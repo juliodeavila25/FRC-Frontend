@@ -36,7 +36,7 @@ const Modal = ({ modal }) => {
                 <>
                   <div className="bg-green-100 mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full  sm:mx-0 sm:h-10 sm:w-10">
                     <svg
-                      class="h-6 w-6 text-green-600"
+                      className="h-6 w-6 text-green-600"
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
                       viewBox="0 0 24 24"

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Alert from "../components/Alert";
 import clienteAxios from "../config/clienteAxios";
@@ -12,6 +12,12 @@ const Login = () => {
   const { setAuth } = useAuth();
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      navigate("/dashboard");
+    }
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -32,7 +38,7 @@ const Login = () => {
       setAlerta({});
       localStorage.setItem("token", data.token);
       setAuth(data);
-      navigate("/proyectos");
+      navigate("/dashboard");
     } catch (error) {
       setAlerta({
         msg: error.response.data.msg,

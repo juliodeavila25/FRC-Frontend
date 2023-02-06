@@ -8,7 +8,7 @@ const RutaProtegida = () => {
   const { auth, cargando } = useAuth();
 
   if (cargando) return <BeatLoader color="#36d7b7" />;
-  console.log(auth._id);
+  // console.log(auth._id);
   return (
     <>
       {auth._id ? (

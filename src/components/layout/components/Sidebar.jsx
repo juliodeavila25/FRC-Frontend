@@ -13,24 +13,36 @@ import {
 } from "@heroicons/react/20/solid";
 import Header from "./Header";
 import Body from "./Body";
-
-const navigation = [
-  { name: "Home", href: "#", icon: HomeIcon, current: true },
-  { name: "My tasks", href: "#", icon: Bars4Icon, current: false },
-  { name: "Recent", href: "#", icon: ClockIcon, current: false },
-];
-const teams = [
-  { name: "Engineering", href: "#", bgColorClass: "bg-indigo-500" },
-  { name: "Human Resources", href: "#", bgColorClass: "bg-green-500" },
-  { name: "Customer Success", href: "#", bgColorClass: "bg-yellow-500" },
-];
-
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
+import { Link, useLocation } from "react-router-dom";
 
 const Sidebar = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const location = useLocation();
+
+  const navigation = [
+    {
+      name: "Inicio",
+      href: "/dashboard",
+      icon: HomeIcon,
+      current: location.pathname.includes("/dashboard") ? true : false,
+    },
+    {
+      name: "Mi Hoja de Vida",
+      href: "/curriculum/crear-curriculum",
+      icon: Bars4Icon,
+      current: location.pathname.includes("/curriculum") ? true : false,
+    },
+  ];
+  const teams = [
+    { name: "Engineering", href: "#", bgColorClass: "bg-indigo-500" },
+    { name: "Human Resources", href: "#", bgColorClass: "bg-green-500" },
+    { name: "Customer Success", href: "#", bgColorClass: "bg-yellow-500" },
+  ];
+
+  function classNames(...classes) {
+    return classes.filter(Boolean).join(" ");
+  }
+
   return (
     <>
       <Transition.Root show={sidebarOpen} as={Fragment}>
@@ -96,9 +108,9 @@ const Sidebar = () => {
                   <nav className="px-2">
                     <div className="space-y-1">
                       {navigation.map((item) => (
-                        <a
+                        <Link
                           key={item.name}
-                          href={item.href}
+                          to={item.href}
                           className={classNames(
                             item.current
                               ? "bg-gray-100 text-gray-900"
@@ -117,7 +129,7 @@ const Sidebar = () => {
                             aria-hidden="true"
                           />
                           {item.name}
-                        </a>
+                        </Link>
                       ))}
                     </div>
                     <div className="mt-8">
@@ -335,9 +347,9 @@ const Sidebar = () => {
           <nav className="mt-6 px-3">
             <div className="space-y-1">
               {navigation.map((item) => (
-                <a
+                <Link
                   key={item.name}
-                  href={item.href}
+                  to={item.href}
                   className={classNames(
                     item.current
                       ? "bg-gray-200 text-gray-900"
@@ -356,7 +368,7 @@ const Sidebar = () => {
                     aria-hidden="true"
                   />
                   {item.name}
-                </a>
+                </Link>
               ))}
             </div>
             <div className="mt-8">
