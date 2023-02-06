@@ -139,7 +139,7 @@ const FormularioCurriculum = () => {
       <div className="bg-white py-8 px-4 shadow-lg rounded-lg sm:px-10">
         {msg && <Alert alerta={alerta} />}
         <form className="space-y-6 " onSubmit={handleSubmit}>
-          <div className="text-left text-xl text-gray-700 mt-8 font-bold border-b-4 border-indigo-500 inline-flex">
+          <div className="text-left text-xl text-gray-700 mt-8 font-bold border-b-4 border-corporative-blue inline-flex">
             Datos personales
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
@@ -450,14 +450,14 @@ const FormularioCurriculum = () => {
           <div className="grid grid-cols-2 gap-6 w-3/5 mx-auto">
             <Link
               to="/"
-              className="flex w-full justify-center rounded-md border border border-indigo-600 bg-transparent py-2 px-4 text-sm font-medium text-indigo-600 shadow-sm hover:bg-indigo-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+              className="flex w-full justify-center rounded-md border-2 border-red-400 bg-transparent py-2 px-4 text-sm font-medium text-red-500 shadow-sm hover:bg-red-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
             >
-              Regresar
+              Cancelar
             </Link>
             <input
               type="submit"
-              className="flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-              value="Crear cuenta"
+              className="flex w-full justify-center rounded-md border border-transparent bg-green-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 cursor-pointer"
+              value="Guardar"
             />
           </div>
         </form>

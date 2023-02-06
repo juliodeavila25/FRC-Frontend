@@ -6,7 +6,26 @@ import {
   ClockIcon,
   HomeIcon,
   XMarkIcon,
+  BriefcaseIcon,
+  ArrowPathRoundedSquareIcon,
+  DocumentTextIcon,
+  DocumentCheckIcon,
 } from "@heroicons/react/24/outline";
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  viewBox="0 0 24 24"
+  strokeWidth={1.5}
+  stroke="currentColor"
+  className="w-6 h-6"
+>
+  <path
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z"
+  />
+</svg>;
+
 import {
   ChevronUpDownIcon,
   MagnifyingGlassIcon,
@@ -32,11 +51,26 @@ const Sidebar = () => {
       icon: Bars4Icon,
       current: location.pathname.includes("/curriculum") ? true : false,
     },
+    {
+      name: "Ofertas de empleo",
+      href: "/ofertas",
+      icon: BriefcaseIcon,
+      current: location.pathname.includes("/ofertas") ? true : false,
+    },
   ];
   const teams = [
-    { name: "Engineering", href: "#", bgColorClass: "bg-indigo-500" },
-    { name: "Human Resources", href: "#", bgColorClass: "bg-green-500" },
-    { name: "Customer Success", href: "#", bgColorClass: "bg-yellow-500" },
+    {
+      name: "Certificado Laboral",
+      href: "/solicitudes/certificado-laboral",
+      icon: DocumentTextIcon,
+      current: location.pathname.includes("/ofertas") ? true : false,
+    },
+    {
+      name: "Desprendible de nómina",
+      href: "/ofertas",
+      icon: DocumentCheckIcon,
+      current: location.pathname.includes("/ofertas") ? true : false,
+    },
   ];
 
   function classNames(...classes) {
@@ -134,31 +168,39 @@ const Sidebar = () => {
                     </div>
                     <div className="mt-8">
                       <h3
-                        className="px-3 text-sm font-medium text-gray-500"
+                        className="px-3 text-lg font-medium text-gray-500"
                         id="mobile-teams-headline"
                       >
-                        Teams
+                        Solicitudes
                       </h3>
                       <div
                         className="mt-1 space-y-1"
                         role="group"
                         aria-labelledby="mobile-teams-headline"
                       >
-                        {teams.map((team) => (
-                          <a
-                            key={team.name}
-                            href={team.href}
-                            className="group flex items-center rounded-md px-3 py-2 text-base font-medium leading-5 text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+                        {teams.map((item) => (
+                          <Link
+                            key={item.name}
+                            to={item.href}
+                            className={classNames(
+                              item.current
+                                ? "bg-gray-100 text-gray-900"
+                                : "text-gray-600 hover:text-gray-900 hover:bg-gray-50",
+                              "group flex items-center px-2 py-2 text-base leading-5 font-medium rounded-md"
+                            )}
+                            aria-current={item.current ? "page" : undefined}
                           >
-                            <span
+                            <item.icon
                               className={classNames(
-                                team.bgColorClass,
-                                "w-2.5 h-2.5 mr-4 rounded-full"
+                                item.current
+                                  ? "text-gray-500"
+                                  : "text-gray-400 group-hover:text-gray-500",
+                                "mr-3 flex-shrink-0 h-6 w-6"
                               )}
                               aria-hidden="true"
                             />
-                            <span className="truncate">{team.name}</span>
-                          </a>
+                            {item.name}
+                          </Link>
                         ))}
                       </div>
                     </div>
@@ -196,10 +238,10 @@ const Sidebar = () => {
                     />
                     <span className="flex min-w-0 flex-1 flex-col">
                       <span className="truncate text-sm font-medium text-gray-900">
-                        Jessy Schwarz
+                        Andres Puello
                       </span>
                       <span className="truncate text-sm text-gray-500">
-                        @jessyschwarz
+                        apuello.aac@gmail.com
                       </span>
                     </span>
                   </span>
@@ -374,31 +416,39 @@ const Sidebar = () => {
             <div className="mt-8">
               {/* Secondary navigation */}
               <h3
-                className="px-3 text-sm font-medium text-gray-500"
+                className="px-3 text-lg font-medium text-blue-500"
                 id="desktop-teams-headline"
               >
-                Teams
+                Solicitudes
               </h3>
               <div
                 className="mt-1 space-y-1"
                 role="group"
                 aria-labelledby="desktop-teams-headline"
               >
-                {teams.map((team) => (
-                  <a
-                    key={team.name}
-                    href={team.href}
-                    className="group flex items-center rounded-md px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-gray-900"
+                {teams.map((item) => (
+                  <Link
+                    key={item.name}
+                    to={item.href}
+                    className={classNames(
+                      item.current
+                        ? "bg-gray-100 text-gray-900"
+                        : "text-gray-600 hover:text-gray-900 hover:bg-gray-50",
+                      "group flex items-center px-2 py-2 text-base leading-5 font-medium rounded-md"
+                    )}
+                    aria-current={item.current ? "page" : undefined}
                   >
-                    <span
+                    <item.icon
                       className={classNames(
-                        team.bgColorClass,
-                        "w-2.5 h-2.5 mr-4 rounded-full"
+                        item.current
+                          ? "text-gray-500"
+                          : "text-gray-400 group-hover:text-gray-500",
+                        "mr-3 flex-shrink-0 h-6 w-6"
                       )}
                       aria-hidden="true"
                     />
-                    <span className="truncate">{team.name}</span>
-                  </a>
+                    {item.name}
+                  </Link>
                 ))}
               </div>
             </div>

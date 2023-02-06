@@ -1,12 +1,3 @@
-import { Fragment } from "react";
-import { Menu, Transition } from "@headlessui/react";
-import {
-  ChevronRightIcon,
-  EllipsisVerticalIcon,
-} from "@heroicons/react/20/solid";
-import useAuth from "../hooks/useAuth";
-import { BeatLoader } from "react-spinners";
-
 import useOfertas from "../hooks/useOfertas";
 
 const projects = [
@@ -48,7 +39,6 @@ const projects = [
   },
   // More projects...
 ];
-const pinnedProjects = projects.filter((project) => project.pinned);
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -67,7 +57,7 @@ export default function Dashboard() {
           </h2>
           <button
             type="button"
-            className="order-0 inline-flex items-center rounded-md border border-transparent bg-purple-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 sm:order-1 sm:ml-3"
+            className="order-0 inline-flex items-center rounded-md border border-transparent bg-corporative-blue px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-corporative-blue-hover focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 sm:order-1 sm:ml-3"
           >
             Ver todas las ofertas
           </button>
@@ -77,7 +67,7 @@ export default function Dashboard() {
           role="list"
           className="mt-3 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 xl:grid-cols-3 "
         >
-          {ofertas.map((oferta) => (
+          {ofertas.slice(0, 3).map((oferta) => (
             <div
               key={oferta.convocatoria}
               className="py-8 px-4 rounded-lg shadow-xl  text-base   overflow-ellipsis overflow-hidden "
@@ -100,7 +90,7 @@ export default function Dashboard() {
                     </button>
                     <button
                       type="button"
-                      className="order-0 inline-flex items-center rounded-md border border-transparent bg-purple-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 sm:order-1 sm:ml-3"
+                      className="order-0 inline-flex items-center rounded-md border border-transparent bg-corporative-blue px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-corporative-blue-hover focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 sm:order-1 sm:ml-3"
                     >
                       Aplicar a la oferta
                     </button>
@@ -125,7 +115,7 @@ export default function Dashboard() {
       </div>
 
       {/* Projects table (small breakpoint and up) */}
-      <div className="mt-8 hidden sm:block mb-10">
+      <div className="mt-8 block mb-10">
         <div className="inline-block min-w-full border-b border-gray-200 align-middle">
           <table className="min-w-full">
             <thead>
@@ -137,13 +127,13 @@ export default function Dashboard() {
                   <span className="lg:pl-2 text-lg">Ofertas Aplicadas</span>
                 </th>
                 <th
-                  className="border-b border-gray-200 bg-gray-50 px-6 py-3 text-left text-sm font-semibold text-gray-900"
+                  className="border-b border-gray-200 bg-gray-50 px-6 py-3 text-left text-sm font-semibold text-gray-900 hidden md:table-cell"
                   scope="col"
                 >
                   Salario
                 </th>
                 <th
-                  className="hidden border-b border-gray-200 bg-gray-50 px-6 py-3 text-right text-sm font-semibold text-gray-900 md:table-cell"
+                  className=" border-b border-gray-200 bg-gray-50 px-6 py-3 text-right text-sm font-semibold text-gray-900 md:table-cell"
                   scope="col"
                 >
                   Fecha de Aplicación
@@ -172,10 +162,10 @@ export default function Dashboard() {
                       </a>
                     </div>
                   </td>
-                  <td className="px-6 py-3 text-sm font-medium text-gray-500">
+                  <td className="px-6 py-3 text-sm font-medium text-gray-500 hidden  md:table-cell">
                     $1.000.000
                   </td>
-                  <td className="hidden whitespace-nowrap px-6 py-3 text-right text-sm text-gray-500 md:table-cell">
+                  <td className=" whitespace-nowrap px-6 py-3 text-right text-sm text-gray-500 md:table-cell">
                     06/02/2023
                   </td>
                 </tr>

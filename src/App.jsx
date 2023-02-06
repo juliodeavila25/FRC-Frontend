@@ -13,6 +13,8 @@ import Dashboard from "./pages/Dashboard";
 import NuevoProyecto from "./pages/NuevoProyecto";
 import CurriculumVitae from "./pages/CurriculumVitae";
 import EditarCurriculumVitae from "./pages/EditarCurriculumVitae";
+import Ofertas from "./pages/Ofertas";
+import CertificadoLaboral from "./pages/CertificadoLaboral";
 
 function App() {
   return (
@@ -31,6 +33,9 @@ function App() {
                 />
                 <Route path="confirmar/:id" element={<ConfirmAccount />} />
               </Route>
+              <Route path="/dashboard" element={<RutaProtegida />}>
+                <Route index element={<Dashboard />} />
+              </Route>
               <Route path="/curriculum" element={<RutaProtegida />}>
                 <Route path="crear-curriculum" element={<CurriculumVitae />} />
                 <Route
@@ -38,9 +43,15 @@ function App() {
                   element={<EditarCurriculumVitae />}
                 />
               </Route>
-              <Route path="/dashboard" element={<RutaProtegida />}>
-                <Route index element={<Dashboard />} />
+              <Route path="/ofertas" element={<RutaProtegida />}>
+                <Route index element={<Ofertas />} />
               </Route>
+              {/* <Route path="/solicitudes" element={<RutaProtegida />}>
+                {/* <Route
+                  path="certificado-laboral"
+                  element={<CertificadoLaboral />}
+                />
+              </Route> */}
             </Routes>
           </CurriculumProvider>
         </OfertasProvider>
