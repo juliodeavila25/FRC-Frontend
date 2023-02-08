@@ -15,6 +15,7 @@ import CurriculumVitae from "./pages/CurriculumVitae";
 import EditarCurriculumVitae from "./pages/EditarCurriculumVitae";
 import Ofertas from "./pages/Ofertas";
 import CertificadoLaboral from "./pages/CertificadoLaboral";
+import Unauthorized from "./pages/Unauthorized";
 
 function App() {
   return (
@@ -32,20 +33,34 @@ function App() {
                   element={<NewPassword />}
                 />
                 <Route path="confirmar/:id" element={<ConfirmAccount />} />
+                <Route path="sin-autorizacion" element={<Unauthorized />} />
               </Route>
-              <Route path="/dashboard" element={<RutaProtegida />}>
+
+              <Route
+                path="/dashboard"
+                element={<RutaProtegida allowedRoles={["aspirante"]} />}
+              >
                 <Route index element={<Dashboard />} />
               </Route>
-              <Route path="/curriculum" element={<RutaProtegida />}>
+
+              <Route
+                path="/curriculum"
+                element={<RutaProtegida allowedRoles={["aspirante"]} />}
+              >
                 <Route path="crear-curriculum" element={<CurriculumVitae />} />
                 <Route
                   path="editar-curriculum/:id"
                   element={<EditarCurriculumVitae />}
                 />
               </Route>
-              <Route path="/ofertas" element={<RutaProtegida />}>
+
+              <Route
+                path="/ofertas"
+                element={<RutaProtegida allowedRoles={["aspirante"]} />}
+              >
                 <Route index element={<Ofertas />} />
               </Route>
+
               {/* <Route path="/solicitudes" element={<RutaProtegida />}>
                 {/* <Route
                   path="certificado-laboral"
