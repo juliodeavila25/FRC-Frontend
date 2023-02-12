@@ -61,12 +61,15 @@ function App() {
                 <Route index element={<Ofertas />} />
               </Route>
 
-              {/* <Route path="/solicitudes" element={<RutaProtegida />}>
-                {/* <Route
+              <Route
+                path="/solicitudes"
+                element={<RutaProtegida allowedRoles={["aspirante"]} />}
+              >
+                <Route
                   path="certificado-laboral"
                   element={<CertificadoLaboral />}
                 />
-              </Route> */}
+              </Route>
             </Routes>
           </CurriculumProvider>
         </OfertasProvider>
