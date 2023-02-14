@@ -16,6 +16,9 @@ import EditarCurriculumVitae from "./pages/EditarCurriculumVitae";
 import Ofertas from "./pages/Ofertas";
 import CertificadoLaboral from "./pages/CertificadoLaboral";
 import Unauthorized from "./pages/Unauthorized";
+import ListarConvocatorias from "./pages/recursos_humanos/ListarConvocatorias";
+import CrearConvocatoria from "./pages/recursos_humanos/CrearConvocatoria";
+import EditarConvocatoria from "./pages/recursos_humanos/EditarConvocatoria";
 
 function App() {
   return (
@@ -38,7 +41,11 @@ function App() {
 
               <Route
                 path="/dashboard"
-                element={<RutaProtegida allowedRoles={["aspirante"]} />}
+                element={
+                  <RutaProtegida
+                    allowedRoles={["aspirante", "recursos_humanos"]}
+                  />
+                }
               >
                 <Route index element={<Dashboard />} />
               </Route>
@@ -63,11 +70,34 @@ function App() {
 
               <Route
                 path="/solicitudes"
-                element={<RutaProtegida allowedRoles={["aspirante"]} />}
+                element={
+                  <RutaProtegida
+                    allowedRoles={["aspirante", "recursos_humanos"]}
+                  />
+                }
               >
                 <Route
                   path="certificado-laboral"
                   element={<CertificadoLaboral />}
+                />
+              </Route>
+
+              <Route
+                path="/recursos-humanos"
+                element={<RutaProtegida allowedRoles={["recursos_humanos"]} />}
+              >
+                <Route
+                  index
+                  path="listar-convocatorias"
+                  element={<ListarConvocatorias />}
+                />
+                <Route
+                  path="crear-convocatoria"
+                  element={<CrearConvocatoria />}
+                />
+                <Route
+                  path="editar-convocatoria/:id"
+                  element={<EditarConvocatoria />}
                 />
               </Route>
             </Routes>

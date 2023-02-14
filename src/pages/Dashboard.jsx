@@ -1,5 +1,7 @@
 import useOfertas from "../hooks/useOfertas";
 
+import useAuth from "../hooks/useAuth";
+
 const projects = [
   {
     id: 1,
@@ -46,8 +48,10 @@ function classNames(...classes) {
 
 export default function Dashboard() {
   const { ofertas } = useOfertas();
+  const { auth } = useAuth();
 
-  console.log(ofertas);
+  console.log(auth?.userType[0]);
+
   return (
     <>
       <div className="mt-6 px-4 sm:px-6 lg:px-8">

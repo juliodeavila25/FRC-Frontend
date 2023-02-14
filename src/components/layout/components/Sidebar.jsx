@@ -33,12 +33,16 @@ import {
 import Header from "./Header";
 import Body from "./Body";
 import { Link, useLocation } from "react-router-dom";
+import useAuth from "../../../hooks/useAuth";
 
 const Sidebar = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const location = useLocation();
+  const { auth } = useAuth();
 
-  const navigation = [
+  console.log(auth?.userType[0]);
+
+  const navigation_aspirante = [
     {
       name: "Inicio",
       href: "/dashboard",
@@ -58,7 +62,23 @@ const Sidebar = () => {
       current: location.pathname.includes("/ofertas") ? true : false,
     },
   ];
-  const teams = [
+
+  const navigation_recursos_humanos = [
+    {
+      name: "Inicio",
+      href: "/dashboard",
+      icon: HomeIcon,
+      current: location.pathname.includes("/dashboard") ? true : false,
+    },
+    {
+      name: "Ofertas de empleo",
+      href: "/recursos-humanos/listar-convocatorias",
+      icon: Bars4Icon,
+      current: location.pathname.includes("/recursos-humanos") ? true : false,
+    },
+  ];
+
+  const solicitudes = [
     {
       name: "Certificado Laboral",
       href: "/solicitudes/certificado-laboral",
@@ -141,30 +161,57 @@ const Sidebar = () => {
                 <div className="mt-5 h-0 flex-1 overflow-y-auto">
                   <nav className="px-2">
                     <div className="space-y-1">
-                      {navigation.map((item) => (
-                        <Link
-                          key={item.name}
-                          to={item.href}
-                          className={classNames(
-                            item.current
-                              ? "bg-gray-100 text-gray-900"
-                              : "text-gray-600 hover:text-gray-900 hover:bg-gray-50",
-                            "group flex items-center px-2 py-2 text-base leading-5 font-medium rounded-md"
-                          )}
-                          aria-current={item.current ? "page" : undefined}
-                        >
-                          <item.icon
+                      {auth?.userType[0] === "aspirante" &&
+                        navigation_aspirante.map((item) => (
+                          <Link
+                            key={item.name}
+                            to={item.href}
                             className={classNames(
                               item.current
-                                ? "text-gray-500"
-                                : "text-gray-400 group-hover:text-gray-500",
-                              "mr-3 flex-shrink-0 h-6 w-6"
+                                ? "bg-gray-100 text-gray-900"
+                                : "text-gray-600 hover:text-gray-900 hover:bg-gray-50",
+                              "group flex items-center px-2 py-2 text-base leading-5 font-medium rounded-md"
                             )}
-                            aria-hidden="true"
-                          />
-                          {item.name}
-                        </Link>
-                      ))}
+                            aria-current={item.current ? "page" : undefined}
+                          >
+                            <item.icon
+                              className={classNames(
+                                item.current
+                                  ? "text-gray-500"
+                                  : "text-gray-400 group-hover:text-gray-500",
+                                "mr-3 flex-shrink-0 h-6 w-6"
+                              )}
+                              aria-hidden="true"
+                            />
+                            {item.name}
+                          </Link>
+                        ))}
+
+                      {auth?.userType[0] === "recursos_humanos" &&
+                        navigation_recursos_humanos.map((item) => (
+                          <Link
+                            key={item.name}
+                            to={item.href}
+                            className={classNames(
+                              item.current
+                                ? "bg-gray-100 text-gray-900"
+                                : "text-gray-600 hover:text-gray-900 hover:bg-gray-50",
+                              "group flex items-center px-2 py-2 text-base leading-5 font-medium rounded-md"
+                            )}
+                            aria-current={item.current ? "page" : undefined}
+                          >
+                            <item.icon
+                              className={classNames(
+                                item.current
+                                  ? "text-gray-500"
+                                  : "text-gray-400 group-hover:text-gray-500",
+                                "mr-3 flex-shrink-0 h-6 w-6"
+                              )}
+                              aria-hidden="true"
+                            />
+                            {item.name}
+                          </Link>
+                        ))}
                     </div>
                     <div className="mt-8">
                       <h3
@@ -178,7 +225,7 @@ const Sidebar = () => {
                         role="group"
                         aria-labelledby="mobile-teams-headline"
                       >
-                        {teams.map((item) => (
+                        {solicitudes.map((item) => (
                           <Link
                             key={item.name}
                             to={item.href}
@@ -388,30 +435,57 @@ const Sidebar = () => {
           {/* Navigation */}
           <nav className="mt-6 px-3">
             <div className="space-y-1">
-              {navigation.map((item) => (
-                <Link
-                  key={item.name}
-                  to={item.href}
-                  className={classNames(
-                    item.current
-                      ? "bg-gray-200 text-gray-900"
-                      : "text-gray-700 hover:text-gray-900 hover:bg-gray-50",
-                    "group flex items-center px-2 py-2 text-sm font-medium rounded-md"
-                  )}
-                  aria-current={item.current ? "page" : undefined}
-                >
-                  <item.icon
+              {auth?.userType[0] === "aspirante" &&
+                navigation_aspirante.map((item) => (
+                  <Link
+                    key={item.name}
+                    to={item.href}
                     className={classNames(
                       item.current
-                        ? "text-gray-500"
-                        : "text-gray-400 group-hover:text-gray-500",
-                      "mr-3 flex-shrink-0 h-6 w-6"
+                        ? "bg-gray-200 text-gray-900"
+                        : "text-gray-700 hover:text-gray-900 hover:bg-gray-50",
+                      "group flex items-center px-2 py-2 text-sm font-medium rounded-md"
                     )}
-                    aria-hidden="true"
-                  />
-                  {item.name}
-                </Link>
-              ))}
+                    aria-current={item.current ? "page" : undefined}
+                  >
+                    <item.icon
+                      className={classNames(
+                        item.current
+                          ? "text-gray-500"
+                          : "text-gray-400 group-hover:text-gray-500",
+                        "mr-3 flex-shrink-0 h-6 w-6"
+                      )}
+                      aria-hidden="true"
+                    />
+                    {item.name}
+                  </Link>
+                ))}
+
+              {auth?.userType[0] === "recursos_humanos" &&
+                navigation_recursos_humanos.map((item) => (
+                  <Link
+                    key={item.name}
+                    to={item.href}
+                    className={classNames(
+                      item.current
+                        ? "bg-gray-200 text-gray-900"
+                        : "text-gray-700 hover:text-gray-900 hover:bg-gray-50",
+                      "group flex items-center px-2 py-2 text-sm font-medium rounded-md"
+                    )}
+                    aria-current={item.current ? "page" : undefined}
+                  >
+                    <item.icon
+                      className={classNames(
+                        item.current
+                          ? "text-gray-500"
+                          : "text-gray-400 group-hover:text-gray-500",
+                        "mr-3 flex-shrink-0 h-6 w-6"
+                      )}
+                      aria-hidden="true"
+                    />
+                    {item.name}
+                  </Link>
+                ))}
             </div>
             <div className="mt-8">
               {/* Secondary navigation */}
@@ -426,7 +500,7 @@ const Sidebar = () => {
                 role="group"
                 aria-labelledby="desktop-teams-headline"
               >
-                {teams.map((item) => (
+                {solicitudes.map((item) => (
                   <Link
                     key={item.name}
                     to={item.href}
