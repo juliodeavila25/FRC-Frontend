@@ -4,6 +4,9 @@ import Alert from "../components/Alert";
 import clienteAxios from "../config/clienteAxios";
 
 const Registrar = () => {
+  const [active, setActive] = useState(false);
+  const [tipoDocumento, setTipoDocumento] = useState("Cedula");
+  const [documento, setDocumento] = useState("");
   const [nombre, setNombre] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -44,12 +47,15 @@ const Registrar = () => {
         nombre,
         password,
         email,
+        tipoDocumento,
+        documento
       });
       setAlerta({
         msg: data.msg,
         error: false,
       });
-
+      setTipoDocumento("Cedula");
+      setDocumento("");
       setNombre("");
       setEmail("");
       setPassword("");
@@ -82,6 +88,54 @@ const Registrar = () => {
             {msg && <Alert alerta={alerta} />}
 
             <form className="space-y-6 " onSubmit={handleSubmit}>
+            <div>
+              <label
+                htmlFor="tipoDocumento"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Tipo de Documento
+              </label>
+              <div className="mt-1">
+                <select
+                  id="tipoDocumento"
+                  name="tipoDocumento"
+                  placeholder="Seleccione su tipo de documento"
+                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                  onChange={(e) => {
+                    const selectedTipoDocumento = e.target.value;
+                    setTipoDocumento(selectedTipoDocumento);
+                  }}
+                  value={tipoDocumento}
+                  disabled={active}
+                >
+                  <option value="Cedula">Cedula</option>
+                  <option value="Cedula de Extranjeria">
+                  Cedula de Extranjeria
+                  </option>
+                  <option value="Pasaporte">Pasaporte</option>
+                </select>
+              </div>
+            </div>
+            <div>
+                <label
+                  htmlFor="documento"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Documento de Identidad
+                </label>
+                <div className="mt-1">
+                  <input
+                    id="documento"
+                    name="documento"
+                    type="text"
+                    autoComplete="documento"
+                    placeholder="Digita tu documento"
+                    className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                    value={documento}
+                    onChange={(e) => setDocumento(e.target.value)}
+                  />
+                </div>
+              </div>
               <div>
                 <label
                   htmlFor="nombre"
