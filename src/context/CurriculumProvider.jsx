@@ -20,8 +20,9 @@ const CurriculumProvider = ({ children }) => {
     }, 5000);
   };
 
-  const submitCurriculum = async (curriculum) => {
-    if (curriculum.estado == true) {
+  const submitCurriculum = async (curriculum, estado) => {
+    // console.log(estado);
+    if (estado == true) {
       await editarCurriculum(curriculum);
     } else {
       await nuevoCurriculum(curriculum);
@@ -29,18 +30,21 @@ const CurriculumProvider = ({ children }) => {
   };
 
   const editarCurriculum = async (curriculum) => {
-    console.log(curriculum);
+    console.log(curriculum.get("soporteExp"));
+    const id = curriculum.get("id");
+    //console.log(id);
+    //console.log(curriculum);
     try {
       const token = localStorage.getItem("token");
       if (!token) return;
       const config = {
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${token}`,
         },
       };
       const { data } = await clienteAxios.put(
-        `/curriculum/${curriculum.id}`,
+        `/curriculum/${id}`,
         curriculum,
         config
       );
@@ -61,12 +65,16 @@ const CurriculumProvider = ({ children }) => {
   };
 
   const nuevoCurriculum = async (curriculum) => {
+    console.log(curriculum);
+    for (const value of curriculum.values()) {
+      console.log(value);
+    }
     try {
       const token = localStorage.getItem("token");
       if (!token) return;
       const config = {
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${token}`,
         },
       };

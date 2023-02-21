@@ -13,7 +13,7 @@ const FormularioCurriculum = () => {
   const [tipoDocumento, setTipoDocumento] = useState("Cedula de ciudadania");
   const [numeroDocumento, setNumeroDocumento] = useState("");
   const [fechaNacimiento, setFechaNacimiento] = useState("");
-  const [lugarNacimiento, setlugarNacimiento] = useState("");
+  const [lugarNacimiento, setLugarNacimiento] = useState("");
   const [telefono, setTelefono] = useState("");
   const [correo, setCorreo] = useState("");
   const [direccion, setDireccion] = useState("");
@@ -32,6 +32,7 @@ const FormularioCurriculum = () => {
   const [empresaExp, setEmpresaExp] = useState("");
   const [fechaInicioExp, setFechaInicioExp] = useState("");
   const [fechaFinExp, setFechaFinExp] = useState("");
+  const [soporteExp, setSoporteExp] = useState("");
   //Referencias
   const [nombreRefA, setNombreRefA] = useState("");
   const [telefonoRefA, setTelefonoRefA] = useState("");
@@ -41,7 +42,9 @@ const FormularioCurriculum = () => {
   const [correoRefB, setCorreoRefB] = useState("");
   //Seguridad Social
   const [eps, setEPS] = useState("");
+  const [soporteEps, setSoporteEps] = useState("");
   const [pension, setPension] = useState("");
+  const [soportePension, setSoportePension] = useState("");
   //Referencias Bancarias
   const [tipoCuenta, setTipoCuenta] = useState("Ahorro");
   const [entidadBancaria, setEntidadBancaria] = useState("");
@@ -65,13 +68,14 @@ const FormularioCurriculum = () => {
 
   useEffect(() => {
     if (curriculum.length > 0) {
+      console.log(curriculum);
       setId(auth._id);
       setEstado(curriculum[0].estado);
       setNombre(curriculum[0].nombre);
       setTipoDocumento(curriculum[0].tipoDocumento);
       setNumeroDocumento(curriculum[0].numeroDocumento);
       setFechaNacimiento(curriculum[0].fechaNacimiento?.split("T")[0]);
-      setlugarNacimiento(curriculum[0].lugarNacimiento);
+      setLugarNacimiento(curriculum[0].lugarNacimiento);
       setTelefono(curriculum[0].telefono);
       setCorreo(curriculum[0].correo);
       setDireccion(curriculum[0].direccion);
@@ -109,120 +113,158 @@ const FormularioCurriculum = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (
-      [
-        nombre,
-        tipoDocumento,
-        numeroDocumento,
-        fechaNacimiento,
-        lugarNacimiento,
-        telefono,
-        correo,
-        direccion,
-        estadoCivil,
-        pais,
-        departamento,
-        ciudad,
-        numeroHijos,
-        tipoSangre,
-        nivel,
-        titulo,
-        anioTitulo,
-        institucionTitulo,
-        empresaExp,
-        fechaInicioExp,
-        fechaFinExp,
-        nombreRefA,
-        telefonoRefA,
-        correoRefA,
-        nombreRefB,
-        telefonoRefB,
-        correoRefB,
-        eps,
-        pension,
-        tipoCuenta,
-        entidadBancaria,
-        numeroCuenta
-      ].includes("")
-    ) {
-      console.log(
-        nombre,
-        tipoDocumento,
-        numeroDocumento,
-        fechaNacimiento,
-        lugarNacimiento,
-        telefono,
-        correo,
-        direccion,
-        estadoCivil,
-        pais,
-        departamento,
-        ciudad,
-        numeroHijos,
-        tipoSangre,
-        nivel,
-        titulo,
-        anioTitulo,
-        institucionTitulo,
-        empresaExp,
-        fechaInicioExp,
-        fechaFinExp,
-        nombreRefA,
-        telefonoRefA,
-        correoRefA,
-        nombreRefB,
-        telefonoRefB,
-        correoRefB,
-        eps,
-        pension,
-        tipoCuenta,
-        entidadBancaria,
-        numeroCuenta
-      );
-      mostrarAlerta({
-        msg: "Todos los campos son obligatorios",
-        error: true,
-      });
-      return;
-    }
+    // if (
+    //   [
+    //     nombre,
+    //     tipoDocumento,
+    //     numeroDocumento,
+    //     fechaNacimiento,
+    //     lugarNacimiento,
+    //     telefono,
+    //     correo,
+    //     direccion,
+    //     estadoCivil,
+    //     pais,
+    //     departamento,
+    //     ciudad,
+    //     numeroHijos,
+    //     tipoSangre,
+    //     nivel,
+    //     titulo,
+    //     anioTitulo,
+    //     institucionTitulo,
+    //     empresaExp,
+    //     fechaInicioExp,
+    //     fechaFinExp,
+    //     nombreRefA,
+    //     telefonoRefA,
+    //     correoRefA,
+    //     nombreRefB,
+    //     telefonoRefB,
+    //     correoRefB,
+    //     eps,
+    //     pension,
+    //     tipoCuenta,
+    //     entidadBancaria,
+    //     numeroCuenta
+    //   ].includes("")
+    // ) {
+    //   console.log(
+    //     nombre,
+    //     tipoDocumento,
+    //     numeroDocumento,
+    //     fechaNacimiento,
+    //     lugarNacimiento,
+    //     telefono,
+    //     correo,
+    //     direccion,
+    //     estadoCivil,
+    //     pais,
+    //     departamento,
+    //     ciudad,
+    //     numeroHijos,
+    //     tipoSangre,
+    //     nivel,
+    //     titulo,
+    //     anioTitulo,
+    //     institucionTitulo,
+    //     empresaExp,
+    //     fechaInicioExp,
+    //     fechaFinExp,
+    //     nombreRefA,
+    //     telefonoRefA,
+    //     correoRefA,
+    //     nombreRefB,
+    //     telefonoRefB,
+    //     correoRefB,
+    //     eps,
+    //     pension,
+    //     tipoCuenta,
+    //     entidadBancaria,
+    //     numeroCuenta
+    //   );
+    //   mostrarAlerta({
+    //     msg: "Todos los campos son obligatorios",
+    //     error: true,
+    //   });
+    //   return;
+    // }
 
+    const formData = new FormData();
+
+    formData.append("id", id);
+    formData.append("nombre", nombre);
+    formData.append("tipoDocumento", tipoDocumento);
+    formData.append("numeroDocumento", numeroDocumento);
+    formData.append("fechaNacimiento", fechaNacimiento);
+    formData.append("lugarNacimiento", lugarNacimiento);
+    formData.append("telefono", telefono);
+    formData.append("correo", correo);
+    formData.append("direccion", direccion);
+    formData.append("estadoCivil", estadoCivil);
+    formData.append("pais", pais);
+    formData.append("departamento", departamento);
+    formData.append("ciudad", ciudad);
+    formData.append("numeroHijos", numeroHijos);
+    formData.append("tipoSangre", tipoSangre);
+    formData.append("nivel", nivel);
+    formData.append("titulo", titulo);
+    formData.append("anioTitulo", anioTitulo);
+    formData.append("institucionTitulo", institucionTitulo);
+    formData.append("empresaExp", empresaExp);
+    formData.append("fechaInicioExp", fechaInicioExp);
+    formData.append("fechaFinExp", fechaFinExp);
+    formData.append("soporteExp", soporteExp);
+    formData.append("nombreRefA", nombreRefA);
+    formData.append("telefonoRefA", telefonoRefA);
+    formData.append("correoRefA", correoRefA);
+    formData.append("nombreRefB", nombreRefB);
+    formData.append("telefonoRefB", telefonoRefB);
+    formData.append("correoRefB", correoRefB);
+    formData.append("eps", eps);
+    formData.append("soporteEps", soporteEps);
+    formData.append("pension", pension);
+    formData.append("soportePension", soportePension);
+    formData.append("tipoCuenta", tipoCuenta);
+    formData.append("entidadBancaria", entidadBancaria);
+    formData.append("numeroCuenta", numeroCuenta);
+    console.log(formData);
     //Pasar los datos hacia el provider
-    await submitCurriculum({
-      id,
-      estado,
-      nombre,
-      tipoDocumento,
-      numeroDocumento,
-      fechaNacimiento,
-      lugarNacimiento,
-      telefono,
-      correo,
-      direccion,
-      estadoCivil,
-      pais,
-      departamento,
-      ciudad,
-      numeroHijos,
-      tipoSangre,
-      nivel,
-      titulo,
-      anioTitulo,
-      institucionTitulo,
-      empresaExp,
-      fechaInicioExp,
-      fechaFinExp,
-      nombreRefA,
-      telefonoRefA,
-      correoRefA,
-      nombreRefB,
-      telefonoRefB,
-      correoRefB,
-      eps,
-      pension,
-      tipoCuenta,
-      entidadBancaria,
-      numeroCuenta
-    });
+    await submitCurriculum(formData, estado);
+    // id,
+    //   estado,
+    //   nombre,
+    //   tipoDocumento,
+    //   numeroDocumento,
+    //   fechaNacimiento,
+    //   lugarNacimiento,
+    //   telefono,
+    //   correo,
+    //   direccion,
+    //   estadoCivil,
+    //   pais,
+    //   departamento,
+    //   ciudad,
+    //   numeroHijos,
+    //   tipoSangre,
+    //   nivel,
+    //   titulo,
+    //   anioTitulo,
+    //   institucionTitulo,
+    //   empresaExp,
+    //   fechaInicioExp,
+    //   fechaFinExp,
+    //   nombreRefA,
+    //   telefonoRefA,
+    //   correoRefA,
+    //   nombreRefB,
+    //   telefonoRefB,
+    //   correoRefB,
+    //   eps,
+    //   pension,
+    //   tipoCuenta,
+    //   entidadBancaria,
+    //   numeroCuenta,
     // setNombre("");
     // setDescripcion("");
     // setFechaEntrega("");
@@ -237,7 +279,11 @@ const FormularioCurriculum = () => {
     <div className=" sm:mx-auto sm:w-full">
       <div className="bg-white py-8 px-4 shadow-lg rounded-lg sm:px-10">
         {msg && <Alert alerta={alerta} />}
-        <form className="space-y-6 " onSubmit={handleSubmit}>
+        <form
+          className="space-y-6 "
+          onSubmit={handleSubmit}
+          encType="multipart/form-data"
+        >
           <div className="text-left text-xl text-gray-700 mt-8 font-bold border-b-4 border-corporative-blue inline-flex">
             Datos personales
           </div>
@@ -350,7 +396,7 @@ const FormularioCurriculum = () => {
                   placeholder="Digite su lugar de nacimiento"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={lugarNacimiento}
-                  onChange={(e) => setlugarNacimiento(e.target.value)}
+                  onChange={(e) => setLugarNacimiento(e.target.value)}
                   disabled={active}
                 />
               </div>
@@ -720,7 +766,7 @@ const FormularioCurriculum = () => {
               </label>
               <div className="mt-1">
                 <input
-                  class="form-control
+                  className="form-control
                   block
                   w-full
                   px-3
@@ -736,16 +782,32 @@ const FormularioCurriculum = () => {
                   m-0
                   focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                   type="file"
-                  id="formFile"
+                  name="soporteExp"
+                  id="soporteExp"
+                  onChange={(e) => setSoporteExp(e.target.files[0])}
                 />
+              </div>
+              <div className="mt-3">
+                {curriculum[0]?.soporteExp && (
+                  <a
+                    href={`${import.meta.env.VITE_BACKEND_URL}/${
+                      curriculum[0].soporteExp
+                    }`}
+                    download={curriculum[0].soporteExp}
+                    target="_blank"
+                    className="underline text-blue-500 pt-5"
+                  >
+                    Soporte Experiencia
+                  </a>
+                )}
               </div>
             </div>
           </div>
           <div className="text-left text-xl text-gray-700 mt-8 font-bold border-b-4 border-corporative-blue inline-flex pt-3">
             Referencias
           </div>
-          <div class="border-b border-gray-200 pb-2">
-            <h6 class="text-sm font-medium leading-6 text-gray-900">
+          <div className="border-b border-gray-200 pb-2">
+            <h6 className="text-sm font-medium leading-6 text-gray-900">
               Referencia 1
             </h6>
           </div>
@@ -814,8 +876,8 @@ const FormularioCurriculum = () => {
               </div>
             </div>
           </div>
-          <div class="border-b border-gray-200 pb-2">
-            <h6 class="text-sm font-medium leading-6 text-gray-900">
+          <div className="border-b border-gray-200 pb-2">
+            <h6 className="text-sm font-medium leading-6 text-gray-900">
               Referencia 2
             </h6>
           </div>
@@ -914,14 +976,14 @@ const FormularioCurriculum = () => {
             </div>
             <div>
               <label
-                htmlFor="soporteEPS"
+                htmlFor="soporteEps"
                 className="block text-sm font-medium text-gray-700"
               >
                 Soporte
               </label>
               <div className="mt-1">
                 <input
-                  class="form-control
+                  className="form-control
                   block
                   w-full
                   px-3
@@ -937,8 +999,24 @@ const FormularioCurriculum = () => {
                   m-0
                   focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                   type="file"
-                  id="soporteEPS"
+                  id="soporteEps"
+                  name="soporteEps"
+                  onChange={(e) => setSoporteEps(e.target.files[0])}
                 />
+              </div>
+              <div className="mt-3">
+                {curriculum[0]?.soporteEps && (
+                  <a
+                    href={`${import.meta.env.VITE_BACKEND_URL}/${
+                      curriculum[0].soporteEps
+                    }`}
+                    download={curriculum[0].soporteEps}
+                    target="_blank"
+                    className="underline text-blue-500 pt-5"
+                  >
+                    Soporte EPS
+                  </a>
+                )}
               </div>
             </div>
             <div>
@@ -974,7 +1052,7 @@ const FormularioCurriculum = () => {
               </label>
               <div className="mt-1">
                 <input
-                  class="form-control
+                  className="form-control
                   block
                   w-full
                   px-3
@@ -991,21 +1069,35 @@ const FormularioCurriculum = () => {
                   focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                   type="file"
                   id="soportePension"
+                  name="soportePension"
+                  onChange={(e) => setSoportePension(e.target.files[0])}
                 />
+              </div>
+              <div className="mt-3">
+                {curriculum[0]?.soportePension && (
+                  <a
+                    href={`${import.meta.env.VITE_BACKEND_URL}/${
+                      curriculum[0].soportePension
+                    }`}
+                    download={curriculum[0].soportePension}
+                    target="_blank"
+                    className="underline text-blue-500 pt-5"
+                  >
+                    Soporte Pensión
+                  </a>
+                )}
               </div>
             </div>
           </div>
           <div className="text-left text-xl text-gray-700 mt-8 font-bold border-b-4 border-corporative-blue inline-flex pt-3">
             Información Financiera
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              
-          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"></div>
           <div className="text-left text-xl text-gray-700 mt-8 font-bold border-b-4 border-corporative-blue inline-flex pt-3">
             Referencias Bancarias
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          <div>
+            <div>
               <label
                 htmlFor="tipoCuenta"
                 className="block text-sm font-medium text-gray-700"
@@ -1026,7 +1118,7 @@ const FormularioCurriculum = () => {
                   disabled={active}
                 >
                   <option value="Ahorro">Ahorro</option>
-                  <option value="Corriente">Corriente</option>      
+                  <option value="Corriente">Corriente</option>
                 </select>
               </div>
             </div>
@@ -1070,7 +1162,7 @@ const FormularioCurriculum = () => {
                   disabled={active}
                 />
               </div>
-              </div>
+            </div>
           </div>
           <div className="grid grid-cols-2 gap-6 w-3/5 mx-auto">
             <Link
