@@ -1505,7 +1505,7 @@ const FormularioCurriculum = () => {
                       type="radio"
                       placeholder=""
                       className=""
-                      checked={poseeCuenta === "Si"}
+                      checked={poseeCuenta && poseeCuenta === "Si"}
                       value="Si"
                       onChange={(e) => setPoseeCuenta(e.target.value)}
                     />
@@ -1526,7 +1526,7 @@ const FormularioCurriculum = () => {
                       type="radio"
                       placeholder=""
                       className=""
-                      checked={poseeCuenta === "No"}
+                      checked={poseeCuenta && poseeCuenta === "No"}
                       value="No"
                       onChange={(e) => setPoseeCuenta(e.target.value)}
                     />
@@ -1542,7 +1542,8 @@ const FormularioCurriculum = () => {
             </div>
           </div>
           <div>
-            {poseeCuenta === "Si" &&
+            {poseeCuenta &&
+              poseeCuenta === "Si" &&
               inputCuentas.map((item, i) => {
                 return (
                   <div
