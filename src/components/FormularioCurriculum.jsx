@@ -78,7 +78,14 @@ const FormularioCurriculum = () => {
   const [tipoCuenta, setTipoCuenta] = useState("Ahorro");
   const [entidadBancaria, setEntidadBancaria] = useState("");
   const [numeroCuenta, setNumeroCuenta] = useState("");
+<<<<<<< HEAD
 
+=======
+  //Contractual
+  const [tipoContrato, setTipoContrato] = useState("");
+  const [fechaIngreso, setFechaIngreso] = useState("");
+  const [fechaFin, setFechaFin] = useState("");
+>>>>>>> 268f7d9ff0623ac65ba0978050e1b79a4424e250
   const params = useParams();
 
   const {
@@ -160,6 +167,10 @@ const FormularioCurriculum = () => {
       setTipoCuenta(curriculum[0].tipoCuenta);
       setEntidadBancaria(curriculum[0].entidadBancaria);
       setNumeroCuenta(curriculum[0].numeroCuenta);
+      //Contractual
+      setTipoContrato(curriculum[0].tipoContrato);
+      setFechaIngreso(curriculum[0].fechaIngreso);
+      setFechaFin(curriculum[0].fechaFin);
     }
   }, [curriculum]);
 
@@ -280,6 +291,7 @@ const FormularioCurriculum = () => {
     formData.append("tipoCuenta", tipoCuenta);
     formData.append("entidadBancaria", entidadBancaria);
     formData.append("numeroCuenta", numeroCuenta);
+<<<<<<< HEAD
     for (let i = 0; i < inputFinanciera.length; i++) {
       formData.append("inputFinanciera", JSON.stringify(inputFinanciera[i]));
     }
@@ -305,6 +317,11 @@ const FormularioCurriculum = () => {
     formData.append("prestamos", prestamos);
     formData.append("otras", otras);
 
+=======
+    formData.append("tipoContrato", tipoContrato);
+    formData.append("fechaIngreso", fechaIngreso);
+    formData.append("fechaFin", fechaFin);
+>>>>>>> 268f7d9ff0623ac65ba0978050e1b79a4424e250
     console.log(formData);
     //Pasar los datos hacia el provider
     await submitCurriculum(formData, estado);

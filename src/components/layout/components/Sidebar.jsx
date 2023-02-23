@@ -9,7 +9,7 @@ import {
   BriefcaseIcon,
   ArrowPathRoundedSquareIcon,
   DocumentTextIcon,
-  DocumentCheckIcon,
+  DocumentCheckIcon
 } from "@heroicons/react/24/outline";
 <svg
   xmlns="http://www.w3.org/2000/svg"
@@ -28,6 +28,7 @@ import {
 
 import {
   ChevronUpDownIcon,
+  ClipboardDocumentListIcon,
   MagnifyingGlassIcon,
 } from "@heroicons/react/20/solid";
 import Header from "./Header";
@@ -76,6 +77,12 @@ const Sidebar = () => {
       icon: Bars4Icon,
       current: location.pathname.includes("/recursos-humanos") ? true : false,
     },
+    {
+      name: "Documentos",
+      href: "/documentos/listar-documentos",
+      icon: ClipboardDocumentListIcon,
+      current: location.pathname.includes("/documentos") ? true : false,
+    }
   ];
 
   const solicitudes = [
@@ -83,13 +90,13 @@ const Sidebar = () => {
       name: "Certificado Laboral",
       href: "/solicitudes/certificado-laboral",
       icon: DocumentTextIcon,
-      current: location.pathname.includes("/ofertas") ? true : false,
+      current: location.pathname.includes("/solicitudes") ? true : false,
     },
     {
-      name: "Desprendible de nómina",
-      href: "/ofertas",
+      name: "Desprendible Nómina",
+      href: "/solicitudes/certificado-desprendible",
       icon: DocumentCheckIcon,
-      current: location.pathname.includes("/ofertas") ? true : false,
+      current: location.pathname.includes("/solicitudes") ? true : false,
     },
   ];
 
