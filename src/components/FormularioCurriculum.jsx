@@ -6,7 +6,6 @@ import useAuth from "../hooks/useAuth";
 import { BeatLoader } from "react-spinners";
 
 const FormularioCurriculum = () => {
-  const [active, setActive] = useState(false);
   const [id, setId] = useState(null);
   const [estado, setEstado] = useState(null);
   const [nombre, setNombre] = useState("");
@@ -41,14 +40,45 @@ const FormularioCurriculum = () => {
   const [telefonoRefB, setTelefonoRefB] = useState("");
   const [correoRefB, setCorreoRefB] = useState("");
   //Seguridad Social
-  const [eps, setEPS] = useState("");
+  const [eps, setEPS] = useState("Sura");
   const [soporteEps, setSoporteEps] = useState("");
-  const [pension, setPension] = useState("");
+  const [pension, setPension] = useState("Protección");
   const [soportePension, setSoportePension] = useState("");
+  //Informacion financiera
+  const [inputFinanciera, setinputFinanciera] = useState([
+    { ciu: "", actividad_economica: "" },
+  ]);
+
+  const [rut, setRut] = useState("");
+  const [numeroRut, setNumeroRut] = useState("");
+  const [fechaCorte, setFechaCorte] = useState("");
+  const [ingresosAnuales, setIngresosAnuales] = useState("");
+  const [egresosAnuales, setEgresosAnuales] = useState("");
+  const [otrosIngresos, setOtrosIngresos] = useState("");
+  const [patrimonio, setPatrimonio] = useState("");
+  const [activos, setActivos] = useState("");
+  const [pasivos, setPasivos] = useState("");
+  const [descripcionIngresos, setDescripcionIngresos] = useState("");
+
+  const [poseeCuenta, setPoseeCuenta] = useState("Si");
+  const [inputCuentas, setInputCuentas] = useState([
+    { nro_cuenta: "", banco: "", ciudad: "", pais: "", moneda: "" },
+  ]);
+
+  const [operacionesExtranjera, setOperacionesExtranjera] = useState("Si");
+
+  const [exportaciones, setExportaciones] = useState("");
+  const [transferencias, setTransferencias] = useState("");
+  const [pagoServicios, setPagoServicios] = useState("");
+  const [importaciones, setImportaciones] = useState("");
+  const [prestamos, setPrestamos] = useState("");
+  const [otras, setOtras] = useState("");
+
   //Referencias Bancarias
   const [tipoCuenta, setTipoCuenta] = useState("Ahorro");
   const [entidadBancaria, setEntidadBancaria] = useState("");
   const [numeroCuenta, setNumeroCuenta] = useState("");
+
   const params = useParams();
 
   const {
@@ -104,6 +134,28 @@ const FormularioCurriculum = () => {
       //Seguridad Social
       setEPS(curriculum[0].eps);
       setPension(curriculum[0].pension);
+      //Informacion financiera
+      setinputFinanciera(curriculum[0].inputFinanciera);
+      setRut(curriculum[0].rut);
+      setNumeroRut(curriculum[0].numeroRut);
+      setFechaCorte(curriculum[0].fechaCorte);
+      setIngresosAnuales(curriculum[0].ingresosAnuales);
+      setEgresosAnuales(curriculum[0].egresosAnuales);
+      setOtrosIngresos(curriculum[0].otrosIngresos);
+      setPatrimonio(curriculum[0].patrimonio);
+      setActivos(curriculum[0].activos);
+      setPasivos(curriculum[0].pasivos);
+      setDescripcionIngresos(curriculum[0].descripcionIngresos);
+      setPoseeCuenta(curriculum[0].poseeCuenta);
+      setInputCuentas(curriculum[0].inputCuentas);
+      setOperacionesExtranjera(curriculum[0].operacionesExtranjera);
+      setExportaciones(curriculum[0].exportaciones);
+      setTransferencias(curriculum[0].transferencias);
+      setPagoServicios(curriculum[0].pagoServicios);
+      setImportaciones(curriculum[0].importaciones);
+      setPrestamos(curriculum[0].prestamos);
+      setOtras(curriculum[0].otras);
+
       //Referencias Bancarias
       setTipoCuenta(curriculum[0].tipoCuenta);
       setEntidadBancaria(curriculum[0].entidadBancaria);
@@ -228,6 +280,31 @@ const FormularioCurriculum = () => {
     formData.append("tipoCuenta", tipoCuenta);
     formData.append("entidadBancaria", entidadBancaria);
     formData.append("numeroCuenta", numeroCuenta);
+    for (let i = 0; i < inputFinanciera.length; i++) {
+      formData.append("inputFinanciera", JSON.stringify(inputFinanciera[i]));
+    }
+    formData.append("rut", rut);
+    formData.append("numeroRut", numeroRut);
+    formData.append("fechaCorte", fechaCorte);
+    formData.append("ingresosAnuales", ingresosAnuales);
+    formData.append("egresosAnuales", egresosAnuales);
+    formData.append("otrosIngresos", otrosIngresos);
+    formData.append("patrimonio", patrimonio);
+    formData.append("activos", activos);
+    formData.append("pasivos", pasivos);
+    formData.append("descripcionIngresos", descripcionIngresos);
+    formData.append("poseeCuenta", poseeCuenta);
+    for (let i = 0; i < inputCuentas.length; i++) {
+      formData.append("inputCuentas", JSON.stringify(inputCuentas[i]));
+    }
+    formData.append("operacionesExtranjera", operacionesExtranjera);
+    formData.append("exportaciones", exportaciones);
+    formData.append("transferencias", transferencias);
+    formData.append("pagoServicios", pagoServicios);
+    formData.append("importaciones", importaciones);
+    formData.append("prestamos", prestamos);
+    formData.append("otras", otras);
+
     console.log(formData);
     //Pasar los datos hacia el provider
     await submitCurriculum(formData, estado);
@@ -271,6 +348,46 @@ const FormularioCurriculum = () => {
     // setCliente("");
   };
 
+  const handleinputchange = (e, index) => {
+    const { name, value } = e.target;
+    const list = [...inputFinanciera];
+    list[index][name] = value;
+    setinputFinanciera(list);
+  };
+
+  const handleremove = (index) => {
+    const list = [...inputFinanciera];
+    list.splice(index, 1);
+    setinputFinanciera(list);
+  };
+
+  const handleaddclick = () => {
+    setinputFinanciera([
+      ...inputFinanciera,
+      { nro_cuenta: "", banco: "", ciudad: "", pais: "", moneda: "" },
+    ]);
+  };
+
+  const handleinputchangeCuenta = (e, index) => {
+    const { name, value } = e.target;
+    const list = [...inputCuentas];
+    list[index][name] = value;
+    setInputCuentas(list);
+  };
+
+  const handleremoveCuenta = (index) => {
+    const list = [...inputCuentas];
+    list.splice(index, 1);
+    setInputCuentas(list);
+  };
+
+  const handleaddclickCuenta = () => {
+    setInputCuentas([
+      ...inputCuentas,
+      { nro_cuenta: "", banco: "", ciudad: "", pais: "", moneda: "" },
+    ]);
+  };
+
   const { msg } = alerta;
 
   if (cargandoData) return <BeatLoader color="#36d7b7" />;
@@ -305,7 +422,6 @@ const FormularioCurriculum = () => {
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={nombre}
                   onChange={(e) => setNombre(e.target.value)}
-                  disabled={active}
                 />
               </div>
             </div>
@@ -324,10 +440,10 @@ const FormularioCurriculum = () => {
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   onChange={(e) => {
                     const selectedDocumentType = e.target.value;
-                    console.log(selectedDocumentType);
+
                     setTipoDocumento(selectedDocumentType);
                   }}
-                  disabled={active}
+                  value={tipoDocumento}
                 >
                   <option value="Cedula de ciudadania">
                     Cedula de ciudadania
@@ -355,7 +471,6 @@ const FormularioCurriculum = () => {
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={numeroDocumento}
                   onChange={(e) => setNumeroDocumento(e.target.value)}
-                  disabled={active}
                 />
               </div>
             </div>
@@ -376,7 +491,6 @@ const FormularioCurriculum = () => {
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={fechaNacimiento}
                   onChange={(e) => setFechaNacimiento(e.target.value)}
-                  disabled={active}
                 />
               </div>
             </div>
@@ -397,7 +511,6 @@ const FormularioCurriculum = () => {
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={lugarNacimiento}
                   onChange={(e) => setLugarNacimiento(e.target.value)}
-                  disabled={active}
                 />
               </div>
             </div>
@@ -418,7 +531,6 @@ const FormularioCurriculum = () => {
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={telefono}
                   onChange={(e) => setTelefono(e.target.value)}
-                  disabled={active}
                 />
               </div>
             </div>
@@ -439,7 +551,6 @@ const FormularioCurriculum = () => {
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={correo}
                   onChange={(e) => setCorreo(e.target.value)}
-                  disabled={active}
                 />
               </div>
             </div>
@@ -460,7 +571,6 @@ const FormularioCurriculum = () => {
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={direccion}
                   onChange={(e) => setDireccion(e.target.value)}
-                  disabled={active}
                 />
               </div>
             </div>
@@ -481,7 +591,6 @@ const FormularioCurriculum = () => {
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={estadoCivil}
                   onChange={(e) => setEstadoCivil(e.target.value)}
-                  disabled={active}
                 />
               </div>
             </div>
@@ -502,7 +611,6 @@ const FormularioCurriculum = () => {
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={pais}
                   onChange={(e) => setPais(e.target.value)}
-                  disabled={active}
                 />
               </div>
             </div>
@@ -523,7 +631,6 @@ const FormularioCurriculum = () => {
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={departamento}
                   onChange={(e) => setDepartamento(e.target.value)}
-                  disabled={active}
                 />
               </div>
             </div>
@@ -544,7 +651,6 @@ const FormularioCurriculum = () => {
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={ciudad}
                   onChange={(e) => setCiudad(e.target.value)}
-                  disabled={active}
                 />
               </div>
             </div>
@@ -565,7 +671,6 @@ const FormularioCurriculum = () => {
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={numeroHijos}
                   onChange={(e) => setNumeroHijos(e.target.value)}
-                  disabled={active}
                 />
               </div>
             </div>
@@ -586,7 +691,6 @@ const FormularioCurriculum = () => {
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={tipoSangre}
                   onChange={(e) => setTipoSangre(e.target.value)}
-                  disabled={active}
                 />
               </div>
             </div>
@@ -614,7 +718,7 @@ const FormularioCurriculum = () => {
                     //console.log(selectedDocumentType);
                     setNivel(selectedNivel);
                   }}
-                  disabled={active}
+                  value={nivel}
                 >
                   <option value="Ninguno">Ninguno</option>
                   <option value="Técnico Profesional">
@@ -645,7 +749,6 @@ const FormularioCurriculum = () => {
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={titulo}
                   onChange={(e) => setTitulo(e.target.value)}
-                  disabled={active}
                 />
               </div>
             </div>
@@ -665,7 +768,6 @@ const FormularioCurriculum = () => {
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={anioTitulo}
                   onChange={(e) => setAnioTitulo(e.target.value)}
-                  disabled={active}
                 />
               </div>
             </div>
@@ -686,7 +788,6 @@ const FormularioCurriculum = () => {
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={institucionTitulo}
                   onChange={(e) => setInstitucionTitulo(e.target.value)}
-                  disabled={active}
                 />
               </div>
             </div>
@@ -713,7 +814,6 @@ const FormularioCurriculum = () => {
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={empresaExp}
                   onChange={(e) => setEmpresaExp(e.target.value)}
-                  disabled={active}
                 />
               </div>
             </div>
@@ -733,7 +833,6 @@ const FormularioCurriculum = () => {
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={fechaInicioExp}
                   onChange={(e) => setFechaInicioExp(e.target.value)}
-                  disabled={active}
                 />
               </div>
             </div>
@@ -753,7 +852,6 @@ const FormularioCurriculum = () => {
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={fechaFinExp}
                   onChange={(e) => setFechaFinExp(e.target.value)}
-                  disabled={active}
                 />
               </div>
             </div>
@@ -829,7 +927,6 @@ const FormularioCurriculum = () => {
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={nombreRefA}
                   onChange={(e) => setNombreRefA(e.target.value)}
-                  disabled={active}
                 />
               </div>
             </div>
@@ -850,7 +947,6 @@ const FormularioCurriculum = () => {
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={telefonoRefA}
                   onChange={(e) => setTelefonoRefA(e.target.value)}
-                  disabled={active}
                 />
               </div>
             </div>
@@ -871,7 +967,6 @@ const FormularioCurriculum = () => {
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={correoRefA}
                   onChange={(e) => setCorreoRefA(e.target.value)}
-                  disabled={active}
                 />
               </div>
             </div>
@@ -899,7 +994,6 @@ const FormularioCurriculum = () => {
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={nombreRefB}
                   onChange={(e) => setNombreRefB(e.target.value)}
-                  disabled={active}
                 />
               </div>
             </div>
@@ -920,7 +1014,6 @@ const FormularioCurriculum = () => {
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={telefonoRefB}
                   onChange={(e) => setTelefonoRefB(e.target.value)}
-                  disabled={active}
                 />
               </div>
             </div>
@@ -941,7 +1034,6 @@ const FormularioCurriculum = () => {
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={correoRefB}
                   onChange={(e) => setCorreoRefB(e.target.value)}
-                  disabled={active}
                 />
               </div>
             </div>
@@ -967,7 +1059,7 @@ const FormularioCurriculum = () => {
                     const selectedEPS = e.target.value;
                     setEPS(selectedEPS);
                   }}
-                  disabled={active}
+                  value={eps}
                 >
                   <option value="Sura">Sura</option>
                   <option value="Salud Total">Salud Total</option>
@@ -1036,7 +1128,7 @@ const FormularioCurriculum = () => {
                     const selectedPension = e.target.value;
                     setPension(selectedPension);
                   }}
-                  disabled={active}
+                  value={pension}
                 >
                   <option value="Protección">Protección</option>
                   <option value="Porvenir">Porvenir</option>
@@ -1092,7 +1184,648 @@ const FormularioCurriculum = () => {
           <div className="text-left text-xl text-gray-700 mt-8 font-bold border-b-4 border-corporative-blue inline-flex pt-3">
             Información Financiera
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"></div>
+          <div>
+            {inputFinanciera.map((item, i) => {
+              return (
+                <div
+                  key={i}
+                  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 pt-5"
+                >
+                  <div className="">
+                    <label className="block text-sm font-medium text-gray-700">
+                      CIU
+                    </label>
+                    <input
+                      type="text"
+                      className="form-control
+                      block
+                      w-full
+                      px-3
+                      py-1.5
+                      text-base
+                      font-normal
+                      text-gray-700
+                      bg-white bg-clip-padding
+                      border border-solid border-gray-300
+                      rounded
+                      transition
+                      ease-in-out
+                      m-0
+                      focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                      placeholder="Ingresar CIU"
+                      id="ciu"
+                      name="ciu"
+                      value={item.ciu}
+                      onChange={(e) => handleinputchange(e, i)}
+                    />
+                  </div>
+                  <div className="">
+                    <label className="block text-sm font-medium text-gray-700">
+                      Actividad Economica
+                    </label>
+                    <input
+                      type="text"
+                      className="form-control
+                      block
+                      w-full
+                      px-3
+                      py-1.5
+                      text-base
+                      font-normal
+                      text-gray-700
+                      bg-white bg-clip-padding
+                      border border-solid border-gray-300
+                      rounded
+                      transition
+                      ease-in-out
+                      m-0
+                      focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                      placeholder="Ingresar Actividad Economica"
+                      id="actividad_economica"
+                      name="actividad_economica"
+                      value={item.actividad_economica}
+                      onChange={(e) => handleinputchange(e, i)}
+                    />
+                  </div>
+                  <div className="grid grid-cols-2 gap-4 pt-6 ">
+                    {inputFinanciera.length !== 1 && (
+                      <button
+                        className="h-8 flex items-center w-full justify-center rounded-md border-2 border-red-400 bg-transparent py-2 px-4 text-sm font-medium text-red-500 shadow-sm hover:bg-red-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                        onClick={() => handleremove(i)}
+                      >
+                        Remover
+                      </button>
+                    )}
+                    {inputFinanciera.length - 1 === i && (
+                      <button
+                        className="h-8 flex items-center w-full justify-center rounded-md border border-transparent bg-green-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 cursor-pointer"
+                        onClick={handleaddclick}
+                      >
+                        Agregar
+                      </button>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 pt-5">
+            {/** Aqui */}
+            <div>
+              <label
+                htmlFor="rut"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Rut
+              </label>
+              <div className="mt-1">
+                <input
+                  className="form-control
+                  block
+                  w-full
+                  px-3
+                  py-1.5
+                  text-base
+                  font-normal
+                  text-gray-700
+                  bg-white bg-clip-padding
+                  border border-solid border-gray-300
+                  rounded
+                  transition
+                  ease-in-out
+                  m-0
+                  focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                  type="file"
+                  name="rut"
+                  id="rut"
+                  onChange={(e) => setRut(e.target.files[0])}
+                />
+              </div>
+            </div>
+            <div>
+              <label
+                htmlFor="numeroRut"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Número RUT
+              </label>
+              <div className="mt-1">
+                <input
+                  id="numeroRut"
+                  name="numeroRut"
+                  type="text"
+                  placeholder="Digita el número del RUT"
+                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                  value={numeroRut}
+                  onChange={(e) => setNumeroRut(e.target.value)}
+                />
+              </div>
+            </div>
+            <div>
+              <label
+                htmlFor="fechaCorte"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Número RUT
+              </label>
+              <div className="mt-1">
+                <input
+                  id="fechaCorte"
+                  name="fechaCorte"
+                  type="date"
+                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                  value={fechaCorte}
+                  onChange={(e) => setFechaCorte(e.target.value)}
+                />
+              </div>
+            </div>
+
+            <div>
+              <label
+                htmlFor="ingresosAnuales"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Ingresos Anuales
+              </label>
+              <div className="mt-1">
+                <input
+                  id="ingresosAnuales"
+                  name="ingresosAnuales"
+                  type="number"
+                  placeholder="Digite sus ingresos anuales"
+                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                  value={ingresosAnuales}
+                  onChange={(e) => setIngresosAnuales(e.target.value)}
+                />
+              </div>
+            </div>
+
+            <div>
+              <label
+                htmlFor="egresosAnuales"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Egresos Anuales
+              </label>
+              <div className="mt-1">
+                <input
+                  id="egresosAnuales"
+                  name="egresosAnuales"
+                  type="number"
+                  placeholder="Digite sus egresos anuales"
+                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                  value={egresosAnuales}
+                  onChange={(e) => setEgresosAnuales(e.target.value)}
+                />
+              </div>
+            </div>
+
+            <div>
+              <label
+                htmlFor="otrosIngresos"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Otros Ingresos
+              </label>
+              <div className="mt-1">
+                <input
+                  id="otrosIngresos"
+                  name="otrosIngresos"
+                  type="number"
+                  placeholder="Digite otros ingresos"
+                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                  value={otrosIngresos}
+                  onChange={(e) => setOtrosIngresos(e.target.value)}
+                />
+              </div>
+            </div>
+
+            <div>
+              <label
+                htmlFor="patrimonio"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Patrimonio
+              </label>
+              <div className="mt-1">
+                <input
+                  id="patrimonio"
+                  name="patrimonio"
+                  type="number"
+                  placeholder="Digite su patrimonio"
+                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                  value={patrimonio}
+                  onChange={(e) => setPatrimonio(e.target.value)}
+                />
+              </div>
+            </div>
+
+            <div>
+              <label
+                htmlFor="activos"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Total Activos
+              </label>
+              <div className="mt-1">
+                <input
+                  id="activos"
+                  name="activos"
+                  type="number"
+                  placeholder="Digite total activos"
+                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                  value={activos}
+                  onChange={(e) => setActivos(e.target.value)}
+                />
+              </div>
+            </div>
+
+            <div>
+              <label
+                htmlFor="pasivos"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Total Pasivos
+              </label>
+              <div className="mt-1">
+                <input
+                  id="pasivos"
+                  name="pasivos"
+                  type="number"
+                  placeholder="Digite total pasivos"
+                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                  value={pasivos}
+                  onChange={(e) => setPasivos(e.target.value)}
+                />
+              </div>
+            </div>
+
+            <div>
+              <label
+                htmlFor="descripcionIngresos"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Descripción de otros ingresos
+              </label>
+              <div className="mt-1">
+                <input
+                  id="descripcionIngresos"
+                  name="descripcionIngresos"
+                  type="text"
+                  placeholder=""
+                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                  value={descripcionIngresos}
+                  onChange={(e) => setDescripcionIngresos(e.target.value)}
+                />
+              </div>
+            </div>
+            {/** Aqui */}
+          </div>
+          <div className="pt-5">
+            <div>
+              <p className="font-medium">
+                ¿Posee Cuentas Corrientes en Moneda Extranjera?
+              </p>
+              <div className="flex space-x-24 pt-3 pl-4">
+                <div className="flex space-x-4 items-center">
+                  <div className="mt-1">
+                    <input
+                      id="poseeCuentaSi"
+                      name="poseeCuenta"
+                      type="radio"
+                      placeholder=""
+                      className=""
+                      checked={poseeCuenta === "Si"}
+                      value="Si"
+                      onChange={(e) => setPoseeCuenta(e.target.value)}
+                    />
+                  </div>
+                  <label
+                    htmlFor="poseeCuenta"
+                    className="block text-sm font-medium text-gray-700"
+                  >
+                    Si
+                  </label>
+                </div>
+
+                <div className="flex space-x-4 items-center">
+                  <div className="mt-1">
+                    <input
+                      id="poseeCuentaNo"
+                      name="poseeCuenta"
+                      type="radio"
+                      placeholder=""
+                      className=""
+                      checked={poseeCuenta === "No"}
+                      value="No"
+                      onChange={(e) => setPoseeCuenta(e.target.value)}
+                    />
+                  </div>
+                  <label
+                    htmlFor="poseeCuenta"
+                    className="block text-sm font-medium text-gray-700"
+                  >
+                    No
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            {poseeCuenta === "Si" &&
+              inputCuentas.map((item, i) => {
+                return (
+                  <div
+                    key={i}
+                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 pt-5"
+                  >
+                    <div className="">
+                      <label className="block text-sm font-medium text-gray-700">
+                        Número de cuenta
+                      </label>
+                      <input
+                        type="text"
+                        className="form-control
+                      block
+                      w-full
+                      px-3
+                      py-1.5
+                      text-base
+                      font-normal
+                      text-gray-700
+                      bg-white bg-clip-padding
+                      border border-solid border-gray-300
+                      rounded
+                      transition
+                      ease-in-out
+                      m-0
+                      focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                        placeholder="Ingresar CIU"
+                        id="nro_cuenta"
+                        name="nro_cuenta"
+                        value={item.nro_cuenta}
+                        onChange={(e) => handleinputchangeCuenta(e, i)}
+                      />
+                    </div>
+                    <div className="">
+                      <label className="block text-sm font-medium text-gray-700">
+                        Banco
+                      </label>
+                      <input
+                        type="text"
+                        className="form-control
+                      block
+                      w-full
+                      px-3
+                      py-1.5
+                      text-base
+                      font-normal
+                      text-gray-700
+                      bg-white bg-clip-padding
+                      border border-solid border-gray-300
+                      rounded
+                      transition
+                      ease-in-out
+                      m-0
+                      focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                        placeholder="Ingresar Actividad Economica"
+                        id="banco"
+                        name="banco"
+                        value={item.banco}
+                        onChange={(e) => handleinputchangeCuenta(e, i)}
+                      />
+                    </div>
+                    <div className="">
+                      <label className="block text-sm font-medium text-gray-700">
+                        Ciudad
+                      </label>
+                      <input
+                        type="text"
+                        className="form-control
+                      block
+                      w-full
+                      px-3
+                      py-1.5
+                      text-base
+                      font-normal
+                      text-gray-700
+                      bg-white bg-clip-padding
+                      border border-solid border-gray-300
+                      rounded
+                      transition
+                      ease-in-out
+                      m-0
+                      focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                        placeholder="Ingresar Actividad Economica"
+                        id="ciudad"
+                        name="ciudad"
+                        value={item.ciudad}
+                        onChange={(e) => handleinputchangeCuenta(e, i)}
+                      />
+                    </div>
+
+                    <div className="">
+                      <label className="block text-sm font-medium text-gray-700">
+                        Pais
+                      </label>
+                      <input
+                        type="text"
+                        className="form-control
+                      block
+                      w-full
+                      px-3
+                      py-1.5
+                      text-base
+                      font-normal
+                      text-gray-700
+                      bg-white bg-clip-padding
+                      border border-solid border-gray-300
+                      rounded
+                      transition
+                      ease-in-out
+                      m-0
+                      focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                        placeholder="Ingresar Actividad Economica"
+                        id="pais"
+                        name="pais"
+                        value={item.pais}
+                        onChange={(e) => handleinputchangeCuenta(e, i)}
+                      />
+                    </div>
+                    <div className="">
+                      <label className="block text-sm font-medium text-gray-700">
+                        Moneda
+                      </label>
+                      <input
+                        type="text"
+                        className="form-control
+                      block
+                      w-full
+                      px-3
+                      py-1.5
+                      text-base
+                      font-normal
+                      text-gray-700
+                      bg-white bg-clip-padding
+                      border border-solid border-gray-300
+                      rounded
+                      transition
+                      ease-in-out
+                      m-0
+                      focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                        placeholder="Ingresar Actividad Economica"
+                        id="moneda"
+                        name="moneda"
+                        value={item.moneda}
+                        onChange={(e) => handleinputchangeCuenta(e, i)}
+                      />
+                    </div>
+                    <div className="grid grid-cols-2 gap-4 pt-6 ">
+                      {inputCuentas.length !== 1 && (
+                        <button
+                          className="h-8 flex items-center w-full justify-center rounded-md border-2 border-red-400 bg-transparent py-2 px-4 text-sm font-medium text-red-500 shadow-sm hover:bg-red-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                          onClick={() => handleremoveCuenta(i)}
+                        >
+                          Remover
+                        </button>
+                      )}
+                      {inputCuentas.length - 1 === i && (
+                        <button
+                          className="h-8 flex items-center w-full justify-center rounded-md border border-transparent bg-green-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 cursor-pointer"
+                          onClick={handleaddclickCuenta}
+                        >
+                          Agregar
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                );
+              })}
+          </div>
+          <div className="pt-5">
+            <div>
+              <p className="font-medium">
+                ¿En su Actividad Económica Realiza Operaciones en Moneda
+                Extranjera?
+              </p>
+              <div className="flex space-x-24 pt-3 pl-4">
+                <div className="flex space-x-4 items-center">
+                  <div className="mt-1">
+                    <input
+                      id="operacionesExtranjeraSi"
+                      name="operacionesExtranjera"
+                      type="radio"
+                      placeholder=""
+                      className=""
+                      checked={operacionesExtranjera === "Si"}
+                      value="Si"
+                      onChange={(e) => setOperacionesExtranjera(e.target.value)}
+                    />
+                  </div>
+                  <label
+                    htmlFor="operacionesExtranjera"
+                    className="block text-sm font-medium text-gray-700"
+                  >
+                    Si
+                  </label>
+                </div>
+
+                <div className="flex space-x-4 items-center">
+                  <div className="mt-1">
+                    <input
+                      id="operacionesExtranjeraNo"
+                      name="operacionesExtranjera"
+                      type="radio"
+                      placeholder=""
+                      className=""
+                      checked={operacionesExtranjera === "No"}
+                      value="No"
+                      onChange={(e) => setOperacionesExtranjera(e.target.value)}
+                    />
+                  </div>
+                  <label
+                    htmlFor="operacionesExtranjera"
+                    className="block text-sm font-medium text-gray-700"
+                  >
+                    No
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div>
+              <p className="font-medium pt-5">
+                ¿En su Actividad Económica Realiza Operaciones en Moneda
+                Extranjera?
+              </p>
+              <div className="flex space-x-4 items-center pl-4">
+                <input
+                  type="checkbox"
+                  id="exportaciones"
+                  name="exportaciones"
+                  value="exportaciones"
+                  checked={exportaciones === "exportaciones"}
+                  onChange={(e) => setExportaciones(e.target.value)}
+                />
+                <label htmlFor="exportaciones">Exportaciones</label>
+              </div>
+
+              <div className="flex space-x-4 items-center  pl-4">
+                <input
+                  type="checkbox"
+                  id="transferencias"
+                  name="transferencias"
+                  value="transferencias"
+                  checked={transferencias === "transferencias"}
+                  onChange={(e) => setTransferencias(e.target.value)}
+                />
+                <label htmlFor="transferencias">Transferencias</label>
+              </div>
+              <div className="flex space-x-4 items-center  pl-4">
+                <input
+                  type="checkbox"
+                  id="pagoServicios"
+                  name="pagoServicios"
+                  value="pagoServicios"
+                  checked={pagoServicios === "pagoServicios"}
+                  onChange={(e) => setPagoServicios(e.target.value)}
+                />
+                <label htmlFor="pagoServicios">Pago de Servicios</label>
+              </div>
+              <div className="flex space-x-4 items-center  pl-4">
+                <input
+                  type="checkbox"
+                  id="importaciones"
+                  name="importaciones"
+                  value="importaciones"
+                  checked={importaciones === "importaciones"}
+                  onChange={(e) => setImportaciones(e.target.value)}
+                />
+                <label htmlFor="importaciones">Importaciones</label>
+              </div>
+              <div className="flex space-x-4 items-center  pl-4">
+                <input
+                  type="checkbox"
+                  id="prestamos"
+                  name="prestamos"
+                  value="prestamos"
+                  checked={prestamos === "prestamos"}
+                  onChange={(e) => setPrestamos(e.target.value)}
+                />
+                <label htmlFor="prestamos">Prestamos en Moneda</label>
+              </div>
+              <div className="flex space-x-4 items-center  pl-4">
+                <input
+                  type="checkbox"
+                  id="otras"
+                  name="otras"
+                  value="otras"
+                  checked={otras === "otras"}
+                  onChange={(e) => setOtras(e.target.value)}
+                />
+                <label htmlFor="otras">Otras</label>
+              </div>
+            </div>
+          </div>
           <div className="text-left text-xl text-gray-700 mt-8 font-bold border-b-4 border-corporative-blue inline-flex pt-3">
             Referencias Bancarias
           </div>
@@ -1115,7 +1848,7 @@ const FormularioCurriculum = () => {
                     //console.log(selectedDocumentType);
                     setTipoCuenta(selectedTipoCuenta);
                   }}
-                  disabled={active}
+                  value={tipoCuenta}
                 >
                   <option value="Ahorro">Ahorro</option>
                   <option value="Corriente">Corriente</option>
@@ -1139,7 +1872,6 @@ const FormularioCurriculum = () => {
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={entidadBancaria}
                   onChange={(e) => setEntidadBancaria(e.target.value)}
-                  disabled={active}
                 />
               </div>
             </div>
@@ -1159,7 +1891,6 @@ const FormularioCurriculum = () => {
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={numeroCuenta}
                   onChange={(e) => setNumeroCuenta(e.target.value)}
-                  disabled={active}
                 />
               </div>
             </div>

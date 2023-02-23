@@ -30,10 +30,9 @@ const CurriculumProvider = ({ children }) => {
   };
 
   const editarCurriculum = async (curriculum) => {
-    console.log(curriculum.get("soporteExp"));
+    console.log(curriculum.get("inputFinanciera"));
     const id = curriculum.get("id");
-    //console.log(id);
-    //console.log(curriculum);
+
     try {
       const token = localStorage.getItem("token");
       if (!token) return;
