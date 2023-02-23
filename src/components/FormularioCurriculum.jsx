@@ -1728,7 +1728,9 @@ const FormularioCurriculum = () => {
                       type="radio"
                       placeholder=""
                       className=""
-                      checked={operacionesExtranjera === "Si"}
+                      checked={
+                        operacionesExtranjera && operacionesExtranjera === "Si"
+                      }
                       value="Si"
                       onChange={(e) => setOperacionesExtranjera(e.target.value)}
                     />
@@ -1749,7 +1751,9 @@ const FormularioCurriculum = () => {
                       type="radio"
                       placeholder=""
                       className=""
-                      checked={operacionesExtranjera === "No"}
+                      checked={
+                        operacionesExtranjera && operacionesExtranjera === "No"
+                      }
                       value="No"
                       onChange={(e) => setOperacionesExtranjera(e.target.value)}
                     />
