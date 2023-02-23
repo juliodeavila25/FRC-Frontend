@@ -17,7 +17,7 @@ const styles_table = StyleSheet.create({
     
   },
   table: {
-    fontSize: 10,
+    fontSize: 9,
     width: 522,
     display: "flex",
     flexDirection: "column",
@@ -30,7 +30,7 @@ const styles_table = StyleSheet.create({
     borderWidth: 2,
   },
   rowPaddingBottom: {
-    flexBasis: 100
+    flexBasis: 30
   },
   row: {
     display: "flex",
@@ -71,19 +71,24 @@ const styles_table = StyleSheet.create({
     backgroundColor: "#eee"
   },
   headerText: {
-    fontSize: 11,
+    padding: 10,
+    fontSize: 10,
     fontWeight: 1200,
     color: "#1a245c",
-    margin: 15,
+    margin: 5,
     fontFamily: "Times-Roman"
   },
   tableText: {
-    margin: 10,
-    fontSize: 10,
+   // margin: 10,
+    fontSize: 9,
     //color: neutralDark
   },
   textBold: {
     fontFamily: "Times-Bold",
+  },
+  textHidden: {
+    display: "none",
+    color: "white"
   }
 });
 
@@ -94,23 +99,23 @@ const styles = StyleSheet.create({
     paddingHorizontal: 35
   },
   title: {
-    fontSize: 24,
+    fontSize: 23,
     textAlign: 'center',
     fontFamily: 'Oswald'
   },
   author: {
-    fontSize: 12,
+    fontSize: 11,
     textAlign: 'center',
     marginBottom: 40,
   },
   subtitle: {
-    fontSize: 18,
+    fontSize: 17,
     margin: 12,
     fontFamily: 'Oswald'
   },
   text: {
     margin: 12,
-    fontSize: 14,
+    fontSize: 13,
     textAlign: 'justify',
     fontFamily: 'Times-Roman'
   },
@@ -119,14 +124,14 @@ const styles = StyleSheet.create({
     marginHorizontal: 100,
   },
   header: {
-    fontSize: 12,
+    fontSize: 11,
     marginBottom: 5,
     textAlign: 'center',
     color: 'grey',
   },
   pageNumber: {
     position: 'absolute',
-    fontSize: 12,
+    fontSize: 11,
     bottom: 30,
     left: 0,
     right: 0,
@@ -135,47 +140,42 @@ const styles = StyleSheet.create({
   },
   textTitle: {
     color: 'blue',
-    fontSize: 9
+    fontSize: 8
   },
 });
 
 const PdfCertificadoNomina = ({ data }) => {
-  console.log(data);
   return (
     <Document>
       <Page style={styles_table.page} size="A4" wrap>
         <View style={styles_table.table}>
               <View style={[styles_table.row, styles.header]}>
-                  <Text style={[styles_table.headerText]}><Text style={[styles_table.textBold, styles.textTitle]}> FUNDACION RENAL DE COLOMBIA</Text></Text>
-                  <Text style={[styles_table.headerText]}><Text style={styles_table.textBold}> Fecha de Pago: </Text> 30/01/2023</Text>
-                  <Text style={[styles_table.headerText]}><Text style={styles_table.textBold}> Periodo: </Text>01/01/2023 Al 30/01/2023</Text>
+                  <Text style={[styles_table.headerText]}><Text style={[styles_table.textBold, styles.textTitle, { fontSize: '11'} ]}> FUNDACION RENAL DE COLOMBIA</Text></Text>
+                  <Text style={[styles_table.headerText]}><Text style={styles_table.textBold}> Fecha de Pago: </Text> {data.fecha_pago}</Text>
+                  <Text style={[styles_table.headerText]}><Text style={styles_table.textBold}> Periodo: </Text>{data.periodo_inicio} Al {data.periodo_fin}</Text>
               </View>
               <View style={[styles_table.row, styles.header]}>
                   <Text style={[styles_table.headerText]}><Text style={styles_table.textBold}>NOMINA:</Text> MAGANGUE</Text>
                   <Text style={[styles_table.headerText]}></Text>
                   <Text style={[styles_table.headerText]}><Text style={styles_table.textBold}>NIT </Text> 830123731 - 5</Text>
-                  <Text style={[styles_table.headerText]}><Text style={styles_table.textBold}>Causación</Text> 1/01/2023 Al 30/01/2023</Text>
+                  <Text style={[styles_table.headerText]}><Text style={styles_table.textBold}>Causación</Text> {data.periodo_inicio} Al {data.periodo_fin}</Text>
               </View>
               <View style={[styles_table.row, styles_table.boderTop, styles.header]}>
-                  <Text style={[styles_table.headerText]}><Text style={styles_table.textBold}>CODIGO</Text> 1748</Text>
+                  <Text style={[styles_table.headerText]}><Text style={styles_table.textBold}>CODIGO</Text> {data.consecutivo}</Text>
                   <Text style={[styles_table.headerText]}></Text>
                   <Text style={[styles_table.headerText]}></Text>
                 <Text style={[styles_table.headerText]}><Text style={styles_table.textBold}>FECHA INGRESO</Text> 2/02/2022 </Text>
-                  <Text style={[styles_table.headerText]}><Text style={styles_table.textBold}>SUELDO BASE</Text> 2.421.540,00</Text>
+                  <Text style={[styles_table.headerText]}><Text style={styles_table.textBold}>SUELDO BASE</Text> { data.sueldo_basico_format }</Text>
               </View>
               <View style={[styles_table.row, styles.header]}>
-                  <Text style={[styles_table.headerText]}><Text style={styles_table.textBold}>IDENTIFICACION</Text> 8865970</Text>
-                  <Text style={[styles_table.headerText]}><Text style={styles_table.textBold}>NOMBRE</Text> CARLOS GABRIEL CASTILLO CASTRO</Text>
+                  <Text style={[styles_table.headerText]}><Text style={styles_table.textBold}>IDENTIFICACION</Text> {data.identificacion}</Text>
+                  <Text style={[styles_table.headerText]}><Text style={styles_table.textBold}>NOMBRE</Text> {data.nombre_completo}</Text>
                   <Text style={[styles_table.headerText]}></Text>
                   <Text style={[styles_table.headerText]}></Text>
               </View>
               <View style={[styles_table.row, styles.header]}>
-                  <Text style={[styles_table.headerText]}><Text style={styles_table.textBold}>CARGO</Text> ASISTENTE DE RECURSOS HUMANOS</Text>
-                  <Text style={[styles_table.headerText]}></Text>
-                  <Text style={[styles_table.headerText]}></Text>
-                  <Text style={[styles_table.headerText]}></Text>
-                  <Text style={[styles_table.headerText]}></Text>
-                  <Text style={[styles_table.headerText]}></Text>
+                  <Text style={[styles_table.headerText]}><Text style={styles_table.textBold}>CARGO</Text> {data.cargo}</Text>
+                  <Text style={[styles_table.headerText]}><Text style={styles_table.textHidden}>NOMBRE {data.nombre_completo} </Text></Text>
                   <Text style={[styles_table.headerText]}></Text>
                   <Text style={[styles_table.headerText]}></Text>
               </View>
@@ -191,33 +191,54 @@ const PdfCertificadoNomina = ({ data }) => {
                   <Text style={[styles_table.headerText, styles_table.cellCenter]}><Text style={styles_table.textBold}>Descripción - Valor</Text></Text>
                   <Text style={[styles_table.headerText]}></Text>
               </View>
-              <View style={[styles_table.row, styles_table.boderTop, styles.header]}>
-                  <Text style={[styles_table.headerText, styles_table.cellCenter, { textAlign: 'left',paddingLeft: '10' }]}>SUELDO</Text>
-                  <Text style={[styles_table.headerText]}>2.421.540,00</Text>
-                <Text style={[styles_table.headerText, styles_table.cellCenter, { textAlign: 'left',paddingRight: '10' }]}>APORTE SALUD:</Text>
-                  <Text style={[styles_table.headerText]}>96.862,00</Text>
-              </View>
-              <View style={[styles_table.row, styles.header]}>
+              <View style={[styles_table.tableText, { paddingLeft: '20' }]}>
+                <View style={[styles_table.row,  {flexBasis: 25}]}>
+                  <Text style={[styles_table.headerText, styles_table.cellCenter]}>SUELDO</Text>
+                  <Text style={[styles_table.headerText, styles_table.cellCenter]}>{ data.sueldo_basico_format }</Text>
+                  <Text style={[styles_table.headerText, styles_table.cellCenter]}>APORTE SALUD</Text>
+                  <Text style={[styles_table.headerText, styles_table.cellCenter]}>{data.apt_salud_format}</Text>
+                </View>
+                <View style={[styles_table.row,  {flexBasis: 25}]}>
+                  <Text style={[styles_table.headerText, styles_table.cellCenter]}>AUX TRANSPORTE</Text>
+                  <Text style={[styles_table.headerText, styles_table.cellCenter]}>{ data.aux_transp_format }</Text>
+                  <Text style={[styles_table.headerText, styles_table.cellCenter]}>APORTE PENSION</Text>
+                  <Text style={[styles_table.headerText, styles_table.cellCenter]}>{data.apt_pension_format}</Text>
+                </View>
+                <View style={[styles_table.row,  {flexBasis: 30}]}>
+                  <Text style={[styles_table.headerText, styles_table.cellCenter]}>HORAS EXTRAS</Text>
+                  <Text style={[styles_table.headerText, styles_table.cellCenter]}>{ data.horas_extras_format }</Text>
+                  <Text style={[styles_table.headerText, styles_table.cellCenter]}>RETENCIÓN. FUENTE</Text>
+                  <Text style={[styles_table.headerText, styles_table.cellCenter]}>{data.ret_fuente_format}</Text>
+                </View>
+                <View style={[styles_table.row,  {flexBasis: 30}]}>
+                  <Text style={[styles_table.headerText, styles_table.cellCenter]}>RECARGO NOCTURNO</Text>
+                  <Text style={[styles_table.headerText, styles_table.cellCenter]}>{ data.rec_nocturno_format }</Text>
+                  <Text style={[styles_table.headerText, styles_table.cellCenter]}>OTROS DESCUENTOS</Text>
+                  <Text style={[styles_table.headerText, styles_table.cellCenter]}>{data.otros_descuentos_format}</Text>
+                </View>
+                <View style={[styles_table.row,  {flexBasis: 35}]}>
+                  <Text style={[styles_table.headerText, styles_table.cellCenter]}>AUXILIOS</Text>
+                  <Text style={[styles_table.headerText, styles_table.cellCenter]}>{ data.auxilios_format }</Text>
                   <Text style={[styles_table.headerText, styles_table.cellCenter]}></Text>
-                  <Text style={[styles_table.headerText, styles_table.cellCenter, { paddingRight: '10' }]}>APORTE PENSION</Text>
-                  <Text style={[styles_table.headerText]}>96.862,00</Text>
-              </View>
-              <View style={[styles_table.row, styles.header]}>
                   <Text style={[styles_table.headerText, styles_table.cellCenter]}></Text>
-                  <Text style={[styles_table.headerText]}></Text>
-                <Text style={[styles_table.headerText, styles_table.cellCenter, { paddingRight: '10' }]}>OTROS DESCUENTOS</Text>
-                  <Text style={[styles_table.headerText]}>72.736,00</Text>
-              </View>
+                </View>
+                <View style={[styles_table.row,  {flexBasis: 35}]}>
+                  <Text style={[styles_table.headerText, styles_table.cellCenter]}>OTROS PAGOS</Text>
+                  <Text style={[styles_table.headerText, styles_table.cellCenter]}>{ data.otros_pagos_format }</Text>
+                  <Text style={[styles_table.headerText, styles_table.cellCenter]}></Text>
+                  <Text style={[styles_table.headerText, styles_table.cellCenter]}></Text>
+                </View>
+              </View>            
               <View style={[styles_table.rowPaddingBottom]}></View>      
               <View style={[styles_table.row, styles.header]}>
-                  <Text style={[styles_table.headerText, styles_table.cellCenter]}><Text style={styles_table.textBold}>TOTAL PAGOS</Text></Text>
-                  <Text style={[styles_table.headerText]}>2.421.540,00</Text>
+                  <Text style={[styles_table.headerText, styles_table.cellCenter, { textAlign: 'left',paddingLeft: '10' }]}><Text style={styles_table.textBold}>TOTAL PAGOS</Text></Text>
+                  <Text style={[styles_table.headerText, styles_table.cellCenter, { textAlign: 'right',paddingLeft: '2' }]}>{ data.total_pagos_format }</Text>
                   <Text style={[styles_table.headerText, styles_table.cellCenter]}><Text style={styles_table.textBold}>TOTAL DESCUENTOS</Text></Text>
-                  <Text style={[styles_table.headerText]}>266.460,00</Text>
+                  <Text style={[styles_table.headerText]}>{ data.total_descuentos_format }</Text>
               </View>
               <View style={[styles_table.row, styles_table.boderTop, styles.header]}>
-                  <Text style={[styles_table.headerText, styles_table.cellCenter]}><Text style={styles_table.textBold}>NETO A PAGAR</Text></Text>
-                  <Text style={[styles_table.headerText]}>2.155.080,00</Text>
+                  <Text style={[styles_table.headerText, styles_table.cellCenter, { textAlign: 'left',paddingLeft: '10' }]}><Text style={styles_table.textBold}>NETO A PAGAR</Text></Text>
+                  <Text style={[styles_table.headerText, styles_table.cellCenter, { paddingLeft: '7' }]}>{ data.total_neto_pagado_format }</Text>
                   <Text style={[styles_table.headerText, styles_table.cellCenter]}></Text>
                   <Text style={[styles_table.headerText]}></Text>
               </View>

@@ -49,6 +49,10 @@ const FormularioCurriculum = () => {
   const [tipoCuenta, setTipoCuenta] = useState("Ahorro");
   const [entidadBancaria, setEntidadBancaria] = useState("");
   const [numeroCuenta, setNumeroCuenta] = useState("");
+  //Contractual
+  const [tipoContrato, setTipoContrato] = useState("");
+  const [fechaIngreso, setFechaIngreso] = useState("");
+  const [fechaFin, setFechaFin] = useState("");
   const params = useParams();
 
   const {
@@ -108,6 +112,10 @@ const FormularioCurriculum = () => {
       setTipoCuenta(curriculum[0].tipoCuenta);
       setEntidadBancaria(curriculum[0].entidadBancaria);
       setNumeroCuenta(curriculum[0].numeroCuenta);
+      //Contractual
+      setTipoContrato(curriculum[0].tipoContrato);
+      setFechaIngreso(curriculum[0].fechaIngreso);
+      setFechaFin(curriculum[0].fechaFin);
     }
   }, [curriculum]);
 
@@ -228,6 +236,9 @@ const FormularioCurriculum = () => {
     formData.append("tipoCuenta", tipoCuenta);
     formData.append("entidadBancaria", entidadBancaria);
     formData.append("numeroCuenta", numeroCuenta);
+    formData.append("tipoContrato", tipoContrato);
+    formData.append("fechaIngreso", fechaIngreso);
+    formData.append("fechaFin", fechaFin);
     console.log(formData);
     //Pasar los datos hacia el provider
     await submitCurriculum(formData, estado);

@@ -89,23 +89,22 @@ const PdfCertificado = ({ data }) => {
         />
         <Text style={styles.subtitle}>CERTIFICADO LABORAL</Text>
         <Text style={styles.text}>
-          El señor(a)<Text style={styles.textb}> {data.nombre} </Text>
+          El señor(a)<Text style={styles.textb}> {data.nombre_completo} </Text>
           identificado(a) con cédula de ciudadanía número
-          <Text style={styles.textb}> 1.007.661.687 </Text>, presta sus
-          servicios como <Text style={styles.textb}> ENFERMERA </Text> en la
+          <Text style={styles.textb}> { data.identificacion_format }</Text>, presta sus
+          servicios como <Text style={styles.textb}> {data.cargo} </Text> en la
           Fundación Renal de Colombia, desde el día 1 de septiembre del 2022 con
           un Contrato de Trabajo Vigente a
-          <Text style={styles.textb}> Obra y Labor </Text>, devengando un
+          <Text style={styles.textb}> Obra y Labor</Text>, devengando un
           Salario Mensual<Text style={styles.textb}> actual </Text>
           de:{" "}
           <Text style={styles.textb}>
-            dos millones diecisiete mil pesos ($2.017.000){" "}
+            {data.sueldo_basico_letras} pesos (${ data.sueldo_basico_format}){" "}
           </Text>{" "}
           M/CTE. :
         </Text>
         <Text style={styles.text}>
-          El presente certificado se expide a solicitud del interesado a los
-          veintiun (21) días del mes de noviembre dos mil veintidos (2022) a
+          El presente certificado se expide a solicitud del interesado a los { data.dia_letras } ({data.dia}) días del mes de { data.mes_letras } del { data.anio_letras } ({data.anio}) a
           solicitud de <Text style={styles.textb}>A QUIEN INTERESE </Text>.
         </Text>
         <Text style={styles.text}>Cordialmente,</Text>
