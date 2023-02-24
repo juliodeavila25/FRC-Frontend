@@ -36,6 +36,7 @@ export default function ModalPublic({ data, setShowModal }) {
                     placeholder="Digita el código"
                     className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                     value={data.codigo}
+                    disabled="true"
                   />
                 </div>
               </div>
@@ -55,6 +56,7 @@ export default function ModalPublic({ data, setShowModal }) {
                     placeholder="Digita el proceso"
                     className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                     value={data.proceso}
+                    disabled="true"
                   />
                 </div>
               </div>
@@ -75,6 +77,7 @@ export default function ModalPublic({ data, setShowModal }) {
                     className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                     value={data.titulo}
                     rows="3"
+                    disabled="true"
                   />
                 </div>
               </div>
@@ -94,6 +97,7 @@ export default function ModalPublic({ data, setShowModal }) {
                     placeholder="Digite el servicio"
                     className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                     value={data.servicio}
+                    disabled="true"
                   />
                 </div>
               </div>
@@ -113,6 +117,7 @@ export default function ModalPublic({ data, setShowModal }) {
                     placeholder="Digite el tipo"
                     className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                     value={data.tipo}
+                    disabled="true"
                   />
                 </div>
               </div>
@@ -132,6 +137,7 @@ export default function ModalPublic({ data, setShowModal }) {
                     placeholder="Digite la implementacion"
                     className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                     value={data.implementacion}
+                    disabled="true"
                   />
                 </div>
               </div>
@@ -152,6 +158,7 @@ export default function ModalPublic({ data, setShowModal }) {
                     className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                     value={data.descripcion}
                     rows="6"
+                    disabled="true"
                   />
                 </div>
               </div>
@@ -171,6 +178,7 @@ export default function ModalPublic({ data, setShowModal }) {
                     placeholder="Digite la especialidad"
                     className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                     value={data.especialidad}
+                    disabled="true"
                   />
                 </div>
               </div>
@@ -190,6 +198,7 @@ export default function ModalPublic({ data, setShowModal }) {
                     placeholder="Digite el responsable"
                     className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                     value={data.responsable}
+                    disabled="true"
                   />
                 </div>
               </div>
@@ -209,6 +218,7 @@ export default function ModalPublic({ data, setShowModal }) {
                     placeholder="Digite la fuente"
                     className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                     value={data.fuente}
+                    disabled="true"
                   />
                 </div>
               </div>
