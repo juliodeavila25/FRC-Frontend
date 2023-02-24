@@ -11,11 +11,11 @@ const ListarDocumentosTotal = () => {
 
   const [headers, setHeaders] = useState([
     {
-      Header: "Nro. Convocatoria",
-      accessor: "convocatoria",
+      Header: "Código",
+      accessor: "codigo",
     },
-    { Header: "Cargo", accessor: "nombre" },
-    { Header: "Ciudad", accessor: "ciudad" },
+    { Header: "Proceso", accessor: "proceso" },
+    { Header: "Titulo", accessor: "titulo" },
     {
       Header: "Fecha de creación",
       accessor: "createdAt",
@@ -23,7 +23,6 @@ const ListarDocumentosTotal = () => {
         return format(new Date(value), "dd/MM/yyyy");
       },
     },
-    { Header: "Estado", accessor: "estado" },
     {
       Header: " ",
       accessor: (originalRow, rowIndex) => (
@@ -31,9 +30,7 @@ const ListarDocumentosTotal = () => {
           <button
             className="text-blue-500 hover:text-blue-900"
             onClick={() =>
-              navigate(
-                `/recursos-humanos/editar-convocatoria/${originalRow._id}`
-              )
+              navigate(`/documentos/editar-documento/${originalRow._id}`)
             }
           >
             <svg
@@ -63,7 +60,9 @@ const ListarDocumentosTotal = () => {
     <Table
       data={documentos}
       columns={headers}
-      href={"/recursos-humanos/crear-convocatoria"}
+      title="Listado maestro de documentos"
+      titleButton="Nuevo Documento"
+      href={"/documentos/crear-documento"}
     />
   );
 };

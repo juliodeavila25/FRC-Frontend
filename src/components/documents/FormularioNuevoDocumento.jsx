@@ -1,49 +1,53 @@
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-import useOfertas from "../../hooks/useOfertas";
+import useDocumentos from "../../hooks/useDocumentos";
 import Alert from "../Alert";
 import useAuth from "../../hooks/useAuth";
 import { BeatLoader } from "react-spinners";
 
 const FormularioNuevoDocumento = () => {
-  const [active, setActive] = useState(false);
   const [id, setId] = useState(null);
-  //   const [estado, setEstado] = useState(null);
-  const [nombre, setNombre] = useState("");
-  const [convocatoria, setConvocatoria] = useState("");
-  const [ciudad, setCiudad] = useState("");
-  const [salario, setSalario] = useState("");
-  const [auxilio, setAuxilio] = useState("");
-  const [bonificaciones, setBonificaciones] = useState("");
-  const [perfil, setPerfil] = useState("");
-  const [funciones, setFunciones] = useState("");
+  const [titulo, setTitulo] = useState("");
+  const [codigo, setCodigo] = useState("");
+  const [proceso, setProceso] = useState("");
+  const [servicio, setServicio] = useState("");
+  const [tipo, setTipo] = useState("");
+  const [implementacion, setImplementacion] = useState("");
+  const [descripcion, setDescripcion] = useState("");
+  const [especialidad, setEspecialidad] = useState("");
+  const [responsable, setResponsable] = useState("");
+  const [fuente, setFuente] = useState("");
+  const [link, setLink] = useState("");
 
   const params = useParams();
 
   console.log(params.id);
 
   const {
-    submitOferta,
+    submitDocumento,
     mostrarAlerta,
     alerta,
-    obtenerOferta,
-    oferta,
+    obtenerDocumento,
+    documento,
     cargandoData,
-  } = useOfertas();
+  } = useDocumentos();
 
   const { auth, cargando } = useAuth();
 
   useEffect(() => {
     if (params.id) {
-      setId(oferta._id);
-      setNombre(oferta.nombre);
-      setConvocatoria(oferta.convocatoria);
-      setCiudad(oferta.ciudad);
-      setSalario(oferta.salario);
-      setAuxilio(oferta.auxilio);
-      setBonificaciones(oferta.bonificaciones);
-      setPerfil(oferta.perfil);
-      setFunciones(oferta.funciones);
+      setId(documento._id);
+      setTitulo(documento.titulo);
+      setCodigo(documento.codigo);
+      setProceso(documento.proceso);
+      setServicio(documento.servicio);
+      setTipo(documento.tipo);
+      setImplementacion(documento.implementacion);
+      setDescripcion(documento.descripcion);
+      setEspecialidad(documento.especialidad);
+      setResponsable(documento.responsable);
+      setFuente(documento.fuente);
+      setLink(documento.link);
     }
   }, []);
 
@@ -51,26 +55,19 @@ const FormularioNuevoDocumento = () => {
     e.preventDefault();
     if (
       [
-        nombre,
-        convocatoria,
-        ciudad,
-        salario,
-        auxilio,
-        bonificaciones,
-        perfil,
-        funciones,
+        titulo,
+        codigo,
+        proceso,
+        servicio,
+        tipo,
+        implementacion,
+        descripcion,
+        especialidad,
+        responsable,
+        fuente,
+        link,
       ].includes("")
     ) {
-      console.log(
-        nombre,
-        convocatoria,
-        ciudad,
-        salario,
-        auxilio,
-        bonificaciones,
-        perfil,
-        funciones
-      );
       mostrarAlerta({
         msg: "Todos los campos son obligatorios",
         error: true,
@@ -79,16 +76,19 @@ const FormularioNuevoDocumento = () => {
     }
 
     //Pasar los datos hacia el provider
-    await submitOferta({
+    await submitDocumento({
       id,
-      nombre,
-      convocatoria,
-      ciudad,
-      salario,
-      auxilio,
-      bonificaciones,
-      perfil,
-      funciones,
+      titulo,
+      codigo,
+      proceso,
+      servicio,
+      tipo,
+      implementacion,
+      descripcion,
+      especialidad,
+      responsable,
+      fuente,
+      link,
     });
     // setNombre("");
     // setDescripcion("");
@@ -98,174 +98,245 @@ const FormularioNuevoDocumento = () => {
 
   const { msg } = alerta;
 
+  if (cargandoData) return <BeatLoader color="#36d7b7" />;
+
   return (
     <div className=" sm:mx-auto sm:w-full">
       <div className="bg-white py-8 px-4 shadow-lg rounded-lg sm:px-10">
         {msg && <Alert alerta={alerta} />}
         <form className="space-y-6 " onSubmit={handleSubmit}>
           <div className="text-left text-xl text-gray-700 mt-8 font-bold border-b-4 border-corporative-blue inline-flex">
-            Convocatoria
+            Listado Maestro de Documentos y Formatos
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-2 gap-6">
             <div>
               <label
-                htmlFor="convocatoria"
+                htmlFor="codigo"
                 className="block text-sm font-medium text-gray-700"
               >
-                Nro. Convocatoria
+                Código/Versión <span class="text-red-700">*</span>
               </label>
               <div className="mt-1">
                 <input
                   type="text"
-                  id="convocatoria"
-                  name="convocatoria"
-                  placeholder="Digita tu correo electrónico"
+                  id="codigo"
+                  name="codigo"
+                  placeholder="Digita el código"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                  value={convocatoria}
-                  onChange={(e) => setConvocatoria(e.target.value)}
+                  value={codigo}
+                  onChange={(e) => setCodigo(e.target.value)}
+                  required="true"
                 />
               </div>
             </div>
             <div>
               <label
-                htmlFor="nombre"
+                htmlFor="proceso"
                 className="block text-sm font-medium text-gray-700"
               >
-                Nombre Convocatoria
+                Proceso<span class="text-red-700">*</span>
               </label>
               <div className="mt-1">
                 <input
-                  id="nombre"
-                  name="nombre"
+                  id="proceso"
+                  name="proceso"
                   type="text"
-                  autoComplete="nombre"
-                  placeholder="Digita tu nombre completo"
+                  autoComplete="proceso"
+                  placeholder="Digita el proceso"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                  value={nombre}
-                  onChange={(e) => setNombre(e.target.value)}
-                />
-              </div>
-            </div>
-
-            <div>
-              <label
-                htmlFor="ciudad"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Ciudad
-              </label>
-              <div className="mt-1">
-                <input
-                  id="ciudad"
-                  name="ciudad"
-                  type="text"
-                  placeholder="Digita tu numero de documento"
-                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                  value={ciudad}
-                  onChange={(e) => setCiudad(e.target.value)}
+                  value={proceso}
+                  onChange={(e) => setProceso(e.target.value)}
+                  required="true"
                 />
               </div>
             </div>
 
             <div>
               <label
-                htmlFor="salario"
+                htmlFor="titulo"
                 className="block text-sm font-medium text-gray-700"
               >
-                Salario
+                Titulo<span class="text-red-700">*</span>
               </label>
               <div className="mt-1">
                 <input
-                  id="salario"
-                  name="salario"
+                  id="titulo"
+                  name="titulo"
                   type="text"
-                  placeholder="Seleccione su fecha de nacimiento"
+                  placeholder="Digita el tiulo"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                  value={salario}
-                  onChange={(e) => setSalario(e.target.value)}
+                  value={titulo}
+                  onChange={(e) => setTitulo(e.target.value)}
+                  required="true"
                 />
               </div>
             </div>
 
             <div>
               <label
-                htmlFor="auxilio"
+                htmlFor="servicio"
                 className="block text-sm font-medium text-gray-700"
               >
-                Auxilio
+                Servicio<span class="text-red-700">*</span>
               </label>
               <div className="mt-1">
                 <input
-                  id="auxilio"
-                  name="auxilio"
+                  id="servicio"
+                  name="servicio"
                   type="text"
-                  placeholder="Digite su lugar de nacimiento"
+                  placeholder="Digite el servicio"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                  value={auxilio}
-                  onChange={(e) => setAuxilio(e.target.value)}
+                  value={servicio}
+                  onChange={(e) => setServicio(e.target.value)}
+                  required="true"
                 />
               </div>
             </div>
 
             <div>
               <label
-                htmlFor="bonificaciones"
+                htmlFor="tipo"
                 className="block text-sm font-medium text-gray-700"
               >
-                Bonificaciones
+                Tipo<span class="text-red-700">*</span>
               </label>
               <div className="mt-1">
                 <input
-                  id="bonificaciones"
-                  name="bonificaciones"
+                  id="tipo"
+                  name="tipo"
                   type="text"
-                  placeholder="Digite su número de telefono"
+                  placeholder="Digite el tipo"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                  value={bonificaciones}
-                  onChange={(e) => setBonificaciones(e.target.value)}
+                  value={tipo}
+                  onChange={(e) => setTipo(e.target.value)}
+                  required="true"
                 />
               </div>
             </div>
 
             <div>
               <label
-                htmlFor="perfil"
+                htmlFor="implementacion"
                 className="block text-sm font-medium text-gray-700"
               >
-                Perfil
+                Implementacion<span class="text-red-700">*</span>
+              </label>
+              <div className="mt-1">
+                <input
+                  id="implementacion"
+                  name="implementacion"
+                  type="text"
+                  placeholder="Digite la implementacion"
+                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                  value={implementacion}
+                  onChange={(e) => setImplementacion(e.target.value)}
+                  required="true"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label
+                htmlFor="descripcion"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Descripción<span class="text-red-700">*</span>
               </label>
               <div className="mt-1">
                 <textarea
-                  id="perfil"
-                  name="perfil"
+                  id="descripcion"
+                  name="descripcion"
                   type="text"
-                  placeholder="Digite su correo electrónico"
+                  placeholder="Digite descripción"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                  value={perfil}
-                  onChange={(e) => setPerfil(e.target.value)}
-                  disabled={active}
+                  value={descripcion}
+                  onChange={(e) => setDescripcion(e.target.value)}
                   rows="6"
+                  required="true"
                 />
               </div>
             </div>
 
             <div>
               <label
-                htmlFor="funciones"
+                htmlFor="especialidad"
                 className="block text-sm font-medium text-gray-700"
               >
-                Funciones
+                Especialidad<span class="text-red-700">*</span>
               </label>
               <div className="mt-1">
-                <textarea
-                  id="funciones"
-                  name="funciones"
-                  type="funciones"
-                  placeholder="Digite su dirección"
+                <input
+                  id="especialidad"
+                  name="especialidad"
+                  type="text"
+                  placeholder="Digite la especialidad"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                  value={funciones}
-                  onChange={(e) => setFunciones(e.target.value)}
-                  rows="6"
+                  value={especialidad}
+                  onChange={(e) => setEspecialidad(e.target.value)}
+                  required="true"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label
+                htmlFor="responsable"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Responsable<span class="text-red-700">*</span>
+              </label>
+              <div className="mt-1">
+                <input
+                  id="responsable"
+                  name="responsable"
+                  type="text"
+                  placeholder="Digite el responsable"
+                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                  value={responsable}
+                  onChange={(e) => setResponsable(e.target.value)}
+                  required="true"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label
+                htmlFor="fuente"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Fuente<span class="text-red-700">*</span>
+              </label>
+              <div className="mt-1">
+                <input
+                  id="fuente"
+                  name="fuente"
+                  type="text"
+                  placeholder="Digite la fuente"
+                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                  value={fuente}
+                  onChange={(e) => setFuente(e.target.value)}
+                  required="true"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label
+                htmlFor="link"
+                className="block text-sm font-medium text-gray-700"
+              >
+                URL<span class="text-red-700">*</span>
+              </label>
+              <div className="mt-1">
+                <input
+                  id="link"
+                  name="link"
+                  type="text"
+                  placeholder="Digite la url"
+                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                  value={link}
+                  onChange={(e) => setLink(e.target.value)}
+                  required="true"
                 />
               </div>
             </div>
@@ -273,7 +344,7 @@ const FormularioNuevoDocumento = () => {
 
           <div className="grid grid-cols-2 gap-6 w-3/5 mx-auto">
             <Link
-              to="/recursos-humanos/listar-convocatorias"
+              to="/documentos/listar-documentos"
               className="flex w-full justify-center rounded-md border-2 border-red-400 bg-transparent py-2 px-4 text-sm font-medium text-red-500 shadow-sm hover:bg-red-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
             >
               Cancelar

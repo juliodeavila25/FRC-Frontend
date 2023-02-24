@@ -63,6 +63,8 @@ const ListarOfertas = () => {
     <Table
       data={ofertas}
       columns={headers}
+      title="Ofertas"
+      titleButton="Nueva oferta de empleo"
       href={"/recursos-humanos/crear-convocatoria"}
     />
   );

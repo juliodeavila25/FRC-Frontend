@@ -25,25 +25,34 @@ import ListarDocumentos from "./pages/documents/ListarDocumentos";
 import CrearDocumento from "./pages/documents/CrearDocumento";
 import EditarDocumento from "./pages/documents/EditarDocumento";
 import CertificadoDesprendible from "./pages/CertificadoDesprendible";
+import DataPublic from "./pages/public/DataPublic";
 function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
-      <NominasProvider>
-        <DocumentosProvider>
+        <NominasProvider>
+          <DocumentosProvider>
             <OfertasProvider>
               <CurriculumProvider>
                 <Routes>
                   <Route path="/" element={<AuthLayout />}>
                     <Route index element={<Login />} />
                     <Route path="registrar" element={<Registrar />} />
-                    <Route path="olvide-password" element={<ForgotPassword />} />
+                    <Route
+                      path="olvide-password"
+                      element={<ForgotPassword />}
+                    />
                     <Route
                       path="olvide-password/:token"
                       element={<NewPassword />}
                     />
                     <Route path="confirmar/:id" element={<ConfirmAccount />} />
                     <Route path="sin-autorizacion" element={<Unauthorized />} />
+                  </Route>
+
+                  <Route path="/documentos">
+                    <Route index element={<DataPublic />} />
+                    <Route path="detalles/:id" element={<Unauthorized />} />
                   </Route>
 
                   <Route
@@ -61,7 +70,10 @@ function App() {
                     path="/curriculum"
                     element={<RutaProtegida allowedRoles={["aspirante"]} />}
                   >
-                    <Route path="crear-curriculum" element={<CurriculumVitae />} />
+                    <Route
+                      path="crear-curriculum"
+                      element={<CurriculumVitae />}
+                    />
                     <Route
                       path="editar-curriculum/:id"
                       element={<EditarCurriculumVitae />}
@@ -96,7 +108,9 @@ function App() {
 
                   <Route
                     path="/recursos-humanos"
-                    element={<RutaProtegida allowedRoles={["recursos_humanos"]} />}
+                    element={
+                      <RutaProtegida allowedRoles={["recursos_humanos"]} />
+                    }
                   >
                     <Route
                       index
@@ -115,7 +129,9 @@ function App() {
 
                   <Route
                     path="/documentos"
-                    element={<RutaProtegida allowedRoles={["recursos_humanos"]} />}
+                    element={
+                      <RutaProtegida allowedRoles={["recursos_humanos"]} />
+                    }
                   >
                     <Route
                       index
@@ -135,7 +151,7 @@ function App() {
               </CurriculumProvider>
             </OfertasProvider>
           </DocumentosProvider>
-        </NominasProvider>  
+        </NominasProvider>
       </AuthProvider>
     </BrowserRouter>
   );

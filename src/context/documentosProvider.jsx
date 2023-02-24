@@ -43,15 +43,15 @@ const DocumentosProvider = ({ children }) => {
     obtenerDocumentos();
   }, [auth]);
 
-  const submitOferta = async (oferta) => {
-    if (oferta.id) {
-      await editarOferta(oferta);
+  const submitDocumento = async (documento) => {
+    if (documento.id) {
+      await editarDocumento(documento);
     } else {
-      await nuevaOferta(oferta);
+      await nuevoDocumento(documento);
     }
   };
 
-  const editarOferta = async (oferta) => {
+  const editarDocumento = async (documento) => {
     try {
       const token = localStorage.getItem("token");
       if (!token) return;
@@ -62,35 +62,32 @@ const DocumentosProvider = ({ children }) => {
         },
       };
       const { data } = await clienteAxios.put(
-        `/ofertas/${oferta.id}`,
-        oferta,
+        `/documentos/${documento.id}`,
+        documento,
         config
       );
 
-      console.log(ofertas);
-      console.log(data);
-
-      const ofertasActualizados = ofertas.map((ofertaState) =>
-        ofertaState._id === data._id ? data : ofertaState
+      const documentosActualizados = documentos.map((documentoState) =>
+        documentoState._id === data._id ? data : documentoState
       );
-      setOfertas(ofertasActualizados);
+      setDocumentos(documentosActualizados);
 
       //Mostrar alerta
       setAlerta({
-        msg: "Oferta actualizada correctamente",
+        msg: "Documento actualizado correctamente",
         error: false,
       });
 
       setTimeout(() => {
         setAlerta({});
-        navigate("/recursos-humanos/listar-convocatorias");
+        navigate("/documentos/listar-documentos");
       }, 3000);
     } catch (error) {
       console.log(error);
     }
   };
 
-  const nuevaOferta = async (oferta) => {
+  const nuevoDocumento = async (documento) => {
     try {
       const token = localStorage.getItem("token");
       if (!token) return;
@@ -101,25 +98,29 @@ const DocumentosProvider = ({ children }) => {
         },
       };
 
-      const { data } = await clienteAxios.post("/ofertas", oferta, config);
+      const { data } = await clienteAxios.post(
+        "/documentos",
+        documento,
+        config
+      );
 
-      setOfertas([...ofertas, data]);
+      setDocumentos([...documentos, data]);
 
       setAlerta({
-        msg: "Oferta creada correctamente",
+        msg: "Documento creado correctamente",
         error: false,
       });
 
       setTimeout(() => {
         setAlerta({});
-        navigate("/recursos-humanos/listar-convocatorias");
+        navigate("/documentos/listar-documentos");
       }, 3000);
     } catch (error) {
       console.log(error);
     }
   };
 
-  const obtenerOferta = async (id) => {
+  const obtenerDocumento = async (id) => {
     setCargando(true);
     console.log(id);
     try {
@@ -131,9 +132,9 @@ const DocumentosProvider = ({ children }) => {
           Authorization: `Bearer ${token}`,
         },
       };
-      const { data } = await clienteAxios.get(`/ofertas/${id}`, config);
+      const { data } = await clienteAxios.get(`/documentos/${id}`, config);
       console.log(data);
-      setOferta(data);
+      setDocumento(data);
     } catch (error) {
       console.log(error);
     }
@@ -145,14 +146,13 @@ const DocumentosProvider = ({ children }) => {
     <DocumentosContext.Provider
       value={{
         alerta,
-        ofertas,
         documento,
         documentos,
-        oferta,
         cargandoData,
-        submitOferta,
-        mostrarAlerta,       
-        editarOferta,
+        submitDocumento,
+        mostrarAlerta,
+        editarDocumento,
+        obtenerDocumento,
       }}
     >
       {children}
