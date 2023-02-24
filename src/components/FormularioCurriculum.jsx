@@ -62,8 +62,10 @@ const FormularioCurriculum = () => {
 
   const [poseeCuenta, setPoseeCuenta] = useState("Si");
   const [inputCuentas, setInputCuentas] = useState([
-    { nro_cuenta: "", banco: "", ciudad: "", pais: "", moneda: "" },
+    { nro_cuenta: " ", banco: " ", ciudad: " ", pais: "", moneda: " " },
   ]);
+
+  console.log(inputCuentas);
 
   const [operacionesExtranjera, setOperacionesExtranjera] = useState("Si");
 
