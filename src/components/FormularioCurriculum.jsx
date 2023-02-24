@@ -10,22 +10,22 @@ const FormularioCurriculum = () => {
   const [estado, setEstado] = useState(null);
   const [nombre, setNombre] = useState("");
   const [tipoDocumento, setTipoDocumento] = useState("Cedula de ciudadania");
-  const [numeroDocumento, setNumeroDocumento] = useState("");
+  const [numeroDocumento, setNumeroDocumento] = useState(0);
   const [fechaNacimiento, setFechaNacimiento] = useState("");
   const [lugarNacimiento, setLugarNacimiento] = useState("");
-  const [telefono, setTelefono] = useState("");
+  const [telefono, setTelefono] = useState(0);
   const [correo, setCorreo] = useState("");
   const [direccion, setDireccion] = useState("");
   const [estadoCivil, setEstadoCivil] = useState("");
   const [pais, setPais] = useState("");
   const [departamento, setDepartamento] = useState("");
   const [ciudad, setCiudad] = useState("");
-  const [numeroHijos, setNumeroHijos] = useState("");
+  const [numeroHijos, setNumeroHijos] = useState(0);
   const [tipoSangre, setTipoSangre] = useState("");
   //Formación Profesional
   const [nivel, setNivel] = useState("Profesional");
   const [titulo, setTitulo] = useState("");
-  const [anioTitulo, setAnioTitulo] = useState("");
+  const [anioTitulo, setAnioTitulo] = useState(0);
   const [institucionTitulo, setInstitucionTitulo] = useState("");
   //Experiencia Profesional
   const [empresaExp, setEmpresaExp] = useState("");
@@ -56,12 +56,12 @@ const FormularioCurriculum = () => {
   const [rut, setRut] = useState("");
   const [numeroRut, setNumeroRut] = useState("");
   const [fechaCorte, setFechaCorte] = useState("");
-  const [ingresosAnuales, setIngresosAnuales] = useState("");
-  const [egresosAnuales, setEgresosAnuales] = useState("");
-  const [otrosIngresos, setOtrosIngresos] = useState("");
-  const [patrimonio, setPatrimonio] = useState("");
-  const [activos, setActivos] = useState("");
-  const [pasivos, setPasivos] = useState("");
+  const [ingresosAnuales, setIngresosAnuales] = useState(0);
+  const [egresosAnuales, setEgresosAnuales] = useState(0);
+  const [otrosIngresos, setOtrosIngresos] = useState(0);
+  const [patrimonio, setPatrimonio] = useState(0);
+  const [activos, setActivos] = useState(0);
+  const [pasivos, setPasivos] = useState(0);
   const [descripcionIngresos, setDescripcionIngresos] = useState("");
 
   const [poseeCuenta, setPoseeCuenta] = useState("Si");
@@ -69,7 +69,7 @@ const FormularioCurriculum = () => {
     { nro_cuenta: " ", banco: " ", ciudad: " ", pais: "", moneda: " " },
   ]);
 
-  console.log(inputCuentas);
+  //console.log(inputCuentas);
 
   const [operacionesExtranjera, setOperacionesExtranjera] = useState("Si");
 
@@ -88,6 +88,12 @@ const FormularioCurriculum = () => {
   const [tipoContrato, setTipoContrato] = useState("");
   const [fechaIngreso, setFechaIngreso] = useState("");
   const [fechaFin, setFechaFin] = useState("");
+  const [empresa, setEmpresa] = useState("");
+  const [nomina, setNomina] = useState("");
+  const [codigoIngreso, setCodigoIngreso] = useState(0);
+  const [sueldo, setSueldo] = useState(0);
+  const [soporteContrato, setSoporteContrato] = useState("");
+  const [cargo, setCargo] = useState("");
   const params = useParams();
 
   const {
@@ -100,14 +106,15 @@ const FormularioCurriculum = () => {
   } = useCurriculum();
 
   const { auth, cargando } = useAuth();
-
+  //console.log(auth.documento);
+  //console.log(auth._id);
   useEffect(() => {
     obtenerCurriculum(auth._id);
   }, []);
 
   useEffect(() => {
     if (curriculum.length > 0) {
-      console.log(curriculum);
+      //console.log(curriculum);
       setId(auth._id);
       setEstado(curriculum[0].estado);
       setNombre(curriculum[0].nombre);
@@ -174,88 +181,92 @@ const FormularioCurriculum = () => {
       //Contractual
       setTipoContrato(curriculum[0].tipoContrato);
       setFechaIngreso(curriculum[0].fechaIngreso);
-      setFechaFin(curriculum[0].fechaFin);
+      setEmpresa(curriculum[0].empresa);
+      setNomina(curriculum[0].nomina);
+      setCodigoIngreso(curriculum[0].codigoIngreso);
+      setSueldo(curriculum[0].sueldo);
+      setCargo(curriculum[0].cargo);
     }
   }, [curriculum]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // if (
-    //   [
-    //     nombre,
-    //     tipoDocumento,
-    //     numeroDocumento,
-    //     fechaNacimiento,
-    //     lugarNacimiento,
-    //     telefono,
-    //     correo,
-    //     direccion,
-    //     estadoCivil,
-    //     pais,
-    //     departamento,
-    //     ciudad,
-    //     numeroHijos,
-    //     tipoSangre,
-    //     nivel,
-    //     titulo,
-    //     anioTitulo,
-    //     institucionTitulo,
-    //     empresaExp,
-    //     fechaInicioExp,
-    //     fechaFinExp,
-    //     nombreRefA,
-    //     telefonoRefA,
-    //     correoRefA,
-    //     nombreRefB,
-    //     telefonoRefB,
-    //     correoRefB,
-    //     eps,
-    //     pension,
-    //     tipoCuenta,
-    //     entidadBancaria,
-    //     numeroCuenta
-    //   ].includes("")
-    // ) {
-    //   console.log(
-    //     nombre,
-    //     tipoDocumento,
-    //     numeroDocumento,
-    //     fechaNacimiento,
-    //     lugarNacimiento,
-    //     telefono,
-    //     correo,
-    //     direccion,
-    //     estadoCivil,
-    //     pais,
-    //     departamento,
-    //     ciudad,
-    //     numeroHijos,
-    //     tipoSangre,
-    //     nivel,
-    //     titulo,
-    //     anioTitulo,
-    //     institucionTitulo,
-    //     empresaExp,
-    //     fechaInicioExp,
-    //     fechaFinExp,
-    //     nombreRefA,
-    //     telefonoRefA,
-    //     correoRefA,
-    //     nombreRefB,
-    //     telefonoRefB,
-    //     correoRefB,
-    //     eps,
-    //     pension,
-    //     tipoCuenta,
-    //     entidadBancaria,
-    //     numeroCuenta
-    //   );
-    //   mostrarAlerta({
-    //     msg: "Todos los campos son obligatorios",
-    //     error: true,
-    //   });
-    //   return;
-    // }
+    if (
+      [
+        nombre,
+        tipoDocumento,
+        numeroDocumento,
+        fechaNacimiento,
+        lugarNacimiento,
+        telefono,
+        correo,
+        direccion,
+        estadoCivil,
+        pais,
+        departamento,
+        ciudad,
+        //numeroHijos,
+        tipoSangre,
+        nivel,
+        titulo,
+        anioTitulo,
+        institucionTitulo,
+        empresaExp,
+        fechaInicioExp,
+        fechaFinExp,
+        nombreRefA,
+        telefonoRefA,
+        correoRefA,
+        //nombreRefB,
+        //telefonoRefB,
+        //correoRefB,
+        //eps,
+        //pension,
+        //tipoCuenta,
+        //entidadBancaria,
+        //numeroCuenta
+      ].includes("")
+    ) {
+      console.log(
+        nombre,
+        tipoDocumento,
+        numeroDocumento,
+        fechaNacimiento,
+        lugarNacimiento,
+        telefono,
+        correo,
+        direccion,
+        estadoCivil,
+        pais,
+        departamento,
+        ciudad,
+        numeroHijos,
+        tipoSangre,
+        nivel,
+        titulo,
+        anioTitulo,
+        institucionTitulo,
+        empresaExp,
+        fechaInicioExp,
+        fechaFinExp,
+        nombreRefA,
+        telefonoRefA,
+        correoRefA,
+        nombreRefB,
+        telefonoRefB,
+        correoRefB,
+        eps,
+        pension,
+        tipoCuenta,
+        entidadBancaria,
+        numeroCuenta
+      );
+      mostrarAlerta({
+        msg: "Todos los campos son obligatorios",
+        error: true,
+      });
+      return;
+    }
 
     const formData = new FormData();
 
@@ -326,47 +337,15 @@ const FormularioCurriculum = () => {
     formData.append("tipoContrato", tipoContrato);
     formData.append("fechaIngreso", fechaIngreso);
     formData.append("fechaFin", fechaFin);
-    console.log(formData);
+    formData.append("empresa", empresa);
+    formData.append("nomina", nomina);
+    formData.append("codigoIngreso", codigoIngreso);
+    formData.append("sueldo", sueldo);
+    formData.append("soporteContrato", soporteContrato);
+    formData.append("cargo", cargo);
+    //console.log(formData);
     //Pasar los datos hacia el provider
     await submitCurriculum(formData, estado);
-    // id,
-    //   estado,
-    //   nombre,
-    //   tipoDocumento,
-    //   numeroDocumento,
-    //   fechaNacimiento,
-    //   lugarNacimiento,
-    //   telefono,
-    //   correo,
-    //   direccion,
-    //   estadoCivil,
-    //   pais,
-    //   departamento,
-    //   ciudad,
-    //   numeroHijos,
-    //   tipoSangre,
-    //   nivel,
-    //   titulo,
-    //   anioTitulo,
-    //   institucionTitulo,
-    //   empresaExp,
-    //   fechaInicioExp,
-    //   fechaFinExp,
-    //   nombreRefA,
-    //   telefonoRefA,
-    //   correoRefA,
-    //   nombreRefB,
-    //   telefonoRefB,
-    //   correoRefB,
-    //   eps,
-    //   pension,
-    //   tipoCuenta,
-    //   entidadBancaria,
-    //   numeroCuenta,
-    // setNombre("");
-    // setDescripcion("");
-    // setFechaEntrega("");
-    // setCliente("");
   };
   //Informacion Financiera
   const handleinputchange = (e, index) => {
@@ -449,7 +428,7 @@ const FormularioCurriculum = () => {
                 htmlFor="nombre"
                 className="block text-sm font-medium text-gray-700"
               >
-                Nombre completo
+                Nombre completo <span class="text-red-700">*</span>
               </label>
               <div className="mt-1">
                 <input
@@ -461,6 +440,7 @@ const FormularioCurriculum = () => {
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={nombre}
                   onChange={(e) => setNombre(e.target.value)}
+                  required="true"
                 />
               </div>
             </div>
@@ -469,7 +449,7 @@ const FormularioCurriculum = () => {
                 htmlFor="tipoDocumento"
                 className="block text-sm font-medium text-gray-700"
               >
-                Tipo de Documento
+                Tipo de Documento <span class="text-red-700">*</span>
               </label>
               <div className="mt-1">
                 <select
@@ -483,6 +463,7 @@ const FormularioCurriculum = () => {
                     setTipoDocumento(selectedDocumentType);
                   }}
                   value={tipoDocumento}
+                  required="true"
                 >
                   <option value="Cedula de ciudadania">
                     Cedula de ciudadania
@@ -499,7 +480,7 @@ const FormularioCurriculum = () => {
                 htmlFor="numeroDocumento"
                 className="block text-sm font-medium text-gray-700"
               >
-                Documento de Identidad
+                Documento de Identidad <span class="text-red-700">*</span>
               </label>
               <div className="mt-1">
                 <input
@@ -519,7 +500,7 @@ const FormularioCurriculum = () => {
                 htmlFor="fechaNacimiento"
                 className="block text-sm font-medium text-gray-700"
               >
-                Fecha de Nacimiento
+                Fecha de Nacimiento <span class="text-red-700">*</span>
               </label>
               <div className="mt-1">
                 <input
@@ -530,6 +511,7 @@ const FormularioCurriculum = () => {
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={fechaNacimiento}
                   onChange={(e) => setFechaNacimiento(e.target.value)}
+                  required="true"
                 />
               </div>
             </div>
@@ -539,7 +521,7 @@ const FormularioCurriculum = () => {
                 htmlFor="lugarNacimiento"
                 className="block text-sm font-medium text-gray-700"
               >
-                Lugar de Nacimiento
+                Lugar de Nacimiento <span class="text-red-700">*</span>
               </label>
               <div className="mt-1">
                 <input
@@ -550,7 +532,8 @@ const FormularioCurriculum = () => {
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={lugarNacimiento}
                   onChange={(e) => setLugarNacimiento(e.target.value)}
-                />
+                  required="true"
+                  />
               </div>
             </div>
 
@@ -559,7 +542,7 @@ const FormularioCurriculum = () => {
                 htmlFor="telefono"
                 className="block text-sm font-medium text-gray-700"
               >
-                Celular/Telefono
+                Celular/Telefono <span class="text-red-700">*</span>
               </label>
               <div className="mt-1">
                 <input
@@ -570,6 +553,7 @@ const FormularioCurriculum = () => {
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={telefono}
                   onChange={(e) => setTelefono(e.target.value)}
+                  required="true"
                 />
               </div>
             </div>
@@ -579,7 +563,7 @@ const FormularioCurriculum = () => {
                 htmlFor="correo"
                 className="block text-sm font-medium text-gray-700"
               >
-                Correo electronico
+                Correo electronico <span class="text-red-700">*</span>
               </label>
               <div className="mt-1">
                 <input
@@ -590,6 +574,7 @@ const FormularioCurriculum = () => {
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={correo}
                   onChange={(e) => setCorreo(e.target.value)}
+                  required="true"
                 />
               </div>
             </div>
@@ -599,7 +584,7 @@ const FormularioCurriculum = () => {
                 htmlFor="direccion"
                 className="block text-sm font-medium text-gray-700"
               >
-                Dirección
+                Dirección <span class="text-red-700">*</span>
               </label>
               <div className="mt-1">
                 <input
@@ -610,6 +595,7 @@ const FormularioCurriculum = () => {
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={direccion}
                   onChange={(e) => setDireccion(e.target.value)}
+                  required="true"
                 />
               </div>
             </div>
@@ -619,7 +605,7 @@ const FormularioCurriculum = () => {
                 htmlFor="estadoCivil"
                 className="block text-sm font-medium text-gray-700"
               >
-                Estado Civil
+                Estado Civil <span class="text-red-700">*</span>
               </label>
               <div className="mt-1">
                 <input
@@ -630,6 +616,7 @@ const FormularioCurriculum = () => {
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={estadoCivil}
                   onChange={(e) => setEstadoCivil(e.target.value)}
+                  required="true"
                 />
               </div>
             </div>
@@ -639,7 +626,7 @@ const FormularioCurriculum = () => {
                 htmlFor="pais"
                 className="block text-sm font-medium text-gray-700"
               >
-                Pais
+                Pais <span class="text-red-700">*</span>
               </label>
               <div className="mt-1">
                 <input
@@ -650,6 +637,7 @@ const FormularioCurriculum = () => {
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={pais}
                   onChange={(e) => setPais(e.target.value)}
+                  required="true"
                 />
               </div>
             </div>
@@ -659,7 +647,7 @@ const FormularioCurriculum = () => {
                 htmlFor="departamento"
                 className="block text-sm font-medium text-gray-700"
               >
-                Departamento
+                Departamento <span class="text-red-700">*</span>
               </label>
               <div className="mt-1">
                 <input
@@ -670,6 +658,7 @@ const FormularioCurriculum = () => {
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={departamento}
                   onChange={(e) => setDepartamento(e.target.value)}
+                  required="true"
                 />
               </div>
             </div>
@@ -679,7 +668,7 @@ const FormularioCurriculum = () => {
                 htmlFor="ciudad"
                 className="block text-sm font-medium text-gray-700"
               >
-                Ciudad
+                Ciudad <span class="text-red-700">*</span>
               </label>
               <div className="mt-1">
                 <input
@@ -690,6 +679,7 @@ const FormularioCurriculum = () => {
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={ciudad}
                   onChange={(e) => setCiudad(e.target.value)}
+                  required="true"
                 />
               </div>
             </div>
@@ -719,7 +709,7 @@ const FormularioCurriculum = () => {
                 htmlFor="tipoSangre"
                 className="block text-sm font-medium text-gray-700"
               >
-                Tipo de Sangre
+                Tipo de Sangre <span class="text-red-700">*</span>
               </label>
               <div className="mt-1">
                 <input
@@ -730,6 +720,7 @@ const FormularioCurriculum = () => {
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={tipoSangre}
                   onChange={(e) => setTipoSangre(e.target.value)}
+                  required="true"
                 />
               </div>
             </div>
@@ -744,7 +735,7 @@ const FormularioCurriculum = () => {
                 htmlFor="nivel"
                 className="block text-sm font-medium text-gray-700"
               >
-                Nivel
+                Nivel <span class="text-red-700">*</span>
               </label>
               <div className="mt-1">
                 <select
@@ -758,6 +749,7 @@ const FormularioCurriculum = () => {
                     setNivel(selectedNivel);
                   }}
                   value={nivel}
+                  required="true"
                 >
                   <option value="Ninguno">Ninguno</option>
                   <option value="Técnico Profesional">
@@ -776,7 +768,7 @@ const FormularioCurriculum = () => {
                 htmlFor="titulo"
                 className="block text-sm font-medium text-gray-700"
               >
-                Titulo
+                Titulo <span class="text-red-700">*</span>
               </label>
               <div className="mt-1">
                 <input
@@ -788,6 +780,7 @@ const FormularioCurriculum = () => {
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={titulo}
                   onChange={(e) => setTitulo(e.target.value)}
+                  required="true"
                 />
               </div>
             </div>
@@ -796,7 +789,7 @@ const FormularioCurriculum = () => {
                 htmlFor="anioTitulo"
                 className="block text-sm font-medium text-gray-700"
               >
-                Año obtención titulo
+                Año obtención titulo <span class="text-red-700">*</span>
               </label>
               <div className="mt-1">
                 <input
@@ -807,6 +800,7 @@ const FormularioCurriculum = () => {
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={anioTitulo}
                   onChange={(e) => setAnioTitulo(e.target.value)}
+                  required="true"
                 />
               </div>
             </div>
@@ -816,7 +810,7 @@ const FormularioCurriculum = () => {
                 htmlFor="institucionTitulo"
                 className="block text-sm font-medium text-gray-700"
               >
-                Institución
+                Institución <span class="text-red-700">*</span>
               </label>
               <div className="mt-1">
                 <input
@@ -827,6 +821,7 @@ const FormularioCurriculum = () => {
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={institucionTitulo}
                   onChange={(e) => setInstitucionTitulo(e.target.value)}
+                  required="true"
                 />
               </div>
             </div>
@@ -841,7 +836,7 @@ const FormularioCurriculum = () => {
                 htmlFor="empresaExp"
                 className="block text-sm font-medium text-gray-700"
               >
-                Empresa
+                Empresa <span class="text-red-700">*</span>
               </label>
               <div className="mt-1">
                 <input
@@ -853,6 +848,7 @@ const FormularioCurriculum = () => {
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={empresaExp}
                   onChange={(e) => setEmpresaExp(e.target.value)}
+                  required="true"
                 />
               </div>
             </div>
@@ -861,7 +857,7 @@ const FormularioCurriculum = () => {
                 htmlFor="fechaInicioExp"
                 className="block text-sm font-medium text-gray-700"
               >
-                Fecha Inicio
+                Fecha Inicio <span class="text-red-700">*</span>
               </label>
               <div className="mt-1">
                 <input
@@ -872,6 +868,7 @@ const FormularioCurriculum = () => {
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={fechaInicioExp}
                   onChange={(e) => setFechaInicioExp(e.target.value)}
+                  required="true"
                 />
               </div>
             </div>
@@ -954,7 +951,7 @@ const FormularioCurriculum = () => {
                 htmlFor="nombreRefA"
                 className="block text-sm font-medium text-gray-700"
               >
-                Nombre
+                Nombre <span class="text-red-700">*</span>
               </label>
               <div className="mt-1">
                 <input
@@ -966,6 +963,7 @@ const FormularioCurriculum = () => {
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={nombreRefA}
                   onChange={(e) => setNombreRefA(e.target.value)}
+                  required="true"
                 />
               </div>
             </div>
@@ -974,7 +972,7 @@ const FormularioCurriculum = () => {
                 htmlFor="telefonoRefA"
                 className="block text-sm font-medium text-gray-700"
               >
-                Celular/Telefono
+                Celular/Telefono <span class="text-red-700">*</span>
               </label>
               <div className="mt-1">
                 <input
@@ -986,6 +984,7 @@ const FormularioCurriculum = () => {
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={telefonoRefA}
                   onChange={(e) => setTelefonoRefA(e.target.value)}
+                  required="true"  
                 />
               </div>
             </div>
@@ -994,7 +993,7 @@ const FormularioCurriculum = () => {
                 htmlFor="correoRefA"
                 className="block text-sm font-medium text-gray-700"
               >
-                Correo
+                Correo <span class="text-red-700">*</span>
               </label>
               <div className="mt-1">
                 <input
@@ -1006,6 +1005,7 @@ const FormularioCurriculum = () => {
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={correoRefA}
                   onChange={(e) => setCorreoRefA(e.target.value)}
+                  required="true"  
                 />
               </div>
             </div>
@@ -1099,6 +1099,7 @@ const FormularioCurriculum = () => {
                     setEPS(selectedEPS);
                   }}
                   value={eps}
+                  required="false"
                 >
                   <option value="Sura">Sura</option>
                   <option value="Salud Total">Salud Total</option>
@@ -1586,8 +1587,6 @@ const FormularioCurriculum = () => {
             </div>
           </div>
           <div>
-            {console.log(poseeCuenta)}
-            {console.log(inputCuentas)}
             {poseeCuenta &&
               poseeCuenta === "Si" &&
               inputCuentas.map((item, i) => {
@@ -2077,9 +2076,29 @@ const FormularioCurriculum = () => {
           </div>
 
           <div className="text-left text-xl text-gray-700 mt-8 font-bold border-b-4 border-corporative-blue inline-flex pt-3">
-            Datos contrato
+            Datos Contrato
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div>
+              <label
+                htmlFor="codigoIngreso"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Codigo Ingreso
+              </label>
+              <div className="mt-1">
+                <input
+                  id="codigoIngreso"
+                  name="codigoIngreso"
+                  type="number"
+                  autoComplete="codigoIngreso"
+                  placeholder="Digita codigo de ingreso"
+                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                  value={codigoIngreso}
+                  onChange={(e) => setCodigoIngreso(e.target.value)}
+                />
+              </div>
+            </div>
             <div>
               <label
                 htmlFor="tipoContrato"
@@ -2093,7 +2112,7 @@ const FormularioCurriculum = () => {
                   name="tipoContrato"
                   type="text"
                   autoComplete="tipoContrato"
-                  placeholder="Digita su ultimo entidad bancaria"
+                  placeholder="Digitar tipo de Contrato"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={tipoContrato}
                   onChange={(e) => setTipoContrato(e.target.value)}
@@ -2123,18 +2142,143 @@ const FormularioCurriculum = () => {
                 htmlFor="fechaFin"
                 className="block text-sm font-medium text-gray-700"
               >
-                Numero de Cuenta
+                Fecha Fin
               </label>
               <div className="mt-1">
                 <input
                   id="fechaFin"
                   name="fechaFin"
                   type="date"
-                  placeholder="Digite su numero de Cuenta"
+                  placeholder="Digite fecha fin"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={fechaFin}
                   onChange={(e) => setFechaFin(e.target.value)}
                 />
+              </div>
+            </div>
+            <div>
+              <label
+                htmlFor="empresa"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Empresa
+              </label>
+              <div className="mt-1">
+                <input
+                  id="empresa"
+                  name="empresa"
+                  type="text"
+                  autoComplete="empresa"
+                  placeholder="Digita nombre empresa"
+                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                  value={empresa}
+                  onChange={(e) => setEmpresa(e.target.value)}
+                />
+              </div>
+            </div>
+            <div>
+              <label
+                htmlFor="nomina"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Nomina
+              </label>
+              <div className="mt-1">
+                <input
+                  id="nomina"
+                  name="nomina"
+                  type="text"
+                  autoComplete="nomina"
+                  placeholder="Digitar la nomina"
+                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                  value={nomina}
+                  onChange={(e) => setNomina(e.target.value)}
+                />
+              </div>
+            </div>
+            <div>
+              <label
+                htmlFor="sueldo"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Sueldo
+              </label>
+              <div className="mt-1">
+                <input
+                  id="sueldo"
+                  name="sueldo"
+                  type="number"
+                  autoComplete="sueldo"
+                  placeholder="Digitar salario"
+                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                  value={sueldo}
+                  onChange={(e) => setSueldo(e.target.value)}
+                />
+              </div>
+            </div>
+            <div>
+              <label
+                htmlFor="cargo"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Cargo
+              </label>
+              <div className="mt-1">
+                <input
+                  id="cargo"
+                  name="cargo"
+                  type="text"
+                  autoComplete="cargo"
+                  placeholder="Digitar la cargo"
+                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                  value={cargo}
+                  onChange={(e) => setCargo(e.target.value)}
+                />
+              </div>
+            </div>
+            <div>
+              <label
+                htmlFor="soporteContrato"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Contrato
+              </label>
+              <div className="mt-1">
+                <input
+                  className="form-control
+                  block
+                  w-full
+                  px-3
+                  py-1.5
+                  text-base
+                  font-normal
+                  text-gray-700
+                  bg-white bg-clip-padding
+                  border border-solid border-gray-300
+                  rounded
+                  transition
+                  ease-in-out
+                  m-0
+                  focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                  type="file"
+                  id="soporteContrato"
+                  name="soporteContrato"
+                  onChange={(e) => setSoporteContrato(e.target.files[0])}
+                />
+              </div>
+              <div className="mt-3">
+                {curriculum[0]?.soporteContrato && (
+                  <a
+                    href={`${import.meta.env.VITE_BACKEND_URL}/${
+                      curriculum[0].soporteContrato
+                    }`}
+                    download={curriculum[0].soporteContrato}
+                    target="_blank"
+                    className="underline text-blue-500 pt-5"
+                  >
+                    Soporte Contrato
+                  </a>
+                )}
               </div>
             </div>
           </div>

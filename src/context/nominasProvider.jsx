@@ -41,8 +41,8 @@ const NominasProvider = ({ children }) => {
   obtenerNominas();
   }, [auth]);
  */
-  const obtenerNomina = async (datos) => {
-
+  const obtenerNomina = async (id) => {
+    console.log(id);
     const date = new Date();
     let day = date.getDate();
     let month = date.getMonth() + 1;
@@ -322,7 +322,7 @@ const NominasProvider = ({ children }) => {
           Authorization: `Bearer ${token}`,
         },
       };
-      const { data } = await clienteAxios.get(`/nominas/obtener`, config);
+      const { data } = await clienteAxios.get(`/nominas/obtener/${id}`, config);
       //Documento      
       data["identificacion_format"] = documentFormat(data.identificacion);
       //Pagos

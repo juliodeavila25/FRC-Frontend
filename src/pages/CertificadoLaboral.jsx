@@ -6,9 +6,9 @@ import useNominas from "../hooks/useNominas";
 import useCurriculum from "../hooks/useCurriculum";
 
 const CertificadoLaboral = () => {
-  const [data, setData] = useState({
+  /*const [data, setData] = useState({
     nombre: "Andres Puello",
-  });
+  });*/
 
   const { auth, cargando } = useAuth();
   const { nomina, obtenerNomina } = useNominas();
@@ -17,10 +17,11 @@ const CertificadoLaboral = () => {
   //const { nomina, obtenerNomina } = useNominas();
 
   useEffect(() => {
-    obtenerNomina({ identificacion: "1050953869", periodo: "202302" });
+    obtenerNomina(auth.documento);
     obtenerCurriculum(auth._id);
   }, []);
-  console.log(auth._id);
+  //console.log(auth._id);
+  //console.log(auth.documento);
 
   if (Object.keys(curriculum).length !== 0) {
     console.log(curriculum);
