@@ -434,7 +434,7 @@ const FormularioCurriculum = () => {
 
   return (
     <div className=" sm:mx-auto sm:w-full">
-      <div className="bg-white py-8 px-4 shadow-lg rounded-lg sm:px-10">        
+      <div className="bg-white py-8 px-4 shadow-lg rounded-lg sm:px-10">
         <form
           className="space-y-6 "
           onSubmit={handleSubmit}
@@ -1225,19 +1225,19 @@ const FormularioCurriculum = () => {
           </div>
           <div>
             {inputFinanciera &&
-            inputFinanciera.map((item, i) => {
-              return (
-                <div
-                  key={i}
-                  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 pt-5"
-                >
-                  <div className="">
-                    <label className="block text-sm font-medium text-gray-700">
-                      CIU
-                    </label>
-                    <input
-                      type="text"
-                      className="form-control
+              inputFinanciera.map((item, i) => {
+                return (
+                  <div
+                    key={i}
+                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 pt-5"
+                  >
+                    <div className="">
+                      <label className="block text-sm font-medium text-gray-700">
+                        CIU
+                      </label>
+                      <input
+                        type="text"
+                        className="form-control
                       block
                       w-full
                       px-3
@@ -1252,20 +1252,20 @@ const FormularioCurriculum = () => {
                       ease-in-out
                       m-0
                       focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                      placeholder="Ingresar CIU"
-                      id="ciu"
-                      name="ciu"
-                      value={item.ciu}
-                      onChange={(e) => handleinputchange(e, i)}
-                    />
-                  </div>
-                  <div className="">
-                    <label className="block text-sm font-medium text-gray-700">
-                      Actividad Economica
-                    </label>
-                    <input
-                      type="text"
-                      className="form-control
+                        placeholder="Ingresar CIU"
+                        id="ciu"
+                        name="ciu"
+                        value={item.ciu}
+                        onChange={(e) => handleinputchange(e, i)}
+                      />
+                    </div>
+                    <div className="">
+                      <label className="block text-sm font-medium text-gray-700">
+                        Actividad Economica
+                      </label>
+                      <input
+                        type="text"
+                        className="form-control
                       block
                       w-full
                       px-3
@@ -1280,34 +1280,34 @@ const FormularioCurriculum = () => {
                       ease-in-out
                       m-0
                       focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                      placeholder="Ingresar Actividad Economica"
-                      id="actividad_economica"
-                      name="actividad_economica"
-                      value={item.actividad_economica}
-                      onChange={(e) => handleinputchange(e, i)}
-                    />
+                        placeholder="Ingresar Actividad Economica"
+                        id="actividad_economica"
+                        name="actividad_economica"
+                        value={item.actividad_economica}
+                        onChange={(e) => handleinputchange(e, i)}
+                      />
+                    </div>
+                    <div className="grid grid-cols-2 gap-4 pt-6 ">
+                      {inputFinanciera.length !== 1 && (
+                        <button
+                          className="h-8 flex items-center w-full justify-center rounded-md border-2 border-red-400 bg-transparent py-2 px-4 text-sm font-medium text-red-500 shadow-sm hover:bg-red-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                          onClick={() => handleremove(i)}
+                        >
+                          Remover
+                        </button>
+                      )}
+                      {inputFinanciera.length - 1 === i && (
+                        <button
+                          className="h-8 flex items-center w-full justify-center rounded-md border border-transparent bg-green-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 cursor-pointer"
+                          onClick={handleaddclick}
+                        >
+                          Agregar
+                        </button>
+                      )}
+                    </div>
                   </div>
-                  <div className="grid grid-cols-2 gap-4 pt-6 ">
-                    {inputFinanciera.length !== 1 && (
-                      <button
-                        className="h-8 flex items-center w-full justify-center rounded-md border-2 border-red-400 bg-transparent py-2 px-4 text-sm font-medium text-red-500 shadow-sm hover:bg-red-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                        onClick={() => handleremove(i)}
-                      >
-                        Remover
-                      </button>
-                    )}
-                    {inputFinanciera.length - 1 === i && (
-                      <button
-                        className="h-8 flex items-center w-full justify-center rounded-md border border-transparent bg-green-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 cursor-pointer"
-                        onClick={handleaddclick}
-                      >
-                        Agregar
-                      </button>
-                    )}
-                  </div>
-                </div>
-              );
-            })}
+                );
+              })}
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 pt-5">
             {/** Aqui */}
@@ -1586,8 +1586,8 @@ const FormularioCurriculum = () => {
             </div>
           </div>
           <div>
-           {console.log(poseeCuenta)}
-           {console.log(inputCuentas)}
+            {console.log(poseeCuenta)}
+            {console.log(inputCuentas)}
             {poseeCuenta &&
               poseeCuenta === "Si" &&
               inputCuentas.map((item, i) => {
@@ -1887,26 +1887,25 @@ const FormularioCurriculum = () => {
               </div>
             </div>
             <div className="border-b border-gray-200 pb-2 pt-5">
-            <h6 className="text-sm font-medium leading-6 text-gray-900">
-              Cuentas Extranjeras
-            </h6>
+              <h6 className="text-sm font-medium leading-6 text-gray-900">
+                Cuentas Extranjeras
+              </h6>
             </div>
             <div>
-            
-            { inputExtranjera &&
-            inputExtranjera.map((item, i) => {
-              return (
-                <div
-                  key={i}
-                  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 pt-5"
-                >
-                  <div className="">
-                    <label className="block text-sm font-medium text-gray-700">
-                      Nombre
-                    </label>
-                    <input
-                      type="text"
-                      className="form-control
+              {inputExtranjera &&
+                inputExtranjera.map((item, i) => {
+                  return (
+                    <div
+                      key={i}
+                      className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 pt-5"
+                    >
+                      <div className="">
+                        <label className="block text-sm font-medium text-gray-700">
+                          Nombre
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control
                       block
                       w-full
                       px-3
@@ -1921,20 +1920,20 @@ const FormularioCurriculum = () => {
                       ease-in-out
                       m-0
                       focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                      placeholder="Ingresar Nombre"
-                      id="nombre"
-                      name="nombre"
-                      value={item.nombre}
-                      onChange={(e) => handleinputchangeExt(e, i)}
-                    />
-                  </div>
-                  <div className="">
-                    <label className="block text-sm font-medium text-gray-700">
-                      Email
-                    </label>
-                    <input
-                      type="text"
-                      className="form-control
+                          placeholder="Ingresar Nombre"
+                          id="nombre"
+                          name="nombre"
+                          value={item.nombre}
+                          onChange={(e) => handleinputchangeExt(e, i)}
+                        />
+                      </div>
+                      <div className="">
+                        <label className="block text-sm font-medium text-gray-700">
+                          Email
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control
                       block
                       w-full
                       px-3
@@ -1949,20 +1948,20 @@ const FormularioCurriculum = () => {
                       ease-in-out
                       m-0
                       focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                      placeholder="Ingresar Email"
-                      id="email"
-                      name="email"
-                      value={item.email}
-                      onChange={(e) => handleinputchangeExt(e, i)}
-                    />
-                  </div>
-                  <div className="">
-                    <label className="block text-sm font-medium text-gray-700">
-                      Telefono
-                    </label>
-                    <input
-                      type="text"
-                      className="form-control
+                          placeholder="Ingresar Email"
+                          id="email"
+                          name="email"
+                          value={item.email}
+                          onChange={(e) => handleinputchangeExt(e, i)}
+                        />
+                      </div>
+                      <div className="">
+                        <label className="block text-sm font-medium text-gray-700">
+                          Telefono
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control
                       block
                       w-full
                       px-3
@@ -1977,35 +1976,35 @@ const FormularioCurriculum = () => {
                       ease-in-out
                       m-0
                       focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                      placeholder="Ingresar Telefono"
-                      id="telefono"
-                      name="telefono"
-                      value={item.telefono}
-                      onChange={(e) => handleinputchangeExt(e, i)}
-                    />
-                  </div>
-                  <div className="grid grid-cols-2 gap-4 pt-6 ">
-                    {inputExtranjera.length !== 1 && (
-                      <button
-                        className="h-8 flex items-center w-full justify-center rounded-md border-2 border-red-400 bg-transparent py-2 px-4 text-sm font-medium text-red-500 shadow-sm hover:bg-red-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                        onClick={() => handleremoveExt(i)}
-                      >
-                        Remover
-                      </button>
-                    )}
-                    {inputExtranjera.length - 1 === i && (
-                      <button
-                        className="h-8 flex items-center w-full justify-center rounded-md border border-transparent bg-green-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 cursor-pointer"
-                        onClick={handleaddclickExt}
-                      >
-                        Agregar
-                      </button>
-                    )}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
+                          placeholder="Ingresar Telefono"
+                          id="telefono"
+                          name="telefono"
+                          value={item.telefono}
+                          onChange={(e) => handleinputchangeExt(e, i)}
+                        />
+                      </div>
+                      <div className="grid grid-cols-2 gap-4 pt-6 ">
+                        {inputExtranjera.length !== 1 && (
+                          <button
+                            className="h-8 flex items-center w-full justify-center rounded-md border-2 border-red-400 bg-transparent py-2 px-4 text-sm font-medium text-red-500 shadow-sm hover:bg-red-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                            onClick={() => handleremoveExt(i)}
+                          >
+                            Remover
+                          </button>
+                        )}
+                        {inputExtranjera.length - 1 === i && (
+                          <button
+                            className="h-8 flex items-center w-full justify-center rounded-md border border-transparent bg-green-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 cursor-pointer"
+                            onClick={handleaddclickExt}
+                          >
+                            Agregar
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })}
+            </div>
           </div>
           <div className="text-left text-xl text-gray-700 mt-8 font-bold border-b-4 border-corporative-blue inline-flex pt-3">
             Referencias Bancarias
@@ -2076,6 +2075,70 @@ const FormularioCurriculum = () => {
               </div>
             </div>
           </div>
+
+          <div className="text-left text-xl text-gray-700 mt-8 font-bold border-b-4 border-corporative-blue inline-flex pt-3">
+            Datos contrato
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <div>
+              <label
+                htmlFor="tipoContrato"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Tipo Contrato
+              </label>
+              <div className="mt-1">
+                <input
+                  id="tipoContrato"
+                  name="tipoContrato"
+                  type="text"
+                  autoComplete="tipoContrato"
+                  placeholder="Digita su ultimo entidad bancaria"
+                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                  value={tipoContrato}
+                  onChange={(e) => setTipoContrato(e.target.value)}
+                />
+              </div>
+            </div>
+            <div>
+              <label
+                htmlFor="fechaIngreso"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Fecha Ingreso
+              </label>
+              <div className="mt-1">
+                <input
+                  id="fechaIngreso"
+                  name="fechaIngreso"
+                  type="date"
+                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                  value={fechaIngreso}
+                  onChange={(e) => setFechaIngreso(e.target.value)}
+                />
+              </div>
+            </div>
+            <div>
+              <label
+                htmlFor="fechaFin"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Numero de Cuenta
+              </label>
+              <div className="mt-1">
+                <input
+                  id="fechaFin"
+                  name="fechaFin"
+                  type="date"
+                  placeholder="Digite su numero de Cuenta"
+                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                  value={fechaFin}
+                  onChange={(e) => setFechaFin(e.target.value)}
+                />
+              </div>
+            </div>
+          </div>
+
           {msg && <Alert alerta={alerta} />}
           <div className="grid grid-cols-2 gap-6 w-3/5 mx-auto">
             <Link
