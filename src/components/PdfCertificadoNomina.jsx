@@ -144,13 +144,14 @@ const styles = StyleSheet.create({
   },
 });
 
-const PdfCertificadoNomina = ({ data }) => {
-  return (
+const PdfCertificadoNomina = ({ data, curriculum }) => {
+  console.log(curriculum);
+  return (   
     <Document>
       <Page style={styles_table.page} size="A4" wrap>
         <View style={styles_table.table}>
               <View style={[styles_table.row, styles.header]}>
-                  <Text style={[styles_table.headerText]}><Text style={[styles_table.textBold, styles.textTitle, { fontSize: '11'} ]}> FUNDACION RENAL DE COLOMBIA</Text></Text>
+                  <Text style={[styles_table.headerText]}><Text style={[styles_table.textBold, styles.textTitle, { fontSize: '11'} ]}> {curriculum[0].empresa}</Text></Text>
                   <Text style={[styles_table.headerText]}><Text style={styles_table.textBold}> Fecha de Pago: </Text> {data.fecha_pago}</Text>
                   <Text style={[styles_table.headerText]}><Text style={styles_table.textBold}> Periodo: </Text>{data.periodo_inicio} Al {data.periodo_fin}</Text>
               </View>
@@ -161,7 +162,7 @@ const PdfCertificadoNomina = ({ data }) => {
                   <Text style={[styles_table.headerText]}><Text style={styles_table.textBold}>Causación</Text> {data.periodo_inicio} Al {data.periodo_fin}</Text>
               </View>
               <View style={[styles_table.row, styles_table.boderTop, styles.header]}>
-                  <Text style={[styles_table.headerText]}><Text style={styles_table.textBold}>CODIGO</Text> {data.consecutivo}</Text>
+                  <Text style={[styles_table.headerText]}><Text style={styles_table.textBold}>CODIGO</Text> {curriculum[0].codigoIngreso}</Text>
                   <Text style={[styles_table.headerText]}></Text>
                   <Text style={[styles_table.headerText]}></Text>
                 <Text style={[styles_table.headerText]}><Text style={styles_table.textBold}>FECHA INGRESO</Text> 2/02/2022 </Text>

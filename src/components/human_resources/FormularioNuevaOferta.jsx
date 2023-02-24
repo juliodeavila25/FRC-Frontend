@@ -112,7 +112,7 @@ const FormularioNuevaOferta = () => {
                 htmlFor="convocatoria"
                 className="block text-sm font-medium text-gray-700"
               >
-                Nro. Convocatoria
+                Nro. Convocatoria <span class="text-red-700">*</span>
               </label>
               <div className="mt-1">
                 <input
@@ -123,6 +123,7 @@ const FormularioNuevaOferta = () => {
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={convocatoria}
                   onChange={(e) => setConvocatoria(e.target.value)}
+                  required="true"
                 />
               </div>
             </div>
@@ -131,7 +132,7 @@ const FormularioNuevaOferta = () => {
                 htmlFor="nombre"
                 className="block text-sm font-medium text-gray-700"
               >
-                Nombre Convocatoria
+                Nombre Convocatoria <span class="text-red-700">*</span>
               </label>
               <div className="mt-1">
                 <input
@@ -143,6 +144,7 @@ const FormularioNuevaOferta = () => {
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={nombre}
                   onChange={(e) => setNombre(e.target.value)}
+                  required="true"
                 />
               </div>
             </div>
@@ -152,7 +154,7 @@ const FormularioNuevaOferta = () => {
                 htmlFor="ciudad"
                 className="block text-sm font-medium text-gray-700"
               >
-                Ciudad
+                Ciudad <span class="text-red-700">*</span>
               </label>
               <div className="mt-1">
                 <input
@@ -163,6 +165,7 @@ const FormularioNuevaOferta = () => {
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={ciudad}
                   onChange={(e) => setCiudad(e.target.value)}
+                  required="true"
                 />
               </div>
             </div>
@@ -172,7 +175,7 @@ const FormularioNuevaOferta = () => {
                 htmlFor="salario"
                 className="block text-sm font-medium text-gray-700"
               >
-                Salario
+                Salario <span class="text-red-700">*</span>
               </label>
               <div className="mt-1">
                 <input
@@ -183,6 +186,7 @@ const FormularioNuevaOferta = () => {
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={salario}
                   onChange={(e) => setSalario(e.target.value)}
+                  required="true"
                 />
               </div>
             </div>
@@ -192,7 +196,7 @@ const FormularioNuevaOferta = () => {
                 htmlFor="auxilio"
                 className="block text-sm font-medium text-gray-700"
               >
-                Auxilio
+                Auxilio <span class="text-red-700">*</span>
               </label>
               <div className="mt-1">
                 <input
@@ -203,6 +207,7 @@ const FormularioNuevaOferta = () => {
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={auxilio}
                   onChange={(e) => setAuxilio(e.target.value)}
+                  required="true"
                 />
               </div>
             </div>
@@ -212,7 +217,7 @@ const FormularioNuevaOferta = () => {
                 htmlFor="bonificaciones"
                 className="block text-sm font-medium text-gray-700"
               >
-                Bonificaciones
+                Bonificaciones <span class="text-red-700">*</span>
               </label>
               <div className="mt-1">
                 <input
@@ -223,6 +228,7 @@ const FormularioNuevaOferta = () => {
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={bonificaciones}
                   onChange={(e) => setBonificaciones(e.target.value)}
+                  required="true"
                 />
               </div>
             </div>
@@ -232,7 +238,7 @@ const FormularioNuevaOferta = () => {
                 htmlFor="perfil"
                 className="block text-sm font-medium text-gray-700"
               >
-                Perfil
+                Perfil <span class="text-red-700">*</span>
               </label>
               <div className="mt-1">
                 <textarea
@@ -245,6 +251,7 @@ const FormularioNuevaOferta = () => {
                   onChange={(e) => setPerfil(e.target.value)}
                   disabled={active}
                   rows="6"
+                  required="true"
                 />
               </div>
             </div>
@@ -254,7 +261,7 @@ const FormularioNuevaOferta = () => {
                 htmlFor="funciones"
                 className="block text-sm font-medium text-gray-700"
               >
-                Funciones
+                Funciones <span class="text-red-700">*</span>
               </label>
               <div className="mt-1">
                 <textarea
@@ -266,6 +273,7 @@ const FormularioNuevaOferta = () => {
                   value={funciones}
                   onChange={(e) => setFunciones(e.target.value)}
                   rows="6"
+                  required="true"
                 />
               </div>
             </div>

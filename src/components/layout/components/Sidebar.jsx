@@ -287,15 +287,15 @@ const Sidebar = () => {
                   <span className="flex min-w-0 items-center justify-between space-x-3">
                     <img
                       className="h-10 w-10 flex-shrink-0 rounded-full bg-gray-300"
-                      src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80"
+                      src="https://images.unsplash.com/photo-1585960691786-a593e76d3847?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzJ8fGhvc3BpdGFsfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
                       alt=""
                     />
                     <span className="flex min-w-0 flex-1 flex-col">
                       <span className="truncate text-sm font-medium text-gray-900">
-                        Andres Puello
+                        { auth.nombre }
                       </span>
                       <span className="truncate text-sm text-gray-500">
-                        apuello.aac@gmail.com
+                      { auth.email }
                       </span>
                     </span>
                   </span>

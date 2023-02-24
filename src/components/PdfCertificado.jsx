@@ -93,8 +93,7 @@ const PdfCertificado = ({ data, curriculum }) => {
           identificado(a) con cédula de ciudadanía número
           <Text style={styles.textb}> {data.identificacion_format}</Text>,
           presta sus servicios como{" "}
-          <Text style={styles.textb}> {data.cargo} </Text> en la Fundación Renal
-          de Colombia, desde el {curriculum[0].fechaIngreso} con un Contrato de
+          <Text style={styles.textb}> {data.cargo} </Text> en la {curriculum[0].empresa}, desde el {curriculum[0].fechaIngreso} con un Contrato de
           Trabajo Vigente a
           <Text style={styles.textb}> {curriculum[0].tipoContrato}</Text>,
           devengando un Salario Mensual
