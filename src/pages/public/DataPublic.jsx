@@ -268,7 +268,8 @@ export default function DataPublic() {
             </div>
           </header>
           <main>
-            {documentosPublicos.length > 0 ? (
+            {Array.isArray(documentosPublicos) &&
+            documentosPublicos.length > 0 ? (
               <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
                 <PublicTable data={documentosPublicos} columns={headers} />
               </div>

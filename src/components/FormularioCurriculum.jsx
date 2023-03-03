@@ -113,7 +113,7 @@ const FormularioCurriculum = () => {
   }, []);
 
   useEffect(() => {
-    if (curriculum.length > 0) {
+    if (Array.isArray(curriculum) && curriculum.length > 0) {
       //console.log(curriculum);
       setId(auth._id);
       setEstado(curriculum[0].estado);
@@ -1249,6 +1249,7 @@ const FormularioCurriculum = () => {
           </div>
           <div>
             {inputFinanciera &&
+              Array.isArray(inputFinanciera) &&
               inputFinanciera.map((item, i) => {
                 return (
                   <div
@@ -1612,6 +1613,7 @@ const FormularioCurriculum = () => {
           <div>
             {poseeCuenta &&
               poseeCuenta === "Si" &&
+              Array.isArray(inputCuentas) &&
               inputCuentas.map((item, i) => {
                 return (
                   <div
@@ -1914,6 +1916,7 @@ const FormularioCurriculum = () => {
             <div>
               {otras === true &&
                 inputExtranjera &&
+                Array.isArray(inputExtranjera) &&
                 inputExtranjera.map((item, i) => {
                   return (
                     <div key={i}>

@@ -1,6 +1,6 @@
 import { Outlet, Navigate, useLocation } from "react-router-dom";
 import { BeatLoader } from "react-spinners";
-import Layout from "../components/layout/layout";
+import Layout from "../components/layout/Layout";
 
 import useAuth from "../hooks/useAuth";
 
