@@ -2,6 +2,7 @@ import useOfertas from "../hooks/useOfertas";
 
 const Ofertas = () => {
   const { ofertas } = useOfertas();
+
   return (
     <div className="mt-6 px-4 sm:px-6 lg:px-8">
       <ul

@@ -4,11 +4,44 @@ import useCurriculum from "../hooks/useCurriculum";
 import Alert from "./Alert";
 import useAuth from "../hooks/useAuth";
 import { BeatLoader } from "react-spinners";
+import { Errors } from "./ui/Errors";
+import { useForm } from "react-hook-form";
 
 const FormularioCurriculum = () => {
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      nombre: " ",
+      numeroDocumento: " ",
+      fechaNacimiento: " ",
+      lugarNacimiento: " ",
+      telefono: " ",
+      correo: " ",
+      direccion: " ",
+      pais: " ",
+      departamento: " ",
+      ciudad: " ",
+      numeroHijos: " ",
+      tipoSangre: " ",
+      nivel: " ",
+      titulo: " ",
+      anioTitulo: " ",
+      institucionTitulo: " ",
+      empresaExp: " ",
+      fechaInicioExp: " ",
+      nombreRefA: " ",
+      telefonoRefA: " ",
+      correoRefA: " ",
+    },
+  });
   const [id, setId] = useState(null);
   const [estado, setEstado] = useState(null);
   const [nombre, setNombre] = useState("");
+
   const [tipoDocumento, setTipoDocumento] = useState("Cedula de ciudadania");
   const [numeroDocumento, setNumeroDocumento] = useState(0);
   const [fechaNacimiento, setFechaNacimiento] = useState("");
@@ -16,7 +49,7 @@ const FormularioCurriculum = () => {
   const [telefono, setTelefono] = useState(0);
   const [correo, setCorreo] = useState("");
   const [direccion, setDireccion] = useState("");
-  const [estadoCivil, setEstadoCivil] = useState("");
+  const [estadoCivil, setEstadoCivil] = useState("Soltero(a)");
   const [pais, setPais] = useState("");
   const [departamento, setDepartamento] = useState("");
   const [ciudad, setCiudad] = useState("");
@@ -32,6 +65,7 @@ const FormularioCurriculum = () => {
   const [fechaInicioExp, setFechaInicioExp] = useState("");
   const [fechaFinExp, setFechaFinExp] = useState("");
   const [soporteExp, setSoporteExp] = useState("");
+  const [errorSoporteExp, setErrorSoporteExp] = useState(false);
   //Referencias
   const [nombreRefA, setNombreRefA] = useState("");
   const [telefonoRefA, setTelefonoRefA] = useState("");
@@ -42,8 +76,10 @@ const FormularioCurriculum = () => {
   //Seguridad Social
   const [eps, setEPS] = useState("Sura");
   const [soporteEps, setSoporteEps] = useState("");
+  const [errorSoporteEps, setErrorSoporteEps] = useState(false);
   const [pension, setPension] = useState("Protección");
   const [soportePension, setSoportePension] = useState("");
+  const [errorSoportePension, setErrorSoportePension] = useState(false);
   //Informacion financiera
   const [inputFinanciera, setinputFinanciera] = useState([
     { ciu: " ", actividad_economica: " " },
@@ -54,6 +90,7 @@ const FormularioCurriculum = () => {
   ]);
 
   const [rut, setRut] = useState("");
+  const [errorSoporteRut, setErrorSoporteRut] = useState(false);
   const [numeroRut, setNumeroRut] = useState("");
   const [fechaCorte, setFechaCorte] = useState("");
   const [ingresosAnuales, setIngresosAnuales] = useState(0);
@@ -93,6 +130,7 @@ const FormularioCurriculum = () => {
   const [codigoIngreso, setCodigoIngreso] = useState(0);
   const [sueldo, setSueldo] = useState(0);
   const [soporteContrato, setSoporteContrato] = useState("");
+  const [errorSoporteContrato, setErrorSoporteContrato] = useState(false);
   const [cargo, setCargo] = useState("");
   const params = useParams();
 
@@ -156,7 +194,7 @@ const FormularioCurriculum = () => {
       setinputExtranjera(curriculum[0].inputExtranjera);
       setRut(curriculum[0].rut);
       setNumeroRut(curriculum[0].numeroRut);
-      setFechaCorte(curriculum[0].fechaCorte);
+      setFechaCorte(curriculum[0].fechaCorte?.split("T")[0]);
       setIngresosAnuales(curriculum[0].ingresosAnuales);
       setEgresosAnuales(curriculum[0].egresosAnuales);
       setOtrosIngresos(curriculum[0].otrosIngresos);
@@ -180,7 +218,8 @@ const FormularioCurriculum = () => {
       setNumeroCuenta(curriculum[0].numeroCuenta);
       //Contractual
       setTipoContrato(curriculum[0].tipoContrato);
-      setFechaIngreso(curriculum[0].fechaIngreso);
+      setFechaIngreso(curriculum[0].fechaIngreso?.split("T")[0]);
+      setFechaFin(curriculum[0].fechaFin?.split("T")[0]);
       setEmpresa(curriculum[0].empresa);
       setNomina(curriculum[0].nomina);
       setCodigoIngreso(curriculum[0].codigoIngreso);
@@ -189,80 +228,44 @@ const FormularioCurriculum = () => {
     }
   }, [curriculum]);
 
-  const handleSubmit = async (e) => {
+  const submitData = async (data, e) => {
     e.preventDefault();
-    if (
-      [
-        nombre,
-        tipoDocumento,
-        numeroDocumento,
-        fechaNacimiento,
-        lugarNacimiento,
-        telefono,
-        correo,
-        direccion,
-        estadoCivil,
-        pais,
-        departamento,
-        ciudad,
-        //numeroHijos,
-        tipoSangre,
-        nivel,
-        titulo,
-        anioTitulo,
-        institucionTitulo,
-        empresaExp,
-        fechaInicioExp,
-        fechaFinExp,
-        nombreRefA,
-        telefonoRefA,
-        correoRefA,
-        //nombreRefB,
-        //telefonoRefB,
-        //correoRefB,
-        //eps,
-        //pension,
-        //tipoCuenta,
-        //entidadBancaria,
-        //numeroCuenta
-      ].includes("")
-    ) {
-      console.log(
-        nombre,
-        tipoDocumento,
-        numeroDocumento,
-        fechaNacimiento,
-        lugarNacimiento,
-        telefono,
-        correo,
-        direccion,
-        estadoCivil,
-        pais,
-        departamento,
-        ciudad,
-        numeroHijos,
-        tipoSangre,
-        nivel,
-        titulo,
-        anioTitulo,
-        institucionTitulo,
-        empresaExp,
-        fechaInicioExp,
-        fechaFinExp,
-        nombreRefA,
-        telefonoRefA,
-        correoRefA,
-        nombreRefB,
-        telefonoRefB,
-        correoRefB,
-        eps,
-        pension,
-        tipoCuenta,
-        entidadBancaria,
-        numeroCuenta
-      );
+
+    if (errorSoporteExp === true) {
       mostrarAlerta({
-        msg: "Todos los campos son obligatorios",
+        msg: "Tamaño máximo del soporte de Experiencia Laboral es de 500kb",
+        error: true,
+      });
+      return;
+    }
+
+    if (errorSoporteEps === true) {
+      mostrarAlerta({
+        msg: "Tamaño máximo del soporte de Eps es de 500kb",
+        error: true,
+      });
+      return;
+    }
+
+    if (errorSoportePension === true) {
+      mostrarAlerta({
+        msg: "Tamaño máximo del soporte de Pensión es de 500kb",
+        error: true,
+      });
+      return;
+    }
+
+    if (errorSoporteRut === true) {
+      mostrarAlerta({
+        msg: "Tamaño máximo del soporte de Rut es de 500kb",
+        error: true,
+      });
+      return;
+    }
+
+    if (errorSoporteContrato === true) {
+      mostrarAlerta({
+        msg: "Tamaño máximo del soporte del contrato es de 500kb",
         error: true,
       });
       return;
@@ -345,6 +348,7 @@ const FormularioCurriculum = () => {
     formData.append("cargo", cargo);
     //console.log(formData);
     //Pasar los datos hacia el provider
+    console.log(formData.get("nombre"));
     await submitCurriculum(formData, estado);
   };
   //Informacion Financiera
@@ -364,7 +368,7 @@ const FormularioCurriculum = () => {
   const handleaddclick = () => {
     setinputFinanciera([
       ...inputFinanciera,
-      { nro_cuenta: "", banco: "", ciudad: "", pais: "", moneda: "" },
+      { ciu: " ", actividad_economica: " " },
     ]);
   };
   //Cuentas Extranjero
@@ -431,7 +435,65 @@ const FormularioCurriculum = () => {
     setOtras(event.target.checked);
   };
 
-  console.log(exportaciones);
+  const handleSoporteExp = (data) => {
+    const maxfilesize = (1024 * 1024) / 2;
+
+    if (data && data.size > maxfilesize) {
+      setErrorSoporteExp(true);
+      setSoporteExp(" ");
+    } else {
+      setErrorSoporteExp(false);
+      setSoporteExp(data);
+    }
+  };
+
+  const handleSoporteEps = (data) => {
+    const maxfilesize = (1024 * 1024) / 2;
+
+    if (data && data.size > maxfilesize) {
+      setErrorSoporteEps(true);
+      setSoporteEps(" ");
+    } else {
+      setErrorSoporteEps(false);
+      setSoporteEps(data);
+    }
+  };
+
+  const handleSoportePension = (data) => {
+    const maxfilesize = (1024 * 1024) / 2;
+
+    if (data && data.size > maxfilesize) {
+      setErrorSoportePension(true);
+      setSoportePension(" ");
+    } else {
+      setErrorSoportePension(false);
+      setSoportePension(data);
+    }
+  };
+
+  const handleSoporteRut = (data) => {
+    const maxfilesize = (1024 * 1024) / 2;
+
+    if (data && data.size > maxfilesize) {
+      setErrorSoporteRut(true);
+      setRut(" ");
+    } else {
+      setErrorSoporteRut(false);
+      setRut(data);
+    }
+  };
+
+  const handleSoporteContrato = (data) => {
+    const maxfilesize = (1024 * 1024) / 2;
+
+    if (data && data.size > maxfilesize) {
+      setErrorSoporteContrato(true);
+      setSoporteContrato(" ");
+    } else {
+      setErrorSoporteContrato(false);
+      setSoporteContrato(data);
+    }
+  };
   const { msg } = alerta;
 
   if (cargandoData) return <BeatLoader color="#36d7b7" />;
@@ -441,7 +503,9 @@ const FormularioCurriculum = () => {
       <div className="bg-white py-8 px-4 shadow-lg rounded-lg sm:px-10">
         <form
           className="space-y-6 "
-          onSubmit={handleSubmit}
+          onSubmit={handleSubmit((data, e) => {
+            submitData(data, e);
+          })}
           encType="multipart/form-data"
         >
           <div className="text-left text-xl text-gray-700 mt-8 font-bold border-b-4 border-corporative-blue inline-flex">
@@ -464,10 +528,15 @@ const FormularioCurriculum = () => {
                   placeholder="Digita tu nombre completo"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={nombre}
-                  onChange={(e) => setNombre(e.target.value)}
-                  required={true}
+                  {...register("nombre", {
+                    required: "Este campo es requerido",
+                    onChange: (e) => setNombre(e.target.value),
+                  })}
                 />
               </div>
+              <span className="text-xs text-red-500">
+                {errors.nombre?.message}
+              </span>
             </div>
             <div>
               <label
@@ -514,9 +583,15 @@ const FormularioCurriculum = () => {
                   placeholder="Digita tu numero de documento"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={numeroDocumento}
-                  onChange={(e) => setNumeroDocumento(e.target.value)}
+                  {...register("numeroDocumento", {
+                    required: "Este campo es requerido",
+                    onChange: (e) => setNumeroDocumento(e.target.value),
+                  })}
                 />
               </div>
+              <span className="text-xs text-red-500">
+                {errors.numeroDocumento?.message}
+              </span>
             </div>
 
             <div>
@@ -534,10 +609,15 @@ const FormularioCurriculum = () => {
                   placeholder="Seleccione su fecha de nacimiento"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={fechaNacimiento}
-                  onChange={(e) => setFechaNacimiento(e.target.value)}
-                  required={true}
+                  {...register("fechaNacimiento", {
+                    required: "Este campo es requerido",
+                    onChange: (e) => setFechaNacimiento(e.target.value),
+                  })}
                 />
               </div>
+              <span className="text-xs text-red-500">
+                {errors.fechaNacimiento?.message}
+              </span>
             </div>
 
             <div>
@@ -555,10 +635,15 @@ const FormularioCurriculum = () => {
                   placeholder="Digite su lugar de nacimiento"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={lugarNacimiento}
-                  onChange={(e) => setLugarNacimiento(e.target.value)}
-                  required={true}
+                  {...register("lugarNacimiento", {
+                    required: "Este campo es requerido",
+                    onChange: (e) => setLugarNacimiento(e.target.value),
+                  })}
                 />
               </div>
+              <span className="text-xs text-red-500">
+                {errors.lugarNacimiento?.message}
+              </span>
             </div>
 
             <div>
@@ -576,10 +661,15 @@ const FormularioCurriculum = () => {
                   placeholder="Digite su número de telefono"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={telefono}
-                  onChange={(e) => setTelefono(e.target.value)}
-                  required={true}
+                  {...register("telefono", {
+                    required: "Este campo es requerido",
+                    onChange: (e) => setTelefono(e.target.value),
+                  })}
                 />
               </div>
+              <span className="text-xs text-red-500">
+                {errors.telefono?.message}
+              </span>
             </div>
 
             <div>
@@ -597,10 +687,15 @@ const FormularioCurriculum = () => {
                   placeholder="Digite su correo electrónico"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={correo}
-                  onChange={(e) => setCorreo(e.target.value)}
-                  required={true}
+                  {...register("correo", {
+                    required: "Este campo es requerido",
+                    onChange: (e) => setCorreo(e.target.value),
+                  })}
                 />
               </div>
+              <span className="text-xs text-red-500">
+                {errors.correo?.message}
+              </span>
             </div>
 
             <div>
@@ -618,10 +713,15 @@ const FormularioCurriculum = () => {
                   placeholder="Digite su dirección"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={direccion}
-                  onChange={(e) => setDireccion(e.target.value)}
-                  required={true}
+                  {...register("direccion", {
+                    required: "Este campo es requerido",
+                    onChange: (e) => setDireccion(e.target.value),
+                  })}
                 />
               </div>
+              <span className="text-xs text-red-500">
+                {errors.direccion?.message}
+              </span>
             </div>
 
             <div>
@@ -632,16 +732,22 @@ const FormularioCurriculum = () => {
                 Estado Civil <span className="text-red-700">*</span>
               </label>
               <div className="mt-1">
-                <input
+                <select
                   id="estadoCivil"
                   name="estadoCivil"
-                  type="text"
-                  placeholder="Digite su estado civil"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                  value={estadoCivil}
-                  onChange={(e) => setEstadoCivil(e.target.value)}
-                  required={true}
-                />
+                  onChange={(e) => {
+                    const selectedDocumentType = e.target.value;
+
+                    setTipoDocumento(selectedDocumentType);
+                  }}
+                  value={tipoDocumento}
+                >
+                  <option value="Soltero(a)">Soltero(a)</option>
+                  <option value="Casado(a)">Casado(a)</option>
+                  <option value="Viudo(a)">Viudo(a)</option>
+                  <option value="Unión libre">Unión libre</option>
+                </select>
               </div>
             </div>
 
@@ -660,10 +766,15 @@ const FormularioCurriculum = () => {
                   placeholder="Digite el país"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={pais}
-                  onChange={(e) => setPais(e.target.value)}
-                  required={true}
+                  {...register("pais", {
+                    required: "Este campo es requerido",
+                    onChange: (e) => setPais(e.target.value),
+                  })}
                 />
               </div>
+              <span className="text-xs text-red-500">
+                {errors.pais?.message}
+              </span>
             </div>
 
             <div>
@@ -681,10 +792,15 @@ const FormularioCurriculum = () => {
                   placeholder="Digite el departamento"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={departamento}
-                  onChange={(e) => setDepartamento(e.target.value)}
-                  required={true}
+                  {...register("departamento", {
+                    required: "Este campo es requerido",
+                    onChange: (e) => setDepartamento(e.target.value),
+                  })}
                 />
               </div>
+              <span className="text-xs text-red-500">
+                {errors.departamento?.message}
+              </span>
             </div>
 
             <div>
@@ -702,10 +818,15 @@ const FormularioCurriculum = () => {
                   placeholder="Digite la ciudad"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={ciudad}
-                  onChange={(e) => setCiudad(e.target.value)}
-                  required={true}
+                  {...register("ciudad", {
+                    required: "Este campo es requerido",
+                    onChange: (e) => setCiudad(e.target.value),
+                  })}
                 />
               </div>
+              <span className="text-xs text-red-500">
+                {errors.ciudad?.message}
+              </span>
             </div>
 
             <div>
@@ -723,9 +844,15 @@ const FormularioCurriculum = () => {
                   placeholder="Digite el numero de hijos"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={numeroHijos}
-                  onChange={(e) => setNumeroHijos(e.target.value)}
+                  {...register("numeroHijos", {
+                    required: "Este campo es requerido",
+                    onChange: (e) => setNumeroHijos(e.target.value),
+                  })}
                 />
               </div>
+              <span className="text-xs text-red-500">
+                {errors.numeroHijos?.message}
+              </span>
             </div>
 
             <div>
@@ -743,10 +870,15 @@ const FormularioCurriculum = () => {
                   placeholder="Digite su tipo de sangre"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={tipoSangre}
-                  onChange={(e) => setTipoSangre(e.target.value)}
-                  required={true}
+                  {...register("tipoSangre", {
+                    required: "Este campo es requerido",
+                    onChange: (e) => setTipoSangre(e.target.value),
+                  })}
                 />
               </div>
+              <span className="text-xs text-red-500">
+                {errors.tipoSangre?.message}
+              </span>
             </div>
           </div>
           <div className="text-left text-xl text-gray-700 mt-8 font-bold border-b-4 border-corporative-blue inline-flex pt-3">
@@ -802,10 +934,15 @@ const FormularioCurriculum = () => {
                   placeholder="Digita su ultimo titulo profesional"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={titulo}
-                  onChange={(e) => setTitulo(e.target.value)}
-                  required={true}
+                  {...register("titulo", {
+                    required: "Este campo es requerido",
+                    onChange: (e) => setTitulo(e.target.value),
+                  })}
                 />
               </div>
+              <span className="text-xs text-red-500">
+                {errors.titulo?.message}
+              </span>
             </div>
             <div>
               <label
@@ -822,10 +959,15 @@ const FormularioCurriculum = () => {
                   placeholder="Digite año del titulo"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={anioTitulo}
-                  onChange={(e) => setAnioTitulo(e.target.value)}
-                  required={true}
+                  {...register("anioTitulo", {
+                    required: "Este campo es requerido",
+                    onChange: (e) => setAnioTitulo(e.target.value),
+                  })}
                 />
               </div>
+              <span className="text-xs text-red-500">
+                {errors.anioTitulo?.message}
+              </span>
             </div>
 
             <div>
@@ -843,10 +985,15 @@ const FormularioCurriculum = () => {
                   placeholder="Digite institución"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={institucionTitulo}
-                  onChange={(e) => setInstitucionTitulo(e.target.value)}
-                  required={true}
+                  {...register("institucionTitulo", {
+                    required: "Este campo es requerido",
+                    onChange: (e) => setInstitucionTitulo(e.target.value),
+                  })}
                 />
               </div>
+              <span className="text-xs text-red-500">
+                {errors.institucionTitulo?.message}
+              </span>
             </div>
           </div>
           <div className="text-left text-xl text-gray-700 mt-8 font-bold border-b-4 border-corporative-blue inline-flex pt-3">
@@ -870,10 +1017,15 @@ const FormularioCurriculum = () => {
                   placeholder="Digita la ultima empresa donde laboró"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={empresaExp}
-                  onChange={(e) => setEmpresaExp(e.target.value)}
-                  required={true}
+                  {...register("empresaExp", {
+                    required: "Este campo es requerido",
+                    onChange: (e) => setEmpresaExp(e.target.value),
+                  })}
                 />
               </div>
+              <span className="text-xs text-red-500">
+                {errors.empresaExp?.message}
+              </span>
             </div>
             <div>
               <label
@@ -890,10 +1042,15 @@ const FormularioCurriculum = () => {
                   placeholder="Seleccione su fecha de inicio"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={fechaInicioExp}
-                  onChange={(e) => setFechaInicioExp(e.target.value)}
-                  required={true}
+                  {...register("fechaInicioExp", {
+                    required: "Este campo es requerido",
+                    onChange: (e) => setFechaInicioExp(e.target.value),
+                  })}
                 />
               </div>
+              <span className="text-xs text-red-500">
+                {errors.fechaInicioExp?.message}
+              </span>
             </div>
             <div>
               <label
@@ -941,9 +1098,15 @@ const FormularioCurriculum = () => {
                   type="file"
                   name="soporteExp"
                   id="soporteExp"
-                  onChange={(e) => setSoporteExp(e.target.files[0])}
+                  onChange={(e) => handleSoporteExp(e.target.files[0])}
+                  accept=".pdf"
                 />
               </div>
+              {errorSoporteExp === true && (
+                <span className="text-red-500 text-xs">
+                  El tamaño máximo es 500kb
+                </span>
+              )}
               <div className="mt-3">
                 {curriculum[0]?.soporteExp && (
                   <a
@@ -985,10 +1148,15 @@ const FormularioCurriculum = () => {
                   placeholder="Digita nombre de la referencia 1"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={nombreRefA}
-                  onChange={(e) => setNombreRefA(e.target.value)}
-                  required={true}
+                  {...register("nombreRefA", {
+                    required: "Este campo es requerido",
+                    onChange: (e) => setNombreRefA(e.target.value),
+                  })}
                 />
               </div>
+              <span className="text-xs text-red-500">
+                {errors.nombreRefA?.message}
+              </span>
             </div>
             <div>
               <label
@@ -1006,10 +1174,15 @@ const FormularioCurriculum = () => {
                   placeholder="Digita telefono de la referencia 1"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={telefonoRefA}
-                  onChange={(e) => setTelefonoRefA(e.target.value)}
-                  required={true}
+                  {...register("telefonoRefA", {
+                    required: "Este campo es requerido",
+                    onChange: (e) => setTelefonoRefA(e.target.value),
+                  })}
                 />
               </div>
+              <span className="text-xs text-red-500">
+                {errors.telefonoRefA?.message}
+              </span>
             </div>
             <div>
               <label
@@ -1027,10 +1200,15 @@ const FormularioCurriculum = () => {
                   placeholder="Digita correo de la referencia 1"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={correoRefA}
-                  onChange={(e) => setCorreoRefA(e.target.value)}
-                  required={true}
+                  {...register("correoRefA", {
+                    required: "Este campo es requerido",
+                    onChange: (e) => setCorreoRefA(e.target.value),
+                  })}
                 />
               </div>
+              <span className="text-xs text-red-500">
+                {errors.correoRefA?.message}
+              </span>
             </div>
           </div>
           <div className="border-b border-gray-200 pb-2">
@@ -1156,9 +1334,15 @@ const FormularioCurriculum = () => {
                   type="file"
                   id="soporteEps"
                   name="soporteEps"
-                  onChange={(e) => setSoporteEps(e.target.files[0])}
+                  onChange={(e) => handleSoporteEps(e.target.files[0])}
+                  accept=".pdf"
                 />
               </div>
+              {errorSoporteEps === true && (
+                <span className="text-red-500 text-xs">
+                  El tamaño máximo es 500kb
+                </span>
+              )}
               <div className="mt-3">
                 {curriculum[0]?.soporteEps && (
                   <a
@@ -1225,9 +1409,15 @@ const FormularioCurriculum = () => {
                   type="file"
                   id="soportePension"
                   name="soportePension"
-                  onChange={(e) => setSoportePension(e.target.files[0])}
+                  onChange={(e) => handleSoportePension(e.target.files[0])}
+                  accept=".pdf"
                 />
               </div>
+              {errorSoportePension === true && (
+                <span className="text-red-500 text-xs">
+                  El tamaño máximo es 500kb
+                </span>
+              )}
               <div className="mt-3">
                 {curriculum[0]?.soportePension && (
                   <a
@@ -1363,9 +1553,15 @@ const FormularioCurriculum = () => {
                   type="file"
                   name="rut"
                   id="rut"
-                  onChange={(e) => setRut(e.target.files[0])}
+                  onChange={(e) => handleSoporteRut(e.target.files[0])}
+                  accept=".pdf"
                 />
               </div>
+              {errorSoporteRut === true && (
+                <span className="text-red-500 text-xs">
+                  El tamaño máximo es 500kb
+                </span>
+              )}
               <div className="mt-3">
                 {curriculum[0]?.rut && (
                   <a
@@ -2292,9 +2488,15 @@ const FormularioCurriculum = () => {
                   type="file"
                   id="soporteContrato"
                   name="soporteContrato"
-                  onChange={(e) => setSoporteContrato(e.target.files[0])}
+                  onChange={(e) => handleSoporteContrato(e.target.files[0])}
+                  accept=".pdf"
                 />
               </div>
+              {errorSoporteContrato === true && (
+                <span className="text-red-500 text-xs">
+                  El tamaño máximo es 500kb
+                </span>
+              )}
               <div className="mt-3">
                 {curriculum[0]?.soporteContrato && (
                   <a
