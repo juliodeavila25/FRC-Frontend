@@ -56,17 +56,58 @@ const ListarOfertas = () => {
     },
   ]);
 
-  if (!ofertas) return <BeatLoader color="#36d7b7" />;
-  console.log(oferta);
-
+  console.log("Hoola");
   return (
-    <Table
-      data={ofertas}
-      columns={headers}
-      title="Ofertas"
-      titleButton="Nueva oferta de empleo"
-      href={"/recursos-humanos/crear-convocatoria"}
-    />
+    <>
+      {Array.isArray(ofertas) && ofertas.length > 0 ? (
+        <>
+          <div className="sm:flex sm:items-center">
+            <div className="sm:flex-auto">
+              <h1 className="text-xl font-semibold text-gray-900">Ofertas</h1>
+            </div>
+            <div className="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
+              <Link
+                to="/recursos-humanos/crear-convocatoria"
+                className="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto"
+              >
+                Nueva oferta de empleo
+              </Link>
+            </div>
+          </div>
+          <Table
+            data={ofertas}
+            columns={headers}
+            title="Ofertas"
+            titleButton="Nueva oferta de empleo"
+            href={"/recursos-humanos/crear-convocatoria"}
+          />
+        </>
+      ) : (
+        <div className="rounded-md bg-blue-50 p-4">
+          <div className="flex">
+            <div className="flex-shrink-0">
+              <svg
+                className="h-5 w-5 text-blue-400"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a.75.75 0 000 1.5h.253a.25.25 0 01.244.304l-.459 2.066A1.75 1.75 0 0010.747 15H11a.75.75 0 000-1.5h-.253a.25.25 0 01-.244-.304l.459-2.066A1.75 1.75 0 009.253 9H9z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </div>
+            <div className="ml-3 flex-1 md:flex ">
+              <p className="text-sm text-blue-700">
+                No existen ofertas laborales vigentes.
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

@@ -51,19 +51,6 @@ const Table = ({ data, columns, href, title, titleButton }) => {
 
   return (
     <div className="px-4 sm:px-6 lg:px-8 mt-5">
-      <div className="sm:flex sm:items-center">
-        <div className="sm:flex-auto">
-          <h1 className="text-xl font-semibold text-gray-900">{title}</h1>
-        </div>
-        <div className="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
-          <Link
-            to={href}
-            className="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto"
-          >
-            {titleButton}
-          </Link>
-        </div>
-      </div>
       <div className="mt-8 flex flex-col">
         <div className="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div className="px-2 md:px-6 lg:px-8 sm:flex  sm:justify-start">

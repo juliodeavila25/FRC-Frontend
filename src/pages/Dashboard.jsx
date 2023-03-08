@@ -148,7 +148,7 @@ export default function Dashboard() {
         </div>
       )}
       {/* Projects table (small breakpoint and up) */}
-      <div className="mt-8 block mb-10">
+      {/* <div className="mt-8 block mb-10">
         <div className="inline-block min-w-full border-b border-gray-200 align-middle">
           <table className="min-w-full">
             <thead>
@@ -206,7 +206,7 @@ export default function Dashboard() {
             </tbody>
           </table>
         </div>
-      </div>
+      </div> */}
     </>
   );
 }
