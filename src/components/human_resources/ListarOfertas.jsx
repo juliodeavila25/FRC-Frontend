@@ -3,7 +3,7 @@ import { useState } from "react";
 import Table from "../table/Table";
 import { BeatLoader } from "react-spinners";
 import { format } from "date-fns";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const ListarOfertas = () => {
   const { ofertas, obtenerOferta, oferta } = useOfertas();
@@ -56,11 +56,10 @@ const ListarOfertas = () => {
     },
   ]);
 
-  console.log("Hoola");
   return (
     <>
-      {Array.isArray(ofertas) && ofertas.length > 0 ? (
-        <>
+      <div className="px-4 sm:px-6 lg:px-8 mt-5 mb-5">
+        <div className="mt-8 flex flex-col">
           <div className="sm:flex sm:items-center">
             <div className="sm:flex-auto">
               <h1 className="text-xl font-semibold text-gray-900">Ofertas</h1>
@@ -74,6 +73,10 @@ const ListarOfertas = () => {
               </Link>
             </div>
           </div>
+        </div>
+      </div>
+      {Array.isArray(ofertas) && ofertas.length > 0 ? (
+        <>
           <Table
             data={ofertas}
             columns={headers}
@@ -101,7 +104,7 @@ const ListarOfertas = () => {
             </div>
             <div className="ml-3 flex-1 md:flex ">
               <p className="text-sm text-blue-700">
-                No existen ofertas laborales vigentes.
+                No existen ofertas laborales registradas.
               </p>
             </div>
           </div>
