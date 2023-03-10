@@ -9,7 +9,7 @@ import {
   BriefcaseIcon,
   ArrowPathRoundedSquareIcon,
   DocumentTextIcon,
-  DocumentCheckIcon
+  DocumentCheckIcon,
 } from "@heroicons/react/24/outline";
 <svg
   xmlns="http://www.w3.org/2000/svg"
@@ -82,7 +82,7 @@ const Sidebar = () => {
       href: "/documentos/listar-documentos",
       icon: ClipboardDocumentListIcon,
       current: location.pathname.includes("/documentos") ? true : false,
-    }
+    },
   ];
 
   const solicitudes = [
@@ -220,44 +220,46 @@ const Sidebar = () => {
                           </Link>
                         ))}
                     </div>
-                    <div className="mt-8">
-                      <h3
-                        className="px-3 text-lg font-medium text-gray-500"
-                        id="mobile-teams-headline"
-                      >
-                        Solicitudes
-                      </h3>
-                      <div
-                        className="mt-1 space-y-1"
-                        role="group"
-                        aria-labelledby="mobile-teams-headline"
-                      >
-                        {solicitudes.map((item) => (
-                          <Link
-                            key={item.name}
-                            to={item.href}
-                            className={classNames(
-                              item.current
-                                ? "bg-gray-100 text-gray-900"
-                                : "text-gray-600 hover:text-gray-900 hover:bg-gray-50",
-                              "group flex items-center px-2 py-2 text-base leading-5 font-medium rounded-md"
-                            )}
-                            aria-current={item.current ? "page" : undefined}
-                          >
-                            <item.icon
+                    {auth?.userType[0] !== "aspirante" && (
+                      <div className="mt-8">
+                        <h3
+                          className="px-3 text-lg font-medium text-gray-500"
+                          id="mobile-teams-headline"
+                        >
+                          Solicitudes
+                        </h3>
+                        <div
+                          className="mt-1 space-y-1"
+                          role="group"
+                          aria-labelledby="mobile-teams-headline"
+                        >
+                          {solicitudes.map((item) => (
+                            <Link
+                              key={item.name}
+                              to={item.href}
                               className={classNames(
                                 item.current
-                                  ? "text-gray-500"
-                                  : "text-gray-400 group-hover:text-gray-500",
-                                "mr-3 flex-shrink-0 h-6 w-6"
+                                  ? "bg-gray-100 text-gray-900"
+                                  : "text-gray-600 hover:text-gray-900 hover:bg-gray-50",
+                                "group flex items-center px-2 py-2 text-base leading-5 font-medium rounded-md"
                               )}
-                              aria-hidden="true"
-                            />
-                            {item.name}
-                          </Link>
-                        ))}
+                              aria-current={item.current ? "page" : undefined}
+                            >
+                              <item.icon
+                                className={classNames(
+                                  item.current
+                                    ? "text-gray-500"
+                                    : "text-gray-400 group-hover:text-gray-500",
+                                  "mr-3 flex-shrink-0 h-6 w-6"
+                                )}
+                                aria-hidden="true"
+                              />
+                              {item.name}
+                            </Link>
+                          ))}
+                        </div>
                       </div>
-                    </div>
+                    )}
                   </nav>
                 </div>
               </Dialog.Panel>
@@ -292,10 +294,10 @@ const Sidebar = () => {
                     />
                     <span className="flex min-w-0 flex-1 flex-col">
                       <span className="truncate text-sm font-medium text-gray-900">
-                        { auth.nombre }
+                        {auth.nombre}
                       </span>
                       <span className="truncate text-sm text-gray-500">
-                      { auth.email }
+                        {auth.email}
                       </span>
                     </span>
                   </span>
@@ -494,45 +496,47 @@ const Sidebar = () => {
                   </Link>
                 ))}
             </div>
-            <div className="mt-8">
-              {/* Secondary navigation */}
-              <h3
-                className="px-3 text-lg font-medium text-blue-500"
-                id="desktop-teams-headline"
-              >
-                Solicitudes
-              </h3>
-              <div
-                className="mt-1 space-y-1"
-                role="group"
-                aria-labelledby="desktop-teams-headline"
-              >
-                {solicitudes.map((item) => (
-                  <Link
-                    key={item.name}
-                    to={item.href}
-                    className={classNames(
-                      item.current
-                        ? "bg-gray-100 text-gray-900"
-                        : "text-gray-600 hover:text-gray-900 hover:bg-gray-50",
-                      "group flex items-center px-2 py-2 text-base leading-5 font-medium rounded-md"
-                    )}
-                    aria-current={item.current ? "page" : undefined}
-                  >
-                    <item.icon
+            {auth?.userType[0] !== "aspirante" && (
+              <div className="mt-8">
+                {/* Secondary navigation */}
+                <h3
+                  className="px-3 text-lg font-medium text-blue-500"
+                  id="desktop-teams-headline"
+                >
+                  Solicitudes
+                </h3>
+                <div
+                  className="mt-1 space-y-1"
+                  role="group"
+                  aria-labelledby="desktop-teams-headline"
+                >
+                  {solicitudes.map((item) => (
+                    <Link
+                      key={item.name}
+                      to={item.href}
                       className={classNames(
                         item.current
-                          ? "text-gray-500"
-                          : "text-gray-400 group-hover:text-gray-500",
-                        "mr-3 flex-shrink-0 h-6 w-6"
+                          ? "bg-gray-100 text-gray-900"
+                          : "text-gray-600 hover:text-gray-900 hover:bg-gray-50",
+                        "group flex items-center px-2 py-2 text-base leading-5 font-medium rounded-md"
                       )}
-                      aria-hidden="true"
-                    />
-                    {item.name}
-                  </Link>
-                ))}
+                      aria-current={item.current ? "page" : undefined}
+                    >
+                      <item.icon
+                        className={classNames(
+                          item.current
+                            ? "text-gray-500"
+                            : "text-gray-400 group-hover:text-gray-500",
+                          "mr-3 flex-shrink-0 h-6 w-6"
+                        )}
+                        aria-hidden="true"
+                      />
+                      {item.name}
+                    </Link>
+                  ))}
+                </div>
               </div>
-            </div>
+            )}
           </nav>
         </div>
       </div>

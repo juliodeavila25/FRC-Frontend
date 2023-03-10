@@ -8,43 +8,12 @@ import { Errors } from "./ui/Errors";
 import { useForm } from "react-hook-form";
 
 const FormularioCurriculum = () => {
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm({
-    defaultValues: {
-      nombre: " ",
-      numeroDocumento: " ",
-      fechaNacimiento: " ",
-      lugarNacimiento: " ",
-      telefono: " ",
-      correo: " ",
-      direccion: " ",
-      pais: " ",
-      departamento: " ",
-      ciudad: " ",
-      numeroHijos: " ",
-      tipoSangre: " ",
-      nivel: " ",
-      titulo: " ",
-      anioTitulo: " ",
-      institucionTitulo: " ",
-      empresaExp: " ",
-      fechaInicioExp: " ",
-      nombreRefA: " ",
-      telefonoRefA: " ",
-      correoRefA: " ",
-    },
-  });
   const [id, setId] = useState(null);
   const [estado, setEstado] = useState(null);
   const [nombre, setNombre] = useState("");
-
   const [tipoDocumento, setTipoDocumento] = useState("Cedula de ciudadania");
   const [numeroDocumento, setNumeroDocumento] = useState(0);
-  const [fechaNacimiento, setFechaNacimiento] = useState("");
+  const [fechaNacimiento, setFechaNacimiento] = useState( '1990-01-01');
   const [lugarNacimiento, setLugarNacimiento] = useState("");
   const [telefono, setTelefono] = useState(0);
   const [correo, setCorreo] = useState("");
@@ -62,8 +31,8 @@ const FormularioCurriculum = () => {
   const [institucionTitulo, setInstitucionTitulo] = useState("");
   //Experiencia Profesional
   const [empresaExp, setEmpresaExp] = useState("");
-  const [fechaInicioExp, setFechaInicioExp] = useState("");
-  const [fechaFinExp, setFechaFinExp] = useState("");
+  const [fechaInicioExp, setFechaInicioExp] = useState( '1990-01-01');
+  const [fechaFinExp, setFechaFinExp] = useState( '1990-01-01');
   const [soporteExp, setSoporteExp] = useState("");
   const [errorSoporteExp, setErrorSoporteExp] = useState(false);
   //Referencias
@@ -92,7 +61,7 @@ const FormularioCurriculum = () => {
   const [rut, setRut] = useState("");
   const [errorSoporteRut, setErrorSoporteRut] = useState(false);
   const [numeroRut, setNumeroRut] = useState("");
-  const [fechaCorte, setFechaCorte] = useState("");
+  const [fechaCorte, setFechaCorte] = useState( '1990-01-01');
   const [ingresosAnuales, setIngresosAnuales] = useState(0);
   const [egresosAnuales, setEgresosAnuales] = useState(0);
   const [otrosIngresos, setOtrosIngresos] = useState(0);
@@ -123,8 +92,8 @@ const FormularioCurriculum = () => {
   const [numeroCuenta, setNumeroCuenta] = useState("");
   //Contractual
   const [tipoContrato, setTipoContrato] = useState("");
-  const [fechaIngreso, setFechaIngreso] = useState("");
-  const [fechaFin, setFechaFin] = useState("");
+  const [fechaIngreso, setFechaIngreso] = useState( '1990-01-01');
+  const [fechaFin, setFechaFin] = useState( '1990-01-01');
   const [empresa, setEmpresa] = useState("");
   const [nomina, setNomina] = useState("");
   const [codigoIngreso, setCodigoIngreso] = useState(0);
@@ -150,9 +119,10 @@ const FormularioCurriculum = () => {
     obtenerCurriculum(auth._id);
   }, []);
 
+ 
   useEffect(() => {
     if (Array.isArray(curriculum) && curriculum.length > 0) {
-      //console.log(curriculum);
+      console.log(curriculum);
       setId(auth._id);
       setEstado(curriculum[0].estado);
       setNombre(curriculum[0].nombre);
@@ -228,8 +198,41 @@ const FormularioCurriculum = () => {
     }
   }, [curriculum]);
 
-  const submitData = async (data, e) => {
+  // const {
+  //   register,
+  //   handleSubmit,
+  //   reset,
+  //   formState: { errors },
+  // } = useForm({
+  //   defaultValues: {
+  //     nombre: " assa",
+  //     numeroDocumento: " ",
+  //     fechaNacimiento: " ",
+  //     lugarNacimiento: " ",
+  //     telefono: " ",
+  //     correo: " ",
+  //     direccion: " ",
+  //     pais: " ",
+  //     departamento: " ",
+  //     ciudad: " ",
+  //     numeroHijos: " ",
+  //     tipoSangre: " ",
+  //     nivel: " ",
+  //     titulo: " ",
+  //     anioTitulo: " ",
+  //     institucionTitulo: " ",
+  //     empresaExp: " ",
+  //     fechaInicioExp: " ",
+  //     nombreRefA: " ",
+  //     telefonoRefA: " ",
+  //     correoRefA: " ",
+  //   },
+  // });
+
+  const submitData = async (e) => {
     e.preventDefault();
+
+    //console.log(errors);
 
     if (errorSoporteExp === true) {
       mostrarAlerta({
@@ -503,9 +506,10 @@ const FormularioCurriculum = () => {
       <div className="bg-white py-8 px-4 shadow-lg rounded-lg sm:px-10">
         <form
           className="space-y-6 "
-          onSubmit={handleSubmit((data, e) => {
-            submitData(data, e);
-          })}
+          // onSubmit={handleSubmit((data, e) => {
+          //   submitData(data, e);
+          // })}
+          onSubmit={submitData}
           encType="multipart/form-data"
         >
           <div className="text-left text-xl text-gray-700 mt-8 font-bold border-b-4 border-corporative-blue inline-flex">
@@ -528,15 +532,17 @@ const FormularioCurriculum = () => {
                   placeholder="Digita tu nombre completo"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={nombre}
-                  {...register("nombre", {
-                    required: "Este campo es requerido",
-                    onChange: (e) => setNombre(e.target.value),
-                  })}
+                  onChange={(e) => setNombre(e.target.value)}
+                  required
+                  // {...register("nombre", {
+                  //   required: "Este campo es requerido",
+                  //   onChange: (e) => setNombre(e.target.value),
+                  // })}
                 />
               </div>
-              <span className="text-xs text-red-500">
+              {/* <span className="text-xs text-red-500">
                 {errors.nombre?.message}
-              </span>
+              </span> */}
             </div>
             <div>
               <label
@@ -583,15 +589,17 @@ const FormularioCurriculum = () => {
                   placeholder="Digita tu numero de documento"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={numeroDocumento}
-                  {...register("numeroDocumento", {
-                    required: "Este campo es requerido",
-                    onChange: (e) => setNumeroDocumento(e.target.value),
-                  })}
+                  onChange={(e) => setNumeroDocumento(e.target.value)}
+                  required
+                  // {...register("numeroDocumento", {
+                  //   required: "Este campo es requerido",
+                  //   onChange: (e) => setNumeroDocumento(e.target.value),
+                  // })}
                 />
               </div>
-              <span className="text-xs text-red-500">
+              {/* <span className="text-xs text-red-500">
                 {errors.numeroDocumento?.message}
-              </span>
+              </span> */}
             </div>
 
             <div>
@@ -609,15 +617,17 @@ const FormularioCurriculum = () => {
                   placeholder="Seleccione su fecha de nacimiento"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={fechaNacimiento}
-                  {...register("fechaNacimiento", {
-                    required: "Este campo es requerido",
-                    onChange: (e) => setFechaNacimiento(e.target.value),
-                  })}
+                  onChange={(e) => setFechaNacimiento(e.target.value)}
+                  required
+                  // {...register("fechaNacimiento", {
+                  //   required: "Este campo es requerido",
+                  //   onChange: (e) => setFechaNacimiento(e.target.value),
+                  // })}
                 />
               </div>
-              <span className="text-xs text-red-500">
+              {/* <span className="text-xs text-red-500">
                 {errors.fechaNacimiento?.message}
-              </span>
+              </span> */}
             </div>
 
             <div>
@@ -635,15 +645,17 @@ const FormularioCurriculum = () => {
                   placeholder="Digite su lugar de nacimiento"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={lugarNacimiento}
-                  {...register("lugarNacimiento", {
-                    required: "Este campo es requerido",
-                    onChange: (e) => setLugarNacimiento(e.target.value),
-                  })}
+                   onChange={(e) => setLugarNacimiento(e.target.value)}
+                   required
+                  // {...register("lugarNacimiento", {
+                  //   required: "Este campo es requerido",
+                  //   onChange: (e) => setLugarNacimiento(e.target.value),
+                  // })}
                 />
               </div>
-              <span className="text-xs text-red-500">
+              {/* <span className="text-xs text-red-500">
                 {errors.lugarNacimiento?.message}
-              </span>
+              </span> */}
             </div>
 
             <div>
@@ -661,15 +673,17 @@ const FormularioCurriculum = () => {
                   placeholder="Digite su número de telefono"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={telefono}
-                  {...register("telefono", {
-                    required: "Este campo es requerido",
-                    onChange: (e) => setTelefono(e.target.value),
-                  })}
+                   onChange={(e) => setTelefono(e.target.value)}
+                   required
+                  // {...register("telefono", {
+                  //   required: "Este campo es requerido",
+                  //   onChange: (e) => setTelefono(e.target.value),
+                  // })}
                 />
               </div>
-              <span className="text-xs text-red-500">
+              {/* <span className="text-xs text-red-500">
                 {errors.telefono?.message}
-              </span>
+              </span> */}
             </div>
 
             <div>
@@ -687,15 +701,17 @@ const FormularioCurriculum = () => {
                   placeholder="Digite su correo electrónico"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={correo}
-                  {...register("correo", {
-                    required: "Este campo es requerido",
-                    onChange: (e) => setCorreo(e.target.value),
-                  })}
+                   onChange={(e) => setCorreo(e.target.value)}
+                   required
+                  // {...register("correo", {
+                  //   required: "Este campo es requerido",
+                  //   onChange: (e) => setCorreo(e.target.value),
+                  // })}
                 />
               </div>
-              <span className="text-xs text-red-500">
+              {/* <span className="text-xs text-red-500">
                 {errors.correo?.message}
-              </span>
+              </span> */}
             </div>
 
             <div>
@@ -713,15 +729,17 @@ const FormularioCurriculum = () => {
                   placeholder="Digite su dirección"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={direccion}
-                  {...register("direccion", {
-                    required: "Este campo es requerido",
-                    onChange: (e) => setDireccion(e.target.value),
-                  })}
+                  onChange={(e) => setDireccion(e.target.value)}
+                  required
+                  // {...register("direccion", {
+                  //   required: "Este campo es requerido",
+                  //   onChange: (e) => setDireccion(e.target.value),
+                  // })}
                 />
               </div>
-              <span className="text-xs text-red-500">
+              {/* <span className="text-xs text-red-500">
                 {errors.direccion?.message}
-              </span>
+              </span> */}
             </div>
 
             <div>
@@ -766,15 +784,17 @@ const FormularioCurriculum = () => {
                   placeholder="Digite el país"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={pais}
-                  {...register("pais", {
-                    required: "Este campo es requerido",
-                    onChange: (e) => setPais(e.target.value),
-                  })}
+                  onChange={(e) => setPais(e.target.value)}
+                  required
+                  // {...register("pais", {
+                  //   required: "Este campo es requerido",
+                  //   onChange: (e) => setPais(e.target.value),
+                  // })}
                 />
               </div>
-              <span className="text-xs text-red-500">
+              {/* <span className="text-xs text-red-500">
                 {errors.pais?.message}
-              </span>
+              </span> */}
             </div>
 
             <div>
@@ -792,15 +812,17 @@ const FormularioCurriculum = () => {
                   placeholder="Digite el departamento"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={departamento}
-                  {...register("departamento", {
-                    required: "Este campo es requerido",
-                    onChange: (e) => setDepartamento(e.target.value),
-                  })}
+                  onChange={(e) => setDepartamento(e.target.value)}
+                  required
+                  // {...register("departamento", {
+                  //   required: "Este campo es requerido",
+                  //   onChange: (e) => setDepartamento(e.target.value),
+                  // })}
                 />
               </div>
-              <span className="text-xs text-red-500">
+              {/* <span className="text-xs text-red-500">
                 {errors.departamento?.message}
-              </span>
+              </span> */}
             </div>
 
             <div>
@@ -818,15 +840,17 @@ const FormularioCurriculum = () => {
                   placeholder="Digite la ciudad"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={ciudad}
-                  {...register("ciudad", {
-                    required: "Este campo es requerido",
-                    onChange: (e) => setCiudad(e.target.value),
-                  })}
+                  onChange={(e) => setCiudad(e.target.value)}
+                  required
+                  // {...register("ciudad", {
+                  //   required: "Este campo es requerido",
+                  //   onChange: (e) => setCiudad(e.target.value),
+                  // })}
                 />
               </div>
-              <span className="text-xs text-red-500">
+              {/* <span className="text-xs text-red-500">
                 {errors.ciudad?.message}
-              </span>
+              </span> */}
             </div>
 
             <div>
@@ -844,15 +868,17 @@ const FormularioCurriculum = () => {
                   placeholder="Digite el numero de hijos"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={numeroHijos}
-                  {...register("numeroHijos", {
-                    required: "Este campo es requerido",
-                    onChange: (e) => setNumeroHijos(e.target.value),
-                  })}
+                  onChange={(e) => setNumeroHijos(e.target.value)}
+                  required
+                  // {...register("numeroHijos", {
+                  //   required: "Este campo es requerido",
+                  //   onChange: (e) => setNumeroHijos(e.target.value),
+                  // })}
                 />
               </div>
-              <span className="text-xs text-red-500">
+              {/* <span className="text-xs text-red-500">
                 {errors.numeroHijos?.message}
-              </span>
+              </span> */}
             </div>
 
             <div>
@@ -870,15 +896,17 @@ const FormularioCurriculum = () => {
                   placeholder="Digite su tipo de sangre"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={tipoSangre}
-                  {...register("tipoSangre", {
-                    required: "Este campo es requerido",
-                    onChange: (e) => setTipoSangre(e.target.value),
-                  })}
+                  onChange={(e) => setTipoSangre(e.target.value)}
+                  required
+                  // {...register("tipoSangre", {
+                  //   required: "Este campo es requerido",
+                  //   onChange: (e) => setTipoSangre(e.target.value),
+                  // })}
                 />
               </div>
-              <span className="text-xs text-red-500">
+              {/* <span className="text-xs text-red-500">
                 {errors.tipoSangre?.message}
-              </span>
+              </span> */}
             </div>
           </div>
           <div className="text-left text-xl text-gray-700 mt-8 font-bold border-b-4 border-corporative-blue inline-flex pt-3">
@@ -934,15 +962,17 @@ const FormularioCurriculum = () => {
                   placeholder="Digita su ultimo titulo profesional"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={titulo}
-                  {...register("titulo", {
-                    required: "Este campo es requerido",
-                    onChange: (e) => setTitulo(e.target.value),
-                  })}
+                  onChange={(e) => setTitulo(e.target.value)}
+                  required
+                  // {...register("titulo", {
+                  //   required: "Este campo es requerido",
+                  //   onChange: (e) => setTitulo(e.target.value),
+                  // })}
                 />
               </div>
-              <span className="text-xs text-red-500">
+              {/* <span className="text-xs text-red-500">
                 {errors.titulo?.message}
-              </span>
+              </span> */}
             </div>
             <div>
               <label
@@ -959,15 +989,17 @@ const FormularioCurriculum = () => {
                   placeholder="Digite año del titulo"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={anioTitulo}
-                  {...register("anioTitulo", {
-                    required: "Este campo es requerido",
-                    onChange: (e) => setAnioTitulo(e.target.value),
-                  })}
+                  onChange={(e) => setAnioTitulo(e.target.value)}
+                  required
+                  // {...register("anioTitulo", {
+                  //   required: "Este campo es requerido",
+                  //   onChange: (e) => setAnioTitulo(e.target.value),
+                  // })}
                 />
               </div>
-              <span className="text-xs text-red-500">
+              {/* <span className="text-xs text-red-500">
                 {errors.anioTitulo?.message}
-              </span>
+              </span> */}
             </div>
 
             <div>
@@ -985,15 +1017,17 @@ const FormularioCurriculum = () => {
                   placeholder="Digite institución"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={institucionTitulo}
-                  {...register("institucionTitulo", {
-                    required: "Este campo es requerido",
-                    onChange: (e) => setInstitucionTitulo(e.target.value),
-                  })}
+                  onChange={(e) => setInstitucionTitulo(e.target.value)}
+                  required
+                  // {...register("institucionTitulo", {
+                  //   required: "Este campo es requerido",
+                  //   onChange: (e) => setInstitucionTitulo(e.target.value),
+                  // })}
                 />
               </div>
-              <span className="text-xs text-red-500">
+              {/* <span className="text-xs text-red-500">
                 {errors.institucionTitulo?.message}
-              </span>
+              </span> */}
             </div>
           </div>
           <div className="text-left text-xl text-gray-700 mt-8 font-bold border-b-4 border-corporative-blue inline-flex pt-3">
@@ -1017,15 +1051,17 @@ const FormularioCurriculum = () => {
                   placeholder="Digita la ultima empresa donde laboró"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={empresaExp}
-                  {...register("empresaExp", {
-                    required: "Este campo es requerido",
-                    onChange: (e) => setEmpresaExp(e.target.value),
-                  })}
+                  onChange={(e) => setEmpresaExp(e.target.value)}
+                  required
+                  // {...register("empresaExp", {
+                  //   required: "Este campo es requerido",
+                  //   onChange: (e) => setEmpresaExp(e.target.value),
+                  // })}
                 />
               </div>
-              <span className="text-xs text-red-500">
+              {/* <span className="text-xs text-red-500">
                 {errors.empresaExp?.message}
-              </span>
+              </span> */}
             </div>
             <div>
               <label
@@ -1042,15 +1078,17 @@ const FormularioCurriculum = () => {
                   placeholder="Seleccione su fecha de inicio"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={fechaInicioExp}
-                  {...register("fechaInicioExp", {
-                    required: "Este campo es requerido",
-                    onChange: (e) => setFechaInicioExp(e.target.value),
-                  })}
+                  onChange={(e) => setFechaInicioExp(e.target.value)}
+                  required
+                  // {...register("fechaInicioExp", {
+                  //   required: "Este campo es requerido",
+                  //   onChange: (e) => setFechaInicioExp(e.target.value),
+                  // })}
                 />
               </div>
-              <span className="text-xs text-red-500">
+              {/* <span className="text-xs text-red-500">
                 {errors.fechaInicioExp?.message}
-              </span>
+              </span> */}
             </div>
             <div>
               <label
@@ -1148,15 +1186,17 @@ const FormularioCurriculum = () => {
                   placeholder="Digita nombre de la referencia 1"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={nombreRefA}
-                  {...register("nombreRefA", {
-                    required: "Este campo es requerido",
-                    onChange: (e) => setNombreRefA(e.target.value),
-                  })}
+                  onChange={(e) => setNombreRefA(e.target.value)}
+                  required
+                  // {...register("nombreRefA", {
+                  //   required: "Este campo es requerido",
+                  //   onChange: (e) => setNombreRefA(e.target.value),
+                  // })}
                 />
               </div>
-              <span className="text-xs text-red-500">
+              {/* <span className="text-xs text-red-500">
                 {errors.nombreRefA?.message}
-              </span>
+              </span> */}
             </div>
             <div>
               <label
@@ -1174,15 +1214,17 @@ const FormularioCurriculum = () => {
                   placeholder="Digita telefono de la referencia 1"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={telefonoRefA}
-                  {...register("telefonoRefA", {
-                    required: "Este campo es requerido",
-                    onChange: (e) => setTelefonoRefA(e.target.value),
-                  })}
+                  onChange={(e) => setTelefonoRefA(e.target.value)}
+                  required
+                  // {...register("telefonoRefA", {
+                  //   required: "Este campo es requerido",
+                  //   onChange: (e) => setTelefonoRefA(e.target.value),
+                  // })}
                 />
               </div>
-              <span className="text-xs text-red-500">
+              {/* <span className="text-xs text-red-500">
                 {errors.telefonoRefA?.message}
-              </span>
+              </span> */}
             </div>
             <div>
               <label
@@ -1200,15 +1242,17 @@ const FormularioCurriculum = () => {
                   placeholder="Digita correo de la referencia 1"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={correoRefA}
-                  {...register("correoRefA", {
-                    required: "Este campo es requerido",
-                    onChange: (e) => setCorreoRefA(e.target.value),
-                  })}
+                  onChange={(e) => setCorreoRefA(e.target.value)}
+                  required
+                  // {...register("correoRefA", {
+                  //   required: "Este campo es requerido",
+                  //   onChange: (e) => setCorreoRefA(e.target.value),
+                  // })}
                 />
               </div>
-              <span className="text-xs text-red-500">
+              {/* <span className="text-xs text-red-500">
                 {errors.correoRefA?.message}
-              </span>
+              </span> */}
             </div>
           </div>
           <div className="border-b border-gray-200 pb-2">
