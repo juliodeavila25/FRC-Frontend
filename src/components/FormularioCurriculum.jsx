@@ -1346,8 +1346,19 @@ const FormularioCurriculum = () => {
                   value={eps}
                   required
                 >
-                  <option value="Sura">Sura</option>
+                  <option value="Asociacion Mutual Ser Eps">Asociacion Mutual Ser Eps</option>
+                  <option value="Cajacopi Eps">Cajacopi Eps</option>
+                  <option value="Comparta">Comparta</option>
+                  <option value="Compensar">Compensar</option>
+                  <option value="E.P.S. Sanitas">E.P.S. Sanitas</option>
+                  <option value="E.P.S. Sura">E.P.S. Sura</option>
+                  <option value="Eps Coosalud Ess">Eps Coosalud Ess</option>
+                  <option value="Eps S Ambuc">Eps S Ambuc</option>
+                  <option value="Famisanar">Famisanar</option>
+                  <option value="Nueva Eps">Nueva Eps</option>
                   <option value="Salud Total">Salud Total</option>
+                  <option value="Salud Vida Eps">Salud Vida Eps</option>
+                  <option value="Sura Eps">Sura Eps</option>
                 </select>
               </div>
             </div>
@@ -1421,8 +1432,11 @@ const FormularioCurriculum = () => {
                   }}
                   value={pension}
                 >
-                  <option value="Protección">Protección</option>
+                  <option value="Proteccion">Proteccion</option>
                   <option value="Porvenir">Porvenir</option>
+                  <option value="Colpensiones">Colpensiones</option>
+                  <option value="Colfondos">Colfondos</option>
+                    
                 </select>
               </div>
             </div>

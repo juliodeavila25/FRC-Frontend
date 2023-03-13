@@ -18,6 +18,7 @@ const navigation = [
   {
     name: "Inicio",
     href: "/",
+    
   },
   {
     name: "Documentos",
@@ -66,10 +67,10 @@ export default function DataPublic() {
   const [headers, setHeaders] = useState([
     {
       Header: "Código",
-      accessor: "codigo",
+      accessor: "codigo"
     },
-    { Header: "Proceso", accessor: "proceso" },
-    { Header: "Titulo", accessor: "titulo" },
+    { Header: "Proceso", accessor: "proceso"},
+    { Header: "Titulo", accessor: "titulo"},
     {
       Header: "Fecha de creación",
       accessor: "createdAt",
@@ -80,7 +81,7 @@ export default function DataPublic() {
     {
       Header: " ",
       accessor: (originalRow, rowIndex) => (
-        <div className="flex space-x-2 items-center">
+        <div className="flex space-x-2 items-center ">
           <button
             className="text-blue-500 hover:text-blue-900"
             onClick={() => activateModal(originalRow)}
@@ -141,7 +142,7 @@ export default function DataPublic() {
         <Disclosure as="nav" className="border-b border-gray-200 bg-white">
           {({ open }) => (
             <>
-              <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+              <div className="mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex h-16 justify-between">
                   <div className="flex">
                     <div className="flex flex-shrink-0 items-center">

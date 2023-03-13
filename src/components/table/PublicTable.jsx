@@ -9,6 +9,7 @@ import { BeatLoader } from "react-spinners";
 import GlobalFilter from "./GlobalFilter";
 import { Link } from "react-router-dom";
 
+
 const PublicTable = ({ data, columns }) => {
   //const columns = useMemo(() => headers, []);
 
@@ -72,6 +73,7 @@ const PublicTable = ({ data, columns }) => {
                           {...column.getHeaderProps(
                             column.getSortByToggleProps()
                           )}
+                          
                         >
                           <div className="flex items-center">
                             {column.render("Header")}
@@ -127,11 +129,13 @@ const PublicTable = ({ data, columns }) => {
                     return (
                       <tr {...row.getRowProps()}>
                         {row.cells.map((cell) => {
+                         
                           return (
                             <td
-                              className="whitespace-nowrap px-3 py-4 text-sm text-gray-500 "
+                              className="whitespace-nowrap px-3 py-4 text-sm text-gray-500 truncate "
                               {...cell.getCellProps()}
                             >
+                               {console.log(cell.render("Cell"))}
                               {cell.value === "activo" ? (
                                 <span className="capitalize inline-flex rounded-full bg-green-100 px-2 text-xs font-semibold leading-5 text-green-800 ">
                                   {cell.render("Cell")}
@@ -141,7 +145,12 @@ const PublicTable = ({ data, columns }) => {
                                   {cell.render("Cell")}
                                 </span>
                               ) : (
-                                cell.render("Cell")
+                                 <span className="w-auto max-w-sm truncate flex ">
+                                   <div className="text-ellipsis overflow-hidden">
+                                       { cell.render("Cell")}
+                                   </div>
+                                 
+                                </span>
                               )}
                             </td>
                           );
