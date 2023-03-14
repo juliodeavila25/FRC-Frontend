@@ -168,7 +168,7 @@ const Sidebar = () => {
                 <div className="mt-5 h-0 flex-1 overflow-y-auto">
                   <nav className="px-2">
                     <div className="space-y-1">
-                      {auth?.userType[0] === "aspirante" &&
+                      {auth?.userType[0] === "aspirante" || auth?.userType[0] === "colaborador" ?
                         navigation_aspirante.map((item) => (
                           <Link
                             key={item.name}
@@ -192,7 +192,7 @@ const Sidebar = () => {
                             />
                             {item.name}
                           </Link>
-                        ))}
+                        )):""}
 
                       {auth?.userType[0] === "recursos_humanos" &&
                         navigation_recursos_humanos.map((item) => (
@@ -444,7 +444,7 @@ const Sidebar = () => {
           {/* Navigation */}
           <nav className="mt-6 px-3">
             <div className="space-y-1">
-              {auth?.userType[0] === "aspirante" &&
+              {auth?.userType[0] === "aspirante" || auth?.userType[0] === "colaborador" ? 
                 navigation_aspirante.map((item) => (
                   <Link
                     key={item.name}
@@ -468,7 +468,7 @@ const Sidebar = () => {
                     />
                     {item.name}
                   </Link>
-                ))}
+                )):""}
 
               {auth?.userType[0] === "recursos_humanos" &&
                 navigation_recursos_humanos.map((item) => (

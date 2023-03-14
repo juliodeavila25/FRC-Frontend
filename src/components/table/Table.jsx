@@ -141,7 +141,12 @@ const Table = ({ data, columns, href, title, titleButton }) => {
                                   {cell.render("Cell")}
                                 </span>
                               ) : (
-                                cell.render("Cell")
+                                <span className="w-auto max-w-sm truncate flex ">
+                                   <div className="text-ellipsis overflow-hidden">
+                                       { cell.render("Cell")}
+                                   </div>
+                                 
+                                </span>
                               )}
                             </td>
                           );

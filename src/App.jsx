@@ -59,7 +59,7 @@ function App() {
                     path="/dashboard"
                     element={
                       <RutaProtegida
-                        allowedRoles={["aspirante", "recursos_humanos"]}
+                        allowedRoles={["aspirante", "recursos_humanos", "colaborador"]}
                       />
                     }
                   >
@@ -68,7 +68,7 @@ function App() {
 
                   <Route
                     path="/curriculum"
-                    element={<RutaProtegida allowedRoles={["aspirante"]} />}
+                    element={<RutaProtegida allowedRoles={["aspirante", "colaborador", "recursos_humanos"]} />}
                   >
                     <Route
                       path="crear-curriculum"
@@ -82,7 +82,7 @@ function App() {
 
                   <Route
                     path="/ofertas"
-                    element={<RutaProtegida allowedRoles={["aspirante"]} />}
+                    element={<RutaProtegida allowedRoles={["aspirante", "colaborador"]} />}
                   >
                     <Route index element={<Ofertas />} />
                   </Route>
@@ -91,7 +91,7 @@ function App() {
                     path="/solicitudes"
                     element={
                       <RutaProtegida
-                        allowedRoles={["aspirante", "recursos_humanos"]}
+                        allowedRoles={["recursos_humanos", "colaborador"]}
                       />
                     }
                   >
