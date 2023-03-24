@@ -1,17 +1,21 @@
 import { useState, useEffect, createContext } from "react";
 
 import clienteAxios from "../config/clienteAxios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
+
 
 const NominasContext = createContext();
 
 const NominasProvider = ({ children }) => {
   const [nomina, setNomina] = useState([]);
+  const [nominas, setNominas] = useState([]);
   const [alerta, setAlerta] = useState({});
   const [cargandoData, setCargando] = useState(false);
   const navigate = useNavigate();
   const { auth } = useAuth();
+
+
 
   const mostrarAlerta = (alerta) => {
     setAlerta(alerta);
@@ -19,20 +23,23 @@ const NominasProvider = ({ children }) => {
       setAlerta({});
     }, 5000);
   };
-  /*
-  useEffect(() => {
 
+  useEffect(() => {
   const obtenerNominas = async () => {
     try {
+      const identificacion = auth.documento;
+      
       const token = localStorage.getItem("token");
-      if (!token) return;
+      if (!token || !identificacion) return;
       const config = {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
       };
-      const { data } = await clienteAxios("/nominas", config);
+      console.log(identificacion)
+      const { data } = await clienteAxios.get("/nominas/obtener_moninas", config);
+      console.log(data)
       setNominas(data);
     } catch (error) {
       console.log(error);
@@ -40,9 +47,12 @@ const NominasProvider = ({ children }) => {
   };
   obtenerNominas();
   }, [auth]);
- */
-  const obtenerNomina = async (id) => {
-    console.log(id);
+
+
+
+  const obtenerNomina = async (identificacion, periodo) => {
+    
+ 
     const date = new Date();
     let day = date.getDate();
     let month = date.getMonth() + 1;
@@ -313,6 +323,7 @@ const NominasProvider = ({ children }) => {
     setCargando(true);
     //console.log(numeroALetras(3500000));
     //console.log(datos);
+    
     try {
       const token = localStorage.getItem("token");
       if (!token) return;
@@ -322,7 +333,9 @@ const NominasProvider = ({ children }) => {
           Authorization: `Bearer ${token}`,
         },
       };
-      const { data } = await clienteAxios.get(`/nominas/obtener/${id}`, config);
+
+      console.log(periodo)
+      const { data } = await clienteAxios.get(`/nominas/obtener/${identificacion}/${periodo}`, config);
       //Documento      
       data["identificacion_format"] = documentFormat(data.identificacion);
       //Pagos
@@ -369,7 +382,7 @@ const NominasProvider = ({ children }) => {
     <NominasContext.Provider
       value={{
         alerta,
-        //nominas,
+        nominas,
         nomina,
         cargandoData,
         obtenerNomina,

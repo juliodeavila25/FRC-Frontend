@@ -94,7 +94,7 @@ const Sidebar = () => {
     },
     {
       name: "Desprendible Nómina",
-      href: "/solicitudes/certificado-desprendible",
+      href: "/solicitudes/listado-certificado-desprendible",
       icon: DocumentCheckIcon,
       current: location.pathname.includes("/solicitudes") ? true : false,
     },
