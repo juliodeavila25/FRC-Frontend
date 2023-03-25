@@ -29,9 +29,9 @@ const CertificadoLaboral = () => {
     console.log(curriculum);
   }
 
-
-    const data = nominas[0]
-   const date = new Date();
+  if(Array.isArray(nominas) && nominas.length > 0){
+  const data = nominas[0]
+    const date = new Date();
     let day = date.getDate();
     let month = date.getMonth() + 1;
     let year = date.getFullYear();
@@ -331,16 +331,18 @@ const CertificadoLaboral = () => {
       data["mes_letras"] = mes_letras_trim;
       data["anio"] = year;
       data["anio_letras"] = anio_letras_trim;
+  }
+  
 
-   if (cargandoData) return <BeatLoader color="#36d7b7" />;
+   if (cargandoData && !curriculum) return <BeatLoader color="#36d7b7" />;
    console.log(cargandoData)
   return (
     <>
-      {Object.keys(curriculum).length !== 0 && (
+      {Object.keys(curriculum).length !== 0 &&  Array.isArray(nominas) && nominas.length > 0 ?(
         <PDFViewer style={{ width: "100%", height: "90vh" }}>
           <PdfCertificado data={nominas[0]} curriculum={curriculum} />
         </PDFViewer>
-      )}
+      ): null}
     </>
   );
 };

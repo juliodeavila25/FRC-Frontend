@@ -26,6 +26,7 @@ const NominasProvider = ({ children }) => {
 
   useEffect(() => {
   const obtenerNominas = async () => {
+    setCargando(true);
     try {
       const identificacion = auth.documento;
       
@@ -41,9 +42,11 @@ const NominasProvider = ({ children }) => {
       const { data } = await clienteAxios.get("/nominas/obtener_moninas", config);
       console.log(data)
       setNominas(data);
+      
     } catch (error) {
       console.log(error);
     }
+    setCargando(false);
   };
   obtenerNominas();
   }, [auth]);
