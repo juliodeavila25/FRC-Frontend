@@ -26,6 +26,7 @@ import CrearDocumento from "./pages/documents/CrearDocumento";
 import EditarDocumento from "./pages/documents/EditarDocumento";
 import CertificadoDesprendible from "./pages/CertificadoDesprendible";
 import DataPublic from "./pages/public/DataPublic";
+import ListarCertificadoDesprendible from "./pages/ListarCertificadoDesprendible";
 function App() {
   return (
     <BrowserRouter>
@@ -95,14 +96,20 @@ function App() {
                       />
                     }
                   >
+                  
                     <Route
                       path="certificado-laboral"
                       element={<CertificadoLaboral />}
                     />
 
                     <Route
-                      path="certificado-desprendible"
+                      path="certificado-desprendible/:id/:periodo"
                       element={<CertificadoDesprendible />}
+                    />
+
+                    <Route
+                      path="listado-certificado-desprendible"
+                      element={<ListarCertificadoDesprendible />}
                     />
                   </Route>
 

@@ -4,21 +4,23 @@ import PdfCertificadoNomina from "../components/PdfCertificadoNomina";
 import useNominas from "../hooks/useNominas"
 import useAuth from "../hooks/useAuth";
 import useCurriculum from "../hooks/useCurriculum";
-
+import { BeatLoader } from "react-spinners";
 const CertificadoDesprendible = () => {
  /* const [data, setData] = useState({
     nombre: "Andres Puello",
   });*/
   const { auth, cargando } = useAuth();
-  const { nomina, obtenerNomina } = useNominas();
+  const {cargandoData, nomina, obtenerNomina } = useNominas();
   const { curriculum, obtenerCurriculum } = useCurriculum();
 
   useEffect(()=>{
-    obtenerNomina(auth.documento);
+    const periodo = localStorage.getItem("periodo");
+    obtenerNomina(auth.documento, periodo);
     obtenerCurriculum(auth._id);
   },[]);
-  console.log(nomina);
-  console.log(curriculum);
+
+
+   if (cargandoData) return <BeatLoader color="#36d7b7" />;
   return (
     <>
       {Object.keys(curriculum).length !== 0 && (
