@@ -129,7 +129,7 @@ const FormularioNuevoDocumento = () => {
                 />
               </div>
             </div>
-            <div>
+             {/* <div>
               <label
                 htmlFor="proceso"
                 className="block text-sm font-medium text-gray-700"
@@ -148,6 +148,39 @@ const FormularioNuevoDocumento = () => {
                   onChange={(e) => setProceso(e.target.value)}
                   required="true"
                 />
+              </div>
+            </div> */}
+            <div>
+              <label
+                htmlFor="proceso"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Proceso <span className="text-red-700">*</span>
+              </label>
+              <div className="mt-1">
+                <select
+                  id="proceso"
+                  name="proceso"
+                  placeholder="Selecciona el proceso"
+                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                  onChange={(e) => {
+                    const selectedDocumentType = e.target.value;
+
+                    setProceso(selectedDocumentType);
+                  }}
+                  value={proceso}
+                >
+                  <option value="Atención en Salud">
+                   Atención en Salud  
+                  </option>
+                  <option value="Apoyo Administratico y Operativo">
+                    Atension en Salud  
+                  </option>
+                  <option value="Mejoramiento Continuo">
+                    Mejoramiento Continuo
+                  </option>
+                  <option value="Direccionamiento Estrategico">Direccionamiento Estrategico</option>
+                </select>
               </div>
             </div>
 
@@ -192,7 +225,7 @@ const FormularioNuevoDocumento = () => {
                 />
               </div>
             </div>
-
+            {/* 
             <div>
               <label
                 htmlFor="tipo"
@@ -211,6 +244,36 @@ const FormularioNuevoDocumento = () => {
                   onChange={(e) => setTipo(e.target.value)}
                   required="true"
                 />
+              </div>
+            </div>
+                  */}
+            <div>
+              <label
+                htmlFor="tipo"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Tipo <span className="text-red-700">*</span>
+              </label>
+              <div className="mt-1">
+                <select
+                  id="tipo"
+                  name="tipo"
+                  placeholder="Selecciona el tipo"
+                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                  onChange={(e) => {
+                    const selectedDocumentType = e.target.value;
+
+                    setTipo(selectedDocumentType);
+                  }}
+                  value={tipo}
+                >
+                  <option value="Documento">
+                    Documento 
+                  </option>
+                  <option value="Formato">
+                    Formato  
+                  </option>
+                </select>
               </div>
             </div>
 
@@ -298,7 +361,7 @@ const FormularioNuevoDocumento = () => {
                 />
               </div>
             </div>
-
+                  {/* 
             <div>
               <label
                 htmlFor="fuente"
@@ -317,6 +380,35 @@ const FormularioNuevoDocumento = () => {
                   onChange={(e) => setFuente(e.target.value)}
                   required="true"
                 />
+              </div>
+            </div>
+*/}
+            <div>
+              <label
+                htmlFor="fuente"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Fuente <span className="text-red-700">*</span>
+              </label>
+              <div className="mt-1">
+                <select
+                  id="fuente"
+                  name="fuente"
+                  placeholder="Selecciona el fuente"
+                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                  onChange={(e) => {
+                    const selectedDocumentType = e.target.value;
+                    setFuente(selectedDocumentType);
+                  }}
+                  value={fuente}
+                >
+                  <option value="Documento interno">
+                    Documento interno  
+                  </option>
+                  <option value="Documento Externo">
+                    Documento Externo   
+                  </option>
+                </select>
               </div>
             </div>
 

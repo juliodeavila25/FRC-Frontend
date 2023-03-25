@@ -1166,8 +1166,8 @@ const FormularioCurriculum = () => {
           </div>
           <div className="border-b border-gray-200 pb-2">
             <h6 className="text-sm font-medium leading-6 text-gray-900">
-              Referencia 1
-            </h6>
+              Referencia 1 <span className="italic"> (Familiar)</span>
+            </h6>            
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             <div>
@@ -1257,7 +1257,7 @@ const FormularioCurriculum = () => {
           </div>
           <div className="border-b border-gray-200 pb-2">
             <h6 className="text-sm font-medium leading-6 text-gray-900">
-              Referencia 2
+              Referencia 2 <span className="italic"> (Personal)</span>
             </h6>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
@@ -1653,26 +1653,7 @@ const FormularioCurriculum = () => {
                   onChange={(e) => setNumeroRut(e.target.value)}
                 />
               </div>
-            </div>
-            <div>
-              <label
-                htmlFor="fechaCorte"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Fecha Corte
-              </label>
-              <div className="mt-1">
-                <input
-                  id="fechaCorte"
-                  name="fechaCorte"
-                  type="date"
-                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                  value={fechaCorte}
-                  onChange={(e) => setFechaCorte(e.target.value)}
-                />
-              </div>
-            </div>
-
+            </div>           
             <div>
               <label
                 htmlFor="ingresosAnuales"
@@ -1692,7 +1673,24 @@ const FormularioCurriculum = () => {
                 />
               </div>
             </div>
-
+            <div className="invisible">
+              <label
+                htmlFor="fechaCorte"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Fecha Corte
+              </label>
+              <div className="mt-1">
+                <input
+                  id="fechaCorte"
+                  name="fechaCorte"
+                  type="date"
+                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                  value={fechaCorte}
+                  onChange={(e) => setFechaCorte(e.target.value)}
+                />
+              </div>
+            </div>         
             <div>
               <label
                 htmlFor="egresosAnuales"
@@ -2163,7 +2161,7 @@ const FormularioCurriculum = () => {
                   checked={otras}
                   onChange={handleChangeOtrasOperaciones}
                 />
-                <label htmlFor="otras">Otras</label>
+                <label htmlFor="otras">Ninguna</label>
               </div>
             </div>
 

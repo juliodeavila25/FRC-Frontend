@@ -8,6 +8,74 @@ import {
   Image,
 } from "@react-pdf/renderer";
 
+const styles_array = StyleSheet.create({
+  /*table: {
+    width: '100%',
+  },*/
+  row: {
+    display: 'flex',
+    flexDirection: 'row',
+    borderTop: '1px solid #EEE',
+    paddingTop: 8,
+    paddingBottom: 8,
+  },
+  header: {
+    borderTop: 'none',
+  },
+  bold: {
+    fontWeight: 'bold',
+    fontSize: 9,
+  },
+  // So Declarative and unDRY 👌
+  row1: {
+    width: '25%',
+  },
+  row2: {
+    width: '25%',
+  },
+  row3: {
+    width: '25%',
+  },
+  row4: {
+    width: '25%',
+  },
+  table: { 
+    display: "table", 
+    width: "auto", 
+    borderStyle: "solid", 
+    borderWidth: 1, 
+    borderRightWidth: 0, 
+    borderBottomWidth: 0 
+  },
+  rowView: {
+    display: 'flex', 
+    flexDirection: 'row', 
+    borderTop: '1px solid #EEE', 
+    paddingTop: 8, 
+    paddingBottom: 8, 
+    textAlign: "center"
+  },
+  tableRow: { 
+    margin: "auto", 
+    flexDirection: "row" 
+  }, 
+  tableCol: { 
+    width: "25%", 
+    borderStyle: "solid", 
+    borderWidth: 1, 
+    borderLeftWidth: 0, 
+    borderTopWidth: 0,
+    padding: 4,
+  }, 
+  tableCell: { 
+    margin: "auto", 
+    marginTop: 5, 
+    fontSize: 10,
+    padding: 4,
+    color: "#1a245c",
+  }
+})
+
 const styles_table = StyleSheet.create({
   page: { 
     flexDirection: "column",
@@ -145,7 +213,29 @@ const styles = StyleSheet.create({
 });
 
 const PdfCertificadoNomina = ({ data, curriculum }) => {
-  console.log(curriculum);
+  //console.log(curriculum);
+  const data_table = [{
+        "codigo": 6,
+        "concepto": "APORTE SALUD ",
+        "tipo": "Descuento ",
+        "valor": -127640
+    },
+    {
+        "codigo": 7,
+        "concepto": "APORTE PENSION ",
+        "tipo": "Descuento ",
+        "valor": -127640
+    },
+    {
+        "codigo": 1,
+        "concepto": "SUELDO ",
+        "tipo": "Pago ",
+        "valor": 3191000
+    }];
+    let USDollar = new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+    });
   return (   
     <Document>
       <Page style={styles_table.page} size="A4" wrap>
@@ -194,40 +284,40 @@ const PdfCertificadoNomina = ({ data, curriculum }) => {
               </View>
               <View style={[styles_table.tableText, { paddingLeft: '20' }]}>
                 <View style={[styles_table.row,  {flexBasis: 25}]}>
-                  <Text style={[styles_table.headerText, styles_table.cellCenter]}>SUELDO</Text>
-                  <Text style={[styles_table.headerText, styles_table.cellCenter]}>{ data.sueldo_basico_format }</Text>
-                  <Text style={[styles_table.headerText, styles_table.cellCenter]}>APORTE SALUD</Text>
-                  <Text style={[styles_table.headerText, styles_table.cellCenter]}>{data.apt_salud_format}</Text>
+                  <Text style={[styles_table.headerText, styles_table.cellCenter, { width: 150 }]}>SUELDO</Text>
+                  <Text style={[styles_table.headerText, styles_table.cellCenter, { width: 50 }]}>{ data.sueldo_basico_format }</Text>
+                  <Text style={[styles_table.headerText, styles_table.cellCenter, { width: 150 }]}>APORTE SALUD</Text>
+                  <Text style={[styles_table.headerText, styles_table.cellCenter, { width: 50 }]}>{data.apt_salud_format}</Text>
                 </View>
                 <View style={[styles_table.row,  {flexBasis: 25}]}>
-                  <Text style={[styles_table.headerText, styles_table.cellCenter]}>AUX TRANSPORTE</Text>
-                  <Text style={[styles_table.headerText, styles_table.cellCenter]}>{ data.aux_transp_format }</Text>
-                  <Text style={[styles_table.headerText, styles_table.cellCenter]}>APORTE PENSION</Text>
-                  <Text style={[styles_table.headerText, styles_table.cellCenter]}>{data.apt_pension_format}</Text>
+                  <Text style={[styles_table.headerText, styles_table.cellCenter, { width: 150 }]}>AUX TRANSPORTE</Text>
+                  <Text style={[styles_table.headerText, styles_table.cellCenter, { width: 50 }]}>{ data.aux_transp_format }</Text>
+                  <Text style={[styles_table.headerText, styles_table.cellCenter, { width: 150 }]}>APORTE PENSION</Text>
+                  <Text style={[styles_table.headerText, styles_table.cellCenter, { width: 50 }]}>{data.apt_pension_format}</Text>
                 </View>
                 <View style={[styles_table.row,  {flexBasis: 30}]}>
-                  <Text style={[styles_table.headerText, styles_table.cellCenter]}>HORAS EXTRAS</Text>
-                  <Text style={[styles_table.headerText, styles_table.cellCenter]}>{ data.horas_extras_format }</Text>
-                  <Text style={[styles_table.headerText, styles_table.cellCenter]}>RETENCIÓN. FUENTE</Text>
-                  <Text style={[styles_table.headerText, styles_table.cellCenter]}>{data.ret_fuente_format}</Text>
+                  <Text style={[styles_table.headerText, styles_table.cellCenter, { width: 150 }]}>HORAS EXTRAS</Text>
+                  <Text style={[styles_table.headerText, styles_table.cellCenter, { width: 50 }]}>{ data.horas_extras_format }</Text>
+                  <Text style={[styles_table.headerText, styles_table.cellCenter, { width: 150 }]}>RETENCIÓN. FUENTE</Text>
+                  <Text style={[styles_table.headerText, styles_table.cellCenter, { width: 50 }]}>{data.ret_fuente_format}</Text>
                 </View>
                 <View style={[styles_table.row,  {flexBasis: 30}]}>
-                  <Text style={[styles_table.headerText, styles_table.cellCenter]}>RECARGO NOCTURNO</Text>
-                  <Text style={[styles_table.headerText, styles_table.cellCenter]}>{ data.rec_nocturno_format }</Text>
-                  <Text style={[styles_table.headerText, styles_table.cellCenter]}>OTROS DESCUENTOS</Text>
-                  <Text style={[styles_table.headerText, styles_table.cellCenter]}>{data.otros_descuentos_format}</Text>
+                  <Text style={[styles_table.headerText, styles_table.cellCenter, { width: 150 }]}>RECARGO NOCTURNO</Text>
+                  <Text style={[styles_table.headerText, styles_table.cellCenter, { width: 50 }]}>{ data.rec_nocturno_format }</Text>
+                  <Text style={[styles_table.headerText, styles_table.cellCenter, { width: 150 }]}>OTROS DESCUENTOS</Text>
+                  <Text style={[styles_table.headerText, styles_table.cellCenter, { width: 50 }]}>{data.otros_descuentos_format}</Text>
                 </View>
                 <View style={[styles_table.row,  {flexBasis: 35}]}>
-                  <Text style={[styles_table.headerText, styles_table.cellCenter]}>AUXILIOS</Text>
-                  <Text style={[styles_table.headerText, styles_table.cellCenter]}>{ data.auxilios_format }</Text>
-                  <Text style={[styles_table.headerText, styles_table.cellCenter]}></Text>
-                  <Text style={[styles_table.headerText, styles_table.cellCenter]}></Text>
+                  <Text style={[styles_table.headerText, styles_table.cellCenter, { width: 150 }]}>AUXILIOS</Text>
+                  <Text style={[styles_table.headerText, styles_table.cellCenter, { width: 50 }]}>{ data.auxilios_format }</Text>
+                  <Text style={[styles_table.headerText, styles_table.cellCenter, { width: 150 }]}></Text>
+                  <Text style={[styles_table.headerText, styles_table.cellCenter, { width: 50 }]}></Text>
                 </View>
                 <View style={[styles_table.row,  {flexBasis: 35}]}>
-                  <Text style={[styles_table.headerText, styles_table.cellCenter]}>OTROS PAGOS</Text>
-                  <Text style={[styles_table.headerText, styles_table.cellCenter]}>{ data.otros_pagos_format }</Text>
-                  <Text style={[styles_table.headerText, styles_table.cellCenter]}></Text>
-                  <Text style={[styles_table.headerText, styles_table.cellCenter]}></Text>
+                  <Text style={[styles_table.headerText, styles_table.cellCenter, { width: 150 }]}>OTROS PAGOS</Text>
+                  <Text style={[styles_table.headerText, styles_table.cellCenter, { width: 50 }]}>{ data.otros_pagos_format }</Text>
+                  <Text style={[styles_table.headerText, styles_table.cellCenter, { width: 150 }]}></Text>
+                  <Text style={[styles_table.headerText, styles_table.cellCenter, { width: 50 }]}></Text>
                 </View>
               </View>            
               <View style={[styles_table.rowPaddingBottom]}></View>      
@@ -245,6 +335,40 @@ const PdfCertificadoNomina = ({ data, curriculum }) => {
               </View>
         </View> 
       </Page>    
+      <Page style={styles_table.page} size="A4" wrap>
+      <View style={styles_table.table}>
+          <View style={styles_array.tableRow}>
+            <View style={styles_array.tableCol}> 
+              <Text style={styles_array.tableCell}>Codigo</Text> 
+            </View> 
+            <View style={styles_array.tableCol}> 
+              <Text style={styles_array.tableCell}>Concepto</Text> 
+            </View> 
+            <View style={styles_array.tableCol}> 
+              <Text style={styles_array.tableCell}>Tipo</Text> 
+            </View> 
+            <View style={styles_array.tableCol}> 
+              <Text style={styles_array.tableCell}>Valor</Text> 
+            </View> 
+          </View>
+          {data_table.map((row, i) => (
+            <View key={i} style={styles_array.tableRow} wrap={false}>
+              <Text style={styles_array.tableCol}>
+                <Text style={styles_array.tableCell}>{row.codigo}</Text>
+              </Text>              
+              <Text style={styles_array.tableCol}>
+                <Text style={styles_array.tableCell}>{row.concepto}</Text>              
+              </Text>
+              <Text style={styles_array.tableCol}>
+                <Text style={styles_array.tableCell}>{row.tipo}</Text>
+              </Text>
+              <Text style={styles_array.tableCol}>
+                <Text style={styles_array.tableCell}>{USDollar.format(row.valor)} </Text>
+              </Text>
+            </View>
+          ))}
+        </View>
+      </Page>
     </Document>
   );
 };
