@@ -12,7 +12,8 @@ const CurriculumProvider = ({ children }) => {
   const [cargandoData, setCargando] = useState(false);
   const navigate = useNavigate();
   const { auth } = useAuth();
-
+  
+  console.log(auth)
   const mostrarAlerta = (alerta) => {
     setAlerta(alerta);
     setTimeout(() => {
@@ -59,7 +60,14 @@ const CurriculumProvider = ({ children }) => {
 
       setTimeout(() => {
         setAlerta({});
-        navigate("/dashboard");
+        const tipo = localStorage.getItem("tipo");
+        if(tipo === "formRH"){
+          console.log(token)
+          navigate("/colaboradores");
+        }else{
+          navigate("/dashboard");
+        }
+        
       }, 3000);
     } catch (error) {
       console.log(error);

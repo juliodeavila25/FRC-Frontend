@@ -10,7 +10,12 @@ import {
   ArrowPathRoundedSquareIcon,
   DocumentTextIcon,
   DocumentCheckIcon,
+  UsersIcon,
+  TableCellsIcon
+  
 } from "@heroicons/react/24/outline";
+
+
 <svg
   xmlns="http://www.w3.org/2000/svg"
   fill="none"
@@ -72,9 +77,21 @@ const Sidebar = () => {
       current: location.pathname.includes("/dashboard") ? true : false,
     },
     {
+      name: "Mi Hoja de Vida",
+      href: "/curriculum/crear-curriculum",
+      icon: Bars4Icon,
+      current: location.pathname.includes("/curriculum") ? true : false,
+    },
+    {
+      name: "Colaboradores",
+      href: "/colaboradores",
+      icon: UsersIcon,
+      current: location.pathname.includes("/colaboradores") ? true : false,
+    },
+    {
       name: "Ofertas de empleo",
       href: "/recursos-humanos/listar-convocatorias",
-      icon: Bars4Icon,
+      icon: TableCellsIcon,
       current: location.pathname.includes("/recursos-humanos") ? true : false,
     },
     {

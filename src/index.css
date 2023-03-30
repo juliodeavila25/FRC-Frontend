@@ -1,3 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+input[type="text"][disabled] {
+   background-color:#F0F0F0;
+}
+
+input[type="number"][disabled] {
+   background-color:#F0F0F0;
+}
+
+input[type="date"][disabled] {
+   background-color:#F0F0F0;
+}
+
+select[disabled]{
+   background-color:#F0F0F0;
+}

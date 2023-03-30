@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, version } from "react";
 import { useParams, Link } from "react-router-dom";
 import useDocumentos from "../../hooks/useDocumentos";
 import Alert from "../Alert";
@@ -18,10 +18,13 @@ const FormularioNuevoDocumento = () => {
   const [responsable, setResponsable] = useState("");
   const [fuente, setFuente] = useState("");
   const [link, setLink] = useState("");
+  const [inputVersiones, setInputVersiones] = useState([
+    { version: 1, url: " ", observaciones:"", estado:"Vigente" },
+  ]);
 
   const params = useParams();
 
-  console.log(params.id);
+ 
 
   const {
     submitDocumento,
@@ -48,6 +51,7 @@ const FormularioNuevoDocumento = () => {
       setResponsable(documento.responsable);
       setFuente(documento.fuente);
       setLink(documento.link);
+      setInputVersiones(documento.inputVersiones);
     }
   }, []);
 
@@ -89,12 +93,47 @@ const FormularioNuevoDocumento = () => {
       responsable,
       fuente,
       link,
+      inputVersiones
     });
     // setNombre("");
     // setDescripcion("");
     // setFechaEntrega("");
     // setCliente("");
   };
+
+  const handleinputchange = (e, index) => {
+    const { name, value } = e.target;
+    const list = [...inputVersiones];
+    list[index][name] = value;
+    setInputVersiones(list);
+  };
+
+  const handleremove = (e, index) => {
+    e.preventDefault();
+    const list = [...inputVersiones];
+    list.splice(index, 1);
+    for (let i = 0; i < list.length; i++) {
+      if(i === list.length -1){
+        list[i].estado = "Vigente"
+      }
+      list[i].version = i +1 
+
+    }
+    setInputVersiones(list);
+  };
+
+  const handleaddclick = (index) => {
+     const list = [...inputVersiones];
+     console.log(list.length)
+     for (let i = 0; i < list.length; i++) {
+      list[i].estado = "Obsoleto"
+    }
+    setInputVersiones([
+      ...list,
+      { version: index +2, estado:"Vigente" },
+    ]);
+  };
+
 
   const { msg } = alerta;
 
@@ -114,7 +153,7 @@ const FormularioNuevoDocumento = () => {
                 htmlFor="codigo"
                 className="block text-sm font-medium text-gray-700"
               >
-                Código/Versión <span class="text-red-700">*</span>
+                Código/Versión <span className="text-red-700">*</span>
               </label>
               <div className="mt-1">
                 <input
@@ -125,7 +164,7 @@ const FormularioNuevoDocumento = () => {
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={codigo}
                   onChange={(e) => setCodigo(e.target.value)}
-                  required="true"
+                  required={true}
                 />
               </div>
             </div>
@@ -134,7 +173,7 @@ const FormularioNuevoDocumento = () => {
                 htmlFor="proceso"
                 className="block text-sm font-medium text-gray-700"
               >
-                Proceso<span class="text-red-700">*</span>
+                Proceso<span className="text-red-700">*</span>
               </label>
               <div className="mt-1">
                 <input
@@ -146,7 +185,7 @@ const FormularioNuevoDocumento = () => {
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={proceso}
                   onChange={(e) => setProceso(e.target.value)}
-                  required="true"
+                  required={true}
                 />
               </div>
             </div>
@@ -156,7 +195,7 @@ const FormularioNuevoDocumento = () => {
                 htmlFor="titulo"
                 className="block text-sm font-medium text-gray-700"
               >
-                Titulo<span class="text-red-700">*</span>
+                Titulo<span className="text-red-700">*</span>
               </label>
               <div className="mt-1">
                 <input
@@ -167,7 +206,7 @@ const FormularioNuevoDocumento = () => {
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={titulo}
                   onChange={(e) => setTitulo(e.target.value)}
-                  required="true"
+                  required={true}
                 />
               </div>
             </div>
@@ -177,7 +216,7 @@ const FormularioNuevoDocumento = () => {
                 htmlFor="servicio"
                 className="block text-sm font-medium text-gray-700"
               >
-                Servicio<span class="text-red-700">*</span>
+                Servicio<span className="text-red-700">*</span>
               </label>
               <div className="mt-1">
                 <input
@@ -188,7 +227,7 @@ const FormularioNuevoDocumento = () => {
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={servicio}
                   onChange={(e) => setServicio(e.target.value)}
-                  required="true"
+                  required={true}
                 />
               </div>
             </div>
@@ -198,7 +237,7 @@ const FormularioNuevoDocumento = () => {
                 htmlFor="tipo"
                 className="block text-sm font-medium text-gray-700"
               >
-                Tipo<span class="text-red-700">*</span>
+                Tipo<span className="text-red-700">*</span>
               </label>
               <div className="mt-1">
                 <input
@@ -209,7 +248,7 @@ const FormularioNuevoDocumento = () => {
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={tipo}
                   onChange={(e) => setTipo(e.target.value)}
-                  required="true"
+                  required={true}
                 />
               </div>
             </div>
@@ -219,7 +258,7 @@ const FormularioNuevoDocumento = () => {
                 htmlFor="implementacion"
                 className="block text-sm font-medium text-gray-700"
               >
-                Implementacion<span class="text-red-700">*</span>
+                Implementacion<span className="text-red-700">*</span>
               </label>
               <div className="mt-1">
                 <input
@@ -230,7 +269,7 @@ const FormularioNuevoDocumento = () => {
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={implementacion}
                   onChange={(e) => setImplementacion(e.target.value)}
-                  required="true"
+                  required={true}
                 />
               </div>
             </div>
@@ -240,7 +279,7 @@ const FormularioNuevoDocumento = () => {
                 htmlFor="descripcion"
                 className="block text-sm font-medium text-gray-700"
               >
-                Descripción<span class="text-red-700">*</span>
+                Descripción<span className="text-red-700">*</span>
               </label>
               <div className="mt-1">
                 <textarea
@@ -252,7 +291,7 @@ const FormularioNuevoDocumento = () => {
                   value={descripcion}
                   onChange={(e) => setDescripcion(e.target.value)}
                   rows="6"
-                  required="true"
+                  required={true}
                 />
               </div>
             </div>
@@ -262,7 +301,7 @@ const FormularioNuevoDocumento = () => {
                 htmlFor="especialidad"
                 className="block text-sm font-medium text-gray-700"
               >
-                Especialidad<span class="text-red-700">*</span>
+                Especialidad<span className="text-red-700">*</span>
               </label>
               <div className="mt-1">
                 <input
@@ -273,7 +312,7 @@ const FormularioNuevoDocumento = () => {
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={especialidad}
                   onChange={(e) => setEspecialidad(e.target.value)}
-                  required="true"
+                  required={true}
                 />
               </div>
             </div>
@@ -283,7 +322,7 @@ const FormularioNuevoDocumento = () => {
                 htmlFor="responsable"
                 className="block text-sm font-medium text-gray-700"
               >
-                Responsable<span class="text-red-700">*</span>
+                Responsable<span className="text-red-700">*</span>
               </label>
               <div className="mt-1">
                 <input
@@ -294,7 +333,7 @@ const FormularioNuevoDocumento = () => {
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={responsable}
                   onChange={(e) => setResponsable(e.target.value)}
-                  required="true"
+                  required={true}
                 />
               </div>
             </div>
@@ -304,7 +343,7 @@ const FormularioNuevoDocumento = () => {
                 htmlFor="fuente"
                 className="block text-sm font-medium text-gray-700"
               >
-                Fuente<span class="text-red-700">*</span>
+                Fuente<span className="text-red-700">*</span>
               </label>
               <div className="mt-1">
                 <input
@@ -315,7 +354,7 @@ const FormularioNuevoDocumento = () => {
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={fuente}
                   onChange={(e) => setFuente(e.target.value)}
-                  required="true"
+                  required={true}
                 />
               </div>
             </div>
@@ -325,7 +364,7 @@ const FormularioNuevoDocumento = () => {
                 htmlFor="link"
                 className="block text-sm font-medium text-gray-700"
               >
-                URL<span class="text-red-700">*</span>
+                URL<span className="text-red-700">*</span>
               </label>
               <div className="mt-1">
                 <input
@@ -336,10 +375,292 @@ const FormularioNuevoDocumento = () => {
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={link}
                   onChange={(e) => setLink(e.target.value)}
-                  required="true"
+                  required={true}
                 />
               </div>
             </div>
+          </div>
+
+           <div className="text-left text-xl text-gray-700 mt-8 font-bold border-b-4 border-corporative-blue inline-flex">
+            Versiones
+          </div>
+
+          <div>
+            {Array.isArray(documento.inputVersiones) && documento.inputVersiones.length > 0 ? 
+              <>
+              {console.log("AQui estoy")}
+               {inputVersiones &&
+              Array.isArray(inputVersiones) &&  
+              inputVersiones.map((item, i) => {
+                return (
+                  <div
+                    key={i}
+                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 pt-5"
+                  >
+                    <div className="">
+                      <label className="block text-sm font-medium text-gray-700">
+                        Versión
+                      </label>
+                      <input
+                        type="text"
+                        className="form-control
+                      block
+                      w-full
+                      px-3
+                      py-1.5
+                      text-base
+                      font-normal
+                      text-gray-700
+                      bg-white bg-clip-padding
+                      border border-solid border-gray-300
+                      rounded
+                      transition
+                      ease-in-out
+                      m-0
+                      focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                        placeholder="Ingresar version"
+                        id="version"
+                        name="version"
+                        value={item.version}
+                        onChange={(e) => handleinputchange(e, i)}
+                        disabled={true }
+                      />
+                    </div>
+                    <div className="">
+                      <label className="block text-sm font-medium text-gray-700">
+                        Link
+                      </label>
+                      <input
+                        type="text"
+                        className="form-control
+                      block
+                      w-full
+                      px-3
+                      py-1.5
+                      text-base
+                      font-normal
+                      text-gray-700
+                      bg-white bg-clip-padding
+                      border border-solid border-gray-300
+                      rounded
+                      transition
+                      ease-in-out
+                      m-0
+                      focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                        placeholder="Ingresar url"
+                        id="url"
+                        name="url"
+                        value={item.url}
+                        onChange={(e) => handleinputchange(e, i)}
+                        disabled={Array.isArray(documento.inputVersiones) && i === documento.inputVersiones.length || i > documento.inputVersiones.length ? false : true }
+                      />
+                    </div>
+                     <div className="">
+                      <label className="block text-sm font-medium text-gray-700">
+                        Observaciones
+                      </label>
+                      <textarea
+                        id="observaciones"
+                        name="observaciones"
+                        type="text"
+                        placeholder="Digite observaciones"
+                        className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                        value={item.observaciones}
+                        onChange={(e) => handleinputchange(e, i)}
+                        rows="3"
+                        disabled={Array.isArray(documento.inputVersiones) && i === documento.inputVersiones.length || i > documento.inputVersiones.length ? false : true }
+                      />
+                    </div> 
+                     <div className="">
+                      <label className="block text-sm font-medium text-gray-700">
+                        Estado
+                      </label>
+                      <input
+                        type="text"
+                        className="form-control
+                          block
+                          w-full
+                          px-3
+                          py-1.5
+                          text-base
+                          font-normal
+                          text-gray-700
+                          bg-white bg-clip-padding
+                          border border-solid border-gray-300
+                          rounded
+                          transition
+                          ease-in-out
+                          m-0
+                          focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                        id="estado"
+                        name="estado"
+                        value={item.estado}
+                        onChange={(e) => handleinputchange(e, i)}
+                        disabled={true}
+                        
+                      />
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-4 pt-6 ">                      
+                      {Array.isArray(documento.inputVersiones) && i === documento.inputVersiones.length || i > documento.inputVersiones.length ? (
+                        <button
+                          className="h-8 flex items-center w-full justify-center rounded-md border-2 border-red-400 bg-transparent py-2 px-4 text-sm font-medium text-red-500 shadow-sm hover:bg-red-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                          onClick={(e) => handleremove(e, i)}
+                        >
+                          Remover
+                        </button>
+                      ): null}
+                      {inputVersiones.length - 1 === i && (
+                        <button
+                          className="h-8 flex items-center w-full justify-center rounded-md border border-transparent bg-green-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 cursor-pointer"
+                          onClick={()=>handleaddclick(i)}
+                        >
+                          Agregar
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                );
+              } )}
+              </> :
+              <>
+               {inputVersiones &&
+              Array.isArray(inputVersiones) &&  
+              inputVersiones.map((item, i) => {
+              
+                return (
+                  <div
+                    key={i}
+                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 pt-5"
+                  >
+                    <div className="">
+                      <label className="block text-sm font-medium text-gray-700">
+                        Versión
+                      </label>
+                      <input
+                        type="text"
+                        className="form-control
+                      block
+                      w-full
+                      px-3
+                      py-1.5
+                      text-base
+                      font-normal
+                      text-gray-700
+                      bg-white bg-clip-padding
+                      border border-solid border-gray-300
+                      rounded
+                      transition
+                      ease-in-out
+                      m-0
+                      focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                        placeholder="Ingresar version"
+                        id="version"
+                        name="version"
+                        value={item.version}
+                        onChange={(e) => handleinputchange(e, i)}
+                        disabled={true }
+                      />
+                    </div>
+                    <div className="">
+                      <label className="block text-sm font-medium text-gray-700">
+                        Link
+                      </label>
+                      <input
+                        type="text"
+                        className="form-control
+                      block
+                      w-full
+                      px-3
+                      py-1.5
+                      text-base
+                      font-normal
+                      text-gray-700
+                      bg-white bg-clip-padding
+                      border border-solid border-gray-300
+                      rounded
+                      transition
+                      ease-in-out
+                      m-0
+                      focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                        placeholder="Ingresar url"
+                        id="url"
+                        name="url"
+                        value={item.url}
+                        onChange={(e) => handleinputchange(e, i)}
+                        
+                      />
+                    </div>
+                    <div className="">
+                      <label className="block text-sm font-medium text-gray-700">
+                        Observaciones
+                      </label>
+                      <textarea
+                        id="observaciones"
+                        name="observaciones"
+                        type="text"
+                        placeholder="Digite observaciones"
+                        className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                        value={item.observaciones}
+                        onChange={(e) => handleinputchange(e, i)}
+                        rows="3"
+                      />
+                    </div> 
+                    <div className="">
+                      <label className="block text-sm font-medium text-gray-700">
+                        Estado
+                      </label>
+                      <input
+                        type="text"
+                        className="form-control
+                      block
+                      w-full
+                      px-3
+                      py-1.5
+                      text-base
+                      font-normal
+                      text-gray-700
+                      bg-white bg-clip-padding
+                      border border-solid border-gray-300
+                      rounded
+                      transition
+                      ease-in-out
+                      m-0
+                      focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                        disabled={true}
+                        id="estado"
+                        name="estado"
+                        value={item.estado}
+                        onChange={(e) => handleinputchange(e, i)}
+                        
+                      />
+                    </div>
+                    
+                    <div className="grid grid-cols-2 gap-4 pt-6 ">
+                     
+                      {inputVersiones.length !== 1 && (
+                        <button
+                          className="h-8 flex items-center w-full justify-center rounded-md border-2 border-red-400 bg-transparent py-2 px-4 text-sm font-medium text-red-500 shadow-sm hover:bg-red-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                          onClick={(e) => handleremove(e, i)}
+                        >
+                          Remover
+                        </button>
+                      )}
+                      {inputVersiones.length - 1 === i && (
+                        <button
+                          className="h-8 flex items-center w-full justify-center rounded-md border border-transparent bg-green-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 cursor-pointer"
+                          onClick={()=>handleaddclick(i)}
+                        >
+                          Agregar
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                );
+              } )}
+              </>
+          }
+           
           </div>
 
           <div className="grid grid-cols-2 gap-6 w-3/5 mx-auto">
