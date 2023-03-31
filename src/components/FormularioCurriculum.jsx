@@ -61,7 +61,7 @@ const FormularioCurriculum = () => {
   const [rut, setRut] = useState("");
   const [errorSoporteRut, setErrorSoporteRut] = useState(false);
   const [numeroRut, setNumeroRut] = useState("");
-  const [fechaCorte, setFechaCorte] = useState( '1990-01-01');
+  const [fechaCorte, setFechaCorte] = useState('2022-12-31');
   const [ingresosAnuales, setIngresosAnuales] = useState(0);
   const [egresosAnuales, setEgresosAnuales] = useState(0);
   const [otrosIngresos, setOtrosIngresos] = useState(0);
@@ -497,10 +497,15 @@ const FormularioCurriculum = () => {
       setSoporteContrato(data);
     }
   };
+  
+  const sumPatrimonio = function(){
+    setPatrimonio(Number(activos) - Number(pasivos));
+}
+  
   const { msg } = alerta;
 
   if (cargandoData) return <BeatLoader color="#36d7b7" />;
-
+  
   return (
     <div className=" sm:mx-auto sm:w-full">
       <div className="bg-white py-8 px-4 shadow-lg rounded-lg sm:px-10">
@@ -1640,7 +1645,7 @@ const FormularioCurriculum = () => {
                 htmlFor="numeroRut"
                 className="block text-sm font-medium text-gray-700"
               >
-                Número RUT
+                Número de Formulario
               </label>
               <div className="mt-1">
                 <input
@@ -1653,7 +1658,27 @@ const FormularioCurriculum = () => {
                   onChange={(e) => setNumeroRut(e.target.value)}
                 />
               </div>
-            </div>           
+            </div>   
+            <div className=""></div>     
+            <div className=""></div>
+            <div className="hidden">
+              <label
+                htmlFor="fechaCorte"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Fecha Corte
+              </label>
+              <div className="mt-1">
+                <input
+                  id="fechaCorte"
+                  name="fechaCorte"
+                  type="date"
+                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                  value={fechaCorte}
+                  onChange={(e) => setFechaCorte(e.target.value)}
+                />
+              </div>
+            </div>  
             <div>
               <label
                 htmlFor="ingresosAnuales"
@@ -1672,25 +1697,7 @@ const FormularioCurriculum = () => {
                   onChange={(e) => setIngresosAnuales(e.target.value)}
                 />
               </div>
-            </div>
-            <div className="invisible">
-              <label
-                htmlFor="fechaCorte"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Fecha Corte
-              </label>
-              <div className="mt-1">
-                <input
-                  id="fechaCorte"
-                  name="fechaCorte"
-                  type="date"
-                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                  value={fechaCorte}
-                  onChange={(e) => setFechaCorte(e.target.value)}
-                />
-              </div>
-            </div>         
+            </div>       
             <div>
               <label
                 htmlFor="egresosAnuales"
@@ -1730,27 +1737,7 @@ const FormularioCurriculum = () => {
                 />
               </div>
             </div>
-
-            <div>
-              <label
-                htmlFor="patrimonio"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Patrimonio
-              </label>
-              <div className="mt-1">
-                <input
-                  id="patrimonio"
-                  name="patrimonio"
-                  type="number"
-                  placeholder="Digite su patrimonio"
-                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                  value={patrimonio}
-                  onChange={(e) => setPatrimonio(e.target.value)}
-                />
-              </div>
-            </div>
-
+            <div className=""></div>      
             <div>
               <label
                 htmlFor="activos"
@@ -1766,7 +1753,8 @@ const FormularioCurriculum = () => {
                   placeholder="Digite total activos"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={activos}
-                  onChange={(e) => setActivos(e.target.value)}
+                  onChange={(e) => { setActivos(e.target.value)}}
+                  onBlur={(e) => { sumPatrimonio(e.target.value)}}
                 />
               </div>
             </div>
@@ -1786,11 +1774,31 @@ const FormularioCurriculum = () => {
                   placeholder="Digite total pasivos"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={pasivos}
-                  onChange={(e) => setPasivos(e.target.value)}
+                  onChange={(e) => { setPasivos(e.target.value)}}
+                  onBlur={(e) => { sumPatrimonio(e.target.value)}}
                 />
               </div>
             </div>
-
+            <div>
+              <label
+                htmlFor="patrimonio"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Patrimonio
+              </label>
+              <div className="mt-1">
+                <input
+                  id="patrimonio"
+                  name="patrimonio"
+                  type="number"
+                  placeholder="Digite su patrimonio"
+                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                  value={patrimonio}
+                  readOnly="readonly"
+                  onChange={(e) => setPatrimonio(e.target.value)}
+                />
+              </div>
+            </div>        
             <div>
               <label
                 htmlFor="descripcionIngresos"
@@ -1798,12 +1806,13 @@ const FormularioCurriculum = () => {
               >
                 Descripción de otros ingresos
               </label>
-              <div className="mt-1">
-                <input
+              <div className="mt-1"> 
+                <textarea
                   id="descripcionIngresos"
                   name="descripcionIngresos"
                   type="text"
                   placeholder=""
+                  rows="3"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={descripcionIngresos}
                   onChange={(e) => setDescripcionIngresos(e.target.value)}
@@ -2161,7 +2170,7 @@ const FormularioCurriculum = () => {
                   checked={otras}
                   onChange={handleChangeOtrasOperaciones}
                 />
-                <label htmlFor="otras">Ninguna</label>
+                <label htmlFor="otras">Otras</label>
               </div>
             </div>
 
@@ -2286,10 +2295,10 @@ const FormularioCurriculum = () => {
                 })}
             </div>
           </div>
-          <div className="text-left text-xl text-gray-700 mt-8 font-bold border-b-4 border-corporative-blue inline-flex pt-3">
+          <div className="hidden text-left text-xl text-gray-700 mt-8 font-bold border-b-4 border-corporative-blue inline-flex pt-3">
             Referencias Bancarias
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 hidden">
             <div>
               <label
                 htmlFor="tipoCuenta"
@@ -2376,6 +2385,7 @@ const FormularioCurriculum = () => {
                   placeholder="Digita codigo de ingreso"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={codigoIngreso}
+                  readOnly="readonly"
                   onChange={(e) => setCodigoIngreso(e.target.value)}
                 />
               </div>
@@ -2396,6 +2406,7 @@ const FormularioCurriculum = () => {
                   placeholder="Digitar tipo de Contrato"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={tipoContrato}
+                  readOnly="readonly"
                   onChange={(e) => setTipoContrato(e.target.value)}
                 />
               </div>
@@ -2414,6 +2425,7 @@ const FormularioCurriculum = () => {
                   type="date"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={fechaIngreso}
+                  readOnly="readonly"
                   onChange={(e) => setFechaIngreso(e.target.value)}
                 />
               </div>
@@ -2433,6 +2445,7 @@ const FormularioCurriculum = () => {
                   placeholder="Digite fecha fin"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={fechaFin}
+                  readOnly="readonly"
                   onChange={(e) => setFechaFin(e.target.value)}
                 />
               </div>
@@ -2453,6 +2466,7 @@ const FormularioCurriculum = () => {
                   placeholder="Digita nombre empresa"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={empresa}
+                  readOnly="readonly"
                   onChange={(e) => setEmpresa(e.target.value)}
                 />
               </div>
@@ -2473,6 +2487,7 @@ const FormularioCurriculum = () => {
                   placeholder="Digitar la nomina"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={nomina}
+                  readOnly="readonly"
                   onChange={(e) => setNomina(e.target.value)}
                 />
               </div>
@@ -2493,6 +2508,7 @@ const FormularioCurriculum = () => {
                   placeholder="Digitar salario"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={sueldo}
+                  readOnly="readonly"
                   onChange={(e) => setSueldo(e.target.value)}
                 />
               </div>
@@ -2513,6 +2529,7 @@ const FormularioCurriculum = () => {
                   placeholder="Digitar la cargo"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={cargo}
+                  readOnly="readonly"
                   onChange={(e) => setCargo(e.target.value)}
                 />
               </div>
@@ -2545,6 +2562,7 @@ const FormularioCurriculum = () => {
                   id="soporteContrato"
                   name="soporteContrato"
                   onChange={(e) => handleSoporteContrato(e.target.files[0])}
+                  disabled="disabled"
                   accept=".pdf"
                 />
               </div>
