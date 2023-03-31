@@ -62,7 +62,7 @@ const FormularioCurriculum = () => {
   const [rut, setRut] = useState("");
   const [errorSoporteRut, setErrorSoporteRut] = useState(false);
   const [numeroRut, setNumeroRut] = useState("");
-  const [fechaCorte, setFechaCorte] = useState('2022-12-31');
+  const [fechaCorte, setFechaCorte] = useState( '1990-01-01');
   const [ingresosAnuales, setIngresosAnuales] = useState(0);
   const [egresosAnuales, setEgresosAnuales] = useState(0);
   const [otrosIngresos, setOtrosIngresos] = useState(0);
@@ -104,101 +104,108 @@ const FormularioCurriculum = () => {
   const [cargo, setCargo] = useState("");
   const params = useParams();
 
+
   const {
     submitCurriculum,
+    cargandoData,
     mostrarAlerta,
     alerta,
-    obtenerCurriculum,
-    curriculum,
-    cargandoData,
   } = useCurriculum();
-  
+
+  const {
+   
+    obtenerCurriculumRH,
+    collaborator,
+    cargandoDatos,
+  } = useCollaborators();
+ 
 
   const { auth, cargando } = useAuth();
   //console.log(auth.documento);
   //console.log(auth._id);
   useEffect(() => {
-      obtenerCurriculum(auth._id);
+    console.log(params.id)
+    obtenerCurriculumRH(params.id)   
   }, []);
 
  
   useEffect(() => {
-    if (Array.isArray(curriculum) && curriculum.length > 0) {
-      console.log(curriculum);
+    if (Object.keys(collaborator).length !== 0) {
+      console.log(collaborator);
       setId(auth._id);
-      setEstado(curriculum[0].estado);
-      setNombre(curriculum[0].nombre);
-      setTipoDocumento(curriculum[0].tipoDocumento);
-      setNumeroDocumento(curriculum[0].numeroDocumento);
-      setFechaNacimiento(curriculum[0].fechaNacimiento?.split("T")[0]);
-      setLugarNacimiento(curriculum[0].lugarNacimiento);
-      setTelefono(curriculum[0].telefono);
-      setCorreo(curriculum[0].correo);
-      setDireccion(curriculum[0].direccion);
-      setEstadoCivil(curriculum[0].estadoCivil);
-      setPais(curriculum[0].pais);
-      setDepartamento(curriculum[0].departamento);
-      setCiudad(curriculum[0].ciudad);
-      setNumeroHijos(curriculum[0].numeroHijos);
-      setTipoSangre(curriculum[0].tipoSangre);
+      setEstado(collaborator.estado);
+      setNombre(collaborator.nombre);
+      setTipoDocumento(collaborator.tipoDocumento);
+      setNumeroDocumento(collaborator.numeroDocumento);
+      setFechaNacimiento(collaborator.fechaNacimiento?.split("T")[0]);
+      setLugarNacimiento(collaborator.lugarNacimiento);
+      setTelefono(collaborator.telefono);
+      setCorreo(collaborator.correo);
+      setDireccion(collaborator.direccion);
+      setEstadoCivil(collaborator.estadoCivil);
+      setPais(collaborator.pais);
+      setDepartamento(collaborator.departamento);
+      setCiudad(collaborator.ciudad);
+      setNumeroHijos(collaborator.numeroHijos);
+      setTipoSangre(collaborator.tipoSangre);
       //Formación Profesional
-      setNivel(curriculum[0].nivel);
-      setTitulo(curriculum[0].titulo);
-      setAnioTitulo(curriculum[0].anioTitulo);
-      setInstitucionTitulo(curriculum[0].institucionTitulo);
+      setNivel(collaborator.nivel);
+      setTitulo(collaborator.titulo);
+      setAnioTitulo(collaborator.anioTitulo);
+      setInstitucionTitulo(collaborator.institucionTitulo);
       //Experiencia Profesional
-      setEmpresaExp(curriculum[0].empresaExp);
-      setFechaInicioExp(curriculum[0].fechaInicioExp?.split("T")[0]);
-      setFechaFinExp(curriculum[0].fechaFinExp?.split("T")[0]);
+      setEmpresaExp(collaborator.empresaExp);
+      setFechaInicioExp(collaborator.fechaInicioExp?.split("T")[0]);
+      setFechaFinExp(collaborator.fechaFinExp?.split("T")[0]);
       //Referencias
-      setNombreRefA(curriculum[0].nombreRefA);
-      setTelefonoRefA(curriculum[0].telefonoRefA);
-      setCorreoRefA(curriculum[0].correoRefA);
-      setNombreRefB(curriculum[0].nombreRefB);
-      setTelefonoRefB(curriculum[0].telefonoRefB);
-      setCorreoRefB(curriculum[0].correoRefB);
+      setNombreRefA(collaborator.nombreRefA);
+      setTelefonoRefA(collaborator.telefonoRefA);
+      setCorreoRefA(collaborator.correoRefA);
+      setNombreRefB(collaborator.nombreRefB);
+      setTelefonoRefB(collaborator.telefonoRefB);
+      setCorreoRefB(collaborator.correoRefB);
       //Seguridad Social
-      setEPS(curriculum[0].eps);
-      setPension(curriculum[0].pension);
+      setEPS(collaborator.eps);
+      setPension(collaborator.pension);
       //Informacion financiera
-      setinputFinanciera(curriculum[0].inputFinanciera);
+      setinputFinanciera(collaborator.inputFinanciera);
       //Cuentas Extranjero
-      setinputExtranjera(curriculum[0].inputExtranjera);
-      setRut(curriculum[0].rut);
-      setNumeroRut(curriculum[0].numeroRut);
-      setFechaCorte(curriculum[0].fechaCorte?.split("T")[0]);
-      setIngresosAnuales(curriculum[0].ingresosAnuales);
-      setEgresosAnuales(curriculum[0].egresosAnuales);
-      setOtrosIngresos(curriculum[0].otrosIngresos);
-      setPatrimonio(curriculum[0].patrimonio);
-      setActivos(curriculum[0].activos);
-      setPasivos(curriculum[0].pasivos);
-      setDescripcionIngresos(curriculum[0].descripcionIngresos);
-      setPoseeCuenta(curriculum[0].poseeCuenta);
-      setInputCuentas(curriculum[0].inputCuentas);
-      setOperacionesExtranjera(curriculum[0].operacionesExtranjera);
-      setExportaciones(curriculum[0].exportaciones);
-      setTransferencias(curriculum[0].transferencias);
-      setPagoServicios(curriculum[0].pagoServicios);
-      setImportaciones(curriculum[0].importaciones);
-      setPrestamos(curriculum[0].prestamos);
-      setOtras(curriculum[0].otras);
+      setinputExtranjera(collaborator.inputExtranjera);
+      setRut(collaborator.rut);
+      setNumeroRut(collaborator.numeroRut);
+      setFechaCorte(collaborator.fechaCorte?.split("T")[0]);
+      setIngresosAnuales(collaborator.ingresosAnuales);
+      setEgresosAnuales(collaborator.egresosAnuales);
+      setOtrosIngresos(collaborator.otrosIngresos);
+      setPatrimonio(collaborator.patrimonio);
+      setActivos(collaborator.activos);
+      setPasivos(collaborator.pasivos);
+      setDescripcionIngresos(collaborator.descripcionIngresos);
+      setPoseeCuenta(collaborator.poseeCuenta);
+      setInputCuentas(collaborator.inputCuentas);
+      setOperacionesExtranjera(collaborator.operacionesExtranjera);
+      setExportaciones(collaborator.exportaciones);
+      setTransferencias(collaborator.transferencias);
+      setPagoServicios(collaborator.pagoServicios);
+      setImportaciones(collaborator.importaciones);
+      setPrestamos(collaborator.prestamos);
+      setOtras(collaborator.otras);
 
       //Referencias Bancarias
-      setTipoCuenta(curriculum[0].tipoCuenta);
-      setEntidadBancaria(curriculum[0].entidadBancaria);
-      setNumeroCuenta(curriculum[0].numeroCuenta);
+      setTipoCuenta(collaborator.tipoCuenta);
+      setEntidadBancaria(collaborator.entidadBancaria);
+      setNumeroCuenta(collaborator.numeroCuenta);
       //Contractual
-      setTipoContrato(curriculum[0].tipoContrato);
-      setFechaIngreso(curriculum[0].fechaIngreso?.split("T")[0]);
-      setFechaFin(curriculum[0].fechaFin?.split("T")[0]);
-      setEmpresa(curriculum[0].empresa);
-      setNomina(curriculum[0].nomina);
-      setCodigoIngreso(curriculum[0].codigoIngreso);
-      setSueldo(curriculum[0].sueldo);
-      setCargo(curriculum[0].cargo);
+      setTipoContrato(collaborator.tipoContrato);
+      setFechaIngreso(collaborator.fechaIngreso?.split("T")[0]);
+      setFechaFin(collaborator.fechaFin?.split("T")[0]);
+      setEmpresa(collaborator.empresa);
+      setNomina(collaborator.nomina);
+      setCodigoIngreso(collaborator.codigoIngreso);
+      setSueldo(collaborator.sueldo);
+      setCargo(collaborator.cargo);
     }
-  }, [curriculum]);
+  }, [collaborator]);
 
   // const {
   //   register,
@@ -233,9 +240,7 @@ const FormularioCurriculum = () => {
 
   const submitData = async (e) => {
     e.preventDefault();
-
-    localStorage.setItem("tipo", "formCo");
-
+    localStorage.setItem("tipo", "formRH");
     //console.log(errors);
 
     if (errorSoporteExp === true) {
@@ -501,15 +506,12 @@ const FormularioCurriculum = () => {
       setSoporteContrato(data);
     }
   };
-  
-  const sumPatrimonio = function(){
-    setPatrimonio(Number(activos) - Number(pasivos));
-}
-  
+
+
   const { msg } = alerta;
 
   if (cargandoData) return <BeatLoader color="#36d7b7" />;
-  
+
   return (
     <div className=" sm:mx-auto sm:w-full">
       <div className="bg-white py-8 px-4 shadow-lg rounded-lg sm:px-10">
@@ -543,6 +545,7 @@ const FormularioCurriculum = () => {
                   value={nombre}
                   onChange={(e) => setNombre(e.target.value)}
                   required
+                  disabled={true}
                   // {...register("nombre", {
                   //   required: "Este campo es requerido",
                   //   onChange: (e) => setNombre(e.target.value),
@@ -572,6 +575,7 @@ const FormularioCurriculum = () => {
                     setTipoDocumento(selectedDocumentType);
                   }}
                   value={tipoDocumento}
+                   disabled={true}
                 >
                   <option value="Cedula de ciudadania">
                     Cedula de ciudadania
@@ -600,6 +604,7 @@ const FormularioCurriculum = () => {
                   value={numeroDocumento}
                   onChange={(e) => setNumeroDocumento(e.target.value)}
                   required
+                   disabled={true}
                   // {...register("numeroDocumento", {
                   //   required: "Este campo es requerido",
                   //   onChange: (e) => setNumeroDocumento(e.target.value),
@@ -628,6 +633,7 @@ const FormularioCurriculum = () => {
                   value={fechaNacimiento}
                   onChange={(e) => setFechaNacimiento(e.target.value)}
                   required
+                   disabled={true}
                   // {...register("fechaNacimiento", {
                   //   required: "Este campo es requerido",
                   //   onChange: (e) => setFechaNacimiento(e.target.value),
@@ -654,8 +660,9 @@ const FormularioCurriculum = () => {
                   placeholder="Digite su lugar de nacimiento"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={lugarNacimiento}
-                   onChange={(e) => setLugarNacimiento(e.target.value)}
-                   required
+                  onChange={(e) => setLugarNacimiento(e.target.value)}
+                  required
+                  disabled={true}
                   // {...register("lugarNacimiento", {
                   //   required: "Este campo es requerido",
                   //   onChange: (e) => setLugarNacimiento(e.target.value),
@@ -682,8 +689,9 @@ const FormularioCurriculum = () => {
                   placeholder="Digite su número de telefono"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={telefono}
-                   onChange={(e) => setTelefono(e.target.value)}
-                   required
+                  onChange={(e) => setTelefono(e.target.value)}
+                  required
+                  disabled={true}
                   // {...register("telefono", {
                   //   required: "Este campo es requerido",
                   //   onChange: (e) => setTelefono(e.target.value),
@@ -710,8 +718,9 @@ const FormularioCurriculum = () => {
                   placeholder="Digite su correo electrónico"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={correo}
-                   onChange={(e) => setCorreo(e.target.value)}
-                   required
+                  onChange={(e) => setCorreo(e.target.value)}
+                  required
+                  disabled={true}
                   // {...register("correo", {
                   //   required: "Este campo es requerido",
                   //   onChange: (e) => setCorreo(e.target.value),
@@ -740,6 +749,7 @@ const FormularioCurriculum = () => {
                   value={direccion}
                   onChange={(e) => setDireccion(e.target.value)}
                   required
+                  disabled={true}
                   // {...register("direccion", {
                   //   required: "Este campo es requerido",
                   //   onChange: (e) => setDireccion(e.target.value),
@@ -769,6 +779,7 @@ const FormularioCurriculum = () => {
                     setTipoDocumento(selectedDocumentType);
                   }}
                   value={tipoDocumento}
+                  disabled={true}
                 >
                   <option value="Soltero(a)">Soltero(a)</option>
                   <option value="Casado(a)">Casado(a)</option>
@@ -795,6 +806,7 @@ const FormularioCurriculum = () => {
                   value={pais}
                   onChange={(e) => setPais(e.target.value)}
                   required
+                  disabled={true}
                   // {...register("pais", {
                   //   required: "Este campo es requerido",
                   //   onChange: (e) => setPais(e.target.value),
@@ -823,6 +835,7 @@ const FormularioCurriculum = () => {
                   value={departamento}
                   onChange={(e) => setDepartamento(e.target.value)}
                   required
+                  disabled={true}
                   // {...register("departamento", {
                   //   required: "Este campo es requerido",
                   //   onChange: (e) => setDepartamento(e.target.value),
@@ -851,6 +864,7 @@ const FormularioCurriculum = () => {
                   value={ciudad}
                   onChange={(e) => setCiudad(e.target.value)}
                   required
+                  disabled={true}
                   // {...register("ciudad", {
                   //   required: "Este campo es requerido",
                   //   onChange: (e) => setCiudad(e.target.value),
@@ -879,6 +893,7 @@ const FormularioCurriculum = () => {
                   value={numeroHijos}
                   onChange={(e) => setNumeroHijos(e.target.value)}
                   required
+                  disabled={true}
                   // {...register("numeroHijos", {
                   //   required: "Este campo es requerido",
                   //   onChange: (e) => setNumeroHijos(e.target.value),
@@ -907,6 +922,7 @@ const FormularioCurriculum = () => {
                   value={tipoSangre}
                   onChange={(e) => setTipoSangre(e.target.value)}
                   required
+                  disabled={true}
                   // {...register("tipoSangre", {
                   //   required: "Este campo es requerido",
                   //   onChange: (e) => setTipoSangre(e.target.value),
@@ -942,6 +958,7 @@ const FormularioCurriculum = () => {
                     setNivel(selectedNivel);
                   }}
                   value={nivel}
+                  disabled={true}
                 >
                   <option value="Ninguno">Ninguno</option>
                   <option value="Técnico Profesional">
@@ -973,6 +990,7 @@ const FormularioCurriculum = () => {
                   value={titulo}
                   onChange={(e) => setTitulo(e.target.value)}
                   required
+                  disabled={true}
                   // {...register("titulo", {
                   //   required: "Este campo es requerido",
                   //   onChange: (e) => setTitulo(e.target.value),
@@ -1000,6 +1018,7 @@ const FormularioCurriculum = () => {
                   value={anioTitulo}
                   onChange={(e) => setAnioTitulo(e.target.value)}
                   required
+                  disabled={true}
                   // {...register("anioTitulo", {
                   //   required: "Este campo es requerido",
                   //   onChange: (e) => setAnioTitulo(e.target.value),
@@ -1028,6 +1047,7 @@ const FormularioCurriculum = () => {
                   value={institucionTitulo}
                   onChange={(e) => setInstitucionTitulo(e.target.value)}
                   required
+                  disabled={true}
                   // {...register("institucionTitulo", {
                   //   required: "Este campo es requerido",
                   //   onChange: (e) => setInstitucionTitulo(e.target.value),
@@ -1062,6 +1082,7 @@ const FormularioCurriculum = () => {
                   value={empresaExp}
                   onChange={(e) => setEmpresaExp(e.target.value)}
                   required
+                  disabled={true}
                   // {...register("empresaExp", {
                   //   required: "Este campo es requerido",
                   //   onChange: (e) => setEmpresaExp(e.target.value),
@@ -1089,6 +1110,7 @@ const FormularioCurriculum = () => {
                   value={fechaInicioExp}
                   onChange={(e) => setFechaInicioExp(e.target.value)}
                   required
+                  disabled={true}
                   // {...register("fechaInicioExp", {
                   //   required: "Este campo es requerido",
                   //   onChange: (e) => setFechaInicioExp(e.target.value),
@@ -1115,6 +1137,7 @@ const FormularioCurriculum = () => {
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={fechaFinExp}
                   onChange={(e) => setFechaFinExp(e.target.value)}
+                  disabled={true}
                 />
               </div>
             </div>
@@ -1147,6 +1170,7 @@ const FormularioCurriculum = () => {
                   id="soporteExp"
                   onChange={(e) => handleSoporteExp(e.target.files[0])}
                   accept=".pdf"
+                  disabled={true}
                 />
               </div>
               {errorSoporteExp === true && (
@@ -1155,12 +1179,12 @@ const FormularioCurriculum = () => {
                 </span>
               )}
               <div className="mt-3">
-                {curriculum[0]?.soporteExp && (
+                {collaborator[0]?.soporteExp && (
                   <a
                     href={`${import.meta.env.VITE_BACKEND_URL}/${
-                      curriculum[0].soporteExp
+                      collaborator[0].soporteExp
                     }`}
-                    download={curriculum[0].soporteExp}
+                    download={collaborator[0].soporteExp}
                     target="_blank"
                     className="underline text-blue-500 pt-5"
                   >
@@ -1175,8 +1199,8 @@ const FormularioCurriculum = () => {
           </div>
           <div className="border-b border-gray-200 pb-2">
             <h6 className="text-sm font-medium leading-6 text-gray-900">
-              Referencia 1 <span className="italic"> (Familiar)</span>
-            </h6>            
+              Referencia 1
+            </h6>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             <div>
@@ -1197,6 +1221,7 @@ const FormularioCurriculum = () => {
                   value={nombreRefA}
                   onChange={(e) => setNombreRefA(e.target.value)}
                   required
+                  disabled={true}
                   // {...register("nombreRefA", {
                   //   required: "Este campo es requerido",
                   //   onChange: (e) => setNombreRefA(e.target.value),
@@ -1225,6 +1250,7 @@ const FormularioCurriculum = () => {
                   value={telefonoRefA}
                   onChange={(e) => setTelefonoRefA(e.target.value)}
                   required
+                  disabled={true}
                   // {...register("telefonoRefA", {
                   //   required: "Este campo es requerido",
                   //   onChange: (e) => setTelefonoRefA(e.target.value),
@@ -1253,6 +1279,7 @@ const FormularioCurriculum = () => {
                   value={correoRefA}
                   onChange={(e) => setCorreoRefA(e.target.value)}
                   required
+                  disabled={true}
                   // {...register("correoRefA", {
                   //   required: "Este campo es requerido",
                   //   onChange: (e) => setCorreoRefA(e.target.value),
@@ -1266,7 +1293,7 @@ const FormularioCurriculum = () => {
           </div>
           <div className="border-b border-gray-200 pb-2">
             <h6 className="text-sm font-medium leading-6 text-gray-900">
-              Referencia 2 <span className="italic"> (Personal)</span>
+              Referencia 2
             </h6>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
@@ -1287,6 +1314,7 @@ const FormularioCurriculum = () => {
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={nombreRefB}
                   onChange={(e) => setNombreRefB(e.target.value)}
+                  disabled={true}
                 />
               </div>
             </div>
@@ -1307,6 +1335,7 @@ const FormularioCurriculum = () => {
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={telefonoRefB}
                   onChange={(e) => setTelefonoRefB(e.target.value)}
+                  disabled={true}
                 />
               </div>
             </div>
@@ -1327,6 +1356,7 @@ const FormularioCurriculum = () => {
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={correoRefB}
                   onChange={(e) => setCorreoRefB(e.target.value)}
+                  disabled={true}
                 />
               </div>
             </div>
@@ -1351,9 +1381,11 @@ const FormularioCurriculum = () => {
                   onChange={(e) => {
                     const selectedEPS = e.target.value;
                     setEPS(selectedEPS);
+
                   }}
                   value={eps}
                   required
+                  disabled={true}
                 >
                   <option value="Asociacion Mutual Ser Eps">Asociacion Mutual Ser Eps</option>
                   <option value="Cajacopi Eps">Cajacopi Eps</option>
@@ -1400,6 +1432,7 @@ const FormularioCurriculum = () => {
                   name="soporteEps"
                   onChange={(e) => handleSoporteEps(e.target.files[0])}
                   accept=".pdf"
+                  disabled={true}
                 />
               </div>
               {errorSoporteEps === true && (
@@ -1408,12 +1441,12 @@ const FormularioCurriculum = () => {
                 </span>
               )}
               <div className="mt-3">
-                {curriculum[0]?.soporteEps && (
+                {collaborator[0]?.soporteEps && (
                   <a
                     href={`${import.meta.env.VITE_BACKEND_URL}/${
-                      curriculum[0].soporteEps
+                      collaborator[0].soporteEps
                     }`}
-                    download={curriculum[0].soporteEps}
+                    download={collaborator[0].soporteEps}
                     target="_blank"
                     className="underline text-blue-500 pt-5"
                   >
@@ -1440,6 +1473,7 @@ const FormularioCurriculum = () => {
                     setPension(selectedPension);
                   }}
                   value={pension}
+                  disabled={true}
                 >
                   <option value="Proteccion">Proteccion</option>
                   <option value="Porvenir">Porvenir</option>
@@ -1478,6 +1512,7 @@ const FormularioCurriculum = () => {
                   name="soportePension"
                   onChange={(e) => handleSoportePension(e.target.files[0])}
                   accept=".pdf"
+                  disabled={true}
                 />
               </div>
               {errorSoportePension === true && (
@@ -1486,12 +1521,12 @@ const FormularioCurriculum = () => {
                 </span>
               )}
               <div className="mt-3">
-                {curriculum[0]?.soportePension && (
+                {collaborator[0]?.soportePension && (
                   <a
                     href={`${import.meta.env.VITE_BACKEND_URL}/${
-                      curriculum[0].soportePension
+                      collaborator[0].soportePension
                     }`}
-                    download={curriculum[0].soportePension}
+                    download={collaborator[0].soportePension}
                     target="_blank"
                     className="underline text-blue-500 pt-5"
                   >
@@ -1539,6 +1574,7 @@ const FormularioCurriculum = () => {
                         name="ciu"
                         value={item.ciu}
                         onChange={(e) => handleinputchange(e, i)}
+                        disabled={true}
                       />
                     </div>
                     <div className="">
@@ -1567,6 +1603,7 @@ const FormularioCurriculum = () => {
                         name="actividad_economica"
                         value={item.actividad_economica}
                         onChange={(e) => handleinputchange(e, i)}
+                        disabled={true}
                       />
                     </div>
                     <div className="grid grid-cols-2 gap-4 pt-6 ">
@@ -1622,6 +1659,7 @@ const FormularioCurriculum = () => {
                   id="rut"
                   onChange={(e) => handleSoporteRut(e.target.files[0])}
                   accept=".pdf"
+                  disabled={true}
                 />
               </div>
               {errorSoporteRut === true && (
@@ -1630,12 +1668,12 @@ const FormularioCurriculum = () => {
                 </span>
               )}
               <div className="mt-3">
-                {curriculum[0]?.rut && (
+                {collaborator[0]?.rut && (
                   <a
                     href={`${import.meta.env.VITE_BACKEND_URL}/${
-                      curriculum[0].rut
+                      collaborator[0].rut
                     }`}
-                    download={curriculum[0].rut}
+                    download={collaborator[0].rut}
                     target="_blank"
                     className="underline text-blue-500 pt-5"
                   >
@@ -1649,7 +1687,7 @@ const FormularioCurriculum = () => {
                 htmlFor="numeroRut"
                 className="block text-sm font-medium text-gray-700"
               >
-                Número de Formulario
+                Número RUT
               </label>
               <div className="mt-1">
                 <input
@@ -1660,12 +1698,11 @@ const FormularioCurriculum = () => {
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={numeroRut}
                   onChange={(e) => setNumeroRut(e.target.value)}
+                  disabled={true}
                 />
               </div>
-            </div>   
-            <div className=""></div>     
-            <div className=""></div>
-            <div className="hidden">
+            </div>
+            <div>
               <label
                 htmlFor="fechaCorte"
                 className="block text-sm font-medium text-gray-700"
@@ -1680,9 +1717,11 @@ const FormularioCurriculum = () => {
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={fechaCorte}
                   onChange={(e) => setFechaCorte(e.target.value)}
+                  disabled={true}
                 />
               </div>
-            </div>  
+            </div>
+
             <div>
               <label
                 htmlFor="ingresosAnuales"
@@ -1699,9 +1738,11 @@ const FormularioCurriculum = () => {
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={ingresosAnuales}
                   onChange={(e) => setIngresosAnuales(e.target.value)}
+                  disabled={true}
                 />
               </div>
-            </div>       
+            </div>
+
             <div>
               <label
                 htmlFor="egresosAnuales"
@@ -1718,6 +1759,7 @@ const FormularioCurriculum = () => {
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={egresosAnuales}
                   onChange={(e) => setEgresosAnuales(e.target.value)}
+                  disabled={true}
                 />
               </div>
             </div>
@@ -1738,10 +1780,32 @@ const FormularioCurriculum = () => {
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={otrosIngresos}
                   onChange={(e) => setOtrosIngresos(e.target.value)}
+                  disabled={true}
                 />
               </div>
             </div>
-            <div className=""></div>      
+
+            <div>
+              <label
+                htmlFor="patrimonio"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Patrimonio
+              </label>
+              <div className="mt-1">
+                <input
+                  id="patrimonio"
+                  name="patrimonio"
+                  type="number"
+                  placeholder="Digite su patrimonio"
+                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                  value={patrimonio}
+                  onChange={(e) => setPatrimonio(e.target.value)}
+                  disabled={true}
+                />
+              </div>
+            </div>
+
             <div>
               <label
                 htmlFor="activos"
@@ -1757,8 +1821,8 @@ const FormularioCurriculum = () => {
                   placeholder="Digite total activos"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={activos}
-                  onChange={(e) => { setActivos(e.target.value)}}
-                  onBlur={(e) => { sumPatrimonio(e.target.value)}}
+                  onChange={(e) => setActivos(e.target.value)}
+                  disabled={true}
                 />
               </div>
             </div>
@@ -1778,31 +1842,12 @@ const FormularioCurriculum = () => {
                   placeholder="Digite total pasivos"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={pasivos}
-                  onChange={(e) => { setPasivos(e.target.value)}}
-                  onBlur={(e) => { sumPatrimonio(e.target.value)}}
+                  onChange={(e) => setPasivos(e.target.value)}
+                  disabled={true}
                 />
               </div>
             </div>
-            <div>
-              <label
-                htmlFor="patrimonio"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Patrimonio
-              </label>
-              <div className="mt-1">
-                <input
-                  id="patrimonio"
-                  name="patrimonio"
-                  type="number"
-                  placeholder="Digite su patrimonio"
-                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                  value={patrimonio}
-                  readOnly="readonly"
-                  onChange={(e) => setPatrimonio(e.target.value)}
-                />
-              </div>
-            </div>        
+
             <div>
               <label
                 htmlFor="descripcionIngresos"
@@ -1810,16 +1855,16 @@ const FormularioCurriculum = () => {
               >
                 Descripción de otros ingresos
               </label>
-              <div className="mt-1"> 
-                <textarea
+              <div className="mt-1">
+                <input
                   id="descripcionIngresos"
                   name="descripcionIngresos"
                   type="text"
                   placeholder=""
-                  rows="3"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={descripcionIngresos}
                   onChange={(e) => setDescripcionIngresos(e.target.value)}
+                  disabled={true}
                 />
               </div>
             </div>
@@ -1842,6 +1887,7 @@ const FormularioCurriculum = () => {
                       checked={poseeCuenta && poseeCuenta === "Si"}
                       value="Si"
                       onChange={(e) => setPoseeCuenta(e.target.value)}
+                      disabled={true}
                     />
                   </div>
                   <label
@@ -1863,6 +1909,7 @@ const FormularioCurriculum = () => {
                       checked={poseeCuenta && poseeCuenta === "No"}
                       value="No"
                       onChange={(e) => setPoseeCuenta(e.target.value)}
+                      disabled={true}
                     />
                   </div>
                   <label
@@ -1911,6 +1958,7 @@ const FormularioCurriculum = () => {
                         name="nro_cuenta"
                         value={item.nro_cuenta}
                         onChange={(e) => handleinputchangeCuenta(e, i)}
+                        disabled={true}
                       />
                     </div>
                     <div className="">
@@ -1939,6 +1987,7 @@ const FormularioCurriculum = () => {
                         name="banco"
                         value={item.banco}
                         onChange={(e) => handleinputchangeCuenta(e, i)}
+                        disabled={true}
                       />
                     </div>
                     <div className="">
@@ -1967,6 +2016,7 @@ const FormularioCurriculum = () => {
                         name="ciudad"
                         value={item.ciudad}
                         onChange={(e) => handleinputchangeCuenta(e, i)}
+                        disabled={true}
                       />
                     </div>
 
@@ -1996,6 +2046,7 @@ const FormularioCurriculum = () => {
                         name="pais"
                         value={item.pais}
                         onChange={(e) => handleinputchangeCuenta(e, i)}
+                        disabled={true}
                       />
                     </div>
                     <div className="">
@@ -2024,6 +2075,7 @@ const FormularioCurriculum = () => {
                         name="moneda"
                         value={item.moneda}
                         onChange={(e) => handleinputchangeCuenta(e, i)}
+                        disabled={true}
                       />
                     </div>
                     <div className="grid grid-cols-2 gap-4 pt-6 ">
@@ -2068,6 +2120,7 @@ const FormularioCurriculum = () => {
                       }
                       value="Si"
                       onChange={(e) => setOperacionesExtranjera(e.target.value)}
+                      disabled={true}
                     />
                   </div>
                   <label
@@ -2091,6 +2144,7 @@ const FormularioCurriculum = () => {
                       }
                       value="No"
                       onChange={(e) => setOperacionesExtranjera(e.target.value)}
+                      disabled={true}
                     />
                   </div>
                   <label
@@ -2117,6 +2171,7 @@ const FormularioCurriculum = () => {
                   //checked={exportaciones === "exportaciones"}
                   //onChange={(e) => setExportaciones(e.target.value)}
                   onChange={handleChangeExportaciones}
+                  disabled={true}
                 />
                 <label htmlFor="exportaciones">Exportaciones</label>
               </div>
@@ -2129,6 +2184,7 @@ const FormularioCurriculum = () => {
                   value="transferencias"
                   checked={transferencias}
                   onChange={handleChangeTransferencias}
+                  disabled={true}
                 />
                 <label htmlFor="transferencias">Transferencias</label>
               </div>
@@ -2140,6 +2196,7 @@ const FormularioCurriculum = () => {
                   value="pagoServicios"
                   checked={pagoServicios}
                   onChange={handleChangePagoServicios}
+                  disabled={true}
                 />
                 <label htmlFor="pagoServicios">Pago de Servicios</label>
               </div>
@@ -2151,6 +2208,7 @@ const FormularioCurriculum = () => {
                   value="importaciones"
                   checked={importaciones}
                   onChange={handleChangeImportaciones}
+                  disabled={true}
                 />
                 <label htmlFor="importaciones">Importaciones</label>
               </div>
@@ -2162,6 +2220,7 @@ const FormularioCurriculum = () => {
                   value="prestamos"
                   checked={prestamos}
                   onChange={handleChangePrestamos}
+                  disabled={true}
                 />
                 <label htmlFor="prestamos">Prestamos en Moneda</label>
               </div>
@@ -2173,6 +2232,7 @@ const FormularioCurriculum = () => {
                   value="otras"
                   checked={otras}
                   onChange={handleChangeOtrasOperaciones}
+                  disabled={true}
                 />
                 <label htmlFor="otras">Otras</label>
               </div>
@@ -2217,6 +2277,7 @@ const FormularioCurriculum = () => {
                             name="nombre"
                             value={item.nombre}
                             onChange={(e) => handleinputchangeExt(e, i)}
+                            disabled={true}
                           />
                         </div>
                         <div className="">
@@ -2245,6 +2306,7 @@ const FormularioCurriculum = () => {
                             name="email"
                             value={item.email}
                             onChange={(e) => handleinputchangeExt(e, i)}
+                            disabled={true}
                           />
                         </div>
                         <div className="">
@@ -2273,6 +2335,7 @@ const FormularioCurriculum = () => {
                             name="telefono"
                             value={item.telefono}
                             onChange={(e) => handleinputchangeExt(e, i)}
+                            disabled={true}
                           />
                         </div>
                         <div className="grid grid-cols-2 gap-4 pt-6 ">
@@ -2299,10 +2362,10 @@ const FormularioCurriculum = () => {
                 })}
             </div>
           </div>
-          <div className="hidden text-left text-xl text-gray-700 mt-8 font-bold border-b-4 border-corporative-blue inline-flex pt-3">
+          <div className="text-left text-xl text-gray-700 mt-8 font-bold border-b-4 border-corporative-blue inline-flex pt-3">
             Referencias Bancarias
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 hidden">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             <div>
               <label
                 htmlFor="tipoCuenta"
@@ -2322,6 +2385,7 @@ const FormularioCurriculum = () => {
                     setTipoCuenta(selectedTipoCuenta);
                   }}
                   value={tipoCuenta}
+                  disabled={true}
                 >
                   <option value="Ahorro">Ahorro</option>
                   <option value="Corriente">Corriente</option>
@@ -2345,6 +2409,7 @@ const FormularioCurriculum = () => {
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={entidadBancaria}
                   onChange={(e) => setEntidadBancaria(e.target.value)}
+                  disabled={true}
                 />
               </div>
             </div>
@@ -2364,6 +2429,7 @@ const FormularioCurriculum = () => {
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={numeroCuenta}
                   onChange={(e) => setNumeroCuenta(e.target.value)}
+                  disabled={true}
                 />
               </div>
             </div>
@@ -2389,8 +2455,8 @@ const FormularioCurriculum = () => {
                   placeholder="Digita codigo de ingreso"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={codigoIngreso}
-                  readOnly="readonly"
                   onChange={(e) => setCodigoIngreso(e.target.value)}
+                  
                 />
               </div>
             </div>
@@ -2410,7 +2476,6 @@ const FormularioCurriculum = () => {
                   placeholder="Digitar tipo de Contrato"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={tipoContrato}
-                  readOnly="readonly"
                   onChange={(e) => setTipoContrato(e.target.value)}
                 />
               </div>
@@ -2429,7 +2494,6 @@ const FormularioCurriculum = () => {
                   type="date"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={fechaIngreso}
-                  readOnly="readonly"
                   onChange={(e) => setFechaIngreso(e.target.value)}
                 />
               </div>
@@ -2449,7 +2513,6 @@ const FormularioCurriculum = () => {
                   placeholder="Digite fecha fin"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={fechaFin}
-                  readOnly="readonly"
                   onChange={(e) => setFechaFin(e.target.value)}
                 />
               </div>
@@ -2470,7 +2533,6 @@ const FormularioCurriculum = () => {
                   placeholder="Digita nombre empresa"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={empresa}
-                  readOnly="readonly"
                   onChange={(e) => setEmpresa(e.target.value)}
                 />
               </div>
@@ -2491,7 +2553,6 @@ const FormularioCurriculum = () => {
                   placeholder="Digitar la nomina"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={nomina}
-                  readOnly="readonly"
                   onChange={(e) => setNomina(e.target.value)}
                 />
               </div>
@@ -2512,7 +2573,6 @@ const FormularioCurriculum = () => {
                   placeholder="Digitar salario"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={sueldo}
-                  readOnly="readonly"
                   onChange={(e) => setSueldo(e.target.value)}
                 />
               </div>
@@ -2533,7 +2593,6 @@ const FormularioCurriculum = () => {
                   placeholder="Digitar la cargo"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={cargo}
-                  readOnly="readonly"
                   onChange={(e) => setCargo(e.target.value)}
                 />
               </div>
@@ -2566,7 +2625,6 @@ const FormularioCurriculum = () => {
                   id="soporteContrato"
                   name="soporteContrato"
                   onChange={(e) => handleSoporteContrato(e.target.files[0])}
-                  disabled="disabled"
                   accept=".pdf"
                 />
               </div>
@@ -2576,12 +2634,12 @@ const FormularioCurriculum = () => {
                 </span>
               )}
               <div className="mt-3">
-                {curriculum[0]?.soporteContrato && (
+                {collaborator[0]?.soporteContrato && (
                   <a
                     href={`${import.meta.env.VITE_BACKEND_URL}/${
-                      curriculum[0].soporteContrato
+                      collaborator[0].soporteContrato
                     }`}
-                    download={curriculum[0].soporteContrato}
+                    download={collaborator[0].soporteContrato}
                     target="_blank"
                     className="underline text-blue-500 pt-5"
                   >
