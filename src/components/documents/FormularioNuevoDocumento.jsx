@@ -18,9 +18,13 @@ const FormularioNuevoDocumento = () => {
   const [responsable, setResponsable] = useState("");
   const [fuente, setFuente] = useState("");
   const [link, setLink] = useState("");
-  const [inputVersiones, setInputVersiones] = useState([
-    { version: 1, url: " ", observaciones:"", estado:"Vigente" },
-  ]);
+  // const [inputVersiones, setInputVersiones] = useState([
+  //   { version: 1, url: " ", observaciones:"", estado:"Vigente" },
+  // ]);
+
+  // const [inputTest, setInputTest] = useState([
+  //   { numero: ""},
+  // ]);
 
   const params = useParams();
 
@@ -51,7 +55,8 @@ const FormularioNuevoDocumento = () => {
       setResponsable(documento.responsable);
       setFuente(documento.fuente);
       setLink(documento.link);
-      setInputVersiones(documento.inputVersiones);
+      //setInputVersiones(documento.inputVersiones);
+      //setInputTest(documento.inputTest)
     }
   }, []);
 
@@ -93,7 +98,8 @@ const FormularioNuevoDocumento = () => {
       responsable,
       fuente,
       link,
-      inputVersiones
+      //inputVersiones,
+     // inputTest
     });
     // setNombre("");
     // setDescripcion("");
@@ -101,38 +107,51 @@ const FormularioNuevoDocumento = () => {
     // setCliente("");
   };
 
-  const handleinputchange = (e, index) => {
-    const { name, value } = e.target;
-    const list = [...inputVersiones];
-    list[index][name] = value;
-    setInputVersiones(list);
+
+   const handleChange = (event) => {
+    console.log(inputTest)
+    const { name, value } = event.target;
+    const list = [...inputTest];
+    console.log(name, value)
+    list[list.length][name] = value;
+    console.log(list)
+    setInputTest(list)
+   
   };
 
-  const handleremove = (e, index) => {
-    e.preventDefault();
-    const list = [...inputVersiones];
-    list.splice(index, 1);
-    for (let i = 0; i < list.length; i++) {
-      if(i === list.length -1){
-        list[i].estado = "Vigente"
-      }
-      list[i].version = i +1 
+  // const handleinputchange = (e, index) => {
+  //   console.log("Hola")
+  //   const { name, value } = e.target;
+  //   const list = [...inputTest];
+  //   list[index][name] = value;
+  //   setInputTest(list);
+  // };
 
-    }
-    setInputVersiones(list);
-  };
+  // const handleremove = (e, index) => {
+  //   e.preventDefault();
+  //   const list = [...inputVersiones];
+  //   list.splice(index, 1);
+  //   for (let i = 0; i < list.length; i++) {
+  //     if(i === list.length -1){
+  //       list[i].estado = "Vigente"
+  //     }
+  //     list[i].version = i +1 
 
-  const handleaddclick = (index) => {
-     const list = [...inputVersiones];
-     console.log(list.length)
-     for (let i = 0; i < list.length; i++) {
-      list[i].estado = "Obsoleto"
-    }
-    setInputVersiones([
-      ...list,
-      { version: index +2, estado:"Vigente" },
-    ]);
-  };
+  //   }
+  //   setInputVersiones(list);
+  // };
+
+  // const handleaddclick = (index) => {
+  //    const list = [...inputVersiones];
+  //    console.log(list.length)
+  //    for (let i = 0; i < list.length; i++) {
+  //     list[i].estado = "Obsoleto"
+  //   }
+  //   setInputVersiones([
+  //     ...list,
+  //     { version: index +2, estado:"Vigente" },
+  //   ]);
+  // };
 
 
   const { msg } = alerta;
@@ -473,11 +492,34 @@ const FormularioNuevoDocumento = () => {
             </div>
           </div>
 
-           <div className="text-left text-xl text-gray-700 mt-8 font-bold border-b-4 border-corporative-blue inline-flex">
+          {/* <div className="text-left text-xl text-gray-700 mt-8 font-bold border-b-4 border-corporative-blue inline-flex">
             Versiones
           </div>
 
+
           <div>
+              <label
+                htmlFor="numero"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Número<span className="text-red-700">*</span>
+              </label>
+              <div className="mt-1">
+                <input
+                  id="numero"
+                  name="numero"
+                  type="text"
+                  placeholder="Digite la version"
+                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                  value={inputTest.numero}
+                  onChange={(e) => handleChange(e)}
+                  required={true}
+                />
+              </div>
+            </div> */}
+
+
+          {/* <div>
             {Array.isArray(documento.inputVersiones) && documento.inputVersiones.length > 0 ? 
               <>
               {console.log("AQui estoy")}
@@ -753,7 +795,7 @@ const FormularioNuevoDocumento = () => {
               </>
           }
            
-          </div>
+          </div> */}
 
           <div className="grid grid-cols-2 gap-6 w-3/5 mx-auto">
             <Link
