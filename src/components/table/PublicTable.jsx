@@ -145,8 +145,8 @@ const PublicTable = ({ data, columns }) => {
                                   {cell.render("Cell")}
                                 </span>
                               ) : (
-                                 <span className="w-auto max-w-sm flex">
-                                   <div className="">
+                                 <span className="w-auto max-w-sm flex ">
+                                   <div className=" space-x-2">
                                        { cell.render("Cell")}
                                    </div>
                                  

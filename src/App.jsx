@@ -29,6 +29,7 @@ import DataPublic from "./pages/public/DataPublic";
 import ListarCertificadoDesprendible from "./pages/ListarCertificadoDesprendible";
 import ListadoColaboradores from "./components/human_resources/ListadoColaboradores";
 import EditarColaborador from "./pages/recursos_humanos/EditarColaborador";
+import ListarVersiones from "./components/documents/ListarVersiones";
 
 function App() {
   return (
@@ -156,7 +157,13 @@ function App() {
                       <Route
                         path="editar-documento/:id"
                         element={<EditarDocumento />}
+                      >
+                      </Route>
+                      <Route
+                        path="editar-documento/:id/listar-versiones"
+                        element={<ListarVersiones />}
                       />
+                      
                     </Route>
                     <Route
                       path="/colaboradores"
