@@ -71,6 +71,12 @@ export default function DataPublic() {
     },
     { Header: "Proceso", accessor: "proceso"},
     { Header: "Titulo", accessor: "titulo"},
+    { Header: "Tags", 
+      accessor: "selectedTag",
+      Cell: ({ value }) => {
+        return (value.length > 0 && value.map((tag)=> (<span  className="bg-blue-500 text-white rounded-full px-3 py-1 text-xs ">{tag}</span> )))
+      },
+    },
     {
       Header: "Fecha de creación",
       accessor: "createdAt",
@@ -109,7 +115,7 @@ export default function DataPublic() {
           
           <a
             className="text-blue-500 hover:text-blue-900"
-            href={originalRow.inputVersiones[originalRow.inputVersiones.length -1].url}
+            href={originalRow.link}
             target="_blank"
           >
             <svg
@@ -133,7 +139,7 @@ export default function DataPublic() {
   ]);
 
   // if (!documentosPublicos) return <BeatLoader color="#36d7b7" />;
-  // console.log(documentosPublicos);
+  console.log(documentosPublicos);
   return (
     <>
       {visible === true && (

@@ -18,3 +18,13 @@ input[type="date"][disabled] {
 select[disabled]{
    background-color:#F0F0F0;
 }
+
+
+element.style {
+}
+
+.rti--container {
+  
+    --rti-s: .415rem !important;
+    
+}

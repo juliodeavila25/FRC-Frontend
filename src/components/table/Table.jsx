@@ -129,7 +129,7 @@ const Table = ({ data, columns, href, title, titleButton }) => {
                         {row.cells.map((cell) => {
                           return (
                             <td
-                              className="whitespace-nowrap px-3 py-4 text-sm text-gray-500 "
+                              className="whitespace-pre-line px-3 py-4 text-sm text-gray-500 truncate"
                               {...cell.getCellProps()}
                             >
                               {cell.value === "activo" ? (
@@ -141,8 +141,8 @@ const Table = ({ data, columns, href, title, titleButton }) => {
                                   {cell.render("Cell")}
                                 </span>
                               ) : (
-                                <span className="w-auto max-w-sm truncate flex ">
-                                   <div className="text-ellipsis overflow-hidden">
+                                <span className="w-auto max-w-sm flex"> 
+                                   <div className="">
                                        { cell.render("Cell")}
                                    </div>
                                  
