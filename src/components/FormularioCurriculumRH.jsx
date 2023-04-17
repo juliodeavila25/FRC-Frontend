@@ -5,8 +5,6 @@ import useCollaborators from "../hooks/useCollaborators";
 import Alert from "./Alert";
 import useAuth from "../hooks/useAuth";
 import { BeatLoader } from "react-spinners";
-import { Errors } from "./ui/Errors";
-import { useForm } from "react-hook-form";
 
 const FormularioCurriculum = () => {
   const [id, setId] = useState(null);
@@ -76,7 +74,7 @@ const FormularioCurriculum = () => {
     { nro_cuenta: " ", banco: " ", ciudad: " ", pais: "", moneda: " " },
   ]);
 
-  //console.log(inputCuentas);
+  console.log(ciuu);
 
   const [operacionesExtranjera, setOperacionesExtranjera] = useState("Si");
 

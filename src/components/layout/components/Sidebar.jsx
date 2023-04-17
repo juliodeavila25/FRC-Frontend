@@ -11,7 +11,8 @@ import {
   DocumentTextIcon,
   DocumentCheckIcon,
   UsersIcon,
-  TableCellsIcon
+  TableCellsIcon,
+  AcademicCapIcon
   
 } from "@heroicons/react/24/outline";
 
@@ -97,6 +98,14 @@ const Sidebar = () => {
       icon: UsersIcon,
       current: location.pathname.includes("/colaboradores") ? true : false,
     },
+
+     {
+      name: "Cargos",
+      href: "/cargos/listar-cargos",
+      icon: AcademicCapIcon,
+      current: location.pathname.includes("/cargos") ? true : false,
+    },
+
     {
       name: "Ofertas de empleo",
       href: "/recursos-humanos/listar-convocatorias",

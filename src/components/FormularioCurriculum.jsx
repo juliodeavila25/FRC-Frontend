@@ -5,8 +5,11 @@ import useCollaborators from "../hooks/useCollaborators";
 import Alert from "./Alert";
 import useAuth from "../hooks/useAuth";
 import { BeatLoader } from "react-spinners";
-import { Errors } from "./ui/Errors";
-import { useForm } from "react-hook-form";
+import { ReactSearchAutocomplete } from 'react-search-autocomplete'
+import ciuu from '../json/ciuu.json'
+
+
+
 
 const FormularioCurriculum = () => {
   const [id, setId] = useState(null);
@@ -76,7 +79,7 @@ const FormularioCurriculum = () => {
     { nro_cuenta: " ", banco: " ", ciudad: " ", pais: "", moneda: " " },
   ]);
 
-  //console.log(inputCuentas);
+  console.log(ciuu);
 
   const [operacionesExtranjera, setOperacionesExtranjera] = useState("Si");
 
@@ -1513,6 +1516,31 @@ const FormularioCurriculum = () => {
                     key={i}
                     className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 pt-5"
                   >
+                     {/* <div className="z-10 relative">
+                    <ReactSearchAutocomplete
+                      items={ciuu}
+                      placeholder="Busqueda"
+                      styling={{
+                        borderRadius: '5px',
+                        boxShadow: '0 2px 12px rgba(0, 0, 0, 0.1)',
+                        backgroundColor: 'rgba(255, 255, 255, 0.9) ',
+                        padding: '2px 0',
+                        fontSize: '90%',
+                        //position: 'absolute',
+                        overflow: 'auto',
+                        maxHeight: '50%', // TODO: don't cheat, let it flow to the bottom
+                        "zIndex": 1000,
+                      }}
+                      className=""
+                      // onSearch={handleOnSearch}
+                      // onHover={handleOnHover}
+                      // onSelect={handleOnSelect}
+                      // onFocus={handleOnFocus}
+                      // autoFocus
+                      // formatResult={formatResult}
+                      showIcon={false}
+                    />
+                    </div> */}
                     <div className="">
                       <label className="block text-sm font-medium text-gray-700">
                         CIU

@@ -1,0 +1,2002 @@
+﻿[
+ {
+  "id": 46,
+  "name": "46 - Comercio al por mayor y en comisión o por contrata, excepto el comercio de vehículos automotores y motocicletas."
+ },
+ {
+  "id": 10,
+  "name": "0010 - Asalariados"
+ },
+ {
+  "id": 81,
+  "name": "0081 - Personas Naturales sin Actividad Económica"
+ },
+ {
+  "id": 82,
+  "name": "0082 - Personas Naturales Subsidiadas por Terceros"
+ },
+ {
+  "id": 90,
+  "name": "0090 - Rentistas de Capital, solo para personas naturales."
+ },
+ {
+  "id": 111,
+  "name": "0111 - Cultivo de cereales (excepto arroz), legumbres y semillas oleaginosas."
+ },
+ {
+  "id": 112,
+  "name": "0112 - Cultivo de arroz."
+ },
+ {
+  "id": 113,
+  "name": "0113 - Cultivo de hortalizas, raíces y tubérculos."
+ },
+ {
+  "id": 114,
+  "name": "0114 - Cultivo de tabaco."
+ },
+ {
+  "id": 115,
+  "name": "0115 - Cultivo de plantas textiles."
+ },
+ {
+  "id": 119,
+  "name": "0119 - Otros cultivos transitorios n.c.p."
+ },
+ {
+  "id": 121,
+  "name": "0121 - Cultivo de frutas tropicales y subtropicales."
+ },
+ {
+  "id": 122,
+  "name": "0122 - Cultivo de plátano y banano."
+ },
+ {
+  "id": 123,
+  "name": "0123 - Cultivo de café."
+ },
+ {
+  "id": 124,
+  "name": "0124 - Cultivo de caña de azúcar."
+ },
+ {
+  "id": 125,
+  "name": "0125 - Cultivo de flor de corte."
+ },
+ {
+  "id": 126,
+  "name": "0126 - Cultivo de palma para aceite (palma africana) y otros frutos oleaginosos."
+ },
+ {
+  "id": 127,
+  "name": "0127 - Cultivo de plantas con las que se preparan bebidas."
+ },
+ {
+  "id": 128,
+  "name": "0128 - Cultivo de especias y de plantas aromáticas y medicinales."
+ },
+ {
+  "id": 129,
+  "name": "0129 - Otros cultivos permanentes n.c.p."
+ },
+ {
+  "id": 130,
+  "name": "0130 - Propagación de plantas (actividades de los viveros, excepto viveros forestales)."
+ },
+ {
+  "id": 141,
+  "name": "0141 - Cría de ganado bovino y bufalino."
+ },
+ {
+  "id": 142,
+  "name": "0142 - Cría de caballos y otros equinos."
+ },
+ {
+  "id": 143,
+  "name": "0143 - Cría de ovejas y cabras."
+ },
+ {
+  "id": 144,
+  "name": "0144 - Cría de ganado porcino."
+ },
+ {
+  "id": 145,
+  "name": "0145 - Cría de aves de corral."
+ },
+ {
+  "id": 149,
+  "name": "0149 - Cría de otros animales n.c.p."
+ },
+ {
+  "id": 150,
+  "name": "0150 - Explotación mixta (agrícola y pecuaria)."
+ },
+ {
+  "id": 161,
+  "name": "0161 - Actividades de apoyo a la agricultura."
+ },
+ {
+  "id": 162,
+  "name": "0162 - Actividades de apoyo a la ganadería."
+ },
+ {
+  "id": 163,
+  "name": "0163 - Actividades posteriores a la cosecha."
+ },
+ {
+  "id": 164,
+  "name": "0164 - Tratamiento de semillas para propagación."
+ },
+ {
+  "id": 170,
+  "name": "0170 - Caza ordinaria y mediante trampas y actividades de servicios conexas."
+ },
+ {
+  "id": 210,
+  "name": "0210 - Silvicultura y otras actividades forestales."
+ },
+ {
+  "id": 220,
+  "name": "0220 - Extracción de madera."
+ },
+ {
+  "id": 230,
+  "name": "0230 - Recolección de productos forestales diferentes a la madera."
+ },
+ {
+  "id": 240,
+  "name": "0240 - Servicios de apoyo a la silvicultura."
+ },
+ {
+  "id": 311,
+  "name": "0311 - Pesca marítima."
+ },
+ {
+  "id": 312,
+  "name": "0312 - Pesca de agua dulce."
+ },
+ {
+  "id": 321,
+  "name": "0321 - Acuicultura marítima."
+ },
+ {
+  "id": 322,
+  "name": "0322 - Acuicultura de agua dulce."
+ },
+ {
+  "id": 510,
+  "name": "0510 - Extracción de hulla (carbón de piedra)."
+ },
+ {
+  "id": 520,
+  "name": "0520 - Extracción de carbón lignito."
+ },
+ {
+  "id": 610,
+  "name": "0610 - Extracción de petróleo crudo."
+ },
+ {
+  "id": 620,
+  "name": "0620 - Extracción de gas natural."
+ },
+ {
+  "id": 710,
+  "name": "0710 - Extracción de minerales de hierro."
+ },
+ {
+  "id": 721,
+  "name": "0721 - Extracción de minerales de uranio y de torio."
+ },
+ {
+  "id": 722,
+  "name": "0722 - Extracción de oro y otros metales preciosos."
+ },
+ {
+  "id": 723,
+  "name": "0723 - Extracción de minerales de níquel."
+ },
+ {
+  "id": 729,
+  "name": "0729 - Extracción de otros minerales metalíferos no ferrosos n.c.p."
+ },
+ {
+  "id": 811,
+  "name": "0811 - Extracción de piedra, arena, arcillas comunes, yeso y anhidrita."
+ },
+ {
+  "id": 812,
+  "name": "0812 - Extracción de arcillas de uso industrial, caliza, caolín y bentonitas."
+ },
+ {
+  "id": 820,
+  "name": "0820 - Extracción de esmeraldas, piedras preciosas y semipreciosas."
+ },
+ {
+  "id": 891,
+  "name": "0891 - Extracción de minerales para la fabricación de abonos y productos químicos."
+ },
+ {
+  "id": 892,
+  "name": "0892 - Extracción de halita (sal)."
+ },
+ {
+  "id": 899,
+  "name": "0899 - Extracción de otros minerales no metálicos n.c.p."
+ },
+ {
+  "id": 910,
+  "name": "0910 - Actividades de apoyo para la extracción de petróleo y de gas natural."
+ },
+ {
+  "id": 990,
+  "name": "0990 - Actividades de apoyo para otras actividades de explotación de minas y canteras."
+ },
+ {
+  "id": 1011,
+  "name": "1011 - Procesamiento y conservación de carne y productos cárnicos."
+ },
+ {
+  "id": 1012,
+  "name": "1012 - Procesamiento y conservación de pescados, crustáceos y moluscos."
+ },
+ {
+  "id": 1020,
+  "name": "1020 - Procesamiento y conservación de frutas, legumbres, hortalizas y tubérculos."
+ },
+ {
+  "id": 1030,
+  "name": "1030 - Elaboración de aceites y grasas de origen vegetal y animal."
+ },
+ {
+  "id": 1040,
+  "name": "1040 - Elaboración de productos lácteos."
+ },
+ {
+  "id": 1051,
+  "name": "1051 - Elaboración de productos de molinería."
+ },
+ {
+  "id": 1052,
+  "name": "1052 - Elaboración de almidones y productos derivados del almidón."
+ },
+ {
+  "id": 1061,
+  "name": "1061 - Trilla de café."
+ },
+ {
+  "id": 1062,
+  "name": "1062 - Descafeinado, tostión y molienda del café."
+ },
+ {
+  "id": 1063,
+  "name": "1063 - Otros derivados del café."
+ },
+ {
+  "id": 1071,
+  "name": "1071 - Elaboración y refinación de azúcar."
+ },
+ {
+  "id": 1072,
+  "name": "1072 - Elaboración de panela."
+ },
+ {
+  "id": 1081,
+  "name": "1081 - Elaboración de productos de panadería."
+ },
+ {
+  "id": 1082,
+  "name": "1082 - Elaboración de cacao, chocolate y productos de confitería."
+ },
+ {
+  "id": 1083,
+  "name": "1083 - Elaboración de macarrones, fideos, alcuzcuz y productos farináceos similares."
+ },
+ {
+  "id": 1084,
+  "name": "1084 - Elaboración de comidas y platos preparados."
+ },
+ {
+  "id": 1089,
+  "name": "1089 - Elaboración de otros productos alimenticios n.c.p."
+ },
+ {
+  "id": 1090,
+  "name": "1090 - Elaboración de alimentos preparados para animales."
+ },
+ {
+  "id": 1101,
+  "name": "1101 - Destilación, rectificación y mezcla de bebidas alcohólicas."
+ },
+ {
+  "id": 1102,
+  "name": "1102 - Elaboración de bebidas fermentadas no destiladas."
+ },
+ {
+  "id": 1103,
+  "name": "1103 - Producción de malta, elaboración de cervezas y otras bebidas malteadas."
+ },
+ {
+  "id": 1104,
+  "name": "1104 - Elaboración de bebidas no alcohólicas, producción de aguas minerales y de otras aguas embotelladas."
+ },
+ {
+  "id": 1200,
+  "name": "1200 - Elaboración de productos de tabaco."
+ },
+ {
+  "id": 1311,
+  "name": "1311 - Preparación e hilatura de fibras textiles."
+ },
+ {
+  "id": 1312,
+  "name": "1312 - Tejeduría de productos textiles."
+ },
+ {
+  "id": 1313,
+  "name": "1313 - Acabado de productos textiles."
+ },
+ {
+  "id": 1391,
+  "name": "1391 - Fabricación de tejidos de punto y ganchillo."
+ },
+ {
+  "id": 1392,
+  "name": "1392 - Confección de artículos con materiales textiles, excepto prendas de vestir."
+ },
+ {
+  "id": 1393,
+  "name": "1393 - Fabricación de tapetes y alfombras para pisos."
+ },
+ {
+  "id": 1394,
+  "name": "1394 - Fabricación de cuerdas, cordeles, cables, bramantes y redes."
+ },
+ {
+  "id": 1399,
+  "name": "1399 - Fabricación de otros artículos textiles n.c.p."
+ },
+ {
+  "id": 1410,
+  "name": "1410 - Confección de prendas de vestir, excepto prendas de piel."
+ },
+ {
+  "id": 1420,
+  "name": "1420 - Fabricación de artículos de piel."
+ },
+ {
+  "id": 1430,
+  "name": "1430 - Fabricación de artículos de punto y ganchillo."
+ },
+ {
+  "id": 1511,
+  "name": "1511 - Curtido y recurtido de cueros; recurtido y teñido de pieles."
+ },
+ {
+  "id": 1512,
+  "name": "1512 - Fabricación de artículos de viaje, bolsos de mano y artículos similares elaborados en cuero, y fabricación de artículos de talabartería y guarnicionería."
+ },
+ {
+  "id": 1513,
+  "name": "1513 - Fabricación de artículos de viaje, bolsos de mano y artículos similares; artículos de talabartería y guarnicionería elaborados en otros materiales."
+ },
+ {
+  "id": 1521,
+  "name": "1521 - Fabricación de calzado de cuero y piel, con cualquier tipo de suela."
+ },
+ {
+  "id": 1522,
+  "name": "1522 - Fabricación de otros tipos de calzado, excepto calzado de cuero y piel."
+ },
+ {
+  "id": 1523,
+  "name": "1523 - Fabricación de partes del calzado."
+ },
+ {
+  "id": 1610,
+  "name": "1610 - Aserrado, acepillado e impregnación de la madera."
+ },
+ {
+  "id": 1620,
+  "name": "1620 - Fabricación de hojas de madera para enchapado; fabricación de tableros contra­chapados, tableros laminados, tableros de partículas y otros tableros y paneles."
+ },
+ {
+  "id": 1630,
+  "name": "1630 - Fabricación de partes y piezas de madera, de carpintería y ebanistería para la construcción."
+ },
+ {
+  "id": 1640,
+  "name": "1640 - Fabricación de recipientes de madera."
+ },
+ {
+  "id": 1690,
+  "name": "1690 - Fabricación de otros productos de madera; fabricación de artículos de corcho, cestería y espartería."
+ },
+ {
+  "id": 1701,
+  "name": "1701 - Fabricación de pulpas (pastas) celulósicas; papel y cartón."
+ },
+ {
+  "id": 1702,
+  "name": "1702 - Fabricación de papel y cartón ondulado (corrugado); fabricación de envases, empaques y de embalajes de papel y cartón."
+ },
+ {
+  "id": 1709,
+  "name": "1709 - Fabricación de otros artículos de papel y cartón."
+ },
+ {
+  "id": 1811,
+  "name": "1811 - Actividades de impresión."
+ },
+ {
+  "id": 1812,
+  "name": "1812 - Actividades de servicios relacionados con la impresión."
+ },
+ {
+  "id": 1820,
+  "name": "1820 - Producción de copias a partir de grabaciones originales."
+ },
+ {
+  "id": 1910,
+  "name": "1910 - Fabricación de productos de hornos de coque."
+ },
+ {
+  "id": 1921,
+  "name": "1921 - Fabricación de productos de la refinación del petróleo."
+ },
+ {
+  "id": 1922,
+  "name": "1922 - Actividad de mezcla de combustibles."
+ },
+ {
+  "id": 2011,
+  "name": "2011 - Fabricación de sustancias y productos químicos básicos."
+ },
+ {
+  "id": 2012,
+  "name": "2012 - Fabricación de abonos y compuestos inorgánicos nitrogenados."
+ },
+ {
+  "id": 2013,
+  "name": "2013 - Fabricación de plásticos en formas primarias."
+ },
+ {
+  "id": 2014,
+  "name": "2014 - Fabricación de caucho sintético en formas primarias."
+ },
+ {
+  "id": 2021,
+  "name": "2021 - Fabricación de plaguicidas y otros productos químicos de uso agropecuario."
+ },
+ {
+  "id": 2022,
+  "name": "2022 - Fabricación de pinturas, barnices y revestimientos similares, tintas para impresión y masillas."
+ },
+ {
+  "id": 2023,
+  "name": "2023 - Fabricación de jabones y detergentes, preparados para limpiar y pulir; perfumes y preparados de tocador."
+ },
+ {
+  "id": 2029,
+  "name": "2029 - Fabricación de otros productos químicos n.c.p."
+ },
+ {
+  "id": 2030,
+  "name": "2030 - Fabricación de fibras sintéticas y artificiales."
+ },
+ {
+  "id": 2100,
+  "name": "2100 - Fabricación de productos farmacéuticos, sustancias químicas medicinales y pro­ductos botánicos de uso farmacéutico."
+ },
+ {
+  "id": 2211,
+  "name": "2211 - Fabricación de llantas y neumáticos de caucho"
+ },
+ {
+  "id": 2212,
+  "name": "2212 - Reencauche de llantas usadas"
+ },
+ {
+  "id": 2219,
+  "name": "2219 - Fabricación de formas básicas de caucho y otros productos de caucho n.c.p."
+ },
+ {
+  "id": 2221,
+  "name": "2221 - Fabricación de formas básicas de plástico."
+ },
+ {
+  "id": 2229,
+  "name": "2229 - Fabricación de artículos de plástico n.c.p."
+ },
+ {
+  "id": 2310,
+  "name": "2310 - Fabricación de vidrio y productos de vidrio."
+ },
+ {
+  "id": 2391,
+  "name": "2391 - Fabricación de productos refractarios."
+ },
+ {
+  "id": 2392,
+  "name": "2392 - Fabricación de materiales de arcilla para la construcción."
+ },
+ {
+  "id": 2393,
+  "name": "2393 - Fabricación de otros productos de cerámica y porcelana."
+ },
+ {
+  "id": 2394,
+  "name": "2394 - Fabricación de cemento, cal y yeso."
+ },
+ {
+  "id": 2395,
+  "name": "2395 - Fabricación de artículos de hormigón, cemento y yeso."
+ },
+ {
+  "id": 2396,
+  "name": "2396 - Corte, tallado y acabado de la piedra."
+ },
+ {
+  "id": 2399,
+  "name": "2399 - Fabricación de otros productos minerales no metálicos n.c.p."
+ },
+ {
+  "id": 2410,
+  "name": "2410 - Industrias básicas de hierro y de acero."
+ },
+ {
+  "id": 2421,
+  "name": "2421 - Industrias básicas de metales preciosos."
+ },
+ {
+  "id": 2429,
+  "name": "2429 - Industrias básicas de otros metales no ferrosos."
+ },
+ {
+  "id": 2431,
+  "name": "2431 - Fundición de hierro y de acero."
+ },
+ {
+  "id": 2432,
+  "name": "2432 - Fundición de metales no ferrosos."
+ },
+ {
+  "id": 2511,
+  "name": "2511 - Fabricación de productos metálicos para uso estructural."
+ },
+ {
+  "id": 2512,
+  "name": "2512 - Fabricación de tanques, depósitos y recipientes de metal, excepto los utilizados para el envase o transporte de mercancías."
+ },
+ {
+  "id": 2513,
+  "name": "2513 - Fabricación de generadores de vapor, excepto calderas de agua caliente para calefacción central."
+ },
+ {
+  "id": 2520,
+  "name": "2520 - Fabricación de armas y municiones."
+ },
+ {
+  "id": 2591,
+  "name": "2591 - Forja, prensado, estampado y laminado de metal; pulvimetalurgia."
+ },
+ {
+  "id": 2592,
+  "name": "2592 - Tratamiento y revestimiento de metales; mecanizado."
+ },
+ {
+  "id": 2593,
+  "name": "2593 - Fabricación de artículos de cuchillería, herramientas de mano y artículos de ferretería."
+ },
+ {
+  "id": 2599,
+  "name": "2599 - Fabricación de otros productos elaborados de metal n.c.p."
+ },
+ {
+  "id": 2610,
+  "name": "2610 - Fabricación de componentes y tableros electrónicos."
+ },
+ {
+  "id": 2620,
+  "name": "2620 - Fabricación de computadoras y de equipo periférico."
+ },
+ {
+  "id": 2630,
+  "name": "2630 - Fabricación de equipos de comunicación."
+ },
+ {
+  "id": 2640,
+  "name": "2640 - Fabricación de aparatos electrónicos de consumo."
+ },
+ {
+  "id": 2651,
+  "name": "2651 - Fabricación de equipo de medición, prueba, navegación y control."
+ },
+ {
+  "id": 2652,
+  "name": "2652 - Fabricación de relojes."
+ },
+ {
+  "id": 2660,
+  "name": "2660 - Fabricación de equipo de irradiación y equipo electrónico de uso médico y tera­péutico."
+ },
+ {
+  "id": 2670,
+  "name": "2670 - Fabricación de instrumentos ópticos y equipo fotográfico."
+ },
+ {
+  "id": 2680,
+  "name": "2680 - Fabricación de medios magnéticos y ópticos para almacenamiento de datos."
+ },
+ {
+  "id": 2711,
+  "name": "2711 - Fabricación de motores, generadores y transformadores eléctricos."
+ },
+ {
+  "id": 2712,
+  "name": "2712 - Fabricación de aparatos de distribución y control de la energía eléctrica."
+ },
+ {
+  "id": 2720,
+  "name": "2720 - Fabricación de pilas, baterías y acumuladores eléctricos."
+ },
+ {
+  "id": 2731,
+  "name": "2731 - Fabricación de hilos y cables eléctricos y de fibra óptica."
+ },
+ {
+  "id": 2732,
+  "name": "2732 - Fabricación de dispositivos de cableado."
+ },
+ {
+  "id": 2740,
+  "name": "2740 - Fabricación de equipos eléctricos de iluminación."
+ },
+ {
+  "id": 2750,
+  "name": "2750 - Fabricación de aparatos de uso doméstico."
+ },
+ {
+  "id": 2790,
+  "name": "2790 - Fabricación de otros tipos de equipo eléctrico n.c.p."
+ },
+ {
+  "id": 2811,
+  "name": "2811 - Fabricación de motores, turbinas, y partes para motores de combustión interna."
+ },
+ {
+  "id": 2812,
+  "name": "2812 - Fabricación de equipos de potencia hidráulica y neumática."
+ },
+ {
+  "id": 2813,
+  "name": "2813 - Fabricación de otras bombas, compresores, grifos y válvulas."
+ },
+ {
+  "id": 2814,
+  "name": "2814 - Fabricación de cojinetes, engranajes, trenes de engranajes y piezas de transmisión."
+ },
+ {
+  "id": 2815,
+  "name": "2815 - Fabricación de hornos, hogares y quemadores industriales."
+ },
+ {
+  "id": 2816,
+  "name": "2816 - Fabricación de equipo de elevación y manipulación."
+ },
+ {
+  "id": 2817,
+  "name": "2817 - Fabricación de maquinaria y equipo de oficina (excepto computadoras y equipo periférico)."
+ },
+ {
+  "id": 2818,
+  "name": "2818 - Fabricación de herramientas manuales con motor."
+ },
+ {
+  "id": 2819,
+  "name": "2819 - Fabricación de otros tipos de maquinaria y equipo de uso general n.c.p."
+ },
+ {
+  "id": 2821,
+  "name": "2821 - Fabricación de maquinaria agropecuaria y forestal."
+ },
+ {
+  "id": 2822,
+  "name": "2822 - Fabricación de máquinas formadoras de metal y de máquinas herramienta."
+ },
+ {
+  "id": 2823,
+  "name": "2823 - Fabricación de maquinaria para la metalurgia."
+ },
+ {
+  "id": 2824,
+  "name": "2824 - Fabricación de maquinaria para explotación de minas y canteras y para obras de construcción."
+ },
+ {
+  "id": 2825,
+  "name": "2825 - Fabricación de maquinaria para la elaboración de alimentos, bebidas y tabaco."
+ },
+ {
+  "id": 2826,
+  "name": "2826 - Fabricación de maquinaria para la elaboración de productos textiles, prendas de vestir y cueros."
+ },
+ {
+  "id": 2829,
+  "name": "2829 - Fabricación de otros tipos de maquinaria y equipo de uso especial n.c.p."
+ },
+ {
+  "id": 2910,
+  "name": "2910 - Fabricación de vehículos automotores y sus motores."
+ },
+ {
+  "id": 2920,
+  "name": "2920 - Fabricación de carrocerías para vehículos automotores; fabricación de remolques y semirremolques."
+ },
+ {
+  "id": 2930,
+  "name": "2930 - Fabricación de partes, piezas (autopartes) y accesorios (lujos) para vehículos automotores."
+ },
+ {
+  "id": 3011,
+  "name": "3011 - Construcción de barcos y de estructuras flotantes."
+ },
+ {
+  "id": 3012,
+  "name": "3012 - Construcción de embarcaciones de recreo y deporte."
+ },
+ {
+  "id": 3020,
+  "name": "3020 - Fabricación de locomotoras y de material rodante para ferrocarriles."
+ },
+ {
+  "id": 3030,
+  "name": "3030 - Fabricación de aeronaves, naves espaciales y de maquinaria conexa."
+ },
+ {
+  "id": 3040,
+  "name": "3040 - Fabricación de vehículos militares de combate."
+ },
+ {
+  "id": 3091,
+  "name": "3091 - Fabricación de motocicletas."
+ },
+ {
+  "id": 3092,
+  "name": "3092 - Fabricación de bicicletas y de sillas de ruedas para personas con discapacidad."
+ },
+ {
+  "id": 3099,
+  "name": "3099 - Fabricación de otros tipos de equipo de transporte n.c.p."
+ },
+ {
+  "id": 3110,
+  "name": "3110 - Fabricación de muebles."
+ },
+ {
+  "id": 3120,
+  "name": "3120 - Fabricación de colchones y somieres."
+ },
+ {
+  "id": 3210,
+  "name": "3210 - Fabricación de joyas, bisutería y artículos conexos."
+ },
+ {
+  "id": 3220,
+  "name": "3220 - Fabricación de instrumentos musicales."
+ },
+ {
+  "id": 3230,
+  "name": "3230 - Fabricación de artículos y equipo para la práctica del deporte."
+ },
+ {
+  "id": 3240,
+  "name": "3240 - Fabricación de juegos, juguetes y rompecabezas."
+ },
+ {
+  "id": 3250,
+  "name": "3250 - Fabricación de instrumentos, aparatos y materiales médicos y odontológicos (incluido mobiliario)."
+ },
+ {
+  "id": 3290,
+  "name": "3290 - Otras industrias manufactureras n.c.p."
+ },
+ {
+  "id": 3311,
+  "name": "3311 - Mantenimiento y reparación especializado de productos elaborados en metal."
+ },
+ {
+  "id": 3312,
+  "name": "3312 - Mantenimiento y reparación especializado de maquinaria y equipo."
+ },
+ {
+  "id": 3313,
+  "name": "3313 - Mantenimiento y reparación especializado de equipo electrónico y óptico."
+ },
+ {
+  "id": 3314,
+  "name": "3314 - Mantenimiento y reparación especializado de equipo eléctrico."
+ },
+ {
+  "id": 3315,
+  "name": "3315 - Mantenimiento y reparación especializado de equipo de transporte, excepto los vehículos automotores, motocicletas y bicicletas."
+ },
+ {
+  "id": 3319,
+  "name": "3319 - Mantenimiento y reparación de otros tipos de equipos y sus componentes n.c.p."
+ },
+ {
+  "id": 3320,
+  "name": "3320 - Instalación especializada de maquinaria y equipo industrial."
+ },
+ {
+  "id": 3511,
+  "name": "3511 - Generación de energía eléctrica."
+ },
+ {
+  "id": 3512,
+  "name": "3512 - Transmisión de energía eléctrica."
+ },
+ {
+  "id": 3513,
+  "name": "3513 - Distribución de energía eléctrica."
+ },
+ {
+  "id": 3514,
+  "name": "3514 - Comercialización de energía eléctrica."
+ },
+ {
+  "id": 3520,
+  "name": "3520 - Producción de gas; distribución de combustibles gaseosos por tuberías."
+ },
+ {
+  "id": 3530,
+  "name": "3530 - Suministro de vapor y aire acondicionado."
+ },
+ {
+  "id": 3600,
+  "name": "3600 - Captación, tratamiento y distribución de agua."
+ },
+ {
+  "id": 3700,
+  "name": "3700 - Evacuación y tratamiento de aguas residuales."
+ },
+ {
+  "id": 3811,
+  "name": "3811 - Recolección de desechos no peligrosos."
+ },
+ {
+  "id": 3812,
+  "name": "3812 - Recolección de desechos peligrosos."
+ },
+ {
+  "id": 3821,
+  "name": "3821 - Tratamiento y disposición de desechos no peligrosos."
+ },
+ {
+  "id": 3822,
+  "name": "3822 - Tratamiento y disposición de desechos peligrosos."
+ },
+ {
+  "id": 3830,
+  "name": "3830 - Recuperación de materiales."
+ },
+ {
+  "id": 3900,
+  "name": "3900 - Actividades de saneamiento ambiental y otros servicios de gestión de desechos."
+ },
+ {
+  "id": 4111,
+  "name": "4111 - Construcción de edificios residenciales."
+ },
+ {
+  "id": 4112,
+  "name": "4112 - Construcción de edificios no residenciales."
+ },
+ {
+  "id": 4210,
+  "name": "4210 - Construcción de carreteras y vías de ferrocarril."
+ },
+ {
+  "id": 4220,
+  "name": "4220 - Construcción de proyectos de servicio público."
+ },
+ {
+  "id": 4290,
+  "name": "4290 - Construcción de otras obras de ingeniería civil."
+ },
+ {
+  "id": 4311,
+  "name": "4311 - Demolición."
+ },
+ {
+  "id": 4312,
+  "name": "4312 - Preparación del terreno."
+ },
+ {
+  "id": 4321,
+  "name": "4321 - Instalaciones eléctricas."
+ },
+ {
+  "id": 4322,
+  "name": "4322 - Instalaciones de fontanería, calefacción y aire acondicionado."
+ },
+ {
+  "id": 4329,
+  "name": "4329 - Otras instalaciones especializadas."
+ },
+ {
+  "id": 4330,
+  "name": "4330 - Terminación y acabado de edificios y obras de ingeniería civil."
+ },
+ {
+  "id": 4390,
+  "name": "4390 - Otras actividades especializadas para la construcción de edificios y obras de ingeniería civil."
+ },
+ {
+  "id": 4511,
+  "name": "4511 - Comercio de vehículos automotores nuevos."
+ },
+ {
+  "id": 4512,
+  "name": "4512 - Comercio de vehículos automotores usados."
+ },
+ {
+  "id": 4520,
+  "name": "4520 - Mantenimiento y reparación de vehículos automotores."
+ },
+ {
+  "id": 4530,
+  "name": "4530 - Comercio de partes, piezas (autopartes) y accesorios (lujos) para vehículos automotores."
+ },
+ {
+  "id": 4541,
+  "name": "4541 - Comercio de motocicletas y de sus partes, piezas y accesorios."
+ },
+ {
+  "id": 4542,
+  "name": "4542 - Mantenimiento y reparación de motocicletas y de sus partes y piezas."
+ },
+ {
+  "id": 4610,
+  "name": "4610 - Comercio al por mayor a cambio de una retribución o por contrata."
+ },
+ {
+  "id": 4620,
+  "name": "4620 - Comercio al por mayor de materias primas agropecuarias; animales vivos."
+ },
+ {
+  "id": 4631,
+  "name": "4631 - Comercio al por mayor de productos alimenticios."
+ },
+ {
+  "id": 4632,
+  "name": "4632 - Comercio al por mayor de bebidas y tabaco."
+ },
+ {
+  "id": 4641,
+  "name": "4641 - Comercio al por mayor de productos textiles, productos confeccionados para uso doméstico."
+ },
+ {
+  "id": 4642,
+  "name": "4642 - Comercio al por mayor de prendas de vestir."
+ },
+ {
+  "id": 4643,
+  "name": "4643 - Comercio al por mayor de calzado."
+ },
+ {
+  "id": 4644,
+  "name": "4644 - Comercio al por mayor de aparatos y equipo de uso doméstico."
+ },
+ {
+  "id": 4645,
+  "name": "4645 - Comercio al por mayor de productos farmacéuticos, medicinales, cosméticos y de tocador."
+ },
+ {
+  "id": 4649,
+  "name": "4649 - Comercio al por mayor de otros utensilios domésticos n.c.p."
+ },
+ {
+  "id": 4651,
+  "name": "4651 - Comercio al por mayor de computadores, equipo periférico y programas de informática."
+ },
+ {
+  "id": 4652,
+  "name": "4652 - Comercio al por mayor de equipo, partes y piezas electrónicos y de telecomuni­caciones."
+ },
+ {
+  "id": 4653,
+  "name": "4653 - Comercio al por mayor de maquinaria y equipo agropecuarios."
+ },
+ {
+  "id": 4659,
+  "name": "4659 - Comercio al por mayor de otros tipos de maquinaria y equipo n.c.p."
+ },
+ {
+  "id": 4661,
+  "name": "4661 - Comercio al por mayor de combustibles sólidos, líquidos, gaseosos y productos conexos."
+ },
+ {
+  "id": 4662,
+  "name": "4662 - Comercio al por mayor de metales y productos metalíferos."
+ },
+ {
+  "id": 4663,
+  "name": "4663 - Comercio al por mayor de materiales de construcción, artículos de ferretería, pinturas, productos de vidrio, equipo y materiales de fontanería y calefacción."
+ },
+ {
+  "id": 4664,
+  "name": "4664 - Comercio al por mayor de productos químicos básicos, cauchos y plásticos en formas primarias y productos químicos de uso agropecuario."
+ },
+ {
+  "id": 4665,
+  "name": "4665 - Comercio al por mayor de desperdicios, desechos y chatarra."
+ },
+ {
+  "id": 4669,
+  "name": "4669 - Comercio al por mayor de otros productos n.c.p."
+ },
+ {
+  "id": 4690,
+  "name": "4690 - Comercio al por mayor no especializado."
+ },
+ {
+  "id": 4711,
+  "name": "4711 - Comercio al por menor en establecimientos no especializados con surtido com­puesto principalmente por alimentos, bebidas o tabaco."
+ },
+ {
+  "id": 4719,
+  "name": "4719 - Comercio al por menor en establecimientos no especializados, con surtido compuesto principalmente por productos diferentes de alimentos (víveres en general), bebidas y tabaco."
+ },
+ {
+  "id": 4721,
+  "name": "4721 - Comercio al por menor de productos agrícolas para el consumo en establecimientos especializados."
+ },
+ {
+  "id": 4722,
+  "name": "4722 - Comercio al por menor de leche, productos lácteos y huevos, en establecimientos especializados."
+ },
+ {
+  "id": 4723,
+  "name": "4723 - Comercio al por menor de carnes (incluye aves de corral), productos cárnicos, pescados y productos de mar, en establecimientos especializados."
+ },
+ {
+  "id": 4724,
+  "name": "4724 - Comercio al por menor de bebidas y productos del tabaco, en establecimientos especializados."
+ },
+ {
+  "id": 4729,
+  "name": "4729 - Comercio al por menor de otros productos alimenticios n.c.p., en establecimientos especializados."
+ },
+ {
+  "id": 4731,
+  "name": "4731 - Comercio al por menor de combustible para automotores."
+ },
+ {
+  "id": 4732,
+  "name": "4732 - Comercio al por menor de lubricantes (aceites, grasas), aditivos y productos de limpieza para vehículos automotores."
+ },
+ {
+  "id": 4741,
+  "name": "4741 - Comercio al por menor de computadores, equipos periféricos, programas de informática y equipos de telecomunicaciones en establecimientos especializados."
+ },
+ {
+  "id": 4742,
+  "name": "4742 - Comercio al por menor de equipos y aparatos de sonido y de video, en establecimientos especializados."
+ },
+ {
+  "id": 4751,
+  "name": "4751 - Comercio al por menor de productos textiles en establecimientos especializados."
+ },
+ {
+  "id": 4752,
+  "name": "4752 - Comercio al por menor de artículos de ferretería, pinturas y productos de vidrio en establecimientos especializados."
+ },
+ {
+  "id": 4753,
+  "name": "4753 - Comercio al por menor de tapices, alfombras y cubrimientos para paredes y pisos en establecimientos especializados."
+ },
+ {
+  "id": 4754,
+  "name": "4754 - Comercio al por menor de electrodomésticos y gasodomésticos de uso doméstico, muebles y equipos de iluminación."
+ },
+ {
+  "id": 4755,
+  "name": "4755 - Comercio al por menor de artículos y utensilios de uso doméstico."
+ },
+ {
+  "id": 4759,
+  "name": "4759 - Comercio al por menor de otros artículos domésticos en establecimientos especializados."
+ },
+ {
+  "id": 4761,
+  "name": "4761 - Comercio al por menor de libros, periódicos, materiales y artículos de papelería y escritorio, en establecimientos especializados."
+ },
+ {
+  "id": 4762,
+  "name": "4762 - Comercio al por menor de artículos deportivos, en establecimientos especializados."
+ },
+ {
+  "id": 4769,
+  "name": "4769 - Comercio al por menor de otros artículos culturales y de entretenimiento n.c.p. en establecimientos especializados."
+ },
+ {
+  "id": 4771,
+  "name": "4771 - Comercio al por menor de prendas de vestir y sus accesorios (incluye artículos de piel) en establecimientos especializados."
+ },
+ {
+  "id": 4772,
+  "name": "4772 - Comercio al por menor de todo tipo de calzado y artículos de cuero y sucedáneos del cuero en establecimientos especializados."
+ },
+ {
+  "id": 4773,
+  "name": "4773 - Comercio al por menor de productos farmacéuticos y medicinales, cosméticos y artículos de tocador en establecimientos especializados."
+ },
+ {
+  "id": 4774,
+  "name": "4774 - Comercio al por menor de otros productos nuevos en establecimientos especializados."
+ },
+ {
+  "id": 4775,
+  "name": "4775 - Comercio al por menor de artículos de segunda mano."
+ },
+ {
+  "id": 4781,
+  "name": "4781 - Comercio al por menor de alimentos, bebidas y tabaco, en puestos de venta móviles."
+ },
+ {
+  "id": 4782,
+  "name": "4782 - Comercio al por menor de productos textiles, prendas de vestir y calzado, en puestos de venta móviles."
+ },
+ {
+  "id": 4789,
+  "name": "4789 - Comercio al por menor de otros productos en puestos de venta móviles."
+ },
+ {
+  "id": 4791,
+  "name": "4791 - Comercio al por menor realizado a través de internet."
+ },
+ {
+  "id": 4792,
+  "name": "4792 - Comercio al por menor realizado a través de casas de venta o por correo."
+ },
+ {
+  "id": 4799,
+  "name": "4799 - Otros tipos de comercio al por menor no realizado en establecimientos, puestos de venta o mercados."
+ },
+ {
+  "id": 4911,
+  "name": "4911 - Transporte férreo de pasajeros."
+ },
+ {
+  "id": 4912,
+  "name": "4912 - Transporte férreo de carga."
+ },
+ {
+  "id": 4921,
+  "name": "4921 - Transporte de pasajeros."
+ },
+ {
+  "id": 4922,
+  "name": "4922 - Transporte mixto."
+ },
+ {
+  "id": 4923,
+  "name": "4923 - Transporte de carga por carretera."
+ },
+ {
+  "id": 4930,
+  "name": "4930 - Transporte por tuberías."
+ },
+ {
+  "id": 5011,
+  "name": "5011 - Transporte de pasajeros marítimo y de cabotaje."
+ },
+ {
+  "id": 5012,
+  "name": "5012 - Transporte de carga marítimo y de cabotaje."
+ },
+ {
+  "id": 5021,
+  "name": "5021 - Transporte fluvial de pasajeros."
+ },
+ {
+  "id": 5022,
+  "name": "5022 - Transporte fluvial de carga."
+ },
+ {
+  "id": 5111,
+  "name": "5111 - Transporte aéreo nacional de pasajeros."
+ },
+ {
+  "id": 5112,
+  "name": "5112 - Transporte aéreo internacional de pasajeros."
+ },
+ {
+  "id": 5121,
+  "name": "5121 - Transporte aéreo nacional de carga."
+ },
+ {
+  "id": 5122,
+  "name": "5122 - Transporte aéreo internacional de carga."
+ },
+ {
+  "id": 5210,
+  "name": "5210 - Almacenamiento y depósito."
+ },
+ {
+  "id": 5221,
+  "name": "5221 - Actividades de estaciones, vías y servicios complementarios para el transporte terrestre."
+ },
+ {
+  "id": 5222,
+  "name": "5222 - Actividades de puertos y servicios complementarios para el transporte acuático."
+ },
+ {
+  "id": 5223,
+  "name": "5223 - Actividades de aeropuertos, servicios de navegación aérea y demás actividades conexas al transporte aéreo."
+ },
+ {
+  "id": 5224,
+  "name": "5224 - Manipulación de carga."
+ },
+ {
+  "id": 5229,
+  "name": "5229 - Otras actividades complementarias al transporte."
+ },
+ {
+  "id": 5310,
+  "name": "5310 - Actividades postales nacionales."
+ },
+ {
+  "id": 5320,
+  "name": "5320 - Actividades de mensajería."
+ },
+ {
+  "id": 5511,
+  "name": "5511 - Alojamiento en hoteles."
+ },
+ {
+  "id": 5512,
+  "name": "5512 - Alojamiento en apartahoteles."
+ },
+ {
+  "id": 5513,
+  "name": "5513 - Alojamiento en centros vacacionales."
+ },
+ {
+  "id": 5514,
+  "name": "5514 - Alojamiento rural."
+ },
+ {
+  "id": 5519,
+  "name": "5519 - Otros tipos de alojamientos para visitantes."
+ },
+ {
+  "id": 5520,
+  "name": "5520 - Actividades de zonas de camping y parques para vehículos recreacionales."
+ },
+ {
+  "id": 5530,
+  "name": "5530 - Servicio por horas"
+ },
+ {
+  "id": 5590,
+  "name": "5590 - Otros tipos de alojamiento n.c.p."
+ },
+ {
+  "id": 5611,
+  "name": "5611 - Expendio a la mesa de comidas preparadas."
+ },
+ {
+  "id": 5612,
+  "name": "5612 - Expendio por autoservicio de comidas preparadas."
+ },
+ {
+  "id": 5613,
+  "name": "5613 - Expendio de comidas preparadas en cafeterías."
+ },
+ {
+  "id": 5619,
+  "name": "5619 - Otros tipos de expendio de comidas preparadas n.c.p."
+ },
+ {
+  "id": 5621,
+  "name": "5621 - Catering para eventos."
+ },
+ {
+  "id": 5629,
+  "name": "5629 - Actividades de otros servicios de comidas."
+ },
+ {
+  "id": 5630,
+  "name": "5630 - Expendio de bebidas alcohólicas para el consumo dentro del establecimiento."
+ },
+ {
+  "id": 5811,
+  "name": "5811 - Edición de libros."
+ },
+ {
+  "id": 5812,
+  "name": "5812 - Edición de directorios y listas de correo."
+ },
+ {
+  "id": 5813,
+  "name": "5813 - Edición de periódicos, revistas y otras publicaciones periódicas."
+ },
+ {
+  "id": 5819,
+  "name": "5819 - Otros trabajos de edición."
+ },
+ {
+  "id": 5820,
+  "name": "5820 - Edición de programas de informática (software)."
+ },
+ {
+  "id": 5911,
+  "name": "5911 - Actividades de producción de películas cinematográficas, videos, programas, anuncios y comerciales de televisión."
+ },
+ {
+  "id": 5912,
+  "name": "5912 - Actividades de posproducción de películas cinematográficas, videos, programas, anuncios y comerciales de televisión."
+ },
+ {
+  "id": 5913,
+  "name": "5913 - Actividades de distribución de películas cinematográficas, videos, programas, anuncios y comerciales de televisión."
+ },
+ {
+  "id": 5914,
+  "name": "5914 - Actividades de exhibición de películas cinematográficas y videos."
+ },
+ {
+  "id": 5920,
+  "name": "5920 - Actividades de grabación de sonido y edición de música."
+ },
+ {
+  "id": 6010,
+  "name": "6010 - Actividades de programación y transmisión en el servicio de radiodifusión sonora."
+ },
+ {
+  "id": 6020,
+  "name": "6020 - Actividades de programación y transmisión de televisión."
+ },
+ {
+  "id": 6110,
+  "name": "6110 - Actividades de telecomunicaciones alámbricas."
+ },
+ {
+  "id": 6120,
+  "name": "6120 - Actividades de telecomunicaciones inalámbricas."
+ },
+ {
+  "id": 6130,
+  "name": "6130 - Actividades de telecomunicación satelital."
+ },
+ {
+  "id": 6190,
+  "name": "6190 - Otras actividades de telecomunicaciones."
+ },
+ {
+  "id": 6201,
+  "name": "6201 - Actividades de desarrollo de sistemas informáticos (planificación, análisis, diseño, programación, pruebas)."
+ },
+ {
+  "id": 6202,
+  "name": "6202 - Actividades de consultoría informática y actividades de administración de instalaciones informáticas."
+ },
+ {
+  "id": 6209,
+  "name": "6209 - Otras actividades de tecnologías de información y actividades de servicios informáticos."
+ },
+ {
+  "id": 6311,
+  "name": "6311 - Procesamiento de datos, alojamiento (hosting) y actividades relacionadas."
+ },
+ {
+  "id": 6312,
+  "name": "6312 - Portales web."
+ },
+ {
+  "id": 6391,
+  "name": "6391 - Actividades de agencias de noticias."
+ },
+ {
+  "id": 6399,
+  "name": "6399 - Otras actividades de servicio de información n.c.p."
+ },
+ {
+  "id": 6411,
+  "name": "6411 - Banco Central."
+ },
+ {
+  "id": 6412,
+  "name": "6412 - Bancos comerciales."
+ },
+ {
+  "id": 6421,
+  "name": "6421 - Actividades de las corporaciones financieras."
+ },
+ {
+  "id": 6422,
+  "name": "6422 - Actividades de las compañías de financiamiento."
+ },
+ {
+  "id": 6423,
+  "name": "6423 - Banca de segundo piso."
+ },
+ {
+  "id": 6424,
+  "name": "6424 - Actividades de las cooperativas financieras."
+ },
+ {
+  "id": 6431,
+  "name": "6431 - Fideicomisos, fondos y entidades financieras similares."
+ },
+ {
+  "id": 6432,
+  "name": "6432 - Fondos de cesantías."
+ },
+ {
+  "id": 6491,
+  "name": "6491 - Leasing financiero (arrendamiento financiero)."
+ },
+ {
+  "id": 6492,
+  "name": "6492 - Actividades financieras de fondos de empleados y otras formas asociativas del sector solidario."
+ },
+ {
+  "id": 6493,
+  "name": "6493 - Actividades de compra de cartera o factoring."
+ },
+ {
+  "id": 6494,
+  "name": "6494 - Otras actividades de distribución de fondos."
+ },
+ {
+  "id": 6495,
+  "name": "6495 - Instituciones especiales oficiales."
+ },
+ {
+  "id": 6499,
+  "name": "6499 - Otras actividades de servicio financiero, excepto las de seguros y pensiones n.c.p."
+ },
+ {
+  "id": 6511,
+  "name": "6511 - Seguros generales."
+ },
+ {
+  "id": 6512,
+  "name": "6512 - Seguros de vida."
+ },
+ {
+  "id": 6513,
+  "name": "6513 - Reaseguros."
+ },
+ {
+  "id": 6514,
+  "name": "6514 - Capitalización."
+ },
+ {
+  "id": 6521,
+  "name": "6521 - Servicios de seguros sociales de salud."
+ },
+ {
+  "id": 6522,
+  "name": "6522 - Servicios de seguros sociales de riesgos profesionales."
+ },
+ {
+  "id": 6531,
+  "name": "6531 - Régimen de prima media con prestación definida (RPM)."
+ },
+ {
+  "id": 6532,
+  "name": "6532 - Régimen de ahorro individual (RAI)."
+ },
+ {
+  "id": 6611,
+  "name": "6611 - Administración de mercados financieros."
+ },
+ {
+  "id": 6612,
+  "name": "6612 - Corretaje de valores y de contratos de productos básicos."
+ },
+ {
+  "id": 6613,
+  "name": "6613 - Otras actividades relacionadas con el mercado de valores."
+ },
+ {
+  "id": 6614,
+  "name": "6614 - Actividades de las casas de cambio."
+ },
+ {
+  "id": 6615,
+  "name": "6615 - Actividades de los profesionales de compra y venta de divisas."
+ },
+ {
+  "id": 6619,
+  "name": "6619 - Otras actividades auxiliares de las actividades de servicios financieros n.c.p."
+ },
+ {
+  "id": 6621,
+  "name": "6621 - Actividades de agentes y corredores de seguros"
+ },
+ {
+  "id": 6629,
+  "name": "6629 - Evaluación de riesgos y daños, y otras actividades de servicios auxiliares"
+ },
+ {
+  "id": 6630,
+  "name": "6630 - Actividades de administración de fondos."
+ },
+ {
+  "id": 6810,
+  "name": "6810 - Actividades inmobiliarias realizadas con bienes propios o arrendados."
+ },
+ {
+  "id": 6820,
+  "name": "6820 - Actividades inmobiliarias realizadas a cambio de una retribución o por contrata."
+ },
+ {
+  "id": 6910,
+  "name": "6910 - Actividades jurídicas."
+ },
+ {
+  "id": 6920,
+  "name": "6920 - Actividades de contabilidad, teneduría de libros, auditoría financiera y asesoría tributaria."
+ },
+ {
+  "id": 7010,
+  "name": "7010 - Actividades de administración empresarial."
+ },
+ {
+  "id": 7020,
+  "name": "7020 - Actividades de consultaría de gestión."
+ },
+ {
+  "id": 7110,
+  "name": "7110 - Actividades de arquitectura e ingeniería y otras actividades conexas de consultoría técnica."
+ },
+ {
+  "id": 7120,
+  "name": "7120 - Ensayos y análisis técnicos."
+ },
+ {
+  "id": 7210,
+  "name": "7210 - Investigaciones y desarrollo experimental en el campo de las ciencias naturales y la ingeniería."
+ },
+ {
+  "id": 7220,
+  "name": "7220 - Investigaciones y desarrollo experimental en el campo de las ciencias sociales y las humanidades."
+ },
+ {
+  "id": 7310,
+  "name": "7310 - Publicidad."
+ },
+ {
+  "id": 7320,
+  "name": "7320 - Estudios de mercado y realización de encuestas de opinión pública."
+ },
+ {
+  "id": 7410,
+  "name": "7410 - Actividades especializadas de diseño."
+ },
+ {
+  "id": 7420,
+  "name": "7420 - Actividades de fotografía."
+ },
+ {
+  "id": 7490,
+  "name": "7490 - Otras actividades profesionales, científicas y técnicas n.c.p."
+ },
+ {
+  "id": 7500,
+  "name": "7500 - Actividades veterinarias."
+ },
+ {
+  "id": 7710,
+  "name": "7710 - Alquiler y arrendamiento de vehículos automotores."
+ },
+ {
+  "id": 7721,
+  "name": "7721 - Alquiler y arrendamiento de equipo recreativo y deportivo."
+ },
+ {
+  "id": 7722,
+  "name": "7722 - Alquiler de videos y discos."
+ },
+ {
+  "id": 7729,
+  "name": "7729 - Alquiler y arrendamiento de otros efectos personales y enseres domésticos n.c.p."
+ },
+ {
+  "id": 7730,
+  "name": "7730 - Alquiler y arrendamiento de otros tipos de maquinaria, equipo y bienes tangibles n.c.p."
+ },
+ {
+  "id": 7740,
+  "name": "7740 - Arrendamiento de propiedad intelectual y productos similares, excepto obras protegidas por derechos de autor."
+ },
+ {
+  "id": 7810,
+  "name": "7810 - Actividades de agencias de empleo."
+ },
+ {
+  "id": 7820,
+  "name": "7820 - Actividades de agencias de empleo temporal."
+ },
+ {
+  "id": 7830,
+  "name": "7830 - Otras actividades de suministro de recurso humano."
+ },
+ {
+  "id": 7911,
+  "name": "7911 - Actividades de las agencias de viaje."
+ },
+ {
+  "id": 7912,
+  "name": "7912 - Actividades de operadores turísticos."
+ },
+ {
+  "id": 7990,
+  "name": "7990 - Otros servicios de reserva y actividades relacionadas."
+ },
+ {
+  "id": 8010,
+  "name": "8010 - Actividades de seguridad privada."
+ },
+ {
+  "id": 8020,
+  "name": "8020 - Actividades de servicios de sistemas de seguridad."
+ },
+ {
+  "id": 8030,
+  "name": "8030 - Actividades de detectives e investigadores privados."
+ },
+ {
+  "id": 8110,
+  "name": "8110 - Actividades combinadas de apoyo a instalaciones."
+ },
+ {
+  "id": 8121,
+  "name": "8121 - Limpieza general interior de edificios."
+ },
+ {
+  "id": 8129,
+  "name": "8129 - Otras actividades de limpieza de edificios e instalaciones industriales."
+ },
+ {
+  "id": 8130,
+  "name": "8130 - Actividades de paisajismo y servicios de mantenimiento conexos."
+ },
+ {
+  "id": 8211,
+  "name": "8211 - Actividades combinadas de servicios administrativos de oficina."
+ },
+ {
+  "id": 8219,
+  "name": "8219 - Fotocopiado, preparación de documentos y otras actividades especializadas de apoyo a oficina."
+ },
+ {
+  "id": 8220,
+  "name": "8220 - Actividades de centros de llamadas (Call center)."
+ },
+ {
+  "id": 8230,
+  "name": "8230 - Organización de convenciones y eventos comerciales."
+ },
+ {
+  "id": 8291,
+  "name": "8291 - Actividades de agencias de cobranza y oficinas de calificación crediticia."
+ },
+ {
+  "id": 8292,
+  "name": "8292 - Actividades de envase y empaque."
+ },
+ {
+  "id": 8299,
+  "name": "8299 - Otras actividades de servicio de apoyo a las empresas n.c.p."
+ },
+ {
+  "id": 8411,
+  "name": "8411 - Actividades legislativas de la administración pública."
+ },
+ {
+  "id": 8412,
+  "name": "8412 - Actividades ejecutivas de la administración pública."
+ },
+ {
+  "id": 8413,
+  "name": "8413 - Regulación de las actividades de organismos que prestan servicios de salud, edu­cativos, culturales y otros servicios sociales, excepto servicios de seguridad social."
+ },
+ {
+  "id": 8414,
+  "name": "8414 - Actividades reguladoras y facilitadoras de la actividad económica."
+ },
+ {
+  "id": 8415,
+  "name": "8415 - Actividades de los otros órganos de control."
+ },
+ {
+  "id": 8421,
+  "name": "8421 - Relaciones exteriores."
+ },
+ {
+  "id": 8422,
+  "name": "8422 - Actividades de defensa."
+ },
+ {
+  "id": 8423,
+  "name": "8423 - Orden público y actividades de seguridad."
+ },
+ {
+  "id": 8424,
+  "name": "8424 - Administración de justicia."
+ },
+ {
+  "id": 8430,
+  "name": "8430 - Actividades de planes de seguridad social de afiliación obligatoria."
+ },
+ {
+  "id": 8511,
+  "name": "8511 - Educación de la primera infancia."
+ },
+ {
+  "id": 8512,
+  "name": "8512 - Educación preescolar."
+ },
+ {
+  "id": 8513,
+  "name": "8513 - Educación básica primaria."
+ },
+ {
+  "id": 8521,
+  "name": "8521 - Educación básica secundaria."
+ },
+ {
+  "id": 8522,
+  "name": "8522 - Educación media académica."
+ },
+ {
+  "id": 8523,
+  "name": "8523 - Educación media técnica y de formación laboral."
+ },
+ {
+  "id": 8530,
+  "name": "8530 - Establecimientos que combinan diferentes niveles de educación."
+ },
+ {
+  "id": 8541,
+  "name": "8541 - Educación técnica profesional."
+ },
+ {
+  "id": 8542,
+  "name": "8542 - Educación tecnológica."
+ },
+ {
+  "id": 8543,
+  "name": "8543 - Educación de instituciones universitarias o de escuelas tecnológicas."
+ },
+ {
+  "id": 8544,
+  "name": "8544 - Educación de universidades."
+ },
+ {
+  "id": 8551,
+  "name": "8551 - Formación académica no formal."
+ },
+ {
+  "id": 8552,
+  "name": "8552 - Enseñanza deportiva y recreativa."
+ },
+ {
+  "id": 8553,
+  "name": "8553 - Enseñanza cultural."
+ },
+ {
+  "id": 8559,
+  "name": "8559 - Otros tipos de educación n.c.p."
+ },
+ {
+  "id": 8560,
+  "name": "8560 - Actividades de apoyo a la educación."
+ },
+ {
+  "id": 8610,
+  "name": "8610 - Actividades de hospitales y clínicas, con internación."
+ },
+ {
+  "id": 8621,
+  "name": "8621 - Actividades de la práctica médica, sin internación."
+ },
+ {
+  "id": 8622,
+  "name": "8622 - Actividades de la práctica odontológica."
+ },
+ {
+  "id": 8691,
+  "name": "8691 - Actividades de apoyo diagnóstico."
+ },
+ {
+  "id": 8692,
+  "name": "8692 - Actividades de apoyo terapéutico."
+ },
+ {
+  "id": 8699,
+  "name": "8699 - Otras actividades de atención de la salud humana."
+ },
+ {
+  "id": 8710,
+  "name": "8710 - Actividades de atención residencial medicalizada de tipo general."
+ },
+ {
+  "id": 8720,
+  "name": "8720 - Actividades de atención residencial, para el cuidado de pacientes con retardo mental, enfermedad mental y consumo de sustancias psicoactivas."
+ },
+ {
+  "id": 8730,
+  "name": "8730 - Actividades de atención en instituciones para el cuidado de personas mayores y\/o discapacitadas."
+ },
+ {
+  "id": 8790,
+  "name": "8790 - Otras actividades de atención en instituciones con alojamiento"
+ },
+ {
+  "id": 8810,
+  "name": "8810 - Actividades de asistencia social sin alojamiento para personas mayores y discapacitadas."
+ },
+ {
+  "id": 8890,
+  "name": "8890 - Otras actividades de asistencia social sin alojamiento."
+ },
+ {
+  "id": 9001,
+  "name": "9001 - Creación literaria."
+ },
+ {
+  "id": 9002,
+  "name": "9002 - Creación musical."
+ },
+ {
+  "id": 9003,
+  "name": "9003 - Creación teatral."
+ },
+ {
+  "id": 9004,
+  "name": "9004 - Creación audiovisual."
+ },
+ {
+  "id": 9005,
+  "name": "9005 - Artes plásticas y visuales."
+ },
+ {
+  "id": 9006,
+  "name": "9006 - Actividades teatrales."
+ },
+ {
+  "id": 9007,
+  "name": "9007 - Actividades de espectáculos musicales en vivo."
+ },
+ {
+  "id": 9008,
+  "name": "9008 - Otras actividades de espectáculos en vivo."
+ },
+ {
+  "id": 9101,
+  "name": "9101 - Actividades de bibliotecas y archivos."
+ },
+ {
+  "id": 9102,
+  "name": "9102 - Actividades y funcionamiento de museos, conservación de edificios y sitios históricos."
+ },
+ {
+  "id": 9103,
+  "name": "9103 - Actividades de jardines botánicos, zoológicos y reservas naturales."
+ },
+ {
+  "id": 9200,
+  "name": "9200 - Actividades de juegos de azar y apuestas."
+ },
+ {
+  "id": 9311,
+  "name": "9311 - Gestión de instalaciones deportivas."
+ },
+ {
+  "id": 9312,
+  "name": "9312 - Actividades de clubes deportivos."
+ },
+ {
+  "id": 9319,
+  "name": "9319 - Otras actividades deportivas."
+ },
+ {
+  "id": 9321,
+  "name": "9321 - Actividades de parques de atracciones y parques temáticos."
+ },
+ {
+  "id": 9329,
+  "name": "9329 - Otras actividades recreativas y de esparcimiento n.c.p."
+ },
+ {
+  "id": 9411,
+  "name": "9411 - Actividades de asociaciones empresariales y de empleadores"
+ },
+ {
+  "id": 9412,
+  "name": "9412 - Actividades de asociaciones profesionales"
+ },
+ {
+  "id": 9420,
+  "name": "9420 - Actividades de sindicatos de empleados."
+ },
+ {
+  "id": 9491,
+  "name": "9491 - Actividades de asociaciones religiosas."
+ },
+ {
+  "id": 9492,
+  "name": "9492 - Actividades de asociaciones políticas."
+ },
+ {
+  "id": 9499,
+  "name": "9499 - Actividades de otras asociaciones n.c.p."
+ },
+ {
+  "id": 9511,
+  "name": "9511 - Mantenimiento y reparación de computadores y de equipo periférico."
+ },
+ {
+  "id": 9512,
+  "name": "9512 - Mantenimiento y reparación de equipos de comunicación."
+ },
+ {
+  "id": 9521,
+  "name": "9521 - Mantenimiento y reparación de aparatos electrónicos de consumo."
+ },
+ {
+  "id": 9522,
+  "name": "9522 - Mantenimiento y reparación de aparatos y equipos domésticos y de jardinería."
+ },
+ {
+  "id": 9523,
+  "name": "9523 - Reparación de calzado y artículos de cuero."
+ },
+ {
+  "id": 9524,
+  "name": "9524 - Reparación de muebles y accesorios para el hogar."
+ },
+ {
+  "id": 9529,
+  "name": "9529 - Mantenimiento y reparación de otros efectos personales y enseres domésticos."
+ },
+ {
+  "id": 9601,
+  "name": "9601 - Lavado y limpieza, incluso la limpieza en seco, de productos textiles y de piel."
+ },
+ {
+  "id": 9602,
+  "name": "9602 - Peluquería y otros tratamientos de belleza."
+ },
+ {
+  "id": 9603,
+  "name": "9603 - Pompas fúnebres y actividades relacionadas."
+ },
+ {
+  "id": 9609,
+  "name": "9609 - Otras actividades de servicios personales n.c.p."
+ },
+ {
+  "id": 9700,
+  "name": "9700 - Actividades de los hogares individuales como empleadores de personal doméstico."
+ },
+ {
+  "id": 9810,
+  "name": "9810 - Actividades no diferenciadas de los hogares individuales como productores de bienes para uso propio."
+ },
+ {
+  "id": 9820,
+  "name": "9820 - Actividades no diferenciadas de los hogares individuales como productores de servicios para uso propio."
+ },
+ {
+  "id": 9900,
+  "name": "9900 - Actividades de organizaciones y entidades extraterritoriales."
+ }
+]
