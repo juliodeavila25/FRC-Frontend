@@ -1,7 +1,6 @@
 import useOfertas from "../hooks/useOfertas";
-
 import useAuth from "../hooks/useAuth";
-
+import Admin  from "../components/dashboard/Admin"
 const projects = [
   {
     id: 1,
@@ -50,12 +49,17 @@ export default function Dashboard() {
   const { ofertas } = useOfertas();
   const { auth } = useAuth();
 
-  console.log(auth?.userType[0]);
+  //console.log(auth?.userType[0]);
 
-  console.log(ofertas);
+  //console.log(ofertas);
 
   return (
     <>
+        { 
+          auth?.userType[0] === "admin" ? (
+              <Admin/>
+        ) : null
+        }
       {Array.isArray(ofertas) && ofertas.length > 0 ? (
         <div className="mt-6 px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between space-x-4">
@@ -124,7 +128,7 @@ export default function Dashboard() {
         </div>
       ) : (
         <div className="rounded-md bg-blue-50 p-4">
-          <div className="flex">
+          <div className="flex">          
             <div className="flex-shrink-0">
               <svg
                 className="h-5 w-5 text-blue-400"
@@ -144,69 +148,9 @@ export default function Dashboard() {
                 No existen ofertas laborales vigentes.
               </p>
             </div>
-          </div>
+          </div>          
         </div>
-      )}
-      {/* Projects table (small breakpoint and up) */}
-      {/* <div className="mt-8 block mb-10">
-        <div className="inline-block min-w-full border-b border-gray-200 align-middle">
-          <table className="min-w-full">
-            <thead>
-              <tr className="border-t border-gray-200">
-                <th
-                  className="border-b border-gray-200 bg-gray-50 px-6 py-3 text-left text-sm font-semibold text-gray-900"
-                  scope="col"
-                >
-                  <span className="lg:pl-2 text-lg">Ofertas Aplicadas</span>
-                </th>
-                <th
-                  className="border-b border-gray-200 bg-gray-50 px-6 py-3 text-left text-sm font-semibold text-gray-900 hidden md:table-cell"
-                  scope="col"
-                >
-                  Salario
-                </th>
-                <th
-                  className=" border-b border-gray-200 bg-gray-50 px-6 py-3 text-right text-sm font-semibold text-gray-900 md:table-cell"
-                  scope="col"
-                >
-                  Fecha de Aplicación
-                </th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-gray-100 bg-white">
-              {projects.map((project) => (
-                <tr key={project.id}>
-                  <td className="w-full max-w-0 whitespace-nowrap px-6 py-3 text-sm font-medium text-gray-900">
-                    <div className="flex items-center space-x-3 lg:pl-2">
-                      <div
-                        className={classNames(
-                          project.bgColorClass,
-                          "flex-shrink-0 w-2.5 h-2.5 rounded-full"
-                        )}
-                        aria-hidden="true"
-                      />
-                      <a href="#" className="truncate hover:text-gray-600">
-                        <span>
-                          Auxiliar de Enfermería
-                          <span className="font-normal text-gray-500 pl-1">
-                            en Mompox
-                          </span>
-                        </span>
-                      </a>
-                    </div>
-                  </td>
-                  <td className="px-6 py-3 text-sm font-medium text-gray-500 hidden  md:table-cell">
-                    $1.000.000
-                  </td>
-                  <td className=" whitespace-nowrap px-6 py-3 text-right text-sm text-gray-500 md:table-cell">
-                    06/02/2023
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div> */}
+      )} 
     </>
   );
 }

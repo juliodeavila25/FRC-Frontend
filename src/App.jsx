@@ -10,6 +10,7 @@ import { CurriculumProvider } from "./context/CurriculumProvider";
 import { OfertasProvider } from "./context/ofertasProvider";
 import { DocumentosProvider } from "./context/documentosProvider";
 import { NominasProvider } from "./context/nominasProvider";
+import { NominaDetalladasProvider } from "./context/nominaDetalladasProvider";
 import {CollaboratorsProvider} from "./context/CollaboratorsProvider"
 import RutaProtegida from "./layouts/RutaProtegida";
 import Dashboard from "./pages/Dashboard";
@@ -36,6 +37,7 @@ function App() {
     <BrowserRouter>
       <AuthProvider>
         <CollaboratorsProvider>
+        <NominaDetalladasProvider>        
           <NominasProvider>
             <DocumentosProvider>
               <OfertasProvider>
@@ -65,7 +67,7 @@ function App() {
                       path="/dashboard"
                       element={
                         <RutaProtegida
-                          allowedRoles={["aspirante", "recursos_humanos", "colaborador"]}
+                          allowedRoles={["aspirante", "recursos_humanos", "colaborador", "admin"]}
                         />
                       }
                     >
@@ -184,6 +186,7 @@ function App() {
               </OfertasProvider>
             </DocumentosProvider>
           </NominasProvider>
+          </NominaDetalladasProvider>
         </CollaboratorsProvider>
       </AuthProvider>
     </BrowserRouter>

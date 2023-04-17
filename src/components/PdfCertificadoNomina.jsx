@@ -9,210 +9,6 @@ import {
   Link
 } from "@react-pdf/renderer";
 
-
-/*
-
-const styles_array = StyleSheet.create({
-  row: {
-    display: 'flex',
-    flexDirection: 'row',
-    borderTop: '1px solid #EEE',
-    paddingTop: 8,
-    paddingBottom: 8,
-  },
-  header: {
-    borderTop: 'none',
-  },
-  bold: {
-    fontWeight: 'bold',
-    fontSize: 9,
-  },
-  // So Declarative and unDRY 👌
-  row1: {
-    width: '25%',
-  },
-  row2: {
-    width: '25%',
-  },
-  row3: {
-    width: '25%',
-  },
-  row4: {
-    width: '25%',
-  },
-  table: { 
-    display: "table", 
-    width: "auto", 
-    borderStyle: "solid", 
-    borderWidth: 1, 
-    borderRightWidth: 0, 
-    borderBottomWidth: 0 
-  },
-  rowView: {
-    display: 'flex', 
-    flexDirection: 'row', 
-    borderTop: '1px solid #EEE', 
-    paddingTop: 8, 
-    paddingBottom: 8, 
-    textAlign: "center"
-  },
-  tableRow: { 
-    margin: "auto", 
-    flexDirection: "row" 
-  }, 
-  tableCol: { 
-    width: "25%", 
-    borderStyle: "solid", 
-    borderWidth: 1, 
-    borderLeftWidth: 0, 
-    borderTopWidth: 0,
-    padding: 4,
-  }, 
-  tableCell: { 
-    margin: "auto", 
-    marginTop: 5, 
-    fontSize: 10,
-    padding: 4,
-    color: "#1a245c",
-  }
-})
-
-const styles_table = StyleSheet.create({
-  page: { 
-    flexDirection: "column",
-    paddingTop: 35,
-    paddingBottom: 65,
-    paddingHorizontal: 35
-    
-  },
-  table: {
-    fontSize: 9,
-    width: 522,
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "flex-start",
-    alignContent: "stretch",
-    flexWrap: "nowrap",
-    alignItems: "stretch",
-    borderColor: "black",
-    borderStyle: "solid",
-    borderWidth: 2,
-  },
-  rowPaddingBottom: {
-    flexBasis: 30
-  },
-  row: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-around",
-    alignContent: "stretch",
-    flexWrap: "nowrap",
-    alignItems: "stretch",
-    flexGrow: 0,
-    flexShrink: 0,
-    flexBasis: 35
-  },
-  marginTotal: {
-    flexBasis: 20
-  },
-  boderTop: {        
-    borderTopWidth: 1
-  },
-  boderRight: {        
-    borderRightWidth: 1
-  },
-  cell: {
-    borderColor: "#cc0000",
-    borderStyle: "solid",
-    borderWidth: 2,
-    flexGrow: 1,
-    flexShrink: 1,
-    flexBasis: "auto",
-    alignSelf: "stretch"
-  },
-  cellCenter: {
-    flexGrow: 1,
-    flexShrink: 1,
-    flexBasis: "auto",
-    alignSelf: "stretch"
-  },
-  header: {
-    backgroundColor: "#eee"
-  },
-  headerText: {
-    padding: 10,
-    fontSize: 10,
-    fontWeight: 1200,
-    color: "#1a245c",
-    margin: 5,
-    fontFamily: "Times-Roman"
-  },
-  tableText: {
-   // margin: 10,
-    fontSize: 9,
-    //color: neutralDark
-  },
-  textBold: {
-    fontFamily: "Times-Bold",
-  },
-  textHidden: {
-    display: "none",
-    color: "white"
-  }
-});
-
-const styles = StyleSheet.create({
-  body: {
-    paddingTop: 35,
-    paddingBottom: 65,
-    paddingHorizontal: 35
-  },
-  title: {
-    fontSize: 23,
-    textAlign: 'center',
-    fontFamily: 'Oswald'
-  },
-  author: {
-    fontSize: 11,
-    textAlign: 'center',
-    marginBottom: 40,
-  },
-  subtitle: {
-    fontSize: 17,
-    margin: 12,
-    fontFamily: 'Oswald'
-  },
-  text: {
-    margin: 12,
-    fontSize: 13,
-    textAlign: 'justify',
-    fontFamily: 'Times-Roman'
-  },
-  image: {
-    marginVertical: 15,
-    marginHorizontal: 100,
-  },
-  header: {
-    fontSize: 11,
-    marginBottom: 5,
-    textAlign: 'center',
-    color: 'grey',
-  },
-  pageNumber: {
-    position: 'absolute',
-    fontSize: 11,
-    bottom: 30,
-    left: 0,
-    right: 0,
-    textAlign: 'center',
-    color: 'grey',
-  },
-  textTitle: {
-    color: 'blue',
-    fontSize: 8
-  },
-});
-*/
 const styles = StyleSheet.create({
   table: { 
     display: "table", 
@@ -376,26 +172,7 @@ Font.register({
   src: 'https://fonts.gstatic.com/s/oswald/v13/Y_TKV6o8WovbUd3m_X9aAA.ttf'
 });*/
 
-const PdfCertificadoNomina = ({ data, curriculum }) => {
-  //console.log(curriculum);
-  const data_table = [{
-        "codigo": 6,
-        "concepto": "APORTE SALUD ",
-        "tipo": "Descuento ",
-        "valor": -127640
-    },
-    {
-        "codigo": 7,
-        "concepto": "APORTE PENSION ",
-        "tipo": "Descuento ",
-        "valor": -127640
-    },
-    {
-        "codigo": 1,
-        "concepto": "SUELDO ",
-        "tipo": "Pago ",
-        "valor": 3191000
-    }];
+const PdfCertificadoNomina = ({ data, curriculum, nominaDetallada }) => {
     let USDollar = new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',
@@ -464,19 +241,19 @@ const PdfCertificadoNomina = ({ data, curriculum }) => {
               <Text style={[styles_array.tableCell, { fontSize: 11,fontFamily: "Helvetica-Bold" }]}>Valor</Text>
             </View> 
           </View>
-          {data_table.map((row, i) => (
+          {nominaDetallada.map((row, i) => (
             <View key={i} style={styles_array.tableRow} wrap={false}>
               <Text style={styles_array.tableCol}>
                 <Text style={styles_array.tableCell}>{row.codigo}</Text>
               </Text>              
               <Text style={styles_array.tableCol}>
-                <Text style={styles_array.tableCell}>{row.concepto}</Text>              
+                <Text style={styles_array.tableCell}>{row.descripcion}</Text>              
               </Text>
               <Text style={styles_array.tableCol}>
                 <Text style={styles_array.tableCell}>{row.tipo}</Text>
               </Text>
               <Text style={styles_array.tableCol}>
-                <Text style={styles_array.tableCell}>{USDollar.format(row.valor)} </Text>
+                <Text style={styles_array.tableCell}>{USDollar.format(row.valorStr)} </Text>
               </Text>
             </View>
           ))}
