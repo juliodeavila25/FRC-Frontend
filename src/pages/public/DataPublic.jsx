@@ -22,8 +22,13 @@ const navigation = [
   },
   {
     name: "Documentos",
-    href: "/info",
+    href: "/documentos",
     current: location.pathname.includes("/documentos") ? true : false,
+  },
+  {
+    name: "Busqueda",
+    href: "/info",
+    current: location.pathname.includes("/busqueda") ? true : false,
   },
 ];
 const userNavigation = [
