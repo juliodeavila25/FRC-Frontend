@@ -7,6 +7,7 @@ import { BeatLoader } from "react-spinners";
 import { TagsInput } from "react-tag-input-component";
 
 
+
 const FormularioNuevoDocumento = () => {
   const navigate = useNavigate();
   const [id, setId] = useState(null);
@@ -29,7 +30,8 @@ const FormularioNuevoDocumento = () => {
   const[observaciones, setObservaciones] = useState("")
   const[estado, setEstado] = useState("Vigente")
   const[numeroVersionMostrar, setNumeroVersionMostrar]= useState("")
-  const [selectedTag, setSelectedTag] = useState([]);
+  const[selectedTag, setSelectedTag] = useState([]);
+  const[unidadFuncional ,setUnidadFuncional]= useState("")
   // const [inputVersiones, setInputVersiones] = useState([
   //   { version: 1, url: " ", observaciones:"", estado:"Vigente" },
   // ]);
@@ -66,6 +68,7 @@ const FormularioNuevoDocumento = () => {
       setFuente(documento.fuente);
       setLink(documento.link);
       setSelectedTag(documento.selectedTag)
+      setUnidadFuncional(documento.unidadFuncional)
       setNumeroVersionMostrar(Array.isArray(documento.inputVersiones) && documento.inputVersiones.length > 0 ? documento.inputVersiones[documento.inputVersiones.length - 1].version : "")
       setUrlMostrar(Array.isArray(documento.inputVersiones) && documento.inputVersiones.length > 0 ? documento.inputVersiones[documento.inputVersiones.length - 1].url : "")
       setObservacionesMostrar(Array.isArray(documento.inputVersiones) && documento.inputVersiones.length > 0 ? documento.inputVersiones[documento.inputVersiones.length - 1].observaciones : "")
@@ -91,7 +94,8 @@ const FormularioNuevoDocumento = () => {
         responsable,
         fuente,
         link,
-        selectedTag
+        selectedTag,
+        unidadFuncional
       ].includes("")
     ) {
       mostrarAlerta({
@@ -107,6 +111,7 @@ const FormularioNuevoDocumento = () => {
         url,
         observaciones,
         estado,
+        unidadFuncional
       ].includes("")
     ){
        await submitDocumento({
@@ -122,7 +127,8 @@ const FormularioNuevoDocumento = () => {
       responsable,
       fuente,
       link,
-      selectedTag
+      selectedTag,
+      unidadFuncional
       //inputVersiones,
      // inputTest
     });
@@ -141,6 +147,7 @@ const FormularioNuevoDocumento = () => {
       responsable,
       fuente,
       link,
+      unidadFuncional,
       selectedTag,
       numeroVersion, 
       url,
@@ -550,7 +557,29 @@ const FormularioNuevoDocumento = () => {
             />
             <em className="text-xs italic">Presiona enter para agregar un nuevo tag</em>
             </div>
+
+            <div className="">
+              <label
+                htmlFor="unidad_funcional"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Unidad Funcional<span className="text-red-700">*</span>
+              </label>
+              <div className="mt-1">
+                <input
+                  id="unidad_funcional"
+                  name="unidad_funcional"
+                  type="text"
+                  placeholder="Digite la unidad funcional"
+                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                  value={unidadFuncional}
+                  onChange={(e) => setUnidadFuncional(e.target.value)}
+                  required={true}
+                />
+              </div>
+            </div>
           </div>
+          
          <div  id="formVersionOld" className={Array.isArray(documento.inputVersiones) && documento.inputVersiones.length > 0 ? "block" : "hidden"}>     
           <div className="text-left text-xl text-gray-700 mt-8 font-bold border-b-4 border-corporative-blue inline-flex">
               Versión vigente
