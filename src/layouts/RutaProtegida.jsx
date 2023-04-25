@@ -9,7 +9,7 @@ const RutaProtegida = ({ allowedRoles }) => {
   const location = useLocation();
 
   if (cargando) return <BeatLoader color="#36d7b7" />;
-  console.log(auth);
+  //console.log(auth);
   return (
     <>
       {auth?.userType?.find((item) => allowedRoles?.includes(item)) ? (

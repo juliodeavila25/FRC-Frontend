@@ -7,14 +7,14 @@ import useCargos from "../../hooks/useCargos";
 
 const EditarCargo = () => {
   const params = useParams();
-  const { obtenerCargo, cargandoData } = useCargos();
+  const { obtenerCargo, cargandoDataCargos } = useCargos();
 
   console.log(params.id);
   useEffect(() => {
     obtenerCargo(params.id);
   }, []);
 
-  if (cargandoData) return <BeatLoader color="#36d7b7" />;
+  if (cargandoDataCargos) return <BeatLoader color="#36d7b7" />;
 
   return <FormularioNuevoCargo />;
 };

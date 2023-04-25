@@ -47,7 +47,7 @@ const Sidebar = () => {
   const location = useLocation();
   const { auth } = useAuth();
 
-  console.log(auth?.userType[0]);
+  //console.log(auth?.userType[0]);
 
   const navigation_admin = [
     {

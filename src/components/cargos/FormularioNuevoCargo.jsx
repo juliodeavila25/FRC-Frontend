@@ -12,7 +12,7 @@ const FormularioNuevoCargo = () => {
   const [id, setId] = useState(null);
   const [nombre, setNombre] = useState("");
   const [inputCargos, setInputCargos] = useState([
-     { nombre_requisito: "", estado_requisito:"Activo" },
+     { nombre_requisito: "", vigencia:false, estado_requisito:"Activo" },
    ]);
 
 
@@ -23,12 +23,12 @@ const FormularioNuevoCargo = () => {
     mostrarAlerta,
     alerta,
     cargo,
-    cargandoData,
+    cargandoDataCargos,
   } = useCargos();
 
   const { auth, cargando } = useAuth();
 
-  console.log(cargo)
+ 
   useEffect(() => {
     if (params.id) {
       setId(cargo._id);
@@ -59,14 +59,18 @@ const FormularioNuevoCargo = () => {
  const handleaddclick = () => {
     setInputCargos([
       ...inputCargos,
-       { nombre_requisito: "", estado_requisito:"Activo" },
+       { nombre_requisito: "", vigencia:false, estado_requisito:"Activo" },
     ]);
   };
-  //Cuentas Extranjero
+
   const handleinputchange = (e, index) => {
-    const { name, value } = e.target;
+    const { name, value, checked } = e.target;
     const list = [...inputCargos];
-    list[index][name] = value;
+    if(e.target.type === "checkbox"){
+        list[index][name] = checked;
+    }else{
+      list[index][name] = value;
+    }
     setInputCargos(list);
   };
 
@@ -79,7 +83,7 @@ const FormularioNuevoCargo = () => {
 
   const { msg } = alerta;
 
-  if (cargandoData) return <BeatLoader color="#36d7b7" />;
+  if (cargandoDataCargos ) return <BeatLoader color="#36d7b7" />;
 
   return (
     <div className=" sm:mx-auto sm:w-full">
@@ -117,7 +121,7 @@ const FormularioNuevoCargo = () => {
                         return (
                         <div
                             key={i}
-                            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 pt-5"
+                            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 pt-5 "
                         >
                             <div className="">
                             <label className="block text-sm font-medium text-gray-700">
@@ -148,6 +152,17 @@ const FormularioNuevoCargo = () => {
                                 required={true}
                                 disabled={Array.isArray(cargo.inputCargos) && i >= cargo.inputCargos?.length  || params.id === undefined && inputCargos.length >= 1 ? false : true}
                             />
+                            </div>
+                            <div className="flex space-x-4 items-center pl-4">
+                              <input
+                                type="checkbox"
+                                id="vigencia"
+                                name="vigencia"
+                                value={item.vigencia}
+                                checked={item.vigencia}
+                                onChange={(e) => handleinputchange(e, i)}
+                              />
+                              <label htmlFor="vigencia">¿Tiene fecha de vigencia?</label>
                             </div>
                             <div className="">
                             <label className="block text-sm font-medium text-gray-700">

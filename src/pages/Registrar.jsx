@@ -52,7 +52,7 @@ const Registrar = () => {
         tipoDocumento,
         documento,
       });
-      console.log(data);
+      //console.log(data);
       setAlerta({
         msg: data.msg,
         error: false,

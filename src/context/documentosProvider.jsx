@@ -133,7 +133,7 @@ const DocumentosProvider = ({ children }) => {
         },
       };
       const { data } = await clienteAxios.get(`/documentos/${id}`, config);
-      console.log(data);
+      //console.log(data);
       setDocumento(data);
     } catch (error) {
       console.log(error);

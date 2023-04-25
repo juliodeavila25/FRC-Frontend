@@ -38,9 +38,9 @@ const NominasProvider = ({ children }) => {
           Authorization: `Bearer ${token}`,
         },
       };
-      console.log(identificacion)
+      //console.log(identificacion)
       const { data } = await clienteAxios.get("/nominas/obtener_moninas", config);
-      console.log(data)
+      //console.log(data)
       setNominas(data);
       
     } catch (error) {

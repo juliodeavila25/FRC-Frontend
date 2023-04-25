@@ -13,7 +13,7 @@ const CurriculumProvider = ({ children }) => {
   const navigate = useNavigate();
   const { auth } = useAuth();
   
-  console.log(auth)
+ 
   const mostrarAlerta = (alerta) => {
     setAlerta(alerta);
     setTimeout(() => {
@@ -62,7 +62,6 @@ const CurriculumProvider = ({ children }) => {
         setAlerta({});
         const tipo = localStorage.getItem("tipo");
         if(tipo === "formRH"){
-          console.log(token)
           navigate("/colaboradores");
         }else{
           navigate("/dashboard");
@@ -75,10 +74,10 @@ const CurriculumProvider = ({ children }) => {
   };
 
   const nuevoCurriculum = async (curriculum) => {
-    console.log(curriculum);
-    for (const value of curriculum.values()) {
-      console.log(value);
-    }
+    // console.log(curriculum);
+    // for (const value of curriculum.values()) {
+    //   console.log(value);
+    // }
     try {
       const token = localStorage.getItem("token");
       if (!token) return;
@@ -121,7 +120,7 @@ const CurriculumProvider = ({ children }) => {
         },
       };
       const { data } = await clienteAxios.get(`/curriculum/${id}`, config);
-      console.log(data);
+      // console.log(data);
       setCurriculum(data);
     } catch (error) {
       console.log(error);

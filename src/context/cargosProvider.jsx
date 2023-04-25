@@ -8,8 +8,9 @@ const CargosContext = createContext();
 const CargosProvider = ({ children }) => {
   const [cargo, setCargo] = useState([]);
   const [cargos, setCargos] = useState([]);
+  const [cargosForm, setCargosForm] = useState([]);
   const [alerta, setAlerta] = useState({});
-  const [cargandoData, setCargando] = useState(false);
+  const [cargandoDataCargos, setCargando] = useState(false);
   const navigate = useNavigate();
   const { auth } = useAuth();
 
@@ -21,6 +22,7 @@ const CargosProvider = ({ children }) => {
   };
 
   useEffect(() => {
+    setCargando(true);
     const obtenerCargos = async () => {
       try {
         const token = localStorage.getItem("token");
@@ -32,12 +34,14 @@ const CargosProvider = ({ children }) => {
           },
         };
         const { data } = await clienteAxios("/cargos", config);
+       
         setCargos(data);
       } catch (error) {
         console.log(error);
       }
     };
     obtenerCargos();
+    setCargando(false);
   }, [auth]);
 
   const submitCargo = async (cargo) => {
@@ -140,16 +144,37 @@ const CargosProvider = ({ children }) => {
     setCargando(false);
   };
 
+
+   const obtenerCargosForm = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        if (!token) return;
+        const config = {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        };
+        const { data } = await clienteAxios("/cargos", config);
+       
+        setCargosForm(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
   return (
     <CargosContext.Provider
       value={{
         alerta,
         cargo,
         cargos,
-        cargandoData,
+        cargosForm,
+        cargandoDataCargos,
         submitCargo,
         mostrarAlerta,
-        obtenerCargo
+        obtenerCargo,
+        obtenerCargosForm
        
       }}
     >

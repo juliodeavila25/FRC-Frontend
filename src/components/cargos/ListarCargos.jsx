@@ -6,7 +6,7 @@ import { format } from "date-fns";
 import { useNavigate, Link } from "react-router-dom";
 
 const ListarCargosTotal = () => {
-  const { cargos, obtenerCargos, cargo, cargandoData } =
+  const { cargos, obtenerCargos, cargo, cargandoDataCargos } =
     useCargos();
   const navigate = useNavigate();
 

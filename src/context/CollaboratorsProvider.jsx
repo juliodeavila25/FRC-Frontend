@@ -59,7 +59,7 @@ const CollaboratorsProvider = ({ children }) => {
         },
       };
       const { data } = await clienteAxios.get(`/colaboradores/editar-colaborador/${id}`, config);
-      console.log(data);
+      //console.log(data);
       setCollaborator(data);
     } catch (error) {
       console.log(error);
