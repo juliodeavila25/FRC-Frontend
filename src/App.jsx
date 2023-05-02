@@ -35,12 +35,18 @@ import ListarVersiones from "./components/documents/ListarVersiones";
 import ListarCargos from "./pages/cargos/ListarCargos";
 import CrearCargo from "./pages/cargos/CrearCargo";
 import EditarCargo from "./pages/cargos/EditarCargo"
+import BusquedaAvanzada from "./pages/public/BusquedaAvanzada";
+import OtrosDocumentos from "./pages/recursos_humanos/OtrosDocumentos";
+import CrearOtroDocumento from "./pages/recursos_humanos/otros_documentos/CrearOtroDocumento";
+import { OtrosDocumentosProvider } from "./context/otrosDocumentosProvider";
+import EditarOtroDocumento from './pages/recursos_humanos/otros_documentos/EditarOtroDocumento'
 
 
 function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
+        <OtrosDocumentosProvider>
         <CargosProvider>
           <CollaboratorsProvider>
           <NominaDetalladasProvider>       
@@ -66,6 +72,7 @@ function App() {
 
                         <Route path="/documentos">
                           <Route index element={<DataPublic />} />
+                           <Route path="busqueda-avanzada" element={<BusquedaAvanzada />} />
                           <Route path="detalles/:id" element={<Unauthorized />} />
                         </Route>
 
@@ -186,6 +193,21 @@ function App() {
                             path="editar-colaborador/:id"
                             element={<EditarColaborador />}
                           />
+
+                          <Route
+                            path="otros-documentos/:id"
+                            element={<OtrosDocumentos/>}
+                          />
+
+                          <Route
+                            path="otros-documentos/:id/crear-documento"
+                            element={<CrearOtroDocumento/>}
+                          />
+
+                          <Route
+                            path="otros-documentos/:id/editar-documento/:id_documento"
+                            element={<EditarOtroDocumento/>}
+                          />
                         </Route>
 
                         <Route
@@ -218,6 +240,7 @@ function App() {
             </NominaDetalladasProvider>       
           </CollaboratorsProvider>
         </CargosProvider>
+        </OtrosDocumentosProvider>
       </AuthProvider>
     </BrowserRouter>
   );

@@ -113,8 +113,11 @@ const FormularioCurriculum = () => {
 
   const[cargosFiltrado, setCargosFiltrado] = useState([])
   const [inputReq, setInputReq] = useState([
-    { nombre_requisito: " ", documento: " ", observaciones:" ", estado_requisito:"" },
+    { nombre_requisito: " ", vigencia:" ", fecha_vigencia:"1990-01-01", observaciones:" ", estado_requisito:"" },
   ]);
+
+  const[documentoRequerido, setDocumentoRequerido] = useState([])
+  
   const params = useParams();
 
   const {
@@ -227,7 +230,7 @@ const FormularioCurriculum = () => {
   useEffect(() => {
     if (Array.isArray(cargosForm) && cargosForm.length > 0 && Array.isArray(curriculum) && curriculum.length > 0) {
       setInputReq([
-    { nombre_requisito: " ", documento: " ", observaciones:" ", estado_requisito:"" },
+    { nombre_requisito: " ", documento: [], vigencia:" ", fecha_vigencia:"1990-01-01", observaciones:" ", estado_requisito:"" },
     ]);
     let cargo_new = Array.isArray(cargosForm) && cargosForm.filter(item => item.nombre.includes(cargo))
     cargo_new[0]?.inputCargos.forEach(item =>{
@@ -235,61 +238,22 @@ const FormularioCurriculum = () => {
         setInputReq(inputReq => 
           [
             ...inputReq,
-            { nombre_requisito: item.nombre_requisito, documento: "", observaciones: "", estado_requisito: item.estado_requisito },
+            { nombre_requisito: item.nombre_requisito, documento: [], vigencia:item.vigencia, fecha_vigencia:"1990-01-01", observaciones: "", estado_requisito: item.estado_requisito },
           ]))
       
     })
     }
    
-   
-   
-
-    //setInputReq(cargo_full)
-    // setCargosFiltrado(Array.isArray(cargos) && cargos.filter(item => item.nombre.includes(cargo)))
-    // console.log(cargosFiltrado)
-
-   
   }, [cargosForm, curriculum])
   
-  //console.log(inputReq)
 
-  // const {
-  //   register,
-  //   handleSubmit,
-  //   reset,
-  //   formState: { errors },
-  // } = useForm({
-  //   defaultValues: {
-  //     nombre: " assa",
-  //     numeroDocumento: " ",
-  //     fechaNacimiento: " ",
-  //     lugarNacimiento: " ",
-  //     telefono: " ",
-  //     correo: " ",
-  //     direccion: " ",
-  //     pais: " ",
-  //     departamento: " ",
-  //     ciudad: " ",
-  //     numeroHijos: " ",
-  //     tipoSangre: " ",
-  //     nivel: " ",
-  //     titulo: " ",
-  //     anioTitulo: " ",
-  //     institucionTitulo: " ",
-  //     empresaExp: " ",
-  //     fechaInicioExp: " ",
-  //     nombreRefA: " ",
-  //     telefonoRefA: " ",
-  //     correoRefA: " ",
-  //   },
-  // });
+  console.log(cargosForm)
 
   const submitData = async (e) => {
     e.preventDefault();
 
     localStorage.setItem("tipo", "formCo");
-
-    //console.log(errors);
+  
 
     if (errorSoporteExp === true) {
       mostrarAlerta({
@@ -410,9 +374,16 @@ const FormularioCurriculum = () => {
     formData.append("sueldo", sueldo);
     formData.append("soporteContrato", soporteContrato);
     formData.append("cargo", cargo);
+    //formData.append("inputReq", inputReq);
+    for (let i = 1; i < inputReq.length; i++) {
+      formData.append("inputReq", (inputReq[i]));
+    }
     //console.log(formData);
     //Pasar los datos hacia el provider
-    
+    //formData.append("documentoRequerido", documentoRequerido);
+    for (let i = 1; i < documentoRequerido.length; i++) {
+      formData.append("documentoRequerido", (documentoRequerido[i]));
+    }
     await submitCurriculum(formData, estado);
   };
 
@@ -513,13 +484,14 @@ const FormularioCurriculum = () => {
   };
 
   const handleSoporteEps = (data) => {
+    console.log(data)
     const maxfilesize = (1024 * 1024) / 2;
 
     if (data && data.size > maxfilesize) {
       setErrorSoporteEps(true);
       setSoporteEps(" ");
     } else {
-      setErrorSoporteEps(false);
+      setErrorSoporteEps(false);      
       setSoporteEps(data);
     }
   };
@@ -579,10 +551,31 @@ const handleChangeDepartamento = (e)=>{
     setMunicipios(municipiosFilter[0].ciudades)
    
 }
+
+ const handleinputchangeRequiredDocuments = (e, index) => {
+    const { name, value } = e.target;
+    const list = [...inputReq];
+    if(e.target.name === "documento"){      
+      list[index][name] = e.target.files[0]
+      setInputReq(list);
+    }else{
+      list[index][name] = value;
+      setInputReq(list);
+     
+    }
+    
+  };
+  
+  const handleTest = (e, index) =>{
+    const list1 = [...documentoRequerido];
+    list1[index] = e.target.files[0]
+    setDocumentoRequerido(list1);
+    console.log(documentoRequerido)
+  }
   
   const { msg } = alerta;
 
-
+ console.log(inputReq)
   
 
   if (cargandoData) return <BeatLoader color="#36d7b7" />;
@@ -620,15 +613,8 @@ const handleChangeDepartamento = (e)=>{
                   value={nombre}
                   onChange={(e) => setNombre(e.target.value)}
                   required
-                  // {...register("nombre", {
-                  //   required: "Este campo es requerido",
-                  //   onChange: (e) => setNombre(e.target.value),
-                  // })}
                 />
               </div>
-              {/* <span className="text-xs text-red-500">
-                {errors.nombre?.message}
-              </span> */}
             </div>
             <div>
               <label
@@ -677,15 +663,9 @@ const handleChangeDepartamento = (e)=>{
                   value={numeroDocumento}
                   onChange={(e) => setNumeroDocumento(e.target.value)}
                   required
-                  // {...register("numeroDocumento", {
-                  //   required: "Este campo es requerido",
-                  //   onChange: (e) => setNumeroDocumento(e.target.value),
-                  // })}
                 />
               </div>
-              {/* <span className="text-xs text-red-500">
-                {errors.numeroDocumento?.message}
-              </span> */}
+             
             </div>
 
             <div>
@@ -705,15 +685,8 @@ const handleChangeDepartamento = (e)=>{
                   value={fechaNacimiento}
                   onChange={(e) => setFechaNacimiento(e.target.value)}
                   required
-                  // {...register("fechaNacimiento", {
-                  //   required: "Este campo es requerido",
-                  //   onChange: (e) => setFechaNacimiento(e.target.value),
-                  // })}
                 />
               </div>
-              {/* <span className="text-xs text-red-500">
-                {errors.fechaNacimiento?.message}
-              </span> */}
             </div>
 
             <div>
@@ -733,15 +706,8 @@ const handleChangeDepartamento = (e)=>{
                   value={lugarNacimiento}
                    onChange={(e) => setLugarNacimiento(e.target.value)}
                    required
-                  // {...register("lugarNacimiento", {
-                  //   required: "Este campo es requerido",
-                  //   onChange: (e) => setLugarNacimiento(e.target.value),
-                  // })}
                 />
               </div>
-              {/* <span className="text-xs text-red-500">
-                {errors.lugarNacimiento?.message}
-              </span> */}
             </div>
 
             <div>
@@ -759,17 +725,11 @@ const handleChangeDepartamento = (e)=>{
                   placeholder="Digite su número de telefono"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={telefono}
-                   onChange={(e) => setTelefono(e.target.value)}
-                   required
-                  // {...register("telefono", {
-                  //   required: "Este campo es requerido",
-                  //   onChange: (e) => setTelefono(e.target.value),
-                  // })}
+                  onChange={(e) => setTelefono(e.target.value)}
+                  required
+                 
                 />
-              </div>
-              {/* <span className="text-xs text-red-500">
-                {errors.telefono?.message}
-              </span> */}
+              </div>             
             </div>
 
             <div>
@@ -787,17 +747,10 @@ const handleChangeDepartamento = (e)=>{
                   placeholder="Digite su correo electrónico"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={correo}
-                   onChange={(e) => setCorreo(e.target.value)}
-                   required
-                  // {...register("correo", {
-                  //   required: "Este campo es requerido",
-                  //   onChange: (e) => setCorreo(e.target.value),
-                  // })}
+                  onChange={(e) => setCorreo(e.target.value)}
+                  required
                 />
               </div>
-              {/* <span className="text-xs text-red-500">
-                {errors.correo?.message}
-              </span> */}
             </div>
 
             <div>
@@ -817,15 +770,8 @@ const handleChangeDepartamento = (e)=>{
                   value={direccion}
                   onChange={(e) => setDireccion(e.target.value)}
                   required
-                  // {...register("direccion", {
-                  //   required: "Este campo es requerido",
-                  //   onChange: (e) => setDireccion(e.target.value),
-                  // })}
                 />
               </div>
-              {/* <span className="text-xs text-red-500">
-                {errors.direccion?.message}
-              </span> */}
             </div>
 
             <div>
@@ -2651,15 +2597,21 @@ const handleChangeDepartamento = (e)=>{
           </div>
           <div className="">
             { inputReq &&
-              Array.isArray(inputReq) && inputReq.length > 0 && inputReq.map(item =>{
+              Array.isArray(inputReq) && inputReq.length > 0 && inputReq.map((item, i) =>{
                 
                 return(
                   <div  key={item.nombre_requisito}>
                   <>
                   {item.estado_requisito === "Activo" || item.estado_requisito === " " ? (
-                        <div className="grid grid-cols-3 gap-10  items-center border border-gray-200 p-2 rounded-ful"> 
-                    <div className="py-10" name="" >{item.nombre_requisito}</div>
+                        <div className="grid grid-cols-4 gap-10  items-center border border-gray-200 p-2 rounded-ful"> 
+                    <div className="py-10 italic underline" name="" >{item.nombre_requisito}:</div>
                      <div>
+                       <label
+                          htmlFor="documentoRequerido"
+                          className="block text-sm font-medium text-gray-700 pb-2"
+                        >
+                          Documento
+                      </label>
                       <input
                           className="form-control
                           block
@@ -2677,24 +2629,52 @@ const handleChangeDepartamento = (e)=>{
                           m-0
                           focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                           type="file"
-                          id="soportePrimero"
-                          name="soportePrimero"
-                          //onChange={(e) => handleSoporteContrato(e.target.files[0])}
-                          disabled={item.estado === "Inactivo" ? true : false}
+                          id="documentoRequerido"
+                          name="documentoRequerido"
+                          onChange={(e) => handleTest(e, i)}
+                          //disabled={item.estado === "Inactivo" ? true : false}
                           accept=".pdf"
                         />
                     </div>
-
+                     {item.vigencia === true ?(
+                      <div>
+                         <label
+                          htmlFor="fecha_vigencia"
+                          className="block text-sm font-medium text-gray-700 pb-2"
+                        >
+                          Fecha de vigencia
+                      </label>
+                      <input
+                        id="fecha_vigencia"
+                        name="fecha_vigencia"
+                        type="date"
+                        placeholder="Seleccione fecha de vigencia"
+                        className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                        value={item.fecha_vigencia}
+                        onChange={(e) => handleinputchangeRequiredDocuments(e, i)}
+                        required
+                      
+                      />
+                      </div>
+                     ): <div></div>}
+                      <div>
+                         <label
+                          htmlFor="observaciones"
+                          className="block text-sm font-medium text-gray-700 pb-2"
+                        >
+                          Descripción
+                      </label>
                      <textarea
-                        id="descripcionIngresos"
-                        name="descripcionIngresos"
+                        id="observaciones"
+                        name="observaciones"
                         type="text"
                         placeholder=""
                         rows="2"
                         className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm mb-2"
-                        //value={descripcionIngresos}
-                        //onChange={(e) => setDescripcionIngresos(e.target.value)}
+                        value={item.observaciones}
+                        onChange={(e) => handleinputchangeRequiredDocuments(e, i)}
                       />
+                      </div>
 
                   </div>
                   ): null} 
@@ -2703,17 +2683,7 @@ const handleChangeDepartamento = (e)=>{
                 )})
              
             } 
-
-           
           </div>
-          
-
-
-            
- 
-   
-  
-
           {msg && <Alert alerta={alerta} />}
           <div className="grid grid-cols-2 gap-6 w-3/5 mx-auto mt-3">
             <Link

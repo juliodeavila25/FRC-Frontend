@@ -48,7 +48,7 @@ const PublicTable = ({ data, columns }) => {
   const { pageIndex } = state;
 
   const { globalFilter } = state;
-  if (data.length <= 0) return <BeatLoader color="#36d7b7" />;
+  if (data.length <= 0) return null;
 
   return (
     <div className="px-4 sm:px-6 lg:px-8 mt-5">
@@ -135,7 +135,7 @@ const PublicTable = ({ data, columns }) => {
                               className="whitespace-pre-line px-3 py-4 text-sm text-gray-500 truncate "
                               {...cell.getCellProps()}
                             >
-                               {console.log(cell.render("Cell"))}
+                              
                               {cell.value === "activo" ? (
                                 <span className="capitalize inline-flex rounded-full bg-green-100 px-2 text-xs font-semibold leading-5 text-green-800 ">
                                   {cell.render("Cell")}

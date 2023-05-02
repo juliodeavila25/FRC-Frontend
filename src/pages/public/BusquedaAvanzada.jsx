@@ -7,6 +7,7 @@ import PublicTable from "../../components/table/PublicTable";
 import { format } from "date-fns";
 import ModalPublic from "../../components/ModalPublic";
 import { Link, useLocation } from "react-router-dom";
+import { TagsInput } from "react-tag-input-component";
 
 const user = {
   name: "Tom Cook",
@@ -23,11 +24,11 @@ const navigation = [
   {
     name: "Documentos",
     href: "/documentos",
-    current: location.pathname.includes("/documentos ") ? true : false,
+    current: location.pathname.includes("/documentos") ? true : false,
   },
   {
     name: "Busqueda",
-    href: "/documentos/busqueda-avanzada",
+    href: "/busqueda-avanzada",
     current: location.pathname.includes("/busqueda-avanzada") ? true : false,
   },
 ];
@@ -41,8 +42,16 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function DataPublic() {
-  const [documentosPublicos, setDocumentosPublicos] = useState([]);
+export default function BusquedaAvanzada() {
+  const[documentosPublicos, setDocumentosPublicos] = useState([]);
+  const[datosFiltrados, setFiltrados] = useState([])
+  const[busqueda, setBusqueda] = useState(false)
+  const[proceso, setProceso] = useState("")
+  const[servicio, setServicio] = useState("")
+  const[tipo, setTipo] = useState("")
+  const[especialidad, setEspecialidad] = useState("")
+  const[responsable, setResponsable] = useState("")
+  const[titulo, setTitulo] = useState("")
   const [data, setData] = useState();
   const [visible, setVisible] = useState(false);
   const location = useLocation();
@@ -68,7 +77,7 @@ export default function DataPublic() {
     setVisible(false);
   };
 
-  console.log(documentosPublicos);
+  
   const [headers, setHeaders] = useState([
     {
       Header: "Código",
@@ -79,7 +88,7 @@ export default function DataPublic() {
     { Header: "Tags", 
       accessor: "selectedTag",
       Cell: ({ value }) => {
-        return (value.length > 0 && value.map((tag)=> (<span  className="bg-blue-500 text-white rounded-full px-3 py-1 text-xs ">{tag}</span> )))
+        return (value.length > 0 && value.map((tag)=> (<span key={tag} className="bg-blue-500 text-white rounded-full px-3 py-1 text-xs ">{tag}</span> )))
       },
     },
     {
@@ -92,7 +101,7 @@ export default function DataPublic() {
     {
       Header: " ",
       accessor: (originalRow, rowIndex) => (
-        <div className="flex space-x-2 items-center ">
+        <div className="flex space-x-2 items-center " >
           <button
             className="text-blue-500 hover:text-blue-900"
             onClick={() => activateModal(originalRow)}
@@ -142,6 +151,54 @@ export default function DataPublic() {
       ),
     },
   ]);
+
+  const handleSubmit = (e) =>{
+    e.preventDefault()
+    setFiltrados([])
+    if (proceso !== "" || titulo !== "" || servicio !== "" || tipo !== "" 
+        || especialidad !== "" || responsable !== "" || titulo !== ""){
+        setBusqueda(true)
+        let arrayInputCargos = [];
+         for(let i=0; i < documentosPublicos.length; i++){
+            let procesoNormalizado = documentosPublicos[i].proceso.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()
+            let tituloNormalizado = documentosPublicos[i].titulo.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()
+            let servicioNormalizado = documentosPublicos[i].servicio.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()
+            let tipoNormalizado = documentosPublicos[i].tipo.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()
+            let especialidadNormalizado = documentosPublicos[i].especialidad.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()
+            let resposableNormalizado = documentosPublicos[i].responsable.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()
+            
+            
+            
+            if(procesoNormalizado.includes(proceso.toLowerCase()) && 
+                tituloNormalizado.includes(titulo.toLowerCase()) && 
+                servicioNormalizado.includes(servicio.toLowerCase()) && 
+                tipoNormalizado.includes(tipo.toLowerCase())&& 
+                especialidadNormalizado.includes(especialidad.toLowerCase())&& 
+                resposableNormalizado.includes(responsable.toLowerCase())
+                ){
+                arrayInputCargos.push(documentosPublicos[i]);
+               setFiltrados(arrayInputCargos)
+            }
+         }
+        }
+    
+    // if( titulo !== ""){
+    //      setBusqueda(true)
+    //     let arrayInputCargos = [];
+    //      for(let i=0; i < documentosPublicos.length; i++){
+    //         if(documentosPublicos[i].titulo.includes(titulo)){
+    //             arrayInputCargos.push(documentosPublicos[i]);
+    //            setFiltrados(arrayInputCargos)
+    //         }
+    //      }
+
+    // } 
+
+
+   
+  }
+
+  console.log(datosFiltrados)
 
   // if (!documentosPublicos) return <BeatLoader color="#36d7b7" />;
   console.log(documentosPublicos);
@@ -281,13 +338,141 @@ export default function DataPublic() {
             </div>
           </header>
           <main>
-            {Array.isArray(documentosPublicos) &&
-            documentosPublicos.length > 0 ? (
-              <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
-                <PublicTable data={documentosPublicos} columns={headers} />
-              </div>
-            ) : (
-              <div className="rounded-md bg-blue-50 p-4">
+             <div className="mx-auto max-w-7xl sm:px-6 px-8">
+                <form className="lg:pl-8" onSubmit={handleSubmit} >
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 mt-10">
+                        <div>
+                            <label
+                                htmlFor="proceso"
+                                className="block text-sm font-medium text-gray-700"
+                            >
+                                Proceso
+                            </label>
+                            <div className="mt-1">
+                                <input
+                                type="text"
+                                id="proceso"
+                                name="proceso"
+                                placeholder="Búsqueda por proceso"
+                                className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                value={proceso}
+                                onChange={(e) => setProceso(e.target.value)}
+                                />
+                            </div>
+                        </div>
+                         <div>
+                            <label
+                                htmlFor="titulo"
+                                className="block text-sm font-medium text-gray-700"
+                            >
+                                Titulo
+                            </label>
+                            <div className="mt-1">
+                                <input
+                                type="text"
+                                id="titulo"
+                                name="titulo"
+                                placeholder="Búsqueda por titulo"
+                                className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                value={titulo}
+                                onChange={(e) => setTitulo(e.target.value)}
+                                />
+                            </div>
+                        </div>
+                         <div>
+                            <label
+                                htmlFor="servicio"
+                                className="block text-sm font-medium text-gray-700"
+                            >
+                                Servicio
+                            </label>
+                            <div className="mt-1">
+                                <input
+                                type="text"
+                                id="servicio"
+                                name="servicio"
+                                placeholder="Búsqueda por servicio"
+                                className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                value={servicio}
+                                onChange={(e) => setServicio(e.target.value)}
+                                />
+                            </div>
+                        </div>
+                        <div>
+                            <label
+                                htmlFor="tipo"
+                                className="block text-sm font-medium text-gray-700"
+                            >
+                                Tipo
+                            </label>
+                            <div className="mt-1">
+                                <input
+                                type="text"
+                                id="tipo"
+                                name="tipo"
+                                placeholder="Búsqueda por tipo"
+                                className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                value={tipo}
+                                onChange={(e) => setTipo(e.target.value)}
+                                />
+                            </div>
+                        </div>
+                        <div>
+                            <label
+                                htmlFor="especialidad"
+                                className="block text-sm font-medium text-gray-700"
+                            >
+                                Especialidad
+                            </label>
+                            <div className="mt-1">
+                                <input
+                                type="text"
+                                id="especialidad"
+                                name="especialidad"
+                                placeholder="Búsqueda por especialidad"
+                                className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                value={especialidad}
+                                onChange={(e) => setEspecialidad(e.target.value)}
+                                />
+                            </div>
+                        </div>
+
+                         <div>
+                            <label
+                                htmlFor="responsable"
+                                className="block text-sm font-medium text-gray-700"
+                            >
+                                Responsable
+                            </label>
+                            <div className="mt-1">
+                                <input
+                                type="text"
+                                id="responsable"
+                                name="responsable"
+                                placeholder="Búsqueda por responsable"
+                                className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                value={responsable}
+                                onChange={(e) => setResponsable(e.target.value)}
+                                />
+                            </div>
+                        </div>
+                         
+                    </div>
+                    <div className="flex justify-center mt-10 ">
+                        <input
+                            type="submit"
+                            className="flex w-60 justify-center rounded-md border border-transparent bg-green-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 cursor-pointer"
+                            value="Buscar"
+                        />
+
+                    </div>
+                    
+                </form>
+             </div>
+            
+            {busqueda === false  ? (
+
+                <div className="rounded-md bg-blue-50 p-4 mt-10">
                 <div className="flex">
                   <div className="flex-shrink-0">
                     <svg
@@ -305,13 +490,19 @@ export default function DataPublic() {
                   </div>
                   <div className="ml-3 flex-1 md:flex ">
                     <p className="text-sm text-blue-700">
-                      En estos momentos no tenemos documentos para mostrar,
-                      consulte mas tarde.
+                      Por favor ingresa un criterio de busqueda
                     </p>
                   </div>
                 </div>
               </div>
-            )}
+             
+            ) :  Array.isArray(datosFiltrados) && datosFiltrados.length > 0 ? (
+                <>
+               <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
+                <PublicTable data={datosFiltrados} columns={headers} />
+              </div>
+              </>
+            ): null}
           </main>
         </div>
       </div>

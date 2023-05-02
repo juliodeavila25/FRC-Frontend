@@ -1,49 +1,65 @@
-import useCollaborators from "../../hooks/useCollaborators";
+import useCargos from "../../hooks/useCargos";
 import useOtrosDocumentos from "../../hooks/useOtrosDocumentos";
-import { useState } from "react";
-import Table from "../table/Table";
+import { useEffect, useState } from "react";
+import Table from "../../components/table/Table";
 import { BeatLoader } from "react-spinners";
 import { format } from "date-fns";
-import { useNavigate, Link } from "react-router-dom";
-import { useEffect } from "react";
+import { useNavigate, Link, useParams } from "react-router-dom";
 
-const ListadoColaboradores = () => {
-  const { obtenerCurriculums, collaborators } = useCollaborators();
-  const {obtenerOtrosDocumentos} = useOtrosDocumentos()
+
+const OtrosDocumentos = () => {
+  const { cargos, obtenerCargos, cargo, cargandoDataCargos } =
+    useCargos();
+  const{otrosDocumentos, obtenerOtrosDocumentos} = useOtrosDocumentos();
   const navigate = useNavigate();
+  const params = useParams();
 
   useEffect(() => {
-    obtenerCurriculums()
+    const id = localStorage.getItem("id_trabajador");
+    obtenerOtrosDocumentos(id)
   }, [])
   
-   
-    const redireccionar = (id) =>{
-      localStorage.setItem("id_trabajador", id);
-      obtenerOtrosDocumentos(id)
-      navigate(
-                  `/colaboradores/otros-documentos/${id}`
-                )
 
-  }
-
-
+  
+ 
+  const id_trabajador = localStorage.getItem("id_trabajador");
   const [headers, setHeaders] = useState([
     {
-      Header: "Nombre",
-      accessor: "nombre",
+      Header: "Nombre Documento",
+      accessor: "nombreDocumento",
     },
-    { Header: "Documento", accessor: "numeroDocumento" },
-    { Header: "Cargo", accessor: "cargo" },
+    {
+      Header: "Fecha de creación",
+      accessor: "createdAt",
+      Cell: ({ value }) => {
+        return format(new Date(value), "dd/MM/yyyy");
+      },
+    },
+    {
+      Header: "Documento",
+      accessor: (originalRow, rowIndex) => (
+        <div>
+          <a
+            className="text-blue-500 hover:text-blue-900 cursor-pointer underline"
+             href={`${import.meta.env.VITE_BACKEND_URL}/${
+                     originalRow.documento
+                    }`}
+            target="_blank"
+          >
+           Ver documento
+          </a>
+        </div>
+      ),
+     
+    },
     {
       Header: " ",
       accessor: (originalRow, rowIndex) => (
-        <div className="flex space-x-2">
+        <div>
           <button
             className="text-blue-500 hover:text-blue-900"
             onClick={() =>
-              navigate(
-                `/colaboradores/editar-colaborador/${originalRow._id}`
-              )
+              navigate(`/colaboradores/otros-documentos/${originalRow.id_trabajador}/editar-documento/${originalRow._id}`)
             }
           >
             <svg
@@ -61,29 +77,10 @@ const ListadoColaboradores = () => {
               />
             </svg>
           </button>
-          <button
-            className="text-blue-500 hover:text-blue-900"
-            onClick={() => redireccionar(originalRow._id) }
-          >
-            <svg 
-              xmlns="http://www.w3.org/2000/svg" 
-              fill="none" 
-              viewBox="0 0 24 24" 
-              strokeWidth={1.5} 
-              stroke="currentColor" 
-              className="w-6 h-6">
-              <path 
-                strokeLinecap="round" 
-                strokeLinejoin="round" 
-                d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" 
-                />
-            </svg>
-          </button>
         </div>
       ),
     },
   ]);
-
 
   return (
     <>
@@ -91,29 +88,24 @@ const ListadoColaboradores = () => {
         <div className="mt-8 flex flex-col">
           <div className="sm:flex sm:items-center">
             <div className="sm:flex-auto">
-              <h1 className="text-xl font-semibold text-gray-900">Listado de Colaboradores</h1>
+              <h1 className="text-xl font-semibold text-gray-900">
+                Listado otros documentos
+              </h1>
+              <p className="text-sm text-gray-500 italic mt-2">Espacio reservado para subir documentos asociados a la actividad del trabajador. (Ej: Contratos, OtroSí, Llamados de atención, Descargos)</p>
             </div>
-            {/* <div className="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
+            <div className="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
               <Link
-                to="/recursos-humanos/crear-convocatoria"
+                to={`/colaboradores/otros-documentos/${id_trabajador}/crear-documento`}
                 className="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto"
               >
-                Nueva oferta de empleo
+                Documento nuevo
               </Link>
-            </div> */}
+            </div>
           </div>
         </div>
       </div>
-      {Array.isArray(collaborators) && collaborators.length > 0 ? (
-        <>
-          <Table
-            data={collaborators}
-            columns={headers}
-            title="Ofertas"
-            titleButton="Nueva oferta de empleo"
-            href={"/recursos-humanos/crear-convocatoria"}
-          />
-        </>
+      {Array.isArray(otrosDocumentos) && otrosDocumentos.length > 0 ? (
+        <Table data={otrosDocumentos} columns={headers} />
       ) : (
         <div className="rounded-md bg-blue-50 p-4">
           <div className="flex">
@@ -133,7 +125,7 @@ const ListadoColaboradores = () => {
             </div>
             <div className="ml-3 flex-1 md:flex ">
               <p className="text-sm text-blue-700">
-                No existen colaboradores registrados.
+                No existen documentos cargados
               </p>
             </div>
           </div>
@@ -143,4 +135,4 @@ const ListadoColaboradores = () => {
   );
 };
 
-export default ListadoColaboradores;
+export default OtrosDocumentos;

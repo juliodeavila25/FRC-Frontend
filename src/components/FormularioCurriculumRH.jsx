@@ -5,6 +5,9 @@ import useCollaborators from "../hooks/useCollaborators";
 import Alert from "./Alert";
 import useAuth from "../hooks/useAuth";
 import { BeatLoader } from "react-spinners";
+import ciuu from '../json/ciuu.json'
+import Select from 'react-select'
+import departamentos from '../json/departamentos_municipios.json'
 
 const FormularioCurriculum = () => {
   const [id, setId] = useState(null);
@@ -21,6 +24,7 @@ const FormularioCurriculum = () => {
   const [pais, setPais] = useState("");
   const [departamento, setDepartamento] = useState("");
   const [ciudad, setCiudad] = useState("");
+  const[municipios, setMunicipios] = useState([]);
   const [numeroHijos, setNumeroHijos] = useState(0);
   const [tipoSangre, setTipoSangre] = useState("");
   //Formación Profesional
@@ -60,7 +64,7 @@ const FormularioCurriculum = () => {
   const [rut, setRut] = useState("");
   const [errorSoporteRut, setErrorSoporteRut] = useState(false);
   const [numeroRut, setNumeroRut] = useState("");
-  const [fechaCorte, setFechaCorte] = useState( '1990-01-01');
+  const [fechaCorte, setFechaCorte] = useState('2022-12-31');
   const [ingresosAnuales, setIngresosAnuales] = useState(0);
   const [egresosAnuales, setEgresosAnuales] = useState(0);
   const [otrosIngresos, setOtrosIngresos] = useState(0);
@@ -74,7 +78,10 @@ const FormularioCurriculum = () => {
     { nro_cuenta: " ", banco: " ", ciudad: " ", pais: "", moneda: " " },
   ]);
 
-  console.log(ciuu);
+  const[codigoCIIU, setCodigoCIIU]=useState([{
+    value: ""
+  }])
+
 
   const [operacionesExtranjera, setOperacionesExtranjera] = useState("Si");
 
@@ -100,6 +107,13 @@ const FormularioCurriculum = () => {
   const [soporteContrato, setSoporteContrato] = useState("");
   const [errorSoporteContrato, setErrorSoporteContrato] = useState(false);
   const [cargo, setCargo] = useState("");
+
+  const[cargosFiltrado, setCargosFiltrado] = useState([])
+  const [inputReq, setInputReq] = useState([
+    { nombre_requisito: " ", vigencia:" ", fecha_vigencia:"1990-01-01", observaciones:" ", estado_requisito:"" },
+  ]);
+
+  const[documentoRequerido, setDocumentoRequerido] = useState([])
   const params = useParams();
 
 
@@ -169,6 +183,7 @@ const FormularioCurriculum = () => {
       setinputFinanciera(collaborator.inputFinanciera);
       //Cuentas Extranjero
       setinputExtranjera(collaborator.inputExtranjera);
+      setCodigoCIIU(collaborator.codigoCIIU)
       setRut(collaborator.rut);
       setNumeroRut(collaborator.numeroRut);
       setFechaCorte(collaborator.fechaCorte?.split("T")[0]);
@@ -202,6 +217,14 @@ const FormularioCurriculum = () => {
       setCodigoIngreso(collaborator.codigoIngreso);
       setSueldo(collaborator.sueldo);
       setCargo(collaborator.cargo);
+
+    //   let municipiosFilter = departamentos.filter(function(departamento){
+    //     return departamento.departamento == collaborator.departamento;
+        
+    // })
+
+    // setMunicipios(municipiosFilter[0].ciudades)
+
     }
   }, [collaborator]);
 
@@ -1534,94 +1557,32 @@ const FormularioCurriculum = () => {
               </div>
             </div>
           </div>
-          <div className="text-left text-xl text-gray-700 mt-8 font-bold border-b-4 border-corporative-blue inline-flex pt-3">
+         <div className="text-left text-xl text-gray-700 mt-8 font-bold border-b-4 border-corporative-blue inline-flex pt-3">
             Información Financiera
           </div>
           <div>
-            {inputFinanciera &&
-              Array.isArray(inputFinanciera) &&
-              inputFinanciera.map((item, i) => {
+            {codigoCIIU &&
+              Array.isArray(codigoCIIU) &&
+              codigoCIIU.map((item, i) => {
+               
                 return (
                   <div
                     key={i}
-                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 pt-5"
+                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-2 gap-6 pt-5"
                   >
-                    <div className="">
-                      <label className="block text-sm font-medium text-gray-700">
+               <div className="">
+                    <label className="block text-sm font-medium text-gray-700">
                         CIU
-                      </label>
-                      <input
-                        type="text"
-                        className="form-control
-                      block
-                      w-full
-                      px-3
-                      py-1.5
-                      text-base
-                      font-normal
-                      text-gray-700
-                      bg-white bg-clip-padding
-                      border border-solid border-gray-300
-                      rounded
-                      transition
-                      ease-in-out
-                      m-0
-                      focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                        placeholder="Ingresar CIU"
-                        id="ciu"
-                        name="ciu"
-                        value={item.ciu}
-                        onChange={(e) => handleinputchange(e, i)}
-                        disabled={true}
-                      />
-                    </div>
-                    <div className="">
-                      <label className="block text-sm font-medium text-gray-700">
-                        Actividad Economica
-                      </label>
-                      <input
-                        type="text"
-                        className="form-control
-                      block
-                      w-full
-                      px-3
-                      py-1.5
-                      text-base
-                      font-normal
-                      text-gray-700
-                      bg-white bg-clip-padding
-                      border border-solid border-gray-300
-                      rounded
-                      transition
-                      ease-in-out
-                      m-0
-                      focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                        placeholder="Ingresar Actividad Economica"
-                        id="actividad_economica"
-                        name="actividad_economica"
-                        value={item.actividad_economica}
-                        onChange={(e) => handleinputchange(e, i)}
-                        disabled={true}
-                      />
-                    </div>
-                    <div className="grid grid-cols-2 gap-4 pt-6 ">
-                      {inputFinanciera.length !== 1 && (
-                        <button
-                          className="h-8 flex items-center w-full justify-center rounded-md border-2 border-red-400 bg-transparent py-2 px-4 text-sm font-medium text-red-500 shadow-sm hover:bg-red-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                          onClick={() => handleremove(i)}
-                        >
-                          Remover
-                        </button>
-                      )}
-                      {inputFinanciera.length - 1 === i && (
-                        <button
-                          className="h-8 flex items-center w-full justify-center rounded-md border border-transparent bg-green-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 cursor-pointer"
-                          onClick={handleaddclick}
-                        >
-                          Agregar
-                        </button>
-                      )}
-                    </div>
+                    </label>
+                    <Select 
+                      options={ciuu} 
+                      placeholder="Digite su CIUU" 
+                      value={item}
+                      onChange={(e) => handleinputchange(e, i)}
+                      isDisabled={true}  />
+                     
+                      
+                    </div> 
                   </div>
                 );
               })}
