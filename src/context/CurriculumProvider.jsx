@@ -31,14 +31,16 @@ const CurriculumProvider = ({ children }) => {
   };
 
   const editarCurriculum = async (curriculum) => {
-    //console.log(curriculum.get("formKey"))
-    console.log((curriculum.get("documentoRequerido")))
+    console.log(curriculum.get("codigoCIIU"))
+    console.log((curriculum.get("inputReq")))
+
+    
     
     const id = curriculum.get("id");
-//     for (const value of curriculum.values()) {
-//       console.log(value);
-//     }
-    console.log(curriculum);
+    // for (const value of curriculum.values()) {
+    //   console.log(value);
+    // }
+    // console.log(curriculum);
     /*for (const value of curriculum.values()) {
       console.log(value);
     }*/

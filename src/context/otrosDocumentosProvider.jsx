@@ -63,58 +63,59 @@ const OtrosDocumentosProvider = ({ children }) => {
     };
 
 
-  const submitOtrosDocumentos = async (documento) => {
-     await nuevoOtroDocumento(documento);
-    // if (cargo.id) {
-    //   await editarCargo(cargo);
-    // } else {
-    //   await nuevoCargo(cargo);
-    // }
+  const submitOtrosDocumentos = async (documento, id) => {
+    if (id) {
+      await editarOtroDocumento(documento);
+    } else {
+       await nuevoOtroDocumento(documento);
+    }
   };
 
-  // const editarCargo= async (cargo) => {
-  //   console.log(cargo)
-  //   try {
-  //     const token = localStorage.getItem("token");
-  //     if (!token) return;
-  //     const config = {
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         Authorization: `Bearer ${token}`,
-  //       },
-  //     };
-  //     const { data } = await clienteAxios.put(
-  //       `/cargos/${cargo.id}`,
-  //       cargo,
-  //       config
-  //     );
+  const editarOtroDocumento= async (documento) => {
+    const id = documento.get("id");
+    const id_trabajador = documento.get("id_trabajador")
+    
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) return;
+      const config = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      const { data } = await clienteAxios.put(
+        `/otros-documentos/${id}`,
+        documento,
+        config
+      );
 
-  //     const cargosActualizados = cargos.map((cargoState) =>
-  //       cargoState._id === data._id ? data : cargoState
-  //     );
-  //     setCargos(cargosActualizados);
+      const documentosActualizados = otrosDocumentos.map((otroDocumentoState) =>
+        otroDocumentoState._id === data._id ? data : otroDocumentoState
+      );
+      setOtroDocumento(documentosActualizados);
 
-  //     //Mostrar alerta
-  //     setAlerta({
-  //       msg: "Cargo actualizado correctamente",
-  //       error: false,
-  //     });
+      //Mostrar alerta
+      setAlerta({
+        msg: "Documento actualizado correctamente",
+        error: false,
+      });
 
-  //     setTimeout(() => {
-  //       setAlerta({});
-  //       navigate("/cargos/listar-cargos");
-  //     }, 3000);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+      setTimeout(() => {
+        setAlerta({});
+        navigate(`/colaboradores/otros-documentos/${id_trabajador}`);
+      }, 3000);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const nuevoOtroDocumento = async (documento) => {
-
-    console.log(documento);
-    for (const value of documento.values()) {
-      console.log(value);
-    }
+    const id_trabajador = documento.get("id_trabajador")
+    // console.log(documento);
+    // for (const value of documento.values()) {
+    //   console.log(value);
+    // }
     try {
       const token = localStorage.getItem("token");
       if (!token) return;
@@ -136,10 +137,10 @@ const OtrosDocumentosProvider = ({ children }) => {
         error: false,
       });
 
-      // setTimeout(() => {
-      //   setAlerta({});
-      //   navigate("/dashboard");
-      // }, 3000);
+      setTimeout(() => {
+        setAlerta({});
+        navigate(`/colaboradores/otros-documentos/${id_trabajador}`);
+      }, 3000);
     } catch (error) {
       console.log(error);
     }
@@ -167,6 +168,32 @@ const OtrosDocumentosProvider = ({ children }) => {
     setCargando(false);
   };
 
+  const eliminarOtroDocumento = async (id) => {
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) return;
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      const { data } = await clienteAxios.delete(`/otros-documentos/${id}`, config);
+
+      //Sincronizar el state
+      const documentosActualizados = otrosDocumentos.filter(
+        (otroDocumentoState) => otroDocumentoState._id !== id
+      );
+
+      console.log(documentosActualizados)
+
+      setOtrosDocumentos(documentosActualizados);
+     
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
 
    
   return (
@@ -179,7 +206,8 @@ const OtrosDocumentosProvider = ({ children }) => {
         submitOtrosDocumentos,
         mostrarAlerta,
         obtenerOtrosDocumentos,
-        obtenerOtroDocumento
+        obtenerOtroDocumento,
+        eliminarOtroDocumento
       }}
     >
       {children}

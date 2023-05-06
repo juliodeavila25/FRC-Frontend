@@ -111,13 +111,7 @@ const FormularioCurriculum = () => {
   const [errorSoporteContrato, setErrorSoporteContrato] = useState(false);
   const [cargo, setCargo] = useState("");
 
-  const[cargosFiltrado, setCargosFiltrado] = useState([])
-  const [inputReq, setInputReq] = useState([
-    { nombre_requisito: " ", vigencia:" ", fecha_vigencia:"1990-01-01", observaciones:" ", estado_requisito:"" },
-  ]);
-
-  const[documentoRequerido, setDocumentoRequerido] = useState([])
-  
+ 
   const params = useParams();
 
   const {
@@ -227,30 +221,29 @@ const FormularioCurriculum = () => {
     }
   }, [curriculum]);
 
-  useEffect(() => {
-    if (Array.isArray(cargosForm) && cargosForm.length > 0 && Array.isArray(curriculum) && curriculum.length > 0) {
-      setInputReq([
-    { nombre_requisito: " ", documento: [], vigencia:" ", fecha_vigencia:"1990-01-01", observaciones:" ", estado_requisito:"" },
-    ]);
-    let cargo_new = Array.isArray(cargosForm) && cargosForm.filter(item => item.nombre.includes(cargo))
-    cargo_new[0]?.inputCargos.forEach(item =>{
-       return(
-        setInputReq(inputReq => 
-          [
-            ...inputReq,
-            { nombre_requisito: item.nombre_requisito, documento: [], vigencia:item.vigencia, fecha_vigencia:"1990-01-01", observaciones: "", estado_requisito: item.estado_requisito },
-          ]))
+  // useEffect(() => {
+  //   if (Array.isArray(cargosForm) && cargosForm.length > 0 && Array.isArray(curriculum) && curriculum.length > 0) {
+  //     setInputReq([
+  //   { nombre_requisito: " ", documento: {}, vigencia:" ", fecha_vigencia:"1990-01-01", observaciones:" ", estado_requisito:"" },
+  //   ]);
+  //   let cargo_new = Array.isArray(cargosForm) && cargosForm.filter(item => item.nombre.includes(cargo))
+  //   cargo_new[0]?.inputCargos.forEach(item =>{
+  //      return(
+  //       setInputReq(inputReq => 
+  //         [
+  //           ...inputReq,
+  //           { nombre_requisito: item.nombre_requisito, documento: {}, vigencia:item.vigencia, fecha_vigencia:"1990-01-01", observaciones: "", estado_requisito: item.estado_requisito },
+  //         ]))
       
-    })
-    }
+  //   })
+  //   }
    
-  }, [cargosForm, curriculum])
-  
+  // }, [cargosForm, curriculum])
 
-  console.log(cargosForm)
 
   const submitData = async (e) => {
     e.preventDefault();
+   
 
     localStorage.setItem("tipo", "formCo");
   
@@ -374,16 +367,16 @@ const FormularioCurriculum = () => {
     formData.append("sueldo", sueldo);
     formData.append("soporteContrato", soporteContrato);
     formData.append("cargo", cargo);
-    //formData.append("inputReq", inputReq);
-    for (let i = 1; i < inputReq.length; i++) {
-      formData.append("inputReq", (inputReq[i]));
-    }
-    //console.log(formData);
-    //Pasar los datos hacia el provider
-    //formData.append("documentoRequerido", documentoRequerido);
-    for (let i = 1; i < documentoRequerido.length; i++) {
-      formData.append("documentoRequerido", (documentoRequerido[i]));
-    }
+
+
+ 
+    
+    // for (let i = 1; i < inputReq.length; i++) {
+    //   console.log(inputReq[i])
+    //   formData.append("inputReq",  JSON.stringify(inputReq[i]));
+    // }
+  
+   
     await submitCurriculum(formData, estado);
   };
 
@@ -561,22 +554,29 @@ const handleChangeDepartamento = (e)=>{
     }else{
       list[index][name] = value;
       setInputReq(list);
-     
     }
-    
+     
   };
+
   
-  const handleTest = (e, index) =>{
-    const list1 = [...documentoRequerido];
-    list1[index] = e.target.files[0]
-    setDocumentoRequerido(list1);
-    console.log(documentoRequerido)
-  }
+  
+    // const handleTest = (e, index) =>{
+  //   const { name, value } = e.target;
+  //   //console.log(name)
+  //   //console.log(e.target.files[0])
+  //   setDocumentoRequerido(...documentoRequerido,  ...e.target.files[0] );
+  //   //const list1 = [...documentoRequerido];
+  //   //list1[index][name] = e.target.files[0]
+  //   console.log(documentoRequerido)
+
+  //   // list1[index-1] = e.target.files[0]
+  //   // setDocumentoRequerido(list1);
+  //   // console.log(documentoRequerido)
+  // }
   
   const { msg } = alerta;
 
- console.log(inputReq)
-  
+ 
 
   if (cargandoData) return <BeatLoader color="#36d7b7" />;
   
@@ -2592,7 +2592,7 @@ const handleChangeDepartamento = (e)=>{
             </div>
           </div>
 
-          <div className="text-left text-xl text-gray-700 mt-8 font-bold border-b-4 border-corporative-blue inline-flex pt-3">
+          {/* <div className="text-left text-xl text-gray-700 mt-8 font-bold border-b-4 border-corporative-blue inline-flex pt-3">
               Documentos Requeridos
           </div>
           <div className="">
@@ -2607,7 +2607,7 @@ const handleChangeDepartamento = (e)=>{
                     <div className="py-10 italic underline" name="" >{item.nombre_requisito}:</div>
                      <div>
                        <label
-                          htmlFor="documentoRequerido"
+                          htmlFor="documento"
                           className="block text-sm font-medium text-gray-700 pb-2"
                         >
                           Documento
@@ -2629,9 +2629,9 @@ const handleChangeDepartamento = (e)=>{
                           m-0
                           focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                           type="file"
-                          id="documentoRequerido"
-                          name="documentoRequerido"
-                          onChange={(e) => handleTest(e, i)}
+                          id="documento"
+                          name="documento"
+                          onChange={(e) => handleinputchangeRequiredDocuments(e, i)}
                           //disabled={item.estado === "Inactivo" ? true : false}
                           accept=".pdf"
                         />
@@ -2683,7 +2683,7 @@ const handleChangeDepartamento = (e)=>{
                 )})
              
             } 
-          </div>
+          </div> */}
           {msg && <Alert alerta={alerta} />}
           <div className="grid grid-cols-2 gap-6 w-3/5 mx-auto mt-3">
             <Link

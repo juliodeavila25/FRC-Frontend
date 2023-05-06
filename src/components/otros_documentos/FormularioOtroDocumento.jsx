@@ -22,13 +22,15 @@ const FormularioOtroDocumento = () => {
   const params = useParams();
   const {
     submitOtrosDocumentos,
-    otroDocumento
+    otroDocumento,
+    alerta,
+    mostrarAlerta,
+    cargandoDocumento
    
   } = useOtrosDocumentos();
 
   const { auth, cargando } = useAuth();
 
-  console.log(otroDocumento)
   useEffect(() => {
     if (params.id) {
       setId(otroDocumento._id);
@@ -43,6 +45,7 @@ const FormularioOtroDocumento = () => {
     e.preventDefault();
     const id_trabajador = localStorage.getItem("id_trabajador");
     const formData = new FormData();
+    formData.append("id", id )
     formData.append("id_trabajador", id_trabajador);
     formData.append("nombreDocumento", nombreDocumento);
     formData.append("documento", documento);
@@ -67,9 +70,9 @@ const FormularioOtroDocumento = () => {
   };
  
 
-  // const { msg } = alerta;
+  const { msg } = alerta;
 
-  // if (cargandoDataCargos ) return <BeatLoader color="#36d7b7" />;
+   if (cargandoDocumento ) return <BeatLoader color="#36d7b7" />;
 
   return (
     <div className=" sm:mx-auto sm:w-full">
@@ -115,7 +118,7 @@ const FormularioOtroDocumento = () => {
                       className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                      
                       onChange={(e) => handleDocumento(e.target.files[0])}
-                      required={true}
+                      required={otroDocumento.documento ? false : true}
                       accept=".pdf"
                       />
                   </div>
@@ -124,6 +127,20 @@ const FormularioOtroDocumento = () => {
                       El tamaño máximo es 500kb
                     </span>
                   )}
+                  <div className="mt-3">
+                {otroDocumento.documento && (
+                  <a
+                    href={`${import.meta.env.VITE_BACKEND_URL}/${
+                      otroDocumento.documento
+                    }`}
+                    download={otroDocumento.documento}
+                    target="_blank"
+                    className="underline text-blue-500 pt-5"
+                  >
+                    Descargar Documento
+                  </a>
+                )}
+              </div>
               </div>
 
               <div>
@@ -146,14 +163,10 @@ const FormularioOtroDocumento = () => {
                 />
                 </div>
               </div>
-
-                
-            
-          
        
         </div>  
 
-            {/* {msg && <Alert alerta={alerta} />} */}
+          {msg && <Alert alerta={alerta} />}
 
           <div className="grid grid-cols-2 gap-6 w-3/5 mx-auto">
             <button
