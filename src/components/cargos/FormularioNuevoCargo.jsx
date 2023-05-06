@@ -127,31 +127,48 @@ const FormularioNuevoCargo = () => {
                             <label className="block text-sm font-medium text-gray-700">
                                 Nombre requisito
                             </label>
-                            <input
-                                type="text"
-                                className="form-control
-                            block
-                            w-full
-                            px-3
-                            py-1.5
-                            text-base
-                            font-normal
-                            text-gray-700
-                            bg-white bg-clip-padding
-                            border border-solid border-gray-300
-                            rounded
-                            transition
-                            ease-in-out
-                            m-0
-                            focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                placeholder="Ingresar nombre del requisito"
-                                id="nombre_requisito"
-                                name="nombre_requisito"
-                                value={item.nombre_requisito}
-                                onChange={(e) => handleinputchange(e, i)}
-                                required={true}
-                                disabled={Array.isArray(cargo.inputCargos) && i >= cargo.inputCargos?.length  || params.id === undefined && inputCargos.length >= 1 ? false : true}
-                            />
+                            <select
+                              id="nombre_requisito"
+                              name="nombre_requisito"
+                              className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                              onChange={(e) => handleinputchange(e, i)}
+                              value={item.nombre_requisito}
+                              required={true}
+                              disabled={Array.isArray(cargo.inputCargos) && i >= cargo.inputCargos?.length  || params.id === undefined && inputCargos.length >= 1 ? false : true}
+                          
+                            >
+                              <option value="Bachiller">
+                                 Bachiller
+                              </option>
+                              <option value="Titulo: Aux o Tec En Auxiliar De Enfermeria">
+                                Titulo: Aux o Tec En Auxiliar De Enfermeria
+                              </option>
+                              <option value="Titulo: Medicina Gral">Titulo: Medicina Gral</option>
+                              <option value="Titulo: Profesional De Enfermeria">Titulo: Profesional De Enfermeria</option>
+                              <option value="Titulo: Instrumentador Quirurgico">Titulo: Instrumentador Quirurgico</option>
+                              <option value="Titulo: Tecnologo En Imagenes Diagnostica">Titulo: Tecnologo En Imagenes Diagnostica</option>
+                              <option value="Titulo: Bacteriologo">Titulo: Bacteriologo</option>
+                              <option value="Titulo: Regencia De Farmacia">Titulo: Regencia De Farmacia</option>
+                              <option value="Titulo: Fisioterapeuta">Titulo: Fisioterapeuta</option>
+                              <option value="Titulo: Quimico Farmaceutico">Titulo: Quimico Farmaceutico</option>
+                              <option value="Tarjeta Profesional">Tarjeta Profesional</option>
+                              <option value="Rethus">Rethus</option>
+                              <option value="Certificado Rcp ( Bls- Acls) Basico">Certificado Rcp ( Bls- Acls) Basico</option>
+                              <option value="Certificado De Curso De Violencia Sexual">Certificado De Curso De Violencia Sexual</option>
+                              <option value="Certificado De Curso Gestion Del Duelo">Certificado De Curso Gestion Del Duelo</option>
+                              <option value="Certificado De Curso Agente Quimicos">Certificado De Curso Agente Quimicos</option>
+                              <option value="Certificado De Curso Aiepi Clinico">Certificado De Curso Aiepi Clinico</option>
+                              <option value="Certificado De Curso De Aimi">Certificado De Curso De Aimi</option>
+                              <option value="Certificado De Toma De Muestra">Certificado De Toma De Muestra</option>
+                              <option value="Certificado De Equivalencia De Medicamentos">Certificado De Equivalencia De Medicamentos</option>
+                              <option value="Certificado Rcp ( Bls- Acls) ">Certificado Rcp ( Bls- Acls)</option>
+                              <option value="Diplomado En Uci: Opcional">Diplomado En Uci: Opcional</option>
+                              <option value="Certificado Rcp ( Bls- Acls) Avanzado">Certificado Rcp ( Bls- Acls) Avanzado</option>
+                              <option value="Certificado De Equivalencia De Medicamento">Certificado De Equivalencia De Medicamento</option>
+                              <option value="Actualizacion Y Manejo Del Fisoterapeutica En Cuidados Criticos">Actualizacion Y Manejo Del Fisoterapeutica En Cuidados Criticos</option>
+                              <option value="Carnet De Radio Protección">Carnet De Radio Protección</option>
+
+                            </select>
                             </div>
                             <div className="flex space-x-4 items-center pl-4">
                               <input
