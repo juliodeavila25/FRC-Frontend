@@ -3,7 +3,7 @@ import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { BeatLoader } from "react-spinners";
 import clienteAxios from "../../config/clienteAxios";
-import PublicTable from "../../components/table/PublicTable";
+import PublicTableFilter from "../../components/table/PublicTableFilter";
 import { format } from "date-fns";
 import ModalPublic from "../../components/ModalPublic";
 import { Link, useLocation } from "react-router-dom";
@@ -21,15 +21,11 @@ const navigation = [
     href: "/",
     
   },
-  {
-    name: "Documentos",
-    href: "/documentos",
-    current: location.pathname.includes("/documentos") ? true : false,
-  },
+  
   {
     name: "Busqueda",
-    href: "/busqueda-avanzada",
-    current: location.pathname.includes("/busqueda-avanzada") ? true : false,
+    href: "documentos/busqueda-avanzada",
+    current: location.pathname.includes("/documentos") ? true : false,
   },
 ];
 const userNavigation = [
@@ -46,14 +42,14 @@ export default function BusquedaAvanzada() {
   const[documentosPublicos, setDocumentosPublicos] = useState([]);
   const[datosFiltrados, setFiltrados] = useState([])
   const[busqueda, setBusqueda] = useState(false)
-  const[proceso, setProceso] = useState("")
+  const[proceso, setProceso] = useState(" ")
   const[servicio, setServicio] = useState("")
-  const[tipo, setTipo] = useState("")
+  const[tipo, setTipo] = useState(" ")
   const[especialidad, setEspecialidad] = useState("")
-  const[responsable, setResponsable] = useState("")
   const[titulo, setTitulo] = useState("")
   const [data, setData] = useState();
   const [visible, setVisible] = useState(false);
+  const[resultados, setResultados]=useState(false)
   const location = useLocation();
 
   useEffect(() => {
@@ -153,32 +149,42 @@ export default function BusquedaAvanzada() {
   ]);
 
   const handleSubmit = (e) =>{
+     
     e.preventDefault()
     setFiltrados([])
     if (proceso !== "" || titulo !== "" || servicio !== "" || tipo !== "" 
-        || especialidad !== "" || responsable !== "" || titulo !== ""){
+        || especialidad !== "" || titulo !== ""){
+          console.log(proceso)
         setBusqueda(true)
         let arrayInputCargos = [];
          for(let i=0; i < documentosPublicos.length; i++){
-            let procesoNormalizado = documentosPublicos[i].proceso.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()
-            let tituloNormalizado = documentosPublicos[i].titulo.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()
-            let servicioNormalizado = documentosPublicos[i].servicio.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()
-            let tipoNormalizado = documentosPublicos[i].tipo.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()
-            let especialidadNormalizado = documentosPublicos[i].especialidad.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()
-            let resposableNormalizado = documentosPublicos[i].responsable.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()
-            
-            
-            
-            if(procesoNormalizado.includes(proceso.toLowerCase()) && 
-                tituloNormalizado.includes(titulo.toLowerCase()) && 
-                servicioNormalizado.includes(servicio.toLowerCase()) && 
-                tipoNormalizado.includes(tipo.toLowerCase())&& 
-                especialidadNormalizado.includes(especialidad.toLowerCase())&& 
-                resposableNormalizado.includes(responsable.toLowerCase())
+            let procesoNormalizado = documentosPublicos[i].proceso.trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()
+            let tituloNormalizado = documentosPublicos[i].titulo.trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()
+            let servicioNormalizado = documentosPublicos[i].servicio.trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()
+            let tipoNormalizado = documentosPublicos[i].tipo.trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()
+            let especialidadNormalizado = documentosPublicos[i].especialidad.trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()
+         
+           
+            if( procesoNormalizado.includes(proceso.trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()) && 
+                tituloNormalizado.includes(titulo.trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()) && 
+                servicioNormalizado.includes(servicio.trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()) && 
+                tipoNormalizado.includes(tipo.trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase())&& 
+                especialidadNormalizado.includes(especialidad.trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase())
+                
                 ){
-                arrayInputCargos.push(documentosPublicos[i]);
-               setFiltrados(arrayInputCargos)
+                  console.log(proceso.trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase(), procesoNormalizado )
+                 arrayInputCargos.push(documentosPublicos[i]);  
+
+                     
+                setFiltrados(arrayInputCargos)
+
+                setResultados(false)
+              
+            }else{
+                setResultados(true)
             }
+
+           
          }
         }
     
@@ -198,10 +204,10 @@ export default function BusquedaAvanzada() {
    
   }
 
-  console.log(datosFiltrados)
+ 
 
   // if (!documentosPublicos) return <BeatLoader color="#36d7b7" />;
-  console.log(documentosPublicos);
+ 
   return (
     <>
       {visible === true && (
@@ -349,15 +355,31 @@ export default function BusquedaAvanzada() {
                                 Proceso
                             </label>
                             <div className="mt-1">
-                                <input
-                                type="text"
-                                id="proceso"
-                                name="proceso"
-                                placeholder="Búsqueda por proceso"
-                                className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                                value={proceso}
-                                onChange={(e) => setProceso(e.target.value)}
-                                />
+                               <select
+                                  id="proceso"
+                                  name="proceso"
+                                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                  onChange={(e) => {
+                                    const selectedDocumentType = e.target.value;
+
+                                    setProceso(selectedDocumentType);
+                                  }}
+                                  value={proceso}
+                                >
+                                  <option value="">
+                                  {" "}
+                                  </option>
+                                  <option value="Atención en Salud">
+                                  Atención en Salud
+                                  </option>
+                                  <option value="Apoyo Administrativo y Operativo">
+                                    Apoyo Administrativo y Operativo
+                                  </option>
+                                  <option value="Mejoramiento Continuo">
+                                    Mejoramiento Continuo
+                                  </option>
+                                  <option value="Direccionamiento Estrategico">Direccionamiento Estrategico</option>
+                                </select>
                             </div>
                         </div>
                          <div>
@@ -405,16 +427,31 @@ export default function BusquedaAvanzada() {
                             >
                                 Tipo
                             </label>
+                         
                             <div className="mt-1">
-                                <input
-                                type="text"
-                                id="tipo"
-                                name="tipo"
-                                placeholder="Búsqueda por tipo"
-                                className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                                value={tipo}
-                                onChange={(e) => setTipo(e.target.value)}
-                                />
+                                 <select
+                                  id="tipo"
+                                  name="tipo"
+                                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                  onChange={(e) => {
+                                    const selectedDocumentType = e.target.value;
+
+                                    setTipo(selectedDocumentType);
+                                  }}
+                                  value={tipo}
+                                >
+                                  <option value=" ">
+                                  {" "}
+                                  </option>
+                                  <option value="Documento">
+                                  Documento
+                                  </option>
+                                  <option value="Formato">
+                                    Formato
+                                  </option>
+                                 
+                                </select>
+                            
                             </div>
                         </div>
                         <div>
@@ -437,25 +474,7 @@ export default function BusquedaAvanzada() {
                             </div>
                         </div>
 
-                         <div>
-                            <label
-                                htmlFor="responsable"
-                                className="block text-sm font-medium text-gray-700"
-                            >
-                                Responsable
-                            </label>
-                            <div className="mt-1">
-                                <input
-                                type="text"
-                                id="responsable"
-                                name="responsable"
-                                placeholder="Búsqueda por responsable"
-                                className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                                value={responsable}
-                                onChange={(e) => setResponsable(e.target.value)}
-                                />
-                            </div>
-                        </div>
+                        
                          
                     </div>
                     <div className="flex justify-center mt-10 ">
@@ -496,10 +515,34 @@ export default function BusquedaAvanzada() {
                 </div>
               </div>
              
-            ) :  Array.isArray(datosFiltrados) && datosFiltrados.length > 0 ? (
+            ) : datosFiltrados.length < 0 && resultados === true ? (
+              <div className="rounded-md bg-blue-50 p-4 mt-10">
+                <div className="flex">
+                  <div className="flex-shrink-0">
+                    <svg
+                      className="h-5 w-5 text-blue-400"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      aria-hidden="true"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a.75.75 0 000 1.5h.253a.25.25 0 01.244.304l-.459 2.066A1.75 1.75 0 0010.747 15H11a.75.75 0 000-1.5h-.253a.25.25 0 01-.244-.304l.459-2.066A1.75 1.75 0 009.253 9H9z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </div>
+                  <div className="ml-3 flex-1 md:flex ">
+                    <p className="text-sm text-blue-700">
+                      Tu criterio de búsqueda no generó resultados
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ) : Array.isArray(datosFiltrados) && datosFiltrados.length > 0 ? (
                 <>
                <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
-                <PublicTable data={datosFiltrados} columns={headers} />
+                <PublicTableFilter data={datosFiltrados} columns={headers} />
               </div>
               </>
             ): null}

@@ -212,7 +212,7 @@ const FormularioNuevoDocumento = () => {
   return (
     <div className=" sm:mx-auto sm:w-full">
       <div className="bg-white py-8 px-4 shadow-lg rounded-lg sm:px-10">
-        {msg && <Alert alerta={alerta} />}
+        
         <form className="space-y-6 " onSubmit={handleSubmit}>
           <div className="text-left text-xl text-gray-700 mt-8 font-bold border-b-4 border-corporative-blue inline-flex">
             Listado Maestro de Documentos y Formatos
@@ -223,7 +223,7 @@ const FormularioNuevoDocumento = () => {
                 htmlFor="codigo"
                 className="block text-sm font-medium text-gray-700"
               >
-                Código/Versión <span className="text-red-700">*</span>
+                Código<span className="text-red-700">*</span>
               </label>
               <div className="mt-1">
                 <input
@@ -270,7 +270,6 @@ const FormularioNuevoDocumento = () => {
                 <select
                   id="proceso"
                   name="proceso"
-                  placeholder="Selecciona el proceso"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   onChange={(e) => {
                     const selectedDocumentType = e.target.value;
@@ -282,8 +281,8 @@ const FormularioNuevoDocumento = () => {
                   <option value="Atención en Salud">
                    Atención en Salud  
                   </option>
-                  <option value="Apoyo Administratico y Operativo">
-                    Atension en Salud  
+                  <option value="Apoyo Administrativo y Operativo">
+                    Apoyo Administrativo y Operativo
                   </option>
                   <option value="Mejoramiento Continuo">
                     Mejoramiento Continuo
@@ -521,7 +520,7 @@ const FormularioNuevoDocumento = () => {
               </div>
             </div>
 
-            <div>
+            {/* <div>
               <label
                 htmlFor="link"
                 className="block text-sm font-medium text-gray-700"
@@ -540,7 +539,7 @@ const FormularioNuevoDocumento = () => {
                   required={true}
                 />
               </div>
-            </div>
+            </div> */}
             <div>
                <label
                 htmlFor="tags"
@@ -774,7 +773,7 @@ const FormularioNuevoDocumento = () => {
         </div>  
           
 
-
+          {msg && <Alert alerta={alerta} />}
        
 
           <div className="grid grid-cols-2 gap-6 w-3/5 mx-auto">

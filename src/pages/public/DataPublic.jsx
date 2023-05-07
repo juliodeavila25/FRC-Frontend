@@ -120,7 +120,7 @@ export default function DataPublic() {
           
           <a
             className="text-blue-500 hover:text-blue-900"
-            href={originalRow.link}
+            href={originalRow.inputVersiones[0].url}
             target="_blank"
           >
             <svg

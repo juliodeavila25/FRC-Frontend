@@ -71,7 +71,7 @@ function App() {
                         </Route>
 
                         <Route path="/documentos">
-                          <Route index element={<DataPublic />} />
+                          <Route index element={<BusquedaAvanzada  />} />
                            <Route path="busqueda-avanzada" element={<BusquedaAvanzada />} />
                           <Route path="detalles/:id" element={<Unauthorized />} />
                         </Route>
