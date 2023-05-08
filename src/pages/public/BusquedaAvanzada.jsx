@@ -157,7 +157,8 @@ export default function BusquedaAvanzada() {
           console.log(proceso)
         setBusqueda(true)
         let arrayInputCargos = [];
-         for(let i=0; i < documentosPublicos.length; i++){
+        if(Array.isArray(documentosPublicos) && documentosPublicos.length > 0){
+           for(let i=0; i < documentosPublicos.length; i++){
             let procesoNormalizado = documentosPublicos[i].proceso.trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()
             let tituloNormalizado = documentosPublicos[i].titulo.trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()
             let servicioNormalizado = documentosPublicos[i].servicio.trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()
@@ -186,6 +187,8 @@ export default function BusquedaAvanzada() {
 
            
          }
+        }
+        
         }
     
     // if( titulo !== ""){
@@ -515,7 +518,7 @@ export default function BusquedaAvanzada() {
                 </div>
               </div>
              
-            ) : datosFiltrados.length < 0 && resultados === true ? (
+            ) : Array.isArray(datosFiltrados) && datosFiltrados.length < 0 && resultados === true ? (
               <div className="rounded-md bg-blue-50 p-4 mt-10">
                 <div className="flex">
                   <div className="flex-shrink-0">
