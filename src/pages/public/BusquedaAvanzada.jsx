@@ -209,7 +209,7 @@ export default function BusquedaAvanzada() {
 
  
 
-  // if (!documentosPublicos) return <BeatLoader color="#36d7b7" />;
+  if (!documentosPublicos) return <BeatLoader color="#36d7b7" />;
  
   return (
     <>
@@ -490,10 +490,8 @@ export default function BusquedaAvanzada() {
                     </div>
                     
                 </form>
-             </div>
-            
+             </div>      
             {busqueda === false  ? (
-
                 <div className="rounded-md bg-blue-50 p-4 mt-10">
                 <div className="flex">
                   <div className="flex-shrink-0">
