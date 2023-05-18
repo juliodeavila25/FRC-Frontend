@@ -12,7 +12,7 @@ const EditarCargo = () => {
   console.log(params.id);
   useEffect(() => {
     obtenerCargo(params.id);
-  }, []);
+  }, []); 
 
   if (cargandoDataCargos) return <BeatLoader color="#36d7b7" />;
 

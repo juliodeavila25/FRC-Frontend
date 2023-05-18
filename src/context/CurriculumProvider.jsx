@@ -37,6 +37,7 @@ const CurriculumProvider = ({ children }) => {
     
     
     const id = curriculum.get("id");
+    console.log("ID:", id)
     // for (const value of curriculum.values()) {
     //   console.log(value);
     // }
@@ -81,10 +82,12 @@ const CurriculumProvider = ({ children }) => {
   };
 
   const nuevoCurriculum = async (curriculum) => {
-    console.log(curriculum);
-    for (const value of curriculum.values()) {
-      console.log(value);
-    }
+     const nombre = curriculum.get("nombre");
+    console.log(nombre)
+    //console.log(curriculum);
+    // for (const value of curriculum.values()) {
+    //   console.log(value);
+    // }
     try {
       const token = localStorage.getItem("token");
       if (!token) return;

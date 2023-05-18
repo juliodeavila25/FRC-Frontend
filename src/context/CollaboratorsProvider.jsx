@@ -68,6 +68,51 @@ const CollaboratorsProvider = ({ children }) => {
     setCargando(false);
   };
 
+   const editarCurriculumRH = async (curriculum) => {
+    console.log(curriculum.get("codigoCIIU"))
+    console.log((curriculum.get("inputReq")))
+
+    
+    
+    const id = curriculum.get("id");
+    console.log("ID:", id)
+    // for (const value of curriculum.values()) {
+    //   console.log(value);
+    // }
+    // console.log(curriculum);
+    /*for (const value of curriculum.values()) {
+      console.log(value);
+    }*/
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) return;
+      const config = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      const { data } = await clienteAxios.put(
+        `/colaboradores/editar-colaborador/${id}`,
+        curriculum,
+        config
+      );
+
+      //Mostrar alerta
+      setAlerta({
+        msg: "Curriculum actualizado correctamente",
+        error: false,
+      });
+
+      setTimeout(() => {
+        setAlerta({});
+          navigate("/colaboradores");
+      }, 3000);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <CollaboratorsContext.Provider
       value={{
@@ -77,6 +122,7 @@ const CollaboratorsProvider = ({ children }) => {
         cargandoDatos,
         obtenerCurriculums,
         obtenerCurriculumRH,
+        editarCurriculumRH,
         mostrarAlerta
       }}
     >

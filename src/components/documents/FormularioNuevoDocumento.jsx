@@ -1,10 +1,11 @@
-import { useState, useEffect, version } from "react";
+import { useState, useEffect, version, useCallback, useRef } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import useDocumentos from "../../hooks/useDocumentos";
 import Alert from "../Alert";
 import useAuth from "../../hooks/useAuth";
 import { BeatLoader } from "react-spinners";
 import { TagsInput } from "react-tag-input-component";
+import ReactTags from 'react-tag-autocomplete'
 
 
 
@@ -13,14 +14,15 @@ const FormularioNuevoDocumento = () => {
   const [id, setId] = useState(null);
   const [titulo, setTitulo] = useState("");
   const [codigo, setCodigo] = useState("");
-  const [proceso, setProceso] = useState("");
+  const [proceso, setProceso] = useState("Atención en Salud");
   const [servicio, setServicio] = useState("");
-  const [tipo, setTipo] = useState("");
+  const [tipo, setTipo] = useState("Formato");
   const [implementacion, setImplementacion] = useState("");
   const [descripcion, setDescripcion] = useState("");
   const [especialidad, setEspecialidad] = useState("");
   const [responsable, setResponsable] = useState("");
-  const [fuente, setFuente] = useState("");
+  const [fuente, setFuente] = useState("Documento interno");
+  const [elaboradoPor, setElaboradoPor] = useState("")
   const [link, setLink] = useState("");
   const[numeroVersion, setNumeroVersion] = useState(1)
   const[urlMostrar, setUrlMostrar] = useState("")
@@ -29,16 +31,24 @@ const FormularioNuevoDocumento = () => {
   const[url, setUrl] = useState("")
   const[observaciones, setObservaciones] = useState("")
   const[estado, setEstado] = useState("Vigente")
-  const[numeroVersionMostrar, setNumeroVersionMostrar]= useState("")
-  const[selectedTag, setSelectedTag] = useState([]);
+  const[numeroVersionMostrar, setNumeroVersionMostrar]= useState("")  
   const[unidadFuncional ,setUnidadFuncional]= useState("")
-  // const [inputVersiones, setInputVersiones] = useState([
-  //   { version: 1, url: " ", observaciones:"", estado:"Vigente" },
-  // ]);
+  const[inputVersiones, setInputVersiones] = useState([
+    { version: 1, url: " ", observaciones:"", estado:"Vigente" },
+  ]);
 
   // const [inputTest, setInputTest] = useState([
   //   { numero: ""},
   // ]);
+
+  const[ tags, setTags] = useState([])
+
+
+  const[ suggestions, setSuggestions] = useState([
+    {id:"bananas", name: "Bananas" },
+   
+  ])
+
 
   const params = useParams();
   const {
@@ -47,6 +57,7 @@ const FormularioNuevoDocumento = () => {
     alerta,
     obtenerDocumento,
     documento,
+    documentos,
     cargandoData,
   } = useDocumentos();
 
@@ -66,16 +77,23 @@ const FormularioNuevoDocumento = () => {
       setEspecialidad(documento.especialidad);
       setResponsable(documento.responsable);
       setFuente(documento.fuente);
+      setElaboradoPor(documento.elaboradoPor)
       setLink(documento.link);
-      setSelectedTag(documento.selectedTag)
       setUnidadFuncional(documento.unidadFuncional)
       setNumeroVersionMostrar(Array.isArray(documento.inputVersiones) && documento.inputVersiones.length > 0 ? documento.inputVersiones[documento.inputVersiones.length - 1].version : "")
       setUrlMostrar(Array.isArray(documento.inputVersiones) && documento.inputVersiones.length > 0 ? documento.inputVersiones[documento.inputVersiones.length - 1].url : "")
       setObservacionesMostrar(Array.isArray(documento.inputVersiones) && documento.inputVersiones.length > 0 ? documento.inputVersiones[documento.inputVersiones.length - 1].observaciones : "")
       setEstadoMostrar(Array.isArray(documento.inputVersiones) && documento.inputVersiones.length > 0 ? documento.inputVersiones[documento.inputVersiones.length - 1].estado : "")
       setNumeroVersion(Array.isArray(documento.inputVersiones) && documento.inputVersiones.length > 0 ? documento.inputVersiones.length + 1  : 1)
+      setTags(documento.tags)
       //setInputVersiones(documento.inputVersiones);
       //setInputTest(documento.inputTest)
+      
+      let result = documentos.map(documento => documento.tags)
+      const dataArr = new Set(result);
+      let filterData = [...dataArr]
+
+      console.log(filterData)
     }
   }, []);
 
@@ -92,9 +110,7 @@ const FormularioNuevoDocumento = () => {
         descripcion,
         especialidad,
         responsable,
-        fuente,
-        link,
-        selectedTag,
+        fuente,      
         unidadFuncional
       ].includes("")
     ) {
@@ -126,8 +142,9 @@ const FormularioNuevoDocumento = () => {
       especialidad,
       responsable,
       fuente,
+      elaboradoPor,
       link,
-      selectedTag,
+      tags,
       unidadFuncional
       //inputVersiones,
      // inputTest
@@ -146,63 +163,38 @@ const FormularioNuevoDocumento = () => {
       especialidad,
       responsable,
       fuente,
+      elaboradoPor,
       link,
       unidadFuncional,
-      selectedTag,
+      tags,
       numeroVersion, 
       url,
       observaciones, 
       estado
       });
     }
-    
    
-    // setNombre("");
-    // setDescripcion("");
-    // setFechaEntrega("");
-    // setCliente("");
   };
 
-
-  
-  // const handleinputchange = (e, index) => {
-  //   console.log("Hola")
-  //   const { name, value } = e.target;
-  //   const list = [...inputTest];
-  //   list[index][name] = value;
-  //   setInputTest(list);
-  // };
-
-  // const handleremove = (e, index) => {
-  //   e.preventDefault();
-  //   const list = [...inputVersiones];
-  //   list.splice(index, 1);
-  //   for (let i = 0; i < list.length; i++) {
-  //     if(i === list.length -1){
-  //       list[i].estado = "Vigente"
-  //     }
-  //     list[i].version = i +1 
-
-  //   }
-  //   setInputVersiones(list);
-  // };
-
-  // const handleaddclick = (index) => {
-  //    const list = [...inputVersiones];
-  //    console.log(list.length)
-  //    for (let i = 0; i < list.length; i++) {
-  //     list[i].estado = "Obsoleto"
-  //   }
-  //   setInputVersiones([
-  //      { version: index +2, estado:"Vigente" },
-  //     ...list
-  //   ]);
-  // };
 
   const addFields = () =>{
     document.getElementById("formVersion").classList.remove("hidden")
     document.getElementById("formVersionOld").classList.add("hidden")
   }
+
+
+  const onDelete = useCallback((tagIndex) => {
+    setTags(tags.filter((_, i) => i !== tagIndex))
+  }, [tags])
+
+  const onAddition = useCallback((newTag) => {
+    newTag.id = newTag.name
+    if(tags.find(tag => tag.name === newTag.name) === undefined){
+      setTags([...tags, newTag])
+    }
+   
+  }, [tags])
+
 
 
   const { msg } = alerta;
@@ -238,27 +230,6 @@ const FormularioNuevoDocumento = () => {
                 />
               </div>
             </div>
-             {/* <div>
-              <label
-                htmlFor="proceso"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Proceso<span className="text-red-700">*</span>
-              </label>
-              <div className="mt-1">
-                <input
-                  id="proceso"
-                  name="proceso"
-                  type="text"
-                  autoComplete="proceso"
-                  placeholder="Digita el proceso"
-                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                  value={proceso}
-                  onChange={(e) => setProceso(e.target.value)}
-                  required={true}
-                />
-              </div>
-            </div> */}
             <div>
               <label
                 htmlFor="proceso"
@@ -513,12 +484,38 @@ const FormularioNuevoDocumento = () => {
                   <option value="Documento interno">
                     Documento interno  
                   </option>
-                  <option value="Documento Externo">
-                    Documento Externo   
+                  <option value="Documento externo">
+                    Documento externo   
                   </option>
                 </select>
               </div>
             </div>
+            
+            {fuente === "Documento externo" ? (
+              <div>
+                <label
+                  htmlFor="elaboradoPor"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Elaborado por <span className="text-red-700">*</span>
+                </label>
+                <div className="mt-1">
+                  <input
+                    type="text"
+                    id="elaboradoPor"
+                    name="elaboradoPor"
+                    placeholder="Digite elaborado por"
+                    className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                    onChange={(e) => setElaboradoPor(e.target.value)}
+                    value={elaboradoPor}
+                    required={fuente === "Documento externo" ? true : false}
+                  >
+                  </input>
+                </div>
+              </div>
+
+            ): null}
+            
 
             {/* <div>
               <label
@@ -540,21 +537,40 @@ const FormularioNuevoDocumento = () => {
                 />
               </div>
             </div> */}
-            <div>
+            {/* <div>
                <label
                 htmlFor="tags"
                 className="block text-sm font-medium text-gray-700 mb-1"
               >
-                Tags<span className="text-red-700">*</span>
+                Etiquetas<span className="text-red-700">*</span>
               </label>
             <TagsInput
               value={selectedTag}
               onChange={setSelectedTag}
               name="tag"
-              placeHolder="Ingrese tags"
+              placeHolder="Ingrese etiqueta"
               
             />
-            <em className="text-xs italic">Presiona enter para agregar un nuevo tag</em>
+            <em className="text-xs italic">Presiona enter para agregar una nueva etiqueta</em>
+            </div> */}
+
+            <div>
+               <label
+                htmlFor="tags"
+                className="block text-sm font-medium text-gray-700 mb-1"
+              >
+                Etiquetas<span className="text-red-700">*</span>
+              </label>
+                 <ReactTags
+                  allowNew
+                  newTagText='Crear nueva etiqueta:'
+                  tags={tags}
+                  suggestions={suggestions}
+                  onDelete={onDelete}
+                  onAddition={onAddition}
+                  placeholderText="Nueva etiqueta"
+                  />
+              
             </div>
 
             <div className="">
@@ -631,14 +647,14 @@ const FormularioNuevoDocumento = () => {
                 htmlFor="observaciones"
                 className="block text-sm font-medium text-gray-700"
               >
-                Observaciones<span className="text-red-700">*</span>
+                Justificaciones<span className="text-red-700">*</span>
               </label>
               <div className="mt-1">
                 <textarea
                   id="observaciones"
                   name="observaciones"                 
                   rows={3}
-                  placeholder="Digite las observaciones"
+                  placeholder="Digite las justificaciones"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={observacionesMostrar}
                   required={false}
@@ -707,6 +723,7 @@ const FormularioNuevoDocumento = () => {
                   value={numeroVersion}
                   onChange={(e) => setNumeroVersion(e.target.value)}
                   required={false}
+                  disabled={true}
                 />
               </div>
             </div>

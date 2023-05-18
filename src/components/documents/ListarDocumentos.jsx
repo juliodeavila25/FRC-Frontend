@@ -10,19 +10,29 @@ const ListarDocumentosTotal = () => {
     useDocumentos();
   const navigate = useNavigate();
 
+  console.log(documentos)
+
   const [headers, setHeaders] = useState([
     {
       Header: "Código",
       accessor: "codigo",
     },
     { Header: "Proceso", accessor: "proceso" },
-    { Header: "Titulo", accessor: "titulo" },
+    { Header: "Titulo", 
+      accessor: (originalRow, rowIndex) => (
+        <div className="">
+          <p>{originalRow.titulo}</p>
+          {/* <div className="flex flex-wrap mt-2 gap-2">{originalRow.selectedTag.map(item =>{
+            return(
+              <p className="bg-blue-400 px-3 rounded-full text-white">{item}</p>
+            )  
+          }) }</div> */}
+        </div>
+      ),
+    },
     {
-      Header: "Fecha de creación",
-      accessor: "createdAt",
-      Cell: ({ value }) => {
-        return format(new Date(value), "dd/MM/yyyy");
-      },
+      Header: "Implementación",
+      accessor: "implementacion",
     },
     {
       Header: " ",

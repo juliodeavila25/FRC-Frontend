@@ -114,6 +114,8 @@ const FormularioCurriculum = () => {
   ]);
 
   const[documentoRequerido, setDocumentoRequerido] = useState([])
+  const[unidadFuncional, setUnidadFuncional]= useState("");
+  const[unidadNegocio, setUnidadNegocio] = useState("Uci Magangué")
   const params = useParams();
 
 
@@ -129,6 +131,7 @@ const FormularioCurriculum = () => {
     obtenerCurriculumRH,
     collaborator,
     cargandoDatos,
+    editarCurriculumRH
   } = useCollaborators();
  
 
@@ -144,7 +147,7 @@ const FormularioCurriculum = () => {
   useEffect(() => {
     if (Object.keys(collaborator).length !== 0) {
       console.log(collaborator);
-      setId(auth._id);
+      setId(params.id);
       setEstado(collaborator.estado);
       setNombre(collaborator.nombre);
       setTipoDocumento(collaborator.tipoDocumento);
@@ -217,6 +220,8 @@ const FormularioCurriculum = () => {
       setCodigoIngreso(collaborator.codigoIngreso);
       setSueldo(collaborator.sueldo);
       setCargo(collaborator.cargo);
+      setUnidadFuncional(collaborator.unidadFuncional);
+      setUnidadNegocio(collaborator.unidadNegocio)
 
     //   let municipiosFilter = departamentos.filter(function(departamento){
     //     return departamento.departamento == collaborator.departamento;
@@ -362,6 +367,9 @@ const FormularioCurriculum = () => {
     for (let i = 0; i < inputCuentas.length; i++) {
       formData.append("inputCuentas", JSON.stringify(inputCuentas[i]));
     }
+    for (let i = 0; i < codigoCIIU.length; i++) {
+      formData.append("codigoCIIU", JSON.stringify(codigoCIIU[i]));
+    }
     formData.append("operacionesExtranjera", operacionesExtranjera);
     formData.append("exportaciones", exportaciones);
     formData.append("transferencias", transferencias);
@@ -379,10 +387,14 @@ const FormularioCurriculum = () => {
     formData.append("sueldo", sueldo);
     formData.append("soporteContrato", soporteContrato);
     formData.append("cargo", cargo);
+    formData.append("unidadFuncional", unidadFuncional);
+    formData.append("unidadNegocio", unidadNegocio);
+
     //console.log(formData);
     //Pasar los datos hacia el provider
     console.log(formData.get("nombre"));
-    await submitCurriculum(formData, estado);
+    
+    await editarCurriculumRH(formData);
   };
   //Informacion Financiera
   const handleinputchange = (e, index) => {
@@ -2554,6 +2566,57 @@ const FormularioCurriculum = () => {
                   value={cargo}
                   onChange={(e) => setCargo(e.target.value)}
                 />
+              </div>
+            </div>
+
+              <div>
+              <label
+                htmlFor="unidadFuncional"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Unidad funcional
+              </label>
+              <div className="mt-1">
+                <input
+                  id="unidadFuncional"
+                  name="unidadFuncional"
+                  type="text"
+                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                  value={unidadFuncional}
+                  onChange={(e) => setUnidadFuncional(e.target.value)}
+                />
+              </div>
+            </div>
+
+             <div>
+              <label
+                htmlFor="unidadNegocio"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Unidad de negocio
+              </label>
+              <div className="mt-1">
+              <select
+                  id="unidadNegocio"
+                  name="unidadNegocio"
+                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                  onChange={(e) => {
+                    const selectedDocumentType = e.target.value;
+
+                    setUnidadNegocio(selectedDocumentType);
+                  }}
+                  value={unidadNegocio}
+               
+                >
+                  <option value="Uci Magangué">
+                    Uci Magangue
+                  </option>
+                  <option value="Hospital Magangué">
+                    Hospital Magangué
+                  </option>
+                  <option value="Hospital Mompox">Hospital Mompox</option>
+                  <option value="Salud mental Mompox">Salud mental Mompox</option>
+                </select>
               </div>
             </div>
             <div>

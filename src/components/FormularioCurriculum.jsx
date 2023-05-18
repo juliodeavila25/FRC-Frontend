@@ -110,6 +110,8 @@ const FormularioCurriculum = () => {
   const [soporteContrato, setSoporteContrato] = useState("");
   const [errorSoporteContrato, setErrorSoporteContrato] = useState(false);
   const [cargo, setCargo] = useState("");
+  const[unidadFuncional, setUnidadFuncional]= useState("");
+  const[unidadNegocio, setUnidadNegocio] = useState("Uci Magangué")
 
  
   const params = useParams();
@@ -210,6 +212,8 @@ const FormularioCurriculum = () => {
       setCodigoIngreso(curriculum[0].codigoIngreso);
       setSueldo(curriculum[0].sueldo);
       setCargo(curriculum[0].cargo);
+      setUnidadFuncional(curriculum[0].unidadFuncional);
+      setUnidadNegocio(curriculum[0].unidadNegocio)
 
       let municipiosFilter = departamentos.filter(function(departamento){
         return departamento.departamento == curriculum[0].departamento;
@@ -367,6 +371,8 @@ const FormularioCurriculum = () => {
     formData.append("sueldo", sueldo);
     formData.append("soporteContrato", soporteContrato);
     formData.append("cargo", cargo);
+    formData.append("unidadFuncional", unidadFuncional);
+    formData.append("unidadNegocio", unidadNegocio);
 
 
  
@@ -2536,6 +2542,58 @@ const handleChangeDepartamento = (e)=>{
                   readOnly="readonly"
                   onChange={(e) => setCargo(e.target.value)}
                 />
+              </div>
+            </div>
+
+             <div>
+              <label
+                htmlFor="unidadFuncional"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Unidad funcional
+              </label>
+              <div className="mt-1">
+                <input
+                  id="unidadFuncional"
+                  name="unidadFuncional"
+                  type="text"
+                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                  value={unidadFuncional}
+                 readOnly={true}
+                  onChange={(e) => setUnidadFuncional(e.target.value)}
+                />
+              </div>
+            </div>
+
+             <div>
+              <label
+                htmlFor="unidadNegocio"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Unidad de negocio
+              </label>
+              <div className="mt-1">
+              <select
+                  id="unidadNegocio"
+                  name="unidadNegocio"
+                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                  onChange={(e) => {
+                    const selectedDocumentType = e.target.value;
+
+                    setUnidadNegocio(selectedDocumentType);
+                  }}
+                  value={unidadNegocio}
+                  disabled={true}
+                >
+                  <option value="Uci Magangué">
+                    Uci Magangue
+                  </option>
+                  <option value="Hospital Magangué">
+                    Hospital Magangué
+                  </option>
+                  <option value="Hospital Mompox">Hospital Mompox</option>
+                  <option value="Salud mental Mompox">Salud mental Mompox</option>
+                </select>
               </div>
             </div>
             <div>

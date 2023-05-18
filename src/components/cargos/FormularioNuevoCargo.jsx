@@ -12,7 +12,7 @@ const FormularioNuevoCargo = () => {
   const [id, setId] = useState(null);
   const [nombre, setNombre] = useState("");
   const [inputCargos, setInputCargos] = useState([
-     { nombre_requisito: "", vigencia:false, estado_requisito:"Activo" },
+     { nombre_requisito: "Bachiller", vigencia:false, estado_requisito:"Activo" },
    ]);
 
 
@@ -36,7 +36,7 @@ const FormularioNuevoCargo = () => {
       setInputCargos(cargo.inputCargos);
      
     }
-  }, []);
+  }, [cargo]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -105,7 +105,7 @@ const FormularioNuevoCargo = () => {
                         type="text"
                         id="codigo"
                         name="codigo"
-                        placeholder="Digita el código"
+                        placeholder="Digita el nombre del cargo"
                         className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                         value={nombre}
                         onChange={(e) => setNombre(e.target.value)}
@@ -137,7 +137,7 @@ const FormularioNuevoCargo = () => {
                               disabled={Array.isArray(cargo.inputCargos) && i >= cargo.inputCargos?.length  || params.id === undefined && inputCargos.length >= 1 ? false : true}
                           
                             >
-                              <option value="Bachiller">
+                              <option value="Bachiller" >
                                  Bachiller
                               </option>
                               <option value="Titulo: Aux o Tec En Auxiliar De Enfermeria">

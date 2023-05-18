@@ -27,6 +27,7 @@
     "react-select": "^5.7.2",
     "react-spinners": "^0.13.8",
     "react-table": "^7.8.0",
+    "react-tag-autocomplete": "^6.3.0",
     "react-tag-input-component": "^2.0.2",
     "sweetalert": "^2.1.2"
   },

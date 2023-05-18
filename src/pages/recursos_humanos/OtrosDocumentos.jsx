@@ -54,6 +54,10 @@ const OtrosDocumentos = () => {
      
     },
     {
+      Header: "Observaciones",
+      accessor: "observaciones",
+    },
+    {
       Header: " ",
       accessor: (originalRow, rowIndex) => (
         <div className="flex space-x-4">
