@@ -22,7 +22,7 @@ const FormularioNuevoDocumento = () => {
   const [especialidad, setEspecialidad] = useState("");
   const [responsable, setResponsable] = useState("");
   const [fuente, setFuente] = useState("Documento interno");
-  const [elaboradoPor, setElaboradoPor] = useState("")
+  const [elaboradoPor, setElaboradoPor] = useState([])
   const [link, setLink] = useState("");
   const[numeroVersion, setNumeroVersion] = useState(1)
   const[urlMostrar, setUrlMostrar] = useState("")
@@ -44,10 +44,8 @@ const FormularioNuevoDocumento = () => {
   const[ tags, setTags] = useState([])
 
 
-  const[ suggestions, setSuggestions] = useState([
-    {id:"bananas", name: "Bananas" },
-   
-  ])
+  const[ suggestions, setSuggestions] = useState([])
+  const[ suggestionsElaborado, setSuggestionsElaborado] = useState([])
 
 
   const params = useParams();
@@ -68,7 +66,7 @@ const FormularioNuevoDocumento = () => {
       console.log(documento)
       setId(documento._id);
       setTitulo(documento.titulo);
-      setCodigo(documento.codigo);
+      setCodigo(documento.codigo?.toString().padStart(5, '0'));
       setProceso(documento.proceso);
       setServicio(documento.servicio);
       setTipo(documento.tipo);
@@ -88,14 +86,27 @@ const FormularioNuevoDocumento = () => {
       setTags(documento.tags)
       //setInputVersiones(documento.inputVersiones);
       //setInputTest(documento.inputTest)
-      
-      let result = documentos.map(documento => documento.tags)
-      const dataArr = new Set(result);
-      let filterData = [...dataArr]
+    }else{
 
-      console.log(filterData)
+      const newCodigo = parseInt(localStorage.getItem("codigo"))
+      let newCodigoString = (newCodigo + 1).toString()
+      let addZeros = newCodigoString.padStart(5, '0')
+      setCodigo(addZeros);
     }
+
+      let result = documentos.map(documento => documento.tags)
+      let onlyArray = result.flat();
+      let resultTags = Object.values(onlyArray.reduce((acc, obj)=>({...acc, [obj.id]: obj}), {}))
+      setSuggestions(resultTags)
+
+      let resultElaborado = documentos.map(documento => documento.elaboradoPor)
+      let onlyArrayElaborado = resultElaborado.flat();
+      let resultTagsElaborado = Object.values(onlyArrayElaborado.reduce((acc, obj)=>({...acc, [obj.id]: obj}), {}))
+      setSuggestionsElaborado(resultTagsElaborado)
+      
   }, []);
+
+  console.log(documentos)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -196,6 +207,20 @@ const FormularioNuevoDocumento = () => {
   }, [tags])
 
 
+  const onDeleteElaborado = useCallback((tagIndex) => {
+    setElaboradoPor(elaboradoPor.filter((_, i) => i !== tagIndex))
+  }, [elaboradoPor])
+
+  const onAdditionElaborado = useCallback((newTag) => {
+    newTag.id = newTag.name
+    if(elaboradoPor.find(tag => tag.name === newTag.name) === undefined){
+      setElaboradoPor([...elaboradoPor, newTag])
+    }
+   
+  }, [elaboradoPor])
+
+
+
 
   const { msg } = alerta;
 
@@ -226,7 +251,7 @@ const FormularioNuevoDocumento = () => {
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={codigo}
                   onChange={(e) => setCodigo(e.target.value)}
-                  required={true}
+                  disabled={true}
                 />
               </div>
             </div>
@@ -500,7 +525,16 @@ const FormularioNuevoDocumento = () => {
                   Elaborado por <span className="text-red-700">*</span>
                 </label>
                 <div className="mt-1">
-                  <input
+                  <ReactTags
+                  allowNew
+                  newTagText='Crear nueva etiqueta:'
+                  tags={elaboradoPor}
+                  suggestions={suggestionsElaborado}
+                  onDelete={onDeleteElaborado}
+                  onAddition={onAdditionElaborado}
+                  placeholderText="Nueva etiqueta"
+                  />
+                  {/* <input
                     type="text"
                     id="elaboradoPor"
                     name="elaboradoPor"
@@ -510,7 +544,7 @@ const FormularioNuevoDocumento = () => {
                     value={elaboradoPor}
                     required={fuente === "Documento externo" ? true : false}
                   >
-                  </input>
+                  </input> */}
                 </div>
               </div>
 

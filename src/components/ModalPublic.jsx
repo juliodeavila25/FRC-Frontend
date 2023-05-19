@@ -9,7 +9,7 @@ export default function ModalPublic({ data, setShowModal }) {
           <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
             {/*header*/}
             <div className="flex items-start justify-between px-5 py-3 border-b border-solid border-slate-200 rounded-t">
-              <h3 className="text-xl font-semibold">{data.codigo}</h3>
+              <h3 className="text-xl font-semibold">Codigo: {data.codigo?.toString().padStart(5, '0')}</h3>
               <button
                 className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
                 onClick={() => setShowModal(false)}
@@ -26,7 +26,7 @@ export default function ModalPublic({ data, setShowModal }) {
                   htmlFor="codigo"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Código/Versión
+                  Código
                 </label>
                 <div className="mt-1">
                   <input
@@ -35,7 +35,7 @@ export default function ModalPublic({ data, setShowModal }) {
                     name="codigo"
                     placeholder="Digita el código"
                     className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                    value={data.codigo}
+                    value={data.codigo?.toString().padStart(5, '0')}
                     disabled="true"
                   />
                 </div>

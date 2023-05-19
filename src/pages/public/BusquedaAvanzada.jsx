@@ -77,22 +77,30 @@ export default function BusquedaAvanzada() {
   const [headers, setHeaders] = useState([
     {
       Header: "Código",
-      accessor: "codigo"
+      accessor: (originalRow, rowIndex) => (
+        <div className="">
+          <p>{originalRow.codigo?.toString().padStart(5, '0')}</p>
+        </div>
+      ),
     },
     { Header: "Proceso", accessor: "proceso"},
-    { Header: "Titulo", accessor: "titulo"},
-    { Header: "Tags", 
-      accessor: "selectedTag",
-      Cell: ({ value }) => {
-        return (value.length > 0 && value.map((tag)=> (<span key={tag} className="bg-blue-500 text-white rounded-full px-3 py-1 text-xs ">{tag}</span> )))
-      },
+    { Header: "Titulo", 
+      accessor: (originalRow, rowIndex) => (
+        <div className="">
+   
+          <p>{originalRow.titulo}</p>
+          <div className="flex flex-wrap mt-2 gap-2">{originalRow.tags.map(item =>{
+              return(
+                <p className="bg-blue-400 px-3 rounded-full text-white">{item.name}</p>
+              )  
+            }) }</div>
+        </div>
+      ),
     },
+    
     {
-      Header: "Fecha de creación",
-      accessor: "createdAt",
-      Cell: ({ value }) => {
-        return format(new Date(value), "dd/MM/yyyy");
-      },
+       Header: "Implementación",
+      accessor: "implementacion",
     },
     {
       Header: " ",

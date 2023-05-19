@@ -11,22 +11,29 @@ const ListarDocumentosTotal = () => {
   const navigate = useNavigate();
 
   console.log(documentos)
+  localStorage.setItem("codigo", documentos[0]?.codigo);
+
 
   const [headers, setHeaders] = useState([
     {
       Header: "Código",
-      accessor: "codigo",
+       accessor: (originalRow, rowIndex) => (
+        <div className="">
+          <p>{originalRow.codigo?.toString().padStart(5, '0')}</p>
+        </div>
+      ),
     },
     { Header: "Proceso", accessor: "proceso" },
     { Header: "Titulo", 
       accessor: (originalRow, rowIndex) => (
         <div className="">
+   
           <p>{originalRow.titulo}</p>
-          {/* <div className="flex flex-wrap mt-2 gap-2">{originalRow.selectedTag.map(item =>{
-            return(
-              <p className="bg-blue-400 px-3 rounded-full text-white">{item}</p>
-            )  
-          }) }</div> */}
+          <div className="flex flex-wrap mt-2 gap-2">{originalRow.tags.map(item =>{
+              return(
+                <p className="bg-blue-400 px-3 rounded-full text-white">{item.name}</p>
+              )  
+            }) }</div>
         </div>
       ),
     },

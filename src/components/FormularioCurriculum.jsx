@@ -135,10 +135,10 @@ const FormularioCurriculum = () => {
       obtenerCargosForm()
   }, []);
 
- 
+  console.log(curriculum)
   useEffect(() => {
     if (Array.isArray(curriculum) && curriculum.length > 0) {
-     
+      
       setId(auth._id);
       setEstado(curriculum[0].estado);
       setNombre(curriculum[0].nombre);
