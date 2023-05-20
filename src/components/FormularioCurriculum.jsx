@@ -3,6 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import useCurriculum from "../hooks/useCurriculum";
 import useCargos from "../hooks/useCargos"
 import useCollaborators from "../hooks/useCollaborators";
+import useDocumentosRequeridos from '../hooks/useDocumentosRequeridos'
 import Alert from "./Alert";
 import useAuth from "../hooks/useAuth";
 import { BeatLoader } from "react-spinners";
@@ -10,6 +11,8 @@ import { ReactSearchAutocomplete } from 'react-search-autocomplete'
 import ciuu from '../json/ciuu.json'
 import Select from 'react-select'
 import departamentos from '../json/departamentos_municipios.json'
+import ListarRequisitos from "./ListarRequisitos";
+import ModalCurriculum from '../components/ModalCurriculum'
 
 
 const FormularioCurriculum = () => {
@@ -112,6 +115,9 @@ const FormularioCurriculum = () => {
   const [cargo, setCargo] = useState("");
   const[unidadFuncional, setUnidadFuncional]= useState("");
   const[unidadNegocio, setUnidadNegocio] = useState("Uci Magangué")
+  const [visible, setVisible] = useState(false);
+  const[cargosFiltrados, setCargosFiltrados] = useState("")
+  const[editarDocumento, setEditarDocumento] = useState({})
 
  
   const params = useParams();
@@ -126,14 +132,21 @@ const FormularioCurriculum = () => {
   } = useCurriculum();
 
   const{cargos, obtenerCargosForm, cargosForm} = useCargos();
+  const{obtenerDocumentosRequeridos, documentosRequeridos }= useDocumentosRequeridos();
 
   const { auth, cargando } = useAuth();
   //console.log(auth.documento);
   //console.log(auth._id);
   useEffect(() => {
       obtenerCurriculum(auth._id);
+      
       obtenerCargosForm()
   }, []);
+
+  useEffect(() => {
+   obtenerDocumentosRequeridos(auth._id)
+  }, [documentosRequeridos])
+  
 
   console.log(curriculum)
   useEffect(() => {
@@ -225,24 +238,14 @@ const FormularioCurriculum = () => {
     }
   }, [curriculum]);
 
-  // useEffect(() => {
-  //   if (Array.isArray(cargosForm) && cargosForm.length > 0 && Array.isArray(curriculum) && curriculum.length > 0) {
-  //     setInputReq([
-  //   { nombre_requisito: " ", documento: {}, vigencia:" ", fecha_vigencia:"1990-01-01", observaciones:" ", estado_requisito:"" },
-  //   ]);
-  //   let cargo_new = Array.isArray(cargosForm) && cargosForm.filter(item => item.nombre.includes(cargo))
-  //   cargo_new[0]?.inputCargos.forEach(item =>{
-  //      return(
-  //       setInputReq(inputReq => 
-  //         [
-  //           ...inputReq,
-  //           { nombre_requisito: item.nombre_requisito, documento: {}, vigencia:item.vigencia, fecha_vigencia:"1990-01-01", observaciones: "", estado_requisito: item.estado_requisito },
-  //         ]))
-      
-  //   })
-  //   }
-   
-  // }, [cargosForm, curriculum])
+  console.log(cargosForm)
+
+  useEffect(() => {
+    if (Array.isArray(curriculum) && curriculum.length > 0) {
+      let obj =  cargosForm.find(item => item.nombre === curriculum[0].cargo);
+      setCargosFiltrados(obj)
+     }
+  }, [cargosForm, curriculum])
 
 
   const submitData = async (e) => {
@@ -361,7 +364,6 @@ const FormularioCurriculum = () => {
     formData.append("importaciones", importaciones);
     formData.append("prestamos", prestamos);
     formData.append("otras", otras);
-
     formData.append("tipoContrato", tipoContrato);
     formData.append("fechaIngreso", fechaIngreso);
     formData.append("fechaFin", fechaFin);
@@ -551,34 +553,25 @@ const handleChangeDepartamento = (e)=>{
    
 }
 
- const handleinputchangeRequiredDocuments = (e, index) => {
-    const { name, value } = e.target;
-    const list = [...inputReq];
-    if(e.target.name === "documento"){      
-      list[index][name] = e.target.files[0]
-      setInputReq(list);
-    }else{
-      list[index][name] = value;
-      setInputReq(list);
-    }
-     
+
+  const activateModal = (e) => {
+    e.preventDefault()
+    setVisible(true);
   };
 
-  
-  
-    // const handleTest = (e, index) =>{
-  //   const { name, value } = e.target;
-  //   //console.log(name)
-  //   //console.log(e.target.files[0])
-  //   setDocumentoRequerido(...documentoRequerido,  ...e.target.files[0] );
-  //   //const list1 = [...documentoRequerido];
-  //   //list1[index][name] = e.target.files[0]
-  //   console.log(documentoRequerido)
+   const setShowModal = () => {
+    setVisible(false);
+    setEditarDocumento("")
+  };
 
-  //   // list1[index-1] = e.target.files[0]
-  //   // setDocumentoRequerido(list1);
-  //   // console.log(documentoRequerido)
-  // }
+
+  const editModal = (e, data) =>{
+    e.preventDefault()
+    console.log(data)
+    setEditarDocumento(data)
+    setVisible(true);
+  }
+
   
   const { msg } = alerta;
 
@@ -589,6 +582,9 @@ const handleChangeDepartamento = (e)=>{
   return (
     <div className=" sm:mx-auto sm:w-full">
       <div className="bg-white py-8 px-4 shadow-lg rounded-lg sm:px-10">
+        {visible === true && (
+        <ModalCurriculum  setShowModal={setShowModal} cargos={cargosFiltrados} data={editarDocumento} />
+        )}
         <form
           className="space-y-6 "
           // onSubmit={handleSubmit((data, e) => {
@@ -2397,6 +2393,7 @@ const handleChangeDepartamento = (e)=>{
                   value={codigoIngreso}
                   readOnly="readonly"
                   onChange={(e) => setCodigoIngreso(e.target.value)}
+                  disabled={true}
                 />
               </div>
             </div>
@@ -2418,6 +2415,7 @@ const handleChangeDepartamento = (e)=>{
                   value={tipoContrato}
                   readOnly="readonly"
                   onChange={(e) => setTipoContrato(e.target.value)}
+                  disabled={true}
                 />
               </div>
             </div>
@@ -2437,6 +2435,7 @@ const handleChangeDepartamento = (e)=>{
                   value={fechaIngreso}
                   readOnly="readonly"
                   onChange={(e) => setFechaIngreso(e.target.value)}
+                  disabled={true}
                 />
               </div>
             </div>
@@ -2457,6 +2456,7 @@ const handleChangeDepartamento = (e)=>{
                   value={fechaFin}
                   readOnly="readonly"
                   onChange={(e) => setFechaFin(e.target.value)}
+                  disabled={true}
                 />
               </div>
             </div>
@@ -2478,6 +2478,7 @@ const handleChangeDepartamento = (e)=>{
                   value={empresa}
                   readOnly="readonly"
                   onChange={(e) => setEmpresa(e.target.value)}
+                  disabled={true}
                 />
               </div>
             </div>
@@ -2499,6 +2500,7 @@ const handleChangeDepartamento = (e)=>{
                   value={nomina}
                   readOnly="readonly"
                   onChange={(e) => setNomina(e.target.value)}
+                  disabled={true}
                 />
               </div>
             </div>
@@ -2520,6 +2522,7 @@ const handleChangeDepartamento = (e)=>{
                   value={sueldo}
                   readOnly="readonly"
                   onChange={(e) => setSueldo(e.target.value)}
+                  disabled={true}
                 />
               </div>
             </div>
@@ -2541,6 +2544,7 @@ const handleChangeDepartamento = (e)=>{
                   value={cargo}
                   readOnly="readonly"
                   onChange={(e) => setCargo(e.target.value)}
+                  disabled={true}
                 />
               </div>
             </div>
@@ -2559,8 +2563,9 @@ const handleChangeDepartamento = (e)=>{
                   type="text"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={unidadFuncional}
-                 readOnly={true}
+                  readOnly={true}
                   onChange={(e) => setUnidadFuncional(e.target.value)}
+                  disabled={true}
                 />
               </div>
             </div>
@@ -2624,7 +2629,7 @@ const handleChangeDepartamento = (e)=>{
                   id="soporteContrato"
                   name="soporteContrato"
                   onChange={(e) => handleSoporteContrato(e.target.files[0])}
-                  disabled="disabled"
+                  disabled={true}
                   accept=".pdf"
                 />
               </div>
@@ -2650,98 +2655,50 @@ const handleChangeDepartamento = (e)=>{
             </div>
           </div>
 
-          {/* <div className="text-left text-xl text-gray-700 mt-8 font-bold border-b-4 border-corporative-blue inline-flex pt-3">
-              Documentos Requeridos
+          <div className="text-left text-xl text-gray-700 mt-8 font-bold border-b-4 border-corporative-blue inline-flex pt-3">
+            Documentos Requeridos
           </div>
-          <div className="">
-            { inputReq &&
-              Array.isArray(inputReq) && inputReq.length > 0 && inputReq.map((item, i) =>{
-                
-                return(
-                  <div  key={item.nombre_requisito}>
-                  <>
-                  {item.estado_requisito === "Activo" || item.estado_requisito === " " ? (
-                        <div className="grid grid-cols-4 gap-10  items-center border border-gray-200 p-2 rounded-ful"> 
-                    <div className="py-10 italic underline" name="" >{item.nombre_requisito}:</div>
-                     <div>
-                       <label
-                          htmlFor="documento"
-                          className="block text-sm font-medium text-gray-700 pb-2"
-                        >
-                          Documento
-                      </label>
-                      <input
-                          className="form-control
-                          block
-                          w-full
-                          px-3
-                          py-1.5
-                          text-base
-                          font-normal
-                          text-gray-700
-                          bg-white bg-clip-padding
-                          border border-solid border-gray-300
-                          rounded
-                          transition
-                          ease-in-out
-                          m-0
-                          focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                          type="file"
-                          id="documento"
-                          name="documento"
-                          onChange={(e) => handleinputchangeRequiredDocuments(e, i)}
-                          //disabled={item.estado === "Inactivo" ? true : false}
-                          accept=".pdf"
-                        />
-                    </div>
-                     {item.vigencia === true ?(
-                      <div>
-                         <label
-                          htmlFor="fecha_vigencia"
-                          className="block text-sm font-medium text-gray-700 pb-2"
-                        >
-                          Fecha de vigencia
-                      </label>
-                      <input
-                        id="fecha_vigencia"
-                        name="fecha_vigencia"
-                        type="date"
-                        placeholder="Seleccione fecha de vigencia"
-                        className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                        value={item.fecha_vigencia}
-                        onChange={(e) => handleinputchangeRequiredDocuments(e, i)}
-                        required
-                      
+           <div className="flex justify-end">
+            <div className=" sm:mt-0 sm:ml-16 sm:flex-none">
+                  <button
+                    onClick={(e) => activateModal(e)}
+                    className="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto"
+                  >
+                    Nuevo Documento
+                  </button>
+            </div>
+          </div>
+           <div>
+            { Array.isArray(documentosRequeridos) && documentosRequeridos.length > 0 ?
+             <ListarRequisitos data ={documentosRequeridos} editModal={editModal}  />: (
+               <div className="rounded-md bg-blue-50 p-4">
+                <div className="flex">
+                  <div className="flex-shrink-0">
+                    <svg
+                      className="h-5 w-5 text-blue-400"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      aria-hidden="true"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a.75.75 0 000 1.5h.253a.25.25 0 01.244.304l-.459 2.066A1.75 1.75 0 0010.747 15H11a.75.75 0 000-1.5h-.253a.25.25 0 01-.244-.304l.459-2.066A1.75 1.75 0 009.253 9H9z"
+                        clipRule="evenodd"
                       />
-                      </div>
-                     ): <div></div>}
-                      <div>
-                         <label
-                          htmlFor="observaciones"
-                          className="block text-sm font-medium text-gray-700 pb-2"
-                        >
-                          Descripción
-                      </label>
-                     <textarea
-                        id="observaciones"
-                        name="observaciones"
-                        type="text"
-                        placeholder=""
-                        rows="2"
-                        className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm mb-2"
-                        value={item.observaciones}
-                        onChange={(e) => handleinputchangeRequiredDocuments(e, i)}
-                      />
-                      </div>
-
+                    </svg>
                   </div>
-                  ): null} 
-                  </>
+                  <div className="ml-3 flex-1 md:flex ">
+                    <p className="text-sm text-blue-700">
+                      No existen documentos cargados
+                    </p>
                   </div>
-                )})
-             
-            } 
-          </div> */}
+                </div>
+              </div>
+              )
+            }
+           
+           </div>
+            
           {msg && <Alert alerta={alerta} />}
           <div className="grid grid-cols-2 gap-6 w-3/5 mx-auto mt-3">
             <Link
