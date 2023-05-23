@@ -62,7 +62,7 @@ const ListarCertificadoDesprendible = () => {
 
   return (
     <>
-     {auth?.userType[0] === "colaborador" && auth?.estado === "por completar" ? (
+     {auth?.userType[0] === "colaborador" && auth?.estado === "por_completar" ? (
         <ModalFillCurriculum/>
       ) : null}
       <div className="px-4 sm:px-6 lg:px-8 mt-5 mb-5">

@@ -339,7 +339,7 @@ const CertificadoLaboral = () => {
    
   return (
     <>
-     {auth?.userType[0] === "colaborador" && auth?.estado === "por completar" ? (
+     {auth?.userType[0] === "colaborador" && auth?.estado === "por_completar" ? (
         <ModalFillCurriculum/>
       ) : null}
       

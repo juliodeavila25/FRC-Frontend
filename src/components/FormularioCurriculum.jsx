@@ -330,6 +330,7 @@ const FormularioCurriculum = () => {
   }, [curriculum]);
 
 
+
   useEffect(() => {
     if (Array.isArray(curriculum) && curriculum.length > 0) {
       let obj =  cargosForm.find(item => item.nombre === curriculum[0].cargo);
@@ -536,6 +537,14 @@ const FormularioCurriculum = () => {
       setErrorCorreoRefInput(false)
       setErrorCorreoInput(false)
     }
+
+     if(estado === true && documentosRequeridos.length === 0){
+      mostrarAlerta({
+        msg: "Favor diligenciar la sección de documentos requeridos",
+        error: true,
+      });
+      return;
+     }
 
     // if (errorSoporteExp === true) {
     //   mostrarAlerta({
@@ -1492,12 +1501,9 @@ const handleChangeDepartamento = (e)=>{
               </div>
             </div>
           </div>
-          <div className="text-left text-xl text-gray-700 mt-8 font-bold border-b-4 border-corporative-blue inline-flex pt-3">
-            Referencias
-          </div>
-          <div className="border-b border-gray-200 pb-2">
-            <h6 className="text-sm font-medium leading-6 text-gray-900">
-              Referencia 1 <span className="italic"> (Familiar)</span>
+          <div className="border-b border-gray-200 pb-2 -mt-8">
+            <h6 className="text-sm font-medium leading-6 text-gray-900 italic">
+              Contacto laboral
             </h6>            
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
@@ -1583,9 +1589,14 @@ const handleChangeDepartamento = (e)=>{
              
             </div>
           </div>
+
+          <div className="text-left text-xl text-gray-700 mt-8 font-bold border-b-4 border-corporative-blue inline-flex pt-3">
+            Contactos
+          </div>
+         
           <div className="border-b border-gray-200 pb-2">
             <h6 className="text-sm font-medium leading-6 text-gray-900">
-              Referencia 2 <span className="italic"> (Personal)</span>
+             Contacto 1 <span className="italic"> (Personal)</span>
             </h6>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">

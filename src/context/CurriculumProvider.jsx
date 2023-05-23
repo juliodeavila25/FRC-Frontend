@@ -74,6 +74,8 @@ const CurriculumProvider = ({ children }) => {
         }else{
           navigate("/dashboard");
         }
+
+         window.location.reload(false)
         
       }, 3000);
     } catch (error) {

@@ -87,12 +87,6 @@ const Sidebar = () => {
       current: location.pathname.includes("/dashboard") ? true : false,
     },
     {
-      name: "Mi Hoja de Vida",
-      href: "/curriculum/crear-curriculum",
-      icon: Bars4Icon,
-      current: location.pathname.includes("/curriculum") ? true : false,
-    },
-    {
       name: "Colaboradores",
       href: "/colaboradores",
       icon: UsersIcon,
@@ -281,7 +275,7 @@ const Sidebar = () => {
                           </Link>
                         ))}
                     </div>
-                    {auth?.userType[0] === "colaborador" || auth?.userType[0] === "recursos_humanos" ? (
+                    {auth?.userType[0] === "colaborador"  ? (
                       <div className="mt-8">
                         <h3
                           className="px-3 text-lg font-medium text-gray-500"
@@ -583,7 +577,7 @@ const Sidebar = () => {
                   </Link>
                 ))}
             </div>
-            {auth?.userType[0] === "colaborador" || auth?.userType[0] === "recursos_humanos" ? (
+            {auth?.userType[0] === "colaborador"  ? (
               <div className="mt-8">
                 {/* Secondary navigation */}
                 <h3

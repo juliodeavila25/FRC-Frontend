@@ -114,7 +114,7 @@ function App() {
                               path="/solicitudes"
                               element={
                                 <RutaProtegida
-                                  allowedRoles={["recursos_humanos", "colaborador"]}
+                                  allowedRoles={["colaborador"]}
                                 />
                               }
                             >

@@ -61,7 +61,7 @@ export default function Dashboard() {
               <Admin/>
         ) : null
       }
-      {auth?.userType[0] === "colaborador" && auth?.estado === "por completar" ? (
+      {auth?.userType[0] === "colaborador" && auth?.estado === "por_completar" ? (
         <ModalFillCurriculum/>
       ) : null}
       {Array.isArray(ofertas) && ofertas.length > 0 ? (

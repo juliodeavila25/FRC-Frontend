@@ -1,255 +1,351 @@
-﻿[
+[
  {
-  "value": "46 - Comercio al por mayor y en comisión o por contrata, excepto el comercio de vehículos automotores y motocicletas.",
-  "label": "46 - Comercio al por mayor y en comisión o por contrata, excepto el comercio de vehículos automotores y motocicletas."
+  "value": "11 - Cultivos agrícolas transitorios.",
+  "label": "11 - Cultivos agrícolas transitorios."
  },
  {
-  "value": "0010 - Asalariados",
-  "label": "0010 - Asalariados"
+  "value": "111 - Cultivo de cereales (excepto arroz), legumbres y semillas oleaginosas.",
+  "label": "111 - Cultivo de cereales (excepto arroz), legumbres y semillas oleaginosas."
  },
  {
-  "value": "0081 - Personas Naturales sin Actividad Económica",
-  "label": "0081 - Personas Naturales sin Actividad Económica"
+  "value": "112 - Cultivo de arroz.",
+  "label": "112 - Cultivo de arroz."
  },
  {
-  "value": "0082 - Personas Naturales Subsidiadas por Terceros",
-  "label": "0082 - Personas Naturales Subsidiadas por Terceros"
+  "value": "113 - Cultivo de hortalizas, raíces y tubérculos.",
+  "label": "113 - Cultivo de hortalizas, raíces y tubérculos."
  },
  {
-  "value": "0090 - Rentistas de Capital, solo para personas naturales.",
-  "label": "0090 - Rentistas de Capital, solo para personas naturales."
+  "value": "114 - Cultivo de tabaco.",
+  "label": "114 - Cultivo de tabaco."
  },
  {
-  "value": "0111 - Cultivo de cereales (excepto arroz), legumbres y semillas oleaginosas.",
-  "label": "0111 - Cultivo de cereales (excepto arroz), legumbres y semillas oleaginosas."
+  "value": "115 - Cultivo de plantas textiles.",
+  "label": "115 - Cultivo de plantas textiles."
  },
  {
-  "value": "0112 - Cultivo de arroz.",
-  "label": "0112 - Cultivo de arroz."
+  "value": "119 - Otros cultivos transitorios n.c.p.",
+  "label": "119 - Otros cultivos transitorios n.c.p."
  },
  {
-  "value": "0113 - Cultivo de hortalizas, raíces y tubérculos.",
-  "label": "0113 - Cultivo de hortalizas, raíces y tubérculos."
+  "value": "12 - Cultivos agrícolas permanentes.",
+  "label": "12 - Cultivos agrícolas permanentes."
  },
  {
-  "value": "0114 - Cultivo de tabaco.",
-  "label": "0114 - Cultivo de tabaco."
+  "value": "121 - Cultivo de frutas tropicales y subtropicales.",
+  "label": "121 - Cultivo de frutas tropicales y subtropicales."
  },
  {
-  "value": "0115 - Cultivo de plantas textiles.",
-  "label": "0115 - Cultivo de plantas textiles."
+  "value": "122 - Cultivo de plátano y banano.",
+  "label": "122 - Cultivo de plátano y banano."
  },
  {
-  "value": "0119 - Otros cultivos transitorios n.c.p.",
-  "label": "0119 - Otros cultivos transitorios n.c.p."
+  "value": "123 - Cultivo de café.",
+  "label": "123 - Cultivo de café."
  },
  {
-  "value": "0121 - Cultivo de frutas tropicales y subtropicales.",
-  "label": "0121 - Cultivo de frutas tropicales y subtropicales."
+  "value": "124 - Cultivo de caña de azúcar.",
+  "label": "124 - Cultivo de caña de azúcar."
  },
  {
-  "value": "0122 - Cultivo de plátano y banano.",
-  "label": "0122 - Cultivo de plátano y banano."
+  "value": "125 - Cultivo de flor de corte.",
+  "label": "125 - Cultivo de flor de corte."
  },
  {
-  "value": "0123 - Cultivo de café.",
-  "label": "0123 - Cultivo de café."
+  "value": "126 - Cultivo de palma para aceite (palma africana) y otros frutos oleaginosos.",
+  "label": "126 - Cultivo de palma para aceite (palma africana) y otros frutos oleaginosos."
  },
  {
-  "value": "0124 - Cultivo de caña de azúcar.",
-  "label": "0124 - Cultivo de caña de azúcar."
+  "value": "127 - Cultivo de plantas con las que se preparan bebidas.",
+  "label": "127 - Cultivo de plantas con las que se preparan bebidas."
  },
  {
-  "value": "0125 - Cultivo de flor de corte.",
-  "label": "0125 - Cultivo de flor de corte."
+  "value": "128 - Cultivo de especias y de plantas aromáticas y medicinales.",
+  "label": "128 - Cultivo de especias y de plantas aromáticas y medicinales."
  },
  {
-  "value": "0126 - Cultivo de palma para aceite (palma africana) y otros frutos oleaginosos.",
-  "label": "0126 - Cultivo de palma para aceite (palma africana) y otros frutos oleaginosos."
+  "value": "129 - Otros cultivos permanentes n.c.p.",
+  "label": "129 - Otros cultivos permanentes n.c.p."
  },
  {
-  "value": "0127 - Cultivo de plantas con las que se preparan bebidas.",
-  "label": "0127 - Cultivo de plantas con las que se preparan bebidas."
+  "value": "13 - Propagación de plantas (actividades de los viveros, excepto viveros forestales)",
+  "label": "13 - Propagación de plantas (actividades de los viveros, excepto viveros forestales)"
  },
  {
-  "value": "0128 - Cultivo de especias y de plantas aromáticas y medicinales.",
-  "label": "0128 - Cultivo de especias y de plantas aromáticas y medicinales."
+  "value": "130 - Propagación de plantas (actividades de los viveros, excepto viveros forestales).",
+  "label": "130 - Propagación de plantas (actividades de los viveros, excepto viveros forestales)."
  },
  {
-  "value": "0129 - Otros cultivos permanentes n.c.p.",
-  "label": "0129 - Otros cultivos permanentes n.c.p."
+  "value": "14 - Ganadería.",
+  "label": "14 - Ganadería."
  },
  {
-  "value": "0130 - Propagación de plantas (actividades de los viveros, excepto viveros forestales).",
-  "label": "0130 - Propagación de plantas (actividades de los viveros, excepto viveros forestales)."
+  "value": "141 - Cría de ganado bovino y bufalino.",
+  "label": "141 - Cría de ganado bovino y bufalino."
  },
  {
-  "value": "0141 - Cría de ganado bovino y bufalino.",
-  "label": "0141 - Cría de ganado bovino y bufalino."
+  "value": "142 - Cría de caballos y otros equinos.",
+  "label": "142 - Cría de caballos y otros equinos."
  },
  {
-  "value": "0142 - Cría de caballos y otros equinos.",
-  "label": "0142 - Cría de caballos y otros equinos."
+  "value": "143 - Cría de ovejas y cabras.",
+  "label": "143 - Cría de ovejas y cabras."
  },
  {
-  "value": "0143 - Cría de ovejas y cabras.",
-  "label": "0143 - Cría de ovejas y cabras."
+  "value": "144 - Cría de ganado porcino.",
+  "label": "144 - Cría de ganado porcino."
  },
  {
-  "value": "0144 - Cría de ganado porcino.",
-  "label": "0144 - Cría de ganado porcino."
+  "value": "145 - Cría de aves de corral.",
+  "label": "145 - Cría de aves de corral."
  },
  {
-  "value": "0145 - Cría de aves de corral.",
-  "label": "0145 - Cría de aves de corral."
+  "value": "149 - Cría de otros animales n.c.p.",
+  "label": "149 - Cría de otros animales n.c.p."
  },
  {
-  "value": "0149 - Cría de otros animales n.c.p.",
-  "label": "0149 - Cría de otros animales n.c.p."
+  "value": "15 - Explotación mixta (agrícola y pecuaria).",
+  "label": "15 - Explotación mixta (agrícola y pecuaria)."
  },
  {
-  "value": "0150 - Explotación mixta (agrícola y pecuaria).",
-  "label": "0150 - Explotación mixta (agrícola y pecuaria)."
+  "value": "150 - Explotación mixta (agrícola y pecuaria).",
+  "label": "150 - Explotación mixta (agrícola y pecuaria)."
  },
  {
-  "value": "0161 - Actividades de apoyo a la agricultura.",
-  "label": "0161 - Actividades de apoyo a la agricultura."
+  "value": "16 - Actividades de apoyo a la agricultura y la ganadería, y actividades posteriores a la cosecha.",
+  "label": "16 - Actividades de apoyo a la agricultura y la ganadería, y actividades posteriores a la cosecha."
  },
  {
-  "value": "0162 - Actividades de apoyo a la ganadería.",
-  "label": "0162 - Actividades de apoyo a la ganadería."
+  "value": "161 - Actividades de apoyo a la agricultura.",
+  "label": "161 - Actividades de apoyo a la agricultura."
  },
  {
-  "value": "0163 - Actividades posteriores a la cosecha.",
-  "label": "0163 - Actividades posteriores a la cosecha."
+  "value": "162 - Actividades de apoyo a la ganadería.",
+  "label": "162 - Actividades de apoyo a la ganadería."
  },
  {
-  "value": "0164 - Tratamiento de semillas para propagación.",
-  "label": "0164 - Tratamiento de semillas para propagación."
+  "value": "163 - Actividades posteriores a la cosecha.",
+  "label": "163 - Actividades posteriores a la cosecha."
  },
  {
-  "value": "0170 - Caza ordinaria y mediante trampas y actividades de servicios conexas.",
-  "label": "0170 - Caza ordinaria y mediante trampas y actividades de servicios conexas."
+  "value": "164 - Tratamiento de semillas para propagación.",
+  "label": "164 - Tratamiento de semillas para propagación."
  },
  {
-  "value": "0210 - Silvicultura y otras actividades forestales.",
-  "label": "0210 - Silvicultura y otras actividades forestales."
+  "value": "17 - Caza ordinaria y mediante trampas y actividades de servicios conexas.",
+  "label": "17 - Caza ordinaria y mediante trampas y actividades de servicios conexas."
  },
  {
-  "value": "0220 - Extracción de madera.",
-  "label": "0220 - Extracción de madera."
+  "value": "1710 - Caza ordinaria y mediante trampas y actividades de servicios conexas.",
+  "label": "1710 - Caza ordinaria y mediante trampas y actividades de servicios conexas."
  },
  {
-  "value": "0230 - Recolección de productos forestales diferentes a la madera.",
-  "label": "0230 - Recolección de productos forestales diferentes a la madera."
+  "value": "21 - Silvicultura y otras actividades forestales.",
+  "label": "21 - Silvicultura y otras actividades forestales."
  },
  {
-  "value": "0240 - Servicios de apoyo a la silvicultura.",
-  "label": "0240 - Servicios de apoyo a la silvicultura."
+  "value": "210 - Silvicultura y otras actividades forestales.",
+  "label": "210 - Silvicultura y otras actividades forestales."
  },
  {
-  "value": "0311 - Pesca marítima.",
-  "label": "0311 - Pesca marítima."
+  "value": "22 - Extracción de madera.",
+  "label": "22 - Extracción de madera."
  },
  {
-  "value": "0312 - Pesca de agua dulce.",
-  "label": "0312 - Pesca de agua dulce."
+  "value": "220 - Extracción de madera.",
+  "label": "220 - Extracción de madera."
  },
  {
-  "value": "0321 - Acuicultura marítima.",
-  "label": "0321 - Acuicultura marítima."
+  "value": "23 - Recolección de productos forestales diferentes a la madera.",
+  "label": "23 - Recolección de productos forestales diferentes a la madera."
  },
  {
-  "value": "0322 - Acuicultura de agua dulce.",
-  "label": "0322 - Acuicultura de agua dulce."
+  "value": "230 - Recolección de productos forestales diferentes a la madera.",
+  "label": "230 - Recolección de productos forestales diferentes a la madera."
  },
  {
-  "value": "0510 - Extracción de hulla (carbón de piedra).",
-  "label": "0510 - Extracción de hulla (carbón de piedra)."
+  "value": "24 - Servicios de apoyo a la silvicultura.",
+  "label": "24 - Servicios de apoyo a la silvicultura."
  },
  {
-  "value": "0520 - Extracción de carbón lignito.",
-  "label": "0520 - Extracción de carbón lignito."
+  "value": "240 - Servicios de apoyo a la silvicultura.",
+  "label": "240 - Servicios de apoyo a la silvicultura."
  },
  {
-  "value": "0610 - Extracción de petróleo crudo.",
-  "label": "0610 - Extracción de petróleo crudo."
+  "value": "31 - Pesca.",
+  "label": "31 - Pesca."
  },
  {
-  "value": "0620 - Extracción de gas natural.",
-  "label": "0620 - Extracción de gas natural."
+  "value": "311 - Pesca marítima.",
+  "label": "311 - Pesca marítima."
  },
  {
-  "value": "0710 - Extracción de minerales de hierro.",
-  "label": "0710 - Extracción de minerales de hierro."
+  "value": "312 - Pesca de agua dulce.",
+  "label": "312 - Pesca de agua dulce."
  },
  {
-  "value": "0721 - Extracción de minerales de uranio y de torio.",
-  "label": "0721 - Extracción de minerales de uranio y de torio."
+  "value": "32 - Acuicultura.",
+  "label": "32 - Acuicultura."
  },
  {
-  "value": "0722 - Extracción de oro y otros metales preciosos.",
-  "label": "0722 - Extracción de oro y otros metales preciosos."
+  "value": "321 - Acuicultura marítima.",
+  "label": "321 - Acuicultura marítima."
  },
  {
-  "value": "0723 - Extracción de minerales de níquel.",
-  "label": "0723 - Extracción de minerales de níquel."
+  "value": "322 - Acuicultura de agua dulce.",
+  "label": "322 - Acuicultura de agua dulce."
  },
  {
-  "value": "0729 - Extracción de otros minerales metalíferos no ferrosos n.c.p.",
-  "label": "0729 - Extracción de otros minerales metalíferos no ferrosos n.c.p."
+  "value": "51 - Extracción de hulla (carbón de piedra).",
+  "label": "51 - Extracción de hulla (carbón de piedra)."
  },
  {
-  "value": "0811 - Extracción de piedra, arena, arcillas comunes, yeso y anhidrita.",
-  "label": "0811 - Extracción de piedra, arena, arcillas comunes, yeso y anhidrita."
+  "value": "510 - Extracción de hulla (carbón de piedra).",
+  "label": "510 - Extracción de hulla (carbón de piedra)."
  },
  {
-  "value": "0812 - Extracción de arcillas de uso industrial, caliza, caolín y bentonitas.",
-  "label": "0812 - Extracción de arcillas de uso industrial, caliza, caolín y bentonitas."
+  "value": "52 - Extracción de carbón lignito.",
+  "label": "52 - Extracción de carbón lignito."
  },
  {
-  "value": "0820 - Extracción de esmeraldas, piedras preciosas y semipreciosas.",
-  "label": "0820 - Extracción de esmeraldas, piedras preciosas y semipreciosas."
+  "value": "520 - Extracción de carbón lignito.",
+  "label": "520 - Extracción de carbón lignito."
  },
  {
-  "value": "0891 - Extracción de minerales para la fabricación de abonos y productos químicos.",
-  "label": "0891 - Extracción de minerales para la fabricación de abonos y productos químicos."
+  "value": "61 - Extracción de petróleo crudo.",
+  "label": "61 - Extracción de petróleo crudo."
  },
  {
-  "value": "0892 - Extracción de halita (sal).",
-  "label": "0892 - Extracción de halita (sal)."
+  "value": "610 - Extracción de petróleo crudo.",
+  "label": "610 - Extracción de petróleo crudo."
  },
  {
-  "value": "0899 - Extracción de otros minerales no metálicos n.c.p.",
-  "label": "0899 - Extracción de otros minerales no metálicos n.c.p."
+  "value": "62 - Extracción de gas natural.",
+  "label": "62 - Extracción de gas natural."
  },
  {
-  "value": "0910 - Actividades de apoyo para la extracción de petróleo y de gas natural.",
-  "label": "0910 - Actividades de apoyo para la extracción de petróleo y de gas natural."
+  "value": "620 - Extracción de gas natural.",
+  "label": "620 - Extracción de gas natural."
  },
  {
-  "value": "0990 - Actividades de apoyo para otras actividades de explotación de minas y canteras.",
-  "label": "0990 - Actividades de apoyo para otras actividades de explotación de minas y canteras."
+  "value": "71 - Extracción de minerales de hierro.",
+  "label": "71 - Extracción de minerales de hierro."
  },
  {
-  "value": "1011 - Procesamiento y conservación de carne y productos cárnicos.",
-  "label": "1011 - Procesamiento y conservación de carne y productos cárnicos."
+  "value": "710 - Extracción de minerales de hierro.",
+  "label": "710 - Extracción de minerales de hierro."
  },
  {
-  "value": "1012 - Procesamiento y conservación de pescados, crustáceos y moluscos.",
-  "label": "1012 - Procesamiento y conservación de pescados, crustáceos y moluscos."
+  "value": "72 - Extracción de minerales metalíferos no ferrosos.",
+  "label": "72 - Extracción de minerales metalíferos no ferrosos."
+ },
+ {
+  "value": "721 - Extracción de minerales de uranio y de torio.",
+  "label": "721 - Extracción de minerales de uranio y de torio."
+ },
+ {
+  "value": "722 - Extracción de oro y otros metales preciosos.",
+  "label": "722 - Extracción de oro y otros metales preciosos."
+ },
+ {
+  "value": "723 - Extracción de minerales de níquel.",
+  "label": "723 - Extracción de minerales de níquel."
+ },
+ {
+  "value": "729 - Extracción de otros minerales metalíferos no ferrosos n.c.p.",
+  "label": "729 - Extracción de otros minerales metalíferos no ferrosos n.c.p."
+ },
+ {
+  "value": "81 - Extracción de piedra, arena, arcillas, cal, yeso, caolín, bentonitas y similares",
+  "label": "81 - Extracción de piedra, arena, arcillas, cal, yeso, caolín, bentonitas y similares"
+ },
+ {
+  "value": "811 - Extracción de piedra, arena, arcillas comunes, yeso y anhidrita.",
+  "label": "811 - Extracción de piedra, arena, arcillas comunes, yeso y anhidrita."
+ },
+ {
+  "value": "812 - Extracción de arcillas de uso industrial, caliza, caolín y bentonitas.",
+  "label": "812 - Extracción de arcillas de uso industrial, caliza, caolín y bentonitas."
+ },
+ {
+  "value": "82 - Extracción de esmeraldas, piedras preciosas y semipreciosas.",
+  "label": "82 - Extracción de esmeraldas, piedras preciosas y semipreciosas."
+ },
+ {
+  "value": "820 - Extracción de esmeraldas, piedras preciosas y semipreciosas.",
+  "label": "820 - Extracción de esmeraldas, piedras preciosas y semipreciosas."
+ },
+ {
+  "value": "89 - Extracción de otros minerales no metálicos n.c.p.",
+  "label": "89 - Extracción de otros minerales no metálicos n.c.p."
+ },
+ {
+  "value": "891 - Extracción de minerales para la fabricación de abonos y productos químicos.",
+  "label": "891 - Extracción de minerales para la fabricación de abonos y productos químicos."
+ },
+ {
+  "value": "892 - Extracción de halita (sal).",
+  "label": "892 - Extracción de halita (sal)."
+ },
+ {
+  "value": "899 - Extracción de otros minerales no metálicos n.c.p.",
+  "label": "899 - Extracción de otros minerales no metálicos n.c.p."
+ },
+ {
+  "value": "91 - Actividades de apoyo para la extracción de petróleo y de gas natural.",
+  "label": "91 - Actividades de apoyo para la extracción de petróleo y de gas natural."
+ },
+ {
+  "value": "910 - Actividades de apoyo para la extracción de petróleo y de gas natural.",
+  "label": "910 - Actividades de apoyo para la extracción de petróleo y de gas natural."
+ },
+ {
+  "value": "99 - Actividades de apoyo para otras actividades de explotación de minas y canteras",
+  "label": "99 - Actividades de apoyo para otras actividades de explotación de minas y canteras"
+ },
+ {
+  "value": "990 - Actividades de apoyo para otras actividades de explotación de minas y canteras.",
+  "label": "990 - Actividades de apoyo para otras actividades de explotación de minas y canteras."
+ },
+ {
+  "value": "101 - Procesamiento y conservación de carne, pescado, crustáceos y moluscos.",
+  "label": "101 - Procesamiento y conservación de carne, pescado, crustáceos y moluscos."
+ },
+ {
+  "value": "1011 -  Procesamiento y conservación de carne y productos cárnicos.",
+  "label": "1011 -  Procesamiento y conservación de carne y productos cárnicos."
+ },
+ {
+  "value": "1012 -  Procesamiento y conservación de pescados, crustáceos y moluscos.",
+  "label": "1012 -  Procesamiento y conservación de pescados, crustáceos y moluscos."
+ },
+ {
+  "value": "102 - Procesamiento y conservación de frutas, legumbres, hortalizas y turbérculo",
+  "label": "102 - Procesamiento y conservación de frutas, legumbres, hortalizas y turbérculo"
  },
  {
   "value": "1020 - Procesamiento y conservación de frutas, legumbres, hortalizas y tubérculos.",
   "label": "1020 - Procesamiento y conservación de frutas, legumbres, hortalizas y tubérculos."
  },
  {
+  "value": "103 - Elaboración de aceites y grasas de origen vegetal y animal.",
+  "label": "103 - Elaboración de aceites y grasas de origen vegetal y animal."
+ },
+ {
   "value": "1030 - Elaboración de aceites y grasas de origen vegetal y animal.",
   "label": "1030 - Elaboración de aceites y grasas de origen vegetal y animal."
  },
  {
+  "value": "104 - Elaboración de productos lácteos.",
+  "label": "104 - Elaboración de productos lácteos."
+ },
+ {
   "value": "1040 - Elaboración de productos lácteos.",
   "label": "1040 - Elaboración de productos lácteos."
+ },
+ {
+  "value": "105 - Elaboración de productos de molinería, almidones y productos derivados del almidón.",
+  "label": "105 - Elaboración de productos de molinería, almidones y productos derivados del almidón."
  },
  {
   "value": "1051 - Elaboración de productos de molinería.",
@@ -258,6 +354,10 @@
  {
   "value": "1052 - Elaboración de almidones y productos derivados del almidón.",
   "label": "1052 - Elaboración de almidones y productos derivados del almidón."
+ },
+ {
+  "value": "106 - Elaboración de productos de café.",
+  "label": "106 - Elaboración de productos de café."
  },
  {
   "value": "1061 - Trilla de café.",
@@ -272,12 +372,20 @@
   "label": "1063 - Otros derivados del café."
  },
  {
+  "value": "107 - Elaboración de azúcar y panela.",
+  "label": "107 - Elaboración de azúcar y panela."
+ },
+ {
   "value": "1071 - Elaboración y refinación de azúcar.",
   "label": "1071 - Elaboración y refinación de azúcar."
  },
  {
   "value": "1072 - Elaboración de panela.",
   "label": "1072 - Elaboración de panela."
+ },
+ {
+  "value": "108 - Elaboración de otros productos alimenticios.",
+  "label": "108 - Elaboración de otros productos alimenticios."
  },
  {
   "value": "1081 - Elaboración de productos de panadería.",
@@ -300,8 +408,16 @@
   "label": "1089 - Elaboración de otros productos alimenticios n.c.p."
  },
  {
+  "value": "109 - Elaboración de alimentos preparados para animales.",
+  "label": "109 - Elaboración de alimentos preparados para animales."
+ },
+ {
   "value": "1090 - Elaboración de alimentos preparados para animales.",
   "label": "1090 - Elaboración de alimentos preparados para animales."
+ },
+ {
+  "value": "110 - Elaboración de bebidas.",
+  "label": "110 - Elaboración de bebidas."
  },
  {
   "value": "1101 - Destilación, rectificación y mezcla de bebidas alcohólicas.",
@@ -320,8 +436,16 @@
   "label": "1104 - Elaboración de bebidas no alcohólicas, producción de aguas minerales y de otras aguas embotelladas."
  },
  {
-  "value": "1200 - Elaboración de productos de tabaco.",
-  "label": "1200 - Elaboración de productos de tabaco."
+  "value": "120 -  Elaboración de productos de tabaco.",
+  "label": "120 -  Elaboración de productos de tabaco."
+ },
+ {
+  "value": "1200 -  Elaboración de productos de tabaco.",
+  "label": "1200 -  Elaboración de productos de tabaco."
+ },
+ {
+  "value": "131 - Preparación, hilatura, tejeduría y acabado de productos textiles.",
+  "label": "131 - Preparación, hilatura, tejeduría y acabado de productos textiles."
  },
  {
   "value": "1311 - Preparación e hilatura de fibras textiles.",
@@ -334,6 +458,10 @@
  {
   "value": "1313 - Acabado de productos textiles.",
   "label": "1313 - Acabado de productos textiles."
+ },
+ {
+  "value": "139 - Fabricación de otros productos textiles.",
+  "label": "139 - Fabricación de otros productos textiles."
  },
  {
   "value": "1391 - Fabricación de tejidos de punto y ganchillo.",
@@ -356,16 +484,32 @@
   "label": "1399 - Fabricación de otros artículos textiles n.c.p."
  },
  {
+  "value": "141 - Confección de prendas de vestir, excepto prendas de piel.",
+  "label": "141 - Confección de prendas de vestir, excepto prendas de piel."
+ },
+ {
   "value": "1410 - Confección de prendas de vestir, excepto prendas de piel.",
   "label": "1410 - Confección de prendas de vestir, excepto prendas de piel."
+ },
+ {
+  "value": "142 - Fabricación de artículos de piel.",
+  "label": "142 - Fabricación de artículos de piel."
  },
  {
   "value": "1420 - Fabricación de artículos de piel.",
   "label": "1420 - Fabricación de artículos de piel."
  },
  {
+  "value": "143 - Fabricación de artículos de punto y ganchillo.",
+  "label": "143 - Fabricación de artículos de punto y ganchillo."
+ },
+ {
   "value": "1430 - Fabricación de artículos de punto y ganchillo.",
   "label": "1430 - Fabricación de artículos de punto y ganchillo."
+ },
+ {
+  "value": "151 - Curtido y recurtido de cueros; fabricación de artículos de viaje, bolsos de mano y artículos similares, y fabricación de artículos de talabartería y guarnicionería, adobo y teñido de pieles.",
+  "label": "151 - Curtido y recurtido de cueros; fabricación de artículos de viaje, bolsos de mano y artículos similares, y fabricación de artículos de talabartería y guarnicionería, adobo y teñido de pieles."
  },
  {
   "value": "1511 - Curtido y recurtido de cueros; recurtido y teñido de pieles.",
@@ -376,8 +520,12 @@
   "label": "1512 - Fabricación de artículos de viaje, bolsos de mano y artículos similares elaborados en cuero, y fabricación de artículos de talabartería y guarnicionería."
  },
  {
-  "value": "1513 - Fabricación de artículos de viaje, bolsos de mano y artículos similares; artículos de talabartería y guarnicionería elaborados en otros materiales.",
-  "label": "1513 - Fabricación de artículos de viaje, bolsos de mano y artículos similares; artículos de talabartería y guarnicionería elaborados en otros materiales."
+  "value": "1513 - Fabricación de artículos de viaje, bolsos de mano y artículos similares elaborados en cuero, y fabricación de artículos de talabartería y guarnicionería.",
+  "label": "1513 - Fabricación de artículos de viaje, bolsos de mano y artículos similares elaborados en cuero, y fabricación de artículos de talabartería y guarnicionería."
+ },
+ {
+  "value": "152 - Fabricación de calzado.",
+  "label": "152 - Fabricación de calzado."
  },
  {
   "value": "1521 - Fabricación de calzado de cuero y piel, con cualquier tipo de suela.",
@@ -392,24 +540,48 @@
   "label": "1523 - Fabricación de partes del calzado."
  },
  {
-  "value": "1610 - Aserrado, acepillado e impregnación de la madera.",
-  "label": "1610 - Aserrado, acepillado e impregnación de la madera."
+  "value": "161 -  Aserrado, acepillado e impregnación de la madera.",
+  "label": "161 -  Aserrado, acepillado e impregnación de la madera."
  },
  {
-  "value": "1620 - Fabricación de hojas de madera para enchapado; fabricación de tableros contra­chapados, tableros laminados, tableros de partículas y otros tableros y paneles.",
-  "label": "1620 - Fabricación de hojas de madera para enchapado; fabricación de tableros contra­chapados, tableros laminados, tableros de partículas y otros tableros y paneles."
+  "value": "1610 -  Aserrado, acepillado e impregnación de la madera.",
+  "label": "1610 -  Aserrado, acepillado e impregnación de la madera."
+ },
+ {
+  "value": "162 - Fabricación de hojas de madera para enchapado; fabricación de tableros contrachapados, tableros laminados, tableros de partículas y otros tableros y paneles.",
+  "label": "162 - Fabricación de hojas de madera para enchapado; fabricación de tableros contrachapados, tableros laminados, tableros de partículas y otros tableros y paneles."
+ },
+ {
+  "value": "1620 - Fabricación de hojas de madera para enchapado; fabricación de tableros contrachapados, tableros laminados, tableros de partículas y otros tableros y paneles.",
+  "label": "1620 - Fabricación de hojas de madera para enchapado; fabricación de tableros contrachapados, tableros laminados, tableros de partículas y otros tableros y paneles."
+ },
+ {
+  "value": "163 - Fabricación de partes y piezas de madera, de carpintería y ebanistería para la construcción.",
+  "label": "163 - Fabricación de partes y piezas de madera, de carpintería y ebanistería para la construcción."
  },
  {
   "value": "1630 - Fabricación de partes y piezas de madera, de carpintería y ebanistería para la construcción.",
   "label": "1630 - Fabricación de partes y piezas de madera, de carpintería y ebanistería para la construcción."
  },
  {
+  "value": "164 - Fabricación de recipientes de madera.",
+  "label": "164 - Fabricación de recipientes de madera."
+ },
+ {
   "value": "1640 - Fabricación de recipientes de madera.",
   "label": "1640 - Fabricación de recipientes de madera."
  },
  {
-  "value": "1690 - Fabricación de otros productos de madera; fabricación de artículos de corcho, cestería y espartería.",
-  "label": "1690 - Fabricación de otros productos de madera; fabricación de artículos de corcho, cestería y espartería."
+  "value": "169 - Fabricación de otros productos de madera; fabricación de artículos de cestería y espartería.",
+  "label": "169 - Fabricación de otros productos de madera; fabricación de artículos de cestería y espartería."
+ },
+ {
+  "value": "1690 - Fabricación de otros productos de madera; fabricación de artículos de cestería y espartería.",
+  "label": "1690 - Fabricación de otros productos de madera; fabricación de artículos de cestería y espartería."
+ },
+ {
+  "value": "170 - Fabricación de papel, cartón y productos de papel y cartón.",
+  "label": "170 - Fabricación de papel, cartón y productos de papel y cartón."
  },
  {
   "value": "1701 - Fabricación de pulpas (pastas) celulósicas; papel y cartón.",
@@ -424,6 +596,10 @@
   "label": "1709 - Fabricación de otros artículos de papel y cartón."
  },
  {
+  "value": "181 - Actividades de impresión y actividades de servicios relacionados con la impresión",
+  "label": "181 - Actividades de impresión y actividades de servicios relacionados con la impresión"
+ },
+ {
   "value": "1811 - Actividades de impresión.",
   "label": "1811 - Actividades de impresión."
  },
@@ -432,12 +608,24 @@
   "label": "1812 - Actividades de servicios relacionados con la impresión."
  },
  {
+  "value": "182 - Producción de copias a partir de grabaciones originales.",
+  "label": "182 - Producción de copias a partir de grabaciones originales."
+ },
+ {
   "value": "1820 - Producción de copias a partir de grabaciones originales.",
   "label": "1820 - Producción de copias a partir de grabaciones originales."
  },
  {
+  "value": "191 - Fabricación de productos de hornos de coque.",
+  "label": "191 - Fabricación de productos de hornos de coque."
+ },
+ {
   "value": "1910 - Fabricación de productos de hornos de coque.",
   "label": "1910 - Fabricación de productos de hornos de coque."
+ },
+ {
+  "value": "192 - Fabricación de productos de la refinación del petróleo.",
+  "label": "192 - Fabricación de productos de la refinación del petróleo."
  },
  {
   "value": "1921 - Fabricación de productos de la refinación del petróleo.",
@@ -446,6 +634,10 @@
  {
   "value": "1922 - Actividad de mezcla de combustibles.",
   "label": "1922 - Actividad de mezcla de combustibles."
+ },
+ {
+  "value": "201 - Fabricación de sustancias químicas básicas, abonos y compuestos inorgánicos nitrogenados, plásticos y caucho sintético en formas primarias.",
+  "label": "201 - Fabricación de sustancias químicas básicas, abonos y compuestos inorgánicos nitrogenados, plásticos y caucho sintético en formas primarias."
  },
  {
   "value": "2011 - Fabricación de sustancias y productos químicos básicos.",
@@ -464,6 +656,10 @@
   "label": "2014 - Fabricación de caucho sintético en formas primarias."
  },
  {
+  "value": "202 - Fabricación de otros productos químicos.",
+  "label": "202 - Fabricación de otros productos químicos."
+ },
+ {
   "value": "2021 - Fabricación de plaguicidas y otros productos químicos de uso agropecuario.",
   "label": "2021 - Fabricación de plaguicidas y otros productos químicos de uso agropecuario."
  },
@@ -476,16 +672,28 @@
   "label": "2023 - Fabricación de jabones y detergentes, preparados para limpiar y pulir; perfumes y preparados de tocador."
  },
  {
-  "value": "2029 - Fabricación de otros productos químicos n.c.p.",
-  "label": "2029 - Fabricación de otros productos químicos n.c.p."
+  "value": "2029 - perfumes y preparados de tocador. Fabricación de otros productos químicos n.c.p.",
+  "label": "2029 - perfumes y preparados de tocador. Fabricación de otros productos químicos n.c.p."
+ },
+ {
+  "value": "203 - Fabricación de fibras sintéticas y artificiales.",
+  "label": "203 - Fabricación de fibras sintéticas y artificiales."
  },
  {
   "value": "2030 - Fabricación de fibras sintéticas y artificiales.",
   "label": "2030 - Fabricación de fibras sintéticas y artificiales."
  },
  {
-  "value": "2100 - Fabricación de productos farmacéuticos, sustancias químicas medicinales y pro­ductos botánicos de uso farmacéutico.",
-  "label": "2100 - Fabricación de productos farmacéuticos, sustancias químicas medicinales y pro­ductos botánicos de uso farmacéutico."
+  "value": "210 - Fabricación de productos farmacéuticos, sustancias químicas medicinales y productos botánicos de uso farmacéutico.",
+  "label": "210 - Fabricación de productos farmacéuticos, sustancias químicas medicinales y productos botánicos de uso farmacéutico."
+ },
+ {
+  "value": "2100 -  Fabricación de productos farmacéuticos, sustancias químicas medicinales y productos botánicos de uso farmacéutico.",
+  "label": "2100 -  Fabricación de productos farmacéuticos, sustancias químicas medicinales y productos botánicos de uso farmacéutico."
+ },
+ {
+  "value": "221 - Fabricación de productos de caucho.",
+  "label": "221 - Fabricación de productos de caucho."
  },
  {
   "value": "2211 - Fabricación de llantas y neumáticos de caucho",
@@ -500,6 +708,10 @@
   "label": "2219 - Fabricación de formas básicas de caucho y otros productos de caucho n.c.p."
  },
  {
+  "value": "222 - Fabricación de productos de plástico.",
+  "label": "222 - Fabricación de productos de plástico."
+ },
+ {
   "value": "2221 - Fabricación de formas básicas de plástico.",
   "label": "2221 - Fabricación de formas básicas de plástico."
  },
@@ -508,8 +720,16 @@
   "label": "2229 - Fabricación de artículos de plástico n.c.p."
  },
  {
+  "value": "231 - Fabricación de vidrio y productos de vidrio.",
+  "label": "231 - Fabricación de vidrio y productos de vidrio."
+ },
+ {
   "value": "2310 - Fabricación de vidrio y productos de vidrio.",
   "label": "2310 - Fabricación de vidrio y productos de vidrio."
+ },
+ {
+  "value": "239 - Fabricación de productos minerales no metálicos n.c.p.",
+  "label": "239 - Fabricación de productos minerales no metálicos n.c.p."
  },
  {
   "value": "2391 - Fabricación de productos refractarios.",
@@ -540,8 +760,16 @@
   "label": "2399 - Fabricación de otros productos minerales no metálicos n.c.p."
  },
  {
+  "value": "241 - Industrias básicas de hierro y de acero.",
+  "label": "241 - Industrias básicas de hierro y de acero."
+ },
+ {
   "value": "2410 - Industrias básicas de hierro y de acero.",
   "label": "2410 - Industrias básicas de hierro y de acero."
+ },
+ {
+  "value": "242 - Industrias básicas de metales preciosos y de metales no ferrosos.",
+  "label": "242 - Industrias básicas de metales preciosos y de metales no ferrosos."
  },
  {
   "value": "2421 - Industrias básicas de metales preciosos.",
@@ -552,12 +780,20 @@
   "label": "2429 - Industrias básicas de otros metales no ferrosos."
  },
  {
+  "value": "243 - Fundición de metales.",
+  "label": "243 - Fundición de metales."
+ },
+ {
   "value": "2431 - Fundición de hierro y de acero.",
   "label": "2431 - Fundición de hierro y de acero."
  },
  {
   "value": "2432 - Fundición de metales no ferrosos.",
   "label": "2432 - Fundición de metales no ferrosos."
+ },
+ {
+  "value": "251 - Fabricación de productos metálicos para uso estructural, tanques, depósitos y generadores de vapor.",
+  "label": "251 - Fabricación de productos metálicos para uso estructural, tanques, depósitos y generadores de vapor."
  },
  {
   "value": "2511 - Fabricación de productos metálicos para uso estructural.",
@@ -568,12 +804,20 @@
   "label": "2512 - Fabricación de tanques, depósitos y recipientes de metal, excepto los utilizados para el envase o transporte de mercancías."
  },
  {
-  "value": "2513 - Fabricación de generadores de vapor, excepto calderas de agua caliente para calefacción central.",
-  "label": "2513 - Fabricación de generadores de vapor, excepto calderas de agua caliente para calefacción central."
+  "value": "2513 - Fabricación de generadores de vapor, excepto calderas de agua caliente para calefacción central,",
+  "label": "2513 - Fabricación de generadores de vapor, excepto calderas de agua caliente para calefacción central,"
+ },
+ {
+  "value": "252 - Fabricación de armas y municiones.",
+  "label": "252 - Fabricación de armas y municiones."
  },
  {
   "value": "2520 - Fabricación de armas y municiones.",
   "label": "2520 - Fabricación de armas y municiones."
+ },
+ {
+  "value": "259 - Fabricación de otros productos elaborados de metal y actividades de servicios relacionadas con el trabajo de metales.",
+  "label": "259 - Fabricación de otros productos elaborados de metal y actividades de servicios relacionadas con el trabajo de metales."
  },
  {
   "value": "2591 - Forja, prensado, estampado y laminado de metal; pulvimetalurgia.",
@@ -588,44 +832,80 @@
   "label": "2593 - Fabricación de artículos de cuchillería, herramientas de mano y artículos de ferretería."
  },
  {
-  "value": "2599 - Fabricación de otros productos elaborados de metal n.c.p.",
-  "label": "2599 - Fabricación de otros productos elaborados de metal n.c.p."
+  "value": "2599 -  Fabricación de otros productos laborados de metal n.c.p.",
+  "label": "2599 -  Fabricación de otros productos laborados de metal n.c.p."
+ },
+ {
+  "value": "261 - Fabricación de componentes y tableros electrónicos.",
+  "label": "261 - Fabricación de componentes y tableros electrónicos."
  },
  {
   "value": "2610 - Fabricación de componentes y tableros electrónicos.",
   "label": "2610 - Fabricación de componentes y tableros electrónicos."
  },
  {
+  "value": "262 - Fabricación de computadoras y de equipo periférico.",
+  "label": "262 - Fabricación de computadoras y de equipo periférico."
+ },
+ {
   "value": "2620 - Fabricación de computadoras y de equipo periférico.",
   "label": "2620 - Fabricación de computadoras y de equipo periférico."
+ },
+ {
+  "value": "263 - Fabricación de equipos de comunicación.",
+  "label": "263 - Fabricación de equipos de comunicación."
  },
  {
   "value": "2630 - Fabricación de equipos de comunicación.",
   "label": "2630 - Fabricación de equipos de comunicación."
  },
  {
+  "value": "264 - Fabricación de aparatos electrónicos de consumo.",
+  "label": "264 - Fabricación de aparatos electrónicos de consumo."
+ },
+ {
   "value": "2640 - Fabricación de aparatos electrónicos de consumo.",
   "label": "2640 - Fabricación de aparatos electrónicos de consumo."
  },
  {
-  "value": "2651 - Fabricación de equipo de medición, prueba, navegación y control.",
-  "label": "2651 - Fabricación de equipo de medición, prueba, navegación y control."
+  "value": "265 - Fabricación de equipo de medición, prueba, navegación y control; fabricación de relojes.",
+  "label": "265 - Fabricación de equipo de medición, prueba, navegación y control; fabricación de relojes."
+ },
+ {
+  "value": "2651 - abricación de equipo de medición, prueba, navegación y control",
+  "label": "2651 - abricación de equipo de medición, prueba, navegación y control"
  },
  {
   "value": "2652 - Fabricación de relojes.",
   "label": "2652 - Fabricación de relojes."
  },
  {
-  "value": "2660 - Fabricación de equipo de irradiación y equipo electrónico de uso médico y tera­péutico.",
-  "label": "2660 - Fabricación de equipo de irradiación y equipo electrónico de uso médico y tera­péutico."
+  "value": "266 - Fabricación de equipo de irradiación y equipo electrónico de uso médico y terapéutico.",
+  "label": "266 - Fabricación de equipo de irradiación y equipo electrónico de uso médico y terapéutico."
+ },
+ {
+  "value": "2660 - Fabricación de equipo de irradiación y equipo electrónico de uso médico y terapéutico.",
+  "label": "2660 - Fabricación de equipo de irradiación y equipo electrónico de uso médico y terapéutico."
+ },
+ {
+  "value": "267 - Fabricación de instrumentos ópticos y equipo fotográfico.",
+  "label": "267 - Fabricación de instrumentos ópticos y equipo fotográfico."
  },
  {
   "value": "2670 - Fabricación de instrumentos ópticos y equipo fotográfico.",
   "label": "2670 - Fabricación de instrumentos ópticos y equipo fotográfico."
  },
  {
+  "value": "268 - Fabricación de medios magnéticos y ópticos para almacenamiento de datos",
+  "label": "268 - Fabricación de medios magnéticos y ópticos para almacenamiento de datos"
+ },
+ {
   "value": "2680 - Fabricación de medios magnéticos y ópticos para almacenamiento de datos.",
   "label": "2680 - Fabricación de medios magnéticos y ópticos para almacenamiento de datos."
+ },
+ {
+  "value": "271 - Fabricación de motores, generadores y transformadores eléctricos y de aparatos de distribución y control de la energía eléctrica.",
+  "label": "271 - Fabricación de motores, generadores y transformadores eléctricos y de aparatos de distribución y control de la energía eléctrica."
  },
  {
   "value": "2711 - Fabricación de motores, generadores y transformadores eléctricos.",
@@ -636,8 +916,16 @@
   "label": "2712 - Fabricación de aparatos de distribución y control de la energía eléctrica."
  },
  {
+  "value": "272 - Fabricación de pilas, baterías y acumuladores eléctricos.",
+  "label": "272 - Fabricación de pilas, baterías y acumuladores eléctricos."
+ },
+ {
   "value": "2720 - Fabricación de pilas, baterías y acumuladores eléctricos.",
   "label": "2720 - Fabricación de pilas, baterías y acumuladores eléctricos."
+ },
+ {
+  "value": "273 - Fabricación de hilos y cables aislados y sus dispositivos.",
+  "label": "273 - Fabricación de hilos y cables aislados y sus dispositivos."
  },
  {
   "value": "2731 - Fabricación de hilos y cables eléctricos y de fibra óptica.",
@@ -648,20 +936,36 @@
   "label": "2732 - Fabricación de dispositivos de cableado."
  },
  {
+  "value": "274 - Fabricación de equipos eléctricos de iluminación.",
+  "label": "274 - Fabricación de equipos eléctricos de iluminación."
+ },
+ {
   "value": "2740 - Fabricación de equipos eléctricos de iluminación.",
   "label": "2740 - Fabricación de equipos eléctricos de iluminación."
+ },
+ {
+  "value": "275 - Fabricación de aparatos de uso doméstico.",
+  "label": "275 - Fabricación de aparatos de uso doméstico."
  },
  {
   "value": "2750 - Fabricación de aparatos de uso doméstico.",
   "label": "2750 - Fabricación de aparatos de uso doméstico."
  },
  {
+  "value": "279 - Fabricación de otros tipos de equipo eléctrico n.c.p.",
+  "label": "279 - Fabricación de otros tipos de equipo eléctrico n.c.p."
+ },
+ {
   "value": "2790 - Fabricación de otros tipos de equipo eléctrico n.c.p.",
   "label": "2790 - Fabricación de otros tipos de equipo eléctrico n.c.p."
  },
  {
-  "value": "2811 - Fabricación de motores, turbinas, y partes para motores de combustión interna.",
-  "label": "2811 - Fabricación de motores, turbinas, y partes para motores de combustión interna."
+  "value": "281 -  Fabricación de maquinaria y equipo de uso general.",
+  "label": "281 -  Fabricación de maquinaria y equipo de uso general."
+ },
+ {
+  "value": "2811 -  Fabricación de motores, turbinas, y partes para motores de combustión interna.",
+  "label": "2811 -  Fabricación de motores, turbinas, y partes para motores de combustión interna."
  },
  {
   "value": "2812 - Fabricación de equipos de potencia hidráulica y neumática.",
@@ -672,8 +976,8 @@
   "label": "2813 - Fabricación de otras bombas, compresores, grifos y válvulas."
  },
  {
-  "value": "2814 - Fabricación de cojinetes, engranajes, trenes de engranajes y piezas de transmisión.",
-  "label": "2814 - Fabricación de cojinetes, engranajes, trenes de engranajes y piezas de transmisión."
+  "value": "2814 - Fabricación de cojinetes, engranajes, trenes de engranajes y piezas de transmisión",
+  "label": "2814 - Fabricación de cojinetes, engranajes, trenes de engranajes y piezas de transmisión"
  },
  {
   "value": "2815 - Fabricación de hornos, hogares y quemadores industriales.",
@@ -696,6 +1000,10 @@
   "label": "2819 - Fabricación de otros tipos de maquinaria y equipo de uso general n.c.p."
  },
  {
+  "value": "282 - Fabricación de maquinaria y equipo de uso especial.",
+  "label": "282 - Fabricación de maquinaria y equipo de uso especial."
+ },
+ {
   "value": "2821 - Fabricación de maquinaria agropecuaria y forestal.",
   "label": "2821 - Fabricación de maquinaria agropecuaria y forestal."
  },
@@ -712,8 +1020,8 @@
   "label": "2824 - Fabricación de maquinaria para explotación de minas y canteras y para obras de construcción."
  },
  {
-  "value": "2825 - Fabricación de maquinaria para la elaboración de alimentos, bebidas y tabaco.",
-  "label": "2825 - Fabricación de maquinaria para la elaboración de alimentos, bebidas y tabaco."
+  "value": "2825 - Fabricación de maquinaria para la elaboración de alimentos, bebidas y tabaco",
+  "label": "2825 - Fabricación de maquinaria para la elaboración de alimentos, bebidas y tabaco"
  },
  {
   "value": "2826 - Fabricación de maquinaria para la elaboración de productos textiles, prendas de vestir y cueros.",
@@ -724,16 +1032,32 @@
   "label": "2829 - Fabricación de otros tipos de maquinaria y equipo de uso especial n.c.p."
  },
  {
+  "value": "291 - Fabricación de vehículos automotores y sus motores.",
+  "label": "291 - Fabricación de vehículos automotores y sus motores."
+ },
+ {
   "value": "2910 - Fabricación de vehículos automotores y sus motores.",
   "label": "2910 - Fabricación de vehículos automotores y sus motores."
+ },
+ {
+  "value": "292 - Fabricación de carrocerías para vehículos automotores; fabricación de remolques y semirremolques.",
+  "label": "292 - Fabricación de carrocerías para vehículos automotores; fabricación de remolques y semirremolques."
  },
  {
   "value": "2920 - Fabricación de carrocerías para vehículos automotores; fabricación de remolques y semirremolques.",
   "label": "2920 - Fabricación de carrocerías para vehículos automotores; fabricación de remolques y semirremolques."
  },
  {
+  "value": "293 - Fabricación de partes, piezas (autopartes) y accesorios (lujos) para vehículos automotores.",
+  "label": "293 - Fabricación de partes, piezas (autopartes) y accesorios (lujos) para vehículos automotores."
+ },
+ {
   "value": "2930 - Fabricación de partes, piezas (autopartes) y accesorios (lujos) para vehículos automotores.",
   "label": "2930 - Fabricación de partes, piezas (autopartes) y accesorios (lujos) para vehículos automotores."
+ },
+ {
+  "value": "301 - Construcción de barcos y otras embarcaciones.",
+  "label": "301 - Construcción de barcos y otras embarcaciones."
  },
  {
   "value": "3011 - Construcción de barcos y de estructuras flotantes.",
@@ -744,16 +1068,32 @@
   "label": "3012 - Construcción de embarcaciones de recreo y deporte."
  },
  {
+  "value": "302 - Fabricación de locomotoras y de material rodante para ferrocarriles.",
+  "label": "302 - Fabricación de locomotoras y de material rodante para ferrocarriles."
+ },
+ {
   "value": "3020 - Fabricación de locomotoras y de material rodante para ferrocarriles.",
   "label": "3020 - Fabricación de locomotoras y de material rodante para ferrocarriles."
+ },
+ {
+  "value": "303 - Fabricación de aeronaves, naves espaciales y de maquinaria conexa.",
+  "label": "303 - Fabricación de aeronaves, naves espaciales y de maquinaria conexa."
  },
  {
   "value": "3030 - Fabricación de aeronaves, naves espaciales y de maquinaria conexa.",
   "label": "3030 - Fabricación de aeronaves, naves espaciales y de maquinaria conexa."
  },
  {
+  "value": "304 - Fabricación de vehículos militares de combate.",
+  "label": "304 - Fabricación de vehículos militares de combate."
+ },
+ {
   "value": "3040 - Fabricación de vehículos militares de combate.",
   "label": "3040 - Fabricación de vehículos militares de combate."
+ },
+ {
+  "value": "309 - Fabricación de otros tipos de equipo de transporte n.c.p.",
+  "label": "309 - Fabricación de otros tipos de equipo de transporte n.c.p."
  },
  {
   "value": "3091 - Fabricación de motocicletas.",
@@ -768,36 +1108,72 @@
   "label": "3099 - Fabricación de otros tipos de equipo de transporte n.c.p."
  },
  {
+  "value": "311 - Fabricación de muebles.",
+  "label": "311 - Fabricación de muebles."
+ },
+ {
   "value": "3110 - Fabricación de muebles.",
   "label": "3110 - Fabricación de muebles."
+ },
+ {
+  "value": "312 - Fabricación de colchones y somieres.",
+  "label": "312 - Fabricación de colchones y somieres."
  },
  {
   "value": "3120 - Fabricación de colchones y somieres.",
   "label": "3120 - Fabricación de colchones y somieres."
  },
  {
+  "value": "321 - Fabricación de joyas, bisutería y artículos conexos.",
+  "label": "321 - Fabricación de joyas, bisutería y artículos conexos."
+ },
+ {
   "value": "3210 - Fabricación de joyas, bisutería y artículos conexos.",
   "label": "3210 - Fabricación de joyas, bisutería y artículos conexos."
+ },
+ {
+  "value": "322 - Fabricación de instrumentos musicales.",
+  "label": "322 - Fabricación de instrumentos musicales."
  },
  {
   "value": "3220 - Fabricación de instrumentos musicales.",
   "label": "3220 - Fabricación de instrumentos musicales."
  },
  {
+  "value": "323 - Fabricación de artículos y equipo para la práctica del deporte.",
+  "label": "323 - Fabricación de artículos y equipo para la práctica del deporte."
+ },
+ {
   "value": "3230 - Fabricación de artículos y equipo para la práctica del deporte.",
   "label": "3230 - Fabricación de artículos y equipo para la práctica del deporte."
+ },
+ {
+  "value": "324 - Fabricación de juegos, juguetes y rompecabezas.",
+  "label": "324 - Fabricación de juegos, juguetes y rompecabezas."
  },
  {
   "value": "3240 - Fabricación de juegos, juguetes y rompecabezas.",
   "label": "3240 - Fabricación de juegos, juguetes y rompecabezas."
  },
  {
+  "value": "325 - Fabricación de instrumentos, aparatos y materiales médicos y odontológicos (incluido mobiliario).",
+  "label": "325 - Fabricación de instrumentos, aparatos y materiales médicos y odontológicos (incluido mobiliario)."
+ },
+ {
   "value": "3250 - Fabricación de instrumentos, aparatos y materiales médicos y odontológicos (incluido mobiliario).",
   "label": "3250 - Fabricación de instrumentos, aparatos y materiales médicos y odontológicos (incluido mobiliario)."
  },
  {
+  "value": "329 - Otras industrias manufactureras n.c.p.",
+  "label": "329 - Otras industrias manufactureras n.c.p."
+ },
+ {
   "value": "3290 - Otras industrias manufactureras n.c.p.",
   "label": "3290 - Otras industrias manufactureras n.c.p."
+ },
+ {
+  "value": "331 - Mantenimiento y reparación especializado de productos elaborados en metal y de maquinaria y equipo.",
+  "label": "331 - Mantenimiento y reparación especializado de productos elaborados en metal y de maquinaria y equipo."
  },
  {
   "value": "3311 - Mantenimiento y reparación especializado de productos elaborados en metal.",
@@ -824,8 +1200,16 @@
   "label": "3319 - Mantenimiento y reparación de otros tipos de equipos y sus componentes n.c.p."
  },
  {
+  "value": "332 - Instalación especializada de maquinaria y equipo industrial.",
+  "label": "332 - Instalación especializada de maquinaria y equipo industrial."
+ },
+ {
   "value": "3320 - Instalación especializada de maquinaria y equipo industrial.",
   "label": "3320 - Instalación especializada de maquinaria y equipo industrial."
+ },
+ {
+  "value": "351 - Generación, transmisión, distribución y comercialización de energía eléctrica",
+  "label": "351 - Generación, transmisión, distribución y comercialización de energía eléctrica"
  },
  {
   "value": "3511 - Generación de energía eléctrica.",
@@ -844,20 +1228,32 @@
   "label": "3514 - Comercialización de energía eléctrica."
  },
  {
+  "value": "352 - Producción de gas; distribución de combustibles gaseosos por tuberías.",
+  "label": "352 - Producción de gas; distribución de combustibles gaseosos por tuberías."
+ },
+ {
   "value": "3520 - Producción de gas; distribución de combustibles gaseosos por tuberías.",
   "label": "3520 - Producción de gas; distribución de combustibles gaseosos por tuberías."
+ },
+ {
+  "value": "353 - Suministro de vapor y aire acondicionado.",
+  "label": "353 - Suministro de vapor y aire acondicionado."
  },
  {
   "value": "3530 - Suministro de vapor y aire acondicionado.",
   "label": "3530 - Suministro de vapor y aire acondicionado."
  },
  {
-  "value": "3600 - Captación, tratamiento y distribución de agua.",
-  "label": "3600 - Captación, tratamiento y distribución de agua."
+  "value": "360 -  Captación, tratamiento y distribución de agua.",
+  "label": "360 -  Captación, tratamiento y distribución de agua."
  },
  {
-  "value": "3700 - Evacuación y tratamiento de aguas residuales.",
-  "label": "3700 - Evacuación y tratamiento de aguas residuales."
+  "value": "3600 -  Captación, tratamiento y distribución de agua.",
+  "label": "3600 -  Captación, tratamiento y distribución de agua."
+ },
+ {
+  "value": "381 - Recolección de desechos.",
+  "label": "381 - Recolección de desechos."
  },
  {
   "value": "3811 - Recolección de desechos no peligrosos.",
@@ -868,6 +1264,10 @@
   "label": "3812 - Recolección de desechos peligrosos."
  },
  {
+  "value": "382 - Tratamiento y disposición de desechos.",
+  "label": "382 - Tratamiento y disposición de desechos."
+ },
+ {
   "value": "3821 - Tratamiento y disposición de desechos no peligrosos.",
   "label": "3821 - Tratamiento y disposición de desechos no peligrosos."
  },
@@ -876,12 +1276,24 @@
   "label": "3822 - Tratamiento y disposición de desechos peligrosos."
  },
  {
+  "value": "383 - Recuperación de materiales.",
+  "label": "383 - Recuperación de materiales."
+ },
+ {
   "value": "3830 - Recuperación de materiales.",
   "label": "3830 - Recuperación de materiales."
  },
  {
-  "value": "3900 - Actividades de saneamiento ambiental y otros servicios de gestión de desechos.",
-  "label": "3900 - Actividades de saneamiento ambiental y otros servicios de gestión de desechos."
+  "value": "16,25 -  Actividades de saneamiento ambiental y otros servicios de gestión de desechos.",
+  "label": "16,25 -  Actividades de saneamiento ambiental y otros servicios de gestión de desechos."
+ },
+ {
+  "value": "3900 -  Actividades de saneamiento ambiental y otros servicios de gestión de desechos.",
+  "label": "3900 -  Actividades de saneamiento ambiental y otros servicios de gestión de desechos."
+ },
+ {
+  "value": "411 - Construcción de edificios.",
+  "label": "411 - Construcción de edificios."
  },
  {
   "value": "4111 - Construcción de edificios residenciales.",
@@ -892,16 +1304,32 @@
   "label": "4112 - Construcción de edificios no residenciales."
  },
  {
+  "value": "421 - Construcción de carreteras y vías de ferrocarril.",
+  "label": "421 - Construcción de carreteras y vías de ferrocarril."
+ },
+ {
   "value": "4210 - Construcción de carreteras y vías de ferrocarril.",
   "label": "4210 - Construcción de carreteras y vías de ferrocarril."
+ },
+ {
+  "value": "422 - Construcción de proyectos de servicio público.",
+  "label": "422 - Construcción de proyectos de servicio público."
  },
  {
   "value": "4220 - Construcción de proyectos de servicio público.",
   "label": "4220 - Construcción de proyectos de servicio público."
  },
  {
+  "value": "429 - Construcción de otras obras de ingeniería civil.",
+  "label": "429 - Construcción de otras obras de ingeniería civil."
+ },
+ {
   "value": "4290 - Construcción de otras obras de ingeniería civil.",
   "label": "4290 - Construcción de otras obras de ingeniería civil."
+ },
+ {
+  "value": "431 - Demolición y preparación del terreno.",
+  "label": "431 - Demolición y preparación del terreno."
  },
  {
   "value": "4311 - Demolición.",
@@ -910,6 +1338,10 @@
  {
   "value": "4312 - Preparación del terreno.",
   "label": "4312 - Preparación del terreno."
+ },
+ {
+  "value": "432 - Instalaciones eléctricas, de fontanería y otras instalaciones especializadas.",
+  "label": "432 - Instalaciones eléctricas, de fontanería y otras instalaciones especializadas."
  },
  {
   "value": "4321 - Instalaciones eléctricas.",
@@ -924,12 +1356,24 @@
   "label": "4329 - Otras instalaciones especializadas."
  },
  {
+  "value": "433 - Terminación y acabado de edificios y obras de ingeniería civil.",
+  "label": "433 - Terminación y acabado de edificios y obras de ingeniería civil."
+ },
+ {
   "value": "4330 - Terminación y acabado de edificios y obras de ingeniería civil.",
   "label": "4330 - Terminación y acabado de edificios y obras de ingeniería civil."
  },
  {
-  "value": "4390 - Otras actividades especializadas para la construcción de edificios y obras de ingeniería civil.",
-  "label": "4390 - Otras actividades especializadas para la construcción de edificios y obras de ingeniería civil."
+  "value": "439 -  Otras actividades especializadas para la construcción de edificios y obras de ingeniería civil.",
+  "label": "439 -  Otras actividades especializadas para la construcción de edificios y obras de ingeniería civil."
+ },
+ {
+  "value": "4390 -  Otras actividades especializadas para la construcción de edificios y obras de ingeniería civil.",
+  "label": "4390 -  Otras actividades especializadas para la construcción de edificios y obras de ingeniería civil."
+ },
+ {
+  "value": "451 - Comercio de vehículos automotores.",
+  "label": "451 - Comercio de vehículos automotores."
  },
  {
   "value": "4511 - Comercio de vehículos automotores nuevos.",
@@ -940,12 +1384,24 @@
   "label": "4512 - Comercio de vehículos automotores usados."
  },
  {
+  "value": "452 - Mantenimiento y reparación de vehículos automotores.",
+  "label": "452 - Mantenimiento y reparación de vehículos automotores."
+ },
+ {
   "value": "4520 - Mantenimiento y reparación de vehículos automotores.",
   "label": "4520 - Mantenimiento y reparación de vehículos automotores."
  },
  {
-  "value": "4530 - Comercio de partes, piezas (autopartes) y accesorios (lujos) para vehículos automotores.",
-  "label": "4530 - Comercio de partes, piezas (autopartes) y accesorios (lujos) para vehículos automotores."
+  "value": "453 - Comercio de partes, piezas (autopartes) y accesorios (lujos) para vehículos automotores.",
+  "label": "453 - Comercio de partes, piezas (autopartes) y accesorios (lujos) para vehículos automotores."
+ },
+ {
+  "value": "4530 - Comercio de partes, piezas (autopartes) y accesorios (lujos) para vehículos automotores",
+  "label": "4530 - Comercio de partes, piezas (autopartes) y accesorios (lujos) para vehículos automotores"
+ },
+ {
+  "value": "454 - Comercio, mantenimiento y reparación de motocicletas y de sus partes, piezas y accesorios.",
+  "label": "454 - Comercio, mantenimiento y reparación de motocicletas y de sus partes, piezas y accesorios."
  },
  {
   "value": "4541 - Comercio de motocicletas y de sus partes, piezas y accesorios.",
@@ -956,12 +1412,28 @@
   "label": "4542 - Mantenimiento y reparación de motocicletas y de sus partes y piezas."
  },
  {
+  "value": "46 - Comercio al por mayor y en comisión o por contrata, excepto el comercio de vehículos automotores y motocicletas.",
+  "label": "46 - Comercio al por mayor y en comisión o por contrata, excepto el comercio de vehículos automotores y motocicletas."
+ },
+ {
+  "value": "461 - Comercio al por mayor a cambio de una retribución o por contrata.",
+  "label": "461 - Comercio al por mayor a cambio de una retribución o por contrata."
+ },
+ {
   "value": "4610 - Comercio al por mayor a cambio de una retribución o por contrata.",
   "label": "4610 - Comercio al por mayor a cambio de una retribución o por contrata."
  },
  {
+  "value": "462 - Comercio al por mayor de materias primas agropecuarias; animales vivos",
+  "label": "462 - Comercio al por mayor de materias primas agropecuarias; animales vivos"
+ },
+ {
   "value": "4620 - Comercio al por mayor de materias primas agropecuarias; animales vivos.",
   "label": "4620 - Comercio al por mayor de materias primas agropecuarias; animales vivos."
+ },
+ {
+  "value": "463 - Comercio al por mayor de alimentos, bebidas y tabaco.",
+  "label": "463 - Comercio al por mayor de alimentos, bebidas y tabaco."
  },
  {
   "value": "4631 - Comercio al por mayor de productos alimenticios.",
@@ -970,6 +1442,10 @@
  {
   "value": "4632 - Comercio al por mayor de bebidas y tabaco.",
   "label": "4632 - Comercio al por mayor de bebidas y tabaco."
+ },
+ {
+  "value": "464 - Comercio al por mayor de artículos y enseres domésticos (incluidas prendas de vestir).",
+  "label": "464 - Comercio al por mayor de artículos y enseres domésticos (incluidas prendas de vestir)."
  },
  {
   "value": "4641 - Comercio al por mayor de productos textiles, productos confeccionados para uso doméstico.",
@@ -996,12 +1472,16 @@
   "label": "4649 - Comercio al por mayor de otros utensilios domésticos n.c.p."
  },
  {
+  "value": "465 - Comercio al por mayor de maquinaria y equipo.",
+  "label": "465 - Comercio al por mayor de maquinaria y equipo."
+ },
+ {
   "value": "4651 - Comercio al por mayor de computadores, equipo periférico y programas de informática.",
   "label": "4651 - Comercio al por mayor de computadores, equipo periférico y programas de informática."
  },
  {
-  "value": "4652 - Comercio al por mayor de equipo, partes y piezas electrónicos y de telecomuni­caciones.",
-  "label": "4652 - Comercio al por mayor de equipo, partes y piezas electrónicos y de telecomuni­caciones."
+  "value": "4652 - Comercio al por mayor de equipo, partes y piezas electrónicos y de telecomunicaciones.",
+  "label": "4652 - Comercio al por mayor de equipo, partes y piezas electrónicos y de telecomunicaciones."
  },
  {
   "value": "4653 - Comercio al por mayor de maquinaria y equipo agropecuarios.",
@@ -1010,6 +1490,10 @@
  {
   "value": "4659 - Comercio al por mayor de otros tipos de maquinaria y equipo n.c.p.",
   "label": "4659 - Comercio al por mayor de otros tipos de maquinaria y equipo n.c.p."
+ },
+ {
+  "value": "466 - Comercio al por mayor especializado de otros productos.",
+  "label": "466 - Comercio al por mayor especializado de otros productos."
  },
  {
   "value": "4661 - Comercio al por mayor de combustibles sólidos, líquidos, gaseosos y productos conexos.",
@@ -1036,20 +1520,32 @@
   "label": "4669 - Comercio al por mayor de otros productos n.c.p."
  },
  {
+  "value": "469 - Comercio al por mayor no especializado.",
+  "label": "469 - Comercio al por mayor no especializado."
+ },
+ {
   "value": "4690 - Comercio al por mayor no especializado.",
   "label": "4690 - Comercio al por mayor no especializado."
  },
  {
-  "value": "4711 - Comercio al por menor en establecimientos no especializados con surtido com­puesto principalmente por alimentos, bebidas o tabaco.",
-  "label": "4711 - Comercio al por menor en establecimientos no especializados con surtido com­puesto principalmente por alimentos, bebidas o tabaco."
+  "value": "471 - Comercio al por menor en establecimientos no especializados.",
+  "label": "471 - Comercio al por menor en establecimientos no especializados."
+ },
+ {
+  "value": "4711 - Comercio al por menor en establecimientos no especializados con surtido compuesto principalmente por alimentos, bebidas o tabaco.",
+  "label": "4711 - Comercio al por menor en establecimientos no especializados con surtido compuesto principalmente por alimentos, bebidas o tabaco."
  },
  {
   "value": "4719 - Comercio al por menor en establecimientos no especializados, con surtido compuesto principalmente por productos diferentes de alimentos (víveres en general), bebidas y tabaco.",
   "label": "4719 - Comercio al por menor en establecimientos no especializados, con surtido compuesto principalmente por productos diferentes de alimentos (víveres en general), bebidas y tabaco."
  },
  {
-  "value": "4721 - Comercio al por menor de productos agrícolas para el consumo en establecimientos especializados.",
-  "label": "4721 - Comercio al por menor de productos agrícolas para el consumo en establecimientos especializados."
+  "value": "472 - Comercio al por menor de alimentos (víveres en general), bebidas y tabaco, en establecimientos especializados.",
+  "label": "472 - Comercio al por menor de alimentos (víveres en general), bebidas y tabaco, en establecimientos especializados."
+ },
+ {
+  "value": "4721 - abaco, en establecimientos especializados. 4721 Comercio al por menor de productos agrícolas para el consumo en establecimientos especializados.",
+  "label": "4721 - abaco, en establecimientos especializados. 4721 Comercio al por menor de productos agrícolas para el consumo en establecimientos especializados."
  },
  {
   "value": "4722 - Comercio al por menor de leche, productos lácteos y huevos, en establecimientos especializados.",
@@ -1068,100 +1564,128 @@
   "label": "4729 - Comercio al por menor de otros productos alimenticios n.c.p., en establecimientos especializados."
  },
  {
-  "value": "4731 - Comercio al por menor de combustible para automotores.",
-  "label": "4731 - Comercio al por menor de combustible para automotores."
+  "value": "473 -  Comercio al por menor de combustible, lubricantes, aditivos y productos de limpieza para automotores, en establecimientos especializados.",
+  "label": "473 -  Comercio al por menor de combustible, lubricantes, aditivos y productos de limpieza para automotores, en establecimientos especializados."
  },
  {
-  "value": "4732 - Comercio al por menor de lubricantes (aceites, grasas), aditivos y productos de limpieza para vehículos automotores.",
-  "label": "4732 - Comercio al por menor de lubricantes (aceites, grasas), aditivos y productos de limpieza para vehículos automotores."
+  "value": "4731 -  Comercio al por menor de combustible para automotores.",
+  "label": "4731 -  Comercio al por menor de combustible para automotores."
  },
  {
-  "value": "4741 - Comercio al por menor de computadores, equipos periféricos, programas de informática y equipos de telecomunicaciones en establecimientos especializados.",
-  "label": "4741 - Comercio al por menor de computadores, equipos periféricos, programas de informática y equipos de telecomunicaciones en establecimientos especializados."
+  "value": "4732 -  Comercio al por menor de lubricantes (aceites, grasas), aditivos y productos de limpieza para vehículos automotores.",
+  "label": "4732 -  Comercio al por menor de lubricantes (aceites, grasas), aditivos y productos de limpieza para vehículos automotores."
  },
  {
-  "value": "4742 - Comercio al por menor de equipos y aparatos de sonido y de video, en establecimientos especializados.",
-  "label": "4742 - Comercio al por menor de equipos y aparatos de sonido y de video, en establecimientos especializados."
+  "value": "474 -  Comercio al por menor de equipos de informática y de comunicaciones, en establecimientos especializados.",
+  "label": "474 -  Comercio al por menor de equipos de informática y de comunicaciones, en establecimientos especializados."
  },
  {
-  "value": "4751 - Comercio al por menor de productos textiles en establecimientos especializados.",
-  "label": "4751 - Comercio al por menor de productos textiles en establecimientos especializados."
+  "value": "4741 -  Comercio al por menor de computadores, equipos periféricos, programas de informática y equipos de telecomunicaciones en establecimientos especializados.",
+  "label": "4741 -  Comercio al por menor de computadores, equipos periféricos, programas de informática y equipos de telecomunicaciones en establecimientos especializados."
  },
  {
-  "value": "4752 - Comercio al por menor de artículos de ferretería, pinturas y productos de vidrio en establecimientos especializados.",
-  "label": "4752 - Comercio al por menor de artículos de ferretería, pinturas y productos de vidrio en establecimientos especializados."
+  "value": "4742 -  Comercio al por menor de equipos y aparatos de sonido y de video, en establecimientos especializados.",
+  "label": "4742 -  Comercio al por menor de equipos y aparatos de sonido y de video, en establecimientos especializados."
  },
  {
-  "value": "4753 - Comercio al por menor de tapices, alfombras y cubrimientos para paredes y pisos en establecimientos especializados.",
-  "label": "4753 - Comercio al por menor de tapices, alfombras y cubrimientos para paredes y pisos en establecimientos especializados."
+  "value": "475 -  Comercio al por menor de otros enseres domésticos en establecimientos especializados.",
+  "label": "475 -  Comercio al por menor de otros enseres domésticos en establecimientos especializados."
  },
  {
-  "value": "4754 - Comercio al por menor de electrodomésticos y gasodomésticos de uso doméstico, muebles y equipos de iluminación.",
-  "label": "4754 - Comercio al por menor de electrodomésticos y gasodomésticos de uso doméstico, muebles y equipos de iluminación."
+  "value": "4751 -  Comercio al por menor de productos textiles en establecimientos especializados.",
+  "label": "4751 -  Comercio al por menor de productos textiles en establecimientos especializados."
  },
  {
-  "value": "4755 - Comercio al por menor de artículos y utensilios de uso doméstico.",
-  "label": "4755 - Comercio al por menor de artículos y utensilios de uso doméstico."
+  "value": "4752 -  Comercio al por menor de artículos de ferretería, pinturas y productos de vidrio en establecimientos especializados.",
+  "label": "4752 -  Comercio al por menor de artículos de ferretería, pinturas y productos de vidrio en establecimientos especializados."
  },
  {
-  "value": "4759 - Comercio al por menor de otros artículos domésticos en establecimientos especializados.",
-  "label": "4759 - Comercio al por menor de otros artículos domésticos en establecimientos especializados."
+  "value": "4753 -  Comercio al por menor de tapices, alfombras y cubrimientos para paredes y pisos en establecimientos especializados.",
+  "label": "4753 -  Comercio al por menor de tapices, alfombras y cubrimientos para paredes y pisos en establecimientos especializados."
  },
  {
-  "value": "4761 - Comercio al por menor de libros, periódicos, materiales y artículos de papelería y escritorio, en establecimientos especializados.",
-  "label": "4761 - Comercio al por menor de libros, periódicos, materiales y artículos de papelería y escritorio, en establecimientos especializados."
+  "value": "4754 -  Comercio al por menor de electrodomésticos y gasodomésticos de uso doméstico, muebles y equipos de iluminación.",
+  "label": "4754 -  Comercio al por menor de electrodomésticos y gasodomésticos de uso doméstico, muebles y equipos de iluminación."
  },
  {
-  "value": "4762 - Comercio al por menor de artículos deportivos, en establecimientos especializados.",
-  "label": "4762 - Comercio al por menor de artículos deportivos, en establecimientos especializados."
+  "value": "4755 -  Comercio al por menor de artículos y utensilios de uso doméstico.",
+  "label": "4755 -  Comercio al por menor de artículos y utensilios de uso doméstico."
  },
  {
-  "value": "4769 - Comercio al por menor de otros artículos culturales y de entretenimiento n.c.p. en establecimientos especializados.",
-  "label": "4769 - Comercio al por menor de otros artículos culturales y de entretenimiento n.c.p. en establecimientos especializados."
+  "value": "4759 -  Comercio al por menor de otros artículos domésticos en establecimientos especializados.",
+  "label": "4759 -  Comercio al por menor de otros artículos domésticos en establecimientos especializados."
  },
  {
-  "value": "4771 - Comercio al por menor de prendas de vestir y sus accesorios (incluye artículos de piel) en establecimientos especializados.",
-  "label": "4771 - Comercio al por menor de prendas de vestir y sus accesorios (incluye artículos de piel) en establecimientos especializados."
+  "value": "476 -  Comercio al por menor de artículos culturales y de entretenimiento, en establecimientos especializados.",
+  "label": "476 -  Comercio al por menor de artículos culturales y de entretenimiento, en establecimientos especializados."
  },
  {
-  "value": "4772 - Comercio al por menor de todo tipo de calzado y artículos de cuero y sucedáneos del cuero en establecimientos especializados.",
-  "label": "4772 - Comercio al por menor de todo tipo de calzado y artículos de cuero y sucedáneos del cuero en establecimientos especializados."
+  "value": "4761 -  Comercio al por menor de libros, periódicos, materiales y artículos de papelería y escritorio, en establecimientos especializados.",
+  "label": "4761 -  Comercio al por menor de libros, periódicos, materiales y artículos de papelería y escritorio, en establecimientos especializados."
  },
  {
-  "value": "4773 - Comercio al por menor de productos farmacéuticos y medicinales, cosméticos y artículos de tocador en establecimientos especializados.",
-  "label": "4773 - Comercio al por menor de productos farmacéuticos y medicinales, cosméticos y artículos de tocador en establecimientos especializados."
+  "value": "4762 -  Comercio al por menor de artículos deportivos, en establecimientos especializados.",
+  "label": "4762 -  Comercio al por menor de artículos deportivos, en establecimientos especializados."
  },
  {
-  "value": "4774 - Comercio al por menor de otros productos nuevos en establecimientos especializados.",
-  "label": "4774 - Comercio al por menor de otros productos nuevos en establecimientos especializados."
+  "value": "4769 -  Comercio al por menor de otros artículos culturales y de entretenimiento n.c.p. en establecimientos especializados.",
+  "label": "4769 -  Comercio al por menor de otros artículos culturales y de entretenimiento n.c.p. en establecimientos especializados."
  },
  {
-  "value": "4775 - Comercio al por menor de artículos de segunda mano.",
-  "label": "4775 - Comercio al por menor de artículos de segunda mano."
+  "value": "477 -  Comercio al por menor de otros productos en establecimientos especializados.",
+  "label": "477 -  Comercio al por menor de otros productos en establecimientos especializados."
  },
  {
-  "value": "4781 - Comercio al por menor de alimentos, bebidas y tabaco, en puestos de venta móviles.",
-  "label": "4781 - Comercio al por menor de alimentos, bebidas y tabaco, en puestos de venta móviles."
+  "value": "4771 -  Comercio al por menor de prendas de vestir y sus accesorios (incluye artículos de piel) en establecimientos especializados.",
+  "label": "4771 -  Comercio al por menor de prendas de vestir y sus accesorios (incluye artículos de piel) en establecimientos especializados."
  },
  {
-  "value": "4782 - Comercio al por menor de productos textiles, prendas de vestir y calzado, en puestos de venta móviles.",
-  "label": "4782 - Comercio al por menor de productos textiles, prendas de vestir y calzado, en puestos de venta móviles."
+  "value": "4772 -  Comercio al por menor de todo tipo de calzado y artículos de cuero y sucedáneos del cuero en establecimientos especializados.",
+  "label": "4772 -  Comercio al por menor de todo tipo de calzado y artículos de cuero y sucedáneos del cuero en establecimientos especializados."
  },
  {
-  "value": "4789 - Comercio al por menor de otros productos en puestos de venta móviles.",
-  "label": "4789 - Comercio al por menor de otros productos en puestos de venta móviles."
+  "value": "4773 -  Comercio al por menor de productos farmacéuticos y medicinales, cosméticos y artículos de tocador en establecimientos especializados.",
+  "label": "4773 -  Comercio al por menor de productos farmacéuticos y medicinales, cosméticos y artículos de tocador en establecimientos especializados."
  },
  {
-  "value": "4791 - Comercio al por menor realizado a través de internet.",
-  "label": "4791 - Comercio al por menor realizado a través de internet."
+  "value": "4774 -  Comercio al por menor de otros productos nuevos en establecimientos especializados.",
+  "label": "4774 -  Comercio al por menor de otros productos nuevos en establecimientos especializados."
  },
  {
-  "value": "4792 - Comercio al por menor realizado a través de casas de venta o por correo.",
-  "label": "4792 - Comercio al por menor realizado a través de casas de venta o por correo."
+  "value": "4775 -  Comercio al por menor de artículos de segunda mano.",
+  "label": "4775 -  Comercio al por menor de artículos de segunda mano."
  },
  {
-  "value": "4799 - Otros tipos de comercio al por menor no realizado en establecimientos, puestos de venta o mercados.",
-  "label": "4799 - Otros tipos de comercio al por menor no realizado en establecimientos, puestos de venta o mercados."
+  "value": "478 -  Comercio al por menor en puestos de venta móviles.",
+  "label": "478 -  Comercio al por menor en puestos de venta móviles."
+ },
+ {
+  "value": "4781 -  Comercio al por menor de alimentos, bebidas y tabaco, en puestos de venta móviles.",
+  "label": "4781 -  Comercio al por menor de alimentos, bebidas y tabaco, en puestos de venta móviles."
+ },
+ {
+  "value": "4789 -  Comercio al por menor de otros productos en puestos de venta móviles.",
+  "label": "4789 -  Comercio al por menor de otros productos en puestos de venta móviles."
+ },
+ {
+  "value": "479 -  Comercio al por menor no realizado en establecimientos, puestos de venta o mercados.",
+  "label": "479 -  Comercio al por menor no realizado en establecimientos, puestos de venta o mercados."
+ },
+ {
+  "value": "4791 -  Comercio al por menor realizado a través de internet.",
+  "label": "4791 -  Comercio al por menor realizado a través de internet."
+ },
+ {
+  "value": "4792 -  Comercio al por menor realizado a través de casas de venta o por correo.",
+  "label": "4792 -  Comercio al por menor realizado a través de casas de venta o por correo."
+ },
+ {
+  "value": "4799 -  Otros tipos de comercio al por menor no realizado en establecimientos, puestos de venta o mercados.",
+  "label": "4799 -  Otros tipos de comercio al por menor no realizado en establecimientos, puestos de venta o mercados."
+ },
+ {
+  "value": "491 - Transporte férreo.",
+  "label": "491 - Transporte férreo."
  },
  {
   "value": "4911 - Transporte férreo de pasajeros.",
@@ -1170,6 +1694,10 @@
  {
   "value": "4912 - Transporte férreo de carga.",
   "label": "4912 - Transporte férreo de carga."
+ },
+ {
+  "value": "492 - Transporte terrestre público automotor.",
+  "label": "492 - Transporte terrestre público automotor."
  },
  {
   "value": "4921 - Transporte de pasajeros.",
@@ -1184,8 +1712,16 @@
   "label": "4923 - Transporte de carga por carretera."
  },
  {
+  "value": "493 - Transporte por tuberías.",
+  "label": "493 - Transporte por tuberías."
+ },
+ {
   "value": "4930 - Transporte por tuberías.",
   "label": "4930 - Transporte por tuberías."
+ },
+ {
+  "value": "501 - Transporte marítimo y de cabotaje.",
+  "label": "501 - Transporte marítimo y de cabotaje."
  },
  {
   "value": "5011 - Transporte de pasajeros marítimo y de cabotaje.",
@@ -1196,12 +1732,20 @@
   "label": "5012 - Transporte de carga marítimo y de cabotaje."
  },
  {
+  "value": "502 - Transporte fluvial.",
+  "label": "502 - Transporte fluvial."
+ },
+ {
   "value": "5021 - Transporte fluvial de pasajeros.",
   "label": "5021 - Transporte fluvial de pasajeros."
  },
  {
   "value": "5022 - Transporte fluvial de carga.",
   "label": "5022 - Transporte fluvial de carga."
+ },
+ {
+  "value": "511 - Transporte aéreo de pasajeros.",
+  "label": "511 - Transporte aéreo de pasajeros."
  },
  {
   "value": "5111 - Transporte aéreo nacional de pasajeros.",
@@ -1212,6 +1756,10 @@
   "label": "5112 - Transporte aéreo internacional de pasajeros."
  },
  {
+  "value": "512 - Transporte aéreo de carga.",
+  "label": "512 - Transporte aéreo de carga."
+ },
+ {
   "value": "5121 - Transporte aéreo nacional de carga.",
   "label": "5121 - Transporte aéreo nacional de carga."
  },
@@ -1220,68 +1768,100 @@
   "label": "5122 - Transporte aéreo internacional de carga."
  },
  {
+  "value": "521 - Almacenamiento y depósito.",
+  "label": "521 - Almacenamiento y depósito."
+ },
+ {
   "value": "5210 - Almacenamiento y depósito.",
   "label": "5210 - Almacenamiento y depósito."
  },
  {
-  "value": "5221 - Actividades de estaciones, vías y servicios complementarios para el transporte terrestre.",
-  "label": "5221 - Actividades de estaciones, vías y servicios complementarios para el transporte terrestre."
+  "value": "522 -  Actividades de las estaciones, vías y servicios complementarios para el transporte.",
+  "label": "522 -  Actividades de las estaciones, vías y servicios complementarios para el transporte."
  },
  {
-  "value": "5222 - Actividades de puertos y servicios complementarios para el transporte acuático.",
-  "label": "5222 - Actividades de puertos y servicios complementarios para el transporte acuático."
+  "value": "5221 -  Actividades de estaciones, vías y servicios complementarios para el transporte terrestre.",
+  "label": "5221 -  Actividades de estaciones, vías y servicios complementarios para el transporte terrestre."
  },
  {
-  "value": "5223 - Actividades de aeropuertos, servicios de navegación aérea y demás actividades conexas al transporte aéreo.",
-  "label": "5223 - Actividades de aeropuertos, servicios de navegación aérea y demás actividades conexas al transporte aéreo."
+  "value": "5222 -  Actividades de puertos y servicios complementarios para el transporte acuático.",
+  "label": "5222 -  Actividades de puertos y servicios complementarios para el transporte acuático."
  },
  {
-  "value": "5224 - Manipulación de carga.",
-  "label": "5224 - Manipulación de carga."
+  "value": "5223 -  Actividades de aeropuertos, servicios de navegación aérea y demás actividades conexas al transporte aéreo.",
+  "label": "5223 -  Actividades de aeropuertos, servicios de navegación aérea y demás actividades conexas al transporte aéreo."
  },
  {
-  "value": "5229 - Otras actividades complementarias al transporte.",
-  "label": "5229 - Otras actividades complementarias al transporte."
+  "value": "5224 -  Manipulación de carga.",
+  "label": "5224 -  Manipulación de carga."
+ },
+ {
+  "value": "5229 -  Otras actividades complementarias al transporte.",
+  "label": "5229 -  Otras actividades complementarias al transporte."
+ },
+ {
+  "value": "531 - Actividades postales nacionales.",
+  "label": "531 - Actividades postales nacionales."
  },
  {
   "value": "5310 - Actividades postales nacionales.",
   "label": "5310 - Actividades postales nacionales."
  },
  {
+  "value": "532 - Actividades de mensajería.",
+  "label": "532 - Actividades de mensajería."
+ },
+ {
   "value": "5320 - Actividades de mensajería.",
   "label": "5320 - Actividades de mensajería."
  },
  {
-  "value": "5511 - Alojamiento en hoteles.",
-  "label": "5511 - Alojamiento en hoteles."
+  "value": "551 -  Actividades de alojamiento de estancias cortas.",
+  "label": "551 -  Actividades de alojamiento de estancias cortas."
  },
  {
-  "value": "5512 - Alojamiento en apartahoteles.",
-  "label": "5512 - Alojamiento en apartahoteles."
+  "value": "5511 -  Alojamiento en hoteles.",
+  "label": "5511 -  Alojamiento en hoteles."
  },
  {
-  "value": "5513 - Alojamiento en centros vacacionales.",
-  "label": "5513 - Alojamiento en centros vacacionales."
+  "value": "5512 -  Alojamiento en apartahoteles.",
+  "label": "5512 -  Alojamiento en apartahoteles."
  },
  {
-  "value": "5514 - Alojamiento rural.",
-  "label": "5514 - Alojamiento rural."
+  "value": "5513 -  Alojamiento en centros vacacionales.",
+  "label": "5513 -  Alojamiento en centros vacacionales."
  },
  {
-  "value": "5519 - Otros tipos de alojamientos para visitantes.",
-  "label": "5519 - Otros tipos de alojamientos para visitantes."
+  "value": "5514 -  Alojamiento rural.",
+  "label": "5514 -  Alojamiento rural."
+ },
+ {
+  "value": "5519 -  Otros tipos de alojamientos para visitantes.",
+  "label": "5519 -  Otros tipos de alojamientos para visitantes."
  },
  {
   "value": "5520 - Actividades de zonas de camping y parques para vehículos recreacionales.",
   "label": "5520 - Actividades de zonas de camping y parques para vehículos recreacionales."
  },
  {
+  "value": "553 - Servicio por horas.",
+  "label": "553 - Servicio por horas."
+ },
+ {
   "value": "5530 - Servicio por horas",
   "label": "5530 - Servicio por horas"
  },
  {
+  "value": "559 - Otros tipos de alojamiento n.c.p.",
+  "label": "559 - Otros tipos de alojamiento n.c.p."
+ },
+ {
   "value": "5590 - Otros tipos de alojamiento n.c.p.",
   "label": "5590 - Otros tipos de alojamiento n.c.p."
+ },
+ {
+  "value": "561 - Actividades de restaurantes, cafeterías y servicio móvil de comidas.",
+  "label": "561 - Actividades de restaurantes, cafeterías y servicio móvil de comidas."
  },
  {
   "value": "5611 - Expendio a la mesa de comidas preparadas.",
@@ -1300,6 +1880,10 @@
   "label": "5619 - Otros tipos de expendio de comidas preparadas n.c.p."
  },
  {
+  "value": "562 - Actividades de catering para eventos y otros servicios de comidas.",
+  "label": "562 - Actividades de catering para eventos y otros servicios de comidas."
+ },
+ {
   "value": "5621 - Catering para eventos.",
   "label": "5621 - Catering para eventos."
  },
@@ -1308,8 +1892,16 @@
   "label": "5629 - Actividades de otros servicios de comidas."
  },
  {
+  "value": "563 - Expendio de bebidas alcohólicas para el consumo dentro del establecimiento.",
+  "label": "563 - Expendio de bebidas alcohólicas para el consumo dentro del establecimiento."
+ },
+ {
   "value": "5630 - Expendio de bebidas alcohólicas para el consumo dentro del establecimiento.",
   "label": "5630 - Expendio de bebidas alcohólicas para el consumo dentro del establecimiento."
+ },
+ {
+  "value": "581 - Edición de libros, publicaciones periódicas y otras actividades de edición.",
+  "label": "581 - Edición de libros, publicaciones periódicas y otras actividades de edición."
  },
  {
   "value": "5811 - Edición de libros.",
@@ -1328,8 +1920,16 @@
   "label": "5819 - Otros trabajos de edición."
  },
  {
+  "value": "582 - Edición de programas de informática (software).",
+  "label": "582 - Edición de programas de informática (software)."
+ },
+ {
   "value": "5820 - Edición de programas de informática (software).",
   "label": "5820 - Edición de programas de informática (software)."
+ },
+ {
+  "value": "591 - Actividades de producción de películas cinematográficas, video y producción de programas, anuncios y comerciales de televisión.",
+  "label": "591 - Actividades de producción de películas cinematográficas, video y producción de programas, anuncios y comerciales de televisión."
  },
  {
   "value": "5911 - Actividades de producción de películas cinematográficas, videos, programas, anuncios y comerciales de televisión.",
@@ -1344,56 +1944,92 @@
   "label": "5913 - Actividades de distribución de películas cinematográficas, videos, programas, anuncios y comerciales de televisión."
  },
  {
-  "value": "5914 - Actividades de exhibición de películas cinematográficas y videos.",
-  "label": "5914 - Actividades de exhibición de películas cinematográficas y videos."
+  "value": "5914 - ctividades de exhibición de películas cinematográficas y videos.",
+  "label": "5914 - ctividades de exhibición de películas cinematográficas y videos."
+ },
+ {
+  "value": "592 - Actividades de grabación de sonido y edición de música.",
+  "label": "592 - Actividades de grabación de sonido y edición de música."
  },
  {
   "value": "5920 - Actividades de grabación de sonido y edición de música.",
   "label": "5920 - Actividades de grabación de sonido y edición de música."
  },
  {
+  "value": "601 - Actividades de programación y transmisión en el servicio de radiodifusión sonora.",
+  "label": "601 - Actividades de programación y transmisión en el servicio de radiodifusión sonora."
+ },
+ {
   "value": "6010 - Actividades de programación y transmisión en el servicio de radiodifusión sonora.",
   "label": "6010 - Actividades de programación y transmisión en el servicio de radiodifusión sonora."
+ },
+ {
+  "value": "602 - Actividades de programación y transmisión de televisión.",
+  "label": "602 - Actividades de programación y transmisión de televisión."
  },
  {
   "value": "6020 - Actividades de programación y transmisión de televisión.",
   "label": "6020 - Actividades de programación y transmisión de televisión."
  },
  {
+  "value": "611 - Actividades de telecomunicaciones alámbricas.",
+  "label": "611 - Actividades de telecomunicaciones alámbricas."
+ },
+ {
   "value": "6110 - Actividades de telecomunicaciones alámbricas.",
   "label": "6110 - Actividades de telecomunicaciones alámbricas."
+ },
+ {
+  "value": "612 - Actividades de telecomunicaciones inalámbricas.",
+  "label": "612 - Actividades de telecomunicaciones inalámbricas."
  },
  {
   "value": "6120 - Actividades de telecomunicaciones inalámbricas.",
   "label": "6120 - Actividades de telecomunicaciones inalámbricas."
  },
  {
+  "value": "613 - Actividades de telecomunicación satelital.",
+  "label": "613 - Actividades de telecomunicación satelital."
+ },
+ {
   "value": "6130 - Actividades de telecomunicación satelital.",
   "label": "6130 - Actividades de telecomunicación satelital."
+ },
+ {
+  "value": "619 - Otras actividades de telecomunicaciones.",
+  "label": "619 - Otras actividades de telecomunicaciones."
  },
  {
   "value": "6190 - Otras actividades de telecomunicaciones.",
   "label": "6190 - Otras actividades de telecomunicaciones."
  },
  {
-  "value": "6201 - Actividades de desarrollo de sistemas informáticos (planificación, análisis, diseño, programación, pruebas).",
-  "label": "6201 - Actividades de desarrollo de sistemas informáticos (planificación, análisis, diseño, programación, pruebas)."
+  "value": "620 -  Desarrollo de sistemas informáticos (planificación, análisis, diseño, programación, pruebas), consultoría informática y actividades relacionadas.",
+  "label": "620 -  Desarrollo de sistemas informáticos (planificación, análisis, diseño, programación, pruebas), consultoría informática y actividades relacionadas."
  },
  {
-  "value": "6202 - Actividades de consultoría informática y actividades de administración de instalaciones informáticas.",
-  "label": "6202 - Actividades de consultoría informática y actividades de administración de instalaciones informáticas."
+  "value": "6201 -  Actividades de desarrollo de sistemas informáticos (planificación, análisis, diseño, programación, pruebas).",
+  "label": "6201 -  Actividades de desarrollo de sistemas informáticos (planificación, análisis, diseño, programación, pruebas)."
  },
  {
-  "value": "6209 - Otras actividades de tecnologías de información y actividades de servicios informáticos.",
-  "label": "6209 - Otras actividades de tecnologías de información y actividades de servicios informáticos."
+  "value": "6202 -  Actividades de consultoría informática y actividades de administración de instalaciones informáticas.",
+  "label": "6202 -  Actividades de consultoría informática y actividades de administración de instalaciones informáticas."
  },
  {
-  "value": "6311 - Procesamiento de datos, alojamiento (hosting) y actividades relacionadas.",
-  "label": "6311 - Procesamiento de datos, alojamiento (hosting) y actividades relacionadas."
+  "value": "6209 -  Otras actividades de tecnologías de información y actividades de servicios informáticos.",
+  "label": "6209 -  Otras actividades de tecnologías de información y actividades de servicios informáticos."
+ },
+ {
+  "value": "6311 - Procesamiento de datos, alojamiento (hosting) y actividades relacionadas; portales web.",
+  "label": "6311 - Procesamiento de datos, alojamiento (hosting) y actividades relacionadas; portales web."
  },
  {
   "value": "6312 - Portales web.",
   "label": "6312 - Portales web."
+ },
+ {
+  "value": "639 - Otras actividades de servicio de información.",
+  "label": "639 - Otras actividades de servicio de información."
  },
  {
   "value": "6391 - Actividades de agencias de noticias.",
@@ -1404,12 +2040,20 @@
   "label": "6399 - Otras actividades de servicio de información n.c.p."
  },
  {
+  "value": "641 - Intermediación monetaria.",
+  "label": "641 - Intermediación monetaria."
+ },
+ {
   "value": "6411 - Banco Central.",
   "label": "6411 - Banco Central."
  },
  {
   "value": "6412 - Bancos comerciales.",
   "label": "6412 - Bancos comerciales."
+ },
+ {
+  "value": "642 - Otros tipos de intermediación monetaria.",
+  "label": "642 - Otros tipos de intermediación monetaria."
  },
  {
   "value": "6421 - Actividades de las corporaciones financieras.",
@@ -1428,12 +2072,20 @@
   "label": "6424 - Actividades de las cooperativas financieras."
  },
  {
+  "value": "643 - Fideicomisos, fondos (incluye fondos de cesantías) y entidades financieras similares.",
+  "label": "643 - Fideicomisos, fondos (incluye fondos de cesantías) y entidades financieras similares."
+ },
+ {
   "value": "6431 - Fideicomisos, fondos y entidades financieras similares.",
   "label": "6431 - Fideicomisos, fondos y entidades financieras similares."
  },
  {
   "value": "6432 - Fondos de cesantías.",
   "label": "6432 - Fondos de cesantías."
+ },
+ {
+  "value": "649 - Otras actividades de servicio financiero, excepto las de seguros y pensiones",
+  "label": "649 - Otras actividades de servicio financiero, excepto las de seguros y pensiones"
  },
  {
   "value": "6491 - Leasing financiero (arrendamiento financiero).",
@@ -1460,6 +2112,10 @@
   "label": "6499 - Otras actividades de servicio financiero, excepto las de seguros y pensiones n.c.p."
  },
  {
+  "value": "651 - Seguros y capitalización.",
+  "label": "651 - Seguros y capitalización."
+ },
+ {
   "value": "6511 - Seguros generales.",
   "label": "6511 - Seguros generales."
  },
@@ -1476,6 +2132,10 @@
   "label": "6514 - Capitalización."
  },
  {
+  "value": "652 - Servicios de seguros sociales de salud y riesgos profesionales.",
+  "label": "652 - Servicios de seguros sociales de salud y riesgos profesionales."
+ },
+ {
   "value": "6521 - Servicios de seguros sociales de salud.",
   "label": "6521 - Servicios de seguros sociales de salud."
  },
@@ -1484,12 +2144,20 @@
   "label": "6522 - Servicios de seguros sociales de riesgos profesionales."
  },
  {
+  "value": "653 - Servicios de seguros sociales de pensiones.",
+  "label": "653 - Servicios de seguros sociales de pensiones."
+ },
+ {
   "value": "6531 - Régimen de prima media con prestación definida (RPM).",
   "label": "6531 - Régimen de prima media con prestación definida (RPM)."
  },
  {
   "value": "6532 - Régimen de ahorro individual (RAI).",
   "label": "6532 - Régimen de ahorro individual (RAI)."
+ },
+ {
+  "value": "661 - Actividades auxiliares de las actividades de servicios financieros, excepto las de seguros y pensiones.",
+  "label": "661 - Actividades auxiliares de las actividades de servicios financieros, excepto las de seguros y pensiones."
  },
  {
   "value": "6611 - Administración de mercados financieros.",
@@ -1516,6 +2184,10 @@
   "label": "6619 - Otras actividades auxiliares de las actividades de servicios financieros n.c.p."
  },
  {
+  "value": "662 - Actividades de servicios auxiliares de los servicios de seguros y pensiones.",
+  "label": "662 - Actividades de servicios auxiliares de los servicios de seguros y pensiones."
+ },
+ {
   "value": "6621 - Actividades de agentes y corredores de seguros",
   "label": "6621 - Actividades de agentes y corredores de seguros"
  },
@@ -1524,76 +2196,136 @@
   "label": "6629 - Evaluación de riesgos y daños, y otras actividades de servicios auxiliares"
  },
  {
+  "value": "663 - Actividades de administración de fondos.",
+  "label": "663 - Actividades de administración de fondos."
+ },
+ {
   "value": "6630 - Actividades de administración de fondos.",
   "label": "6630 - Actividades de administración de fondos."
+ },
+ {
+  "value": "681 - Actividades inmobiliarias realizadas con bienes propios o arrendados.",
+  "label": "681 - Actividades inmobiliarias realizadas con bienes propios o arrendados."
  },
  {
   "value": "6810 - Actividades inmobiliarias realizadas con bienes propios o arrendados.",
   "label": "6810 - Actividades inmobiliarias realizadas con bienes propios o arrendados."
  },
  {
+  "value": "682 - Actividades inmobiliarias realizadas a cambio de una retribución o por contrata.",
+  "label": "682 - Actividades inmobiliarias realizadas a cambio de una retribución o por contrata."
+ },
+ {
   "value": "6820 - Actividades inmobiliarias realizadas a cambio de una retribución o por contrata.",
   "label": "6820 - Actividades inmobiliarias realizadas a cambio de una retribución o por contrata."
+ },
+ {
+  "value": "691 - Actividades jurídicas.",
+  "label": "691 - Actividades jurídicas."
  },
  {
   "value": "6910 - Actividades jurídicas.",
   "label": "6910 - Actividades jurídicas."
  },
  {
+  "value": "692 - Actividades de contabilidad, teneduría de libros, auditoría financiera y asesoría tributaria.",
+  "label": "692 - Actividades de contabilidad, teneduría de libros, auditoría financiera y asesoría tributaria."
+ },
+ {
   "value": "6920 - Actividades de contabilidad, teneduría de libros, auditoría financiera y asesoría tributaria.",
   "label": "6920 - Actividades de contabilidad, teneduría de libros, auditoría financiera y asesoría tributaria."
  },
  {
-  "value": "7010 - Actividades de administración empresarial.",
-  "label": "7010 - Actividades de administración empresarial."
- },
- {
-  "value": "7020 - Actividades de consultaría de gestión.",
-  "label": "7020 - Actividades de consultaría de gestión."
+  "value": "711 - Actividades de arquitectura e ingeniería y otras actividades conexas de consultoría técnica.",
+  "label": "711 - Actividades de arquitectura e ingeniería y otras actividades conexas de consultoría técnica."
  },
  {
   "value": "7110 - Actividades de arquitectura e ingeniería y otras actividades conexas de consultoría técnica.",
   "label": "7110 - Actividades de arquitectura e ingeniería y otras actividades conexas de consultoría técnica."
  },
  {
+  "value": "712 - Ensayos y análisis técnicos.",
+  "label": "712 - Ensayos y análisis técnicos."
+ },
+ {
   "value": "7120 - Ensayos y análisis técnicos.",
   "label": "7120 - Ensayos y análisis técnicos."
  },
  {
-  "value": "7210 - Investigaciones y desarrollo experimental en el campo de las ciencias naturales y la ingeniería.",
-  "label": "7210 - Investigaciones y desarrollo experimental en el campo de las ciencias naturales y la ingeniería."
+  "value": "721 -  Investigaciones y desarrollo experimental en el campo de las ciencias naturales y la ingeniería.",
+  "label": "721 -  Investigaciones y desarrollo experimental en el campo de las ciencias naturales y la ingeniería."
  },
  {
-  "value": "7220 - Investigaciones y desarrollo experimental en el campo de las ciencias sociales y las humanidades.",
-  "label": "7220 - Investigaciones y desarrollo experimental en el campo de las ciencias sociales y las humanidades."
+  "value": "7210 -  Investigaciones y desarrollo experimental en el campo de las ciencias naturales y la ingeniería.",
+  "label": "7210 -  Investigaciones y desarrollo experimental en el campo de las ciencias naturales y la ingeniería."
+ },
+ {
+  "value": "722 -  Investigaciones y desarrollo experimental en el campo de las ciencias sociales y las humanidades.",
+  "label": "722 -  Investigaciones y desarrollo experimental en el campo de las ciencias sociales y las humanidades."
+ },
+ {
+  "value": "7220 -  Investigaciones y desarrollo experimental en el campo de las  ciencias  sociales y las humanidades.",
+  "label": "7220 -  Investigaciones y desarrollo experimental en el campo de las  ciencias  sociales y las humanidades."
+ },
+ {
+  "value": "731 - Publicidad.",
+  "label": "731 - Publicidad."
  },
  {
   "value": "7310 - Publicidad.",
   "label": "7310 - Publicidad."
  },
  {
+  "value": "732 - Estudios de mercado y realización de encuestas de opinión pública.",
+  "label": "732 - Estudios de mercado y realización de encuestas de opinión pública."
+ },
+ {
   "value": "7320 - Estudios de mercado y realización de encuestas de opinión pública.",
   "label": "7320 - Estudios de mercado y realización de encuestas de opinión pública."
+ },
+ {
+  "value": "741 - Actividades especializadas de diseño.",
+  "label": "741 - Actividades especializadas de diseño."
  },
  {
   "value": "7410 - Actividades especializadas de diseño.",
   "label": "7410 - Actividades especializadas de diseño."
  },
  {
+  "value": "742 - Actividades de fotografía.",
+  "label": "742 - Actividades de fotografía."
+ },
+ {
   "value": "7420 - Actividades de fotografía.",
   "label": "7420 - Actividades de fotografía."
+ },
+ {
+  "value": "749 - Otras actividades profesionales, científicas y técnicas n.c.p.",
+  "label": "749 - Otras actividades profesionales, científicas y técnicas n.c.p."
  },
  {
   "value": "7490 - Otras actividades profesionales, científicas y técnicas n.c.p.",
   "label": "7490 - Otras actividades profesionales, científicas y técnicas n.c.p."
  },
  {
-  "value": "7500 - Actividades veterinarias.",
-  "label": "7500 - Actividades veterinarias."
+  "value": "750 -  Actividades veterinarias.",
+  "label": "750 -  Actividades veterinarias."
+ },
+ {
+  "value": "7500 -  Actividades veterinarias.",
+  "label": "7500 -  Actividades veterinarias."
+ },
+ {
+  "value": "771 - Alquiler y arrendamiento de vehículos automotores.",
+  "label": "771 - Alquiler y arrendamiento de vehículos automotores."
  },
  {
   "value": "7710 - Alquiler y arrendamiento de vehículos automotores.",
   "label": "7710 - Alquiler y arrendamiento de vehículos automotores."
+ },
+ {
+  "value": "772 - Alquiler y arrendamiento de efectos personales y enseres domésticos.",
+  "label": "772 - Alquiler y arrendamiento de efectos personales y enseres domésticos."
  },
  {
   "value": "7721 - Alquiler y arrendamiento de equipo recreativo y deportivo.",
@@ -1608,24 +2340,48 @@
   "label": "7729 - Alquiler y arrendamiento de otros efectos personales y enseres domésticos n.c.p."
  },
  {
+  "value": "773 - Alquiler y arrendamiento de otros tipos de maquinaria, equipo y bienes tangibles n.c.p.",
+  "label": "773 - Alquiler y arrendamiento de otros tipos de maquinaria, equipo y bienes tangibles n.c.p."
+ },
+ {
   "value": "7730 - Alquiler y arrendamiento de otros tipos de maquinaria, equipo y bienes tangibles n.c.p.",
   "label": "7730 - Alquiler y arrendamiento de otros tipos de maquinaria, equipo y bienes tangibles n.c.p."
  },
  {
-  "value": "7740 - Arrendamiento de propiedad intelectual y productos similares, excepto obras protegidas por derechos de autor.",
-  "label": "7740 - Arrendamiento de propiedad intelectual y productos similares, excepto obras protegidas por derechos de autor."
+  "value": "774 - Arrendamiento de propiedad intelectual y productos similares, excepto obras protegidas por derechos de autor.",
+  "label": "774 - Arrendamiento de propiedad intelectual y productos similares, excepto obras protegidas por derechos de autor."
+ },
+ {
+  "value": "7740 -  Arrendamiento de propiedad intelectual y productos similares, excepto obras protegidas por derechos de autor.",
+  "label": "7740 -  Arrendamiento de propiedad intelectual y productos similares, excepto obras protegidas por derechos de autor."
+ },
+ {
+  "value": "781 - Actividades de agencias de empleo.",
+  "label": "781 - Actividades de agencias de empleo."
  },
  {
   "value": "7810 - Actividades de agencias de empleo.",
   "label": "7810 - Actividades de agencias de empleo."
  },
  {
+  "value": "782 - Actividades de agencias de empleo temporal.",
+  "label": "782 - Actividades de agencias de empleo temporal."
+ },
+ {
   "value": "7820 - Actividades de agencias de empleo temporal.",
   "label": "7820 - Actividades de agencias de empleo temporal."
  },
  {
+  "value": "783 - Otras actividades de suministro de recurso humano.",
+  "label": "783 - Otras actividades de suministro de recurso humano."
+ },
+ {
   "value": "7830 - Otras actividades de suministro de recurso humano.",
   "label": "7830 - Otras actividades de suministro de recurso humano."
+ },
+ {
+  "value": "791 - Actividades de las agencias de viajes y operadores turísticos.",
+  "label": "791 - Actividades de las agencias de viajes y operadores turísticos."
  },
  {
   "value": "7911 - Actividades de las agencias de viaje.",
@@ -1636,24 +2392,48 @@
   "label": "7912 - Actividades de operadores turísticos."
  },
  {
+  "value": "799 - Otros servicios de reserva y actividades relacionadas.",
+  "label": "799 - Otros servicios de reserva y actividades relacionadas."
+ },
+ {
   "value": "7990 - Otros servicios de reserva y actividades relacionadas.",
   "label": "7990 - Otros servicios de reserva y actividades relacionadas."
+ },
+ {
+  "value": "801 - Actividades de seguridad privada.",
+  "label": "801 - Actividades de seguridad privada."
  },
  {
   "value": "8010 - Actividades de seguridad privada.",
   "label": "8010 - Actividades de seguridad privada."
  },
  {
+  "value": "802 - Actividades de servicios de sistemas de seguridad.",
+  "label": "802 - Actividades de servicios de sistemas de seguridad."
+ },
+ {
   "value": "8020 - Actividades de servicios de sistemas de seguridad.",
   "label": "8020 - Actividades de servicios de sistemas de seguridad."
+ },
+ {
+  "value": "803 - Actividades de detectives e investigadores privados.",
+  "label": "803 - Actividades de detectives e investigadores privados."
  },
  {
   "value": "8030 - Actividades de detectives e investigadores privados.",
   "label": "8030 - Actividades de detectives e investigadores privados."
  },
  {
+  "value": "811 - Actividades combinadas de apoyo a instalaciones.",
+  "label": "811 - Actividades combinadas de apoyo a instalaciones."
+ },
+ {
   "value": "8110 - Actividades combinadas de apoyo a instalaciones.",
   "label": "8110 - Actividades combinadas de apoyo a instalaciones."
+ },
+ {
+  "value": "812 - Actividades de limpieza.",
+  "label": "812 - Actividades de limpieza."
  },
  {
   "value": "8121 - Limpieza general interior de edificios.",
@@ -1664,24 +2444,44 @@
   "label": "8129 - Otras actividades de limpieza de edificios e instalaciones industriales."
  },
  {
+  "value": "813 - Actividades de paisajismo y servicios de mantenimiento conexos.",
+  "label": "813 - Actividades de paisajismo y servicios de mantenimiento conexos."
+ },
+ {
   "value": "8130 - Actividades de paisajismo y servicios de mantenimiento conexos.",
   "label": "8130 - Actividades de paisajismo y servicios de mantenimiento conexos."
  },
  {
-  "value": "8211 - Actividades combinadas de servicios administrativos de oficina.",
-  "label": "8211 - Actividades combinadas de servicios administrativos de oficina."
+  "value": "821 - Actividades administrativas y de apoyo de oficina.",
+  "label": "821 - Actividades administrativas y de apoyo de oficina."
+ },
+ {
+  "value": "8211 - Actividades combinadas de servicios administrativos de oficina",
+  "label": "8211 - Actividades combinadas de servicios administrativos de oficina"
  },
  {
   "value": "8219 - Fotocopiado, preparación de documentos y otras actividades especializadas de apoyo a oficina.",
   "label": "8219 - Fotocopiado, preparación de documentos y otras actividades especializadas de apoyo a oficina."
  },
  {
+  "value": "822 - Actividades de centros de llamadas (Call center).",
+  "label": "822 - Actividades de centros de llamadas (Call center)."
+ },
+ {
   "value": "8220 - Actividades de centros de llamadas (Call center).",
   "label": "8220 - Actividades de centros de llamadas (Call center)."
  },
  {
+  "value": "823 - Organización de convenciones y eventos comerciales.",
+  "label": "823 - Organización de convenciones y eventos comerciales."
+ },
+ {
   "value": "8230 - Organización de convenciones y eventos comerciales.",
   "label": "8230 - Organización de convenciones y eventos comerciales."
+ },
+ {
+  "value": "829 - Actividades de servicios de apoyo a las empresas n.c.p.",
+  "label": "829 - Actividades de servicios de apoyo a las empresas n.c.p."
  },
  {
   "value": "8291 - Actividades de agencias de cobranza y oficinas de calificación crediticia.",
@@ -1696,6 +2496,10 @@
   "label": "8299 - Otras actividades de servicio de apoyo a las empresas n.c.p."
  },
  {
+  "value": "841 - Administración del Estado y aplicación de la política económica y social de la comunidad.",
+  "label": "841 - Administración del Estado y aplicación de la política económica y social de la comunidad."
+ },
+ {
   "value": "8411 - Actividades legislativas de la administración pública.",
   "label": "8411 - Actividades legislativas de la administración pública."
  },
@@ -1704,8 +2508,8 @@
   "label": "8412 - Actividades ejecutivas de la administración pública."
  },
  {
-  "value": "8413 - Regulación de las actividades de organismos que prestan servicios de salud, edu­cativos, culturales y otros servicios sociales, excepto servicios de seguridad social.",
-  "label": "8413 - Regulación de las actividades de organismos que prestan servicios de salud, edu­cativos, culturales y otros servicios sociales, excepto servicios de seguridad social."
+  "value": "8413 - Regulación de las actividades de organismos que prestan servicios de salud, educativos, culturales.y otros servicios sociales, excepto servicios de seguridad social.",
+  "label": "8413 - Regulación de las actividades de organismos que prestan servicios de salud, educativos, culturales.y otros servicios sociales, excepto servicios de seguridad social."
  },
  {
   "value": "8414 - Actividades reguladoras y facilitadoras de la actividad económica.",
@@ -1714,6 +2518,10 @@
  {
   "value": "8415 - Actividades de los otros órganos de control.",
   "label": "8415 - Actividades de los otros órganos de control."
+ },
+ {
+  "value": "842 - Prestación de servicios a la comunidad en general.",
+  "label": "842 - Prestación de servicios a la comunidad en general."
  },
  {
   "value": "8421 - Relaciones exteriores.",
@@ -1732,8 +2540,16 @@
   "label": "8424 - Administración de justicia."
  },
  {
+  "value": "843 - Actividades de planes de seguridad social de afiliación obligatoria.",
+  "label": "843 - Actividades de planes de seguridad social de afiliación obligatoria."
+ },
+ {
   "value": "8430 - Actividades de planes de seguridad social de afiliación obligatoria.",
   "label": "8430 - Actividades de planes de seguridad social de afiliación obligatoria."
+ },
+ {
+  "value": "851 - Educación de la primera infancia, preescolar y básica primaria.",
+  "label": "851 - Educación de la primera infancia, preescolar y básica primaria."
  },
  {
   "value": "8511 - Educación de la primera infancia.",
@@ -1748,6 +2564,10 @@
   "label": "8513 - Educación básica primaria."
  },
  {
+  "value": "852 - Educación secundaria y de formación laboral.",
+  "label": "852 - Educación secundaria y de formación laboral."
+ },
+ {
   "value": "8521 - Educación básica secundaria.",
   "label": "8521 - Educación básica secundaria."
  },
@@ -1760,8 +2580,16 @@
   "label": "8523 - Educación media técnica y de formación laboral."
  },
  {
+  "value": "853 - Establecimientos que combinan diferentes niveles de educación.",
+  "label": "853 - Establecimientos que combinan diferentes niveles de educación."
+ },
+ {
   "value": "8530 - Establecimientos que combinan diferentes niveles de educación.",
   "label": "8530 - Establecimientos que combinan diferentes niveles de educación."
+ },
+ {
+  "value": "854 - Educación superior.",
+  "label": "854 - Educación superior."
  },
  {
   "value": "8541 - Educación técnica profesional.",
@@ -1780,6 +2608,10 @@
   "label": "8544 - Educación de universidades."
  },
  {
+  "value": "855 - Otros tipos de educación.",
+  "label": "855 - Otros tipos de educación."
+ },
+ {
   "value": "8551 - Formación académica no formal.",
   "label": "8551 - Formación académica no formal."
  },
@@ -1796,12 +2628,24 @@
   "label": "8559 - Otros tipos de educación n.c.p."
  },
  {
+  "value": "856 - Actividades de apoyo a la educación.",
+  "label": "856 - Actividades de apoyo a la educación."
+ },
+ {
   "value": "8560 - Actividades de apoyo a la educación.",
   "label": "8560 - Actividades de apoyo a la educación."
  },
  {
+  "value": "861 - Actividades de hospitales y clínicas, con internación.",
+  "label": "861 - Actividades de hospitales y clínicas, con internación."
+ },
+ {
   "value": "8610 - Actividades de hospitales y clínicas, con internación.",
   "label": "8610 - Actividades de hospitales y clínicas, con internación."
+ },
+ {
+  "value": "862 - Actividades de práctica médica y odontológica, sin internación.",
+  "label": "862 - Actividades de práctica médica y odontológica, sin internación."
  },
  {
   "value": "8621 - Actividades de la práctica médica, sin internación.",
@@ -1810,6 +2654,10 @@
  {
   "value": "8622 - Actividades de la práctica odontológica.",
   "label": "8622 - Actividades de la práctica odontológica."
+ },
+ {
+  "value": "869 - Otras actividades de atención relacionadas con la salud humana.",
+  "label": "869 - Otras actividades de atención relacionadas con la salud humana."
  },
  {
   "value": "8691 - Actividades de apoyo diagnóstico.",
@@ -1824,28 +2672,56 @@
   "label": "8699 - Otras actividades de atención de la salud humana."
  },
  {
+  "value": "871 - Actividades de atención residencial medicalizada de tipo general.",
+  "label": "871 - Actividades de atención residencial medicalizada de tipo general."
+ },
+ {
   "value": "8710 - Actividades de atención residencial medicalizada de tipo general.",
   "label": "8710 - Actividades de atención residencial medicalizada de tipo general."
+ },
+ {
+  "value": "872 - Actividades de atención residencial, para el cuidado de pacientes con retardo mental, enfermedad mental y consumo de sustancias psicoactivas.",
+  "label": "872 - Actividades de atención residencial, para el cuidado de pacientes con retardo mental, enfermedad mental y consumo de sustancias psicoactivas."
  },
  {
   "value": "8720 - Actividades de atención residencial, para el cuidado de pacientes con retardo mental, enfermedad mental y consumo de sustancias psicoactivas.",
   "label": "8720 - Actividades de atención residencial, para el cuidado de pacientes con retardo mental, enfermedad mental y consumo de sustancias psicoactivas."
  },
  {
+  "value": "873 - Actividades de atención en instituciones para el cuidado de personas mayores y\/o discapacitadas.",
+  "label": "873 - Actividades de atención en instituciones para el cuidado de personas mayores y\/o discapacitadas."
+ },
+ {
   "value": "8730 - Actividades de atención en instituciones para el cuidado de personas mayores y\/o discapacitadas.",
   "label": "8730 - Actividades de atención en instituciones para el cuidado de personas mayores y\/o discapacitadas."
+ },
+ {
+  "value": "879 - Otras actividades de atención en instituciones con alojamiento.",
+  "label": "879 - Otras actividades de atención en instituciones con alojamiento."
  },
  {
   "value": "8790 - Otras actividades de atención en instituciones con alojamiento",
   "label": "8790 - Otras actividades de atención en instituciones con alojamiento"
  },
  {
+  "value": "881 - Actividades de asistencia social sin alojamiento para personas mayores y discapacitadas.",
+  "label": "881 - Actividades de asistencia social sin alojamiento para personas mayores y discapacitadas."
+ },
+ {
   "value": "8810 - Actividades de asistencia social sin alojamiento para personas mayores y discapacitadas.",
   "label": "8810 - Actividades de asistencia social sin alojamiento para personas mayores y discapacitadas."
  },
  {
+  "value": "889 - Otras actividades de asistencia social sin alojamiento.",
+  "label": "889 - Otras actividades de asistencia social sin alojamiento."
+ },
+ {
   "value": "8890 - Otras actividades de asistencia social sin alojamiento.",
   "label": "8890 - Otras actividades de asistencia social sin alojamiento."
+ },
+ {
+  "value": "900 - Actividades creativas, artísticas y de entretenimiento.",
+  "label": "900 - Actividades creativas, artísticas y de entretenimiento."
  },
  {
   "value": "9001 - Creación literaria.",
@@ -1880,6 +2756,10 @@
   "label": "9008 - Otras actividades de espectáculos en vivo."
  },
  {
+  "value": "910 - Actividades de bibliotecas, archivos, museos y otras actividades culturales.",
+  "label": "910 - Actividades de bibliotecas, archivos, museos y otras actividades culturales."
+ },
+ {
   "value": "9101 - Actividades de bibliotecas y archivos.",
   "label": "9101 - Actividades de bibliotecas y archivos."
  },
@@ -1892,8 +2772,16 @@
   "label": "9103 - Actividades de jardines botánicos, zoológicos y reservas naturales."
  },
  {
-  "value": "9200 - Actividades de juegos de azar y apuestas.",
-  "label": "9200 - Actividades de juegos de azar y apuestas."
+  "value": "920 - Actividades de juegos de azar y apuestas.",
+  "label": "920 - Actividades de juegos de azar y apuestas."
+ },
+ {
+  "value": "9200 -  Actividades de juegos de azar y apuestas.",
+  "label": "9200 -  Actividades de juegos de azar y apuestas."
+ },
+ {
+  "value": "931 - Actividades deportivas.",
+  "label": "931 - Actividades deportivas."
  },
  {
   "value": "9311 - Gestión de instalaciones deportivas.",
@@ -1908,12 +2796,20 @@
   "label": "9319 - Otras actividades deportivas."
  },
  {
+  "value": "932 - Otras actividades recreativas y de esparcimiento.",
+  "label": "932 - Otras actividades recreativas y de esparcimiento."
+ },
+ {
   "value": "9321 - Actividades de parques de atracciones y parques temáticos.",
   "label": "9321 - Actividades de parques de atracciones y parques temáticos."
  },
  {
   "value": "9329 - Otras actividades recreativas y de esparcimiento n.c.p.",
   "label": "9329 - Otras actividades recreativas y de esparcimiento n.c.p."
+ },
+ {
+  "value": "941 - Actividades de asociaciones empresariales y de empleadores, y asociaciones profesionales.",
+  "label": "941 - Actividades de asociaciones empresariales y de empleadores, y asociaciones profesionales."
  },
  {
   "value": "9411 - Actividades de asociaciones empresariales y de empleadores",
@@ -1924,8 +2820,16 @@
   "label": "9412 - Actividades de asociaciones profesionales"
  },
  {
+  "value": "942 - Actividades de sindicatos de empleados.",
+  "label": "942 - Actividades de sindicatos de empleados."
+ },
+ {
   "value": "9420 - Actividades de sindicatos de empleados.",
   "label": "9420 - Actividades de sindicatos de empleados."
+ },
+ {
+  "value": "949 - Actividades de otras asociaciones.",
+  "label": "949 - Actividades de otras asociaciones."
  },
  {
   "value": "9491 - Actividades de asociaciones religiosas.",
@@ -1940,12 +2844,16 @@
   "label": "9499 - Actividades de otras asociaciones n.c.p."
  },
  {
-  "value": "9511 - Mantenimiento y reparación de computadores y de equipo periférico.",
-  "label": "9511 - Mantenimiento y reparación de computadores y de equipo periférico."
+  "value": "951 - Mantenimiento y reparación de computadores y equipo de comunicaciones.",
+  "label": "951 - Mantenimiento y reparación de computadores y equipo de comunicaciones."
  },
  {
-  "value": "9512 - Mantenimiento y reparación de equipos de comunicación.",
-  "label": "9512 - Mantenimiento y reparación de equipos de comunicación."
+  "value": "9511 -  Mantenimiento y reparación de computadores y de equipo periférico.",
+  "label": "9511 -  Mantenimiento y reparación de computadores y de equipo periférico."
+ },
+ {
+  "value": "9512 -  Mantenimiento y reparación de equipos de comunicación.",
+  "label": "9512 -  Mantenimiento y reparación de equipos de comunicación."
  },
  {
   "value": "9521 - Mantenimiento y reparación de aparatos electrónicos de consumo.",
@@ -1968,6 +2876,10 @@
   "label": "9529 - Mantenimiento y reparación de otros efectos personales y enseres domésticos."
  },
  {
+  "value": "960 - Otras actividades de servicios personales.",
+  "label": "960 - Otras actividades de servicios personales."
+ },
+ {
   "value": "9601 - Lavado y limpieza, incluso la limpieza en seco, de productos textiles y de piel.",
   "label": "9601 - Lavado y limpieza, incluso la limpieza en seco, de productos textiles y de piel."
  },
@@ -1984,19 +2896,47 @@
   "label": "9609 - Otras actividades de servicios personales n.c.p."
  },
  {
-  "value": "9700 - Actividades de los hogares individuales como empleadores de personal doméstico.",
-  "label": "9700 - Actividades de los hogares individuales como empleadores de personal doméstico."
+  "value": "970 -  Actividades de los hogares individuales como empleadores de personal doméstico.",
+  "label": "970 -  Actividades de los hogares individuales como empleadores de personal doméstico."
+ },
+ {
+  "value": "9700 -  Actividades de los hogares individuales como empleadores de personal doméstico.",
+  "label": "9700 -  Actividades de los hogares individuales como empleadores de personal doméstico."
+ },
+ {
+  "value": "981 - Actividades no diferenciadas de los hogares individuales como productores de bienes para uso propio.",
+  "label": "981 - Actividades no diferenciadas de los hogares individuales como productores de bienes para uso propio."
  },
  {
   "value": "9810 - Actividades no diferenciadas de los hogares individuales como productores de bienes para uso propio.",
   "label": "9810 - Actividades no diferenciadas de los hogares individuales como productores de bienes para uso propio."
  },
  {
+  "value": "982 - Actividades no diferenciadas de los hogares individuales como productores de servicios para uso propio.",
+  "label": "982 - Actividades no diferenciadas de los hogares individuales como productores de servicios para uso propio."
+ },
+ {
   "value": "9820 - Actividades no diferenciadas de los hogares individuales como productores de servicios para uso propio.",
   "label": "9820 - Actividades no diferenciadas de los hogares individuales como productores de servicios para uso propio."
  },
  {
-  "value": "9900 - Actividades de organizaciones y entidades extraterritoriales.",
-  "label": "9900 - Actividades de organizaciones y entidades extraterritoriales."
+  "value": "10 -  Asalariados.",
+  "label": "10 -  Asalariados."
+ },
+ {
+  "value": "20 - Pensionados.",
+  "label": "20 - Pensionados."
+ },
+ {
+  "value": "81 -  Personas Naturales sin Actividad Económica",
+  "label": "81 -  Personas Naturales sin Actividad Económica"
+ },
+ {
+  "value": "82 -  Personas Naturales Subsidiadas por Terceros",
+  "label": "82 -  Personas Naturales Subsidiadas por Terceros"
+ },
+ {
+  "value": "90 -  Rentistas de Capital, solo para personas naturales.",
+  "label": "90 -  Rentistas de Capital, solo para personas naturales."
  }
 ]

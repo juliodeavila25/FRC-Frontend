@@ -1,10 +1,16 @@
 import useOfertas from "../hooks/useOfertas";
+import useAuth from "../hooks/useAuth";
+import ModalFillCurriculum from "../components/ModalFillCurriculum";
 
 const Ofertas = () => {
   const { ofertas } = useOfertas();
+  const { auth } = useAuth();
 
   return (
     <>
+    {auth?.userType[0] === "colaborador" && auth?.estado === "por_completar" ? (
+        <ModalFillCurriculum/>
+      ) : null}
     {Array.isArray(ofertas) && ofertas.length > 0 ? (
     <div className="mt-6 px-4 sm:px-6 lg:px-8">
       <ul
