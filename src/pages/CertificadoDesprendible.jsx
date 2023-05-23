@@ -6,6 +6,9 @@ import useNominaDetalladas from "../hooks/useNominaDetalladas"
 import useAuth from "../hooks/useAuth";
 import useCurriculum from "../hooks/useCurriculum";
 import { BeatLoader } from "react-spinners";
+
+
+
 const CertificadoDesprendible = () => {
  /* const [data, setData] = useState({
     nombre: "Andres Puello",

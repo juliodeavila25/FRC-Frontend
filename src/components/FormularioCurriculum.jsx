@@ -230,6 +230,7 @@ const FormularioCurriculum = () => {
   const{obtenerDocumentosRequeridos, documentosRequeridos, }= useDocumentosRequeridos();
 
   const { auth } = useAuth();
+
  
   useEffect(() => {
       obtenerCurriculum(auth._id);
@@ -1649,7 +1650,9 @@ const handleChangeDepartamento = (e)=>{
               </div>
             </div>
           </div>
-          <div className="text-left text-xl text-gray-700 mt-8 font-bold border-b-4 border-corporative-blue inline-flex pt-3">
+          {auth.userType[0] === "colaborador" ? (
+            <>
+            <div className="text-left text-xl text-gray-700 mt-8 font-bold border-b-4 border-corporative-blue inline-flex pt-3">
             Seguridad Social
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
@@ -2858,6 +2861,9 @@ const handleChangeDepartamento = (e)=>{
             }
            
            </div>
+           </>
+          ): null}
+          
             
           {msg && <Alert alerta={alerta} />}
           <div className="grid grid-cols-2 gap-6 w-3/5 mx-auto mt-3">

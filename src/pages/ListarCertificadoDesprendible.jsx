@@ -1,13 +1,16 @@
 import useNominas from '../hooks/useNominas'
+import useAuth from "../hooks/useAuth";
 import { useState } from "react";
 import Table from "../components/table/Table";
 import { BeatLoader } from "react-spinners";
 import { format } from "date-fns";
 import { useNavigate, Link } from "react-router-dom";
+import ModalFillCurriculum from '../components/ModalFillCurriculum';
 
 const ListarCertificadoDesprendible = () => {
   const { nominas, obtenerNomina } = useNominas();
   const navigate = useNavigate();
+  const { auth } = useAuth();
   
   const verNomina = (data) =>{
     console.log(data)
@@ -59,6 +62,9 @@ const ListarCertificadoDesprendible = () => {
 
   return (
     <>
+     {auth?.userType[0] === "colaborador" && auth?.estado === "por completar" ? (
+        <ModalFillCurriculum/>
+      ) : null}
       <div className="px-4 sm:px-6 lg:px-8 mt-5 mb-5">
         <div className="mt-8 flex flex-col">
           <div className="sm:flex sm:items-center">

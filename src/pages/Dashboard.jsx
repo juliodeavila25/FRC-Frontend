@@ -1,6 +1,7 @@
 import useOfertas from "../hooks/useOfertas";
 import useAuth from "../hooks/useAuth";
 import Admin  from "../components/dashboard/Admin"
+import ModalFillCurriculum from "../components/ModalFillCurriculum";
 const projects = [
   {
     id: 1,
@@ -55,11 +56,14 @@ export default function Dashboard() {
 
   return (
     <>
-        { 
+      { 
           auth?.userType[0] === "admin" ? (
               <Admin/>
         ) : null
-        }
+      }
+      {auth?.userType[0] === "colaborador" && auth?.estado === "por completar" ? (
+        <ModalFillCurriculum/>
+      ) : null}
       {Array.isArray(ofertas) && ofertas.length > 0 ? (
         <div className="mt-6 px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between space-x-4">

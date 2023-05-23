@@ -5,6 +5,7 @@ import PdfCertificado from "../components/PdfCertificado";
 import useNominas from "../hooks/useNominas";
 import useCurriculum from "../hooks/useCurriculum";
 import { BeatLoader } from "react-spinners";
+import ModalFillCurriculum from "../components/ModalFillCurriculum";
 
 const CertificadoLaboral = () => {
   /*const [data, setData] = useState({
@@ -338,6 +339,9 @@ const CertificadoLaboral = () => {
    console.log(cargandoData)
   return (
     <>
+     {auth?.userType[0] === "colaborador" && auth?.estado === "por completar" ? (
+        <ModalFillCurriculum/>
+      ) : null}
       {Object.keys(curriculum).length !== 0 &&  Array.isArray(nominas) && nominas.length > 0 ?(
         <PDFViewer style={{ width: "100%", height: "90vh" }}>
           <PdfCertificado data={nominas[0]} curriculum={curriculum} />
