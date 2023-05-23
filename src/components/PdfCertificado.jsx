@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
 });
 
 const PdfCertificado = ({ data, curriculum }) => {
-  console.log(data);
+  console.log(curriculum);
   return (
     <Document>
       <Page style={styles.body}>
@@ -89,11 +89,11 @@ const PdfCertificado = ({ data, curriculum }) => {
         />
         <Text style={styles.subtitle}>CERTIFICADO LABORAL</Text>
         <Text style={styles.text}>
-          El señor(a)<Text style={styles.textb}> {data.nombre_completo} </Text>
+          El señor(a)<Text style={styles.textb}> {curriculum[0].nombre} </Text>
           identificado(a) con cédula de ciudadanía número
-          <Text style={styles.textb}> {data.identificacion_format}</Text>,
+          <Text style={styles.textb}> {curriculum[0].numeroDocumento}</Text>,
           presta sus servicios como{" "}
-          <Text style={styles.textb}> {data.cargo} </Text> en la {curriculum[0].empresa}, desde el {curriculum[0].fechaIngreso.split("T")[0]} con un Contrato de
+          <Text style={styles.textb}> {curriculum[0].cargo} </Text> en la {curriculum[0].empresa}, desde el {curriculum[0].fechaIngreso.split("T")[0]} con un Contrato de
           Trabajo Vigente a
           <Text style={styles.textb}> {curriculum[0].tipoContrato}</Text>,
           devengando un Salario Mensual

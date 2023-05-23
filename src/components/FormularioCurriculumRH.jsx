@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import useCurriculum from "../hooks/useCurriculum";
 import useCollaborators from "../hooks/useCollaborators";
+import useCargos from '../hooks/useCargos'
 import Alert from "./Alert";
 import useAuth from "../hooks/useAuth";
 import { BeatLoader } from "react-spinners";
@@ -106,7 +107,7 @@ const FormularioCurriculum = () => {
   const [sueldo, setSueldo] = useState(0);
   const [soporteContrato, setSoporteContrato] = useState("");
   const [errorSoporteContrato, setErrorSoporteContrato] = useState(false);
-  const [cargo, setCargo] = useState("");
+  const [cargo, setCargo] = useState("elegir");
 
   const[cargosFiltrado, setCargosFiltrado] = useState([])
   const [inputReq, setInputReq] = useState([
@@ -120,27 +121,25 @@ const FormularioCurriculum = () => {
 
 
   const {
-    submitCurriculum,
-    cargandoData,
-    mostrarAlerta,
-    alerta,
-  } = useCurriculum();
-
-  const {
-   
     obtenerCurriculumRH,
     collaborator,
     cargandoDatos,
-    editarCurriculumRH
+    cargandoData,
+    editarCurriculumRH,
+    mostrarAlerta,
+    alerta,
   } = useCollaborators();
- 
+
+  const{obtenerCargosForm, cargosForm} = useCargos();
+  
+  console.log(cargosForm)
 
   const { auth, cargando } = useAuth();
   //console.log(auth.documento);
   //console.log(auth._id);
   useEffect(() => {
-    console.log(params.id)
     obtenerCurriculumRH(params.id)   
+     obtenerCargosForm()
   }, []);
 
  
@@ -219,16 +218,9 @@ const FormularioCurriculum = () => {
       setNomina(collaborator.nomina);
       setCodigoIngreso(collaborator.codigoIngreso);
       setSueldo(collaborator.sueldo);
-      setCargo(collaborator.cargo);
+      setCargo(collaborator.cargo !== "" ? collaborator.cargo : "elegir");
       setUnidadFuncional(collaborator.unidadFuncional);
       setUnidadNegocio(collaborator.unidadNegocio)
-
-    //   let municipiosFilter = departamentos.filter(function(departamento){
-    //     return departamento.departamento == collaborator.departamento;
-        
-    // })
-
-    // setMunicipios(municipiosFilter[0].ciudades)
 
     }
   }, [collaborator]);
@@ -2556,16 +2548,25 @@ const FormularioCurriculum = () => {
                 Cargo
               </label>
               <div className="mt-1">
-                <input
-                  id="cargo"
-                  name="cargo"
-                  type="text"
-                  autoComplete="cargo"
-                  placeholder="Digitar la cargo"
-                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                  value={cargo}
-                  onChange={(e) => setCargo(e.target.value)}
-                />
+                 <select
+                    id="cargo"
+                    name="cargo"                 
+                    className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                    onChange={(e) => setCargo(e.target.value)}
+                    value={cargo}   
+                    required={true}                 
+                >
+                  <option value="elegir" disabled >
+                    -- Selecciona un cargo--
+                  </option>
+                   {cargosForm.map((item, i) =>{
+                    return(
+                        <option key={i} value={item.nombre}>
+                           {item.nombre}
+                        </option>
+                    )
+                  })} 
+                </select>
               </div>
             </div>
 

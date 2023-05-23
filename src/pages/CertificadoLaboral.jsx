@@ -315,7 +315,7 @@ const CertificadoLaboral = () => {
       data["otros_descuentos_format"] = currencyFormat(data.otros_descuentos);
       data["total_descuentos_format"] = currencyFormat(data.total_descuentos);
       //Monena a Letras
-      let numero_letras = numeroALetras(data.sueldo_basico);
+      let numero_letras = numeroALetras(curriculum[0].sueldo);
       const numero_letras_trim = numero_letras.replace(/\s+/g, ' ').trim();
       //Date
       let dia_letras = numeroALetras(day);
@@ -324,7 +324,7 @@ const CertificadoLaboral = () => {
       const mes_letras_trim = mes_letras.replace(/\s+/g, ' ').trim();
       let anio_letras = numeroALetras(year);
       const anio_letras_trim = anio_letras.replace(/\s+/g, ' ').trim();
-      data["sueldo_basico_letras"] = numero_letras_trim;
+      curriculum[0]["sueldo_basico_letras"] = numero_letras_trim;
       data["dia"] = day;
       data["dia_letras"] = dia_letras_trim;
       data["mes"] = month;

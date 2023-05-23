@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useParams, Link } from "react-router-dom";
 import useCurriculum from "../hooks/useCurriculum";
 import useCargos from "../hooks/useCargos"
@@ -19,24 +19,24 @@ const FormularioCurriculum = () => {
   const [id, setId] = useState(null);
   const [estado, setEstado] = useState(null);
   const [nombre, setNombre] = useState("");
-  const [tipoDocumento, setTipoDocumento] = useState("Cedula de ciudadania");
-  const [numeroDocumento, setNumeroDocumento] = useState(0);
+  const [tipoDocumento, setTipoDocumento] = useState("elegir");
+  const [numeroDocumento, setNumeroDocumento] = useState("");
   const [fechaNacimiento, setFechaNacimiento] = useState( '1990-01-01');
   const [lugarNacimiento, setLugarNacimiento] = useState("");
-  const [telefono, setTelefono] = useState(0);
+  const [telefono, setTelefono] = useState("");
   const [correo, setCorreo] = useState("");
   const [direccion, setDireccion] = useState("");
-  const [estadoCivil, setEstadoCivil] = useState("Soltero(a)");
+  const [estadoCivil, setEstadoCivil] = useState("elegir");
   const [pais, setPais] = useState("");
-  const [departamento, setDepartamento] = useState("");
-  const [ciudad, setCiudad] = useState("");
+  const [departamento, setDepartamento] = useState("elegir");
+  const [ciudad, setCiudad] = useState("elegir");
   const[municipios, setMunicipios] = useState([]);
-  const [numeroHijos, setNumeroHijos] = useState(0);
+  const [numeroHijos, setNumeroHijos] = useState("");
   const [tipoSangre, setTipoSangre] = useState("");
   //Formación Profesional
-  const [nivel, setNivel] = useState("Profesional");
+  const [nivel, setNivel] = useState("elegir");
   const [titulo, setTitulo] = useState("");
-  const [anioTitulo, setAnioTitulo] = useState(0);
+  const [anioTitulo, setAnioTitulo] = useState("");
   const [institucionTitulo, setInstitucionTitulo] = useState("");
   //Experiencia Profesional
   const [empresaExp, setEmpresaExp] = useState("");
@@ -64,7 +64,7 @@ const FormularioCurriculum = () => {
   ]);
   //Cuentas Extranjero
   const [inputExtranjera, setinputExtranjera] = useState([
-    { nombre: " ", email: " ", telefono: " " },
+    { nombre: "", email: "", telefono: "" },
   ]);
 
   const [rut, setRut] = useState("");
@@ -81,7 +81,7 @@ const FormularioCurriculum = () => {
 
   const [poseeCuenta, setPoseeCuenta] = useState("Si");
   const [inputCuentas, setInputCuentas] = useState([
-    { nro_cuenta: " ", banco: " ", ciudad: " ", pais: "", moneda: " " },
+    { nro_cuenta: "", banco: "", ciudad: "", pais: "", moneda: "" },
   ]);
 
   const[codigoCIIU, setCodigoCIIU]=useState([{
@@ -119,7 +119,102 @@ const FormularioCurriculum = () => {
   const[cargosFiltrados, setCargosFiltrados] = useState("")
   const[editarDocumento, setEditarDocumento] = useState({})
 
+  /* Error en el campo nombre*/
+  const inputRef = useRef(null);
+  const[errorNombre, setErrorNombre] = useState(false)
+
+  /* Error en el campo tipo de documento*/
+  const inputRefTipoDocumento = useRef(null);
+  const[errorTipoDocumento, setErrorTipoDocumento] = useState(false)
+
+  /* Error en el campo numero de documento*/
+  const inputRefNumDocumento = useRef(null);
+  const[errorNumDocumento, setErrorNumDocumento] = useState(false)
+
+  /* Error en el campo lugar de nacimiento*/
+  const inputRefLugarNacimiento = useRef(null);
+  const[errorLugarNacimiento, setErrorLugarNacimiento] = useState(false)
+
+  /* Error en el campo celular*/
+  const inputRefCelular = useRef(null);
+  const[errorCelular, setErrorCelular] = useState(false)
+
+  /* Error en el campo correo electronico*/
+  const inputRefCorreo = useRef(null);
+  const[errorCorreo, setErrorCorreo] = useState(false)
+  const[errorCorreoInput, setErrorCorreoInput] = useState(false)
+
+
+  /* Error en el campo direccion*/
+  const inputRefDireccion = useRef(null);
+  const[errorDireccion, setErrorDireccion] = useState(false)
+
  
+  /* Error en el campo estado civil*/
+  const inputRefEstadoCivil = useRef(null);
+  const[errorEstadoCivil, setErrorEstadoCivil] = useState(false)
+
+  /* Error en el campo estado civil*/
+  const inputRefPais = useRef(null);
+  const[errorPais, setErrorPais] = useState(false)
+
+  /* Error en el campo departamento*/
+  const inputRefDepartamento = useRef(null);
+  const[errorDepartamento, setErrorDepartamento] = useState(false)
+
+  /* Error en el campo ciudad*/
+  const inputRefCiudad = useRef(null);
+  const[errorCiudad, setErrorCiudad] = useState(false)
+
+  /* Error en el campo Numero hijos*/
+  const inputRefNumHijos = useRef(null);
+  const[errorNumHijos, setErrorNumHijos] = useState(false)
+
+  /* Error en el campo tipo de sangre*/
+  const inputRefTipoSangre = useRef(null);
+  const[errorTipoSangre, setErrorTipoSangre] = useState(false)
+
+
+  /* Error en el campo nivel de estudio*/
+  const inputRefNivel = useRef(null);
+  const[errorNivel, setErrorNivel] = useState(false)
+
+  /* Error en el campo titulo*/
+  const inputRefTitulo = useRef(null);
+  const[errorTitulo, setErrorTitulo] = useState(false)
+
+  /* Error en el campo titulo*/
+  const inputAnioTitulo = useRef(null);
+  const[errorAnioTitulo, setErrorAnioTitulo] = useState(false)
+  const[errorAnioRango, setErrorAnioRango] = useState(false)
+
+  /* Error en el campo institucion*/
+  const inputInstitucion = useRef(null);
+  const[errorInstitucion, setErrorInstitucion] = useState(false)
+
+  /* Error en el campo nombre empresa*/
+  const inputNombreEmpresa = useRef(null);
+  const[errorNombreEmpresa, setErrorNombreEmpresa] = useState(false)
+
+  /* Error en el campo fecha inicio empresa*/
+  const inputEmpresaFechaInicio = useRef(null);
+  const[errorEmpresaFechaInicio, setErrorEmpresaFechaInicio] = useState(false)
+
+  /* Error en el campo referencia A nombre*/
+  const inputReferenciaA = useRef(null);
+  const[errorReferenciaA, setErrorReferenciaA] = useState(false)
+
+  /* Error en el campo referencia A telefono*/
+  const inputReferenciaATelefono = useRef(null);
+  const[errorReferenciaATelefono, setErrorReferenciaATelefono] = useState(false)
+
+  /* Error en el campo referencia A correo*/
+  const inputReferenciaACorreo = useRef(null);
+  const[errorReferenciaACorreo, setErrorReferenciaACorreo] = useState(false)
+  const[errorCorreoRefInput, setErrorCorreoRefInput]= useState(false)
+
+
+
   const params = useParams();
 
   const {
@@ -131,27 +226,22 @@ const FormularioCurriculum = () => {
     cargandoData,
   } = useCurriculum();
 
-  const{cargos, obtenerCargosForm, cargosForm} = useCargos();
-  const{obtenerDocumentosRequeridos, documentosRequeridos }= useDocumentosRequeridos();
+  const{obtenerCargosForm, cargosForm} = useCargos();
+  const{obtenerDocumentosRequeridos, documentosRequeridos, }= useDocumentosRequeridos();
 
-  const { auth, cargando } = useAuth();
-  //console.log(auth.documento);
-  //console.log(auth._id);
+  const { auth } = useAuth();
+ 
   useEffect(() => {
       obtenerCurriculum(auth._id);
-      
       obtenerCargosForm()
   }, []);
 
   useEffect(() => {
-   obtenerDocumentosRequeridos(auth._id)
-  }, [documentosRequeridos])
+    obtenerDocumentosRequeridos(auth._id)
+  }, [])
   
-
-  console.log(curriculum)
   useEffect(() => {
     if (Array.isArray(curriculum) && curriculum.length > 0) {
-      
       setId(auth._id);
       setEstado(curriculum[0].estado);
       setNombre(curriculum[0].nombre);
@@ -238,7 +328,6 @@ const FormularioCurriculum = () => {
     }
   }, [curriculum]);
 
-  console.log(cargosForm)
 
   useEffect(() => {
     if (Array.isArray(curriculum) && curriculum.length > 0) {
@@ -250,50 +339,212 @@ const FormularioCurriculum = () => {
 
   const submitData = async (e) => {
     e.preventDefault();
-   
-
     localStorage.setItem("tipo", "formCo");
-  
-
-    if (errorSoporteExp === true) {
-      mostrarAlerta({
-        msg: "Tamaño máximo del soporte de Experiencia Laboral es de 500kb",
-        error: true,
-      });
+   
+    if(nombre === ""){
+      inputRef.current.focus()
+      setErrorNombre(true)
       return;
+    }else{
+      setErrorNombre(false)
     }
 
-    if (errorSoporteEps === true) {
-      mostrarAlerta({
-        msg: "Tamaño máximo del soporte de Eps es de 500kb",
-        error: true,
-      });
+    if(tipoDocumento === "elegir"){
+      inputRefTipoDocumento.current.focus()
+      setErrorTipoDocumento(true)
       return;
+    }else{
+      setErrorTipoDocumento(false)
     }
 
-    if (errorSoportePension === true) {
-      mostrarAlerta({
-        msg: "Tamaño máximo del soporte de Pensión es de 500kb",
-        error: true,
-      });
+    if(numeroDocumento === ""){
+      inputRefNumDocumento.current.focus()
+      setErrorNumDocumento(true)
       return;
+    }else{
+      setErrorNumDocumento(false)
+    }
+    
+    if(lugarNacimiento === ""){
+      inputRefLugarNacimiento.current.focus()
+      setErrorLugarNacimiento(true)
+      return;
+    }else{
+      setErrorLugarNacimiento(false)
     }
 
-    if (errorSoporteRut === true) {
-      mostrarAlerta({
-        msg: "Tamaño máximo del soporte de Rut es de 500kb",
-        error: true,
-      });
+    if(telefono === ""){
+      inputRefCelular.current.focus()
+      setErrorCelular(true)
       return;
+    }else{
+      setErrorCelular(false)
+    }
+    
+    let isValidEmail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+    if(correo === ""){
+      inputRefCorreo.current.focus()
+      setErrorCorreo(true)
+      return;
+    }else if(!isValidEmail.test(correo)){
+     inputRefCorreo.current.focus()
+     setErrorCorreoInput(true)
+     setErrorCorreo(false)
+     return;
+    }else{
+      setErrorCorreo(false)
+      setErrorCorreoInput(false)
     }
 
-    if (errorSoporteContrato === true) {
-      mostrarAlerta({
-        msg: "Tamaño máximo del soporte del contrato es de 500kb",
-        error: true,
-      });
+    if(direccion === ""){
+      inputRefDireccion.current.focus()
+      setErrorDireccion(true)
       return;
+    }else{
+      setErrorDireccion(false)
     }
+
+
+    if(estadoCivil === "elegir"){
+      inputRefEstadoCivil.current.focus()
+      setErrorEstadoCivil(true)
+      return;
+    }else{
+      setErrorEstadoCivil(false)
+    }
+
+    if(pais === ""){
+      inputRefPais.current.focus()
+      setErrorPais(true)
+      return;
+    }else{
+      setErrorPais(false)
+    }
+
+
+    if(departamento === "elegir"){
+      inputRefDepartamento.current.focus()
+      setErrorDepartamento(true)
+      return;
+    }else{
+      setErrorDepartamento(false)
+    }
+
+    if(ciudad === "elegir"){
+      inputRefCiudad.current.focus()
+      setErrorCiudad(true)
+      return;
+    }else{
+      setErrorCiudad(false)
+    }
+
+
+    if(numeroHijos === ""){
+      inputRefNumHijos.current.focus()
+      setErrorNumHijos(true)
+      return;
+    }else{
+      setErrorNumHijos(false)
+    }
+
+    if(tipoSangre === ""){
+      inputRefTipoSangre.current.focus()
+      setErrorTipoSangre(true)
+      return;
+    }else{
+      setErrorTipoSangre(false)
+    }
+
+
+    if(nivel === "elegir"){
+      inputRefNivel.current.focus()
+      setErrorNivel(true)
+      return;
+    }else{
+      setErrorNivel(false)
+    }
+
+    if(titulo === ""){
+      inputRefTitulo.current.focus()
+      setErrorTitulo(true)
+      return;
+    }else{
+      setErrorTitulo(false)
+    }
+
+    
+    if(anioTitulo === ""){
+      inputAnioTitulo.current.focus()
+      setErrorAnioTitulo(true)
+      return;
+    }else if( Number(anioTitulo) <= 1900 ||  Number(anioTitulo) >= 2099){
+      inputAnioTitulo.current.focus()
+      setErrorAnioRango(true)
+      setErrorAnioTitulo(false)
+      return;
+    }else{
+      setErrorAnioRango(false)
+      setErrorAnioTitulo(false)
+    }
+
+    if(institucionTitulo === ""){
+      inputInstitucion.current.focus()
+      setErrorInstitucion(true)
+      return;
+    }else{
+      setErrorInstitucion(false)
+    }
+
+
+    if(empresaExp === ""){
+      inputNombreEmpresa.current.focus()
+      setErrorNombreEmpresa(true)
+      return;
+    }else{
+      setErrorNombreEmpresa(false)
+    }
+
+    if(fechaInicioExp === ""){
+      inputEmpresaFechaInicio.current.focus()
+      setErrorEmpresaFechaInicio(true)
+      return;
+    }else{
+      setErrorEmpresaFechaInicio(false)
+    }
+
+    if(nombreRefA === ""){
+      inputReferenciaA.current.focus()
+      setErrorReferenciaA(true)
+      return;
+    }else{
+      setErrorReferenciaA(false)
+    }
+
+   
+    if(correoRefA === ""){
+      inputReferenciaACorreo.current.focus()
+      setErrorReferenciaACorreo(true)
+      return;
+    }else if(!isValidEmail.test(correoRefA)){
+      inputReferenciaACorreo.current.focus()
+      setErrorCorreoRefInput(true)
+      setErrorReferenciaACorreo(false)
+      return;
+    }else{
+      setErrorCorreoRefInput(false)
+      setErrorCorreoInput(false)
+    }
+
+    // if (errorSoporteExp === true) {
+    //   mostrarAlerta({
+    //     msg: "Tamaño máximo del soporte de Experiencia Laboral es de 500kb",
+    //     error: true,
+    //   });
+    //   return;
+    // }
+
+   
 
     const formData = new FormData();
 
@@ -376,15 +627,6 @@ const FormularioCurriculum = () => {
     formData.append("unidadFuncional", unidadFuncional);
     formData.append("unidadNegocio", unidadNegocio);
 
-
- 
-    
-    // for (let i = 1; i < inputReq.length; i++) {
-    //   console.log(inputReq[i])
-    //   formData.append("inputReq",  JSON.stringify(inputReq[i]));
-    // }
-  
-   
     await submitCurriculum(formData, estado);
   };
 
@@ -587,9 +829,6 @@ const handleChangeDepartamento = (e)=>{
         )}
         <form
           className="space-y-6 "
-          // onSubmit={handleSubmit((data, e) => {
-          //   submitData(data, e);
-          // })}
           onSubmit={submitData}
           encType="multipart/form-data"
         >
@@ -611,11 +850,15 @@ const handleChangeDepartamento = (e)=>{
                   type="text"
                   autoComplete="nombre"
                   placeholder="Digita tu nombre completo"
-                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                  className={errorNombre === false ? 
+                            "block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                            : 
+                            "block w-full appearance-none rounded-md border border-red-500 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-red-500 focus:outline-none  sm:text-sm"}
                   value={nombre}
                   onChange={(e) => setNombre(e.target.value)}
-                  required
+                  ref={inputRef}
                 />
+                {errorNombre === true && <span className="text-red-500 text-xs">Digite la información requerida</span>}
               </div>
             </div>
             <div>
@@ -630,14 +873,22 @@ const handleChangeDepartamento = (e)=>{
                   id="tipoDocumento"
                   name="tipoDocumento"
                   placeholder="Digita tu correo electrónico"
-                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                  className={errorTipoDocumento === false ?
+                            "block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                            :
+                            "block w-full appearance-none rounded-md border border-red-500 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-red-500 focus:outline-none focus:ring-red-500 sm:text-sm"
+                            }
                   onChange={(e) => {
                     const selectedDocumentType = e.target.value;
 
                     setTipoDocumento(selectedDocumentType);
                   }}
                   value={tipoDocumento}
+                  ref={inputRefTipoDocumento}
                 >
+                  <option value="elegir" disabled className="text-gray-400" >
+                    --Selecciona un tipo de documento--
+                  </option>
                   <option value="Cedula de ciudadania">
                     Cedula de ciudadania
                   </option>
@@ -646,6 +897,7 @@ const handleChangeDepartamento = (e)=>{
                   </option>
                   <option value="Pasaporte">Pasaporte</option>
                 </select>
+                 {errorTipoDocumento === true && <span className="text-red-500 text-xs">Seleccione la información requerida</span>}
               </div>
             </div>
             <div>
@@ -661,11 +913,16 @@ const handleChangeDepartamento = (e)=>{
                   name="numeroDocumento"
                   type="number"
                   placeholder="Digita tu numero de documento"
-                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                  className={errorNumDocumento === false ?
+                            "block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                            :
+                            "block w-full appearance-none rounded-md border border-red-500 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-red-500 focus:outline-none focus:ring-red-500 sm:text-sm"
+                            }
                   value={numeroDocumento}
                   onChange={(e) => setNumeroDocumento(e.target.value)}
-                  required
+                  ref={inputRefNumDocumento}
                 />
+                {errorNumDocumento === true && <span className="text-red-500 text-xs">Digite la información requerida</span>}
               </div>
              
             </div>
@@ -686,8 +943,8 @@ const handleChangeDepartamento = (e)=>{
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={fechaNacimiento}
                   onChange={(e) => setFechaNacimiento(e.target.value)}
-                  required
                 />
+                
               </div>
             </div>
 
@@ -704,11 +961,16 @@ const handleChangeDepartamento = (e)=>{
                   name="lugarNacimiento"
                   type="text"
                   placeholder="Digite su lugar de nacimiento"
-                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                  className={errorLugarNacimiento === false ?
+                            "block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                            :
+                            "block w-full appearance-none rounded-md border border-red-500 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-red-500 focus:outline-none focus:ring-red-500 sm:text-sm"
+                            }
                   value={lugarNacimiento}
-                   onChange={(e) => setLugarNacimiento(e.target.value)}
-                   required
+                  onChange={(e) => setLugarNacimiento(e.target.value)}
+                  ref={inputRefLugarNacimiento}
                 />
+                {errorLugarNacimiento === true && <span className="text-red-500 text-xs">Digite la información requerida</span>}
               </div>
             </div>
 
@@ -725,12 +987,16 @@ const handleChangeDepartamento = (e)=>{
                   name="telefono"
                   type="number"
                   placeholder="Digite su número de telefono"
-                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                  className={errorCelular === false ?
+                            "block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                            :
+                            "block w-full appearance-none rounded-md border border-red-500 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-red-500 focus:outline-none focus:ring-red-500 sm:text-sm"
+                            }
                   value={telefono}
                   onChange={(e) => setTelefono(e.target.value)}
-                  required
-                 
+                  ref={inputRefCelular}
                 />
+                {errorCelular === true && <span className="text-red-500 text-xs">Digite la información requerida</span>}
               </div>             
             </div>
 
@@ -747,11 +1013,18 @@ const handleChangeDepartamento = (e)=>{
                   name="correo"
                   type="text"
                   placeholder="Digite su correo electrónico"
-                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                  className={errorCorreo === false && errorCorreoInput === false ?
+                            "block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                            :
+                            "block w-full appearance-none rounded-md border border-red-500 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-red-500 focus:outline-none focus:ring-red-500 sm:text-sm"
+                            }
                   value={correo}
                   onChange={(e) => setCorreo(e.target.value)}
-                  required
+                  ref={inputRefCorreo}
                 />
+                {errorCorreo === true && <span className="text-red-500 text-xs">Digite la información requerida</span>}
+                {errorCorreoInput === true && <span className="text-red-500 text-xs">Digite un correo valido</span>}
+              
               </div>
             </div>
 
@@ -768,11 +1041,16 @@ const handleChangeDepartamento = (e)=>{
                   name="direccion"
                   type="text"
                   placeholder="Digite su dirección"
-                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                  className={errorDireccion === false ?
+                            "block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                            :
+                            "block w-full appearance-none rounded-md border border-red-500 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-red-500 focus:outline-none focus:ring-red-500 sm:text-sm"
+                            }
                   value={direccion}
                   onChange={(e) => setDireccion(e.target.value)}
-                  required
+                   ref={inputRefDireccion}
                 />
+                {errorDireccion === true && <span className="text-red-500 text-xs">Digite la información requerida</span>}
               </div>
             </div>
 
@@ -787,19 +1065,28 @@ const handleChangeDepartamento = (e)=>{
                 <select
                   id="estadoCivil"
                   name="estadoCivil"
-                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                  className={errorEstadoCivil === false ?
+                            "block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                            :
+                            "block w-full appearance-none rounded-md border border-red-500 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-red-500 focus:outline-none focus:ring-red-500 sm:text-sm"
+                            }
                   onChange={(e) => {
                     const selectedDocumentType = e.target.value;
 
-                    setTipoDocumento(selectedDocumentType);
+                    setEstadoCivil(selectedDocumentType);
                   }}
-                  value={tipoDocumento}
+                  value={estadoCivil}
+                  ref={inputRefEstadoCivil}
                 >
+                  <option value="elegir" disabled className="text-gray-400" >
+                    --Selecciona un estado civil--
+                  </option>
                   <option value="Soltero(a)">Soltero(a)</option>
                   <option value="Casado(a)">Casado(a)</option>
                   <option value="Viudo(a)">Viudo(a)</option>
                   <option value="Unión libre">Unión libre</option>
                 </select>
+                {errorEstadoCivil === true && <span className="text-red-500 text-xs">Digite la información requerida</span>}
               </div>
             </div>
 
@@ -816,24 +1103,22 @@ const handleChangeDepartamento = (e)=>{
                   name="pais"
                   type="text"
                   placeholder="Digite el país"
-                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                  className={errorPais === false ?
+                            "block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                            :
+                            "block w-full appearance-none rounded-md border border-red-500 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-red-500 focus:outline-none focus:ring-red-500 sm:text-sm"
+                            }
                   value={pais}
                   onChange={(e) => setPais(e.target.value)}
-                  required
-                  // {...register("pais", {
-                  //   required: "Este campo es requerido",
-                  //   onChange: (e) => setPais(e.target.value),
-                  // })}
+                  ref={inputRefPais}
                 />
+                {errorPais === true && <span className="text-red-500 text-xs">Digite la información requerida</span>}
               </div>
-              {/* <span className="text-xs text-red-500">
-                {errors.pais?.message}
-              </span> */}
+             
             </div>
-
               <div className="">
                 <label
-                  htmlFor="tipoDocumento"
+                  htmlFor="departamento"
                   className="block text-sm font-medium text-gray-700"
                 >
                   Departamento<span className="text-red-700">*</span>
@@ -843,16 +1128,22 @@ const handleChangeDepartamento = (e)=>{
                 id="departamento"
                 name="departamento"
                 value={departamento}
-                placeholder="Seleccione el departamento"
-                className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                className={errorDepartamento === false ?
+                            "block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                            :
+                            "block w-full appearance-none rounded-md border border-red-500 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-red-500 focus:outline-none focus:ring-red-500 sm:text-sm"
+                            }
                 onChange={(e) => {handleChangeDepartamento(e)}}
-                
+                ref={inputRefDepartamento}
                 >
+                  <option value="elegir" disabled >
+                    -- Selecciona un Departamento--
+                  </option>
                 {departamentos.map((item) =>(
                     <option key={item.departamento} value={item.departamento}>{item.departamento}</option>
                 ))}
-                
                 </select>
+                {errorDepartamento === true && <span className="text-red-500 text-xs">Digite la información requerida</span>}
                 </div>
             </div>
                      
@@ -869,15 +1160,23 @@ const handleChangeDepartamento = (e)=>{
                   id="ciudad"
                   name="ciudad"
                   placeholder="Seleccione la ciudad"
-                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                  className={errorCiudad === false ?
+                            "block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                            :
+                            "block w-full appearance-none rounded-md border border-red-500 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-red-500 focus:outline-none focus:ring-red-500 sm:text-sm"
+                            }
                   value={ciudad}
                   onChange={(e) => {setCiudad(e.target.value) }}
+                  ref={inputRefCiudad}
                   >
+                  <option value="elegir" disabled >
+                    -- Selecciona una Ciudad--
+                  </option>
                   {municipios.map((item) =>(
                       <option key={item} value={item}>{item}</option>                      
                   ))}
-                  
                   </select>
+                  {errorCiudad === true && <span className="text-red-500 text-xs">Digite la información requerida</span>}
               </div>
             </div>
 
@@ -894,19 +1193,18 @@ const handleChangeDepartamento = (e)=>{
                   name="numeroHijos"
                   type="number"
                   placeholder="Digite el numero de hijos"
-                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                  className={errorNumHijos === false ?
+                            "block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                            :
+                            "block w-full appearance-none rounded-md border border-red-500 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-red-500 focus:outline-none focus:ring-red-500 sm:text-sm"
+                            }
                   value={numeroHijos}
                   onChange={(e) => setNumeroHijos(e.target.value)}
-                  required
-                  // {...register("numeroHijos", {
-                  //   required: "Este campo es requerido",
-                  //   onChange: (e) => setNumeroHijos(e.target.value),
-                  // })}
+                 ref={inputRefNumHijos}
                 />
+                {errorNumHijos === true && <span className="text-red-500 text-xs">Digite la información requerida</span>}
               </div>
-              {/* <span className="text-xs text-red-500">
-                {errors.numeroHijos?.message}
-              </span> */}
+              
             </div>
 
             <div>
@@ -922,11 +1220,16 @@ const handleChangeDepartamento = (e)=>{
                   name="tipoSangre"
                   type="text"
                   placeholder="Digite su tipo de sangre"
-                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                  className={errorTipoSangre === false ?
+                            "block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                            :
+                            "block w-full appearance-none rounded-md border border-red-500 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-red-500 focus:outline-none focus:ring-red-500 sm:text-sm"
+                            }
                   value={tipoSangre}
                   onChange={(e) => setTipoSangre(e.target.value)}
-                  required
+                  ref={inputRefTipoSangre}
                 />
+                {errorTipoSangre === true && <span className="text-red-500 text-xs">Digite la información requerida</span>}
               </div>
              
             </div>
@@ -947,15 +1250,23 @@ const handleChangeDepartamento = (e)=>{
                 <select
                   id="nivel"
                   name="nivel"
-                  placeholder="Digita su ultimo nivel profesional"
-                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                  placeholder="Digite su ultimo nivel profesional"
+                  className={errorNivel === false ?
+                            "block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                            :
+                            "block w-full appearance-none rounded-md border border-red-500 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-red-500 focus:outline-none focus:ring-red-500 sm:text-sm"
+                            }
                   onChange={(e) => {
                     const selectedNivel = e.target.value;
                     //console.log(selectedDocumentType);
                     setNivel(selectedNivel);
                   }}
                   value={nivel}
-                >
+                  ref={inputRefNivel}
+                > 
+                  <option value="elegir" disabled >
+                    -- Selecciona un nivel academico--
+                  </option>
                   <option value="Ninguno">Ninguno</option>
                   <option value="Técnico Profesional">
                     Técnico Profesional
@@ -966,6 +1277,7 @@ const handleChangeDepartamento = (e)=>{
                   <option value="Maestrías">Maestrías</option>
                   <option value="Doctorados">Doctorados</option>
                 </select>
+                {errorNivel === true && <span className="text-red-500 text-xs">Digite la información requerida</span>}
               </div>
             </div>
             <div>
@@ -980,21 +1292,19 @@ const handleChangeDepartamento = (e)=>{
                   id="titulo"
                   name="titulo"
                   type="text"
-                  autoComplete="titulo"
                   placeholder="Digita su ultimo titulo profesional"
-                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                  className={errorTitulo === false ?
+                            "block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                            :
+                            "block w-full appearance-none rounded-md border border-red-500 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-red-500 focus:outline-none focus:ring-red-500 sm:text-sm"
+                            }
                   value={titulo}
                   onChange={(e) => setTitulo(e.target.value)}
-                  required
-                  // {...register("titulo", {
-                  //   required: "Este campo es requerido",
-                  //   onChange: (e) => setTitulo(e.target.value),
-                  // })}
+                  ref={inputRefTitulo}
                 />
+                {errorTitulo === true && <span className="text-red-500 text-xs">Digite la información requerida</span>}
               </div>
-              {/* <span className="text-xs text-red-500">
-                {errors.titulo?.message}
-              </span> */}
+              
             </div>
             <div>
               <label
@@ -1009,12 +1319,18 @@ const handleChangeDepartamento = (e)=>{
                   name="anioTitulo"
                   type="number"
                   placeholder="Digite año del titulo"
-                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                  className={errorAnioTitulo === false && errorAnioRango === false ?
+                            "block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                            :
+                            "block w-full appearance-none rounded-md border border-red-500 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-red-500 focus:outline-none focus:ring-red-500 sm:text-sm"
+                            }
                   value={anioTitulo}
                   onChange={(e) => setAnioTitulo(e.target.value)}
-                  required
                 
+                  ref={inputAnioTitulo}
                 />
+                {errorAnioTitulo === true && <span className="text-red-500 text-xs">Digite la información requerida</span>}
+                {errorAnioRango === true && <span className="text-red-500 text-xs">No es un año valido. No se aceptan puntos ni comas</span>}
               </div>
              
             </div>
@@ -1032,11 +1348,16 @@ const handleChangeDepartamento = (e)=>{
                   name="institucionTitulo"
                   type="text"
                   placeholder="Digite institución"
-                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                  className={errorInstitucion === false ?
+                            "block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                            :
+                            "block w-full appearance-none rounded-md border border-red-500 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-red-500 focus:outline-none focus:ring-red-500 sm:text-sm"
+                            }
                   value={institucionTitulo}
                   onChange={(e) => setInstitucionTitulo(e.target.value)}
-                  required
+                  ref={inputInstitucion}
                 />
+                {errorInstitucion === true && <span className="text-red-500 text-xs">Digite la información requerida</span>}
               </div>
              
             </div>
@@ -1060,11 +1381,16 @@ const handleChangeDepartamento = (e)=>{
                   type="text"
                   autoComplete="empresaExp"
                   placeholder="Digita la ultima empresa donde laboró"
-                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                  className={errorNombreEmpresa === false ?
+                            "block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                            :
+                            "block w-full appearance-none rounded-md border border-red-500 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-red-500 focus:outline-none focus:ring-red-500 sm:text-sm"
+                            }
                   value={empresaExp}
                   onChange={(e) => setEmpresaExp(e.target.value)}
-                  required
+                  ref={inputNombreEmpresa}
                 />
+                {errorNombreEmpresa === true && <span className="text-red-500 text-xs">Digite la información requerida</span>}
               </div>
               
             </div>
@@ -1081,11 +1407,16 @@ const handleChangeDepartamento = (e)=>{
                   name="fechaInicioExp"
                   type="date"
                   placeholder="Seleccione su fecha de inicio"
-                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                  className={errorEmpresaFechaInicio === false ?
+                            "block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                            :
+                            "block w-full appearance-none rounded-md border border-red-500 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-red-500 focus:outline-none focus:ring-red-500 sm:text-sm"
+                            }
                   value={fechaInicioExp}
                   onChange={(e) => setFechaInicioExp(e.target.value)}
-                  required
+                  ref={inputEmpresaFechaInicio}
                 />
+                {errorEmpresaFechaInicio === true && <span className="text-red-500 text-xs">Digite la información requerida</span>}
               </div>
              
             </div>
@@ -1183,19 +1514,18 @@ const handleChangeDepartamento = (e)=>{
                   type="text"
                   autoComplete="nombreRefA"
                   placeholder="Digita nombre de la referencia 1"
-                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                   className={errorReferenciaA === false ?
+                            "block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                            :
+                            "block w-full appearance-none rounded-md border border-red-500 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-red-500 focus:outline-none focus:ring-red-500 sm:text-sm"
+                            }
                   value={nombreRefA}
                   onChange={(e) => setNombreRefA(e.target.value)}
-                  required
-                  // {...register("nombreRefA", {
-                  //   required: "Este campo es requerido",
-                  //   onChange: (e) => setNombreRefA(e.target.value),
-                  // })}
+                  ref={inputReferenciaA}
                 />
+                {errorReferenciaA === true && <span className="text-red-500 text-xs">Digite la información requerida</span>}
               </div>
-              {/* <span className="text-xs text-red-500">
-                {errors.nombreRefA?.message}
-              </span> */}
+             
             </div>
             <div>
               <label
@@ -1211,19 +1541,18 @@ const handleChangeDepartamento = (e)=>{
                   type="text"
                   autoComplete="telefonoRefA"
                   placeholder="Digita telefono de la referencia 1"
-                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                  className={errorReferenciaATelefono === false ?
+                            "block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                            :
+                            "block w-full appearance-none rounded-md border border-red-500 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-red-500 focus:outline-none focus:ring-red-500 sm:text-sm"
+                            }
                   value={telefonoRefA}
                   onChange={(e) => setTelefonoRefA(e.target.value)}
-                  required
-                  // {...register("telefonoRefA", {
-                  //   required: "Este campo es requerido",
-                  //   onChange: (e) => setTelefonoRefA(e.target.value),
-                  // })}
+                  ref={inputReferenciaATelefono}
                 />
+                {errorReferenciaATelefono === true && <span className="text-red-500 text-xs">Digite la información requerida</span>}
               </div>
-              {/* <span className="text-xs text-red-500">
-                {errors.telefonoRefA?.message}
-              </span> */}
+              
             </div>
             <div>
               <label
@@ -1237,21 +1566,20 @@ const handleChangeDepartamento = (e)=>{
                   id="correoRefA"
                   name="correoRefA"
                   type="text"
-                  autoComplete="correoRefA"
                   placeholder="Digita correo de la referencia 1"
-                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                  className={errorReferenciaACorreo === false && errorCorreoRefInput === false?
+                            "block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                            :
+                            "block w-full appearance-none rounded-md border border-red-500 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-red-500 focus:outline-none focus:ring-red-500 sm:text-sm"
+                            }
                   value={correoRefA}
                   onChange={(e) => setCorreoRefA(e.target.value)}
-                  required
-                  // {...register("correoRefA", {
-                  //   required: "Este campo es requerido",
-                  //   onChange: (e) => setCorreoRefA(e.target.value),
-                  // })}
+                  ref={inputReferenciaACorreo}
                 />
+                {errorReferenciaACorreo === true && <span className="text-red-500 text-xs">Digite la información requerida</span>}
+                {errorCorreoRefInput === true && <span className="text-red-500 text-xs">Digite un correo valido</span>}
               </div>
-              {/* <span className="text-xs text-red-500">
-                {errors.correoRefA?.message}
-              </span> */}
+             
             </div>
           </div>
           <div className="border-b border-gray-200 pb-2">
@@ -1343,7 +1671,7 @@ const handleChangeDepartamento = (e)=>{
                     setEPS(selectedEPS);
                   }}
                   value={eps}
-                  required
+                 
                 >
                   <option value="Asociacion Mutual Ser Eps">Asociacion Mutual Ser Eps</option>
                   <option value="Cajacopi Eps">Cajacopi Eps</option>
@@ -1515,62 +1843,6 @@ const handleChangeDepartamento = (e)=>{
                       onChange={(e) => handleinputchange(e, i)}  />
                       
                     </div> 
-                    {/* <div className="">
-                      <label className="block text-sm font-medium text-gray-700">
-                        CIU
-                      </label>
-                      <input
-                        type="text"
-                        className="form-control
-                      block
-                      w-full
-                      px-3
-                      py-1.5
-                      text-base
-                      font-normal
-                      text-gray-700
-                      bg-white bg-clip-padding
-                      border border-solid border-gray-300
-                      rounded
-                      transition
-                      ease-in-out
-                      m-0
-                      focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                        placeholder="Ingresar CIU"
-                        id="ciu"
-                        name="ciu"
-                        value={item.ciu}
-                        onChange={(e) => handleinputchange(e, i)}
-                      />
-                    </div>
-                    <div className="">
-                      <label className="block text-sm font-medium text-gray-700">
-                        Actividad Economica
-                      </label>
-                      <input
-                        type="text"
-                        className="form-control
-                      block
-                      w-full
-                      px-3
-                      py-1.5
-                      text-base
-                      font-normal
-                      text-gray-700
-                      bg-white bg-clip-padding
-                      border border-solid border-gray-300
-                      rounded
-                      transition
-                      ease-in-out
-                      m-0
-                      focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                        placeholder="Ingresar Actividad Economica"
-                        id="actividad_economica"
-                        name="actividad_economica"
-                        value={item.actividad_economica}
-                        onChange={(e) => handleinputchange(e, i)}
-                      />
-                    </div> */}
                     <div className="grid grid-cols-2 gap-4 pt-6 ">
                       {codigoCIIU.length !== 1 && (
                         <button
@@ -1893,22 +2165,8 @@ const handleChangeDepartamento = (e)=>{
                       </label>
                       <input
                         type="text"
-                        className="form-control
-                      block
-                      w-full
-                      px-3
-                      py-1.5
-                      text-base
-                      font-normal
-                      text-gray-700
-                      bg-white bg-clip-padding
-                      border border-solid border-gray-300
-                      rounded
-                      transition
-                      ease-in-out
-                      m-0
-                      focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                        placeholder="Ingresar CIU"
+                        className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                        placeholder="Digite número de cuenta"
                         id="nro_cuenta"
                         name="nro_cuenta"
                         value={item.nro_cuenta}
@@ -1921,22 +2179,8 @@ const handleChangeDepartamento = (e)=>{
                       </label>
                       <input
                         type="text"
-                        className="form-control
-                      block
-                      w-full
-                      px-3
-                      py-1.5
-                      text-base
-                      font-normal
-                      text-gray-700
-                      bg-white bg-clip-padding
-                      border border-solid border-gray-300
-                      rounded
-                      transition
-                      ease-in-out
-                      m-0
-                      focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                        placeholder="Ingresar Actividad Economica"
+                        className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                        placeholder="Digite banco"
                         id="banco"
                         name="banco"
                         value={item.banco}
@@ -1949,22 +2193,8 @@ const handleChangeDepartamento = (e)=>{
                       </label>
                       <input
                         type="text"
-                        className="form-control
-                      block
-                      w-full
-                      px-3
-                      py-1.5
-                      text-base
-                      font-normal
-                      text-gray-700
-                      bg-white bg-clip-padding
-                      border border-solid border-gray-300
-                      rounded
-                      transition
-                      ease-in-out
-                      m-0
-                      focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                        placeholder="Ingresar Actividad Economica"
+                        className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                        placeholder="Digite la ciudad"
                         id="ciudad"
                         name="ciudad"
                         value={item.ciudad}
@@ -1978,22 +2208,8 @@ const handleChangeDepartamento = (e)=>{
                       </label>
                       <input
                         type="text"
-                        className="form-control
-                      block
-                      w-full
-                      px-3
-                      py-1.5
-                      text-base
-                      font-normal
-                      text-gray-700
-                      bg-white bg-clip-padding
-                      border border-solid border-gray-300
-                      rounded
-                      transition
-                      ease-in-out
-                      m-0
-                      focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                        placeholder="Ingresar Actividad Economica"
+                        className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                        placeholder="Digite el país"
                         id="pais"
                         name="pais"
                         value={item.pais}
@@ -2006,22 +2222,8 @@ const handleChangeDepartamento = (e)=>{
                       </label>
                       <input
                         type="text"
-                        className="form-control
-                      block
-                      w-full
-                      px-3
-                      py-1.5
-                      text-base
-                      font-normal
-                      text-gray-700
-                      bg-white bg-clip-padding
-                      border border-solid border-gray-300
-                      rounded
-                      transition
-                      ease-in-out
-                      m-0
-                      focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                        placeholder="Ingresar Actividad Economica"
+                        className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                        placeholder="Digite la moneda"
                         id="moneda"
                         name="moneda"
                         value={item.moneda}
@@ -2199,22 +2401,8 @@ const handleChangeDepartamento = (e)=>{
                           </label>
                           <input
                             type="text"
-                            className="form-control
-                      block
-                      w-full
-                      px-3
-                      py-1.5
-                      text-base
-                      font-normal
-                      text-gray-700
-                      bg-white bg-clip-padding
-                      border border-solid border-gray-300
-                      rounded
-                      transition
-                      ease-in-out
-                      m-0
-                      focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                            placeholder="Ingresar Nombre"
+                            className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                            placeholder="Digite el nombre"
                             id="nombre"
                             name="nombre"
                             value={item.nombre}
@@ -2227,22 +2415,8 @@ const handleChangeDepartamento = (e)=>{
                           </label>
                           <input
                             type="text"
-                            className="form-control
-                      block
-                      w-full
-                      px-3
-                      py-1.5
-                      text-base
-                      font-normal
-                      text-gray-700
-                      bg-white bg-clip-padding
-                      border border-solid border-gray-300
-                      rounded
-                      transition
-                      ease-in-out
-                      m-0
-                      focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                            placeholder="Ingresar Email"
+                            className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                            placeholder="Digite el email"
                             id="email"
                             name="email"
                             value={item.email}
@@ -2255,22 +2429,8 @@ const handleChangeDepartamento = (e)=>{
                           </label>
                           <input
                             type="text"
-                            className="form-control
-                      block
-                      w-full
-                      px-3
-                      py-1.5
-                      text-base
-                      font-normal
-                      text-gray-700
-                      bg-white bg-clip-padding
-                      border border-solid border-gray-300
-                      rounded
-                      transition
-                      ease-in-out
-                      m-0
-                      focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                            placeholder="Ingresar Telefono"
+                           className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                            placeholder="Digite el telefono"
                             id="telefono"
                             name="telefono"
                             value={item.telefono}
@@ -2539,7 +2699,7 @@ const handleChangeDepartamento = (e)=>{
                   name="cargo"
                   type="text"
                   autoComplete="cargo"
-                  placeholder="Digitar la cargo"
+                  placeholder="Digitar el cargo"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={cargo}
                   readOnly="readonly"

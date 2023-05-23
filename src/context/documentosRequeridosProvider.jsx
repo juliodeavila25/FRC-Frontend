@@ -9,7 +9,7 @@ const DocumentosRequueridosContext = createContext();
 const DocumentosRequeridosProvider = ({ children }) => {
   const [documentosRequeridos, setDocumentosRequeridos] = useState({});
   const [alerta, setAlerta] = useState({});
-  const [cargandoData, setCargando] = useState(false);
+  const [cargandoRequerido, setCargando] = useState(false);
   const navigate = useNavigate();
   const { auth } = useAuth();
   
@@ -47,6 +47,11 @@ const DocumentosRequeridosProvider = ({ children }) => {
         documento,
         config
       );
+
+      const documentosActualizados = documentosRequeridos.map((ofertaState) =>
+        ofertaState._id === data._id ? data : ofertaState
+      );
+      setDocumentosRequeridos(documentosActualizados);
 
       //Mostrar alerta
       setAlerta({
@@ -124,7 +129,7 @@ const DocumentosRequeridosProvider = ({ children }) => {
     <DocumentosRequueridosContext.Provider
       value={{
         alerta,
-        cargandoData,
+        cargandoRequerido,
         documentosRequeridos,
         submitDocumentosRequeridos,
         mostrarAlerta,

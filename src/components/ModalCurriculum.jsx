@@ -2,6 +2,7 @@ import {useState} from "react";
 import useDocumentosRequeridos from "../hooks/useDocumentosRequeridos"
 import Alert from "./Alert";
 import { useEffect } from "react";
+import useCargos from "../hooks/useCargos"
 
 export default function ModalPublic({setShowModal, cargos, data}) {
 
@@ -12,10 +13,16 @@ export default function ModalPublic({setShowModal, cargos, data}) {
   const[errorDocumento, setErrorDocumento] = useState(false);
   const[fechaVigencia, setFechaVigencia] = useState("");
   const[observaciones, setObservaciones] = useState("")
+  const[fechaVigenciaState, setFechaVigenciaState] = useState(true)
   
   
-  const{submitDocumentosRequeridos, alerta, mostrarAlerta} = useDocumentosRequeridos();
+  const{submitDocumentosRequeridos, alerta, mostrarAlerta, documentosRequeridos} = useDocumentosRequeridos();
+  const{cargosForm} = useCargos();
+ 
 
+  console.log(cargos)
+
+  
   useEffect(() => {
     if (Object.keys(data).length !== 0 ){
       setId(data._id);
@@ -25,6 +32,18 @@ export default function ModalPublic({setShowModal, cargos, data}) {
       setObservaciones(data.observaciones)
     }
   }, [data])
+
+
+  useEffect(() => {
+    let preventDouble = cargos.inputCargos.find(item => item.nombre_requisito === nombreRequisito)
+    console.log(preventDouble)
+    if(preventDouble !== undefined){
+      setFechaVigenciaState(preventDouble.vigencia)
+      setFechaVigencia("")
+    }
+   
+  }, [nombreRequisito])
+  
   
 
    const handleDocumento = (data) => {
@@ -42,6 +61,17 @@ export default function ModalPublic({setShowModal, cargos, data}) {
 
   const submitData = async (e) =>{
      e.preventDefault();
+
+    let preventDouble = documentosRequeridos.find(item => item.nombreRequisito === nombreRequisito)
+    if(preventDouble !== undefined && data?.nombreRequisito !== nombreRequisito){
+      mostrarAlerta({
+        msg: "Documento seleccionado ya existe en su Curriculum",
+        error: true,
+      });
+      return;
+    }
+    
+    
 
     if(nombreRequisito === "elegir"){
      mostrarAlerta({
@@ -72,9 +102,11 @@ export default function ModalPublic({setShowModal, cargos, data}) {
     }, 2000);
   };
 
+
+
 const { msg } = alerta;
 
-console.log(msg)
+
 
   return (
     <>
@@ -112,7 +144,7 @@ console.log(msg)
                     id="nombreRequisito"
                     name="nombreRequisito"                 
                     className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                    onChange={(e) => setNombreRequisito( e.target.value)}
+                    onChange={(e) =>  setNombreRequisito(e.target.value)}
                     value={nombreRequisito}   
                     required={true}                 
                 >
@@ -182,27 +214,29 @@ console.log(msg)
                 )}
               </div>
               </div>
-
-               <div>
-                <label
-                  htmlFor="fechaVigencia"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Fecha de vigencia
-                </label>
-                <div className="mt-1">
-                  <input
-                    id="fechaVigencia"
-                    name="fechaVigencia"
-                    type="date"
-                    placeholder="Digite la fecha"
-                    className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                    value={fechaVigencia}
-                    onChange={(e) => setFechaVigencia(e.target.value)}
-                    required={true}
-                  />
+              {fechaVigenciaState === true ? (
+                <div>
+                  <label
+                    htmlFor="fechaVigencia"
+                    className="block text-sm font-medium text-gray-700"
+                  >
+                    Fecha de vigencia
+                  </label>
+                  <div className="mt-1">
+                    <input
+                      id="fechaVigencia"
+                      name="fechaVigencia"
+                      type="date"
+                      placeholder="Digite la fecha"
+                      className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                      value={fechaVigencia}
+                      onChange={(e) => setFechaVigencia(e.target.value)}
+                      required={true}
+                    />
+                  </div>
                 </div>
-              </div>
+              ): null}
+               
 
 
               <div>
