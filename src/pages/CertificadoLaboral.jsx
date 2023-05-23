@@ -14,7 +14,7 @@ const CertificadoLaboral = () => {
   const { auth, cargando } = useAuth();
   const { cargandoData, nominas, obtenerNomina } = useNominas();
   const { curriculum, obtenerCurriculum } = useCurriculum();
-
+  
   //const { nomina, obtenerNomina } = useNominas();
 
   useEffect(() => {
@@ -24,13 +24,13 @@ const CertificadoLaboral = () => {
   //console.log(auth.documento);
 
   
-
+  //let curriculum_individual = curriculum[0];
   if (Object.keys(curriculum).length !== 0) {
     console.log(curriculum);
-  }
+ /* }
 
   if(Array.isArray(nominas) && nominas.length > 0){
-  const data = nominas[0]
+  const data = nominas[0]*/
     const date = new Date();
     let day = date.getDate();
     let month = date.getMonth() + 1;
@@ -297,11 +297,12 @@ const CertificadoLaboral = () => {
   
       return ''
   }
-
-      data["identificacion_format"] = documentFormat(data.identificacion);
+      
+   
+      //data["identificacion_format"] = documentFormat(data.identificacion);
       //Pagos
-      data["sueldo_basico_format"] = currencyFormat(data.sueldo_basico);
-      data["total_neto_pagado_format"] = currencyFormat(data.total_neto_pagado);
+      curriculum[0]["sueldo_basico_format"] = currencyFormat(curriculum[0].sueldo);
+     /*data["total_neto_pagado_format"] = currencyFormat(data.total_neto_pagado);
       data["aux_transp_format"] = currencyFormat(data.aux_transp);
       data["horas_extras_format"] = currencyFormat(data.horas_extras);
       data["rec_nocturno_format"] = currencyFormat(data.rec_nocturno);
@@ -313,7 +314,7 @@ const CertificadoLaboral = () => {
       data["apt_pension_format"] = currencyFormat(data.apt_pension);
       data["ret_fuente_format"] = currencyFormat(data.ret_fuente);
       data["otros_descuentos_format"] = currencyFormat(data.otros_descuentos);
-      data["total_descuentos_format"] = currencyFormat(data.total_descuentos);
+      data["total_descuentos_format"] = currencyFormat(data.total_descuentos);*/
       //Monena a Letras
       let numero_letras = numeroALetras(curriculum[0].sueldo);
       const numero_letras_trim = numero_letras.replace(/\s+/g, ' ').trim();
@@ -325,22 +326,21 @@ const CertificadoLaboral = () => {
       let anio_letras = numeroALetras(year);
       const anio_letras_trim = anio_letras.replace(/\s+/g, ' ').trim();
       curriculum[0]["sueldo_basico_letras"] = numero_letras_trim;
-      data["dia"] = day;
-      data["dia_letras"] = dia_letras_trim;
-      data["mes"] = month;
-      data["mes_letras"] = mes_letras_trim;
-      data["anio"] = year;
-      data["anio_letras"] = anio_letras_trim;
+      curriculum[0]["dia"] = day;
+      curriculum[0]["dia_letras"] = dia_letras_trim;
+      curriculum[0]["mes"] = month;
+      curriculum[0]["mes_letras"] = mes_letras_trim;
+      curriculum[0]["anio"] = year;
+      curriculum[0]["anio_letras"] = anio_letras_trim;
   }
   
-
    if (cargandoData && !curriculum) return <BeatLoader color="#36d7b7" />;
-   console.log(cargandoData)
+   
   return (
     <>
-      {Object.keys(curriculum).length !== 0 &&  Array.isArray(nominas) && nominas.length > 0 ?(
+      {Object.keys(curriculum).length !== 0 /*&&  Array.isArray(nominas) && nominas.length > 0 */?(
         <PDFViewer style={{ width: "100%", height: "90vh" }}>
-          <PdfCertificado data={nominas[0]} curriculum={curriculum} />
+          <PdfCertificado /*data={nominas[0]} */ curriculum={curriculum} />
         </PDFViewer>
       ): null}
     </>

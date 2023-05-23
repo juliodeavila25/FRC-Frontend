@@ -77,8 +77,9 @@ const styles = StyleSheet.create({
   },
 });
 
-const PdfCertificado = ({ data, curriculum }) => {
-  console.log(curriculum);
+const PdfCertificado = ({ curriculum }) => {
+  //console.log(data);
+  //console.log(curriculum);
   return (
     <Document>
       <Page style={styles.body}>
@@ -100,14 +101,14 @@ const PdfCertificado = ({ data, curriculum }) => {
           <Text style={styles.textb}> actual </Text>
           de:{" "}
           <Text style={styles.textb}>
-            {data.sueldo_basico_letras} pesos (${data.sueldo_basico_format}){" "}
+            {curriculum[0].sueldo_basico_letras} pesos (${curriculum[0].sueldo_basico_format}){" "}
           </Text>{" "}
           M/CTE. :
         </Text>
         <Text style={styles.text}>
           El presente certificado se expide a solicitud del interesado a los{" "}
-          {data.dia_letras} ({data.dia}) días del mes de {data.mes_letras} del{" "}
-          {data.anio_letras} ({data.anio}) a solicitud de{" "}
+          {curriculum[0].dia_letras} ({curriculum[0].dia}) días del mes de {curriculum[0].mes_letras} del{" "}
+          {curriculum[0].anio_letras} ({curriculum[0].anio}) a solicitud de{" "}
           <Text style={styles.textb}>A QUIEN INTERESE. </Text>
         </Text>
         <Text style={styles.text}>Cordialmente,</Text>
