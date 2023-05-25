@@ -37,6 +37,7 @@ const Login = () => {
       });
       setAlerta({});
       localStorage.setItem("token", data.token);
+      localStorage.setItem("id_trabajador_conectado", data._id)
       setAuth(data);
       navigate("/dashboard");
     } catch (error) {

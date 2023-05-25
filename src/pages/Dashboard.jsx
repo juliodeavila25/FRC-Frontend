@@ -1,7 +1,9 @@
+import { useEffect } from "react";
 import useOfertas from "../hooks/useOfertas";
 import useAuth from "../hooks/useAuth";
 import Admin  from "../components/dashboard/Admin"
 import ModalFillCurriculum from "../components/ModalFillCurriculum";
+import { XCircleIcon } from '@heroicons/react/20/solid'
 const projects = [
   {
     id: 1,
@@ -48,11 +50,17 @@ function classNames(...classes) {
 
 export default function Dashboard() {
   const { ofertas } = useOfertas();
-  const { auth } = useAuth();
+  const { auth, obtenerUsuarioAutenticado, usuarioAutenticado } = useAuth();
 
   //console.log(auth?.userType[0]);
 
   //console.log(ofertas);
+
+  useEffect(() => {
+    obtenerUsuarioAutenticado()
+  }, [auth])
+  
+  console.log(usuarioAutenticado)
 
   return (
     <>
@@ -61,9 +69,31 @@ export default function Dashboard() {
               <Admin/>
         ) : null
       }
-      {auth?.userType[0] === "colaborador" && auth?.estado === "por_completar" ? (
-        <ModalFillCurriculum/>
+        {Object.keys(usuarioAutenticado).length !== 0 && usuarioAutenticado && usuarioAutenticado?.userType[0] === "colaborador" && usuarioAutenticado?.estado === "por_completar" ? (
+         <ModalFillCurriculum/>
       ) : null}
+
+       {Object.keys(usuarioAutenticado).length !== 0 && usuarioAutenticado && usuarioAutenticado?.userType[0] === "aspirante" && usuarioAutenticado?.estado === "inicial_completado" ? (
+         <div className="rounded-md bg-red-50 p-4">
+          <div className="flex">
+            <div className="flex-shrink-0">
+              <XCircleIcon className="h-5 w-5 text-red-400" aria-hidden="true" />
+            </div>
+            <div className="ml-3">
+              <h3 className="text-sm font-medium text-red-800">Pendiente: Administrador debe validar la información digitada</h3>
+              <div className="mt-2 text-sm text-red-700">
+                <ul role="list" className="list-disc space-y-1 pl-5">
+                  <li> Para descargar <span className="font-bold">Certificado laboral y Desprendibles de Nominas </span> es necesario actualizar todos los datos de la hoja de vida (Seguridad Social, Información Financiera y Documentos Requeridos ), una vez seas validado(a) por el administrador. </li>
+                  
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        ) : null}
+
+
+
       {Array.isArray(ofertas) && ofertas.length > 0 ? (
         <div className="mt-6 px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between space-x-4">

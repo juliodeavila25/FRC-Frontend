@@ -229,7 +229,7 @@ const FormularioCurriculum = () => {
   const{obtenerCargosForm, cargosForm} = useCargos();
   const{obtenerDocumentosRequeridos, documentosRequeridos, }= useDocumentosRequeridos();
 
-  const { auth } = useAuth();
+  const { auth, obtenerUsuarioAutenticado, usuarioAutenticado } = useAuth();
 
  
   useEffect(() => {
@@ -337,6 +337,11 @@ const FormularioCurriculum = () => {
       setCargosFiltrados(obj)
      }
   }, [cargosForm, curriculum])
+
+
+   useEffect(() => {
+    obtenerUsuarioAutenticado()
+  }, [auth])
 
 
   const submitData = async (e) => {
@@ -538,7 +543,11 @@ const FormularioCurriculum = () => {
       setErrorCorreoInput(false)
     }
 
-     if(estado === true && documentosRequeridos.length === 0){
+    if(estado !== true){
+
+    }
+
+     if(estado === true && Object.keys(usuarioAutenticado).length !== 0 && usuarioAutenticado && usuarioAutenticado?.userType[0] === "colaborador" && documentosRequeridos.length === 0 ){
       mostrarAlerta({
         msg: "Favor diligenciar la sección de documentos requeridos",
         error: true,
@@ -1661,7 +1670,7 @@ const handleChangeDepartamento = (e)=>{
               </div>
             </div>
           </div>
-          {auth.userType[0] === "colaborador" ? (
+          {Object.keys(usuarioAutenticado).length !== 0 && usuarioAutenticado && usuarioAutenticado?.userType[0] === "colaborador" ? (
             <>
             <div className="text-left text-xl text-gray-700 mt-8 font-bold border-b-4 border-corporative-blue inline-flex pt-3">
             Seguridad Social

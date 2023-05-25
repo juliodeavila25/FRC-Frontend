@@ -7,6 +7,7 @@ import {
   StyleSheet,
   Image,
 } from "@react-pdf/renderer";
+import firma from "../assets/firma.png"
 
 const styles = StyleSheet.create({
   body: {
@@ -114,7 +115,7 @@ const PdfCertificado = ({ curriculum }) => {
         <Text style={styles.text}>Cordialmente,</Text>
         <Image
           style={styles.sign}
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Firma_de_Juan_Jos%C3%A9_Pradera.svg/2560px-Firma_de_Juan_Jos%C3%A9_Pradera.svg.png"
+          src={firma}
         />
         <Text style={styles.textb}>Mardelis Herrera Machado</Text>
         <Text style={styles.textb}>Fundacion Renal de Colombia</Text>

@@ -45,7 +45,7 @@ const ModalFillCurriculum = () => {
                       </Dialog.Title>
                       <div className="mt-2">
                         <p className="text-sm text-gray-500">
-                          Terminar de diligenciar tu Hoja de Vida es fundamental porque permite presentar de manera estructurada y organizada la información relevante sobre tus habilidades, experiencia laboral, educación y otros aspectos relevantes.
+                           Para descargar <span className="font-bold">Certificado laboral y Desprendibles de Nominas </span> es necesario actualizar todos los datos de la hoja de vida (Seguridad Social, Información Financiera y Documentos Requeridos ).
                         </p>
                       </div>
                     </div>

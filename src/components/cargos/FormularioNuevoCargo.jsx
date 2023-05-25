@@ -1,4 +1,4 @@
-import { useState, useEffect, version } from "react";
+import { useState, useEffect, version, useRef } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import useCargos from "../../hooks/useCargos";
 import Alert from "../Alert";
@@ -15,6 +15,9 @@ const FormularioNuevoCargo = () => {
      { nombre_requisito: "Bachiller", vigencia:false, estado_requisito:"Activo" },
    ]);
 
+  /* Error en el campo nombre del cargo*/
+  const inputRef = useRef(null);
+  const[errorNombre, setErrorNombre] = useState(false)
 
 
   const params = useParams();
@@ -40,7 +43,18 @@ const FormularioNuevoCargo = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(nombre, inputCargos)
+    
+    if(nombre === ""){
+      inputRef.current.focus()
+      setErrorNombre(true)
+      return;
+    }else{
+      setErrorNombre(false)
+    }
+
+   
+ 
+
     await submitCargo({
         id,
         nombre,
@@ -48,10 +62,7 @@ const FormularioNuevoCargo = () => {
     })
     
    
-    // setNombre("");
-    // setDescripcion("");
-    // setFechaEntrega("");
-    // setCliente("");
+  
   };
 
 
@@ -59,7 +70,7 @@ const FormularioNuevoCargo = () => {
  const handleaddclick = () => {
     setInputCargos([
       ...inputCargos,
-       { nombre_requisito: "", vigencia:false, estado_requisito:"Activo" },
+       { nombre_requisito: "Bachiller", vigencia:false, estado_requisito:"Activo" },
     ]);
   };
 
@@ -106,11 +117,15 @@ const FormularioNuevoCargo = () => {
                         id="codigo"
                         name="codigo"
                         placeholder="Digita el nombre del cargo"
-                        className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                        className={errorNombre === false ? 
+                            "block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                            : 
+                            "block w-full appearance-none rounded-md border border-red-500 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-red-500 focus:outline-none  sm:text-sm"}
                         value={nombre}
                         onChange={(e) => setNombre(e.target.value)}
-                        required={true}
+                        ref={inputRef}
                         />
+                        {errorNombre === true && <span className="text-red-500 text-xs">Digite la información requerida</span>}
                     </div>
                 </div>
 
@@ -135,8 +150,11 @@ const FormularioNuevoCargo = () => {
                               value={item.nombre_requisito}
                               required={true}
                               disabled={Array.isArray(cargo.inputCargos) && i >= cargo.inputCargos?.length  || params.id === undefined && inputCargos.length >= 1 ? false : true}
-                          
+                           
                             >
+                              <option value="elegir" disabled className="text-gray-400" >
+                                --Selecciona un tipo de documento--
+                              </option>
                               <option value="Bachiller" >
                                  Bachiller
                               </option>
@@ -169,6 +187,7 @@ const FormularioNuevoCargo = () => {
                               <option value="Carnet De Radio Protección">Carnet De Radio Protección</option>
 
                             </select>
+                             
                             </div>
                             <div className="flex space-x-4 items-center pl-4">
                               <input
@@ -192,6 +211,7 @@ const FormularioNuevoCargo = () => {
                                 className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                                 onChange={(e) => handleinputchange(e, i)}
                                 value={item.estado_requisito}
+                                required={true}
                                 >
                                 <option value="Activo">
                                     Activo

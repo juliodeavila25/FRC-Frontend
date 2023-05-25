@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment, useState, useEffect } from "react";
 import { Dialog, Menu, Transition } from "@headlessui/react";
 import {
   Bars3CenterLeftIcon,
@@ -45,9 +45,14 @@ import useAuth from "../../../hooks/useAuth";
 const Sidebar = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const location = useLocation();
-  const { auth } = useAuth();
+  const { auth, obtenerUsuarioAutenticado, usuarioAutenticado  } = useAuth();
 
   //console.log(auth?.userType[0]);
+
+   useEffect(() => {
+    obtenerUsuarioAutenticado()
+  }, [auth])
+  
 
   const navigation_admin = [
     {
@@ -275,7 +280,7 @@ const Sidebar = () => {
                           </Link>
                         ))}
                     </div>
-                    {auth?.userType[0] === "colaborador"  ? (
+                    {Object.keys(usuarioAutenticado).length !== 0 && usuarioAutenticado && usuarioAutenticado?.userType[0] === "colaborador" && usuarioAutenticado?.estado === "completado"   ? (
                       <div className="mt-8">
                         <h3
                           className="px-3 text-lg font-medium text-gray-500"
@@ -577,7 +582,7 @@ const Sidebar = () => {
                   </Link>
                 ))}
             </div>
-            {auth?.userType[0] === "colaborador"  ? (
+            {Object.keys(usuarioAutenticado).length !== 0 && usuarioAutenticado && usuarioAutenticado?.userType[0] === "colaborador" && usuarioAutenticado?.estado === "completado"   ? (
               <div className="mt-8">
                 {/* Secondary navigation */}
                 <h3

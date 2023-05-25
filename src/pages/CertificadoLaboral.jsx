@@ -12,26 +12,33 @@ const CertificadoLaboral = () => {
     nombre: "Andres Puello",
   });*/
 
-  const { auth, cargando } = useAuth();
+  const { auth, cargando, obtenerUsuarioAutenticado, usuarioAutenticado } = useAuth();
   const { cargandoData, nominas, obtenerNomina } = useNominas();
   const { curriculum, obtenerCurriculum } = useCurriculum();
   
   //const { nomina, obtenerNomina } = useNominas();
 
   useEffect(() => {
-    obtenerCurriculum(auth._id);
+    const id_trabajador_conectado = localStorage.getItem("id_trabajador_conectado");
+
+      if (id_trabajador_conectado) {
+        obtenerCurriculum(id_trabajador_conectado);
+        return;
+      }
+   
   }, []);
-  //console.log(auth._id);
-  //console.log(auth.documento);
+
+
+  useEffect(() => {
+    obtenerUsuarioAutenticado()
+  }, [auth])
+ 
 
   
-  //let curriculum_individual = curriculum[0];
+  
   if (Object.keys(curriculum).length !== 0) {
     console.log(curriculum);
- /* }
 
-  if(Array.isArray(nominas) && nominas.length > 0){
-  const data = nominas[0]*/
     const date = new Date();
     let day = date.getDate();
     let month = date.getMonth() + 1;
@@ -335,11 +342,11 @@ const CertificadoLaboral = () => {
       curriculum[0]["anio_letras"] = anio_letras_trim;
   }
   
-   if (cargandoData && !curriculum) return <BeatLoader color="#36d7b7" />;
+   if (!curriculum) return <BeatLoader color="#36d7b7" />;
    
   return (
     <>
-     {auth?.userType[0] === "colaborador" && auth?.estado === "por_completar" ? (
+     {Object.keys(usuarioAutenticado).length !== 0 && usuarioAutenticado && usuarioAutenticado?.userType[0] === "colaborador" && usuarioAutenticado?.estado === "por_completar" ? (
         <ModalFillCurriculum/>
       ) : null}
       

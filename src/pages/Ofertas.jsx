@@ -1,14 +1,20 @@
+import {useEffect} from 'react'
 import useOfertas from "../hooks/useOfertas";
 import useAuth from "../hooks/useAuth";
 import ModalFillCurriculum from "../components/ModalFillCurriculum";
 
+
 const Ofertas = () => {
   const { ofertas } = useOfertas();
-  const { auth } = useAuth();
+  const { auth, obtenerUsuarioAutenticado, usuarioAutenticado } = useAuth();
+
+  useEffect(() => {
+    obtenerUsuarioAutenticado()
+  }, [auth])
 
   return (
     <>
-    {auth?.userType[0] === "colaborador" && auth?.estado === "por_completar" ? (
+    {Object.keys(usuarioAutenticado).length !== 0 && usuarioAutenticado && usuarioAutenticado?.userType[0] === "colaborador" && usuarioAutenticado?.estado === "por_completar" ? (
         <ModalFillCurriculum/>
       ) : null}
     {Array.isArray(ofertas) && ofertas.length > 0 ? (
