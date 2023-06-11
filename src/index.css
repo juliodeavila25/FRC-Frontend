@@ -170,3 +170,16 @@ padding: 4px 0 0 4px;
   opacity: 0.5;
   cursor: auto;
 }
+
+
+.content {
+  background: white;
+  padding-top: 20px;
+  width: 100%;
+  height: 100%;
+  display: none;
+}
+
+.active-content {
+  display: block;
+}

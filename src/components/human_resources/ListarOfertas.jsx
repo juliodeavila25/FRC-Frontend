@@ -7,7 +7,18 @@ import { useNavigate, Link } from "react-router-dom";
 
 const ListarOfertas = () => {
   const { ofertas, obtenerOferta, oferta } = useOfertas();
+  const [activas, setActivas] = useState([])
+  const [pausadas, setPausadas] = useState([])
+  const [inactivas, setInactivas] = useState([])
+
   const navigate = useNavigate();
+
+  const [toggleState, setToggleState] = useState(1);
+
+  const toggleTab = (index) => {
+    setToggleState(index);
+  };
+
 
   const [headers, setHeaders] = useState([
     {
@@ -17,17 +28,23 @@ const ListarOfertas = () => {
     { Header: "Cargo", accessor: "nombre" },
     { Header: "Ciudad", accessor: "ciudad" },
     {
-      Header: "Fecha de creación",
-      accessor: "createdAt",
+      Header: "Fecha de inicio",
+      accessor: "fechaInicio",
       Cell: ({ value }) => {
         return format(new Date(value), "dd/MM/yyyy");
       },
     },
-    { Header: "Estado", accessor: "estado" },
+    {
+      Header: "Fecha de finalización",
+      accessor: "fechaFin",
+      Cell: ({ value }) => {
+        return format(new Date(value), "dd/MM/yyyy");
+      },
+    },
     {
       Header: " ",
       accessor: (originalRow, rowIndex) => (
-        <div>
+        <div className="flex space-x-2">
           <button
             className="text-blue-500 hover:text-blue-900"
             onClick={() =>
@@ -51,6 +68,20 @@ const ListarOfertas = () => {
               />
             </svg>
           </button>
+
+          <button
+            className="text-blue-500 hover:text-blue-900"
+            onClick={() =>
+              navigate(
+                `/recursos-humanos/convocatoria/${originalRow._id}/postulantes`
+              )
+            }
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
+            </svg>
+
+          </button>
         </div>
       ),
     },
@@ -58,11 +89,11 @@ const ListarOfertas = () => {
 
   return (
     <>
-      <div className="px-4 sm:px-6 lg:px-8 mt-5 mb-5">
+      <div className="px-4 sm:px-6 lg:px-8 mt-5 mb-5 ">
         <div className="mt-8 flex flex-col">
           <div className="sm:flex sm:items-center">
             <div className="sm:flex-auto">
-              <h1 className="text-xl font-semibold text-gray-900">Ofertas</h1>
+              <h1 className="text-xl font-semibold text-gray-900">Listado de ofertas</h1>
             </div>
             <div className="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
               <Link
@@ -75,41 +106,151 @@ const ListarOfertas = () => {
           </div>
         </div>
       </div>
-      {Array.isArray(ofertas) && ofertas.length > 0 ? (
-        <>
-          <Table
-            data={ofertas}
-            columns={headers}
-            title="Ofertas"
-            titleButton="Nueva oferta de empleo"
-            href={"/recursos-humanos/crear-convocatoria"}
-          />
-        </>
-      ) : (
-        <div className="rounded-md bg-blue-50 p-4">
-          <div className="flex">
-            <div className="flex-shrink-0">
-              <svg
-                className="h-5 w-5 text-blue-400"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-                aria-hidden="true"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a.75.75 0 000 1.5h.253a.25.25 0 01.244.304l-.459 2.066A1.75 1.75 0 0010.747 15H11a.75.75 0 000-1.5h-.253a.25.25 0 01-.244-.304l.459-2.066A1.75 1.75 0 009.253 9H9z"
-                  clipRule="evenodd"
+
+      <div className="w-11/12 mx-auto mt-10">
+        <div className="flex justify-between bg-gray-100 rounded-t-lg">
+          <button
+            className={toggleState === 1 ? 'border-indigo-500 text-indigo-600 w-1/4 border-b-2 py-4 px-1 text-center text-sm font-medium' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 w-1/4 border-b-2 py-4 px-1 text-center text-sm font-medium'}
+            onClick={() => toggleTab(1)}
+          >
+            Activas
+          </button>
+          <button
+            className={toggleState === 2 ? 'border-indigo-500 text-indigo-600 w-1/4 border-b-2 py-4 px-1 text-center text-sm font-medium' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 w-1/4 border-b-2 py-4 px-1 text-center text-sm font-medium'}
+            onClick={() => toggleTab(2)}
+          >
+            Pausadas
+          </button>
+          <button
+            className={toggleState === 3 ? 'border-indigo-500 text-indigo-600 w-1/4 border-b-2 py-4 px-1 text-center text-sm font-medium' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 w-1/4 border-b-2 py-4 px-1 text-center text-sm font-medium'}
+            onClick={() => toggleTab(3)}
+          >
+            Inactivas
+          </button>
+        </div>
+
+        <div className="content-tabs">
+          <div
+            className={toggleState === 1 ? "content  active-content" : "content"}
+          >
+            {Array.isArray(ofertas) && ofertas.length > 0 && ofertas.filter(oferta => oferta.estadoConvocatoria === "Activa").length > 0 ? (
+              <>
+                <Table
+                  data={ofertas.filter(oferta => oferta.estadoConvocatoria === "Activa")}
+                  columns={headers}
+                  title="Ofertas"
+                  titleButton="Nueva oferta de empleo"
+                  href={"/recursos-humanos/crear-convocatoria"}
                 />
-              </svg>
-            </div>
-            <div className="ml-3 flex-1 md:flex ">
-              <p className="text-sm text-blue-700">
-                No existen ofertas laborales registradas.
-              </p>
-            </div>
+              </>
+            ) : (
+              <div className="rounded-md bg-blue-50 p-4">
+                <div className="flex">
+                  <div className="flex-shrink-0">
+                    <svg
+                      className="h-5 w-5 text-blue-400"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      aria-hidden="true"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a.75.75 0 000 1.5h.253a.25.25 0 01.244.304l-.459 2.066A1.75 1.75 0 0010.747 15H11a.75.75 0 000-1.5h-.253a.25.25 0 01-.244-.304l.459-2.066A1.75 1.75 0 009.253 9H9z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </div>
+                  <div className="ml-3 flex-1 md:flex ">
+                    <p className="text-sm text-blue-700">
+                      No existen ofertas activas.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+
+          <div
+            className={toggleState === 2 ? "content  active-content" : "content"}
+          >
+            {Array.isArray(ofertas) && ofertas.length > 0 && ofertas.filter(oferta => oferta.estadoConvocatoria === "Pausada").length > 0 ? (
+              <>
+                <Table
+                  data={ofertas.filter(oferta => oferta.estadoConvocatoria === "Pausada")}
+                  columns={headers}
+                  title="Ofertas"
+                  titleButton="Nueva oferta de empleo"
+                  href={"/recursos-humanos/crear-convocatoria"}
+                />
+              </>
+            ) : (
+              <div className="rounded-md bg-blue-50 p-4">
+                <div className="flex">
+                  <div className="flex-shrink-0">
+                    <svg
+                      className="h-5 w-5 text-blue-400"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      aria-hidden="true"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a.75.75 0 000 1.5h.253a.25.25 0 01.244.304l-.459 2.066A1.75 1.75 0 0010.747 15H11a.75.75 0 000-1.5h-.253a.25.25 0 01-.244-.304l.459-2.066A1.75 1.75 0 009.253 9H9z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </div>
+                  <div className="ml-3 flex-1 md:flex ">
+                    <p className="text-sm text-blue-700">
+                      No existen ofertas pausadas.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+
+          <div
+            className={toggleState === 3 ? "content  active-content" : "content"}
+          >
+            {Array.isArray(ofertas) && ofertas.length > 0 && ofertas.filter(oferta => oferta.estadoConvocatoria === "Inactiva").length > 0 ? (
+              <>
+                <Table
+                  data={ofertas.filter(oferta => oferta.estadoConvocatoria === "Inactiva")}
+                  columns={headers}
+                  title="Ofertas"
+                  titleButton="Nueva oferta de empleo"
+                  href={"/recursos-humanos/crear-convocatoria"}
+                />
+              </>
+            ) : (
+              <div className="rounded-md bg-blue-50 p-4">
+                <div className="flex">
+                  <div className="flex-shrink-0">
+                    <svg
+                      className="h-5 w-5 text-blue-400"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      aria-hidden="true"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a.75.75 0 000 1.5h.253a.25.25 0 01.244.304l-.459 2.066A1.75 1.75 0 0010.747 15H11a.75.75 0 000-1.5h-.253a.25.25 0 01-.244-.304l.459-2.066A1.75 1.75 0 009.253 9H9z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </div>
+                  <div className="ml-3 flex-1 md:flex ">
+                    <p className="text-sm text-blue-700">
+                      No existen ofertas inactivas.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         </div>
-      )}
+      </div>
     </>
   );
 };

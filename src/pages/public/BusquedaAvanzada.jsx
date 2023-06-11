@@ -19,9 +19,9 @@ const navigation = [
   {
     name: "Inicio",
     href: "/",
-    
+
   },
-  
+
   {
     name: "Busqueda",
     href: "documentos/busqueda-avanzada",
@@ -39,17 +39,17 @@ function classNames(...classes) {
 }
 
 export default function BusquedaAvanzada() {
-  const[documentosPublicos, setDocumentosPublicos] = useState([]);
-  const[datosFiltrados, setFiltrados] = useState([])
-  const[busqueda, setBusqueda] = useState(false)
-  const[proceso, setProceso] = useState(" ")
-  const[servicio, setServicio] = useState("")
-  const[tipo, setTipo] = useState(" ")
-  const[especialidad, setEspecialidad] = useState("")
-  const[titulo, setTitulo] = useState("")
+  const [documentosPublicos, setDocumentosPublicos] = useState([]);
+  const [datosFiltrados, setFiltrados] = useState([])
+  const [busqueda, setBusqueda] = useState(false)
+  const [proceso, setProceso] = useState(" ")
+  const [servicio, setServicio] = useState("")
+  const [tipo, setTipo] = useState(" ")
+  const [especialidad, setEspecialidad] = useState("")
+  const [titulo, setTitulo] = useState("")
   const [data, setData] = useState();
   const [visible, setVisible] = useState(false);
-  const[resultados, setResultados]=useState(false)
+  const [resultados, setResultados] = useState(false)
   const location = useLocation();
 
   useEffect(() => {
@@ -73,7 +73,7 @@ export default function BusquedaAvanzada() {
     setVisible(false);
   };
 
-  
+
   const [headers, setHeaders] = useState([
     {
       Header: "Código",
@@ -83,23 +83,24 @@ export default function BusquedaAvanzada() {
         </div>
       ),
     },
-    { Header: "Proceso", accessor: "proceso"},
-    { Header: "Titulo", 
+    { Header: "Proceso", accessor: "proceso" },
+    {
+      Header: "Titulo",
       accessor: (originalRow, rowIndex) => (
         <div className="">
-   
+
           <p>{originalRow.titulo}</p>
-          <div className="flex flex-wrap mt-2 gap-2">{originalRow.tags.map(item =>{
-              return(
-                <p className="bg-blue-400 px-3 rounded-full text-white">{item.name}</p>
-              )  
-            }) }</div>
+          <div className="flex flex-wrap mt-2 gap-2">{originalRow.tags.map(item => {
+            return (
+              <p className="bg-blue-400 px-3 rounded-full text-white">{item.name}</p>
+            )
+          })}</div>
         </div>
       ),
     },
-    
+
     {
-       Header: "Implementación",
+      Header: "Implementación",
       accessor: "implementacion",
     },
     {
@@ -130,7 +131,7 @@ export default function BusquedaAvanzada() {
               />
             </svg>
           </button>
-          
+
           <a
             className="text-blue-500 hover:text-blue-900"
             href={originalRow.link}
@@ -156,49 +157,49 @@ export default function BusquedaAvanzada() {
     },
   ]);
 
-  const handleSubmit = (e) =>{
-     
+  const handleSubmit = (e) => {
+
     e.preventDefault()
     setFiltrados([])
-    if (proceso !== "" || titulo !== "" || servicio !== "" || tipo !== "" 
-        || especialidad !== "" || titulo !== ""){
-          console.log(proceso)
-        setBusqueda(true)
-        let arrayInputCargos = [];
-        if(Array.isArray(documentosPublicos) && documentosPublicos.length > 0){
-           for(let i=0; i < documentosPublicos.length; i++){
-            let procesoNormalizado = documentosPublicos[i].proceso.trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()
-            let tituloNormalizado = documentosPublicos[i].titulo.trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()
-            let servicioNormalizado = documentosPublicos[i].servicio.trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()
-            let tipoNormalizado = documentosPublicos[i].tipo.trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()
-            let especialidadNormalizado = documentosPublicos[i].especialidad.trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()
-         
-           
-            if( procesoNormalizado.includes(proceso.trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()) && 
-                tituloNormalizado.includes(titulo.trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()) && 
-                servicioNormalizado.includes(servicio.trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()) && 
-                tipoNormalizado.includes(tipo.trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase())&& 
-                especialidadNormalizado.includes(especialidad.trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase())
-                
-                ){
-                  console.log(proceso.trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase(), procesoNormalizado )
-                 arrayInputCargos.push(documentosPublicos[i]);  
+    if (proceso !== "" || titulo !== "" || servicio !== "" || tipo !== ""
+      || especialidad !== "" || titulo !== "") {
+      console.log(proceso)
+      setBusqueda(true)
+      let arrayInputCargos = [];
+      if (Array.isArray(documentosPublicos) && documentosPublicos.length > 0) {
+        for (let i = 0; i < documentosPublicos.length; i++) {
+          let procesoNormalizado = documentosPublicos[i].proceso.trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()
+          let tituloNormalizado = documentosPublicos[i].titulo.trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()
+          let servicioNormalizado = documentosPublicos[i].servicio.trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()
+          let tipoNormalizado = documentosPublicos[i].tipo.trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()
+          let especialidadNormalizado = documentosPublicos[i].especialidad.trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()
 
-                     
-                setFiltrados(arrayInputCargos)
 
-                setResultados(false)
-              
-            }else{
-                setResultados(true)
-            }
+          if (procesoNormalizado.includes(proceso.trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()) &&
+            tituloNormalizado.includes(titulo.trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()) &&
+            servicioNormalizado.includes(servicio.trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()) &&
+            tipoNormalizado.includes(tipo.trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()) &&
+            especialidadNormalizado.includes(especialidad.trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase())
 
-           
-         }
+          ) {
+            console.log(proceso.trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase(), procesoNormalizado)
+            arrayInputCargos.push(documentosPublicos[i]);
+
+
+            setFiltrados(arrayInputCargos)
+
+            setResultados(false)
+
+          } else {
+            setResultados(true)
+          }
+
+
         }
-        
-        }
-    
+      }
+
+    }
+
     // if( titulo !== ""){
     //      setBusqueda(true)
     //     let arrayInputCargos = [];
@@ -212,13 +213,13 @@ export default function BusquedaAvanzada() {
     // } 
 
 
-   
+
   }
 
- 
+
 
   if (!documentosPublicos) return <BeatLoader color="#36d7b7" />;
- 
+
   return (
     <>
       {visible === true && (
@@ -303,44 +304,7 @@ export default function BusquedaAvanzada() {
                     </Disclosure.Button>
                   ))}
                 </div>
-                <div className="border-t border-gray-200 pt-4 pb-3">
-                  <div className="flex items-center px-4">
-                    <div className="flex-shrink-0">
-                      <img
-                        className="h-10 w-10 rounded-full"
-                        src={user.imageUrl}
-                        alt=""
-                      />
-                    </div>
-                    <div className="ml-3">
-                      <div className="text-base font-medium text-gray-800">
-                        {user.name}
-                      </div>
-                      <div className="text-sm font-medium text-gray-500">
-                        {user.email}
-                      </div>
-                    </div>
-                    <button
-                      type="button"
-                      className="ml-auto flex-shrink-0 rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                    >
-                      <span className="sr-only">View notifications</span>
-                      <BellIcon className="h-6 w-6" aria-hidden="true" />
-                    </button>
-                  </div>
-                  <div className="mt-3 space-y-1">
-                    {userNavigation.map((item) => (
-                      <Disclosure.Button
-                        key={item.name}
-                        as="a"
-                        href={item.href}
-                        className="block px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800"
-                      >
-                        {item.name}
-                      </Disclosure.Button>
-                    ))}
-                  </div>
-                </div>
+
               </Disclosure.Panel>
             </>
           )}
@@ -355,152 +319,152 @@ export default function BusquedaAvanzada() {
             </div>
           </header>
           <main>
-             <div className="mx-auto max-w-7xl sm:px-6 px-8">
-                <form className="lg:pl-8" onSubmit={handleSubmit} >
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 mt-10">
-                        <div>
-                            <label
-                                htmlFor="proceso"
-                                className="block text-sm font-medium text-gray-700"
-                            >
-                                Proceso
-                            </label>
-                            <div className="mt-1">
-                               <select
-                                  id="proceso"
-                                  name="proceso"
-                                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                                  onChange={(e) => {
-                                    const selectedDocumentType = e.target.value;
+            <div className="mx-auto max-w-7xl sm:px-6 px-8">
+              <form className="lg:pl-8" onSubmit={handleSubmit} >
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 mt-10">
+                  <div>
+                    <label
+                      htmlFor="proceso"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Proceso
+                    </label>
+                    <div className="mt-1">
+                      <select
+                        id="proceso"
+                        name="proceso"
+                        className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                        onChange={(e) => {
+                          const selectedDocumentType = e.target.value;
 
-                                    setProceso(selectedDocumentType);
-                                  }}
-                                  value={proceso}
-                                >
-                                  <option value="">
-                                  {" "}
-                                  </option>
-                                  <option value="Atención en Salud">
-                                  Atención en Salud
-                                  </option>
-                                  <option value="Apoyo Administrativo y Operativo">
-                                    Apoyo Administrativo y Operativo
-                                  </option>
-                                  <option value="Mejoramiento Continuo">
-                                    Mejoramiento Continuo
-                                  </option>
-                                  <option value="Direccionamiento Estrategico">Direccionamiento Estrategico</option>
-                                </select>
-                            </div>
-                        </div>
-                         <div>
-                            <label
-                                htmlFor="titulo"
-                                className="block text-sm font-medium text-gray-700"
-                            >
-                                Titulo
-                            </label>
-                            <div className="mt-1">
-                                <input
-                                type="text"
-                                id="titulo"
-                                name="titulo"
-                                placeholder="Búsqueda por titulo"
-                                className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                                value={titulo}
-                                onChange={(e) => setTitulo(e.target.value)}
-                                />
-                            </div>
-                        </div>
-                         <div>
-                            <label
-                                htmlFor="servicio"
-                                className="block text-sm font-medium text-gray-700"
-                            >
-                                Servicio
-                            </label>
-                            <div className="mt-1">
-                                <input
-                                type="text"
-                                id="servicio"
-                                name="servicio"
-                                placeholder="Búsqueda por servicio"
-                                className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                                value={servicio}
-                                onChange={(e) => setServicio(e.target.value)}
-                                />
-                            </div>
-                        </div>
-                        <div>
-                            <label
-                                htmlFor="tipo"
-                                className="block text-sm font-medium text-gray-700"
-                            >
-                                Tipo
-                            </label>
-                         
-                            <div className="mt-1">
-                                 <select
-                                  id="tipo"
-                                  name="tipo"
-                                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                                  onChange={(e) => {
-                                    const selectedDocumentType = e.target.value;
-
-                                    setTipo(selectedDocumentType);
-                                  }}
-                                  value={tipo}
-                                >
-                                  <option value=" ">
-                                  {" "}
-                                  </option>
-                                  <option value="Documento">
-                                  Documento
-                                  </option>
-                                  <option value="Formato">
-                                    Formato
-                                  </option>
-                                 
-                                </select>
-                            
-                            </div>
-                        </div>
-                        <div>
-                            <label
-                                htmlFor="especialidad"
-                                className="block text-sm font-medium text-gray-700"
-                            >
-                                Especialidad
-                            </label>
-                            <div className="mt-1">
-                                <input
-                                type="text"
-                                id="especialidad"
-                                name="especialidad"
-                                placeholder="Búsqueda por especialidad"
-                                className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                                value={especialidad}
-                                onChange={(e) => setEspecialidad(e.target.value)}
-                                />
-                            </div>
-                        </div>
-
-                        
-                         
+                          setProceso(selectedDocumentType);
+                        }}
+                        value={proceso}
+                      >
+                        <option value="">
+                          {" "}
+                        </option>
+                        <option value="Atención en Salud">
+                          Atención en Salud
+                        </option>
+                        <option value="Apoyo Administrativo y Operativo">
+                          Apoyo Administrativo y Operativo
+                        </option>
+                        <option value="Mejoramiento Continuo">
+                          Mejoramiento Continuo
+                        </option>
+                        <option value="Direccionamiento Estrategico">Direccionamiento Estrategico</option>
+                      </select>
                     </div>
-                    <div className="flex justify-center mt-10 ">
-                        <input
-                            type="submit"
-                            className="flex w-60 justify-center rounded-md border border-transparent bg-green-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 cursor-pointer"
-                            value="Buscar"
-                        />
+                  </div>
+                  <div>
+                    <label
+                      htmlFor="titulo"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Titulo
+                    </label>
+                    <div className="mt-1">
+                      <input
+                        type="text"
+                        id="titulo"
+                        name="titulo"
+                        placeholder="Búsqueda por titulo"
+                        className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                        value={titulo}
+                        onChange={(e) => setTitulo(e.target.value)}
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <label
+                      htmlFor="servicio"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Servicio
+                    </label>
+                    <div className="mt-1">
+                      <input
+                        type="text"
+                        id="servicio"
+                        name="servicio"
+                        placeholder="Búsqueda por servicio"
+                        className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                        value={servicio}
+                        onChange={(e) => setServicio(e.target.value)}
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <label
+                      htmlFor="tipo"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Tipo
+                    </label>
+
+                    <div className="mt-1">
+                      <select
+                        id="tipo"
+                        name="tipo"
+                        className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                        onChange={(e) => {
+                          const selectedDocumentType = e.target.value;
+
+                          setTipo(selectedDocumentType);
+                        }}
+                        value={tipo}
+                      >
+                        <option value=" ">
+                          {" "}
+                        </option>
+                        <option value="Documento">
+                          Documento
+                        </option>
+                        <option value="Formato">
+                          Formato
+                        </option>
+
+                      </select>
 
                     </div>
-                    
-                </form>
-             </div>      
-            {busqueda === false  ? (
-                <div className="rounded-md bg-blue-50 p-4 mt-10">
+                  </div>
+                  <div>
+                    <label
+                      htmlFor="especialidad"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Especialidad
+                    </label>
+                    <div className="mt-1">
+                      <input
+                        type="text"
+                        id="especialidad"
+                        name="especialidad"
+                        placeholder="Búsqueda por especialidad"
+                        className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                        value={especialidad}
+                        onChange={(e) => setEspecialidad(e.target.value)}
+                      />
+                    </div>
+                  </div>
+
+
+
+                </div>
+                <div className="flex justify-center mt-10 ">
+                  <input
+                    type="submit"
+                    className="flex w-60 justify-center rounded-md border border-transparent bg-green-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 cursor-pointer"
+                    value="Buscar"
+                  />
+
+                </div>
+
+              </form>
+            </div>
+            {busqueda === false ? (
+              <div className="rounded-md bg-blue-50 p-4 mt-10">
                 <div className="flex">
                   <div className="flex-shrink-0">
                     <svg
@@ -523,7 +487,7 @@ export default function BusquedaAvanzada() {
                   </div>
                 </div>
               </div>
-             
+
             ) : Array.isArray(datosFiltrados) && datosFiltrados.length < 0 && resultados === true ? (
               <div className="rounded-md bg-blue-50 p-4 mt-10">
                 <div className="flex">
@@ -549,12 +513,12 @@ export default function BusquedaAvanzada() {
                 </div>
               </div>
             ) : Array.isArray(datosFiltrados) && datosFiltrados.length > 0 ? (
-                <>
-               <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
-                <PublicTableFilter data={datosFiltrados} columns={headers} />
-              </div>
+              <>
+                <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
+                  <PublicTableFilter data={datosFiltrados} columns={headers} />
+                </div>
               </>
-            ): null}
+            ) : null}
           </main>
         </div>
       </div>

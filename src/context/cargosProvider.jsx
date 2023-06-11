@@ -34,7 +34,7 @@ const CargosProvider = ({ children }) => {
           },
         };
         const { data } = await clienteAxios("/cargos", config);
-       
+
         setCargos(data);
       } catch (error) {
         console.log(error);
@@ -44,6 +44,7 @@ const CargosProvider = ({ children }) => {
     setCargando(false);
   }, [auth]);
 
+
   const submitCargo = async (cargo) => {
     if (cargo.id) {
       await editarCargo(cargo);
@@ -52,7 +53,7 @@ const CargosProvider = ({ children }) => {
     }
   };
 
-  const editarCargo= async (cargo) => {
+  const editarCargo = async (cargo) => {
     console.log(cargo)
     try {
       const token = localStorage.getItem("token");
@@ -145,23 +146,23 @@ const CargosProvider = ({ children }) => {
   };
 
 
-   const obtenerCargosForm = async () => {
-      try {
-        const token = localStorage.getItem("token");
-        if (!token) return;
-        const config = {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        };
-        const { data } = await clienteAxios("/cargos", config);
-       
-        setCargosForm(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
+  const obtenerCargosForm = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) return;
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      const { data } = await clienteAxios("/cargos", config);
+
+      setCargosForm(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <CargosContext.Provider
@@ -175,7 +176,7 @@ const CargosProvider = ({ children }) => {
         mostrarAlerta,
         obtenerCargo,
         obtenerCargosForm
-       
+
       }}
     >
       {children}

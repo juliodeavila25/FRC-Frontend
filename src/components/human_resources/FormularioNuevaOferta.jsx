@@ -6,17 +6,25 @@ import useAuth from "../../hooks/useAuth";
 import { BeatLoader } from "react-spinners";
 
 const FormularioNuevaOferta = () => {
+  let curr = new Date();
+  curr.setDate(curr.getDate() + 3);
+  let date = curr.toISOString().substring(0,10);
+  
+  
   const [active, setActive] = useState(false);
   const [id, setId] = useState(null);
   //   const [estado, setEstado] = useState(null);
   const [nombre, setNombre] = useState("");
   const [convocatoria, setConvocatoria] = useState("");
+  const [fechaInicio, setFechaInicio] = useState(date);
+  const [fechaFin, setFechaFin]= useState("")
   const [ciudad, setCiudad] = useState("");
   const [salario, setSalario] = useState("");
   const [auxilio, setAuxilio] = useState("");
   const [bonificaciones, setBonificaciones] = useState("");
   const [perfil, setPerfil] = useState("");
   const [funciones, setFunciones] = useState("");
+  const [estadoConvocatoria, setEstadoConvocatoria]= useState("Activa")
 
   const params = useParams();
 
@@ -44,6 +52,9 @@ const FormularioNuevaOferta = () => {
       setBonificaciones(oferta.bonificaciones);
       setPerfil(oferta.perfil);
       setFunciones(oferta.funciones);
+      setFechaInicio(oferta.fechaInicio?.split("T")[0]);
+      setFechaFin(oferta.fechaFin?.split("T")[0]);
+      setEstadoConvocatoria(oferta.estadoConvocatoria)
     }
   }, []);
 
@@ -89,11 +100,11 @@ const FormularioNuevaOferta = () => {
       bonificaciones,
       perfil,
       funciones,
+      fechaInicio,
+      fechaFin,
+      estadoConvocatoria
     });
-    // setNombre("");
-    // setDescripcion("");
-    // setFechaEntrega("");
-    // setCliente("");
+  
   };
 
   const { msg } = alerta;
@@ -101,7 +112,7 @@ const FormularioNuevaOferta = () => {
   return (
     <div className=" sm:mx-auto sm:w-full">
       <div className="bg-white py-8 px-4 shadow-lg rounded-lg sm:px-10">
-        {msg && <Alert alerta={alerta} />}
+       
         <form className="space-y-6 " onSubmit={handleSubmit}>
           <div className="text-left text-xl text-gray-700 mt-8 font-bold border-b-4 border-corporative-blue inline-flex">
             Convocatoria
@@ -144,6 +155,47 @@ const FormularioNuevaOferta = () => {
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={nombre}
                   onChange={(e) => setNombre(e.target.value)}
+                  required="true"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label
+                htmlFor="fechaInicio"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Fecha Inicio <span class="text-red-700">*</span>
+              </label>
+              <div className="mt-1">
+                <input
+                  id="fechaInicio"
+                  name="fechaInicio"
+                  type="date"
+                  autoComplete="fechaInicio"
+                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                  value={fechaInicio}
+                  onChange={(e) => setFechaInicio(e.target.value)}
+                  required="true"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label
+                htmlFor="fechaFin"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Fecha fin <span class="text-red-700">*</span>
+              </label>
+              <div className="mt-1">
+                <input
+                  id="fechaFin"
+                  name="fechaFin"
+                  type="date"  
+                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                  value={fechaFin}
+                  onChange={(e) => setFechaFin(e.target.value)}
                   required="true"
                 />
               </div>
@@ -277,8 +329,39 @@ const FormularioNuevaOferta = () => {
                 />
               </div>
             </div>
-          </div>
 
+            <div>
+              <label
+                htmlFor="estadoConvocatoria"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Estado convocatoria <span className="text-red-700">*</span>
+              </label>
+              <div className="mt-1">
+                <select
+                  id="estadoConvocatoria"
+                  name="estadoConvocatoria"
+                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                  onChange={(e) => setEstadoConvocatoria(e.target.value)}
+                  value={estadoConvocatoria}
+                
+                >
+                  <option value="elegir" disabled className="text-gray-400" >
+                    --Selecciona un estado--
+                  </option>
+                  <option value="Activa">
+                    Activa
+                  </option>
+                  <option value="Pausada">
+                    Pausada
+                  </option>
+                  <option value="Inactiva">Inactiva</option>
+                </select>
+                 
+              </div>
+            </div>
+          </div>
+          {msg && <Alert alerta={alerta} />}
           <div className="grid grid-cols-2 gap-6 w-3/5 mx-auto">
             <Link
               to="/recursos-humanos/listar-convocatorias"

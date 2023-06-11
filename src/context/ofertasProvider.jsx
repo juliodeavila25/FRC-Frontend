@@ -10,6 +10,7 @@ const OfertasProvider = ({ children }) => {
   const [oferta, setOferta] = useState([]);
   const [ofertas, setOfertas] = useState([]);
   const [alerta, setAlerta] = useState({});
+  const [postulantes, setPostulantes] = useState([])
   const [cargandoData, setCargando] = useState(false);
   const navigate = useNavigate();
   const { auth } = useAuth();
@@ -22,6 +23,7 @@ const OfertasProvider = ({ children }) => {
   };
 
   useEffect(() => {
+    setCargando(true);
     const obtenerOfertas = async () => {
       try {
         const token = localStorage.getItem("token");
@@ -39,7 +41,32 @@ const OfertasProvider = ({ children }) => {
       }
     };
     obtenerOfertas();
+    setCargando(false);
   }, [auth]);
+
+
+
+  const obtenerPostulantesPorOferta = async (id) => {
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) return;
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      const { data } = await clienteAxios(`ofertas/postulantes-ofertas/${id}`, config);
+      console.log(data)
+      setPostulantes(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+
+
+
 
   const submitOferta = async (oferta) => {
     if (oferta.id) {
@@ -146,10 +173,12 @@ const OfertasProvider = ({ children }) => {
         ofertas,
         oferta,
         cargandoData,
+        postulantes,
         submitOferta,
         mostrarAlerta,
         obtenerOferta,
         editarOferta,
+        obtenerPostulantesPorOferta
       }}
     >
       {children}

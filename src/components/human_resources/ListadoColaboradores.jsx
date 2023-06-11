@@ -109,9 +109,6 @@ const ListadoColaboradores = () => {
           <Table
             data={collaborators}
             columns={headers}
-            title="Ofertas"
-            titleButton="Nueva oferta de empleo"
-            href={"/recursos-humanos/crear-convocatoria"}
           />
         </>
       ) : (
