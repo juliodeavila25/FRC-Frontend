@@ -19,6 +19,13 @@ const ListarOfertas = () => {
     setToggleState(index);
   };
 
+  const handleClick = (originalRow) => {
+    localStorage.setItem("id_oferta", originalRow._id)
+    navigate(
+      `/recursos-humanos/convocatoria/${originalRow._id}/postulantes/${originalRow.nombre}`
+    )
+  }
+
 
   const [headers, setHeaders] = useState([
     {
@@ -72,9 +79,7 @@ const ListarOfertas = () => {
           <button
             className="text-blue-500 hover:text-blue-900"
             onClick={() =>
-              navigate(
-                `/recursos-humanos/convocatoria/${originalRow._id}/postulantes`
-              )
+              handleClick(originalRow)
             }
           >
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
@@ -86,6 +91,8 @@ const ListarOfertas = () => {
       ),
     },
   ]);
+
+
 
   return (
     <>

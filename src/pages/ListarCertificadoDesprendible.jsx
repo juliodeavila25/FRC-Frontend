@@ -15,13 +15,13 @@ const ListarCertificadoDesprendible = () => {
   useEffect(() => {
     obtenerUsuarioAutenticado()
   }, [auth])
-  
-  const verNomina = (data) =>{
+
+  const verNomina = (data) => {
     console.log(data)
 
     obtenerNomina(data.identificacion, data.periodo)
     localStorage.setItem("periodo", data.periodo);
-    navigate( `/solicitudes/certificado-desprendible/${data.identificacion}/${data.periodo}`)
+    navigate(`/solicitudes/certificado-desprendible/${data.identificacion}/${data.periodo}`)
   }
 
   const [headers, setHeaders] = useState([
@@ -31,7 +31,7 @@ const ListarCertificadoDesprendible = () => {
     },
     { Header: "Periodo Inicio", accessor: "periodo_inicio" },
     { Header: "Periodo Fin", accessor: "periodo_fin" },
-    
+
     { Header: "Sueldo", accessor: "sueldo" },
     { Header: "Periodo", accessor: "periodo" },
     {
@@ -66,8 +66,8 @@ const ListarCertificadoDesprendible = () => {
 
   return (
     <>
-     {Object.keys(usuarioAutenticado).length !== 0 && usuarioAutenticado && usuarioAutenticado?.userType[0] === "colaborador" && usuarioAutenticado?.estado === "por_completar" ? (
-        <ModalFillCurriculum/>
+      {Object.keys(usuarioAutenticado).length !== 0 && usuarioAutenticado && usuarioAutenticado?.userType[0] === "colaborador" && usuarioAutenticado?.estado === "por_completar" ? (
+        <ModalFillCurriculum />
       ) : null}
       <div className="px-4 sm:px-6 lg:px-8 mt-5 mb-5">
         <div className="mt-8 flex flex-col">
@@ -110,7 +110,7 @@ const ListarCertificadoDesprendible = () => {
             </div>
           </div>
         </div>
-      )}  
+      )}
     </>
   );
 };

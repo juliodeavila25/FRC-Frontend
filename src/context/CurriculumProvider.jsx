@@ -12,8 +12,8 @@ const CurriculumProvider = ({ children }) => {
   const [cargandoData, setCargando] = useState(false);
   const navigate = useNavigate();
   const { auth } = useAuth();
-  
- 
+
+
   const mostrarAlerta = (alerta) => {
     setAlerta(alerta);
     setTimeout(() => {
@@ -34,8 +34,8 @@ const CurriculumProvider = ({ children }) => {
     console.log(curriculum.get("codigoCIIU"))
     console.log((curriculum.get("inputReq")))
 
-    
-    
+
+
     const id = curriculum.get("id");
     console.log("ID:", id)
     // for (const value of curriculum.values()) {
@@ -44,7 +44,7 @@ const CurriculumProvider = ({ children }) => {
     // console.log(curriculum);
     /*for (const value of curriculum.values()) {
       console.log(value);
-    }*/
+    }*/
     try {
       const token = localStorage.getItem("token");
       if (!token) return;
@@ -69,14 +69,14 @@ const CurriculumProvider = ({ children }) => {
       setTimeout(() => {
         setAlerta({});
         const tipo = localStorage.getItem("tipo");
-        if(tipo === "formRH"){
+        if (tipo === "formRH") {
           navigate("/colaboradores");
-        }else{
+        } else {
           navigate("/dashboard");
         }
 
-         window.location.reload(false)
-        
+        window.location.reload(false)
+
       }, 3000);
     } catch (error) {
       console.log(error);
@@ -84,7 +84,7 @@ const CurriculumProvider = ({ children }) => {
   };
 
   const nuevoCurriculum = async (curriculum) => {
-     const nombre = curriculum.get("nombre");
+    const nombre = curriculum.get("nombre");
     console.log(nombre)
     //console.log(curriculum);
     // for (const value of curriculum.values()) {
@@ -114,6 +114,7 @@ const CurriculumProvider = ({ children }) => {
       setTimeout(() => {
         setAlerta({});
         navigate("/dashboard");
+        window.location.reload(false)
       }, 3000);
     } catch (error) {
       console.log(error);

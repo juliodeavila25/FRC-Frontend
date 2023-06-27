@@ -7,6 +7,7 @@ import Table from "../components/table/Table";
 import { format } from "date-fns";
 import { useNavigate, Link } from "react-router-dom";
 import swal from 'sweetalert'
+import moment from 'moment'
 
 const Ofertas = () => {
 
@@ -145,7 +146,7 @@ const Ofertas = () => {
 
     let idUsuario = auth._id
     let idOferta = data
-    let estadoAplicacionOferta = "En estudio"
+    let estadoAplicacionOferta = "Postulado"
 
 
     swal({

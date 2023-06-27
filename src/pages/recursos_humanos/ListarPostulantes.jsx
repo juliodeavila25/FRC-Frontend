@@ -6,8 +6,10 @@ import {
     AccordionHeader,
     AccordionBody,
 } from "@material-tailwind/react";
-import { FcBusinessContact, FcInspection, FcAssistant, FcCancel, FcOk } from "react-icons/fc";
+import { FcBusinessContact, FcInspection, FcAssistant, FcCancel, FcOk, FcBriefcase, FcManager, FcFile } from "react-icons/fc";
 import Table from "../../components/table/Table"
+import ModalPostulaciones from '../../components/ModalPostulaciones'
+
 
 
 function Icon({ id, open }) {
@@ -30,6 +32,10 @@ function Icon({ id, open }) {
 const ListarPostulantes = () => {
     const [open, setOpen] = useState(0);
     const [curriculums, setCurriculums] = useState([])
+    const [visible, setVisible] = useState(false);
+    const [dataCurriculum, setDataCurriculum] = useState("")
+
+    const navigate = useNavigate();
 
     const handleOpen = (value) => {
         setOpen(open === value ? 0 : value);
@@ -42,14 +48,25 @@ const ListarPostulantes = () => {
 
     useEffect(() => {
         obtenerPostulantesPorOferta(params.id)
+
     }, [])
+
 
 
     useEffect(() => {
         if (Array.isArray(postulantes) && postulantes.length > 0) {
-            console.log(postulantes)
-            const mergedObj = postulantes.reduce((acc, cur) => ({ ...acc, ...cur }), {});
-            setCurriculums(mergedObj)
+            let newArrays = []
+            postulantes.map((el, index) => {
+                const postulante = postulantes.filter(item => item.creador === el.creador)
+                console.log("postulante:", postulante[index])
+                newArrays.push(Object.assign({}, ...postulante));
+
+            })
+
+            let newArraysUnique = [...new Map(newArrays.map(item => [item._id, item])).values()]
+            setCurriculums(newArraysUnique)
+        } else {
+            setCurriculums([])
         }
     }, [postulantes])
 
@@ -69,44 +86,30 @@ const ListarPostulantes = () => {
                         className="text-blue-500 hover:text-blue-900"
                         onClick={() =>
                             navigate(
-                                `/colaboradores/editar-colaborador/${originalRow._id}`
+                                `/recursos-humanos/convocatoria/postulante/${originalRow._id}`
                             )
                         }
                     >
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            strokeWidth={1.5}
-                            stroke="currentColor"
-                            className="w-6 h-6"
-                        >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"
-                            />
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                         </svg>
+
                     </button>
+
                     <button
                         className="text-blue-500 hover:text-blue-900"
-                        onClick={() => redireccionar(originalRow._id)}
+                        onClick={(e) => activateModal(e, originalRow)}
                     >
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            strokeWidth={1.5}
-                            stroke="currentColor"
-                            className="w-6 h-6">
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"
-                            />
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor " className="w-6 h-6">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9" />
                         </svg>
+
                     </button>
+
                 </div>
+
+
             ),
         },
     ]);
@@ -114,13 +117,34 @@ const ListarPostulantes = () => {
 
     console.log(curriculums)
 
+
+    const activateModal = (e, data) => {
+        e.preventDefault()
+        setVisible(true);
+        setDataCurriculum(data)
+
+    };
+
+    const setShowModal = () => {
+        setVisible(false);
+
+    };
+
     return (
         <Fragment>
+            {visible === true && (
+                <ModalPostulaciones setShowModal={setShowModal} data={dataCurriculum} />
+            )}
             <div className="px-4 sm:px-6 lg:px-10 mt-5 mb-5 ">
                 <div className="mt-8 flex flex-col">
                     <div className="sm:flex sm:items-center">
                         <div className="sm:flex-auto">
                             <h1 className="text-xl font-semibold text-gray-900">Listado de postulantes</h1>
+                            <div className="flex space-x-1 items-center">
+                                <FcBriefcase className="text-lg" />
+                                <p className="font-semibold text-gray-900 italic">Cargo: <span className="font-light capitalize">{params.cargo}</span></p>
+                            </div>
+
                         </div>
                         <div className="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
                             <Link
@@ -138,15 +162,15 @@ const ListarPostulantes = () => {
                     <AccordionHeader className="text-base font-semibold text-gray-900" onClick={() => handleOpen(1)}>
                         <div className="flex space-x-3 items-center">
                             <FcBusinessContact className="text-lg" />
-                            <p>En proceso</p>
+                            <p>Postulado (<span>{Array.isArray(curriculums) && curriculums.length > 0 ? curriculums.filter(curriculum => curriculum.estadoAplicacionOferta === "Postulado").length : 0}</span>)</p>
                         </div>
 
                     </AccordionHeader>
                     <AccordionBody>
-                        {Object.keys(curriculums).length !== 0 ? (
+                        {Array.isArray(curriculums) && curriculums.length > 0 && curriculums.filter(curriculum => curriculum.estadoAplicacionOferta === "Postulado").length > 0 ? (
                             <>
                                 <Table
-                                    data={[curriculums]}
+                                    data={curriculums.filter(curriculum => curriculum.estadoAplicacionOferta === "Postulado")}
                                     columns={headers}
                                 />
                             </>
@@ -169,7 +193,7 @@ const ListarPostulantes = () => {
                                     </div>
                                     <div className="ml-3 flex-1 md:flex ">
                                         <p className="text-sm text-blue-700">
-                                            No existen postulantes en proceso.
+                                            No existen postulantes Postulado.
                                         </p>
                                     </div>
                                 </div>
@@ -181,60 +205,262 @@ const ListarPostulantes = () => {
                     <AccordionHeader className="text-base font-semibold text-gray-900" onClick={() => handleOpen(2)}>
                         <div className="flex space-x-3 items-center">
                             <FcInspection className="text-lg" />
-                            <p> Preseleccionado</p>
+                            <p> Preseleccionado (<span>{Array.isArray(curriculums) && curriculums.length > 0 ? curriculums.filter(curriculum => curriculum.estadoAplicacionOferta === "Preseleccionado").length : 0}</span>)</p>
                         </div>
 
                     </AccordionHeader>
                     <AccordionBody>
-                        We&apos;re not always in the position that we want to be at.
-                        We&apos;re constantly growing. We&apos;re constantly making mistakes.
-                        We&apos;re constantly trying to express ourselves and actualize our
-                        dreams.
+                        {Array.isArray(curriculums) && curriculums.length > 0 && curriculums.filter(curriculum => curriculum.estadoAplicacionOferta === "Preseleccionado").length > 0 ? (
+                            <>
+                                <Table
+                                    data={curriculums.filter(curriculum => curriculum.estadoAplicacionOferta === "Preseleccionado")}
+                                    columns={headers}
+                                />
+                            </>
+                        ) : (
+                            <div className="rounded-md bg-blue-50 p-4">
+                                <div className="flex">
+                                    <div className="flex-shrink-0">
+                                        <svg
+                                            className="h-5 w-5 text-blue-400"
+                                            viewBox="0 0 20 20"
+                                            fill="currentColor"
+                                            aria-hidden="true"
+                                        >
+                                            <path
+                                                fillRule="evenodd"
+                                                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a.75.75 0 000 1.5h.253a.25.25 0 01.244.304l-.459 2.066A1.75 1.75 0 0010.747 15H11a.75.75 0 000-1.5h-.253a.25.25 0 01-.244-.304l.459-2.066A1.75 1.75 0 009.253 9H9z"
+                                                clipRule="evenodd"
+                                            />
+                                        </svg>
+                                    </div>
+                                    <div className="ml-3 flex-1 md:flex ">
+                                        <p className="text-sm text-blue-700">
+                                            No existen postulantes preseleccionados.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
                     </AccordionBody>
                 </Accordion>
                 <Accordion open={open === 3} icon={<Icon id={3} open={open} />}>
                     <AccordionHeader className="text-base font-semibold text-gray-900" onClick={() => handleOpen(3)}>
                         <div className="flex space-x-3 items-center">
                             <FcAssistant className="text-lg" />
-                            <p> Entrevista realizada</p>
+                            <p> Entrevista realizada (<span>{Array.isArray(curriculums) && curriculums.length > 0 ? curriculums.filter(curriculum => curriculum.estadoAplicacionOferta === "Entrevista realizada").length : 0}</span>)</p>
                         </div>
 
                     </AccordionHeader>
                     <AccordionBody>
-                        We&apos;re not always in the position that we want to be at.
-                        We&apos;re constantly growing. We&apos;re constantly making mistakes.
-                        We&apos;re constantly trying to express ourselves and actualize our
-                        dreams.
+                        {Array.isArray(curriculums) && curriculums.length > 0 && curriculums.filter(curriculum => curriculum.estadoAplicacionOferta === "Entrevista realizada").length > 0 ? (
+                            <>
+                                <Table
+                                    data={curriculums.filter(curriculum => curriculum.estadoAplicacionOferta === "Entrevista realizada")}
+                                    columns={headers}
+                                />
+                            </>
+                        ) : (
+                            <div className="rounded-md bg-blue-50 p-4">
+                                <div className="flex">
+                                    <div className="flex-shrink-0">
+                                        <svg
+                                            className="h-5 w-5 text-blue-400"
+                                            viewBox="0 0 20 20"
+                                            fill="currentColor"
+                                            aria-hidden="true"
+                                        >
+                                            <path
+                                                fillRule="evenodd"
+                                                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a.75.75 0 000 1.5h.253a.25.25 0 01.244.304l-.459 2.066A1.75 1.75 0 0010.747 15H11a.75.75 0 000-1.5h-.253a.25.25 0 01-.244-.304l.459-2.066A1.75 1.75 0 009.253 9H9z"
+                                                clipRule="evenodd"
+                                            />
+                                        </svg>
+                                    </div>
+                                    <div className="ml-3 flex-1 md:flex ">
+                                        <p className="text-sm text-blue-700">
+                                            No existen postulantes con entrevistas realizadas.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
                     </AccordionBody>
                 </Accordion>
+
                 <Accordion open={open === 4} icon={<Icon id={4} open={open} />}>
                     <AccordionHeader className="text-base font-semibold text-gray-900" onClick={() => handleOpen(4)}>
                         <div className="flex space-x-3 items-center">
-                            <FcCancel className="text-lg" />
-                            <p>  No continúa</p>
+                            <FcManager className="text-lg" />
+                            <p>Exámenes Ocupacionales (<span>{Array.isArray(curriculums) && curriculums.length > 0 ? curriculums.filter(curriculum => curriculum.estadoAplicacionOferta === "Exámenes Ocupacionales").length : 0}</span>)</p>
                         </div>
 
                     </AccordionHeader>
                     <AccordionBody>
-                        We&apos;re not always in the position that we want to be at.
-                        We&apos;re constantly growing. We&apos;re constantly making mistakes.
-                        We&apos;re constantly trying to express ourselves and actualize our
-                        dreams.
+                        {Array.isArray(curriculums) && curriculums.length > 0 && curriculums.filter(curriculum => curriculum.estadoAplicacionOferta === "Exámenes Ocupacionales").length > 0 ? (
+                            <>
+                                <Table
+                                    data={curriculums.filter(curriculum => curriculum.estadoAplicacionOferta === "Exámenes Ocupacionales")}
+                                    columns={headers}
+                                />
+                            </>
+                        ) : (
+                            <div className="rounded-md bg-blue-50 p-4">
+                                <div className="flex">
+                                    <div className="flex-shrink-0">
+                                        <svg
+                                            className="h-5 w-5 text-blue-400"
+                                            viewBox="0 0 20 20"
+                                            fill="currentColor"
+                                            aria-hidden="true"
+                                        >
+                                            <path
+                                                fillRule="evenodd"
+                                                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a.75.75 0 000 1.5h.253a.25.25 0 01.244.304l-.459 2.066A1.75 1.75 0 0010.747 15H11a.75.75 0 000-1.5h-.253a.25.25 0 01-.244-.304l.459-2.066A1.75 1.75 0 009.253 9H9z"
+                                                clipRule="evenodd"
+                                            />
+                                        </svg>
+                                    </div>
+                                    <div className="ml-3 flex-1 md:flex ">
+                                        <p className="text-sm text-blue-700">
+                                            No existen postulantes en exámenes medicos.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
                     </AccordionBody>
                 </Accordion>
+
                 <Accordion open={open === 5} icon={<Icon id={5} open={open} />}>
                     <AccordionHeader className="text-base font-semibold text-gray-900" onClick={() => handleOpen(5)}>
                         <div className="flex space-x-3 items-center">
-                            <FcOk className="text-lg" />
-                            <p>Contratado</p>
+                            <FcFile className="text-lg" />
+                            <p>Afiliaciones (<span>{Array.isArray(curriculums) && curriculums.length > 0 ? curriculums.filter(curriculum => curriculum.estadoAplicacionOferta === "Afiliaciones").length : 0}</span>)</p>
                         </div>
 
                     </AccordionHeader>
                     <AccordionBody>
-                        We&apos;re not always in the position that we want to be at.
-                        We&apos;re constantly growing. We&apos;re constantly making mistakes.
-                        We&apos;re constantly trying to express ourselves and actualize our
-                        dreams.
+                        {Array.isArray(curriculums) && curriculums.length > 0 && curriculums.filter(curriculum => curriculum.estadoAplicacionOferta === "Afiliaciones").length > 0 ? (
+                            <>
+                                <Table
+                                    data={curriculums.filter(curriculum => curriculum.estadoAplicacionOferta === "Afiliaciones")}
+                                    columns={headers}
+                                />
+                            </>
+                        ) : (
+                            <div className="rounded-md bg-blue-50 p-4">
+                                <div className="flex">
+                                    <div className="flex-shrink-0">
+                                        <svg
+                                            className="h-5 w-5 text-blue-400"
+                                            viewBox="0 0 20 20"
+                                            fill="currentColor"
+                                            aria-hidden="true"
+                                        >
+                                            <path
+                                                fillRule="evenodd"
+                                                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a.75.75 0 000 1.5h.253a.25.25 0 01.244.304l-.459 2.066A1.75 1.75 0 0010.747 15H11a.75.75 0 000-1.5h-.253a.25.25 0 01-.244-.304l.459-2.066A1.75 1.75 0 009.253 9H9z"
+                                                clipRule="evenodd"
+                                            />
+                                        </svg>
+                                    </div>
+                                    <div className="ml-3 flex-1 md:flex ">
+                                        <p className="text-sm text-blue-700">
+                                            No existen postulantes en afiliaciones.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+                    </AccordionBody>
+                </Accordion>
+
+                <Accordion open={open === 6} icon={<Icon id={6} open={open} />}>
+                    <AccordionHeader className="text-base font-semibold text-gray-900" onClick={() => handleOpen(6)}>
+                        <div className="flex space-x-3 items-center">
+                            <FcOk className="text-lg" />
+                            <p>Contratado (<span>{Array.isArray(curriculums) && curriculums.length > 0 ? curriculums.filter(curriculum => curriculum.estadoAplicacionOferta === "Contratado").length : 0}</span>)</p>
+                        </div>
+
+                    </AccordionHeader>
+                    <AccordionBody>
+                        {Array.isArray(curriculums) && curriculums.length > 0 && curriculums.filter(curriculum => curriculum.estadoAplicacionOferta === "Contratado").length > 0 ? (
+                            <>
+                                <Table
+                                    data={curriculums.filter(curriculum => curriculum.estadoAplicacionOferta === "Contratado")}
+                                    columns={headers}
+                                />
+                            </>
+                        ) : (
+                            <div className="rounded-md bg-blue-50 p-4">
+                                <div className="flex">
+                                    <div className="flex-shrink-0">
+                                        <svg
+                                            className="h-5 w-5 text-blue-400"
+                                            viewBox="0 0 20 20"
+                                            fill="currentColor"
+                                            aria-hidden="true"
+                                        >
+                                            <path
+                                                fillRule="evenodd"
+                                                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a.75.75 0 000 1.5h.253a.25.25 0 01.244.304l-.459 2.066A1.75 1.75 0 0010.747 15H11a.75.75 0 000-1.5h-.253a.25.25 0 01-.244-.304l.459-2.066A1.75 1.75 0 009.253 9H9z"
+                                                clipRule="evenodd"
+                                            />
+                                        </svg>
+                                    </div>
+                                    <div className="ml-3 flex-1 md:flex ">
+                                        <p className="text-sm text-blue-700">
+                                            No existen postulantes contratados.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+                    </AccordionBody>
+                </Accordion>
+
+                <Accordion open={open === 7} icon={<Icon id={7} open={open} />}>
+                    <AccordionHeader className="text-base font-semibold text-gray-900" onClick={() => handleOpen(7)}>
+                        <div className="flex space-x-3 items-center">
+                            <FcCancel className="text-lg" />
+                            <p>No continúa (<span>{Array.isArray(curriculums) && curriculums.length > 0 ? curriculums.filter(curriculum => curriculum.estadoAplicacionOferta === "No continúa").length : 0}</span>)</p>
+                        </div>
+
+                    </AccordionHeader>
+                    <AccordionBody>
+                        {Array.isArray(curriculums) && curriculums.length > 0 && curriculums.filter(curriculum => curriculum.estadoAplicacionOferta === "No continúa").length > 0 ? (
+                            <>
+                                <Table
+                                    data={curriculums.filter(curriculum => curriculum.estadoAplicacionOferta === "No continúa")}
+                                    columns={headers}
+                                />
+                            </>
+                        ) : (
+                            <div className="rounded-md bg-blue-50 p-4">
+                                <div className="flex">
+                                    <div className="flex-shrink-0">
+                                        <svg
+                                            className="h-5 w-5 text-blue-400"
+                                            viewBox="0 0 20 20"
+                                            fill="currentColor"
+                                            aria-hidden="true"
+                                        >
+                                            <path
+                                                fillRule="evenodd"
+                                                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a.75.75 0 000 1.5h.253a.25.25 0 01.244.304l-.459 2.066A1.75 1.75 0 0010.747 15H11a.75.75 0 000-1.5h-.253a.25.25 0 01-.244-.304l.459-2.066A1.75 1.75 0 009.253 9H9z"
+                                                clipRule="evenodd"
+                                            />
+                                        </svg>
+                                    </div>
+                                    <div className="ml-3 flex-1 md:flex ">
+                                        <p className="text-sm text-blue-700">
+                                            No existen postulantes que no continúan.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
                     </AccordionBody>
                 </Accordion>
             </div>

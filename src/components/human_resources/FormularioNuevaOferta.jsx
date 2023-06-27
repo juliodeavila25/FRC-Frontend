@@ -4,27 +4,27 @@ import useOfertas from "../../hooks/useOfertas";
 import Alert from "../Alert";
 import useAuth from "../../hooks/useAuth";
 import { BeatLoader } from "react-spinners";
+import moment from 'moment'
 
 const FormularioNuevaOferta = () => {
-  let curr = new Date();
-  curr.setDate(curr.getDate() + 3);
-  let date = curr.toISOString().substring(0,10);
-  
-  
+  const current = new Date();
+  const date = `${current.getFullYear()}-${current.getMonth() + 1}-${current.getDate()}`;
+
+
   const [active, setActive] = useState(false);
   const [id, setId] = useState(null);
   //   const [estado, setEstado] = useState(null);
   const [nombre, setNombre] = useState("");
   const [convocatoria, setConvocatoria] = useState("");
-  const [fechaInicio, setFechaInicio] = useState(date);
-  const [fechaFin, setFechaFin]= useState("")
+  const [fechaInicio, setFechaInicio] = useState(moment(date).format('YYYY-MM-DD'));
+  const [fechaFin, setFechaFin] = useState("")
   const [ciudad, setCiudad] = useState("");
   const [salario, setSalario] = useState("");
   const [auxilio, setAuxilio] = useState("");
   const [bonificaciones, setBonificaciones] = useState("");
   const [perfil, setPerfil] = useState("");
   const [funciones, setFunciones] = useState("");
-  const [estadoConvocatoria, setEstadoConvocatoria]= useState("Activa")
+  const [estadoConvocatoria, setEstadoConvocatoria] = useState("Activa")
 
   const params = useParams();
 
@@ -104,7 +104,7 @@ const FormularioNuevaOferta = () => {
       fechaFin,
       estadoConvocatoria
     });
-  
+
   };
 
   const { msg } = alerta;
@@ -112,7 +112,7 @@ const FormularioNuevaOferta = () => {
   return (
     <div className=" sm:mx-auto sm:w-full">
       <div className="bg-white py-8 px-4 shadow-lg rounded-lg sm:px-10">
-       
+
         <form className="space-y-6 " onSubmit={handleSubmit}>
           <div className="text-left text-xl text-gray-700 mt-8 font-bold border-b-4 border-corporative-blue inline-flex">
             Convocatoria
@@ -192,7 +192,7 @@ const FormularioNuevaOferta = () => {
                 <input
                   id="fechaFin"
                   name="fechaFin"
-                  type="date"  
+                  type="date"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={fechaFin}
                   onChange={(e) => setFechaFin(e.target.value)}
@@ -344,7 +344,7 @@ const FormularioNuevaOferta = () => {
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   onChange={(e) => setEstadoConvocatoria(e.target.value)}
                   value={estadoConvocatoria}
-                
+
                 >
                   <option value="elegir" disabled className="text-gray-400" >
                     --Selecciona un estado--
@@ -357,7 +357,7 @@ const FormularioNuevaOferta = () => {
                   </option>
                   <option value="Inactiva">Inactiva</option>
                 </select>
-                 
+
               </div>
             </div>
           </div>

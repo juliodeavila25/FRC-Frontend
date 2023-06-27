@@ -9,7 +9,7 @@ import { BeatLoader } from "react-spinners";
 import GlobalFilter from "./GlobalFilter";
 import { Link } from "react-router-dom";
 
-const Table = ({ data, columns, href, title, titleButton }) => {
+const TableWithoutSearch = ({ data, columns, href, title, titleButton }) => {
   //const columns = useMemo(() => headers, []);
 
   //const data = useMemo(() => dataTable, []);
@@ -50,11 +50,11 @@ const Table = ({ data, columns, href, title, titleButton }) => {
   if (data.length <= 0) return <BeatLoader color="#36d7b7" />;
 
   return (
-    <div className="px-4 sm:px-6 lg:px-8 mt-5">
-      <div className="mt-8 flex flex-col">
+    <div className="px-4 sm:px-6 lg:px-8">
+      <div className="mt-2 flex flex-col">
         <div className="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div className="px-2 md:px-6 lg:px-8 sm:flex  sm:justify-start">
-            <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
+
           </div>
           <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
             <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
@@ -285,4 +285,4 @@ const Table = ({ data, columns, href, title, titleButton }) => {
   );
 };
 
-export default Table;
+export default TableWithoutSearch;

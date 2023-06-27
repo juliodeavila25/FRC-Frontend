@@ -44,6 +44,8 @@ import { OtrosDocumentosProvider } from "./context/otrosDocumentosProvider";
 import EditarOtroDocumento from './pages/recursos_humanos/otros_documentos/EditarOtroDocumento'
 import { DocumentosRequeridosProvider } from "./context/documentosRequeridosProvider";
 import { PostulacionesProvider } from "./context/postulacionesProvider";
+import ListarPostulante from "./pages/recursos_humanos/ListarPostulante";
+import { EstadoPostulacionesProvider } from "./context/estadoPostulacionesProvider";
 
 
 
@@ -51,215 +53,223 @@ function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
-        <PostulacionesProvider>
-          <OtrosDocumentosProvider>
-            <CargosProvider>
-              <CollaboratorsProvider>
-                <NominaDetalladasProvider>
-                  <NominasProvider>
-                    <DocumentosProvider>
-                      <OfertasProvider>
-                        <CurriculumProvider>
-                          <DocumentosRequeridosProvider>
-                            <Routes>
-                              <Route path="/" element={<AuthLayout />}>
-                                <Route index element={<Login />} />
-                                <Route path="registrar" element={<Registrar />} />
-                                <Route
-                                  path="olvide-password"
-                                  element={<ForgotPassword />}
-                                />
-                                <Route
-                                  path="olvide-password/:token"
-                                  element={<NewPassword />}
-                                />
-                                <Route path="confirmar/:id" element={<ConfirmAccount />} />
-                                <Route path="sin-autorizacion" element={<Unauthorized />} />
-                              </Route>
-
-                              <Route path="/documentos">
-                                <Route index element={<BusquedaAvanzada />} />
-
-                              </Route>
-
-                              <Route
-                                path="/dashboard"
-                                element={
-                                  <RutaProtegida
-                                    allowedRoles={["aspirante", "recursos_humanos", "colaborador", "admin"]}
+        <EstadoPostulacionesProvider>
+          <PostulacionesProvider>
+            <OtrosDocumentosProvider>
+              <CargosProvider>
+                <CollaboratorsProvider>
+                  <NominaDetalladasProvider>
+                    <NominasProvider>
+                      <DocumentosProvider>
+                        <OfertasProvider>
+                          <CurriculumProvider>
+                            <DocumentosRequeridosProvider>
+                              <Routes>
+                                <Route path="/" element={<AuthLayout />}>
+                                  <Route index element={<Login />} />
+                                  <Route path="registrar" element={<Registrar />} />
+                                  <Route
+                                    path="olvide-password"
+                                    element={<ForgotPassword />}
                                   />
-                                }
-                              >
-                                <Route index element={<Dashboard />} />
-                              </Route>
-
-                              <Route
-                                path="/curriculum"
-                                element={<RutaProtegida allowedRoles={["aspirante", "colaborador", "recursos_humanos"]} />}
-                              >
-                                <Route
-                                  path="crear-curriculum"
-                                  element={<CurriculumVitae />}
-                                />
-                                <Route
-                                  path="editar-curriculum/:id"
-                                  element={<EditarCurriculumVitae />}
-                                />
-                              </Route>
-
-                              <Route
-                                path="/ofertas"
-                                element={<RutaProtegida allowedRoles={["aspirante", "colaborador"]} />}
-                              >
-                                <Route index element={<Ofertas />} />
-                                <Route
-                                  path="listar-oferta/:id"
-                                  element={<OfertaIndividual />}
-                                />
-                              </Route>
-
-                              <Route
-                                path="/solicitudes"
-                                element={
-                                  <RutaProtegida
-                                    allowedRoles={["colaborador"]}
+                                  <Route
+                                    path="olvide-password/:token"
+                                    element={<NewPassword />}
                                   />
-                                }
-                              >
+                                  <Route path="confirmar/:id" element={<ConfirmAccount />} />
+                                  <Route path="sin-autorizacion" element={<Unauthorized />} />
+                                </Route>
+
+                                <Route path="/documentos">
+                                  <Route index element={<BusquedaAvanzada />} />
+
+                                </Route>
 
                                 <Route
-                                  path="certificado-laboral"
-                                  element={<CertificadoLaboral />}
-                                />
-
-                                <Route
-                                  path="certificado-desprendible/:id/:periodo"
-                                  element={<CertificadoDesprendible />}
-                                />
-
-                                <Route
-                                  path="listado-certificado-desprendible"
-                                  element={<ListarCertificadoDesprendible />}
-                                />
-                              </Route>
-
-                              <Route
-                                path="/recursos-humanos"
-                                element={
-                                  <RutaProtegida allowedRoles={["recursos_humanos"]} />
-                                }
-                              >
-                                <Route
-                                  index
-                                  path="listar-convocatorias"
-                                  element={<ListarConvocatorias />}
-                                />
-                                <Route
-                                  path="crear-convocatoria"
-                                  element={<CrearConvocatoria />}
-                                />
-                                <Route
-                                  path="editar-convocatoria/:id"
-                                  element={<EditarConvocatoria />}
-                                />
-
-                                <Route
-                                  path="convocatoria/:id/postulantes"
-                                  element={<ListarPostulantes />}
-                                />
-
-
-                              </Route>
-
-                              <Route
-                                path="/documentos"
-                                element={
-                                  <RutaProtegida allowedRoles={["recursos_humanos"]} />
-                                }
-                              >
-                                <Route
-                                  index
-                                  path="listar-documentos"
-                                  element={<ListarDocumentos />}
-                                />
-                                <Route
-                                  path="crear-documento"
-                                  element={<CrearDocumento />}
-                                />
-                                <Route
-                                  path="editar-documento/:id"
-                                  element={<EditarDocumento />}
+                                  path="/dashboard"
+                                  element={
+                                    <RutaProtegida
+                                      allowedRoles={["aspirante", "recursos_humanos", "colaborador", "admin"]}
+                                    />
+                                  }
                                 >
+                                  <Route index element={<Dashboard />} />
+                                </Route>
+
+                                <Route
+                                  path="/curriculum"
+                                  element={<RutaProtegida allowedRoles={["aspirante", "colaborador", "recursos_humanos"]} />}
+                                >
+                                  <Route
+                                    path="crear-curriculum"
+                                    element={<CurriculumVitae />}
+                                  />
+                                  <Route
+                                    path="editar-curriculum/:id"
+                                    element={<EditarCurriculumVitae />}
+                                  />
+                                </Route>
+
+                                <Route
+                                  path="/ofertas"
+                                  element={<RutaProtegida allowedRoles={["aspirante", "colaborador"]} />}
+                                >
+                                  <Route index element={<Ofertas />} />
+                                  <Route
+                                    path="listar-oferta/:id"
+                                    element={<OfertaIndividual />}
+                                  />
+                                </Route>
+
+                                <Route
+                                  path="/solicitudes"
+                                  element={
+                                    <RutaProtegida
+                                      allowedRoles={["colaborador"]}
+                                    />
+                                  }
+                                >
+
+                                  <Route
+                                    path="certificado-laboral"
+                                    element={<CertificadoLaboral />}
+                                  />
+
+                                  <Route
+                                    path="certificado-desprendible/:id/:periodo"
+                                    element={<CertificadoDesprendible />}
+                                  />
+
+                                  <Route
+                                    path="listado-certificado-desprendible"
+                                    element={<ListarCertificadoDesprendible />}
+                                  />
+                                </Route>
+
+                                <Route
+                                  path="/recursos-humanos"
+                                  element={
+                                    <RutaProtegida allowedRoles={["recursos_humanos"]} />
+                                  }
+                                >
+                                  <Route
+                                    index
+                                    path="listar-convocatorias"
+                                    element={<ListarConvocatorias />}
+                                  />
+                                  <Route
+                                    path="crear-convocatoria"
+                                    element={<CrearConvocatoria />}
+                                  />
+                                  <Route
+                                    path="editar-convocatoria/:id"
+                                    element={<EditarConvocatoria />}
+                                  />
+
+                                  <Route
+                                    path="convocatoria/:id/postulantes/:cargo"
+                                    element={<ListarPostulantes />}
+                                  />
+
+                                  <Route
+                                    path="convocatoria/postulante/:id"
+                                    element={<ListarPostulante />}
+                                  />
+
+
+
+                                </Route>
+
+                                <Route
+                                  path="/documentos"
+                                  element={
+                                    <RutaProtegida allowedRoles={["recursos_humanos"]} />
+                                  }
+                                >
+                                  <Route
+                                    index
+                                    path="listar-documentos"
+                                    element={<ListarDocumentos />}
+                                  />
+                                  <Route
+                                    path="crear-documento"
+                                    element={<CrearDocumento />}
+                                  />
+                                  <Route
+                                    path="editar-documento/:id"
+                                    element={<EditarDocumento />}
+                                  >
+                                  </Route>
+                                  <Route
+                                    path="editar-documento/:id/listar-versiones"
+                                    element={<ListarVersiones />}
+                                  />
+
                                 </Route>
                                 <Route
-                                  path="editar-documento/:id/listar-versiones"
-                                  element={<ListarVersiones />}
-                                />
+                                  path="/colaboradores"
+                                  element={
+                                    <RutaProtegida
+                                      allowedRoles={["recursos_humanos"]}
+                                    />
+                                  }
+                                ><Route index element={<ListadoColaboradores />} />
 
-                              </Route>
-                              <Route
-                                path="/colaboradores"
-                                element={
-                                  <RutaProtegida
-                                    allowedRoles={["recursos_humanos"]}
+                                  <Route
+                                    path="editar-colaborador/:id"
+                                    element={<EditarColaborador />}
                                   />
-                                }
-                              ><Route index element={<ListadoColaboradores />} />
 
-                                <Route
-                                  path="editar-colaborador/:id"
-                                  element={<EditarColaborador />}
-                                />
+                                  <Route
+                                    path="otros-documentos/:id"
+                                    element={<OtrosDocumentos />}
+                                  />
 
-                                <Route
-                                  path="otros-documentos/:id"
-                                  element={<OtrosDocumentos />}
-                                />
+                                  <Route
+                                    path="otros-documentos/:id/crear-documento"
+                                    element={<CrearOtroDocumento />}
+                                  />
 
-                                <Route
-                                  path="otros-documentos/:id/crear-documento"
-                                  element={<CrearOtroDocumento />}
-                                />
-
-                                <Route
-                                  path="otros-documentos/:id/editar-documento/:id_documento"
-                                  element={<EditarOtroDocumento />}
-                                />
-                              </Route>
-
-                              <Route
-                                path="/cargos"
-                                element={
-                                  <RutaProtegida allowedRoles={["recursos_humanos"]} />
-                                }
-                              >
-                                <Route
-                                  index
-                                  path="listar-cargos"
-                                  element={<ListarCargos />}
-                                />
-                                <Route
-                                  path="crear-cargo"
-                                  element={<CrearCargo />}
-                                />
-
-                                <Route
-                                  path="editar-cargo/:id"
-                                  element={<EditarCargo />}
-                                >
+                                  <Route
+                                    path="otros-documentos/:id/editar-documento/:id_documento"
+                                    element={<EditarOtroDocumento />}
+                                  />
                                 </Route>
-                              </Route>
-                            </Routes>
-                          </DocumentosRequeridosProvider>
-                        </CurriculumProvider>
-                      </OfertasProvider>
-                    </DocumentosProvider>
-                  </NominasProvider>
-                </NominaDetalladasProvider>
-              </CollaboratorsProvider>
-            </CargosProvider>
-          </OtrosDocumentosProvider>
-        </PostulacionesProvider>
+
+                                <Route
+                                  path="/cargos"
+                                  element={
+                                    <RutaProtegida allowedRoles={["recursos_humanos"]} />
+                                  }
+                                >
+                                  <Route
+                                    index
+                                    path="listar-cargos"
+                                    element={<ListarCargos />}
+                                  />
+                                  <Route
+                                    path="crear-cargo"
+                                    element={<CrearCargo />}
+                                  />
+
+                                  <Route
+                                    path="editar-cargo/:id"
+                                    element={<EditarCargo />}
+                                  >
+                                  </Route>
+                                </Route>
+                              </Routes>
+                            </DocumentosRequeridosProvider>
+                          </CurriculumProvider>
+                        </OfertasProvider>
+                      </DocumentosProvider>
+                    </NominasProvider>
+                  </NominaDetalladasProvider>
+                </CollaboratorsProvider>
+              </CargosProvider>
+            </OtrosDocumentosProvider>
+          </PostulacionesProvider>
+        </EstadoPostulacionesProvider>
       </AuthProvider>
     </BrowserRouter>
   );

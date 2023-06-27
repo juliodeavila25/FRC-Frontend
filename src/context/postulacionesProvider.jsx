@@ -8,6 +8,7 @@ const PostulacionesContext = createContext();
 const PostulacionesProvider = ({ children }) => {
   const [postulacion, setPostulacion] = useState([]);
   const [postulaciones, setPostulaciones] = useState([])
+  const [postulacionesUsuario, setPostulacionesUSuario] = useState([])
   const [postulacionesFiltradas, setPostulacionesFiltradas] = useState([])
   const [cargandoDataCargos, setCargando] = useState(false);
   const navigate = useNavigate();
@@ -52,7 +53,7 @@ const PostulacionesProvider = ({ children }) => {
           },
         };
         const { data } = await clienteAxios(`/postulaciones/filtradas/${id}`, config);
-
+        console.log(data)
         setPostulacionesFiltradas(data);
       } catch (error) {
         console.log(error);
@@ -91,6 +92,25 @@ const PostulacionesProvider = ({ children }) => {
 
 
 
+  const obtenerPostulacionesUsuario = async (id) => {
+
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) return;
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      const { data } = await clienteAxios(`/postulaciones/filtradas/${id}`, config);
+
+      setPostulacionesUSuario(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
 
 
   return (
@@ -100,7 +120,9 @@ const PostulacionesProvider = ({ children }) => {
         postulacion,
         cargandoDataCargos,
         postulacionesFiltradas,
+        postulacionesUsuario,
         nuevaPostulacion,
+        obtenerPostulacionesUsuario
 
 
       }}

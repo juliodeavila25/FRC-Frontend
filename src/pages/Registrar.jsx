@@ -92,7 +92,7 @@ const Registrar = () => {
 
         <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
           <div className="bg-white py-8 px-4 shadow rounded-lg sm:px-10">
-            {msg && <Alert alerta={alerta} />}
+
 
             <form className="space-y-6 " onSubmit={handleSubmit}>
               <div>
@@ -223,6 +223,8 @@ const Registrar = () => {
                   />
                 </div>
               </div>
+
+              {msg && <Alert alerta={alerta} />}
 
               <div className="grid grid-cols-2 gap-6">
                 <Link

@@ -5,11 +5,11 @@ import usePostulaciones from "../hooks/usePostulaciones"
 import useAuth from "../hooks/useAuth";
 import { BeatLoader } from "react-spinners";
 import swal from 'sweetalert'
+import moment from 'moment'
 
 const OfertaIndividual = () => {
-    let curr = new Date();
-    curr.setDate(curr.getDate() + 3);
-    let date = curr.toISOString().substring(0, 10);
+    const current = new Date();
+    const date = `${current.getFullYear()}-${current.getMonth() + 1}-${current.getDate()}`;
 
     const navigate = useNavigate();
     const [active, setActive] = useState(false);
@@ -28,7 +28,7 @@ const OfertaIndividual = () => {
 
     const [idUsuario, setIdUsuario] = useState("")
     const [idOferta, setIdOferta] = useState("")
-    const [estadoAplicacionOferta, setEstadoAplicacionOferta] = useState("")
+    const [estadoAplicacionOferta, setEstadoAplicacionOferta] = useState("Postulado")
 
     const params = useParams();
 
@@ -67,7 +67,6 @@ const OfertaIndividual = () => {
             setEstadoConvocatoria(oferta.estadoConvocatoria)
             setIdUsuario(auth._id)
             setIdOferta(oferta._id)
-            setEstadoAplicacionOferta("En estudio")
         }
     }, [oferta]);
 
