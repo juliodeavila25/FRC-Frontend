@@ -441,7 +441,7 @@ const FormularioCurriculumPostulante = () => {
   };
 
   const handleSoporteExp = (data) => {
-    const maxfilesize = (1024 * 1024) / 2;
+    const maxfilesize = (1024 * 1024);
 
     if (data && data.size > maxfilesize) {
       setErrorSoporteExp(true);
@@ -453,7 +453,7 @@ const FormularioCurriculumPostulante = () => {
   };
 
   const handleSoporteEps = (data) => {
-    const maxfilesize = (1024 * 1024) / 2;
+    const maxfilesize = (1024 * 1024);
 
     if (data && data.size > maxfilesize) {
       setErrorSoporteEps(true);
@@ -465,7 +465,7 @@ const FormularioCurriculumPostulante = () => {
   };
 
   const handleSoportePension = (data) => {
-    const maxfilesize = (1024 * 1024) / 2;
+    const maxfilesize = (1024 * 1024);
 
     if (data && data.size > maxfilesize) {
       setErrorSoportePension(true);
@@ -477,7 +477,7 @@ const FormularioCurriculumPostulante = () => {
   };
 
   const handleSoporteRut = (data) => {
-    const maxfilesize = (1024 * 1024) / 2;
+    const maxfilesize = (1024 * 1024);
 
     if (data && data.size > maxfilesize) {
       setErrorSoporteRut(true);
@@ -489,7 +489,7 @@ const FormularioCurriculumPostulante = () => {
   };
 
   const handleSoporteContrato = (data) => {
-    const maxfilesize = (1024 * 1024) / 2;
+    const maxfilesize = (1024 * 1024);
 
     if (data && data.size > maxfilesize) {
       setErrorSoporteContrato(true);
@@ -502,7 +502,7 @@ const FormularioCurriculumPostulante = () => {
 
 
   const handleDocumentacionPostulacion = (data) => {
-    const maxfilesize = (1024 * 1024) / 2;
+    const maxfilesize = (1024 * 1024);
 
     if (data && data.size > maxfilesize) {
       setErrorDocumentacionPostulacion(true);
@@ -1181,7 +1181,7 @@ const FormularioCurriculumPostulante = () => {
               </div>
               {errorSoporteExp === true && (
                 <span className="text-red-500 text-xs">
-                  El tamaño máximo es 500kb
+                  El tamaño máximo es 1mb
                 </span>
               )}
               <div className="mt-3">
@@ -1443,7 +1443,7 @@ const FormularioCurriculumPostulante = () => {
               </div>
               {errorSoporteEps === true && (
                 <span className="text-red-500 text-xs">
-                  El tamaño máximo es 500kb
+                  El tamaño máximo es 1mb
                 </span>
               )}
               <div className="mt-3">
@@ -1522,7 +1522,7 @@ const FormularioCurriculumPostulante = () => {
               </div>
               {errorSoportePension === true && (
                 <span className="text-red-500 text-xs">
-                  El tamaño máximo es 500kb
+                  El tamaño máximo es 1mb
                 </span>
               )}
               <div className="mt-3">
@@ -1606,7 +1606,7 @@ const FormularioCurriculumPostulante = () => {
               </div>
               {errorSoporteRut === true && (
                 <span className="text-red-500 text-xs">
-                  El tamaño máximo es 500kb
+                  El tamaño máximo es 1mb
                 </span>
               )}
               <div className="mt-3">
@@ -2623,7 +2623,7 @@ const FormularioCurriculumPostulante = () => {
               </div>
               {errorSoporteContrato === true && (
                 <span className="text-red-500 text-xs">
-                  El tamaño máximo es 500kb
+                  El tamaño máximo es 1mb
                 </span>
               )}
               <div className="mt-3">
@@ -2761,7 +2761,7 @@ const FormularioCurriculumPostulante = () => {
                     </div>
                     {errorDocumentacionPostulacion === true && (
                       <span className="text-red-500 text-xs">
-                        El tamaño máximo es 500kb
+                        El tamaño máximo es 1mb
                       </span>
                     )}
 

@@ -16,7 +16,7 @@ const FormularioCurriculum = () => {
   const [nombre, setNombre] = useState("");
   const [tipoDocumento, setTipoDocumento] = useState("Cedula de ciudadania");
   const [numeroDocumento, setNumeroDocumento] = useState(0);
-  const [fechaNacimiento, setFechaNacimiento] = useState( '1990-01-01');
+  const [fechaNacimiento, setFechaNacimiento] = useState('1990-01-01');
   const [lugarNacimiento, setLugarNacimiento] = useState("");
   const [telefono, setTelefono] = useState(0);
   const [correo, setCorreo] = useState("");
@@ -25,7 +25,7 @@ const FormularioCurriculum = () => {
   const [pais, setPais] = useState("");
   const [departamento, setDepartamento] = useState("");
   const [ciudad, setCiudad] = useState("");
-  const[municipios, setMunicipios] = useState([]);
+  const [municipios, setMunicipios] = useState([]);
   const [numeroHijos, setNumeroHijos] = useState(0);
   const [tipoSangre, setTipoSangre] = useState("");
   //Formación Profesional
@@ -35,8 +35,8 @@ const FormularioCurriculum = () => {
   const [institucionTitulo, setInstitucionTitulo] = useState("");
   //Experiencia Profesional
   const [empresaExp, setEmpresaExp] = useState("");
-  const [fechaInicioExp, setFechaInicioExp] = useState( '1990-01-01');
-  const [fechaFinExp, setFechaFinExp] = useState( '1990-01-01');
+  const [fechaInicioExp, setFechaInicioExp] = useState('1990-01-01');
+  const [fechaFinExp, setFechaFinExp] = useState('1990-01-01');
   const [soporteExp, setSoporteExp] = useState("");
   const [errorSoporteExp, setErrorSoporteExp] = useState(false);
   //Referencias
@@ -79,7 +79,7 @@ const FormularioCurriculum = () => {
     { nro_cuenta: " ", banco: " ", ciudad: " ", pais: "", moneda: " " },
   ]);
 
-  const[codigoCIIU, setCodigoCIIU]=useState([{
+  const [codigoCIIU, setCodigoCIIU] = useState([{
     value: ""
   }])
 
@@ -99,8 +99,8 @@ const FormularioCurriculum = () => {
   const [numeroCuenta, setNumeroCuenta] = useState("");
   //Contractual
   const [tipoContrato, setTipoContrato] = useState("");
-  const [fechaIngreso, setFechaIngreso] = useState( '1990-01-01');
-  const [fechaFin, setFechaFin] = useState( '1990-01-01');
+  const [fechaIngreso, setFechaIngreso] = useState('1990-01-01');
+  const [fechaFin, setFechaFin] = useState('1990-01-01');
   const [empresa, setEmpresa] = useState("");
   const [nomina, setNomina] = useState("");
   const [codigoIngreso, setCodigoIngreso] = useState(0);
@@ -109,14 +109,14 @@ const FormularioCurriculum = () => {
   const [errorSoporteContrato, setErrorSoporteContrato] = useState(false);
   const [cargo, setCargo] = useState("elegir");
 
-  const[cargosFiltrado, setCargosFiltrado] = useState([])
+  const [cargosFiltrado, setCargosFiltrado] = useState([])
   const [inputReq, setInputReq] = useState([
-    { nombre_requisito: " ", vigencia:" ", fecha_vigencia:"1990-01-01", observaciones:" ", estado_requisito:"" },
+    { nombre_requisito: " ", vigencia: " ", fecha_vigencia: "1990-01-01", observaciones: " ", estado_requisito: "" },
   ]);
 
-  const[documentoRequerido, setDocumentoRequerido] = useState([])
-  const[unidadFuncional, setUnidadFuncional]= useState("");
-  const[unidadNegocio, setUnidadNegocio] = useState("Uci Magangué")
+  const [documentoRequerido, setDocumentoRequerido] = useState([])
+  const [unidadFuncional, setUnidadFuncional] = useState("");
+  const [unidadNegocio, setUnidadNegocio] = useState("Uci Magangué")
   const params = useParams();
 
 
@@ -130,19 +130,19 @@ const FormularioCurriculum = () => {
     alerta,
   } = useCollaborators();
 
-  const{obtenerCargosForm, cargosForm} = useCargos();
-  
+  const { obtenerCargosForm, cargosForm } = useCargos();
+
   console.log(cargosForm)
 
   const { auth, cargando } = useAuth();
   //console.log(auth.documento);
   //console.log(auth._id);
   useEffect(() => {
-    obtenerCurriculumRH(params.id)   
-     obtenerCargosForm()
+    obtenerCurriculumRH(params.id)
+    obtenerCargosForm()
   }, []);
 
- 
+
   useEffect(() => {
     if (Object.keys(collaborator).length !== 0) {
       console.log(collaborator);
@@ -385,7 +385,7 @@ const FormularioCurriculum = () => {
     //console.log(formData);
     //Pasar los datos hacia el provider
     console.log(formData.get("nombre"));
-    
+
     await editarCurriculumRH(formData);
   };
   //Informacion Financiera
@@ -473,7 +473,7 @@ const FormularioCurriculum = () => {
   };
 
   const handleSoporteExp = (data) => {
-    const maxfilesize = (1024 * 1024) / 2;
+    const maxfilesize = (1024 * 1024);
 
     if (data && data.size > maxfilesize) {
       setErrorSoporteExp(true);
@@ -485,7 +485,7 @@ const FormularioCurriculum = () => {
   };
 
   const handleSoporteEps = (data) => {
-    const maxfilesize = (1024 * 1024) / 2;
+    const maxfilesize = (1024 * 1024);
 
     if (data && data.size > maxfilesize) {
       setErrorSoporteEps(true);
@@ -497,7 +497,7 @@ const FormularioCurriculum = () => {
   };
 
   const handleSoportePension = (data) => {
-    const maxfilesize = (1024 * 1024) / 2;
+    const maxfilesize = (1024 * 1024);
 
     if (data && data.size > maxfilesize) {
       setErrorSoportePension(true);
@@ -509,7 +509,7 @@ const FormularioCurriculum = () => {
   };
 
   const handleSoporteRut = (data) => {
-    const maxfilesize = (1024 * 1024) / 2;
+    const maxfilesize = (1024 * 1024);
 
     if (data && data.size > maxfilesize) {
       setErrorSoporteRut(true);
@@ -521,7 +521,7 @@ const FormularioCurriculum = () => {
   };
 
   const handleSoporteContrato = (data) => {
-    const maxfilesize = (1024 * 1024) / 2;
+    const maxfilesize = (1024 * 1024);
 
     if (data && data.size > maxfilesize) {
       setErrorSoporteContrato(true);
@@ -571,10 +571,10 @@ const FormularioCurriculum = () => {
                   onChange={(e) => setNombre(e.target.value)}
                   required
                   disabled={true}
-                  // {...register("nombre", {
-                  //   required: "Este campo es requerido",
-                  //   onChange: (e) => setNombre(e.target.value),
-                  // })}
+                // {...register("nombre", {
+                //   required: "Este campo es requerido",
+                //   onChange: (e) => setNombre(e.target.value),
+                // })}
                 />
               </div>
               {/* <span className="text-xs text-red-500">
@@ -600,7 +600,7 @@ const FormularioCurriculum = () => {
                     setTipoDocumento(selectedDocumentType);
                   }}
                   value={tipoDocumento}
-                   disabled={true}
+                  disabled={true}
                 >
                   <option value="Cedula de ciudadania">
                     Cedula de ciudadania
@@ -629,11 +629,11 @@ const FormularioCurriculum = () => {
                   value={numeroDocumento}
                   onChange={(e) => setNumeroDocumento(e.target.value)}
                   required
-                   disabled={true}
-                  // {...register("numeroDocumento", {
-                  //   required: "Este campo es requerido",
-                  //   onChange: (e) => setNumeroDocumento(e.target.value),
-                  // })}
+                  disabled={true}
+                // {...register("numeroDocumento", {
+                //   required: "Este campo es requerido",
+                //   onChange: (e) => setNumeroDocumento(e.target.value),
+                // })}
                 />
               </div>
               {/* <span className="text-xs text-red-500">
@@ -658,11 +658,11 @@ const FormularioCurriculum = () => {
                   value={fechaNacimiento}
                   onChange={(e) => setFechaNacimiento(e.target.value)}
                   required
-                   disabled={true}
-                  // {...register("fechaNacimiento", {
-                  //   required: "Este campo es requerido",
-                  //   onChange: (e) => setFechaNacimiento(e.target.value),
-                  // })}
+                  disabled={true}
+                // {...register("fechaNacimiento", {
+                //   required: "Este campo es requerido",
+                //   onChange: (e) => setFechaNacimiento(e.target.value),
+                // })}
                 />
               </div>
               {/* <span className="text-xs text-red-500">
@@ -688,10 +688,10 @@ const FormularioCurriculum = () => {
                   onChange={(e) => setLugarNacimiento(e.target.value)}
                   required
                   disabled={true}
-                  // {...register("lugarNacimiento", {
-                  //   required: "Este campo es requerido",
-                  //   onChange: (e) => setLugarNacimiento(e.target.value),
-                  // })}
+                // {...register("lugarNacimiento", {
+                //   required: "Este campo es requerido",
+                //   onChange: (e) => setLugarNacimiento(e.target.value),
+                // })}
                 />
               </div>
               {/* <span className="text-xs text-red-500">
@@ -717,10 +717,10 @@ const FormularioCurriculum = () => {
                   onChange={(e) => setTelefono(e.target.value)}
                   required
                   disabled={true}
-                  // {...register("telefono", {
-                  //   required: "Este campo es requerido",
-                  //   onChange: (e) => setTelefono(e.target.value),
-                  // })}
+                // {...register("telefono", {
+                //   required: "Este campo es requerido",
+                //   onChange: (e) => setTelefono(e.target.value),
+                // })}
                 />
               </div>
               {/* <span className="text-xs text-red-500">
@@ -746,10 +746,10 @@ const FormularioCurriculum = () => {
                   onChange={(e) => setCorreo(e.target.value)}
                   required
                   disabled={true}
-                  // {...register("correo", {
-                  //   required: "Este campo es requerido",
-                  //   onChange: (e) => setCorreo(e.target.value),
-                  // })}
+                // {...register("correo", {
+                //   required: "Este campo es requerido",
+                //   onChange: (e) => setCorreo(e.target.value),
+                // })}
                 />
               </div>
               {/* <span className="text-xs text-red-500">
@@ -775,10 +775,10 @@ const FormularioCurriculum = () => {
                   onChange={(e) => setDireccion(e.target.value)}
                   required
                   disabled={true}
-                  // {...register("direccion", {
-                  //   required: "Este campo es requerido",
-                  //   onChange: (e) => setDireccion(e.target.value),
-                  // })}
+                // {...register("direccion", {
+                //   required: "Este campo es requerido",
+                //   onChange: (e) => setDireccion(e.target.value),
+                // })}
                 />
               </div>
               {/* <span className="text-xs text-red-500">
@@ -832,10 +832,10 @@ const FormularioCurriculum = () => {
                   onChange={(e) => setPais(e.target.value)}
                   required
                   disabled={true}
-                  // {...register("pais", {
-                  //   required: "Este campo es requerido",
-                  //   onChange: (e) => setPais(e.target.value),
-                  // })}
+                // {...register("pais", {
+                //   required: "Este campo es requerido",
+                //   onChange: (e) => setPais(e.target.value),
+                // })}
                 />
               </div>
               {/* <span className="text-xs text-red-500">
@@ -861,10 +861,10 @@ const FormularioCurriculum = () => {
                   onChange={(e) => setDepartamento(e.target.value)}
                   required
                   disabled={true}
-                  // {...register("departamento", {
-                  //   required: "Este campo es requerido",
-                  //   onChange: (e) => setDepartamento(e.target.value),
-                  // })}
+                // {...register("departamento", {
+                //   required: "Este campo es requerido",
+                //   onChange: (e) => setDepartamento(e.target.value),
+                // })}
                 />
               </div>
               {/* <span className="text-xs text-red-500">
@@ -890,10 +890,10 @@ const FormularioCurriculum = () => {
                   onChange={(e) => setCiudad(e.target.value)}
                   required
                   disabled={true}
-                  // {...register("ciudad", {
-                  //   required: "Este campo es requerido",
-                  //   onChange: (e) => setCiudad(e.target.value),
-                  // })}
+                // {...register("ciudad", {
+                //   required: "Este campo es requerido",
+                //   onChange: (e) => setCiudad(e.target.value),
+                // })}
                 />
               </div>
               {/* <span className="text-xs text-red-500">
@@ -919,10 +919,10 @@ const FormularioCurriculum = () => {
                   onChange={(e) => setNumeroHijos(e.target.value)}
                   required
                   disabled={true}
-                  // {...register("numeroHijos", {
-                  //   required: "Este campo es requerido",
-                  //   onChange: (e) => setNumeroHijos(e.target.value),
-                  // })}
+                // {...register("numeroHijos", {
+                //   required: "Este campo es requerido",
+                //   onChange: (e) => setNumeroHijos(e.target.value),
+                // })}
                 />
               </div>
               {/* <span className="text-xs text-red-500">
@@ -948,10 +948,10 @@ const FormularioCurriculum = () => {
                   onChange={(e) => setTipoSangre(e.target.value)}
                   required
                   disabled={true}
-                  // {...register("tipoSangre", {
-                  //   required: "Este campo es requerido",
-                  //   onChange: (e) => setTipoSangre(e.target.value),
-                  // })}
+                // {...register("tipoSangre", {
+                //   required: "Este campo es requerido",
+                //   onChange: (e) => setTipoSangre(e.target.value),
+                // })}
                 />
               </div>
               {/* <span className="text-xs text-red-500">
@@ -1016,10 +1016,10 @@ const FormularioCurriculum = () => {
                   onChange={(e) => setTitulo(e.target.value)}
                   required
                   disabled={true}
-                  // {...register("titulo", {
-                  //   required: "Este campo es requerido",
-                  //   onChange: (e) => setTitulo(e.target.value),
-                  // })}
+                // {...register("titulo", {
+                //   required: "Este campo es requerido",
+                //   onChange: (e) => setTitulo(e.target.value),
+                // })}
                 />
               </div>
               {/* <span className="text-xs text-red-500">
@@ -1044,10 +1044,10 @@ const FormularioCurriculum = () => {
                   onChange={(e) => setAnioTitulo(e.target.value)}
                   required
                   disabled={true}
-                  // {...register("anioTitulo", {
-                  //   required: "Este campo es requerido",
-                  //   onChange: (e) => setAnioTitulo(e.target.value),
-                  // })}
+                // {...register("anioTitulo", {
+                //   required: "Este campo es requerido",
+                //   onChange: (e) => setAnioTitulo(e.target.value),
+                // })}
                 />
               </div>
               {/* <span className="text-xs text-red-500">
@@ -1073,10 +1073,10 @@ const FormularioCurriculum = () => {
                   onChange={(e) => setInstitucionTitulo(e.target.value)}
                   required
                   disabled={true}
-                  // {...register("institucionTitulo", {
-                  //   required: "Este campo es requerido",
-                  //   onChange: (e) => setInstitucionTitulo(e.target.value),
-                  // })}
+                // {...register("institucionTitulo", {
+                //   required: "Este campo es requerido",
+                //   onChange: (e) => setInstitucionTitulo(e.target.value),
+                // })}
                 />
               </div>
               {/* <span className="text-xs text-red-500">
@@ -1108,10 +1108,10 @@ const FormularioCurriculum = () => {
                   onChange={(e) => setEmpresaExp(e.target.value)}
                   required
                   disabled={true}
-                  // {...register("empresaExp", {
-                  //   required: "Este campo es requerido",
-                  //   onChange: (e) => setEmpresaExp(e.target.value),
-                  // })}
+                // {...register("empresaExp", {
+                //   required: "Este campo es requerido",
+                //   onChange: (e) => setEmpresaExp(e.target.value),
+                // })}
                 />
               </div>
               {/* <span className="text-xs text-red-500">
@@ -1136,10 +1136,10 @@ const FormularioCurriculum = () => {
                   onChange={(e) => setFechaInicioExp(e.target.value)}
                   required
                   disabled={true}
-                  // {...register("fechaInicioExp", {
-                  //   required: "Este campo es requerido",
-                  //   onChange: (e) => setFechaInicioExp(e.target.value),
-                  // })}
+                // {...register("fechaInicioExp", {
+                //   required: "Este campo es requerido",
+                //   onChange: (e) => setFechaInicioExp(e.target.value),
+                // })}
                 />
               </div>
               {/* <span className="text-xs text-red-500">
@@ -1200,15 +1200,14 @@ const FormularioCurriculum = () => {
               </div>
               {errorSoporteExp === true && (
                 <span className="text-red-500 text-xs">
-                  El tamaño máximo es 500kb
+                  El tamaño máximo es 1mb
                 </span>
               )}
               <div className="mt-3">
                 {collaborator[0]?.soporteExp && (
                   <a
-                    href={`${import.meta.env.VITE_BACKEND_URL}/${
-                      collaborator[0].soporteExp
-                    }`}
+                    href={`${import.meta.env.VITE_BACKEND_URL}/${collaborator[0].soporteExp
+                      }`}
                     download={collaborator[0].soporteExp}
                     target="_blank"
                     className="underline text-blue-500 pt-5"
@@ -1244,10 +1243,10 @@ const FormularioCurriculum = () => {
                   onChange={(e) => setNombreRefA(e.target.value)}
                   required
                   disabled={true}
-                  // {...register("nombreRefA", {
-                  //   required: "Este campo es requerido",
-                  //   onChange: (e) => setNombreRefA(e.target.value),
-                  // })}
+                // {...register("nombreRefA", {
+                //   required: "Este campo es requerido",
+                //   onChange: (e) => setNombreRefA(e.target.value),
+                // })}
                 />
               </div>
               {/* <span className="text-xs text-red-500">
@@ -1273,10 +1272,10 @@ const FormularioCurriculum = () => {
                   onChange={(e) => setTelefonoRefA(e.target.value)}
                   required
                   disabled={true}
-                  // {...register("telefonoRefA", {
-                  //   required: "Este campo es requerido",
-                  //   onChange: (e) => setTelefonoRefA(e.target.value),
-                  // })}
+                // {...register("telefonoRefA", {
+                //   required: "Este campo es requerido",
+                //   onChange: (e) => setTelefonoRefA(e.target.value),
+                // })}
                 />
               </div>
               {/* <span className="text-xs text-red-500">
@@ -1302,10 +1301,10 @@ const FormularioCurriculum = () => {
                   onChange={(e) => setCorreoRefA(e.target.value)}
                   required
                   disabled={true}
-                  // {...register("correoRefA", {
-                  //   required: "Este campo es requerido",
-                  //   onChange: (e) => setCorreoRefA(e.target.value),
-                  // })}
+                // {...register("correoRefA", {
+                //   required: "Este campo es requerido",
+                //   onChange: (e) => setCorreoRefA(e.target.value),
+                // })}
                 />
               </div>
               {/* <span className="text-xs text-red-500">
@@ -1316,7 +1315,7 @@ const FormularioCurriculum = () => {
           <div className="text-left text-xl text-gray-700 mt-8 font-bold border-b-4 border-corporative-blue inline-flex pt-3">
             Contactos
           </div>
-          
+
           <div className="border-b border-gray-200 pb-2">
             <h6 className="text-sm font-medium leading-6 text-gray-900">
               Contacto 1 (Personal)
@@ -1463,15 +1462,14 @@ const FormularioCurriculum = () => {
               </div>
               {errorSoporteEps === true && (
                 <span className="text-red-500 text-xs">
-                  El tamaño máximo es 500kb
+                  El tamaño máximo es 1mb
                 </span>
               )}
               <div className="mt-3">
                 {collaborator[0]?.soporteEps && (
                   <a
-                    href={`${import.meta.env.VITE_BACKEND_URL}/${
-                      collaborator[0].soporteEps
-                    }`}
+                    href={`${import.meta.env.VITE_BACKEND_URL}/${collaborator[0].soporteEps
+                      }`}
                     download={collaborator[0].soporteEps}
                     target="_blank"
                     className="underline text-blue-500 pt-5"
@@ -1505,7 +1503,7 @@ const FormularioCurriculum = () => {
                   <option value="Porvenir">Porvenir</option>
                   <option value="Colpensiones">Colpensiones</option>
                   <option value="Colfondos">Colfondos</option>
-                    
+
                 </select>
               </div>
             </div>
@@ -1543,15 +1541,14 @@ const FormularioCurriculum = () => {
               </div>
               {errorSoportePension === true && (
                 <span className="text-red-500 text-xs">
-                  El tamaño máximo es 500kb
+                  El tamaño máximo es 1mb
                 </span>
               )}
               <div className="mt-3">
                 {collaborator[0]?.soportePension && (
                   <a
-                    href={`${import.meta.env.VITE_BACKEND_URL}/${
-                      collaborator[0].soportePension
-                    }`}
+                    href={`${import.meta.env.VITE_BACKEND_URL}/${collaborator[0].soportePension
+                      }`}
                     download={collaborator[0].soportePension}
                     target="_blank"
                     className="underline text-blue-500 pt-5"
@@ -1562,32 +1559,32 @@ const FormularioCurriculum = () => {
               </div>
             </div>
           </div>
-         <div className="text-left text-xl text-gray-700 mt-8 font-bold border-b-4 border-corporative-blue inline-flex pt-3">
+          <div className="text-left text-xl text-gray-700 mt-8 font-bold border-b-4 border-corporative-blue inline-flex pt-3">
             Información Financiera
           </div>
           <div>
             {codigoCIIU &&
               Array.isArray(codigoCIIU) &&
               codigoCIIU.map((item, i) => {
-               
+
                 return (
                   <div
                     key={i}
                     className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-2 gap-6 pt-5"
                   >
-               <div className="">
-                    <label className="block text-sm font-medium text-gray-700">
+                    <div className="">
+                      <label className="block text-sm font-medium text-gray-700">
                         CIU
-                    </label>
-                    <Select 
-                      options={ciuu} 
-                      placeholder="Digite su CIUU" 
-                      value={item}
-                      onChange={(e) => handleinputchange(e, i)}
-                      isDisabled={true}  />
-                     
-                      
-                    </div> 
+                      </label>
+                      <Select
+                        options={ciuu}
+                        placeholder="Digite su CIUU"
+                        value={item}
+                        onChange={(e) => handleinputchange(e, i)}
+                        isDisabled={true} />
+
+
+                    </div>
                   </div>
                 );
               })}
@@ -1628,15 +1625,14 @@ const FormularioCurriculum = () => {
               </div>
               {errorSoporteRut === true && (
                 <span className="text-red-500 text-xs">
-                  El tamaño máximo es 500kb
+                  El tamaño máximo es 1mb
                 </span>
               )}
               <div className="mt-3">
                 {collaborator[0]?.rut && (
                   <a
-                    href={`${import.meta.env.VITE_BACKEND_URL}/${
-                      collaborator[0].rut
-                    }`}
+                    href={`${import.meta.env.VITE_BACKEND_URL}/${collaborator[0].rut
+                      }`}
                     download={collaborator[0].rut}
                     target="_blank"
                     className="underline text-blue-500 pt-5"
@@ -2420,7 +2416,7 @@ const FormularioCurriculum = () => {
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={codigoIngreso}
                   onChange={(e) => setCodigoIngreso(e.target.value)}
-                  
+
                 />
               </div>
             </div>
@@ -2549,29 +2545,29 @@ const FormularioCurriculum = () => {
                 Cargo
               </label>
               <div className="mt-1">
-                 <select
-                    id="cargo"
-                    name="cargo"                 
-                    className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                    onChange={(e) => setCargo(e.target.value)}
-                    value={cargo}   
-                    required={true}                 
+                <select
+                  id="cargo"
+                  name="cargo"
+                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                  onChange={(e) => setCargo(e.target.value)}
+                  value={cargo}
+                  required={true}
                 >
                   <option value="elegir" disabled >
                     -- Selecciona un cargo--
                   </option>
-                   {cargosForm.map((item, i) =>{
-                    return(
-                        <option key={i} value={item.nombre}>
-                           {item.nombre}
-                        </option>
+                  {cargosForm.map((item, i) => {
+                    return (
+                      <option key={i} value={item.nombre}>
+                        {item.nombre}
+                      </option>
                     )
-                  })} 
+                  })}
                 </select>
               </div>
             </div>
 
-              <div>
+            <div>
               <label
                 htmlFor="unidadFuncional"
                 className="block text-sm font-medium text-gray-700"
@@ -2590,7 +2586,7 @@ const FormularioCurriculum = () => {
               </div>
             </div>
 
-             <div>
+            <div>
               <label
                 htmlFor="unidadNegocio"
                 className="block text-sm font-medium text-gray-700"
@@ -2598,7 +2594,7 @@ const FormularioCurriculum = () => {
                 Unidad de negocio
               </label>
               <div className="mt-1">
-              <select
+                <select
                   id="unidadNegocio"
                   name="unidadNegocio"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
@@ -2608,7 +2604,7 @@ const FormularioCurriculum = () => {
                     setUnidadNegocio(selectedDocumentType);
                   }}
                   value={unidadNegocio}
-               
+
                 >
                   <option value="Uci Magangué">
                     Uci Magangue
@@ -2654,15 +2650,14 @@ const FormularioCurriculum = () => {
               </div>
               {errorSoporteContrato === true && (
                 <span className="text-red-500 text-xs">
-                  El tamaño máximo es 500kb
+                  El tamaño máximo es 1mb
                 </span>
               )}
               <div className="mt-3">
                 {collaborator[0]?.soporteContrato && (
                   <a
-                    href={`${import.meta.env.VITE_BACKEND_URL}/${
-                      collaborator[0].soporteContrato
-                    }`}
+                    href={`${import.meta.env.VITE_BACKEND_URL}/${collaborator[0].soporteContrato
+                      }`}
                     download={collaborator[0].soporteContrato}
                     target="_blank"
                     className="underline text-blue-500 pt-5"

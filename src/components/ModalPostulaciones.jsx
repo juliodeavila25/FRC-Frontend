@@ -122,7 +122,8 @@ export default function ModalPublic({ setShowModal, data }) {
   const { msg } = alertaPostulacion;
 
   const handleDocumentacionPostulacion = (data) => {
-    const maxfilesize = (1024 * 1024) / 2;
+    const maxfilesize = (1024 * 1024);
+    console.log(maxfilesize)
 
     if (data && data.size > maxfilesize) {
       setErrorDocumentacionPostulacion(true);
@@ -358,7 +359,7 @@ export default function ModalPublic({ setShowModal, data }) {
                 </div>
                 {errorDocumentacionPostulacion === true && (
                   <span className="text-red-500 text-xs">
-                    El tamaño máximo es 500kb
+                    El tamaño máximo es 1 Mb
                   </span>
                 )}
 
