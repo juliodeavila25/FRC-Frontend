@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useParams, Link } from "react-router-dom";
 import useCurriculum from "../hooks/useCurriculum";
 import useCollaborators from "../hooks/useCollaborators";
@@ -117,6 +117,16 @@ const FormularioCurriculum = () => {
   const [documentoRequerido, setDocumentoRequerido] = useState([])
   const [unidadFuncional, setUnidadFuncional] = useState("");
   const [unidadNegocio, setUnidadNegocio] = useState("Uci Magangué")
+
+  /* Error en el campo empresa*/
+  const inputRefEmpresa = useRef(null);
+  const [errorEmpresa, setErrorEmpresa] = useState(false)
+
+  /* Error en el campo empresa*/
+  const inputRefCargo = useRef(null);
+  const [errorCargo, setErrorCargo] = useState(false)
+
+
   const params = useParams();
 
 
@@ -214,7 +224,7 @@ const FormularioCurriculum = () => {
       setTipoContrato(collaborator.tipoContrato);
       setFechaIngreso(collaborator.fechaIngreso?.split("T")[0]);
       setFechaFin(collaborator.fechaFin?.split("T")[0]);
-      setEmpresa(collaborator.empresa);
+      setEmpresa(collaborator.empresa !== "" ? collaborator.empresa : "elegir");
       setNomina(collaborator.nomina);
       setCodigoIngreso(collaborator.codigoIngreso);
       setSueldo(collaborator.sueldo);
@@ -299,6 +309,22 @@ const FormularioCurriculum = () => {
         error: true,
       });
       return;
+    }
+
+    if (empresa === "elegir") {
+      inputRefEmpresa.current.focus()
+      setErrorEmpresa(true)
+      return;
+    } else {
+      setErrorEmpresa(false)
+    }
+
+    if (cargo === "elegir") {
+      inputRefCargo.current.focus()
+      setErrorCargo(true)
+      return;
+    } else {
+      setErrorCargo(false)
     }
 
     const formData = new FormData();
@@ -2485,17 +2511,40 @@ const FormularioCurriculum = () => {
                 Empresa
               </label>
               <div className="mt-1">
-                <input
+                <select
                   id="empresa"
                   name="empresa"
-                  type="text"
-                  autoComplete="empresa"
-                  placeholder="Digita nombre empresa"
-                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                  value={empresa}
+                  className={errorEmpresa === false ?
+                    "block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                    :
+                    "block w-full appearance-none rounded-md border border-red-500 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-red-500 focus:outline-none  sm:text-sm"}
                   onChange={(e) => setEmpresa(e.target.value)}
-                />
+                  value={empresa}
+                  required={true}
+                  ref={inputRefEmpresa}
+                >
+                  <option value="elegir" disabled >
+                    -- Selecciona un cargo--
+                  </option>
+                  <option value="SOVEL" >
+                    SOVEL
+                  </option>
+                  <option value="WORKSERVICES" >
+                    Workservices
+                  </option>
+                  <option value="EFISERVICIOS" >
+                    Efiservicios
+                  </option>
+                  <option value="GEIPAS" >
+                    GEIPAS
+                  </option>
+                  <option value="Fundación Renal de Colombia" >
+                    Fundación Renal de Colombia
+                  </option>
+                </select>
+                {errorEmpresa === true && <span className="text-red-500 text-xs">Seleccione una empresa</span>}
               </div>
+
             </div>
             <div>
               <label
@@ -2548,9 +2597,13 @@ const FormularioCurriculum = () => {
                 <select
                   id="cargo"
                   name="cargo"
-                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                  className={errorCargo === false ?
+                    "block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                    :
+                    "block w-full appearance-none rounded-md border border-red-500 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-red-500 focus:outline-none  sm:text-sm"}
                   onChange={(e) => setCargo(e.target.value)}
                   value={cargo}
+                  ref={inputRefCargo}
                   required={true}
                 >
                   <option value="elegir" disabled >
@@ -2564,6 +2617,7 @@ const FormularioCurriculum = () => {
                     )
                   })}
                 </select>
+                {errorCargo === true && <span className="text-red-500 text-xs">Seleccione un cargo</span>}
               </div>
             </div>
 
