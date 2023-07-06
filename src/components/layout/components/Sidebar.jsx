@@ -17,6 +17,7 @@ import {
 } from "@heroicons/react/24/outline";
 
 
+
 <svg
   xmlns="http://www.w3.org/2000/svg"
   fill="none"
@@ -41,17 +42,22 @@ import Header from "./Header";
 import Body from "./Body";
 import { Link, useLocation } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
+import useCurriculum from "../../../hooks/useCurriculum";
 
 
 const Sidebar = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const location = useLocation();
   const { auth, obtenerUsuarioAutenticado, usuarioAutenticado } = useAuth();
+  const {
+    curriculum, obtenerCurriculum
+  } = useCurriculum();
 
-  //console.log(auth?.userType[0]);
+
 
   useEffect(() => {
     obtenerUsuarioAutenticado()
+    obtenerCurriculum(auth._id);
   }, [auth])
 
 
@@ -311,7 +317,7 @@ const Sidebar = () => {
                           </Link>
                         ))}
                     </div>
-                    {Object.keys(usuarioAutenticado).length !== 0 && usuarioAutenticado && usuarioAutenticado?.userType[0] === "colaborador" && usuarioAutenticado?.estado === "completado" ? (
+                    {Object.keys(usuarioAutenticado).length !== 0 && usuarioAutenticado && usuarioAutenticado?.userType[0] === "colaborador" && usuarioAutenticado?.estado === "completado" && Array.isArray(curriculum) && curriculum.length > 0 && curriculum[0].empresa === "Fundación Renal de Colombia" ? (
                       <div className="mt-8">
                         <h3
                           className="px-3 text-lg font-medium text-gray-500"
@@ -641,7 +647,7 @@ const Sidebar = () => {
                   </Link>
                 ))}
             </div>
-            {Object.keys(usuarioAutenticado).length !== 0 && usuarioAutenticado && usuarioAutenticado?.userType[0] === "colaborador" && usuarioAutenticado?.estado === "completado" ? (
+            {Object.keys(usuarioAutenticado).length !== 0 && usuarioAutenticado && usuarioAutenticado?.userType[0] === "colaborador" && usuarioAutenticado?.estado === "completado" && Array.isArray(curriculum) && curriculum.length > 0 && curriculum[0].empresa === "Fundación Renal de Colombia" ? (
               <div className="mt-8">
                 {/* Secondary navigation */}
                 <h3
