@@ -9,6 +9,8 @@ import { BeatLoader } from "react-spinners";
 import ciuu from '../json/ciuu.json'
 import Select from 'react-select'
 import departamentos from '../json/departamentos_municipios.json'
+import ListarRequisitosRH from "./ListarRequisitosRH";
+import useDocumentosRequeridos from '../hooks/useDocumentosRequeridos'
 
 const FormularioCurriculum = () => {
   const [id, setId] = useState(null);
@@ -142,6 +144,8 @@ const FormularioCurriculum = () => {
 
   const { obtenerCargosForm, cargosForm } = useCargos();
 
+  const { obtenerDocumentosRequeridos, documentosRequeridos, } = useDocumentosRequeridos();
+
   console.log(cargosForm)
 
   const { auth, cargando } = useAuth();
@@ -151,6 +155,10 @@ const FormularioCurriculum = () => {
     obtenerCurriculumRH(params.id)
     obtenerCargosForm()
   }, []);
+
+
+
+
 
 
   useEffect(() => {
@@ -234,6 +242,16 @@ const FormularioCurriculum = () => {
 
     }
   }, [collaborator]);
+
+
+
+  useEffect(() => {
+    if (Object.keys(collaborator).length !== 0) {
+      obtenerDocumentosRequeridos(collaborator.creador)
+    }
+
+
+  }, [collaborator])
 
   // const {
   //   register,
@@ -2723,10 +2741,45 @@ const FormularioCurriculum = () => {
             </div>
           </div>
 
+          <div className="text-left text-xl text-gray-700 mt-8 font-bold border-b-4 border-corporative-blue inline-flex pt-3">
+            Documentos Requeridos
+          </div>
+          <div>
+            {Array.isArray(documentosRequeridos) && documentosRequeridos.length > 0 ?
+              <ListarRequisitosRH data={documentosRequeridos} /> : (
+                <div className="rounded-md bg-blue-50 p-4">
+                  <div className="flex">
+                    <div className="flex-shrink-0">
+                      <svg
+                        className="h-5 w-5 text-blue-400"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                        aria-hidden="true"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a.75.75 0 000 1.5h.253a.25.25 0 01.244.304l-.459 2.066A1.75 1.75 0 0010.747 15H11a.75.75 0 000-1.5h-.253a.25.25 0 01-.244-.304l.459-2.066A1.75 1.75 0 009.253 9H9z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                    </div>
+                    <div className="ml-3 flex-1 md:flex ">
+                      <p className="text-sm text-blue-700">
+                        No existen documentos cargados
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )
+            }
+          </div>
+
+
+
           {msg && <Alert alerta={alerta} />}
           <div className="grid grid-cols-2 gap-6 w-3/5 mx-auto">
             <Link
-              to="/"
+              to="/colaboradores"
               className="flex w-full justify-center rounded-md border-2 border-red-400 bg-transparent py-2 px-4 text-sm font-medium text-red-500 shadow-sm hover:bg-red-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
             >
               Cancelar
