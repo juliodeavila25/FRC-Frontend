@@ -13,7 +13,7 @@ const ListarOfertas = () => {
 
   console.log(ofertas)
 
-  //localStorage.setItem("codigo", documentos[0]?.codigo);
+  localStorage.setItem("codigo_oferta", ofertas[0]?.convocatoria);
 
   const navigate = useNavigate();
 

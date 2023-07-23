@@ -138,6 +138,7 @@ const OfertasProvider = ({ children }) => {
       setTimeout(() => {
         setAlerta({});
         navigate("/recursos-humanos/listar-convocatorias");
+        window.location.reload(false)
       }, 3000);
     } catch (error) {
       console.log(error);

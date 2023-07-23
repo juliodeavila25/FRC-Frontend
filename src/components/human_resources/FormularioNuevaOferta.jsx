@@ -15,7 +15,7 @@ const FormularioNuevaOferta = () => {
   const [active, setActive] = useState(false);
   const [id, setId] = useState(null);
   //   const [estado, setEstado] = useState(null);
-  const [nombre, setNombre] = useState("");
+  const [nombre, setNombre] = useState("elegir");
   const [convocatoria, setConvocatoria] = useState("");
   const [fechaInicio, setFechaInicio] = useState(moment(date).format('YYYY-MM-DD'));
   const [fechaFin, setFechaFin] = useState("")
@@ -59,8 +59,16 @@ const FormularioNuevaOferta = () => {
       setFechaInicio(oferta.fechaInicio?.split("T")[0]);
       setFechaFin(oferta.fechaFin?.split("T")[0]);
       setEstadoConvocatoria(oferta.estadoConvocatoria)
+    }else{
+      const newCodigo = parseInt(localStorage.getItem("codigo_oferta"))
+      //let cutNewCodigo = 
+      let newCodigoString = (newCodigo + 1).toString()
+      let addZeros = newCodigoString.padStart(5, '0')
+      let current_year= new Date().getFullYear() 
+      let concatAddZeros = addZeros.concat( "-", current_year )
+      setConvocatoria(concatAddZeros);
     }
-  }, []);
+  }, []); 
 
 
   
@@ -134,7 +142,7 @@ const FormularioNuevaOferta = () => {
                 htmlFor="convocatoria"
                 className="block text-sm font-medium text-gray-700"
               >
-                Nro. Convocatoria <span class="text-red-700">*</span>
+                Nro. Convocatoria <span className="text-red-700">*</span>
               </label>
               <div className="mt-1">
                 <input
@@ -145,38 +153,17 @@ const FormularioNuevaOferta = () => {
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={convocatoria}
                   onChange={(e) => setConvocatoria(e.target.value)}
-                  required="true"
+                  required={true}
                 />
               </div>
             </div>
-            {/* <div>
-              <label
-                htmlFor="nombre"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Nombre Convocatoria <span class="text-red-700">*</span>
-              </label>
-              <div className="mt-1">
-                <input
-                  id="nombre"
-                  name="nombre"
-                  type="text"
-                  autoComplete="nombre"
-                  placeholder="Digita tu nombre completo"
-                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                  value={nombre}
-                  onChange={(e) => setNombre(e.target.value)}
-                  required="true"
-                />
-              </div>
-            </div> */}
-
+           
             <div>
               <label
                   htmlFor="cargo"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Nombre Convocatoria <span class="text-red-700">*</span>
+                  Nombre Convocatoria <span className="text-red-700">*</span>
                 </label>
             
 
@@ -209,7 +196,7 @@ const FormularioNuevaOferta = () => {
                 htmlFor="fechaInicio"
                 className="block text-sm font-medium text-gray-700"
               >
-                Fecha Inicio <span class="text-red-700">*</span>
+                Fecha Inicio <span className="text-red-700">*</span>
               </label>
               <div className="mt-1">
                 <input
@@ -220,7 +207,7 @@ const FormularioNuevaOferta = () => {
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={fechaInicio}
                   onChange={(e) => setFechaInicio(e.target.value)}
-                  required="true"
+                  required={true}
                 />
               </div>
             </div>
@@ -230,7 +217,7 @@ const FormularioNuevaOferta = () => {
                 htmlFor="fechaFin"
                 className="block text-sm font-medium text-gray-700"
               >
-                Fecha fin <span class="text-red-700">*</span>
+                Fecha fin <span className="text-red-700">*</span>
               </label>
               <div className="mt-1">
                 <input
@@ -240,7 +227,7 @@ const FormularioNuevaOferta = () => {
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={fechaFin}
                   onChange={(e) => setFechaFin(e.target.value)}
-                  required="true"
+                  required={true}
                 />
               </div>
             </div>
@@ -250,18 +237,18 @@ const FormularioNuevaOferta = () => {
                 htmlFor="ciudad"
                 className="block text-sm font-medium text-gray-700"
               >
-                Ciudad <span class="text-red-700">*</span>
+                Ciudad <span className="text-red-700">*</span>
               </label>
               <div className="mt-1">
                 <input
                   id="ciudad"
                   name="ciudad"
                   type="text"
-                  placeholder="Digita tu numero de documento"
+                  placeholder="Digite la ciudad"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={ciudad}
                   onChange={(e) => setCiudad(e.target.value)}
-                  required="true"
+                  required={true}
                 />
               </div>
             </div>
@@ -271,18 +258,18 @@ const FormularioNuevaOferta = () => {
                 htmlFor="salario"
                 className="block text-sm font-medium text-gray-700"
               >
-                Salario <span class="text-red-700">*</span>
+                Salario <span className="text-red-700">*</span>
               </label>
               <div className="mt-1">
                 <input
                   id="salario"
                   name="salario"
                   type="text"
-                  placeholder="Seleccione su fecha de nacimiento"
+                  placeholder="Digite el salario"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={salario}
                   onChange={(e) => setSalario(e.target.value)}
-                  required="true"
+                  required={true}
                 />
               </div>
             </div>
@@ -292,18 +279,18 @@ const FormularioNuevaOferta = () => {
                 htmlFor="auxilio"
                 className="block text-sm font-medium text-gray-700"
               >
-                Auxilio <span class="text-red-700">*</span>
+                Auxilio <span className="text-red-700">*</span>
               </label>
               <div className="mt-1">
                 <input
                   id="auxilio"
                   name="auxilio"
                   type="text"
-                  placeholder="Digite su lugar de nacimiento"
+                  placeholder="Digite el auxilio"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={auxilio}
                   onChange={(e) => setAuxilio(e.target.value)}
-                  required="true"
+                  required={true}
                 />
               </div>
             </div>
@@ -313,18 +300,18 @@ const FormularioNuevaOferta = () => {
                 htmlFor="bonificaciones"
                 className="block text-sm font-medium text-gray-700"
               >
-                Bonificaciones <span class="text-red-700">*</span>
+                Bonificaciones <span className="text-red-700">*</span>
               </label>
               <div className="mt-1">
                 <input
                   id="bonificaciones"
                   name="bonificaciones"
                   type="text"
-                  placeholder="Digite su número de telefono"
+                  placeholder="Digite las bonificaciones"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={bonificaciones}
                   onChange={(e) => setBonificaciones(e.target.value)}
-                  required="true"
+                  required={true}
                 />
               </div>
             </div>
@@ -334,20 +321,20 @@ const FormularioNuevaOferta = () => {
                 htmlFor="perfil"
                 className="block text-sm font-medium text-gray-700"
               >
-                Perfil <span class="text-red-700">*</span>
+                Perfil <span className="text-red-700">*</span>
               </label>
               <div className="mt-1">
                 <textarea
                   id="perfil"
                   name="perfil"
                   type="text"
-                  placeholder="Digite su correo electrónico"
+                  placeholder="Digite el perfil"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={perfil}
                   onChange={(e) => setPerfil(e.target.value)}
                   disabled={active}
                   rows="6"
-                  required="true"
+                  required={true}
                 />
               </div>
             </div>
@@ -357,19 +344,19 @@ const FormularioNuevaOferta = () => {
                 htmlFor="funciones"
                 className="block text-sm font-medium text-gray-700"
               >
-                Funciones <span class="text-red-700">*</span>
+                Funciones <span className="text-red-700">*</span>
               </label>
               <div className="mt-1">
                 <textarea
                   id="funciones"
                   name="funciones"
                   type="funciones"
-                  placeholder="Digite su dirección"
+                  placeholder="Digite las funciones"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={funciones}
                   onChange={(e) => setFunciones(e.target.value)}
                   rows="6"
-                  required="true"
+                  required={true}
                 />
               </div>
             </div>
