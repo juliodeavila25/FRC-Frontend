@@ -1,6 +1,6 @@
 import useDocumentos from "../../hooks/useDocumentos";
-import { useState } from "react";
-import Table from "../table/Table";
+import { useEffect, useState } from "react";
+import TableHidden from "../table/TableHidden";
 import { BeatLoader } from "react-spinners";
 import { format } from "date-fns";
 import { useNavigate, Link } from "react-router-dom";
@@ -13,32 +13,62 @@ const ListarDocumentosTotal = () => {
   console.log(documentos)
   localStorage.setItem("codigo", documentos[0]?.codigo);
 
+  // useEffect(()=>{
+  //   if(documentos){
+  //     for(let i=0; i < documentos.length; i++){
+  //       let tagString= documentos[i].tags.map(item => item.name[0])
+  //       console.log(tagString)
+  //     }
+  //   }
+  // },[documentos])
+
 
   const [headers, setHeaders] = useState([
     {
       Header: "Código",
-       accessor: (originalRow, rowIndex) => (
+      accessor: "codigo",
+      Cell: (row)=>(
         <div className="">
-          <p>{originalRow.codigo?.toString().padStart(5, '0')}</p>
-        </div>
-      ),
+        <p>{row.cell.value?.toString().padStart(5, '0')}</p>
+      </div>
+      )
     },
     { Header: "Proceso", accessor: "proceso" },
    
     { Header: "Titulo", 
-        accessor: "titulo",
-        Cell: (row) => (
-          <div className="">
-            <p>{row.cell.value}</p>
-            {console.log(row.cell)}
-            {/* <div className="flex flex-wrap mt-2 gap-2">{row.cell.tags.map(item =>{
-              return(
-                <p className="bg-blue-400 px-3 rounded-full text-white">{item.name}</p>
-              )  
-            }) }</div> */}
-          </div>
-        ),
+      accessor: (originalRow, rowIndex) => (
+        <div className="" key={rowIndex}>
+          <p>{originalRow.titulo}</p>
+          <div className="flex flex-wrap mt-2 gap-2">{originalRow.tags.map(item =>{
+            return(
+              <p  className="bg-blue-400 px-3 rounded-full text-white">{item.name}</p>
+            )  
+          }) }</div> 
+        </div>
+      ),
     },
+    {
+      Header: "Titulo",
+      accessor: "titulo",
+      Cell: (row)=>(
+        <div className="">
+        <p>{row.cell.value}</p>
+      </div>
+      )
+    },
+    {
+      Header: "Tags-Hidden",
+      accessor: data => {
+        let output = [];
+        data.tags.map(item => {
+          return output.push(item.name);
+        });
+        return output.join(", ");
+      },
+      hidden: true
+      
+    },
+    
     {
       Header: "Implementación",
       accessor: "implementacion",
@@ -95,7 +125,7 @@ const ListarDocumentosTotal = () => {
         </div>
       </div>
       {Array.isArray(documentos) && documentos.length > 0 ? (
-        <Table data={documentos} columns={headers} />
+        <TableHidden data={documentos} columns={headers} />
       ) : (
         <div className="rounded-md bg-blue-50 p-4">
           <div className="flex">
