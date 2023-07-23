@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import useOfertas from "../../hooks/useOfertas";
+import useCargos from '../../hooks/useCargos'
 import Alert from "../Alert";
 import useAuth from "../../hooks/useAuth";
 import { BeatLoader } from "react-spinners";
@@ -28,6 +29,9 @@ const FormularioNuevaOferta = () => {
 
   const params = useParams();
 
+
+  const { obtenerCargosForm, cargosForm } = useCargos();
+
   console.log(params.id);
 
   const {
@@ -44,7 +48,7 @@ const FormularioNuevaOferta = () => {
   useEffect(() => {
     if (params.id) {
       setId(oferta._id);
-      setNombre(oferta.nombre);
+      setNombre(oferta.nombre !== "" ? oferta.nombre : "elegir");
       setConvocatoria(oferta.convocatoria);
       setCiudad(oferta.ciudad);
       setSalario(oferta.salario);
@@ -56,6 +60,13 @@ const FormularioNuevaOferta = () => {
       setFechaFin(oferta.fechaFin?.split("T")[0]);
       setEstadoConvocatoria(oferta.estadoConvocatoria)
     }
+  }, []);
+
+
+  
+  useEffect(() => {
+   
+    obtenerCargosForm()
   }, []);
 
   const handleSubmit = async (e) => {
@@ -138,7 +149,7 @@ const FormularioNuevaOferta = () => {
                 />
               </div>
             </div>
-            <div>
+            {/* <div>
               <label
                 htmlFor="nombre"
                 className="block text-sm font-medium text-gray-700"
@@ -158,7 +169,40 @@ const FormularioNuevaOferta = () => {
                   required="true"
                 />
               </div>
-            </div>
+            </div> */}
+
+            <div>
+              <label
+                  htmlFor="cargo"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Nombre Convocatoria <span class="text-red-700">*</span>
+                </label>
+            
+
+            <div className="mt-1">
+                <select
+                  id="nombre"
+                  name="nombre"
+                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                  onChange={(e) => setNombre(e.target.value)}
+                  value={nombre}
+                  //ref={inputRefCargo}
+                  required={true}
+                >
+                  <option value="elegir" disabled >
+                    -- Selecciona un nombre de convocatoria--
+                  </option>
+                  {cargosForm.map((item, i) => {
+                    return (
+                      <option key={i} value={item.nombre}>
+                        {item.nombre}
+                      </option>
+                    )
+                  })}
+                </select>
+              </div>
+              </div>
 
             <div>
               <label

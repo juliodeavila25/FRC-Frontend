@@ -24,18 +24,20 @@ const ListarDocumentosTotal = () => {
       ),
     },
     { Header: "Proceso", accessor: "proceso" },
-    { Header: "Titulo", 
-      accessor: (originalRow, rowIndex) => (
-        <div className="">
    
-          <p>{originalRow.titulo}</p>
-          <div className="flex flex-wrap mt-2 gap-2">{originalRow.tags.map(item =>{
+    { Header: "Titulo", 
+        accessor: "titulo",
+        Cell: (row) => (
+          <div className="">
+            <p>{row.cell.value}</p>
+            {console.log(row.cell)}
+            {/* <div className="flex flex-wrap mt-2 gap-2">{row.cell.tags.map(item =>{
               return(
                 <p className="bg-blue-400 px-3 rounded-full text-white">{item.name}</p>
               )  
-            }) }</div>
-        </div>
-      ),
+            }) }</div> */}
+          </div>
+        ),
     },
     {
       Header: "Implementación",

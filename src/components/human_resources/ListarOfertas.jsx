@@ -11,6 +11,10 @@ const ListarOfertas = () => {
   const [pausadas, setPausadas] = useState([])
   const [inactivas, setInactivas] = useState([])
 
+  console.log(ofertas)
+
+  //localStorage.setItem("codigo", documentos[0]?.codigo);
+
   const navigate = useNavigate();
 
   const [toggleState, setToggleState] = useState(1);

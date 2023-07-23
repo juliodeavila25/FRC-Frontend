@@ -5,6 +5,7 @@ import Alert from "./Alert";
 import moment from 'moment'
 import TableWithoutSearch from "./table/TableWithoutSearch";
 import { FcDataProtection } from "react-icons/fc";
+import useAuth from "../hooks/useAuth";
 
 
 export default function ModalPublic({ setShowModal, data }) {
@@ -26,6 +27,7 @@ export default function ModalPublic({ setShowModal, data }) {
 
   const { nuevoEstadoPostulacionModal, alertaPostulacion, obtenerEstadoPostulacionesPorUsuario, estadosPostulaciones } = useEstadoPostulaciones();
   const { obtenerPostulacionesUsuario, postulacionesUsuario } = usePostulaciones();
+  const {obtenerUsuarios, usuarios} = useAuth();
 
   useEffect(() => {
     obtenerPostulacionesUsuario(data.creador)
@@ -33,7 +35,6 @@ export default function ModalPublic({ setShowModal, data }) {
 
   useEffect(() => {
     if (Array.isArray(postulacionesUsuario) && postulacionesUsuario.length > 0) {
-      console.log("Hola")
       const id_oferta = localStorage.getItem("id_oferta");
       const idPostulacionUsuario = postulacionesUsuario.filter(item => item.idOferta === id_oferta)
       obtenerEstadoPostulacionesPorUsuario(idPostulacionUsuario[0]._id)
@@ -41,20 +42,27 @@ export default function ModalPublic({ setShowModal, data }) {
 
   }, [postulacionesUsuario])
 
+  useEffect(() =>{
+    obtenerUsuarios()
+  },[])
 
+  
+
+  console.log(usuarios)
   const [headers, setHeaders] = useState([
     {
       Header: "Estado",
       accessor: "estadoPostulacion",
     },
     {
-      Header: "Fecha Revisión",
-      accessor: "fechaRevisionPostulacion",
+      Header: "Fechas",
+      accessor: (originalRow, rowIndex) => (
+        <div className="">
+          <p className="capitalize">F. Post: {originalRow.fechaRevisionPostulacion}</p>
+          <p className="capitalize">F. Rev: {originalRow.fechaSistemaPostulacion}</p>
+        </div>)
     },
-    {
-      Header: "Fecha Sistema",
-      accessor: "fechaSistemaPostulacion",
-    },
+    
     {
       Header: "Observaciones",
       accessor: "observacionesPostulacion",
@@ -78,6 +86,13 @@ export default function ModalPublic({ setShowModal, data }) {
 
         </div>
       ),
+    },
+    {
+      Header: "Creador",
+      accessor: (originalRow, rowIndex) => (
+        <div className="">
+          <p className="capitalize">{originalRow.creador.nombre}</p>
+        </div>)
     },
 
   ]);

@@ -8,6 +8,7 @@ const AuthProvider = ({ children }) => {
   const [auth, setAuth] = useState({});
   const [cargando, setCargando] = useState(true);
   const [usuarioAutenticado, setUsuarioAutenticado] = useState({});
+  const [usuarios, setUsuarios]= useState([])
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -37,6 +38,10 @@ const AuthProvider = ({ children }) => {
     autenticarUsuario()
   }, []);
 
+
+  
+  
+
   const cerrarSesion = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("id_trabajador_conectado");
@@ -61,9 +66,26 @@ const AuthProvider = ({ children }) => {
     } catch (error) {
       console.log(error);
     }
-
-   
   };
+
+
+  const obtenerUsuarios = async () =>{
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) return;
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      const { data } = await clienteAxios.get("usuarios/usuarios", config);
+       console.log(data);
+       setUsuarios(data);
+    } catch (error) {
+      console.log(error);
+    }
+   }
 
   return (
     <AuthContext.Provider
@@ -73,7 +95,9 @@ const AuthProvider = ({ children }) => {
         setAuth,
         cerrarSesion,
         obtenerUsuarioAutenticado,
-        usuarioAutenticado
+        usuarioAutenticado,
+        obtenerUsuarios,
+        usuarios
       }}
     >
       {children}
