@@ -128,7 +128,156 @@ const FormularioNuevoCargo = () => {
                         {errorNombre === true && <span className="text-red-500 text-xs">Digite la información requerida</span>}
                     </div>
                 </div>
-
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-2 gap-6">
+                  <p className="font-medium p5">
+                    Perfil de Riesgo
+                  </p>
+                  <br></br>
+                  <div className="flex space-x-4 items-center  pl-4">
+                    <input
+                      type="checkbox"
+                      id="electrico"
+                      name="electrico"
+                      value="electrico"
+                      //checked={electrico}
+                      //onChange={handleChangeElectrico}
+                      //disabled={true}
+                    />
+                    <label htmlFor="electrico">Eléctrico</label>
+                  </div>
+                  <div className="flex space-x-4 items-center  pl-4">
+                    <input
+                      type="checkbox"
+                      id="locativo"
+                      name="locativo"
+                      value="locativo"
+                      //checked={prestamos}
+                      //onChange={handleChangePrestamos}
+                      //disabled={true}
+                    />
+                    <label htmlFor="locativo">Locativo</label>
+                  </div>
+                  <div className="flex space-x-4 items-center  pl-4">
+                    <input
+                      type="checkbox"
+                      id="mecanico"
+                      name="mecanico"
+                      value="mecanico"
+                      //checked={prestamos}
+                      //onChange={handleChangePrestamos}
+                      //disabled={true}
+                    />
+                    <label htmlFor="mecanico">Mecánico</label>
+                  </div>
+                  <div className="flex space-x-4 items-center  pl-4">
+                    <input
+                      type="checkbox"
+                      id="biologico"
+                      name="biologico"
+                      value="biologico"
+                      //checked={prestamos}
+                      //onChange={handleChangePrestamos}
+                      //disabled={true}
+                    />
+                    <label htmlFor="biologico">Biológico</label>
+                  </div>
+                  <div className="flex space-x-4 items-center  pl-4">
+                    <input
+                      type="checkbox"
+                      id="psicosocial"
+                      name="psicosocial"
+                      value="psicosocial"
+                      //checked={prestamos}
+                      //onChange={handleChangePrestamos}
+                      //disabled={true}
+                    />
+                    <label htmlFor="psicosocial">Psicosocial</label>
+                  </div>
+                  <div className="flex space-x-4 items-center  pl-4">
+                    <input
+                      type="checkbox"
+                      id="carga_fisica"
+                      name="carga_fisica"
+                      value="carga_fisica"
+                      //checked={prestamos}
+                      //onChange={handleChangePrestamos}
+                      //disabled={true}
+                    />
+                    <label htmlFor="carga_fisica">Carga Fisica</label>
+                  </div>
+                  <div className="flex space-x-4 items-center  pl-4">
+                    <input
+                      type="checkbox"
+                      id="quimicos"
+                      name="quimicos"
+                      value="quimicos"
+                      //checked={prestamos}
+                      //onChange={handleChangePrestamos}
+                      //disabled={true}
+                    />
+                    <label htmlFor="quimicos">Químicos</label>
+                  </div>
+                  <div className="flex space-x-4 items-center  pl-4">
+                    <input
+                      type="checkbox"
+                      id="fisico"
+                      name="fisico"
+                      value="fisico"
+                      //checked={prestamos}
+                      //onChange={handleChangePrestamos}
+                      //disabled={true}
+                    />
+                    <label htmlFor="fisico">Físico</label>
+                  </div>
+                  <div className="flex space-x-4 items-center  pl-4">
+                    <input
+                      type="checkbox"
+                      id="movilidad"
+                      name="movilidad"
+                      value="movilidad"
+                      //checked={prestamos}
+                      //onChange={handleChangePrestamos}
+                      //disabled={true}
+                    />
+                    <label htmlFor="movilidad">Movilidad</label>
+                  </div>
+                  <div className="flex space-x-4 items-center  pl-4">
+                    <input
+                      type="checkbox"
+                      id="publico"
+                      name="publico"
+                      value="publico"
+                      //checked={prestamos}
+                      //onChange={handleChangePrestamos}
+                      //disabled={true}
+                    />
+                    <label htmlFor="publico">Publico</label>
+                  </div>
+                  <div className="flex space-x-4 items-center  pl-4">
+                    <input
+                      type="checkbox"
+                      id="tareas_alto_riesgo"
+                      name="tareas_alto_riesgo"
+                      value="tareas_alto_riesgo"
+                      //checked={prestamos}
+                      //onChange={handleChangePrestamos}
+                      //disabled={true}
+                    />
+                    <label htmlFor="tareas_alto_riesgo">Tareas de Alto Riesgo</label>
+                  </div>
+                  <div className="flex space-x-4 items-center  pl-4">
+                    <input
+                      type="checkbox"
+                      id="tecnologico"
+                      name="tecnologico"
+                      value="tecnologico"
+                      //checked={prestamos}
+                      //onChange={handleChangePrestamos}
+                      //disabled={true}
+                    />
+                    <label htmlFor="tecnologico">Tecnológico</label>
+                  </div>
+                </div>
                 <div>
                     {inputCargos &&
                     Array.isArray(inputCargos) &&
@@ -222,6 +371,26 @@ const FormularioNuevoCargo = () => {
                                 
                                 </select>
                             </div>
+                            <div>
+                              <label
+                                htmlFor="descripcionIngresos"
+                                className="block text-sm font-medium text-gray-700"
+                              >
+                                Descripción del requisito
+                              </label>                              
+                              <div>
+                                <textarea
+                                  id="descripcionIngresos"
+                                  name="descripcionIngresos"
+                                  type="text"
+                                  placeholder=""
+                                  rows="3"
+                                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                // value={descripcionIngresos}
+                                // onChange={(e) => setDescripcionIngresos(e.target.value)}
+                                />
+                              </div>
+                            </div>
                             <div className="grid grid-cols-2 gap-4 pt-6 ">
                            
                             {Array.isArray(cargo.inputCargos) && i >= cargo.inputCargos?.length  || params.id === undefined && inputCargos.length !== 1 ? (
@@ -247,8 +416,26 @@ const FormularioNuevoCargo = () => {
                         );
                     })}
           </div>
-            
-          
+          <div>
+            <label
+              htmlFor="descripcionIngresos"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Descripción de la necesidad del cargo
+            </label> 
+            <div className="">
+              <textarea
+                id="descripcionIngresos"
+                name="descripcionIngresos"
+                type="text"
+                placeholder=""
+                rows="3"
+                className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                // value={descripcionIngresos}
+                // onChange={(e) => setDescripcionIngresos(e.target.value)}
+                />
+            </div>
+          </div>
        
         </div>  
 
