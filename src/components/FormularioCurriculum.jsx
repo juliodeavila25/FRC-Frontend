@@ -213,7 +213,9 @@ const FormularioCurriculum = () => {
   const [errorReferenciaACorreo, setErrorReferenciaACorreo] = useState(false)
   const [errorCorreoRefInput, setErrorCorreoRefInput] = useState(false)
 
-
+  /* Error en actividad economica*/
+  const inputRefActividadEconomica = useRef(null);
+  const [errorActividadEconomica, setErrorActividadEconomica] = useState(false)
 
   const params = useParams();
 
@@ -347,6 +349,16 @@ const FormularioCurriculum = () => {
   const submitData = async (e) => {
     e.preventDefault();
     localStorage.setItem("tipo", "formCo");
+    if(operacionesExtranjera === "Si" && [exportaciones,transferencias, pagoServicios, importaciones, prestamos, otras].includes(true)){
+      setErrorActividadEconomica(false)
+    }else if(operacionesExtranjera === "Si" && ![exportaciones,transferencias, pagoServicios, importaciones, prestamos, otras].includes(true)){
+      inputRefActividadEconomica.current.focus()
+      setErrorActividadEconomica(true)
+      console.log()
+      return;
+    }else{
+      setErrorActividadEconomica(false)
+    }
 
     if (nombre === "") {
       inputRef.current.focus()
@@ -831,6 +843,17 @@ const FormularioCurriculum = () => {
     console.log(data)
     setEditarDocumento(data)
     setVisible(true);
+  }
+
+  const onchangeOperacionesExtranjera = (e) =>{
+    
+    setOperacionesExtranjera(e.target.value)
+    setExportaciones(false)
+    setTransferencias(false)
+    setPagoServicios(false)
+    setImportaciones(false)
+    setPrestamos(false)
+    setOtras(false)
   }
 
 
@@ -2291,6 +2314,7 @@ const FormularioCurriculum = () => {
                           }
                           value="Si"
                           onChange={(e) => setOperacionesExtranjera(e.target.value)}
+                          ref={inputRefActividadEconomica}
                         />
                       </div>
                       <label
@@ -2313,7 +2337,7 @@ const FormularioCurriculum = () => {
                             operacionesExtranjera && operacionesExtranjera === "No"
                           }
                           value="No"
-                          onChange={(e) => setOperacionesExtranjera(e.target.value)}
+                          onChange={(e) => onchangeOperacionesExtranjera(e)}
                         />
                       </div>
                       <label
@@ -2325,7 +2349,8 @@ const FormularioCurriculum = () => {
                     </div>
                   </div>
                 </div>
-                <div>
+                {operacionesExtranjera === "Si" ? (
+                  <div>
                   <p className="font-medium pt-5">
                     ¿En su Actividad Económica Realiza Operaciones en Moneda
                     Extranjera?
@@ -2340,6 +2365,7 @@ const FormularioCurriculum = () => {
                       //checked={exportaciones === "exportaciones"}
                       //onChange={(e) => setExportaciones(e.target.value)}
                       onChange={handleChangeExportaciones}
+                     
                     />
                     <label htmlFor="exportaciones">Exportaciones</label>
                   </div>
@@ -2399,8 +2425,17 @@ const FormularioCurriculum = () => {
                     />
                     <label htmlFor="otras">Otras</label>
                   </div>
+                  {errorActividadEconomica === true ? (
+                    <div>
+                    <span className="text-red-500 text-xs">
+                      Seleccione una de las anteriores opciones
+                    </span>
+                  </div>
+                  ) : null}
+                  
                 </div>
-
+                ): null}
+                
                 <div>
                   {otras === true &&
                     inputExtranjera &&
@@ -2879,7 +2914,7 @@ const FormularioCurriculum = () => {
             </>
           ) : null}
 
-
+              
           {msg && <Alert alerta={alerta} />}
           <div className="grid grid-cols-2 gap-6 w-3/5 mx-auto mt-3">
             <Link

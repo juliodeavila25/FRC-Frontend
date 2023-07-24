@@ -2231,7 +2231,8 @@ const FormularioCurriculum = () => {
                 </div>
               </div>
             </div>
-            <div>
+            {operacionesExtranjera === "Si" ? (
+              <div>
               <p className="font-medium pt-5">
                 ¿En su Actividad Económica Realiza Operaciones en Moneda
                 Extranjera?
@@ -2312,6 +2313,8 @@ const FormularioCurriculum = () => {
                 <label htmlFor="otras">Otras</label>
               </div>
             </div>
+            ):null}
+            
 
             <div>
               {otras === true &&
