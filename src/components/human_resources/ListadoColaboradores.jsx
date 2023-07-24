@@ -125,10 +125,10 @@ const ListadoColaboradores = () => {
             <div
               className={toggleState === 1 ? "content  active-content" : "content"}
             >
-              {Array.isArray(collaborators) && collaborators.length > 0 && collaborators.filter(collaborator => collaborator.creador.userType[0] === "colaborador").length > 0 ? (
+              {Array.isArray(collaborators) && collaborators.length > 0 && collaborators.filter(collaborator => collaborator.creador?.userType[0] === "colaborador").length > 0 ? (
                 <>
                   <Table
-                    data={collaborators.filter(collaborator => collaborator.creador.userType[0] === "colaborador")}
+                    data={collaborators.filter(collaborator => collaborator.creador?.userType[0] === "colaborador")}
                     columns={headers}
                   />
                 </>
@@ -162,10 +162,10 @@ const ListadoColaboradores = () => {
             <div
               className={toggleState === 2 ? "content  active-content" : "content"}
             >
-              {Array.isArray(collaborators) && collaborators.length > 0 && collaborators.filter(collaborator => collaborator.creador.userType[0] === "aspirante").length > 0 ? (
+              {Array.isArray(collaborators) && collaborators.length > 0 && collaborators.filter(collaborator => collaborator.creador?.userType[0] === "aspirante").length > 0 ? (
                 <>
                   <Table
-                    data={collaborators.filter(collaborator => collaborator.creador.userType[0] === "aspirante")}
+                    data={collaborators.filter(collaborator => collaborator.creador?.userType[0] === "aspirante")}
                     columns={headers}
                   />
                 </>
