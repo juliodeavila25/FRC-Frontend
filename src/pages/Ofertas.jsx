@@ -190,13 +190,14 @@ const Ofertas = () => {
             className={toggleState === 1 ? 'border-indigo-500 text-indigo-600 w-1/4 border-b-2 py-4 px-1 text-center text-sm font-medium' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 w-1/4 border-b-2 py-4 px-1 text-center text-sm font-medium'}
             onClick={() => toggleTab(1)}
           >
-            Ofertas aplicadas
+            Listado de ofertas
+            
           </button>
           <button
             className={toggleState === 2 ? 'border-indigo-500 text-indigo-600 w-1/4 border-b-2 py-4 px-1 text-center text-sm font-medium' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 w-1/4 border-b-2 py-4 px-1 text-center text-sm font-medium'}
             onClick={() => toggleTab(2)}
           >
-            Listado de ofertas
+            Ofertas aplicadas
           </button>
         </div>
 
@@ -204,47 +205,7 @@ const Ofertas = () => {
           <div
             className={toggleState === 1 ? "content  active-content" : "content"}
           >
-            {Array.isArray(postulaciones) && postulaciones.length > 0 ? (
-              <>
-                <Table
-                  data={postulaciones}
-                  columns={headersOferta}
-                  title="Ofertas"
-                  titleButton="Nueva oferta de empleo"
-                  href={"/recursos-humanos/crear-convocatoria"}
-                />
-              </>
-            ) : (
-              <div className="rounded-md bg-blue-50 p-4">
-                <div className="flex">
-                  <div className="flex-shrink-0">
-                    <svg
-                      className="h-5 w-5 text-blue-400"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                      aria-hidden="true"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a.75.75 0 000 1.5h.253a.25.25 0 01.244.304l-.459 2.066A1.75 1.75 0 0010.747 15H11a.75.75 0 000-1.5h-.253a.25.25 0 01-.244-.304l.459-2.066A1.75 1.75 0 009.253 9H9z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  </div>
-                  <div className="ml-3 flex-1 md:flex ">
-                    <p className="text-sm text-blue-700">
-                      No has aplicado a ninguna oferta.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
-
-          <div
-            className={toggleState === 2 ? "content  active-content" : "content"}
-          >
-            {Array.isArray(ofertas) && ofertas.length > 0 && ofertas.filter(oferta => oferta.estadoConvocatoria === "Activa").length > 0 ? (
+             {Array.isArray(ofertas) && ofertas.length > 0 && ofertas.filter(oferta => oferta.estadoConvocatoria === "Activa").length > 0 ? (
               <>
                 <Table
                   data={ofertas.filter(oferta => oferta.estadoConvocatoria === "Activa")}
@@ -273,7 +234,48 @@ const Ofertas = () => {
                   </div>
                   <div className="ml-3 flex-1 md:flex ">
                     <p className="text-sm text-blue-700">
-                      No existen ofertas activas.
+                    No existen ofertas activas.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+
+          <div
+            className={toggleState === 2 ? "content  active-content" : "content"}
+          >
+           {Array.isArray(postulaciones) && postulaciones.length > 0 ? (
+              <>
+                <Table
+                  data={postulaciones}
+                  columns={headersOferta}
+                  title="Ofertas"
+                  titleButton="Nueva oferta de empleo"
+                  href={"/recursos-humanos/crear-convocatoria"}
+                />
+              </>
+            ) : (
+              <div className="rounded-md bg-blue-50 p-4">
+                <div className="flex">
+                  <div className="flex-shrink-0">
+                    <svg
+                      className="h-5 w-5 text-blue-400"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      aria-hidden="true"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a.75.75 0 000 1.5h.253a.25.25 0 01.244.304l-.459 2.066A1.75 1.75 0 0010.747 15H11a.75.75 0 000-1.5h-.253a.25.25 0 01-.244-.304l.459-2.066A1.75 1.75 0 009.253 9H9z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </div>
+                  <div className="ml-3 flex-1 md:flex ">
+                    <p className="text-sm text-blue-700">
+                    No has aplicado a ninguna oferta.
+                    
                     </p>
                   </div>
                 </div>

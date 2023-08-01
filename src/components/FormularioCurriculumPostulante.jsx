@@ -213,7 +213,7 @@ const FormularioCurriculumPostulante = () => {
 
   useEffect(() => {
     if (Object.keys(collaborator).length !== 0 && Array.isArray(curriculums) && curriculums.length > 0) {
-      console.log(collaborator);
+      console.log(curriculums[0]);
       setId(params.id);
       setEstado(curriculums[0].estado);
       setNombre(curriculums[0].nombre);
@@ -328,6 +328,7 @@ const FormularioCurriculumPostulante = () => {
     formData.append("fechaSistemaPostulacion", fechaSistemaPostulacion);
     formData.append("observacionesPostulacion", observacionesPostulacion);
     formData.append("documentacionPostulacion", documentacionPostulacion);
+    formData.append("estadoPostulacionAnterior", curriculums[0].estadoAplicacionOferta);
 
 
 

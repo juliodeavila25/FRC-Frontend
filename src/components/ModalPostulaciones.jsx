@@ -47,12 +47,18 @@ export default function ModalPublic({ setShowModal, data }) {
   },[])
 
   
+  console.log("Data", data)
 
   console.log(usuarios)
   const [headers, setHeaders] = useState([
     {
-      Header: "Estado",
-      accessor: "estadoPostulacion",
+      Header: "Estado origen - Estado destino",
+      accessor: (originalRow, rowIndex) => (
+        <div className="">
+          <p className="capitalize">{originalRow.estadoPostulacionAnterior} - {originalRow.estadoPostulacion}</p>
+         
+        </div>)
+   
     },
     {
       Header: "Fechas",
@@ -98,7 +104,7 @@ export default function ModalPublic({ setShowModal, data }) {
   ]);
 
 
-
+  console.log("estadosPostulaciones",estadosPostulaciones)
 
   const submitData = async (e) => {
     e.preventDefault();
@@ -124,6 +130,7 @@ export default function ModalPublic({ setShowModal, data }) {
     formData.append("fechaSistemaPostulacion", fechaSistemaPostulacion);
     formData.append("observacionesPostulacion", observacionesPostulacion);
     formData.append("documentacionPostulacion", documentacionPostulacion);
+    formData.append("estadoPostulacionAnterior", data.estadoAplicacionOferta);
 
     await nuevoEstadoPostulacionModal(formData);
 
