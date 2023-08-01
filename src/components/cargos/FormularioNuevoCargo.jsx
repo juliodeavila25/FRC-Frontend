@@ -11,14 +11,30 @@ const FormularioNuevoCargo = () => {
   const navigate = useNavigate();
   const [id, setId] = useState(null);
   const [nombre, setNombre] = useState("");
+  const [electrico, setElectrico] = useState(false);
+  const [locativo, setLocativo] = useState(false);
+  const [mecanico, setMecanico] = useState(false);
+  const [biologico, setBiologico] = useState(false);
+  const [psicosocial, setPsicosocial] = useState(false);
+  const [carga_fisica, setCargaFisica] = useState(false);
+  const [quimicos, setQuimicos] = useState(false);
+  const [fisico, setFisico] = useState(false);
+  const [movilidad, setMovilidad] = useState(false);
+  const [publico, setPublico] = useState(false);
+  const [tareas_alto_riesgo, setTareasAltoRiesgo] = useState(false);
+  const [tecnologico, setTecnologico] = useState(false);
+  const [descripcionCargos, setDescripcionCargos] = useState("");
+  const [estado, setEstado] = useState("Pendiente");
   const [inputCargos, setInputCargos] = useState([
-     { nombre_requisito: "Bachiller", vigencia:false, estado_requisito:"Activo" },
+     { nombre_requisito: "Bachiller", vigencia:false, estado_requisito:"Activo", descripcionRequisitos:"" },
    ]);
 
   /* Error en el campo nombre del cargo*/
   const inputRef = useRef(null);
   const[errorNombre, setErrorNombre] = useState(false)
 
+  const inputRefEstado = useRef(null);
+  const [errorEstado, setErrorEstado] = useState(false)
 
   const params = useParams();
   const {
@@ -37,7 +53,20 @@ const FormularioNuevoCargo = () => {
       setId(cargo._id);
       setNombre(cargo.nombre);
       setInputCargos(cargo.inputCargos);
-     
+      setElectrico(cargo.electrico);
+      setLocativo(cargo.locativo);
+      setMecanico(cargo.mecanico);
+      setBiologico(cargo.biologico);
+      setPsicosocial(cargo.psicosocial);
+      setCargaFisica(cargo.carga_fisica);
+      setQuimicos(cargo.quimicos);
+      setFisico(cargo.fisico);
+      setMovilidad(cargo.movilidad);
+      setPublico(cargo.publico);
+      setTareasAltoRiesgo(cargo.tareas_alto_riesgo);
+      setTecnologico(cargo.tecnologico);
+      setDescripcionCargos(cargo.descripcionCargos);
+      setEstado(cargo.estado);
     }
   }, [cargo]);
 
@@ -52,12 +81,24 @@ const FormularioNuevoCargo = () => {
       setErrorNombre(false)
     }
 
-   
- 
 
     await submitCargo({
         id,
         nombre,
+        electrico,
+        locativo,
+        mecanico,
+        biologico,
+        psicosocial,
+        carga_fisica,
+        quimicos,
+        fisico,
+        movilidad,
+        publico,
+        tareas_alto_riesgo,
+        tecnologico,
+        descripcionCargos,
+        estado,
         inputCargos
     })
     
@@ -70,7 +111,7 @@ const FormularioNuevoCargo = () => {
  const handleaddclick = () => {
     setInputCargos([
       ...inputCargos,
-       { nombre_requisito: "Bachiller", vigencia:false, estado_requisito:"Activo" },
+       { nombre_requisito: "Bachiller", vigencia:false, estado_requisito:"Activo", descripcionRequisitos:"" },
     ]);
   };
 
@@ -91,6 +132,45 @@ const FormularioNuevoCargo = () => {
     setInputCargos(list);
   };
 
+  const handleChangeElectrico = (event) => {
+    setElectrico(event.target.checked);
+  };
+
+  const handleChangeLocativo = (event) => {
+    setLocativo(event.target.checked);
+  };
+
+  const handleChangeMecanico = (event) => {
+    setMecanico(event.target.checked);
+  };
+
+  const handleChangeBiologico = (event) => {
+    setBiologico(event.target.checked);
+  };
+  const handleChangePsicosocial = (event) => {
+    setPsicosocial(event.target.checked);
+  };
+  const handleChangeCargaFisica = (event) => {
+    setCargaFisica(event.target.checked);
+  };
+  const handleChangeQuimicos = (event) => {
+    setQuimicos(event.target.checked);
+  };
+  const handleChangeFisico = (event) => {
+    setFisico(event.target.checked);
+  };
+  const handleChangeMovilidad = (event) => {
+    setMovilidad(event.target.checked);
+  };
+  const handleChangePublico = (event) => {
+    setPublico(event.target.checked);
+  };
+  const handleChangeTareasAltoRiesgo = (event) => {
+    setTareasAltoRiesgo(event.target.checked);
+  };
+  const handleChangeTecnologico = (event) => {
+    setTecnologico(event.target.checked);
+  };
 
   const { msg } = alerta;
 
@@ -114,8 +194,8 @@ const FormularioNuevoCargo = () => {
                     <div className="mt-1">
                         <input
                         type="text"
-                        id="codigo"
-                        name="codigo"
+                        id="nombre"
+                        name="nombre"
                         placeholder="Digita el nombre del cargo"
                         className={errorNombre === false ? 
                             "block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
@@ -128,7 +208,154 @@ const FormularioNuevoCargo = () => {
                         {errorNombre === true && <span className="text-red-500 text-xs">Digite la información requerida</span>}
                     </div>
                 </div>
-
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-2 gap-6">
+                  <p className="font-medium p5">
+                    Perfil de Riesgo
+                  </p>
+                  <br></br>
+                  <div className="flex space-x-4 items-center  pl-4">
+                    <input
+                      type="checkbox"
+                      id="electrico"
+                      name="electrico"
+                      value="electrico"
+                      checked={electrico}
+                      onChange={handleChangeElectrico}
+                    />
+                    <label htmlFor="electrico">Eléctrico</label>
+                  </div>
+                  <div className="flex space-x-4 items-center  pl-4">
+                    <input
+                      type="checkbox"
+                      id="locativo"
+                      name="locativo"
+                      value="locativo"
+                      checked={locativo}
+                      onChange={handleChangeLocativo}
+                    />
+                    <label htmlFor="locativo">Locativo</label>
+                  </div>
+                  <div className="flex space-x-4 items-center  pl-4">
+                    <input
+                      type="checkbox"
+                      id="mecanico"
+                      name="mecanico"
+                      value="mecanico"
+                      checked={mecanico}
+                      onChange={handleChangeMecanico}
+                      //disabled={true}
+                    />
+                    <label htmlFor="mecanico">Mecánico</label>
+                  </div>
+                  <div className="flex space-x-4 items-center  pl-4">
+                    <input
+                      type="checkbox"
+                      id="biologico"
+                      name="biologico"
+                      value="biologico"
+                      checked={biologico}
+                      onChange={handleChangeBiologico}
+                      //disabled={true}
+                    />
+                    <label htmlFor="biologico">Biológico</label>
+                  </div>
+                  <div className="flex space-x-4 items-center  pl-4">
+                    <input
+                      type="checkbox"
+                      id="psicosocial"
+                      name="psicosocial"
+                      value="psicosocial"
+                      checked={psicosocial}
+                      onChange={handleChangePsicosocial}
+                      //disabled={true}
+                    />
+                    <label htmlFor="psicosocial">Psicosocial</label>
+                  </div>
+                  <div className="flex space-x-4 items-center  pl-4">
+                    <input
+                      type="checkbox"
+                      id="carga_fisica"
+                      name="carga_fisica"
+                      value="carga_fisica"
+                      checked={carga_fisica}
+                      onChange={handleChangeCargaFisica}
+                      //disabled={true}
+                    />
+                    <label htmlFor="carga_fisica">Carga Fisica</label>
+                  </div>
+                  <div className="flex space-x-4 items-center  pl-4">
+                    <input
+                      type="checkbox"
+                      id="quimicos"
+                      name="quimicos"
+                      value="quimicos"
+                      checked={quimicos}
+                      onChange={handleChangeQuimicos}
+                      //disabled={true}
+                    />
+                    <label htmlFor="quimicos">Químicos</label>
+                  </div>
+                  <div className="flex space-x-4 items-center  pl-4">
+                    <input
+                      type="checkbox"
+                      id="fisico"
+                      name="fisico"
+                      value="fisico"
+                      checked={fisico}
+                      onChange={handleChangeFisico}
+                      //disabled={true}
+                    />
+                    <label htmlFor="fisico">Físico</label>
+                  </div>
+                  <div className="flex space-x-4 items-center  pl-4">
+                    <input
+                      type="checkbox"
+                      id="movilidad"
+                      name="movilidad"
+                      value="movilidad"
+                      checked={movilidad}
+                      onChange={handleChangeMovilidad}
+                      //disabled={true}
+                    />
+                    <label htmlFor="movilidad">Movilidad</label>
+                  </div>
+                  <div className="flex space-x-4 items-center  pl-4">
+                    <input
+                      type="checkbox"
+                      id="publico"
+                      name="publico"
+                      value="publico"
+                      checked={publico}
+                      onChange={handleChangePublico}
+                      //disabled={true}
+                    />
+                    <label htmlFor="publico">Publico</label>
+                  </div>
+                  <div className="flex space-x-4 items-center  pl-4">
+                    <input
+                      type="checkbox"
+                      id="tareas_alto_riesgo"
+                      name="tareas_alto_riesgo"
+                      value="tareas_alto_riesgo"
+                      checked={tareas_alto_riesgo}
+                      onChange={handleChangeTareasAltoRiesgo}
+                      //disabled={true}
+                    />
+                    <label htmlFor="tareas_alto_riesgo">Tareas de Alto Riesgo</label>
+                  </div>
+                  <div className="flex space-x-4 items-center  pl-4">
+                    <input
+                      type="checkbox"
+                      id="tecnologico"
+                      name="tecnologico"
+                      value="tecnologico"
+                      checked={tecnologico}
+                      onChange={handleChangeTecnologico}
+                      //disabled={true}
+                    />
+                    <label htmlFor="tecnologico">Tecnológico</label>
+                  </div>
+                </div>
                 <div>
                     {inputCargos &&
                     Array.isArray(inputCargos) &&
@@ -222,6 +449,27 @@ const FormularioNuevoCargo = () => {
                                 
                                 </select>
                             </div>
+                            <div>
+                              <label
+                                htmlFor="descripcionRequisitos"
+                                className="block text-sm font-medium text-gray-700"
+                              >
+                                Descripción del requisito
+                              </label>                              
+                              <div>
+                                <textarea
+                                  id="descripcionRequisitos"
+                                  name="descripcionRequisitos"
+                                  type="text"
+                                  placeholder=""
+                                  rows="3"
+                                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                  value={item.descripcionRequisitos}
+                                  onChange={(e) => handleinputchange(e, i)}
+                                // onChange={(e) => setDescripcionIngresos(e.target.value)}
+                                />
+                              </div>
+                            </div>                         
                             <div className="grid grid-cols-2 gap-4 pt-6 ">
                            
                             {Array.isArray(cargo.inputCargos) && i >= cargo.inputCargos?.length  || params.id === undefined && inputCargos.length !== 1 ? (
@@ -247,9 +495,66 @@ const FormularioNuevoCargo = () => {
                         );
                     })}
           </div>
-            
-          
-       
+          <div>
+            <label
+              htmlFor="descripcionCargos"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Descripción de la necesidad del cargo
+            </label> 
+            <div className="">
+              <textarea
+                id="descripcionCargos"
+                name="descripcionCargos"
+                type="text"
+                placeholder=""
+                rows="3"
+                className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                value={descripcionCargos}
+                onChange={(e) => setDescripcionCargos(e.target.value)}
+                />
+            </div>
+          </div>
+          <div>
+                            <label
+                              htmlFor="estado"
+                              className="block text-sm font-medium text-gray-700"
+                            >
+                              Estado <span className="text-red-700">*</span>
+                            </label>
+                            <div className="mt-1">
+                              <select
+                                id="estado"
+                                name="estado"
+                                placeholder="Digita tu estado"
+                                className={errorEstado === false ?
+                                  "block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                  :
+                                  "block w-full appearance-none rounded-md border border-red-500 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-red-500 focus:outline-none focus:ring-red-500 sm:text-sm"
+                                }
+                                onChange={(e) => {
+                                  const selectedError = e.target.value;
+
+                                  setEstado(selectedError);
+                                }}
+                                value={estado}
+                                disabled={true}
+                                ref={inputRefEstado}
+                              >
+                                <option value="elegir" disabled className="text-gray-400" >
+                                  --Selecciona un tipo de documento--
+                                </option>
+                                <option value="Pendiente">
+                                  Pendiente
+                                </option>
+                                <option value="Aprobado">
+                                  Aprobado
+                                </option>
+                                <option value="Rechazado">Rechazado</option>
+                              </select>
+                              {errorEstado === true && <span className="text-red-500 text-xs">Seleccione la información requerida</span>}
+                            </div>
+                          </div>         
         </div>  
 
             {msg && <Alert alerta={alerta} />}

@@ -21,6 +21,7 @@ const FormularioNuevaOferta = () => {
   const [fechaFin, setFechaFin] = useState("")
   const [ciudad, setCiudad] = useState("");
   const [salario, setSalario] = useState("");
+  const [link, setLink] = useState("");
   const [auxilio, setAuxilio] = useState("");
   const [bonificaciones, setBonificaciones] = useState("");
   const [perfil, setPerfil] = useState("");
@@ -52,6 +53,7 @@ const FormularioNuevaOferta = () => {
       setConvocatoria(oferta.convocatoria);
       setCiudad(oferta.ciudad);
       setSalario(oferta.salario);
+      setLink(oferta.link);
       setAuxilio(oferta.auxilio);
       setBonificaciones(oferta.bonificaciones);
       setPerfil(oferta.perfil);
@@ -85,6 +87,7 @@ const FormularioNuevaOferta = () => {
         convocatoria,
         ciudad,
         salario,
+        link,
         auxilio,
         bonificaciones,
         perfil,
@@ -96,6 +99,7 @@ const FormularioNuevaOferta = () => {
         convocatoria,
         ciudad,
         salario,
+        link,
         auxilio,
         bonificaciones,
         perfil,
@@ -115,6 +119,7 @@ const FormularioNuevaOferta = () => {
       convocatoria,
       ciudad,
       salario,
+      link,
       auxilio,
       bonificaciones,
       perfil,
@@ -391,6 +396,46 @@ const FormularioNuevaOferta = () => {
 
               </div>
             </div>
+            <div>
+              <label
+                htmlFor="link"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Link <span className="text-red-700">*</span>
+              </label>
+              <div className="mt-1">
+                <input
+                  id="link"
+                  name="link"
+                  type="text"
+                  placeholder="Digite el link"
+                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                  value={link}
+                  onChange={(e) => setLink(e.target.value)}
+                  required={true}
+                />
+              </div>
+            </div>
+            <div>
+                  <label
+                    htmlFor="unidadFuncional"
+                    className="block text-sm font-medium text-gray-700"
+                  >
+                    Unidad funcional
+                  </label>
+                  <div className="mt-1">
+                    <input
+                      id="unidadFuncional"
+                      name="unidadFuncional"
+                      type="text"
+                      className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                      //value={unidadFuncional}
+                      //readOnly={true}
+                      //onChange={(e) => setUnidadFuncional(e.target.value)}
+                      //disabled={true}
+                    />
+                  </div>
+                </div>
           </div>
           {msg && <Alert alerta={alerta} />}
           <div className="grid grid-cols-2 gap-6 w-3/5 mx-auto">
