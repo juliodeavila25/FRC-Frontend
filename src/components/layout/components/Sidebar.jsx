@@ -398,14 +398,14 @@ const Sidebar = () => {
                       </span>
                     </span>
                   </span>
-                  <ChevronUpDownIcon
+                  {/* <ChevronUpDownIcon
                     className="h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
                     aria-hidden="true"
-                  />
+                  /> */}
                 </span>
               </Menu.Button>
             </div>
-            <Transition
+            {/* <Transition
               as={Fragment}
               enter="transition ease-out duration-100"
               enterFrom="transform opacity-0 scale-95"
@@ -512,10 +512,10 @@ const Sidebar = () => {
                   </Menu.Item>
                 </div>
               </Menu.Items>
-            </Transition>
+            </Transition> */}
           </Menu>
           {/* Sidebar Search */}
-          <div className="mt-5 px-3">
+          {/* <div className="mt-5 px-3">
             <label htmlFor="search" className="sr-only">
               Search
             </label>
@@ -537,9 +537,9 @@ const Sidebar = () => {
                 placeholder="Search"
               />
             </div>
-          </div>
+          </div> */}
           {/* Navigation */}
-          <nav className="mt-6 px-3">
+          <nav className="mt-10 px-3">
             <div className="space-y-1">
               {auth?.userType[0] === "admin" ?
                 navigation_admin.map((item) => (

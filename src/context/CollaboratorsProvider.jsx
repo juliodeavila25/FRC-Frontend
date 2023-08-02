@@ -11,6 +11,7 @@ const CollaboratorsProvider = ({ children }) => {
   const [collaborator, setCollaborator] = useState({});
   const [alerta, setAlerta] = useState({});
   const [cargandoDatos, setCargando] = useState(false);
+  const [loading, setLoading] = useState(false)
   const navigate = useNavigate();
   const { auth } = useAuth();
 
@@ -69,11 +70,7 @@ const CollaboratorsProvider = ({ children }) => {
   };
 
    const editarCurriculumRH = async (curriculum) => {
-    console.log(curriculum.get("codigoCIIU"))
-    console.log((curriculum.get("inputReq")))
-
-    
-    
+    setLoading(true)
     const id = curriculum.get("id");
     console.log("ID:", id)
     // for (const value of curriculum.values()) {
@@ -111,6 +108,7 @@ const CollaboratorsProvider = ({ children }) => {
     } catch (error) {
       console.log(error);
     }
+    setLoading(false)
   };
 
   return (
@@ -120,6 +118,7 @@ const CollaboratorsProvider = ({ children }) => {
         collaborators,
         collaborator,
         cargandoDatos,
+        loading,
         obtenerCurriculums,
         obtenerCurriculumRH,
         editarCurriculumRH,

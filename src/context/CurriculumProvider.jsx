@@ -10,6 +10,7 @@ const CurriculumProvider = ({ children }) => {
   const [curriculum, setCurriculum] = useState({});
   const [alerta, setAlerta] = useState({});
   const [cargandoData, setCargando] = useState(false);
+  const[loading, setLoading] =useState(false);
   const navigate = useNavigate();
   const { auth } = useAuth();
 
@@ -31,13 +32,9 @@ const CurriculumProvider = ({ children }) => {
   };
 
   const editarCurriculum = async (curriculum) => {
-    console.log(curriculum.get("codigoCIIU"))
-    console.log((curriculum.get("inputReq")))
-
-
-
+    setLoading(true)
     const id = curriculum.get("id");
-    console.log("ID:", id)
+    //console.log("ID:", id)
     // for (const value of curriculum.values()) {
     //   console.log(value);
     // }
@@ -81,11 +78,13 @@ const CurriculumProvider = ({ children }) => {
     } catch (error) {
       console.log(error);
     }
+    setLoading(false)
   };
 
   const nuevoCurriculum = async (curriculum) => {
+    setLoading(true)
     const nombre = curriculum.get("nombre");
-    console.log(nombre)
+    //console.log(nombre)
     //console.log(curriculum);
     // for (const value of curriculum.values()) {
     //   console.log(value);
@@ -118,7 +117,12 @@ const CurriculumProvider = ({ children }) => {
       }, 3000);
     } catch (error) {
       console.log(error);
+      setAlerta({
+        msg: "Curriculum ya registrado",
+        error: true,
+      });
     }
+    setLoading(false)
   };
 
   const obtenerCurriculum = async (id) => {
@@ -148,6 +152,7 @@ const CurriculumProvider = ({ children }) => {
         alerta,
         curriculum,
         cargandoData,
+        loading,
         submitCurriculum,
         mostrarAlerta,
         obtenerCurriculum,

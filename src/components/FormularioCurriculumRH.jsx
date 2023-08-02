@@ -2,15 +2,15 @@ import { useState, useEffect, useRef } from "react";
 import { useParams, Link } from "react-router-dom";
 import useCurriculum from "../hooks/useCurriculum";
 import useCollaborators from "../hooks/useCollaborators";
-import useCargos from '../hooks/useCargos'
+import useCargos from "../hooks/useCargos";
 import Alert from "./Alert";
 import useAuth from "../hooks/useAuth";
 import { BeatLoader } from "react-spinners";
-import ciuu from '../json/ciuu.json'
-import Select from 'react-select'
-import departamentos from '../json/departamentos_municipios.json'
+import ciuu from "../json/ciuu.json";
+import Select from "react-select";
+import departamentos from "../json/departamentos_municipios.json";
 import ListarRequisitosRH from "./ListarRequisitosRH";
-import useDocumentosRequeridos from '../hooks/useDocumentosRequeridos'
+import useDocumentosRequeridos from "../hooks/useDocumentosRequeridos";
 
 const FormularioCurriculum = () => {
   const [id, setId] = useState(null);
@@ -18,7 +18,7 @@ const FormularioCurriculum = () => {
   const [nombre, setNombre] = useState("");
   const [tipoDocumento, setTipoDocumento] = useState("Cedula de ciudadania");
   const [numeroDocumento, setNumeroDocumento] = useState(0);
-  const [fechaNacimiento, setFechaNacimiento] = useState('1990-01-01');
+  const [fechaNacimiento, setFechaNacimiento] = useState("1990-01-01");
   const [lugarNacimiento, setLugarNacimiento] = useState("");
   const [telefono, setTelefono] = useState(0);
   const [correo, setCorreo] = useState("");
@@ -37,8 +37,8 @@ const FormularioCurriculum = () => {
   const [institucionTitulo, setInstitucionTitulo] = useState("");
   //Experiencia Profesional
   const [empresaExp, setEmpresaExp] = useState("");
-  const [fechaInicioExp, setFechaInicioExp] = useState('1990-01-01');
-  const [fechaFinExp, setFechaFinExp] = useState('1990-01-01');
+  const [fechaInicioExp, setFechaInicioExp] = useState("1990-01-01");
+  const [fechaFinExp, setFechaFinExp] = useState("1990-01-01");
   const [soporteExp, setSoporteExp] = useState("");
   const [errorSoporteExp, setErrorSoporteExp] = useState(false);
   //Referencias
@@ -67,7 +67,7 @@ const FormularioCurriculum = () => {
   const [rut, setRut] = useState("");
   const [errorSoporteRut, setErrorSoporteRut] = useState(false);
   const [numeroRut, setNumeroRut] = useState("");
-  const [fechaCorte, setFechaCorte] = useState('2022-12-31');
+  const [fechaCorte, setFechaCorte] = useState("2022-12-31");
   const [ingresosAnuales, setIngresosAnuales] = useState(0);
   const [egresosAnuales, setEgresosAnuales] = useState(0);
   const [otrosIngresos, setOtrosIngresos] = useState(0);
@@ -81,10 +81,11 @@ const FormularioCurriculum = () => {
     { nro_cuenta: " ", banco: " ", ciudad: " ", pais: "", moneda: " " },
   ]);
 
-  const [codigoCIIU, setCodigoCIIU] = useState([{
-    value: ""
-  }])
-
+  const [codigoCIIU, setCodigoCIIU] = useState([
+    {
+      value: "",
+    },
+  ]);
 
   const [operacionesExtranjera, setOperacionesExtranjera] = useState("Si");
 
@@ -101,8 +102,8 @@ const FormularioCurriculum = () => {
   const [numeroCuenta, setNumeroCuenta] = useState("");
   //Contractual
   const [tipoContrato, setTipoContrato] = useState("");
-  const [fechaIngreso, setFechaIngreso] = useState('1990-01-01');
-  const [fechaFin, setFechaFin] = useState('1990-01-01');
+  const [fechaIngreso, setFechaIngreso] = useState("1990-01-01");
+  const [fechaFin, setFechaFin] = useState("1990-01-01");
   const [empresa, setEmpresa] = useState("");
   const [nomina, setNomina] = useState("");
   const [codigoIngreso, setCodigoIngreso] = useState(0);
@@ -111,26 +112,30 @@ const FormularioCurriculum = () => {
   const [errorSoporteContrato, setErrorSoporteContrato] = useState(false);
   const [cargo, setCargo] = useState("elegir");
 
-  const [cargosFiltrado, setCargosFiltrado] = useState([])
+  const [cargosFiltrado, setCargosFiltrado] = useState([]);
   const [inputReq, setInputReq] = useState([
-    { nombre_requisito: " ", vigencia: " ", fecha_vigencia: "1990-01-01", observaciones: " ", estado_requisito: "" },
+    {
+      nombre_requisito: " ",
+      vigencia: " ",
+      fecha_vigencia: "1990-01-01",
+      observaciones: " ",
+      estado_requisito: "",
+    },
   ]);
 
-  const [documentoRequerido, setDocumentoRequerido] = useState([])
+  const [documentoRequerido, setDocumentoRequerido] = useState([]);
   const [unidadFuncional, setUnidadFuncional] = useState("");
-  const [unidadNegocio, setUnidadNegocio] = useState("Uci Magangué")
+  const [unidadNegocio, setUnidadNegocio] = useState("Uci Magangué");
 
   /* Error en el campo empresa*/
   const inputRefEmpresa = useRef(null);
-  const [errorEmpresa, setErrorEmpresa] = useState(false)
+  const [errorEmpresa, setErrorEmpresa] = useState(false);
 
   /* Error en el campo empresa*/
   const inputRefCargo = useRef(null);
-  const [errorCargo, setErrorCargo] = useState(false)
-
+  const [errorCargo, setErrorCargo] = useState(false);
 
   const params = useParams();
-
 
   const {
     obtenerCurriculumRH,
@@ -140,26 +145,23 @@ const FormularioCurriculum = () => {
     editarCurriculumRH,
     mostrarAlerta,
     alerta,
+    loading,
   } = useCollaborators();
 
   const { obtenerCargosForm, cargosForm } = useCargos();
 
-  const { obtenerDocumentosRequeridos, documentosRequeridos, } = useDocumentosRequeridos();
+  const { obtenerDocumentosRequeridos, documentosRequeridos } =
+    useDocumentosRequeridos();
 
-  console.log(cargosForm)
+  console.log(cargosForm);
 
   const { auth, cargando } = useAuth();
   //console.log(auth.documento);
   //console.log(auth._id);
   useEffect(() => {
-    obtenerCurriculumRH(params.id)
-    obtenerCargosForm()
+    obtenerCurriculumRH(params.id);
+    obtenerCargosForm();
   }, []);
-
-
-
-
-
 
   useEffect(() => {
     if (Object.keys(collaborator).length !== 0) {
@@ -203,7 +205,7 @@ const FormularioCurriculum = () => {
       setinputFinanciera(collaborator.inputFinanciera);
       //Cuentas Extranjero
       setinputExtranjera(collaborator.inputExtranjera);
-      setCodigoCIIU(collaborator.codigoCIIU)
+      setCodigoCIIU(collaborator.codigoCIIU);
       setRut(collaborator.rut);
       setNumeroRut(collaborator.numeroRut);
       setFechaCorte(collaborator.fechaCorte?.split("T")[0]);
@@ -238,20 +240,15 @@ const FormularioCurriculum = () => {
       setSueldo(collaborator.sueldo);
       setCargo(collaborator.cargo !== "" ? collaborator.cargo : "elegir");
       setUnidadFuncional(collaborator.unidadFuncional);
-      setUnidadNegocio(collaborator.unidadNegocio)
-
+      setUnidadNegocio(collaborator.unidadNegocio);
     }
   }, [collaborator]);
 
-
-
   useEffect(() => {
     if (Object.keys(collaborator).length !== 0) {
-      obtenerDocumentosRequeridos(collaborator.creador)
+      obtenerDocumentosRequeridos(collaborator.creador);
     }
-
-
-  }, [collaborator])
+  }, [collaborator]);
 
   // const {
   //   register,
@@ -330,19 +327,19 @@ const FormularioCurriculum = () => {
     }
 
     if (empresa === "elegir") {
-      inputRefEmpresa.current.focus()
-      setErrorEmpresa(true)
+      inputRefEmpresa.current.focus();
+      setErrorEmpresa(true);
       return;
     } else {
-      setErrorEmpresa(false)
+      setErrorEmpresa(false);
     }
 
     if (cargo === "elegir") {
-      inputRefCargo.current.focus()
-      setErrorCargo(true)
+      inputRefCargo.current.focus();
+      setErrorCargo(true);
       return;
     } else {
-      setErrorCargo(false)
+      setErrorCargo(false);
     }
 
     const formData = new FormData();
@@ -517,7 +514,7 @@ const FormularioCurriculum = () => {
   };
 
   const handleSoporteExp = (data) => {
-    const maxfilesize = (1024 * 1024);
+    const maxfilesize = 1024 * 1024;
 
     if (data && data.size > maxfilesize) {
       setErrorSoporteExp(true);
@@ -529,7 +526,7 @@ const FormularioCurriculum = () => {
   };
 
   const handleSoporteEps = (data) => {
-    const maxfilesize = (1024 * 1024);
+    const maxfilesize = 1024 * 1024;
 
     if (data && data.size > maxfilesize) {
       setErrorSoporteEps(true);
@@ -541,7 +538,7 @@ const FormularioCurriculum = () => {
   };
 
   const handleSoportePension = (data) => {
-    const maxfilesize = (1024 * 1024);
+    const maxfilesize = 1024 * 1024;
 
     if (data && data.size > maxfilesize) {
       setErrorSoportePension(true);
@@ -553,7 +550,7 @@ const FormularioCurriculum = () => {
   };
 
   const handleSoporteRut = (data) => {
-    const maxfilesize = (1024 * 1024);
+    const maxfilesize = 1024 * 1024;
 
     if (data && data.size > maxfilesize) {
       setErrorSoporteRut(true);
@@ -565,7 +562,7 @@ const FormularioCurriculum = () => {
   };
 
   const handleSoporteContrato = (data) => {
-    const maxfilesize = (1024 * 1024);
+    const maxfilesize = 1024 * 1024;
 
     if (data && data.size > maxfilesize) {
       setErrorSoporteContrato(true);
@@ -576,7 +573,6 @@ const FormularioCurriculum = () => {
     }
   };
 
-
   const { msg } = alerta;
 
   if (cargandoData) return <BeatLoader color="#36d7b7" />;
@@ -584,75 +580,76 @@ const FormularioCurriculum = () => {
   return (
     <div className=" sm:mx-auto sm:w-full">
       <section class="pt-16 bg-blueGray-50">
-            <div class="w-full lg:w-6/12 px-4 mx-auto">
-              <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg mt-16">
-                <div class="px-6">
-                  <div class="flex flex-wrap justify-center">
-                    <div class="w-full px-4 flex justify-center">
-                      <div class="relative">
-                      <img
-                        className="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px"
-                        src="https://demos.creative-tim.com/notus-js/assets/img/team-2-800x800.jpg"
-                        alt=""
-                      />
-                      </div>
-                    </div>
-                    <div class="w-full px-4 text-center mt-20">
-                    </div>
+        <div class="w-full lg:w-6/12 px-4 mx-auto">
+          <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg mt-16">
+            <div class="px-6">
+              <div class="flex flex-wrap justify-center">
+                <div class="w-full px-4 flex justify-center">
+                  <div class="relative">
+                    <img
+                      className="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px"
+                      src="https://demos.creative-tim.com/notus-js/assets/img/team-2-800x800.jpg"
+                      alt=""
+                    />
                   </div>
-                  <div class="text-center mt-12">
-                    <h3 class="text-xl font-semibold leading-normal mb-2 text-blueGray-700 mb-2 uppercase">
-                      {nombre}
-                    </h3>
-                    <div class="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold">
-                      <i class="fas fa-map-marker-alt mr-2 text-lg text-blueGray-400"></i>
-                      {tipoDocumento}, {numeroDocumento}
-                    </div>
-                    <div class="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold">
-                      <i class="fas fa-map-marker-alt mr-2 text-lg text-blueGray-400"></i>
-                      {ciudad}, {departamento}
-                    </div>
-                    <div class="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold ">
-                      <p class="font-light text-gray-600 mt-3">{fechaNacimiento}</p>
-                    </div>
-                    <div class="mb-2 text-blueGray-600 mt-10">
-                      <i class="fas fa-briefcase mr-2 text-lg text-blueGray-400"></i>
-                      {nivel}
-                    </div>
-                    <div class="mb-2 text-blueGray-600">
-                      <i class="fas fa-briefcase mr-2 text-lg text-blueGray-400"></i>
-                      {titulo}
-                    </div>
-                    <div class="mb-2 text-blueGray-600">
-                      <i class="fas fa-university mr-2 text-lg text-blueGray-400"></i>
-                       {institucionTitulo}
-                    </div>
-                    <div class="mb-2 text-blueGray-600">
-                      <i class="fas fa-university mr-2 text-lg text-blueGray-400"></i>
-                       {anioTitulo}
-                    </div>
-                  </div>                 
-                  <div class="mt-10 py-10 border-t border-blueGray-200 text-center ">
-                    <div class="flex flex-wrap justify-center">
-                      <div class="w-full lg:w-9/12 px-4">
-                        <p class="mb-4 text-lg leading-relaxed text-blueGray-700">
-                          An artist of considerable range, Jenna the name taken
-                          by Melbourne-raised, Brooklyn-based Nick Murphy
-                          writes, performs and records all of his own music,
-                          giving it a warm, intimate feel with a solid groove
-                          structure. An artist of considerable range.
-                        </p>
-                        <a href="javascript:void(0);" class="font-normal text-pink-500">
-                          Más
-                        </a>
-                      </div>
-                    </div>
-                  </div> 
-                
+                </div>
+                <div class="w-full px-4 text-center mt-20"></div>
+              </div>
+              <div class="text-center mt-12">
+                <h3 class="text-xl font-semibold leading-normal mb-2 text-blueGray-700 mb-2 uppercase">
+                  {nombre}
+                </h3>
+                <div class="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold">
+                  <i class="fas fa-map-marker-alt mr-2 text-lg text-blueGray-400"></i>
+                  {tipoDocumento}, {numeroDocumento}
+                </div>
+                <div class="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold">
+                  <i class="fas fa-map-marker-alt mr-2 text-lg text-blueGray-400"></i>
+                  {ciudad}, {departamento}
+                </div>
+                <div class="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold ">
+                  <p class="font-light text-gray-600 mt-3">{fechaNacimiento}</p>
+                </div>
+                <div class="mb-2 text-blueGray-600 mt-10">
+                  <i class="fas fa-briefcase mr-2 text-lg text-blueGray-400"></i>
+                  {nivel}
+                </div>
+                <div class="mb-2 text-blueGray-600">
+                  <i class="fas fa-briefcase mr-2 text-lg text-blueGray-400"></i>
+                  {titulo}
+                </div>
+                <div class="mb-2 text-blueGray-600">
+                  <i class="fas fa-university mr-2 text-lg text-blueGray-400"></i>
+                  {institucionTitulo}
+                </div>
+                <div class="mb-2 text-blueGray-600">
+                  <i class="fas fa-university mr-2 text-lg text-blueGray-400"></i>
+                  {anioTitulo}
+                </div>
+              </div>
+              <div class="mt-10 py-10 border-t border-blueGray-200 text-center ">
+                <div class="flex flex-wrap justify-center">
+                  <div class="w-full lg:w-9/12 px-4">
+                    <p class="mb-4 text-lg leading-relaxed text-blueGray-700">
+                      An artist of considerable range, Jenna the name taken by
+                      Melbourne-raised, Brooklyn-based Nick Murphy writes,
+                      performs and records all of his own music, giving it a
+                      warm, intimate feel with a solid groove structure. An
+                      artist of considerable range.
+                    </p>
+                    <a
+                      href="javascript:void(0);"
+                      class="font-normal text-pink-500"
+                    >
+                      Más
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
-            </section>
+          </div>
+        </div>
+      </section>
       <div className="bg-white py-8 px-4 shadow-lg rounded-lg sm:px-10">
         <form
           className="space-y-6 "
@@ -661,7 +658,7 @@ const FormularioCurriculum = () => {
           // })}
           onSubmit={submitData}
           encType="multipart/form-data"
-        > 
+        >
           {/* */}
           <div className="text-left text-xl text-gray-700 mt-8 font-bold border-b-4 border-corporative-blue inline-flex">
             Datos personales
@@ -686,10 +683,10 @@ const FormularioCurriculum = () => {
                   onChange={(e) => setNombre(e.target.value)}
                   required
                   disabled={true}
-                // {...register("nombre", {
-                //   required: "Este campo es requerido",
-                //   onChange: (e) => setNombre(e.target.value),
-                // })}
+                  // {...register("nombre", {
+                  //   required: "Este campo es requerido",
+                  //   onChange: (e) => setNombre(e.target.value),
+                  // })}
                 />
               </div>
               {/* <span className="text-xs text-red-500">
@@ -745,10 +742,10 @@ const FormularioCurriculum = () => {
                   onChange={(e) => setNumeroDocumento(e.target.value)}
                   required
                   disabled={true}
-                // {...register("numeroDocumento", {
-                //   required: "Este campo es requerido",
-                //   onChange: (e) => setNumeroDocumento(e.target.value),
-                // })}
+                  // {...register("numeroDocumento", {
+                  //   required: "Este campo es requerido",
+                  //   onChange: (e) => setNumeroDocumento(e.target.value),
+                  // })}
                 />
               </div>
               {/* <span className="text-xs text-red-500">
@@ -774,10 +771,10 @@ const FormularioCurriculum = () => {
                   onChange={(e) => setFechaNacimiento(e.target.value)}
                   required
                   disabled={true}
-                // {...register("fechaNacimiento", {
-                //   required: "Este campo es requerido",
-                //   onChange: (e) => setFechaNacimiento(e.target.value),
-                // })}
+                  // {...register("fechaNacimiento", {
+                  //   required: "Este campo es requerido",
+                  //   onChange: (e) => setFechaNacimiento(e.target.value),
+                  // })}
                 />
               </div>
               {/* <span className="text-xs text-red-500">
@@ -803,10 +800,10 @@ const FormularioCurriculum = () => {
                   onChange={(e) => setLugarNacimiento(e.target.value)}
                   required
                   disabled={true}
-                // {...register("lugarNacimiento", {
-                //   required: "Este campo es requerido",
-                //   onChange: (e) => setLugarNacimiento(e.target.value),
-                // })}
+                  // {...register("lugarNacimiento", {
+                  //   required: "Este campo es requerido",
+                  //   onChange: (e) => setLugarNacimiento(e.target.value),
+                  // })}
                 />
               </div>
               {/* <span className="text-xs text-red-500">
@@ -832,10 +829,10 @@ const FormularioCurriculum = () => {
                   onChange={(e) => setTelefono(e.target.value)}
                   required
                   disabled={true}
-                // {...register("telefono", {
-                //   required: "Este campo es requerido",
-                //   onChange: (e) => setTelefono(e.target.value),
-                // })}
+                  // {...register("telefono", {
+                  //   required: "Este campo es requerido",
+                  //   onChange: (e) => setTelefono(e.target.value),
+                  // })}
                 />
               </div>
               {/* <span className="text-xs text-red-500">
@@ -861,10 +858,10 @@ const FormularioCurriculum = () => {
                   onChange={(e) => setCorreo(e.target.value)}
                   required
                   disabled={true}
-                // {...register("correo", {
-                //   required: "Este campo es requerido",
-                //   onChange: (e) => setCorreo(e.target.value),
-                // })}
+                  // {...register("correo", {
+                  //   required: "Este campo es requerido",
+                  //   onChange: (e) => setCorreo(e.target.value),
+                  // })}
                 />
               </div>
               {/* <span className="text-xs text-red-500">
@@ -890,10 +887,10 @@ const FormularioCurriculum = () => {
                   onChange={(e) => setDireccion(e.target.value)}
                   required
                   disabled={true}
-                // {...register("direccion", {
-                //   required: "Este campo es requerido",
-                //   onChange: (e) => setDireccion(e.target.value),
-                // })}
+                  // {...register("direccion", {
+                  //   required: "Este campo es requerido",
+                  //   onChange: (e) => setDireccion(e.target.value),
+                  // })}
                 />
               </div>
               {/* <span className="text-xs text-red-500">
@@ -947,10 +944,10 @@ const FormularioCurriculum = () => {
                   onChange={(e) => setPais(e.target.value)}
                   required
                   disabled={true}
-                // {...register("pais", {
-                //   required: "Este campo es requerido",
-                //   onChange: (e) => setPais(e.target.value),
-                // })}
+                  // {...register("pais", {
+                  //   required: "Este campo es requerido",
+                  //   onChange: (e) => setPais(e.target.value),
+                  // })}
                 />
               </div>
               {/* <span className="text-xs text-red-500">
@@ -976,10 +973,10 @@ const FormularioCurriculum = () => {
                   onChange={(e) => setDepartamento(e.target.value)}
                   required
                   disabled={true}
-                // {...register("departamento", {
-                //   required: "Este campo es requerido",
-                //   onChange: (e) => setDepartamento(e.target.value),
-                // })}
+                  // {...register("departamento", {
+                  //   required: "Este campo es requerido",
+                  //   onChange: (e) => setDepartamento(e.target.value),
+                  // })}
                 />
               </div>
               {/* <span className="text-xs text-red-500">
@@ -1005,10 +1002,10 @@ const FormularioCurriculum = () => {
                   onChange={(e) => setCiudad(e.target.value)}
                   required
                   disabled={true}
-                // {...register("ciudad", {
-                //   required: "Este campo es requerido",
-                //   onChange: (e) => setCiudad(e.target.value),
-                // })}
+                  // {...register("ciudad", {
+                  //   required: "Este campo es requerido",
+                  //   onChange: (e) => setCiudad(e.target.value),
+                  // })}
                 />
               </div>
               {/* <span className="text-xs text-red-500">
@@ -1034,10 +1031,10 @@ const FormularioCurriculum = () => {
                   onChange={(e) => setNumeroHijos(e.target.value)}
                   required
                   disabled={true}
-                // {...register("numeroHijos", {
-                //   required: "Este campo es requerido",
-                //   onChange: (e) => setNumeroHijos(e.target.value),
-                // })}
+                  // {...register("numeroHijos", {
+                  //   required: "Este campo es requerido",
+                  //   onChange: (e) => setNumeroHijos(e.target.value),
+                  // })}
                 />
               </div>
               {/* <span className="text-xs text-red-500">
@@ -1063,10 +1060,10 @@ const FormularioCurriculum = () => {
                   onChange={(e) => setTipoSangre(e.target.value)}
                   required
                   disabled={true}
-                // {...register("tipoSangre", {
-                //   required: "Este campo es requerido",
-                //   onChange: (e) => setTipoSangre(e.target.value),
-                // })}
+                  // {...register("tipoSangre", {
+                  //   required: "Este campo es requerido",
+                  //   onChange: (e) => setTipoSangre(e.target.value),
+                  // })}
                 />
               </div>
               {/* <span className="text-xs text-red-500">
@@ -1131,10 +1128,10 @@ const FormularioCurriculum = () => {
                   onChange={(e) => setTitulo(e.target.value)}
                   required
                   disabled={true}
-                // {...register("titulo", {
-                //   required: "Este campo es requerido",
-                //   onChange: (e) => setTitulo(e.target.value),
-                // })}
+                  // {...register("titulo", {
+                  //   required: "Este campo es requerido",
+                  //   onChange: (e) => setTitulo(e.target.value),
+                  // })}
                 />
               </div>
               {/* <span className="text-xs text-red-500">
@@ -1159,10 +1156,10 @@ const FormularioCurriculum = () => {
                   onChange={(e) => setAnioTitulo(e.target.value)}
                   required
                   disabled={true}
-                // {...register("anioTitulo", {
-                //   required: "Este campo es requerido",
-                //   onChange: (e) => setAnioTitulo(e.target.value),
-                // })}
+                  // {...register("anioTitulo", {
+                  //   required: "Este campo es requerido",
+                  //   onChange: (e) => setAnioTitulo(e.target.value),
+                  // })}
                 />
               </div>
               {/* <span className="text-xs text-red-500">
@@ -1188,10 +1185,10 @@ const FormularioCurriculum = () => {
                   onChange={(e) => setInstitucionTitulo(e.target.value)}
                   required
                   disabled={true}
-                // {...register("institucionTitulo", {
-                //   required: "Este campo es requerido",
-                //   onChange: (e) => setInstitucionTitulo(e.target.value),
-                // })}
+                  // {...register("institucionTitulo", {
+                  //   required: "Este campo es requerido",
+                  //   onChange: (e) => setInstitucionTitulo(e.target.value),
+                  // })}
                 />
               </div>
               {/* <span className="text-xs text-red-500">
@@ -1223,10 +1220,10 @@ const FormularioCurriculum = () => {
                   onChange={(e) => setEmpresaExp(e.target.value)}
                   required
                   disabled={true}
-                // {...register("empresaExp", {
-                //   required: "Este campo es requerido",
-                //   onChange: (e) => setEmpresaExp(e.target.value),
-                // })}
+                  // {...register("empresaExp", {
+                  //   required: "Este campo es requerido",
+                  //   onChange: (e) => setEmpresaExp(e.target.value),
+                  // })}
                 />
               </div>
               {/* <span className="text-xs text-red-500">
@@ -1251,10 +1248,10 @@ const FormularioCurriculum = () => {
                   onChange={(e) => setFechaInicioExp(e.target.value)}
                   required
                   disabled={true}
-                // {...register("fechaInicioExp", {
-                //   required: "Este campo es requerido",
-                //   onChange: (e) => setFechaInicioExp(e.target.value),
-                // })}
+                  // {...register("fechaInicioExp", {
+                  //   required: "Este campo es requerido",
+                  //   onChange: (e) => setFechaInicioExp(e.target.value),
+                  // })}
                 />
               </div>
               {/* <span className="text-xs text-red-500">
@@ -1321,8 +1318,9 @@ const FormularioCurriculum = () => {
               <div className="mt-3">
                 {collaborator[0]?.soporteExp && (
                   <a
-                    href={`${import.meta.env.VITE_BACKEND_URL}/${collaborator[0].soporteExp
-                      }`}
+                    href={`${import.meta.env.VITE_BACKEND_URL}/${
+                      collaborator[0].soporteExp
+                    }`}
                     download={collaborator[0].soporteExp}
                     target="_blank"
                     className="underline text-blue-500 pt-5"
@@ -1358,10 +1356,10 @@ const FormularioCurriculum = () => {
                   onChange={(e) => setNombreRefA(e.target.value)}
                   required
                   disabled={true}
-                // {...register("nombreRefA", {
-                //   required: "Este campo es requerido",
-                //   onChange: (e) => setNombreRefA(e.target.value),
-                // })}
+                  // {...register("nombreRefA", {
+                  //   required: "Este campo es requerido",
+                  //   onChange: (e) => setNombreRefA(e.target.value),
+                  // })}
                 />
               </div>
               {/* <span className="text-xs text-red-500">
@@ -1387,10 +1385,10 @@ const FormularioCurriculum = () => {
                   onChange={(e) => setTelefonoRefA(e.target.value)}
                   required
                   disabled={true}
-                // {...register("telefonoRefA", {
-                //   required: "Este campo es requerido",
-                //   onChange: (e) => setTelefonoRefA(e.target.value),
-                // })}
+                  // {...register("telefonoRefA", {
+                  //   required: "Este campo es requerido",
+                  //   onChange: (e) => setTelefonoRefA(e.target.value),
+                  // })}
                 />
               </div>
               {/* <span className="text-xs text-red-500">
@@ -1416,10 +1414,10 @@ const FormularioCurriculum = () => {
                   onChange={(e) => setCorreoRefA(e.target.value)}
                   required
                   disabled={true}
-                // {...register("correoRefA", {
-                //   required: "Este campo es requerido",
-                //   onChange: (e) => setCorreoRefA(e.target.value),
-                // })}
+                  // {...register("correoRefA", {
+                  //   required: "Este campo es requerido",
+                  //   onChange: (e) => setCorreoRefA(e.target.value),
+                  // })}
                 />
               </div>
               {/* <span className="text-xs text-red-500">
@@ -1521,13 +1519,14 @@ const FormularioCurriculum = () => {
                   onChange={(e) => {
                     const selectedEPS = e.target.value;
                     setEPS(selectedEPS);
-
                   }}
                   value={eps}
                   required
                   disabled={true}
                 >
-                  <option value="Asociacion Mutual Ser Eps">Asociacion Mutual Ser Eps</option>
+                  <option value="Asociacion Mutual Ser Eps">
+                    Asociacion Mutual Ser Eps
+                  </option>
                   <option value="Cajacopi Eps">Cajacopi Eps</option>
                   <option value="Comparta">Comparta</option>
                   <option value="Compensar">Compensar</option>
@@ -1583,8 +1582,9 @@ const FormularioCurriculum = () => {
               <div className="mt-3">
                 {collaborator[0]?.soporteEps && (
                   <a
-                    href={`${import.meta.env.VITE_BACKEND_URL}/${collaborator[0].soporteEps
-                      }`}
+                    href={`${import.meta.env.VITE_BACKEND_URL}/${
+                      collaborator[0].soporteEps
+                    }`}
                     download={collaborator[0].soporteEps}
                     target="_blank"
                     className="underline text-blue-500 pt-5"
@@ -1618,7 +1618,6 @@ const FormularioCurriculum = () => {
                   <option value="Porvenir">Porvenir</option>
                   <option value="Colpensiones">Colpensiones</option>
                   <option value="Colfondos">Colfondos</option>
-
                 </select>
               </div>
             </div>
@@ -1662,8 +1661,9 @@ const FormularioCurriculum = () => {
               <div className="mt-3">
                 {collaborator[0]?.soportePension && (
                   <a
-                    href={`${import.meta.env.VITE_BACKEND_URL}/${collaborator[0].soportePension
-                      }`}
+                    href={`${import.meta.env.VITE_BACKEND_URL}/${
+                      collaborator[0].soportePension
+                    }`}
                     download={collaborator[0].soportePension}
                     target="_blank"
                     className="underline text-blue-500 pt-5"
@@ -1681,7 +1681,6 @@ const FormularioCurriculum = () => {
             {codigoCIIU &&
               Array.isArray(codigoCIIU) &&
               codigoCIIU.map((item, i) => {
-
                 return (
                   <div
                     key={i}
@@ -1696,9 +1695,8 @@ const FormularioCurriculum = () => {
                         placeholder="Digite su CIUU"
                         value={item}
                         onChange={(e) => handleinputchange(e, i)}
-                        isDisabled={true} />
-
-
+                        isDisabled={true}
+                      />
                     </div>
                   </div>
                 );
@@ -1746,8 +1744,9 @@ const FormularioCurriculum = () => {
               <div className="mt-3">
                 {collaborator[0]?.rut && (
                   <a
-                    href={`${import.meta.env.VITE_BACKEND_URL}/${collaborator[0].rut
-                      }`}
+                    href={`${import.meta.env.VITE_BACKEND_URL}/${
+                      collaborator[0].rut
+                    }`}
                     download={collaborator[0].rut}
                     target="_blank"
                     className="underline text-blue-500 pt-5"
@@ -2233,88 +2232,87 @@ const FormularioCurriculum = () => {
             </div>
             {operacionesExtranjera === "Si" ? (
               <div>
-              <p className="font-medium pt-5">
-                ¿En su Actividad Económica Realiza Operaciones en Moneda
-                Extranjera?
-              </p>
-              <div className="flex space-x-4 items-center pl-4">
-                <input
-                  type="checkbox"
-                  id="exportaciones"
-                  name="exportaciones"
-                  value={exportaciones}
-                  checked={exportaciones}
-                  //checked={exportaciones === "exportaciones"}
-                  //onChange={(e) => setExportaciones(e.target.value)}
-                  onChange={handleChangeExportaciones}
-                  disabled={true}
-                />
-                <label htmlFor="exportaciones">Exportaciones</label>
-              </div>
+                <p className="font-medium pt-5">
+                  ¿En su Actividad Económica Realiza Operaciones en Moneda
+                  Extranjera?
+                </p>
+                <div className="flex space-x-4 items-center pl-4">
+                  <input
+                    type="checkbox"
+                    id="exportaciones"
+                    name="exportaciones"
+                    value={exportaciones}
+                    checked={exportaciones}
+                    //checked={exportaciones === "exportaciones"}
+                    //onChange={(e) => setExportaciones(e.target.value)}
+                    onChange={handleChangeExportaciones}
+                    disabled={true}
+                  />
+                  <label htmlFor="exportaciones">Exportaciones</label>
+                </div>
 
-              <div className="flex space-x-4 items-center  pl-4">
-                <input
-                  type="checkbox"
-                  id="transferencias"
-                  name="transferencias"
-                  value="transferencias"
-                  checked={transferencias}
-                  onChange={handleChangeTransferencias}
-                  disabled={true}
-                />
-                <label htmlFor="transferencias">Transferencias</label>
+                <div className="flex space-x-4 items-center  pl-4">
+                  <input
+                    type="checkbox"
+                    id="transferencias"
+                    name="transferencias"
+                    value="transferencias"
+                    checked={transferencias}
+                    onChange={handleChangeTransferencias}
+                    disabled={true}
+                  />
+                  <label htmlFor="transferencias">Transferencias</label>
+                </div>
+                <div className="flex space-x-4 items-center  pl-4">
+                  <input
+                    type="checkbox"
+                    id="pagoServicios"
+                    name="pagoServicios"
+                    value="pagoServicios"
+                    checked={pagoServicios}
+                    onChange={handleChangePagoServicios}
+                    disabled={true}
+                  />
+                  <label htmlFor="pagoServicios">Pago de Servicios</label>
+                </div>
+                <div className="flex space-x-4 items-center  pl-4">
+                  <input
+                    type="checkbox"
+                    id="importaciones"
+                    name="importaciones"
+                    value="importaciones"
+                    checked={importaciones}
+                    onChange={handleChangeImportaciones}
+                    disabled={true}
+                  />
+                  <label htmlFor="importaciones">Importaciones</label>
+                </div>
+                <div className="flex space-x-4 items-center  pl-4">
+                  <input
+                    type="checkbox"
+                    id="prestamos"
+                    name="prestamos"
+                    value="prestamos"
+                    checked={prestamos}
+                    onChange={handleChangePrestamos}
+                    disabled={true}
+                  />
+                  <label htmlFor="prestamos">Prestamos en Moneda</label>
+                </div>
+                <div className="flex space-x-4 items-center  pl-4">
+                  <input
+                    type="checkbox"
+                    id="otras"
+                    name="otras"
+                    value="otras"
+                    checked={otras}
+                    onChange={handleChangeOtrasOperaciones}
+                    disabled={true}
+                  />
+                  <label htmlFor="otras">Otras</label>
+                </div>
               </div>
-              <div className="flex space-x-4 items-center  pl-4">
-                <input
-                  type="checkbox"
-                  id="pagoServicios"
-                  name="pagoServicios"
-                  value="pagoServicios"
-                  checked={pagoServicios}
-                  onChange={handleChangePagoServicios}
-                  disabled={true}
-                />
-                <label htmlFor="pagoServicios">Pago de Servicios</label>
-              </div>
-              <div className="flex space-x-4 items-center  pl-4">
-                <input
-                  type="checkbox"
-                  id="importaciones"
-                  name="importaciones"
-                  value="importaciones"
-                  checked={importaciones}
-                  onChange={handleChangeImportaciones}
-                  disabled={true}
-                />
-                <label htmlFor="importaciones">Importaciones</label>
-              </div>
-              <div className="flex space-x-4 items-center  pl-4">
-                <input
-                  type="checkbox"
-                  id="prestamos"
-                  name="prestamos"
-                  value="prestamos"
-                  checked={prestamos}
-                  onChange={handleChangePrestamos}
-                  disabled={true}
-                />
-                <label htmlFor="prestamos">Prestamos en Moneda</label>
-              </div>
-              <div className="flex space-x-4 items-center  pl-4">
-                <input
-                  type="checkbox"
-                  id="otras"
-                  name="otras"
-                  value="otras"
-                  checked={otras}
-                  onChange={handleChangeOtrasOperaciones}
-                  disabled={true}
-                />
-                <label htmlFor="otras">Otras</label>
-              </div>
-            </div>
-            ):null}
-            
+            ) : null}
 
             <div>
               {otras === true &&
@@ -2440,7 +2438,7 @@ const FormularioCurriculum = () => {
                 })}
             </div>
           </div>
-          
+
           <div className="text-left text-xl text-gray-700 mt-8 font-bold border-b-4 border-corporative-blue inline-flex pt-3">
             Referencias Bancarias
           </div>
@@ -2534,7 +2532,6 @@ const FormularioCurriculum = () => {
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   value={codigoIngreso}
                   onChange={(e) => setCodigoIngreso(e.target.value)}
-
                 />
               </div>
             </div>
@@ -2606,37 +2603,33 @@ const FormularioCurriculum = () => {
                 <select
                   id="empresa"
                   name="empresa"
-                  className={errorEmpresa === false ?
-                    "block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                    :
-                    "block w-full appearance-none rounded-md border border-red-500 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-red-500 focus:outline-none  sm:text-sm"}
+                  className={
+                    errorEmpresa === false
+                      ? "block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                      : "block w-full appearance-none rounded-md border border-red-500 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-red-500 focus:outline-none  sm:text-sm"
+                  }
                   onChange={(e) => setEmpresa(e.target.value)}
                   value={empresa}
                   required={true}
                   ref={inputRefEmpresa}
                 >
-                  <option value="elegir" disabled >
+                  <option value="elegir" disabled>
                     -- Selecciona un cargo--
                   </option>
-                  <option value="SOVEL" >
-                    SOVEL
-                  </option>
-                  <option value="WORKSERVICES" >
-                    Workservices
-                  </option>
-                  <option value="EFISERVICIOS" >
-                    Efiservicios
-                  </option>
-                  <option value="GEIPAS" >
-                    GEIPAS
-                  </option>
-                  <option value="Fundación Renal de Colombia" >
+                  <option value="SOVEL">SOVEL</option>
+                  <option value="WORKSERVICES">Workservices</option>
+                  <option value="EFISERVICIOS">Efiservicios</option>
+                  <option value="GEIPAS">GEIPAS</option>
+                  <option value="Fundación Renal de Colombia">
                     Fundación Renal de Colombia
                   </option>
                 </select>
-                {errorEmpresa === true && <span className="text-red-500 text-xs">Seleccione una empresa</span>}
+                {errorEmpresa === true && (
+                  <span className="text-red-500 text-xs">
+                    Seleccione una empresa
+                  </span>
+                )}
               </div>
-
             </div>
             <div>
               <label
@@ -2689,16 +2682,17 @@ const FormularioCurriculum = () => {
                 <select
                   id="cargo"
                   name="cargo"
-                  className={errorCargo === false ?
-                    "block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                    :
-                    "block w-full appearance-none rounded-md border border-red-500 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-red-500 focus:outline-none  sm:text-sm"}
+                  className={
+                    errorCargo === false
+                      ? "block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                      : "block w-full appearance-none rounded-md border border-red-500 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-red-500 focus:outline-none  sm:text-sm"
+                  }
                   onChange={(e) => setCargo(e.target.value)}
                   value={cargo}
                   ref={inputRefCargo}
                   required={true}
                 >
-                  <option value="elegir" disabled >
+                  <option value="elegir" disabled>
                     -- Selecciona un cargo--
                   </option>
                   {cargosForm.map((item, i) => {
@@ -2706,10 +2700,14 @@ const FormularioCurriculum = () => {
                       <option key={i} value={item.nombre}>
                         {item.nombre}
                       </option>
-                    )
+                    );
                   })}
                 </select>
-                {errorCargo === true && <span className="text-red-500 text-xs">Seleccione un cargo</span>}
+                {errorCargo === true && (
+                  <span className="text-red-500 text-xs">
+                    Seleccione un cargo
+                  </span>
+                )}
               </div>
             </div>
 
@@ -2750,16 +2748,13 @@ const FormularioCurriculum = () => {
                     setUnidadNegocio(selectedDocumentType);
                   }}
                   value={unidadNegocio}
-
                 >
-                  <option value="Uci Magangué">
-                    Uci Magangue
-                  </option>
-                  <option value="Hospital Magangué">
-                    Hospital Magangué
-                  </option>
+                  <option value="Uci Magangué">Uci Magangue</option>
+                  <option value="Hospital Magangué">Hospital Magangué</option>
                   <option value="Hospital Mompox">Hospital Mompox</option>
-                  <option value="Salud mental Mompox">Salud mental Mompox</option>
+                  <option value="Salud mental Mompox">
+                    Salud mental Mompox
+                  </option>
                 </select>
               </div>
             </div>
@@ -2802,8 +2797,9 @@ const FormularioCurriculum = () => {
               <div className="mt-3">
                 {collaborator[0]?.soporteContrato && (
                   <a
-                    href={`${import.meta.env.VITE_BACKEND_URL}/${collaborator[0].soporteContrato
-                      }`}
+                    href={`${import.meta.env.VITE_BACKEND_URL}/${
+                      collaborator[0].soporteContrato
+                    }`}
                     download={collaborator[0].soporteContrato}
                     target="_blank"
                     className="underline text-blue-500 pt-5"
@@ -2819,36 +2815,35 @@ const FormularioCurriculum = () => {
             Documentos Requeridos
           </div>
           <div>
-            {Array.isArray(documentosRequeridos) && documentosRequeridos.length > 0 ?
-              <ListarRequisitosRH data={documentosRequeridos} /> : (
-                <div className="rounded-md bg-blue-50 p-4">
-                  <div className="flex">
-                    <div className="flex-shrink-0">
-                      <svg
-                        className="h-5 w-5 text-blue-400"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                        aria-hidden="true"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a.75.75 0 000 1.5h.253a.25.25 0 01.244.304l-.459 2.066A1.75 1.75 0 0010.747 15H11a.75.75 0 000-1.5h-.253a.25.25 0 01-.244-.304l.459-2.066A1.75 1.75 0 009.253 9H9z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    </div>
-                    <div className="ml-3 flex-1 md:flex ">
-                      <p className="text-sm text-blue-700">
-                        No existen documentos cargados
-                      </p>
-                    </div>
+            {Array.isArray(documentosRequeridos) &&
+            documentosRequeridos.length > 0 ? (
+              <ListarRequisitosRH data={documentosRequeridos} />
+            ) : (
+              <div className="rounded-md bg-blue-50 p-4">
+                <div className="flex">
+                  <div className="flex-shrink-0">
+                    <svg
+                      className="h-5 w-5 text-blue-400"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      aria-hidden="true"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a.75.75 0 000 1.5h.253a.25.25 0 01.244.304l-.459 2.066A1.75 1.75 0 0010.747 15H11a.75.75 0 000-1.5h-.253a.25.25 0 01-.244-.304l.459-2.066A1.75 1.75 0 009.253 9H9z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </div>
+                  <div className="ml-3 flex-1 md:flex ">
+                    <p className="text-sm text-blue-700">
+                      No existen documentos cargados
+                    </p>
                   </div>
                 </div>
-              )
-            }
+              </div>
+            )}
           </div>
-
-
 
           {msg && <Alert alerta={alerta} />}
           <div className="grid grid-cols-2 gap-6 w-3/5 mx-auto">
@@ -2858,14 +2853,40 @@ const FormularioCurriculum = () => {
             >
               Cancelar
             </Link>
-            <input
-              type="submit"
-              className="flex w-full justify-center rounded-md border border-transparent bg-green-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 cursor-pointer"
-              value="Guardar"
-            />
+            {loading === true ? (
+              <button
+                disabled={true}
+                type="button"
+                className="text-white bg-green-600  font-medium rounded text-sm px-5 py-2.5 text-center mr-2  inline-flex items-center justify-center"
+              >
+                <svg
+                  aria-hidden="true"
+                  role="status"
+                  className="inline mr-3 w-4 h-4 text-white animate-spin"
+                  viewBox="0 0 100 101"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                    fill="#E5E7EB"
+                  ></path>
+                  <path
+                    d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                    fill="currentColor"
+                  ></path>
+                </svg>
+                Cargando...
+              </button>
+            ) : (
+              <input
+                type="submit"
+                className="flex w-full justify-center rounded-md border border-transparent bg-green-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 cursor-pointer"
+                value="Guardar"
+              />
+            )}
           </div>
         </form>
-        
       </div>
     </div>
   );
