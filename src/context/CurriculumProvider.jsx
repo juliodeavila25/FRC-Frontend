@@ -11,6 +11,7 @@ const CurriculumProvider = ({ children }) => {
   const [alerta, setAlerta] = useState({});
   const [cargandoData, setCargando] = useState(false);
   const[loading, setLoading] =useState(false);
+  const[modal, setModal]=useState({})
   const navigate = useNavigate();
   const { auth } = useAuth();
 
@@ -58,23 +59,28 @@ const CurriculumProvider = ({ children }) => {
       );
 
       //Mostrar alerta
-      setAlerta({
-        msg: "Curriculum actualizado correctamente",
+      // setAlerta({
+      //   msg: "Curriculum actualizado correctamente",
+      //   error: false,
+      // });
+      
+      setModal({
+        message: "Hoja de vida actualizada exitosamente",
         error: false,
       });
 
-      setTimeout(() => {
-        setAlerta({});
-        const tipo = localStorage.getItem("tipo");
-        if (tipo === "formRH") {
-          navigate("/colaboradores");
-        } else {
-          navigate("/dashboard");
-        }
+      // setTimeout(() => {
+      //   setAlerta({});
+      //   const tipo = localStorage.getItem("tipo");
+      //   if (tipo === "formRH") {
+      //     navigate("/colaboradores");
+      //   } else {
+      //     navigate("/dashboard");
+      //   }
 
-        window.location.reload(false)
+      //   window.location.reload(false)
 
-      }, 3000);
+      // }, 3000);
     } catch (error) {
       console.log(error);
     }
@@ -105,16 +111,17 @@ const CurriculumProvider = ({ children }) => {
         config
       );
 
-      setAlerta({
-        msg: "Curriculum creado correctamente",
+      setModal({
+        message: "Hoja de vida guardada exitosamente",
         error: false,
+        url:""
       });
 
-      setTimeout(() => {
-        setAlerta({});
-        navigate("/dashboard");
-        window.location.reload(false)
-      }, 3000);
+      // setTimeout(() => {
+      //   setAlerta({});
+      //   navigate("/dashboard");
+      //   window.location.reload(false)
+      // }, 3000);
     } catch (error) {
       console.log(error);
       setAlerta({
@@ -153,6 +160,7 @@ const CurriculumProvider = ({ children }) => {
         curriculum,
         cargandoData,
         loading,
+        modal,
         submitCurriculum,
         mostrarAlerta,
         obtenerCurriculum,

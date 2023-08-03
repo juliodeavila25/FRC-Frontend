@@ -13,6 +13,8 @@ import Select from "react-select";
 import departamentos from "../json/departamentos_municipios.json";
 import ListarRequisitos from "./ListarRequisitos";
 import ModalCurriculum from "../components/ModalCurriculum";
+import ModalValidation from "../components/ModalValidation";
+
 
 const FormularioCurriculum = () => {
   const [id, setId] = useState(null);
@@ -225,6 +227,7 @@ const FormularioCurriculum = () => {
     curriculum,
     cargandoData,
     loading,
+    modal
   } = useCurriculum();
 
   const { obtenerCargosForm, cargosForm } = useCargos();
@@ -232,7 +235,7 @@ const FormularioCurriculum = () => {
     useDocumentosRequeridos();
 
   const { auth, obtenerUsuarioAutenticado, usuarioAutenticado } = useAuth();
-
+  
   useEffect(() => {
     obtenerCurriculum(auth._id);
     obtenerCargosForm();
@@ -861,7 +864,8 @@ const FormularioCurriculum = () => {
     setPrestamos(false);
     setOtras(false);
   };
-
+ 
+  const { message } = modal;
   const { msg } = alerta;
 
   if (cargandoData) return <BeatLoader color="#36d7b7" />;
@@ -3035,6 +3039,8 @@ const FormularioCurriculum = () => {
           ) : null}
 
           {msg && <Alert alerta={alerta} />}
+          {message && <ModalValidation modal={modal} />}
+
           <div className="grid grid-cols-2 gap-6 w-3/5 mx-auto mt-3">
             <Link
               to="/"
@@ -3072,6 +3078,7 @@ const FormularioCurriculum = () => {
                 type="submit"
                 className="flex w-full justify-center rounded-md border border-transparent bg-green-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 cursor-pointer"
                 value="Guardar"
+               
               />
             )}
           </div>

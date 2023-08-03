@@ -129,7 +129,7 @@ const Table = ({ data, columns, href, title, titleButton }) => {
                         {row.cells.map((cell) => {
                           return (
                             <td
-                              className="whitespace-pre-line px-3 py-4 text-sm text-gray-500 truncate"
+                              className="whitespace-pre-line px-3 py-4 text-sm text-gray-500 truncate capitalize"
                               {...cell.getCellProps()}
                             >
                               {cell.value === "activo" ? (

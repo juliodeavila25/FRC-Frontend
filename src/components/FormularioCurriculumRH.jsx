@@ -11,6 +11,7 @@ import Select from "react-select";
 import departamentos from "../json/departamentos_municipios.json";
 import ListarRequisitosRH from "./ListarRequisitosRH";
 import useDocumentosRequeridos from "../hooks/useDocumentosRequeridos";
+import ModalValidation from "../components/ModalValidation";
 
 const FormularioCurriculum = () => {
   const [id, setId] = useState(null);
@@ -146,6 +147,7 @@ const FormularioCurriculum = () => {
     mostrarAlerta,
     alerta,
     loading,
+    modal
   } = useCollaborators();
 
   const { obtenerCargosForm, cargosForm } = useCargos();
@@ -573,6 +575,7 @@ const FormularioCurriculum = () => {
     }
   };
 
+  const { message } = modal;
   const { msg } = alerta;
 
   if (cargandoData) return <BeatLoader color="#36d7b7" />;
@@ -2846,6 +2849,7 @@ const FormularioCurriculum = () => {
           </div>
 
           {msg && <Alert alerta={alerta} />}
+          {message && <ModalValidation modal={modal} />}
           <div className="grid grid-cols-2 gap-6 w-3/5 mx-auto">
             <Link
               to="/colaboradores"

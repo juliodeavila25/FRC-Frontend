@@ -12,6 +12,7 @@ const CollaboratorsProvider = ({ children }) => {
   const [alerta, setAlerta] = useState({});
   const [cargandoDatos, setCargando] = useState(false);
   const [loading, setLoading] = useState(false)
+  const[modal, setModal]=useState({})
   const navigate = useNavigate();
   const { auth } = useAuth();
 
@@ -95,16 +96,14 @@ const CollaboratorsProvider = ({ children }) => {
         config
       );
 
-      //Mostrar alerta
-      setAlerta({
-        msg: "Curriculum actualizado correctamente",
+      //Mostrar modal
+     
+      setModal({
+        message: "Hoja de vida actualizada exitosamente",
         error: false,
       });
 
-      setTimeout(() => {
-        setAlerta({});
-          navigate("/colaboradores");
-      }, 3000);
+     
     } catch (error) {
       console.log(error);
     }
@@ -119,6 +118,7 @@ const CollaboratorsProvider = ({ children }) => {
         collaborator,
         cargandoDatos,
         loading,
+        modal,
         obtenerCurriculums,
         obtenerCurriculumRH,
         editarCurriculumRH,
