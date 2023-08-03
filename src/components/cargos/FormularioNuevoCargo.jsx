@@ -63,6 +63,8 @@ const FormularioNuevoCargo = () => {
 
   const { auth, cargando } = useAuth();
 
+
+
   useEffect(() => {
     if (params.id) {
       setId(cargo._id);
@@ -723,7 +725,7 @@ const FormularioNuevoCargo = () => {
                       <div className="">
                         <div className="border-b border-gray-900 pb-2">
                           <h6 className="text-sm font-medium text-gray-900">
-                            Requisito {i+1}
+                            Requisito {i + 1}
                           </h6>
                         </div>
                         <label className="block text-sm font-medium text-gray-700 pt-4">
@@ -851,9 +853,7 @@ const FormularioNuevoCargo = () => {
                           checked={item.emisor}
                           onChange={(e) => handleinputchange(e, i)}
                         />
-                        <label htmlFor="emisor">
-                          ¿Emisor o expedido por?
-                        </label>
+                        <label htmlFor="emisor">¿Emisor o expedido por?</label>
                       </div>
                       <div className="flex space-x-4 items-center pl-4">
                         <input
@@ -864,9 +864,7 @@ const FormularioNuevoCargo = () => {
                           checked={item.fecha_exp}
                           onChange={(e) => handleinputchange(e, i)}
                         />
-                        <label htmlFor="fecha_exp">
-                          Fecha de expedición
-                        </label>
+                        <label htmlFor="fecha_exp">Fecha de expedición</label>
                       </div>
                       <div className="flex space-x-4 items-center pl-4">
                         <input
@@ -1034,7 +1032,7 @@ const FormularioNuevoCargo = () => {
                     setEstado(selectedError);
                   }}
                   value={estado}
-                  disabled={true}
+                  disabled={auth?.userType[0] === "gerente" ? false : true}
                   ref={inputRefEstado}
                 >
                   <option value="elegir" disabled className="text-gray-400">

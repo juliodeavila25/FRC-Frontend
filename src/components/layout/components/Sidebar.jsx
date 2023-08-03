@@ -12,11 +12,9 @@ import {
   DocumentCheckIcon,
   UsersIcon,
   TableCellsIcon,
-  AcademicCapIcon
-
+  AcademicCapIcon,
+  BuildingOfficeIcon
 } from "@heroicons/react/24/outline";
-
-
 
 <svg
   xmlns="http://www.w3.org/2000/svg"
@@ -44,23 +42,16 @@ import { Link, useLocation } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
 import useCurriculum from "../../../hooks/useCurriculum";
 
-
 const Sidebar = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const location = useLocation();
   const { auth, obtenerUsuarioAutenticado, usuarioAutenticado } = useAuth();
-  const {
-    curriculum, obtenerCurriculum
-  } = useCurriculum();
-
-
+  const { curriculum, obtenerCurriculum } = useCurriculum();
 
   useEffect(() => {
-    obtenerUsuarioAutenticado()
+    obtenerUsuarioAutenticado();
     obtenerCurriculum(auth._id);
-  }, [auth])
-
-
+  }, [auth]);
 
   const navigation_admin = [
     {
@@ -68,7 +59,7 @@ const Sidebar = () => {
       href: "/dashboard",
       icon: HomeIcon,
       current: location.pathname.includes("/dashboard") ? true : false,
-    }
+    },
   ];
 
   const navigation_aspirante = [
@@ -83,7 +74,7 @@ const Sidebar = () => {
       href: "/curriculum/crear-curriculum",
       icon: Bars4Icon,
       current: location.pathname.includes("/curriculum") ? true : false,
-    }
+    },
   ];
 
   const navigation_hv_inicial = [
@@ -92,7 +83,7 @@ const Sidebar = () => {
       href: "/ofertas",
       icon: BriefcaseIcon,
       current: location.pathname.includes("/ofertas") ? true : false,
-    }
+    },
   ];
 
   const navigation_recursos_humanos = [
@@ -127,6 +118,53 @@ const Sidebar = () => {
       href: "/documentos/listar-documentos",
       icon: ClipboardDocumentListIcon,
       current: location.pathname.includes("/documentos") ? true : false,
+    },
+    {
+      name: "Unidad Funcional",
+      href: "/unidades-negocio/listar-unidades-negocio",
+      icon: BuildingOfficeIcon,
+      current: location.pathname.includes("/unidades-negocio") ? true : false,
+    },
+  ];
+
+  const navigation_gerente = [
+    {
+      name: "Inicio",
+      href: "/dashboard",
+      icon: HomeIcon,
+      current: location.pathname.includes("/dashboard") ? true : false,
+    },
+    {
+      name: "Colaboradores",
+      href: "/colaboradores",
+      icon: UsersIcon,
+      current: location.pathname.includes("/colaboradores") ? true : false,
+    },
+
+    {
+      name: "Cargos",
+      href: "/cargos/listar-cargos",
+      icon: AcademicCapIcon,
+      current: location.pathname.includes("/cargos") ? true : false,
+    },
+
+    {
+      name: "Ofertas de empleo",
+      href: "/recursos-humanos/listar-convocatorias",
+      icon: TableCellsIcon,
+      current: location.pathname.includes("/recursos-humanos") ? true : false,
+    },
+    {
+      name: "Documentos",
+      href: "/documentos/listar-documentos",
+      icon: ClipboardDocumentListIcon,
+      current: location.pathname.includes("/documentos") ? true : false,
+    },
+    {
+      name: "Unidad Funcional",
+      href: "/unidades-negocio/listar-unidades-negocio",
+      icon: BuildingOfficeIcon,
+      current: location.pathname.includes("/unidades-negocio") ? true : false,
     },
   ];
 
@@ -213,60 +251,91 @@ const Sidebar = () => {
                 <div className="mt-5 h-0 flex-1 overflow-y-auto">
                   <nav className="px-2">
                     <div className="space-y-1">
-                      {auth?.userType[0] === "admin" ?
-                        navigation_admin.map((item) => (
-                          <Link
-                            key={item.name}
-                            to={item.href}
-                            className={classNames(
-                              item.current
-                                ? "bg-gray-100 text-gray-900"
-                                : "text-gray-600 hover:text-gray-900 hover:bg-gray-50",
-                              "group flex items-center px-2 py-2 text-base leading-5 font-medium rounded-md"
-                            )}
-                            aria-current={item.current ? "page" : undefined}
-                          >
-                            <item.icon
+                      {auth?.userType[0] === "admin"
+                        ? navigation_admin.map((item) => (
+                            <Link
+                              key={item.name}
+                              to={item.href}
                               className={classNames(
                                 item.current
-                                  ? "text-gray-500"
-                                  : "text-gray-400 group-hover:text-gray-500",
-                                "mr-3 flex-shrink-0 h-6 w-6"
+                                  ? "bg-gray-100 text-gray-900"
+                                  : "text-gray-600 hover:text-gray-900 hover:bg-gray-50",
+                                "group flex items-center px-2 py-2 text-base leading-5 font-medium rounded-md"
                               )}
-                              aria-hidden="true"
-                            />
-                            {item.name}
-                          </Link>
-                        )) : ""}
+                              aria-current={item.current ? "page" : undefined}
+                            >
+                              <item.icon
+                                className={classNames(
+                                  item.current
+                                    ? "text-gray-500"
+                                    : "text-gray-400 group-hover:text-gray-500",
+                                  "mr-3 flex-shrink-0 h-6 w-6"
+                                )}
+                                aria-hidden="true"
+                              />
+                              {item.name}
+                            </Link>
+                          ))
+                        : ""}
 
-                      {auth?.userType[0] === "aspirante" || auth?.userType[0] === "colaborador" ?
-                        navigation_aspirante.map((item) => (
-                          <Link
-                            key={item.name}
-                            to={item.href}
-                            className={classNames(
-                              item.current
-                                ? "bg-gray-100 text-gray-900"
-                                : "text-gray-600 hover:text-gray-900 hover:bg-gray-50",
-                              "group flex items-center px-2 py-2 text-base leading-5 font-medium rounded-md"
-                            )}
-                            aria-current={item.current ? "page" : undefined}
-                          >
-                            <item.icon
+                      {auth?.userType[0] === "aspirante" ||
+                      auth?.userType[0] === "colaborador"
+                        ? navigation_aspirante.map((item) => (
+                            <Link
+                              key={item.name}
+                              to={item.href}
                               className={classNames(
                                 item.current
-                                  ? "text-gray-500"
-                                  : "text-gray-400 group-hover:text-gray-500",
-                                "mr-3 flex-shrink-0 h-6 w-6"
+                                  ? "bg-gray-100 text-gray-900"
+                                  : "text-gray-600 hover:text-gray-900 hover:bg-gray-50",
+                                "group flex items-center px-2 py-2 text-base leading-5 font-medium rounded-md"
                               )}
-                              aria-hidden="true"
-                            />
-                            {item.name}
-                          </Link>
-                        )) : ""}
+                              aria-current={item.current ? "page" : undefined}
+                            >
+                              <item.icon
+                                className={classNames(
+                                  item.current
+                                    ? "text-gray-500"
+                                    : "text-gray-400 group-hover:text-gray-500",
+                                  "mr-3 flex-shrink-0 h-6 w-6"
+                                )}
+                                aria-hidden="true"
+                              />
+                              {item.name}
+                            </Link>
+                          ))
+                        : ""}
 
-                      {auth?.userType[0] !== "recursos_humanos" && auth?.estado !== "inicial" ?
-                        navigation_hv_inicial.map((item) => (
+                      {auth?.userType[0] !== "recursos_humanos" && auth?.userType[0] !== "gerente"  &&
+                      auth?.estado !== "inicial"
+                        ? navigation_hv_inicial.map((item) => (
+                            <Link
+                              key={item.name}
+                              to={item.href}
+                              className={classNames(
+                                item.current
+                                  ? "bg-gray-100 text-gray-900"
+                                  : "text-gray-600 hover:text-gray-900 hover:bg-gray-50",
+                                "group flex items-center px-2 py-2 text-base leading-5 font-medium rounded-md"
+                              )}
+                              aria-current={item.current ? "page" : undefined}
+                            >
+                              <item.icon
+                                className={classNames(
+                                  item.current
+                                    ? "text-gray-500"
+                                    : "text-gray-400 group-hover:text-gray-500",
+                                  "mr-3 flex-shrink-0 h-6 w-6"
+                                )}
+                                aria-hidden="true"
+                              />
+                              {item.name}
+                            </Link>
+                          ))
+                        : ""}
+
+                      {auth?.userType[0] === "gerente" &&
+                        navigation_gerente.map((item) => (
                           <Link
                             key={item.name}
                             to={item.href}
@@ -289,7 +358,7 @@ const Sidebar = () => {
                             />
                             {item.name}
                           </Link>
-                        )) : ""}
+                        ))}
 
                       {auth?.userType[0] === "recursos_humanos" &&
                         navigation_recursos_humanos.map((item) => (
@@ -317,7 +386,14 @@ const Sidebar = () => {
                           </Link>
                         ))}
                     </div>
-                    {Object.keys(usuarioAutenticado).length !== 0 && usuarioAutenticado && usuarioAutenticado?.userType[0] === "colaborador" && usuarioAutenticado?.estado === "completado" && Array.isArray(curriculum) && curriculum.length > 0 && curriculum[0].empresa === "Fundación Renal de Colombia" ? (
+
+                    {Object.keys(usuarioAutenticado).length !== 0 &&
+                    usuarioAutenticado &&
+                    usuarioAutenticado?.userType[0] === "colaborador" &&
+                    usuarioAutenticado?.estado === "completado" &&
+                    Array.isArray(curriculum) &&
+                    curriculum.length > 0 &&
+                    curriculum[0].empresa === "Fundación Renal de Colombia" ? (
                       <div className="mt-8">
                         <h3
                           className="px-3 text-lg font-medium text-gray-500"
@@ -356,7 +432,9 @@ const Sidebar = () => {
                           ))}
                         </div>
                       </div>
-                    ) : ''}
+                    ) : (
+                      ""
+                    )}
                   </nav>
                 </div>
               </Dialog.Panel>
@@ -541,85 +619,88 @@ const Sidebar = () => {
           {/* Navigation */}
           <nav className="mt-10 px-3">
             <div className="space-y-1">
-              {auth?.userType[0] === "admin" ?
-                navigation_admin.map((item) => (
-                  <Link
-                    key={item.name}
-                    to={item.href}
-                    className={classNames(
-                      item.current
-                        ? "bg-gray-200 text-gray-900"
-                        : "text-gray-700 hover:text-gray-900 hover:bg-gray-50",
-                      "group flex items-center px-2 py-2 text-sm font-medium rounded-md"
-                    )}
-                    aria-current={item.current ? "page" : undefined}
-                  >
-                    <item.icon
+              {auth?.userType[0] === "admin"
+                ? navigation_admin.map((item) => (
+                    <Link
+                      key={item.name}
+                      to={item.href}
                       className={classNames(
                         item.current
-                          ? "text-gray-500"
-                          : "text-gray-400 group-hover:text-gray-500",
-                        "mr-3 flex-shrink-0 h-6 w-6"
+                          ? "bg-gray-200 text-gray-900"
+                          : "text-gray-700 hover:text-gray-900 hover:bg-gray-50",
+                        "group flex items-center px-2 py-2 text-sm font-medium rounded-md"
                       )}
-                      aria-hidden="true"
-                    />
-                    {item.name}
-                  </Link>
-                )) : ""}
+                      aria-current={item.current ? "page" : undefined}
+                    >
+                      <item.icon
+                        className={classNames(
+                          item.current
+                            ? "text-gray-500"
+                            : "text-gray-400 group-hover:text-gray-500",
+                          "mr-3 flex-shrink-0 h-6 w-6"
+                        )}
+                        aria-hidden="true"
+                      />
+                      {item.name}
+                    </Link>
+                  ))
+                : ""}
 
-              {auth?.userType[0] === "aspirante" || auth?.userType[0] === "colaborador" ?
-                navigation_aspirante.map((item) => (
-                  <Link
-                    key={item.name}
-                    to={item.href}
-                    className={classNames(
-                      item.current
-                        ? "bg-gray-200 text-gray-900"
-                        : "text-gray-700 hover:text-gray-900 hover:bg-gray-50",
-                      "group flex items-center px-2 py-2 text-sm font-medium rounded-md"
-                    )}
-                    aria-current={item.current ? "page" : undefined}
-                  >
-                    <item.icon
+              {auth?.userType[0] === "aspirante" ||
+              auth?.userType[0] === "colaborador"
+                ? navigation_aspirante.map((item) => (
+                    <Link
+                      key={item.name}
+                      to={item.href}
                       className={classNames(
                         item.current
-                          ? "text-gray-500"
-                          : "text-gray-400 group-hover:text-gray-500",
-                        "mr-3 flex-shrink-0 h-6 w-6"
+                          ? "bg-gray-200 text-gray-900"
+                          : "text-gray-700 hover:text-gray-900 hover:bg-gray-50",
+                        "group flex items-center px-2 py-2 text-sm font-medium rounded-md"
                       )}
-                      aria-hidden="true"
-                    />
-                    {item.name}
-                  </Link>
-                )) : ""}
+                      aria-current={item.current ? "page" : undefined}
+                    >
+                      <item.icon
+                        className={classNames(
+                          item.current
+                            ? "text-gray-500"
+                            : "text-gray-400 group-hover:text-gray-500",
+                          "mr-3 flex-shrink-0 h-6 w-6"
+                        )}
+                        aria-hidden="true"
+                      />
+                      {item.name}
+                    </Link>
+                  ))
+                : ""}
 
-              {auth?.userType[0] !== "recursos_humanos" && auth?.estado !== "inicial" ?
-                navigation_hv_inicial.map((item) => (
-                  <Link
-                    key={item.name}
-                    to={item.href}
-                    className={classNames(
-                      item.current
-                        ? "bg-gray-200 text-gray-900"
-                        : "text-gray-700 hover:text-gray-900 hover:bg-gray-50",
-                      "group flex items-center px-2 py-2 text-sm font-medium rounded-md"
-                    )}
-                    aria-current={item.current ? "page" : undefined}
-                  >
-                    <item.icon
+              {auth?.userType[0] !== "recursos_humanos" && auth?.userType[0] !== "gerente"  &&
+              auth?.estado !== "inicial"
+                ? navigation_hv_inicial.map((item) => (
+                    <Link
+                      key={item.name}
+                      to={item.href}
                       className={classNames(
                         item.current
-                          ? "text-gray-500"
-                          : "text-gray-400 group-hover:text-gray-500",
-                        "mr-3 flex-shrink-0 h-6 w-6"
+                          ? "bg-gray-200 text-gray-900"
+                          : "text-gray-700 hover:text-gray-900 hover:bg-gray-50",
+                        "group flex items-center px-2 py-2 text-sm font-medium rounded-md"
                       )}
-                      aria-hidden="true"
-                    />
-                    {item.name}
-                  </Link>
-                )) : ""}
-
-
+                      aria-current={item.current ? "page" : undefined}
+                    >
+                      <item.icon
+                        className={classNames(
+                          item.current
+                            ? "text-gray-500"
+                            : "text-gray-400 group-hover:text-gray-500",
+                          "mr-3 flex-shrink-0 h-6 w-6"
+                        )}
+                        aria-hidden="true"
+                      />
+                      {item.name}
+                    </Link>
+                  ))
+                : ""}
 
               {auth?.userType[0] === "recursos_humanos" &&
                 navigation_recursos_humanos.map((item) => (
@@ -646,8 +727,40 @@ const Sidebar = () => {
                     {item.name}
                   </Link>
                 ))}
+              
+              {auth?.userType[0] === "gerente" &&
+                navigation_gerente.map((item) => (
+                  <Link
+                    key={item.name}
+                    to={item.href}
+                    className={classNames(
+                      item.current
+                        ? "bg-gray-200 text-gray-900"
+                        : "text-gray-700 hover:text-gray-900 hover:bg-gray-50",
+                      "group flex items-center px-2 py-2 text-sm font-medium rounded-md"
+                    )}
+                    aria-current={item.current ? "page" : undefined}
+                  >
+                    <item.icon
+                      className={classNames(
+                        item.current
+                          ? "text-gray-500"
+                          : "text-gray-400 group-hover:text-gray-500",
+                        "mr-3 flex-shrink-0 h-6 w-6"
+                      )}
+                      aria-hidden="true"
+                    />
+                    {item.name}
+                  </Link>
+                ))}
             </div>
-            {Object.keys(usuarioAutenticado).length !== 0 && usuarioAutenticado && usuarioAutenticado?.userType[0] === "colaborador" && usuarioAutenticado?.estado === "completado" && Array.isArray(curriculum) && curriculum.length > 0 && curriculum[0].empresa === "Fundación Renal de Colombia" ? (
+            {Object.keys(usuarioAutenticado).length !== 0 &&
+            usuarioAutenticado &&
+            usuarioAutenticado?.userType[0] === "colaborador" &&
+            usuarioAutenticado?.estado === "completado" &&
+            Array.isArray(curriculum) &&
+            curriculum.length > 0 &&
+            curriculum[0].empresa === "Fundación Renal de Colombia" ? (
               <div className="mt-8">
                 {/* Secondary navigation */}
                 <h3
@@ -687,7 +800,9 @@ const Sidebar = () => {
                   ))}
                 </div>
               </div>
-            ) : ''}
+            ) : (
+              ""
+            )}
           </nav>
         </div>
       </div>
