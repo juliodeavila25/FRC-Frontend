@@ -65,7 +65,7 @@ const FormularioNuevaUnidad = () => {
       <div className="bg-white py-8 px-4 shadow-lg rounded-lg sm:px-10">
         <form className="space-y-6 " onSubmit={handleSubmit}>
           <div className="text-left text-xl text-gray-700 mt-8 font-bold border-b-4 border-corporative-blue inline-flex">
-            Listado Maestro de Unidades Funcionales
+            Listado Maestro de Unidad de Negocio
           </div>
           <div className="grid grid-cols-1 gap-6 ">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-2 gap-6">
@@ -74,7 +74,7 @@ const FormularioNuevaUnidad = () => {
                   htmlFor="codigo"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Nombre Unidad Funcional <span className="text-red-700">*</span>
+                  Nombre Unidad de Negocio <span className="text-red-700">*</span>
                 </label>
                 <div className="mt-1">
                   <input

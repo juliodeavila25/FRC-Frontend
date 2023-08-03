@@ -1,4 +1,4 @@
-import FormularioNuevaUnidad from "../../components/unidad_funcional/FormularioNuevaUnidad";
+import FormularioNuevaUnidad from "../../components/unidad_negocio/FormularioNuevaUnidad";
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 

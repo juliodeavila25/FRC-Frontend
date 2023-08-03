@@ -1,4 +1,4 @@
-import FormularioNuevaUnidad from "../../components/unidad_funcional/FormularioNuevaUnidad"
+import FormularioNuevaUnidad from "../../components/unidad_negocio/FormularioNuevaUnidad"
 
 
 const CrearCargo = () => {

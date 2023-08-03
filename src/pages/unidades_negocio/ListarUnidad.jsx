@@ -1,4 +1,4 @@
-import ListarUnidadTotal from "../../components/unidad_funcional/ListarUnidad"
+import ListarUnidadTotal from "../../components/unidad_negocio/ListarUnidad"
 
 const ListarUnidad = () => {
   return (
