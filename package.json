@@ -34,6 +34,7 @@
     "react-table": "^7.8.0",
     "react-tag-autocomplete": "^6.3.0",
     "react-tag-input-component": "^2.0.2",
+    "react-tooltip": "^5.19.0",
     "sweetalert": "^2.1.2"
   },
   "devDependencies": {

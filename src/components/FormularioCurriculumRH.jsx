@@ -582,11 +582,11 @@ const FormularioCurriculum = () => {
 
   return (
     <div className=" sm:mx-auto sm:w-full">
-      <section class="pt-16 bg-blueGray-50">
+      <section class="pt-2 bg-blueGray-50">
         <div class="w-full lg:w-6/12 px-4 mx-auto">
           <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg mt-16">
             <div class="px-6">
-              <div class="flex flex-wrap justify-center">
+              {/*<div class="flex flex-wrap justify-center">
                 <div class="w-full px-4 flex justify-center">
                   <div class="relative">
                     <img
@@ -597,7 +597,7 @@ const FormularioCurriculum = () => {
                   </div>
                 </div>
                 <div class="w-full px-4 text-center mt-20"></div>
-              </div>
+               </div>*/}
               <div class="text-center mt-12">
                 <h3 class="text-xl font-semibold leading-normal mb-2 text-blueGray-700 mb-2 uppercase">
                   {nombre}
@@ -662,7 +662,7 @@ const FormularioCurriculum = () => {
           onSubmit={submitData}
           encType="multipart/form-data"
         >
-          {/* */}
+          {/* 
           <div className="text-left text-xl text-gray-700 mt-8 font-bold border-b-4 border-corporative-blue inline-flex">
             Datos personales
           </div>
@@ -692,9 +692,6 @@ const FormularioCurriculum = () => {
                   // })}
                 />
               </div>
-              {/* <span className="text-xs text-red-500">
-                {errors.nombre?.message}
-              </span> */}
             </div>
             <div>
               <label
@@ -751,11 +748,7 @@ const FormularioCurriculum = () => {
                   // })}
                 />
               </div>
-              {/* <span className="text-xs text-red-500">
-                {errors.numeroDocumento?.message}
-              </span> */}
             </div>
-
             <div>
               <label
                 htmlFor="fechaNacimiento"
@@ -780,9 +773,6 @@ const FormularioCurriculum = () => {
                   // })}
                 />
               </div>
-              {/* <span className="text-xs text-red-500">
-                {errors.fechaNacimiento?.message}
-              </span> */}
             </div>
 
             <div>
@@ -809,9 +799,6 @@ const FormularioCurriculum = () => {
                   // })}
                 />
               </div>
-              {/* <span className="text-xs text-red-500">
-                {errors.lugarNacimiento?.message}
-              </span> */}
             </div>
 
             <div>
@@ -838,9 +825,6 @@ const FormularioCurriculum = () => {
                   // })}
                 />
               </div>
-              {/* <span className="text-xs text-red-500">
-                {errors.telefono?.message}
-              </span> */}
             </div>
 
             <div>
@@ -867,9 +851,6 @@ const FormularioCurriculum = () => {
                   // })}
                 />
               </div>
-              {/* <span className="text-xs text-red-500">
-                {errors.correo?.message}
-              </span> */}
             </div>
 
             <div>
@@ -896,9 +877,6 @@ const FormularioCurriculum = () => {
                   // })}
                 />
               </div>
-              {/* <span className="text-xs text-red-500">
-                {errors.direccion?.message}
-              </span> */}
             </div>
 
             <div>
@@ -953,9 +931,6 @@ const FormularioCurriculum = () => {
                   // })}
                 />
               </div>
-              {/* <span className="text-xs text-red-500">
-                {errors.pais?.message}
-              </span> */}
             </div>
 
             <div>
@@ -982,9 +957,6 @@ const FormularioCurriculum = () => {
                   // })}
                 />
               </div>
-              {/* <span className="text-xs text-red-500">
-                {errors.departamento?.message}
-              </span> */}
             </div>
 
             <div>
@@ -1011,9 +983,6 @@ const FormularioCurriculum = () => {
                   // })}
                 />
               </div>
-              {/* <span className="text-xs text-red-500">
-                {errors.ciudad?.message}
-              </span> */}
             </div>
 
             <div>
@@ -1040,9 +1009,6 @@ const FormularioCurriculum = () => {
                   // })}
                 />
               </div>
-              {/* <span className="text-xs text-red-500">
-                {errors.numeroHijos?.message}
-              </span> */}
             </div>
 
             <div>
@@ -1069,11 +1035,10 @@ const FormularioCurriculum = () => {
                   // })}
                 />
               </div>
-              {/* <span className="text-xs text-red-500">
-                {errors.tipoSangre?.message}
-              </span> */}
             </div>
           </div>
+        */}   
+          {/*
           <div className="text-left text-xl text-gray-700 mt-8 font-bold border-b-4 border-corporative-blue inline-flex pt-3">
             Formación Profesional
           </div>
@@ -1137,9 +1102,6 @@ const FormularioCurriculum = () => {
                   // })}
                 />
               </div>
-              {/* <span className="text-xs text-red-500">
-                {errors.titulo?.message}
-              </span> */}
             </div>
             <div>
               <label
@@ -1165,9 +1127,6 @@ const FormularioCurriculum = () => {
                   // })}
                 />
               </div>
-              {/* <span className="text-xs text-red-500">
-                {errors.anioTitulo?.message}
-              </span> */}
             </div>
 
             <div>
@@ -1194,11 +1153,9 @@ const FormularioCurriculum = () => {
                   // })}
                 />
               </div>
-              {/* <span className="text-xs text-red-500">
-                {errors.institucionTitulo?.message}
-              </span> */}
             </div>
           </div>
+        */}
           <div className="text-left text-xl text-gray-700 mt-8 font-bold border-b-4 border-corporative-blue inline-flex pt-3">
             Experiencia Laboral
           </div>

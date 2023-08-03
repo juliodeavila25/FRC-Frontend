@@ -1,35 +1,37 @@
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import useOfertas from "../../hooks/useOfertas";
-import useCargos from '../../hooks/useCargos'
+import useCargos from "../../hooks/useCargos";
 import Alert from "../Alert";
 import useAuth from "../../hooks/useAuth";
 import { BeatLoader } from "react-spinners";
-import moment from 'moment'
+import moment from "moment";
 
 const FormularioNuevaOferta = () => {
   const current = new Date();
-  const date = `${current.getFullYear()}-${current.getMonth() + 1}-${current.getDate()}`;
-
+  const date = `${current.getFullYear()}-${
+    current.getMonth() + 1
+  }-${current.getDate()}`;
 
   const [active, setActive] = useState(false);
   const [id, setId] = useState(null);
   //   const [estado, setEstado] = useState(null);
   const [nombre, setNombre] = useState("elegir");
   const [convocatoria, setConvocatoria] = useState("");
-  const [fechaInicio, setFechaInicio] = useState(moment(date).format('YYYY-MM-DD'));
-  const [fechaFin, setFechaFin] = useState("")
+  const [fechaInicio, setFechaInicio] = useState(
+    moment(date).format("YYYY-MM-DD")
+  );
+  const [fechaFin, setFechaFin] = useState("");
   const [ciudad, setCiudad] = useState("");
   const [salario, setSalario] = useState("");
-  const [link, setLink] = useState("");
+  //const [link, setLink] = useState("");
   const [auxilio, setAuxilio] = useState("");
   const [bonificaciones, setBonificaciones] = useState("");
   const [perfil, setPerfil] = useState("");
   const [funciones, setFunciones] = useState("");
-  const [estadoConvocatoria, setEstadoConvocatoria] = useState("Activa")
-
+  const [estadoConvocatoria, setEstadoConvocatoria] = useState("Activa");
+  const [unidadFuncional , setUnidadFuncional] = useState("");
   const params = useParams();
-
 
   const { obtenerCargosForm, cargosForm } = useCargos();
 
@@ -53,30 +55,28 @@ const FormularioNuevaOferta = () => {
       setConvocatoria(oferta.convocatoria);
       setCiudad(oferta.ciudad);
       setSalario(oferta.salario);
-      setLink(oferta.link);
+      //setLink(oferta.link);
       setAuxilio(oferta.auxilio);
       setBonificaciones(oferta.bonificaciones);
       setPerfil(oferta.perfil);
       setFunciones(oferta.funciones);
       setFechaInicio(oferta.fechaInicio?.split("T")[0]);
       setFechaFin(oferta.fechaFin?.split("T")[0]);
-      setEstadoConvocatoria(oferta.estadoConvocatoria)
-    }else{
-      const newCodigo = parseInt(localStorage.getItem("codigo_oferta"))
-      //let cutNewCodigo = 
-      let newCodigoString = (newCodigo + 1).toString()
-      let addZeros = newCodigoString.padStart(5, '0')
-      let current_year= new Date().getFullYear() 
-      let concatAddZeros = addZeros.concat( "-", current_year )
+      setEstadoConvocatoria(oferta.estadoConvocatoria);
+      setUnidadFuncional(oferta.unidadFuncional);
+    } else {
+      const newCodigo = parseInt(localStorage.getItem("codigo_oferta"));
+      //let cutNewCodigo =
+      let newCodigoString = (newCodigo + 1).toString();
+      let addZeros = newCodigoString.padStart(5, "0");
+      let current_year = new Date().getFullYear();
+      let concatAddZeros = addZeros.concat("-", current_year);
       setConvocatoria(concatAddZeros);
     }
-  }, []); 
+  }, []);
 
-
-  
   useEffect(() => {
-   
-    obtenerCargosForm()
+    obtenerCargosForm();
   }, []);
 
   const handleSubmit = async (e) => {
@@ -87,11 +87,12 @@ const FormularioNuevaOferta = () => {
         convocatoria,
         ciudad,
         salario,
-        link,
+        //link,
         auxilio,
         bonificaciones,
         perfil,
         funciones,
+        unidadFuncional
       ].includes("")
     ) {
       console.log(
@@ -99,11 +100,12 @@ const FormularioNuevaOferta = () => {
         convocatoria,
         ciudad,
         salario,
-        link,
+        //link,
         auxilio,
         bonificaciones,
         perfil,
-        funciones
+        funciones,
+        unidadFuncional
       );
       mostrarAlerta({
         msg: "Todos los campos son obligatorios",
@@ -119,16 +121,16 @@ const FormularioNuevaOferta = () => {
       convocatoria,
       ciudad,
       salario,
-      link,
+      //link,
       auxilio,
       bonificaciones,
       perfil,
       funciones,
       fechaInicio,
       fechaFin,
-      estadoConvocatoria
+      estadoConvocatoria,
+      unidadFuncional
     });
-
   };
 
   const { msg } = alerta;
@@ -136,7 +138,6 @@ const FormularioNuevaOferta = () => {
   return (
     <div className=" sm:mx-auto sm:w-full">
       <div className="bg-white py-8 px-4 shadow-lg rounded-lg sm:px-10">
-
         <form className="space-y-6 " onSubmit={handleSubmit}>
           <div className="text-left text-xl text-gray-700 mt-8 font-bold border-b-4 border-corporative-blue inline-flex">
             Convocatoria
@@ -162,17 +163,16 @@ const FormularioNuevaOferta = () => {
                 />
               </div>
             </div>
-           
+
             <div>
               <label
-                  htmlFor="cargo"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Nombre Convocatoria <span className="text-red-700">*</span>
-                </label>
-            
+                htmlFor="cargo"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Nombre Convocatoria <span className="text-red-700">*</span>
+              </label>
 
-            <div className="mt-1">
+              <div className="mt-1">
                 <select
                   id="nombre"
                   name="nombre"
@@ -182,7 +182,7 @@ const FormularioNuevaOferta = () => {
                   //ref={inputRefCargo}
                   required={true}
                 >
-                  <option value="elegir" disabled >
+                  <option value="elegir" disabled>
                     -- Selecciona un nombre de convocatoria--
                   </option>
                   {cargosForm.map((item, i) => {
@@ -190,11 +190,11 @@ const FormularioNuevaOferta = () => {
                       <option key={i} value={item.nombre}>
                         {item.nombre}
                       </option>
-                    )
+                    );
                   })}
                 </select>
               </div>
-              </div>
+            </div>
 
             <div>
               <label
@@ -380,62 +380,34 @@ const FormularioNuevaOferta = () => {
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   onChange={(e) => setEstadoConvocatoria(e.target.value)}
                   value={estadoConvocatoria}
-
                 >
-                  <option value="elegir" disabled className="text-gray-400" >
+                  <option value="elegir" disabled className="text-gray-400">
                     --Selecciona un estado--
                   </option>
-                  <option value="Activa">
-                    Activa
-                  </option>
-                  <option value="Pausada">
-                    Pausada
-                  </option>
+                  <option value="Activa">Activa</option>
+                  <option value="Pausada">Pausada</option>
                   <option value="Inactiva">Inactiva</option>
                 </select>
-
               </div>
             </div>
             <div>
               <label
-                htmlFor="link"
+                htmlFor="unidadFuncional"
                 className="block text-sm font-medium text-gray-700"
               >
-                Link <span className="text-red-700">*</span>
+                Unidad Funcional
               </label>
               <div className="mt-1">
                 <input
-                  id="link"
-                  name="link"
+                  id="unidadFuncional"
+                  name="unidadFuncional"
                   type="text"
-                  placeholder="Digite el link"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                  value={link}
-                  onChange={(e) => setLink(e.target.value)}
-                  required={true}
+                  value={unidadFuncional}
+                  onChange={(e) => setUnidadFuncional(e.target.value)}
                 />
               </div>
             </div>
-            <div>
-                  <label
-                    htmlFor="unidadFuncional"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    Unidad funcional
-                  </label>
-                  <div className="mt-1">
-                    <input
-                      id="unidadFuncional"
-                      name="unidadFuncional"
-                      type="text"
-                      className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                      //value={unidadFuncional}
-                      //readOnly={true}
-                      //onChange={(e) => setUnidadFuncional(e.target.value)}
-                      //disabled={true}
-                    />
-                  </div>
-                </div>
           </div>
           {msg && <Alert alerta={alerta} />}
           <div className="grid grid-cols-2 gap-6 w-3/5 mx-auto">
