@@ -13,7 +13,8 @@ import {
   UsersIcon,
   TableCellsIcon,
   AcademicCapIcon,
-  BuildingOfficeIcon
+  BuildingOfficeIcon,
+  BuildingOffice2Icon
 } from "@heroicons/react/24/outline";
 
 <svg
@@ -106,6 +107,18 @@ const Sidebar = () => {
       icon: AcademicCapIcon,
       current: location.pathname.includes("/cargos") ? true : false,
     },
+    {
+      name: "Unidad Funcional",
+      href: "/unidades-negocio/listar-unidades-negocio",
+      icon: BuildingOfficeIcon,
+      current: location.pathname.includes("/unidades-negocio") ? true : false,
+    },
+    {
+      name: "Unidades funcionales",
+      href: "/unidades-funcionales/listar-unidades-funcionales",
+      icon: BuildingOffice2Icon,
+      current: location.pathname.includes("/unidades-funcionales") ? true : false,
+    },
 
     {
       name: "Ofertas de empleo",
@@ -119,12 +132,7 @@ const Sidebar = () => {
       icon: ClipboardDocumentListIcon,
       current: location.pathname.includes("/documentos") ? true : false,
     },
-    {
-      name: "Unidad Funcional",
-      href: "/unidades-negocio/listar-unidades-negocio",
-      icon: BuildingOfficeIcon,
-      current: location.pathname.includes("/unidades-negocio") ? true : false,
-    },
+    
   ];
 
   const navigation_gerente = [
@@ -147,6 +155,18 @@ const Sidebar = () => {
       icon: AcademicCapIcon,
       current: location.pathname.includes("/cargos") ? true : false,
     },
+    {
+      name: "Unidades de negocio",
+      href: "/unidades-negocio/listar-unidades-negocio",
+      icon: BuildingOfficeIcon,
+      current: location.pathname.includes("/unidades-negocio") ? true : false,
+    },
+    {
+      name: "Unidades funcionales",
+      href: "/unidades-funcionales/listar-unidades-funcionales",
+      icon: BuildingOffice2Icon,
+      current: location.pathname.includes("/unidades-funcionales") ? true : false,
+    },
 
     {
       name: "Ofertas de empleo",
@@ -160,12 +180,7 @@ const Sidebar = () => {
       icon: ClipboardDocumentListIcon,
       current: location.pathname.includes("/documentos") ? true : false,
     },
-    {
-      name: "Unidades de negocio",
-      href: "/unidades-negocio/listar-unidades-negocio",
-      icon: BuildingOfficeIcon,
-      current: location.pathname.includes("/unidades-negocio") ? true : false,
-    },
+    
   ];
 
   const solicitudes = [

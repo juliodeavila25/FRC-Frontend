@@ -1,13 +1,13 @@
-import useUnidad from "../../hooks/useUnidad";
+import useFuncional from "../../hooks/useFuncional";
 import { useState } from "react";
 import Table from "../table/Table";
 import { BeatLoader } from "react-spinners";
 import { format } from "date-fns";
 import { useNavigate, Link } from "react-router-dom";
 
-const ListarUnidad = () => {
-  const { unidades, obtenerUnidades, unidad, cargandoDataUnidades } =
-    useUnidad();
+const ListarUnidadFuncional = () => {
+  const { funcionales } =
+    useFuncional();
   const navigate = useNavigate();
 
   const [headers, setHeaders] = useState([
@@ -34,7 +34,7 @@ const ListarUnidad = () => {
           <button
             className="text-blue-500 hover:text-blue-900"
             onClick={() =>
-              navigate(`/unidades-negocio/editar-unidades-negocio/${originalRow._id}`)
+              navigate(`/unidades-funcionales/editar-unidades-funcionales/${originalRow._id}`)
             }
           >
             <svg
@@ -64,22 +64,22 @@ const ListarUnidad = () => {
           <div className="sm:flex sm:items-center">
             <div className="sm:flex-auto">
               <h1 className="text-xl font-semibold text-gray-900">
-                Listado maestro de unidades de negocio
+                Listado maestro de unidades funcionales
               </h1>
             </div>
             <div className="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
               <Link
-                to="/unidades-negocio/crear-unidades-negocio"
+                to="/unidades-funcionales/crear-unidades-funcionales"
                 className="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto"
               >
-                Nueva unidad de negocio
+                Nueva unidad funcional
               </Link>
             </div>
           </div>
         </div>
       </div>
-      {Array.isArray(unidades) && unidades.length > 0 ? (
-        <Table data={unidades} columns={headers} />
+      {Array.isArray(funcionales) && funcionales.length > 0 ? (
+        <Table data={funcionales} columns={headers} />
       ) : (
         <div className="rounded-md bg-blue-50 p-4">
           <div className="flex">
@@ -99,7 +99,7 @@ const ListarUnidad = () => {
             </div>
             <div className="ml-3 flex-1 md:flex ">
               <p className="text-sm text-blue-700">
-                No existen unidades de negocio registradas
+                No existen unidades funcionales registradas
               </p>
             </div>
           </div>
@@ -109,4 +109,4 @@ const ListarUnidad = () => {
   );
 };
 
-export default ListarUnidad;
+export default ListarUnidadFuncional;

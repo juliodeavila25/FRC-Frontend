@@ -3,14 +3,14 @@ import clienteAxios from "../config/clienteAxios";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 
-const UnidadContext = createContext();
+const FuncionalContext = createContext();
 
-const UnidadProvider = ({ children }) => {
-  const [unidad, setUnidad] = useState([]);
-  const [unidades, setUnidades] = useState([]);
-  const [unidadesForm, setUnidadesForm] = useState([]);
+const FuncionalProvider = ({ children }) => {
+  const [funcional, setFuncional] = useState([]);
+  const [funcionales, setFuncionales] = useState([]);
+  const [funcionalesForm, setFuncionalesForm] = useState([]);
   const [alerta, setAlerta] = useState({});
-  const [cargandoDataUnidades, setCargando] = useState(false);
+  const [cargandoDataFuncionales, setCargando] = useState(false);
   const navigate = useNavigate();
   const { auth } = useAuth();
 
@@ -23,7 +23,7 @@ const UnidadProvider = ({ children }) => {
 
   useEffect(() => {
     setCargando(true);
-    const obtenerUnidades = async () => {
+    const obtenerFuncionales = async () => {
       try {
         const token = localStorage.getItem("token");
         if (!token) return;
@@ -33,28 +33,28 @@ const UnidadProvider = ({ children }) => {
             Authorization: `Bearer ${token}`,
           },
         };
-        const { data } = await clienteAxios("/unidad", config);
+        const { data } = await clienteAxios("/funcional", config);
 
-        setUnidades(data);
+        setFuncionales(data);
       } catch (error) {
         console.log(error);
       }
     };
-    obtenerUnidades();
+    obtenerFuncionales();
     setCargando(false);
   }, [auth]);
 
 
-  const submitUnidad = async (unidad) => {
-    if (unidad.id) {
-      await editarUnidad(unidad);
+  const submitFuncional = async (funcional) => {
+    if (funcional.id) {
+      await editarFuncional(funcional);
     } else {
-      await nuevaUnidad(unidad);
+      await nuevoFuncional(funcional);
     }
   };
 
-  const editarUnidad = async (unidad) => {
-    console.log(unidad)
+  const editarFuncional = async (funcional) => {
+    console.log(funcional)
     try {
       const token = localStorage.getItem("token");
       if (!token) return;
@@ -65,32 +65,32 @@ const UnidadProvider = ({ children }) => {
         },
       };
       const { data } = await clienteAxios.put(
-        `/unidad/${unidad.id}`,
-        unidad,
+        `/funcional/${funcional.id}`,
+        funcional,
         config
       );
 
-      const unidadActualizados = unidades.map((unidadState) =>
-      unidadState._id === data._id ? data : unidadState
+      const funcionalActualizados = funcionales.map((funcionalState) =>
+      funcionalState._id === data._id ? data : funcionalState
       );
-      setUnidades(unidadActualizados);
+      setFuncionales(funcionalActualizados);
 
       //Mostrar alerta
       setAlerta({
-        msg: "Unidad actualizada correctamente",
+        msg: "Unidad funcional actualizado correctamente",
         error: false,
       });
-
+ 
       setTimeout(() => {
         setAlerta({});
-        navigate("/unidades-negocio/listar-unidades-negocio");
+        navigate("/unidades-funcionales/listar-unidades-funcionales");
       }, 3000);
     } catch (error) {
       console.log(error);
     }
   };
 
-  const nuevaUnidad = async (unidad) => {
+  const nuevoFuncional = async (funcional) => {
     try {
       const token = localStorage.getItem("token");
       if (!token) return;
@@ -102,28 +102,28 @@ const UnidadProvider = ({ children }) => {
       };
 
       const { data } = await clienteAxios.post(
-        "/unidad",
-        unidad,
+        "/funcional",
+        funcional,
         config
       );
 
-      setUnidades([...unidades, data]);
+      setFuncionales([...funcionales, data]);
 
       setAlerta({
-        msg: "Unidad creada correctamente",
+        msg: "Unidad funcional creada correctamente",
         error: false,
       });
 
       setTimeout(() => {
         setAlerta({});
-        navigate("/unidades-negocio/listar-unidades-negocio");
+        navigate("/unidades-funcionales/listar-unidades-funcionales");
       }, 3000);
     } catch (error) {
       console.log(error);
     }
   };
 
-  const obtenerUnidad = async (id) => {
+  const obtenerUnidadFuncional = async (id) => {
     setCargando(true);
     console.log(id);
     try {
@@ -135,9 +135,9 @@ const UnidadProvider = ({ children }) => {
           Authorization: `Bearer ${token}`,
         },
       };
-      const { data } = await clienteAxios.get(`/unidad/${id}`, config);
+      const { data } = await clienteAxios.get(`/funcional/${id}`, config);
       console.log(data);
-      setUnidad(data);
+      setFuncional(data);
     } catch (error) {
       console.log(error);
     }
@@ -146,7 +146,7 @@ const UnidadProvider = ({ children }) => {
   };
 
 
-  const obtenerUnidadesForm = async () => {
+  const obtenerFuncionalesForm = async () => {
     try {
       const token = localStorage.getItem("token");
       if (!token) return;
@@ -156,34 +156,34 @@ const UnidadProvider = ({ children }) => {
           Authorization: `Bearer ${token}`,
         },
       };
-      const { data } = await clienteAxios("/unidad", config);
+      const { data } = await clienteAxios("/funcional", config);
 
-      setUnidadesForm(data);
+      setFuncionalesForm(data);
     } catch (error) {
       console.log(error);
     }
   };
 
   return (
-    <UnidadContext.Provider
+    <FuncionalContext.Provider
       value={{
         alerta,
-        unidad,
-        unidades,
-        unidadesForm,
-        cargandoDataUnidades,
-        submitUnidad,
+        funcional,
+        funcionales,
+        funcionalesForm,
+        cargandoDataFuncionales,
+        submitFuncional,
         mostrarAlerta,
-        obtenerUnidad,
-        obtenerUnidadesForm
+        obtenerUnidadFuncional,
+        obtenerFuncionalesForm
 
       }}
     >
       {children}
-    </UnidadContext.Provider>
+    </FuncionalContext.Provider>
   );
 };
 
-export {UnidadProvider};
+export {FuncionalProvider};
 
-export default UnidadContext;
+export default FuncionalContext;
