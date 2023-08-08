@@ -581,7 +581,7 @@ const FormularioCurriculum = () => {
 
   return (
     <div className=" sm:mx-auto sm:w-full">
-      <section class="pt-16 bg-blueGray-50">
+      {/* <section class="pt-16 bg-blueGray-50">
         <div class="w-full lg:w-6/12 px-4 mx-auto">
           <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg mt-16">
             <div class="px-6">
@@ -651,7 +651,7 @@ const FormularioCurriculum = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
       <div className="bg-white py-8 px-4 shadow-lg rounded-lg sm:px-10">
         <form
           className="space-y-6 "

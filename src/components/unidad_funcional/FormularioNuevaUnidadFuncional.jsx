@@ -18,7 +18,7 @@ const FormularioNuevaUnidadFuncional = () => {
   const [estado, setEstado] = useState("Pendiente");
   const [inputCargos, setInputCargos] = useState([
     {
-      cargo: "",
+      cargo: "elegir",
       cantidad: "",
     },
   ]);
@@ -214,11 +214,11 @@ const FormularioNuevaUnidadFuncional = () => {
                         Nombre Cargo
                       </label>
                       <select
-                        id="nombre_cargo"
-                        name="nombre_cargo"
+                        id="cargo"
+                        name="cargo"
                         className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                         onChange={(e) => handleinputchange(e, i)}
-                        value={item.nombre_cargo}
+                        value={item.cargo}
                         required={true}
                         // disabled={
                         //   (Array.isArray(cargo.inputCargos) &&
