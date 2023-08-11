@@ -329,6 +329,10 @@ const FormularioCurriculumPostulante = () => {
     formData.append("observacionesPostulacion", observacionesPostulacion);
     formData.append("documentacionPostulacion", documentacionPostulacion);
     formData.append("estadoPostulacionAnterior", curriculums[0].estadoAplicacionOferta);
+    formData.append("nombre", curriculums[0].nombre);
+    formData.append("correo", curriculums[0].correo);
+    formData.append("idOferta", curriculums[0].idOferta);
+    
 
 
 

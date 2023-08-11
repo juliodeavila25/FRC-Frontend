@@ -131,6 +131,9 @@ export default function ModalPublic({ setShowModal, data }) {
     formData.append("observacionesPostulacion", observacionesPostulacion);
     formData.append("documentacionPostulacion", documentacionPostulacion);
     formData.append("estadoPostulacionAnterior", data.estadoAplicacionOferta);
+    formData.append("nombre", data.nombre);
+    formData.append("correo", data.correo);
+    formData.append("idOferta", data.idOferta);
 
     await nuevoEstadoPostulacionModal(formData);
 
