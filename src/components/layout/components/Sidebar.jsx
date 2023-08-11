@@ -100,6 +100,12 @@ const Sidebar = () => {
       icon: UsersIcon,
       current: location.pathname.includes("/colaboradores") ? true : false,
     },
+    {
+      name: "Aspirantes",
+      href: "/aspirantes",
+      icon: UsersIcon,
+      current: location.pathname.includes("/aspirantes") ? true : false,
+    },
 
     {
       name: "Cargos",
@@ -148,7 +154,12 @@ const Sidebar = () => {
       icon: UsersIcon,
       current: location.pathname.includes("/colaboradores") ? true : false,
     },
-
+    {
+      name: "Aspirantes",
+      href: "/aspirantes",
+      icon: UsersIcon,
+      current: location.pathname.includes("/aspirantes") ? true : false,
+    },
     {
       name: "Cargos",
       href: "/cargos/listar-cargos",

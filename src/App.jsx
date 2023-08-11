@@ -54,6 +54,7 @@ import ListarUnidadFuncional from "./pages/unidades_funcionales/ListarUnidadFunc
 import CrearUnidadFuncional from "./pages/unidades_funcionales/CrearUnidadFuncional";
 import EditarUnidadFuncional from "./pages/unidades_funcionales/EditarUnidadFuncional";
 import { FuncionalProvider } from "./context/funcionalProvider";
+import ListadoAspirantes from "./components/human_resources/ListadoAspirantes";
 
 function App() {
   return (
@@ -287,6 +288,29 @@ function App() {
                                       <Route
                                         path="otros-documentos/:id/editar-documento/:id_documento"
                                         element={<EditarOtroDocumento />}
+                                      />
+                                    </Route>
+
+
+                                    <Route
+                                      path="/aspirantes"
+                                      element={
+                                        <RutaProtegida
+                                          allowedRoles={[
+                                            "recursos_humanos",
+                                            "gerente",
+                                          ]}
+                                        />
+                                      }
+                                    >
+                                      <Route
+                                        index
+                                        element={<ListadoAspirantes />}
+                                      />
+
+                                      <Route
+                                        path="editar-aspirante/:id"
+                                        element={<EditarColaborador />}
                                       />
                                     </Route>
 

@@ -93,7 +93,6 @@ const ListadoColaboradores = () => {
 
 
   return (
-    
       <>
         <div className="px-4 sm:px-6 lg:px-8 mt-5 mb-5 ">
           <div className="mt-8 flex flex-col">
@@ -106,25 +105,8 @@ const ListadoColaboradores = () => {
         </div>
   
         <div className="w-11/12 mx-auto mt-10">
-          <div className="flex justify-between bg-gray-100 rounded-t-lg px-16">
-            <button
-              className={toggleState === 1 ? 'border-indigo-500 text-indigo-600 w-1/4 border-b-2 py-4 px-1 text-center text-sm font-medium' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 w-1/4 border-b-2 py-4 px-1 text-center text-sm font-medium'}
-              onClick={() => toggleTab(1)}
-            >
-              Colaborador
-            </button>
-            <button
-              className={toggleState === 2 ? 'border-indigo-500 text-indigo-600 w-1/4 border-b-2 py-4 px-1 text-center text-sm font-medium' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 w-1/4 border-b-2 py-4 px-1 text-center text-sm font-medium'}
-              onClick={() => toggleTab(2)}
-            >
-              Aspirante
-            </button>
-          </div>
   
-          <div className="content-tabs">
-            <div
-              className={toggleState === 1 ? "content  active-content" : "content"}
-            >
+          
               {Array.isArray(collaborators) && collaborators.length > 0 && collaborators.filter(collaborator => collaborator.creador?.userType[0] === "colaborador").length > 0 ? (
                 <>
                   <Table
@@ -158,99 +140,9 @@ const ListadoColaboradores = () => {
                 </div>
               )}
             </div>
-  
-            <div
-              className={toggleState === 2 ? "content  active-content" : "content"}
-            >
-              {Array.isArray(collaborators) && collaborators.length > 0 && collaborators.filter(collaborator => collaborator.creador?.userType[0] === "aspirante").length > 0 ? (
-                <>
-                  <Table
-                    data={collaborators.filter(collaborator => collaborator.creador?.userType[0] === "aspirante")}
-                    columns={headers}
-                  />
-                </>
-              ) : (
-                <div className="rounded-md bg-blue-50 p-4">
-                  <div className="flex">
-                    <div className="flex-shrink-0">
-                      <svg
-                        className="h-5 w-5 text-blue-400"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                        aria-hidden="true"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a.75.75 0 000 1.5h.253a.25.25 0 01.244.304l-.459 2.066A1.75 1.75 0 0010.747 15H11a.75.75 0 000-1.5h-.253a.25.25 0 01-.244-.304l.459-2.066A1.75 1.75 0 009.253 9H9z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    </div>
-                    <div className="ml-3 flex-1 md:flex ">
-                      <p className="text-sm text-blue-700">
-                        No existen aspirantes registrados.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
       </>
     );
-    // <>
-    //   <div className="px-4 sm:px-6 lg:px-8 mt-5 mb-5">
-    //     <div className="mt-8 flex flex-col">
-    //       <div className="sm:flex sm:items-center">
-    //         <div className="sm:flex-auto">
-    //           <h1 className="text-xl font-semibold text-gray-900">Listado de Colaboradores</h1>
-    //         </div>
-    //         {/* <div className="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
-    //           <Link
-    //             to="/recursos-humanos/crear-convocatoria"
-    //             className="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto"
-    //           >
-    //             Nueva oferta de empleo
-    //           </Link>
-    //         </div> */}
-    //       </div>
-    //     </div>
-    //   </div>
-    //   {Array.isArray(collaborators) && collaborators.length > 0 ? (
-    //     <>
-    //       <Table
-    //         data={collaborators}
-    //         columns={headers}
-    //       />
-    //     </>
-    //   ) : (
-    //     <div className="rounded-md bg-blue-50 p-4">
-    //       <div className="flex">
-    //         <div className="flex-shrink-0">
-    //           <svg
-    //             className="h-5 w-5 text-blue-400"
-    //             viewBox="0 0 20 20"
-    //             fill="currentColor"
-    //             aria-hidden="true"
-    //           >
-    //             <path
-    //               fillRule="evenodd"
-    //               d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a.75.75 0 000 1.5h.253a.25.25 0 01.244.304l-.459 2.066A1.75 1.75 0 0010.747 15H11a.75.75 0 000-1.5h-.253a.25.25 0 01-.244-.304l.459-2.066A1.75 1.75 0 009.253 9H9z"
-    //               clipRule="evenodd"
-    //             />
-    //           </svg>
-    //         </div>
-    //         <div className="ml-3 flex-1 md:flex ">
-    //           <p className="text-sm text-blue-700">
-    //             No existen colaboradores registrados.
-    //           </p>
-    //         </div>
-    //       </div>
-    //     </div>
-    //   )}
-    //</>
-
+    
 };
 
 export default ListadoColaboradores;
