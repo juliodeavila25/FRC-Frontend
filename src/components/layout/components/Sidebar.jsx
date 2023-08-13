@@ -114,7 +114,7 @@ const Sidebar = () => {
       current: location.pathname.includes("/cargos") ? true : false,
     },
     {
-      name: "Unidad Funcional",
+      name: "Unidades de negocio",
       href: "/unidades-negocio/listar-unidades-negocio",
       icon: BuildingOfficeIcon,
       current: location.pathname.includes("/unidades-negocio") ? true : false,
