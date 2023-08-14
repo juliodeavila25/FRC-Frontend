@@ -15,7 +15,6 @@ import ListarRequisitos from "./ListarRequisitos";
 import ModalCurriculum from "../components/ModalCurriculum";
 import ModalValidation from "../components/ModalValidation";
 
-
 const FormularioCurriculum = () => {
   const [id, setId] = useState(null);
   const [estado, setEstado] = useState(null);
@@ -227,7 +226,7 @@ const FormularioCurriculum = () => {
     curriculum,
     cargandoData,
     loading,
-    modal
+    modal,
   } = useCurriculum();
 
   const { obtenerCargosForm, cargosForm } = useCargos();
@@ -235,7 +234,7 @@ const FormularioCurriculum = () => {
     useDocumentosRequeridos();
 
   const { auth, obtenerUsuarioAutenticado, usuarioAutenticado } = useAuth();
-  
+
   useEffect(() => {
     obtenerCurriculum(auth._id);
     obtenerCargosForm();
@@ -346,43 +345,42 @@ const FormularioCurriculum = () => {
     e.preventDefault();
     localStorage.setItem("tipo", "formCo");
 
-    if(Object.keys(usuarioAutenticado).length !== 0 &&
-      usuarioAutenticado.estado !== "inicial"){
-
-        if (
-          operacionesExtranjera === "Si" &&
-          [
-            exportaciones,
-            transferencias,
-            pagoServicios,
-            importaciones,
-            prestamos,
-            otras,
-          ].includes(true)
-        ) {
-          setErrorActividadEconomica(false);
-        } else if (
-          operacionesExtranjera === "Si" &&
-          ![
-            exportaciones,
-            transferencias,
-            pagoServicios,
-            importaciones,
-            prestamos,
-            otras,
-          ].includes(true)
-        ) {
-          inputRefActividadEconomica.current.focus();
-          setErrorActividadEconomica(true);
-          console.log();
-          return;
-        } else {
-          setErrorActividadEconomica(false);
-        }
-    
+    if (
+      Object.keys(usuarioAutenticado).length !== 0 &&
+      usuarioAutenticado.estado !== "inicial"
+    ) {
+      if (
+        operacionesExtranjera === "Si" &&
+        [
+          exportaciones,
+          transferencias,
+          pagoServicios,
+          importaciones,
+          prestamos,
+          otras,
+        ].includes(true)
+      ) {
+        setErrorActividadEconomica(false);
+      } else if (
+        operacionesExtranjera === "Si" &&
+        ![
+          exportaciones,
+          transferencias,
+          pagoServicios,
+          importaciones,
+          prestamos,
+          otras,
+        ].includes(true)
+      ) {
+        inputRefActividadEconomica.current.focus();
+        setErrorActividadEconomica(true);
+        console.log();
+        return;
+      } else {
+        setErrorActividadEconomica(false);
       }
+    }
 
-    
     if (nombre === "") {
       inputRef.current.focus();
       setErrorNombre(true);
@@ -864,7 +862,7 @@ const FormularioCurriculum = () => {
     setPrestamos(false);
     setOtras(false);
   };
- 
+
   const { message } = modal;
   const { msg } = alerta;
 
@@ -2883,7 +2881,7 @@ const FormularioCurriculum = () => {
                   </div>
                 </div>
 
-                <div>
+                <div className="hidden">
                   <label
                     htmlFor="unidadFuncional"
                     className="block text-sm font-medium text-gray-700"
@@ -2904,7 +2902,7 @@ const FormularioCurriculum = () => {
                   </div>
                 </div>
 
-                <div>
+                <div className="hidden">
                   <label
                     htmlFor="unidadNegocio"
                     className="block text-sm font-medium text-gray-700"
@@ -3078,7 +3076,6 @@ const FormularioCurriculum = () => {
                 type="submit"
                 className="flex w-full justify-center rounded-md border border-transparent bg-green-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 cursor-pointer"
                 value="Guardar"
-               
               />
             )}
           </div>
