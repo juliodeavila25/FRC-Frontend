@@ -841,7 +841,7 @@ const FormularioNuevoCargo = () => {
                           onChange={(e) => handleinputchange(e, i)}
                         />
                         <label htmlFor="vigencia">
-                          ¿Tiene fecha de vigencia?
+                          ¿Tiene fecha de vencimiento?
                         </label>
                       </div>
                       <div className="flex space-x-4 items-center pl-4">

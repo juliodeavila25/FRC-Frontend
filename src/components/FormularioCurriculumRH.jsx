@@ -127,6 +127,7 @@ const FormularioCurriculum = () => {
   const [documentoRequerido, setDocumentoRequerido] = useState([]);
   const [unidadFuncional, setUnidadFuncional] = useState("");
   const [unidadNegocio, setUnidadNegocio] = useState("Uci Magangué");
+  const [horasContrato, setHorasContrato] = useState(0);
 
   /* Error en el campo empresa*/
   const inputRefEmpresa = useRef(null);
@@ -242,6 +243,7 @@ const FormularioCurriculum = () => {
       setCargo(collaborator.cargo !== "" ? collaborator.cargo : "elegir");
       setUnidadFuncional(collaborator.unidadFuncional);
       setUnidadNegocio(collaborator.unidadNegocio);
+      setHorasContrato(collaborator.horasContrato);
     }
   }, [collaborator]);
 
@@ -423,7 +425,7 @@ const FormularioCurriculum = () => {
     formData.append("cargo", cargo);
     formData.append("unidadFuncional", unidadFuncional);
     formData.append("unidadNegocio", unidadNegocio);
-
+    formData.append("horasContrato", horasContrato);
     //console.log(formData);
     //Pasar los datos hacia el provider
     console.log(formData.get("nombre"));
@@ -2760,6 +2762,26 @@ const FormularioCurriculum = () => {
                 </select>
               </div>
             </div>
+ 
+            <div>
+              <label
+                htmlFor="horasContrato"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Horas Contrato
+              </label>
+              <div className="mt-1">
+                <input
+                  id="horasContrato"
+                  name="horasContrato"
+                  type="text"
+                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                  value={horasContrato}
+                  onChange={(e) => setHorasContrato(e.target.value)}
+                />
+              </div>
+            </div>
+
             <div>
               <label
                 htmlFor="soporteContrato"

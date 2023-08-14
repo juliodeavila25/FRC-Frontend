@@ -15,7 +15,6 @@ import ListarRequisitos from "./ListarRequisitos";
 import ModalCurriculum from "../components/ModalCurriculum";
 import ModalValidation from "../components/ModalValidation";
 
-
 const FormularioCurriculum = () => {
   const [id, setId] = useState(null);
   const [estado, setEstado] = useState(null);
@@ -227,7 +226,7 @@ const FormularioCurriculum = () => {
     curriculum,
     cargandoData,
     loading,
-    modal
+    modal,
   } = useCurriculum();
 
   const { obtenerCargosForm, cargosForm } = useCargos();
@@ -235,7 +234,7 @@ const FormularioCurriculum = () => {
     useDocumentosRequeridos();
 
   const { auth, obtenerUsuarioAutenticado, usuarioAutenticado } = useAuth();
-  
+
   useEffect(() => {
     obtenerCurriculum(auth._id);
     obtenerCargosForm();
@@ -346,43 +345,42 @@ const FormularioCurriculum = () => {
     e.preventDefault();
     localStorage.setItem("tipo", "formCo");
 
-    if(Object.keys(usuarioAutenticado).length !== 0 &&
-      usuarioAutenticado.estado !== "inicial"){
-
-        if (
-          operacionesExtranjera === "Si" &&
-          [
-            exportaciones,
-            transferencias,
-            pagoServicios,
-            importaciones,
-            prestamos,
-            otras,
-          ].includes(true)
-        ) {
-          setErrorActividadEconomica(false);
-        } else if (
-          operacionesExtranjera === "Si" &&
-          ![
-            exportaciones,
-            transferencias,
-            pagoServicios,
-            importaciones,
-            prestamos,
-            otras,
-          ].includes(true)
-        ) {
-          inputRefActividadEconomica.current.focus();
-          setErrorActividadEconomica(true);
-          console.log();
-          return;
-        } else {
-          setErrorActividadEconomica(false);
-        }
-    
+    if (
+      Object.keys(usuarioAutenticado).length !== 0 &&
+      usuarioAutenticado.estado !== "inicial"
+    ) {
+      if (
+        operacionesExtranjera === "Si" &&
+        [
+          exportaciones,
+          transferencias,
+          pagoServicios,
+          importaciones,
+          prestamos,
+          otras,
+        ].includes(true)
+      ) {
+        setErrorActividadEconomica(false);
+      } else if (
+        operacionesExtranjera === "Si" &&
+        ![
+          exportaciones,
+          transferencias,
+          pagoServicios,
+          importaciones,
+          prestamos,
+          otras,
+        ].includes(true)
+      ) {
+        inputRefActividadEconomica.current.focus();
+        setErrorActividadEconomica(true);
+        console.log();
+        return;
+      } else {
+        setErrorActividadEconomica(false);
       }
+    }
 
-    
     if (nombre === "") {
       inputRef.current.focus();
       setErrorNombre(true);
@@ -864,7 +862,7 @@ const FormularioCurriculum = () => {
     setPrestamos(false);
     setOtras(false);
   };
- 
+
   const { message } = modal;
   const { msg } = alerta;
 
@@ -889,6 +887,44 @@ const FormularioCurriculum = () => {
             Datos personales
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <div>
+              <label
+                htmlFor="tipoDocumento"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Tipo de Persona <span className="text-red-700">*</span>
+              </label>
+              <div className="mt-1">
+                <select
+                  id="tipoDocumento"
+                  name="tipoDocumento"
+                  placeholder="Digita tu correo electrónico"
+                  className={
+                    errorTipoDocumento === false
+                      ? "block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                      : "block w-full appearance-none rounded-md border border-red-500 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-red-500 focus:outline-none focus:ring-red-500 sm:text-sm"
+                  }
+                  onChange={(e) => {
+                    const selectedDocumentType = e.target.value;
+
+                    setTipoDocumento(selectedDocumentType);
+                  }}
+                  value={tipoDocumento}
+                  ref={inputRefTipoDocumento}
+                >
+                  <option value="elegir" disabled className="text-gray-400">
+                    --Selecciona un tipo de persona--
+                  </option>
+                  <option value="Natural">Natural</option>
+                  <option value="Juridica">Juridica</option>
+                </select>
+                {errorTipoDocumento === true && (
+                  <span className="text-red-500 text-xs">
+                    Seleccione la información requerida
+                  </span>
+                )}
+              </div>
+            </div>
             <div>
               <label
                 htmlFor="nombre"
@@ -3078,7 +3114,6 @@ const FormularioCurriculum = () => {
                 type="submit"
                 className="flex w-full justify-center rounded-md border border-transparent bg-green-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 cursor-pointer"
                 value="Guardar"
-               
               />
             )}
           </div>

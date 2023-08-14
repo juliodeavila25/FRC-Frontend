@@ -219,7 +219,7 @@ export default function ModalPublic({ setShowModal, cargos, data }) {
                     htmlFor="fechaVigencia"
                     className="block text-sm font-medium text-gray-700"
                   >
-                    Fecha de vigencia
+                    Fecha de vencimiento
                   </label>
                   <div className="mt-1">
                     <input

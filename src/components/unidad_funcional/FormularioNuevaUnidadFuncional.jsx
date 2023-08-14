@@ -20,6 +20,7 @@ const FormularioNuevaUnidadFuncional = () => {
     {
       cargo: "elegir",
       cantidad: "",
+      hora: "",
     },
   ]);
 
@@ -95,6 +96,7 @@ const FormularioNuevaUnidadFuncional = () => {
       {
         cargo: "",
         cantidad: "",
+        hora: ""
       },
     ]);
   };
@@ -264,7 +266,26 @@ const FormularioNuevaUnidadFuncional = () => {
                         />
                       </div>
                     </div>
-
+                    <div>
+                      <label
+                        htmlFor="hora"
+                        className="block text-sm font-medium text-gray-700 pt-4"
+                      >
+                        Horas
+                        <span className="text-red-700">*</span>
+                      </label>
+                      <div className="">
+                        <input
+                          type="text"
+                          id="hora"
+                          name="hora"
+                          placeholder="Digita la hora"
+                          className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                          value={item.hora}
+                          onChange={(e) => handleinputchange(e, i)}
+                        />
+                      </div>
+                    </div>    
                     <div className="grid grid-cols-2 gap-4  ">
                       {inputCargos.length !== 1 && (
                         <button

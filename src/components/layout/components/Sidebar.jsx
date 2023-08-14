@@ -419,7 +419,7 @@ const Sidebar = () => {
                     usuarioAutenticado?.estado === "completado" &&
                     Array.isArray(curriculum) &&
                     curriculum.length > 0 &&
-                    curriculum[0].empresa === "Fundación Renal de Colombia" ? (
+                    (curriculum[0].empresa === "Fundación Renal de Colombia" || curriculum[0].empresa === "GEIPAS") ? (
                       <div className="mt-8">
                         <h3
                           className="px-3 text-lg font-medium text-gray-500"
@@ -786,7 +786,7 @@ const Sidebar = () => {
             usuarioAutenticado?.estado === "completado" &&
             Array.isArray(curriculum) &&
             curriculum.length > 0 &&
-            curriculum[0].empresa === "Fundación Renal de Colombia" ? (
+            (curriculum[0].empresa === "Fundación Renal de Colombia" || curriculum[0].empresa === "GEIPAS") ? (
               <div className="mt-8">
                 {/* Secondary navigation */}
                 <h3
