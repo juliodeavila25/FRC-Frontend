@@ -2,73 +2,94 @@ import { useState, useEffect, useRef } from "react";
 import useEstadoPostulaciones from "../hooks/useEstadoPostulaciones";
 import usePostulaciones from "../hooks/usePostulaciones";
 import Alert from "./Alert";
-import moment from 'moment'
+import moment from "moment";
 import TableWithoutSearch from "./table/TableWithoutSearch";
 import { FcDataProtection } from "react-icons/fc";
 import useAuth from "../hooks/useAuth";
 
-
 export default function ModalPublic({ setShowModal, data }) {
   const current = new Date();
-  const date = `${current.getFullYear()}-${current.getMonth() + 1}-${current.getDate()}`;
+  const date = `${current.getFullYear()}-${
+    current.getMonth() + 1
+  }-${current.getDate()}`;
 
-  const [estadoPostulacion, setEstadoPostulacion] = useState("elegir")
-
+  const [estadoPostulacion, setEstadoPostulacion] = useState("elegir");
 
   /* Error en el campo de estado de postulación*/
   const inputRefEstadoPostulacion = useRef(null);
-  const [errorEstadoPostulacion, setErrorEstadoPostulacion] = useState(false)
+  const [errorEstadoPostulacion, setErrorEstadoPostulacion] = useState(false);
 
-  const [fechaRevisionPostulacion, setFechaRevisionPostulacion] = useState(moment(date).format('YYYY-MM-DD'))
-  const [fechaSistemaPostulacion, setFechaSistemaPostulacion] = useState(moment(date).format('YYYY-MM-DD'))
-  const [observacionesPostulacion, setObservacionesPostulacion] = useState("")
+  const [fechaRevisionPostulacion, setFechaRevisionPostulacion] = useState(
+    moment(date).format("YYYY-MM-DD")
+  );
+  const [fechaSistemaPostulacion, setFechaSistemaPostulacion] = useState(
+    moment(date).format("YYYY-MM-DD")
+  );
+  const [observacionesPostulacion, setObservacionesPostulacion] = useState("");
   const [documentacionPostulacion, setDocumentacionPostulacion] = useState("");
-  const [errorDocumentacionPostulacion, setErrorDocumentacionPostulacion] = useState(false);
+  const [errorDocumentacionPostulacion, setErrorDocumentacionPostulacion] =
+    useState(false);
 
-  const { nuevoEstadoPostulacionModal, alertaPostulacion, obtenerEstadoPostulacionesPorUsuario, estadosPostulaciones } = useEstadoPostulaciones();
-  const { obtenerPostulacionesUsuario, postulacionesUsuario } = usePostulaciones();
-  const {obtenerUsuarios, usuarios} = useAuth();
+  const {
+    nuevoEstadoPostulacionModal,
+    alertaPostulacion,
+    obtenerEstadoPostulacionesPorUsuario,
+    estadosPostulaciones,
+  } = useEstadoPostulaciones();
+  const { obtenerPostulacionesUsuario, postulacionesUsuario } =
+    usePostulaciones();
+  const { obtenerUsuarios, usuarios } = useAuth();
 
   useEffect(() => {
-    obtenerPostulacionesUsuario(data.creador)
-  }, [])
+    obtenerPostulacionesUsuario(data.creador);
+  }, []);
 
   useEffect(() => {
-    if (Array.isArray(postulacionesUsuario) && postulacionesUsuario.length > 0) {
+    if (
+      Array.isArray(postulacionesUsuario) &&
+      postulacionesUsuario.length > 0
+    ) {
       const id_oferta = localStorage.getItem("id_oferta");
-      const idPostulacionUsuario = postulacionesUsuario.filter(item => item.idOferta === id_oferta)
-      obtenerEstadoPostulacionesPorUsuario(idPostulacionUsuario[0]._id)
+      const idPostulacionUsuario = postulacionesUsuario.filter(
+        (item) => item.idOferta === id_oferta
+      );
+      obtenerEstadoPostulacionesPorUsuario(idPostulacionUsuario[0]._id);
     }
+  }, [postulacionesUsuario]);
 
-  }, [postulacionesUsuario])
+  useEffect(() => {
+    obtenerUsuarios();
+  }, []);
 
-  useEffect(() =>{
-    obtenerUsuarios()
-  },[])
+  console.log("Data", data);
 
-  
-  console.log("Data", data)
-
-  console.log(usuarios)
+  console.log(usuarios);
   const [headers, setHeaders] = useState([
     {
       Header: "Estado origen - Estado destino",
       accessor: (originalRow, rowIndex) => (
         <div className="">
-          <p className="capitalize">{originalRow.estadoPostulacionAnterior} - {originalRow.estadoPostulacion}</p>
-         
-        </div>)
-   
+          <p className="capitalize">
+            {originalRow.estadoPostulacionAnterior} -{" "}
+            {originalRow.estadoPostulacion}
+          </p>
+        </div>
+      ),
     },
     {
       Header: "Fechas",
       accessor: (originalRow, rowIndex) => (
         <div className="">
-          <p className="capitalize">F. Post: {originalRow.fechaRevisionPostulacion}</p>
-          <p className="capitalize">F. Rev: {originalRow.fechaSistemaPostulacion}</p>
-        </div>)
+          <p className="capitalize">
+            F. Post: {originalRow.fechaRevisionPostulacion}
+          </p>
+          <p className="capitalize">
+            F. Rev: {originalRow.fechaSistemaPostulacion}
+          </p>
+        </div>
+      ),
     },
-    
+
     {
       Header: "Observaciones",
       accessor: "observacionesPostulacion",
@@ -81,15 +102,16 @@ export default function ModalPublic({ setShowModal, data }) {
           {originalRow.documentacionPostulacion !== "" ? (
             <a
               className="text-blue-500 hover:text-blue-900 cursor-pointer underline"
-              href={`${import.meta.env.VITE_BACKEND_URL}/${originalRow.documentacionPostulacion
-                }`}
+              href={`${import.meta.env.VITE_BACKEND_URL}/${
+                originalRow.documentacionPostulacion
+              }`}
               target="_blank"
             >
               Ver documento
             </a>
-          ) : <p>No existe documento cargado</p>}
-
-
+          ) : (
+            <p>No existe documento cargado</p>
+          )}
         </div>
       ),
     },
@@ -98,31 +120,30 @@ export default function ModalPublic({ setShowModal, data }) {
       accessor: (originalRow, rowIndex) => (
         <div className="">
           <p className="capitalize">{originalRow.creador.nombre}</p>
-        </div>)
+        </div>
+      ),
     },
-
   ]);
 
-
-  console.log("estadosPostulaciones",estadosPostulaciones)
+  console.log("estadosPostulaciones", estadosPostulaciones);
 
   const submitData = async (e) => {
     e.preventDefault();
     const id_oferta = localStorage.getItem("id_oferta");
 
-
     if (estadoPostulacion === "elegir") {
-      inputRefEstadoPostulacion.current.focus()
-      setErrorEstadoPostulacion(true)
+      inputRefEstadoPostulacion.current.focus();
+      setErrorEstadoPostulacion(true);
       return;
     } else {
-      setErrorEstadoPostulacion(false)
+      setErrorEstadoPostulacion(false);
     }
-
 
     const formData = new FormData();
 
-    const idPostulacionUsuario = postulacionesUsuario.filter(item => item.idOferta === id_oferta)
+    const idPostulacionUsuario = postulacionesUsuario.filter(
+      (item) => item.idOferta === id_oferta
+    );
 
     formData.append("idPostulacion", idPostulacionUsuario[0]._id);
     formData.append("estadoPostulacion", estadoPostulacion);
@@ -138,17 +159,15 @@ export default function ModalPublic({ setShowModal, data }) {
     await nuevoEstadoPostulacionModal(formData);
 
     setTimeout(() => {
-      setShowModal(false)
+      setShowModal(false);
     }, 2000);
   };
-
-
 
   const { msg } = alertaPostulacion;
 
   const handleDocumentacionPostulacion = (data) => {
-    const maxfilesize = (1024 * 1024);
-    console.log(maxfilesize)
+    const maxfilesize = 1024 * 1024;
+    console.log(maxfilesize);
 
     if (data && data.size > maxfilesize) {
       setErrorDocumentacionPostulacion(true);
@@ -158,7 +177,6 @@ export default function ModalPublic({ setShowModal, data }) {
       setDocumentacionPostulacion(data);
     }
   };
-
 
   return (
     <>
@@ -172,7 +190,7 @@ export default function ModalPublic({ setShowModal, data }) {
           >
             {/*header*/}
             <div className="flex items-start justify-between px-5 py-3 border-b border-solid border-slate-200 rounded-t">
-              <div className="mt-2 font-bold" > Proceso de selección</div>
+              <div className="mt-2 font-bold"> Proceso de selección</div>
               <button
                 className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
                 onClick={() => setShowModal(false)}
@@ -191,118 +209,91 @@ export default function ModalPublic({ setShowModal, data }) {
                 <select
                   id="estadoPostulacion"
                   name="estadoPostulacion"
-                  className={errorEstadoPostulacion === false ?
-                    "block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                    :
-                    "block w-full appearance-none rounded-md border border-red-500 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-red-500 focus:outline-none focus:ring-red-500 sm:text-sm"
+                  className={
+                    errorEstadoPostulacion === false
+                      ? "block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                      : "block w-full appearance-none rounded-md border border-red-500 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-red-500 focus:outline-none focus:ring-red-500 sm:text-sm"
                   }
                   ref={inputRefEstadoPostulacion}
                   onChange={(e) => setEstadoPostulacion(e.target.value)}
                   value={estadoPostulacion}
                   required={true}
-
-
                 >
-                  <option value="elegir" disabled className="text-gray-400" >
+                  <option value="elegir" disabled className="text-gray-400">
                     --Selecciona un estado--
                   </option>
-                  {data && data.estadoAplicacionOferta === "Postulado" &&
+                  {data && data.estadoAplicacionOferta === "Postulado" && (
                     <>
-                      <option value="Preseleccionado" >
-                        Preseleccionado
-                      </option>
-                      <option value="No continúa" >
-                        No continúa
-                      </option>
+                      <option value="Preseleccionado">Preseleccionado</option>
+                      <option value="No continúa">No continúa</option>
                     </>
-                  }
-                  {data && data.estadoAplicacionOferta === "Preseleccionado" &&
+                  )}
+                  {data &&
+                    data.estadoAplicacionOferta === "Preseleccionado" && (
+                      <>
+                        <option value="Postulado">Postulado</option>
+                        <option value="Entrevista realizada">
+                          Entrevista realizada
+                        </option>
+                        <option value="No continúa">No continúa</option>
+                      </>
+                    )}
+                  {data &&
+                    data.estadoAplicacionOferta === "Entrevista realizada" && (
+                      <>
+                        <option value="Preseleccionado">Preseleccionado</option>
+                        <option value="Exámenes Ocupacionales">
+                          Exámenes Ocupacionales
+                        </option>
+                        <option value="No continúa">No continúa</option>
+                      </>
+                    )}
+                  {data &&
+                    data.estadoAplicacionOferta ===
+                      "Exámenes Ocupacionales" && (
+                      <>
+                        <option value="Entrevista realizada">
+                          Entrevista realizada
+                        </option>
+                        <option value="Afiliaciones">Afiliaciones</option>
+                        <option value="No continúa">No continúa</option>
+                      </>
+                    )}
+                  {data && data.estadoAplicacionOferta === "Contratado" && (
                     <>
-                      <option value="Postulado" >
-                        Postulado
-                      </option>
-                      <option value="Entrevista realizada" >
-                        Entrevista realizada
-                      </option>
-                      <option value="No continúa" >
-                        No continúa
-                      </option>
-                    </>
-                  }
-                  {data && data.estadoAplicacionOferta === "Entrevista realizada" &&
-                    <>
-                      <option value="Preseleccionado" >
-                        Preseleccionado
-                      </option>
-                      <option value="Exámenes Ocupacionales" >
+                      <option value="Exámenes Ocupacionales">
                         Exámenes Ocupacionales
                       </option>
-                      <option value="No continúa" >
-                        No continúa
-                      </option>
+                      <option value="Afiliaciones">Afiliaciones</option>
+                      <option value="No continúa">No continúa</option>
                     </>
-                  }
-                  {data && data.estadoAplicacionOferta === "Exámenes Ocupacionales" &&
+                  )}
+                  {data && data.estadoAplicacionOferta === "Afiliaciones" && (
                     <>
-                      <option value="Entrevista realizada" >
+                      <option value="Contratado">Contratado</option>
+                      <option value="No continúa">No continúa</option>
+                    </>
+                  )}
+                  {data && data.estadoAplicacionOferta === "No continúa" && (
+                    <>
+                      <option value="Postulado">Postulado</option>
+                      <option value="Preseleccionado">Preseleccionado</option>
+                      <option value="Entrevista realizada">
                         Entrevista realizada
                       </option>
-                      <option value="Afiliaciones" >
-                        Afiliaciones
-                      </option>
-                      <option value="No continúa" >
-                        No continúa
-                      </option>
-                    </>
-                  }
-                  {data && data.estadoAplicacionOferta === "Afiliaciones" &&
-                    <>
-                      <option value="Exámenes Ocupacionales" >
+                      <option value="Exámenes Ocupacionales">
                         Exámenes Ocupacionales
                       </option>
-                      <option value="Contratado" >
-                        Contratado
-                      </option>
-                      <option value="No continúa" >
-                        No continúa
-                      </option>
+                      <option value="Afiliaciones">Afiliaciones</option>
+                      <option value="Contratado">Contratado</option>
                     </>
-                  }
-                  {data && data.estadoAplicacionOferta === "Contratado" &&
-                    <>
-                      <option value="Afiliaciones" >
-                        Afiliaciones
-                      </option>
-                      <option value="No continúa" >
-                        No continúa
-                      </option>
-                    </>
-                  }
-                  {data && data.estadoAplicacionOferta === "No continúa" &&
-                    <>
-                      <option value="Postulado" >
-                        Postulado
-                      </option>
-                      <option value="Preseleccionado" >
-                        Preseleccionado
-                      </option>
-                      <option value="Entrevista realizada" >
-                        Entrevista realizada
-                      </option>
-                      <option value="Exámenes Ocupacionales" >
-                        Exámenes Ocupacionales
-                      </option>
-                      <option value="Afiliaciones" >
-                        Afiliaciones
-                      </option>
-                      <option value="Contratado" >
-                        Contratado
-                      </option>
-
-                    </>
-                  }
+                  )}
                 </select>
-                {errorEstadoPostulacion === true && <span className="text-red-500 text-xs">Seleccione la información requerida</span>}
+                {errorEstadoPostulacion === true && (
+                  <span className="text-red-500 text-xs">
+                    Seleccione la información requerida
+                  </span>
+                )}
               </div>
               <div className="">
                 <label className="block text-sm font-medium text-gray-700">
@@ -315,9 +306,7 @@ export default function ModalPublic({ setShowModal, data }) {
                   value={fechaRevisionPostulacion}
                   onChange={(e) => setFechaRevisionPostulacion(e.target.value)}
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-
                 />
-
               </div>
               <div className="">
                 <label className="block text-sm font-medium text-gray-700">
@@ -332,7 +321,6 @@ export default function ModalPublic({ setShowModal, data }) {
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   disabled={true}
                 />
-
               </div>
               <div className="">
                 <label className="block text-sm font-medium text-gray-700">
@@ -345,9 +333,7 @@ export default function ModalPublic({ setShowModal, data }) {
                   value={observacionesPostulacion}
                   onChange={(e) => setObservacionesPostulacion(e.target.value)}
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-
                 />
-
               </div>
 
               <div>
@@ -377,9 +363,10 @@ export default function ModalPublic({ setShowModal, data }) {
                     type="file"
                     name="documentacionPostulacion"
                     id="documentacionPostulacion"
-                    onChange={(e) => handleDocumentacionPostulacion(e.target.files[0])}
+                    onChange={(e) =>
+                      handleDocumentacionPostulacion(e.target.files[0])
+                    }
                     accept=".pdf"
-
                   />
                 </div>
                 {errorDocumentacionPostulacion === true && (
@@ -387,14 +374,14 @@ export default function ModalPublic({ setShowModal, data }) {
                     El tamaño máximo es 1 Mb
                   </span>
                 )}
-
               </div>
             </div>
-            {Array.isArray(estadosPostulaciones) && estadosPostulaciones.length > 0 ? (
+            {Array.isArray(estadosPostulaciones) &&
+            estadosPostulaciones.length > 0 ? (
               <>
                 <div className="block text-lg  italic font-medium text-blue-700 ml-8 flex space-x-2 items-center">
                   <FcDataProtection className="text-lg" />
-                  <p >Historico del proceso:</p>
+                  <p>Historico del proceso:</p>
                 </div>
                 <TableWithoutSearch
                   data={estadosPostulaciones}

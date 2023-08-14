@@ -14,7 +14,8 @@ import {
   TableCellsIcon,
   AcademicCapIcon,
   BuildingOfficeIcon,
-  BuildingOffice2Icon
+  BuildingOffice2Icon,
+  QueueListIcon
 } from "@heroicons/react/24/outline";
 
 <svg
@@ -106,7 +107,12 @@ const Sidebar = () => {
       icon: UsersIcon,
       current: location.pathname.includes("/aspirantes") ? true : false,
     },
-
+    {
+      name: "Requisitos",
+      href: "/requisitos/listar-requisitos",
+      icon: QueueListIcon,
+      current: location.pathname.includes("/requisitos") ? true : false,
+    },
     {
       name: "Cargos",
       href: "/cargos/listar-cargos",
@@ -159,6 +165,12 @@ const Sidebar = () => {
       href: "/aspirantes",
       icon: UsersIcon,
       current: location.pathname.includes("/aspirantes") ? true : false,
+    },
+    {
+      name: "Requisitos",
+      href: "/requisitos/listar-requisitos",
+      icon: QueueListIcon,
+      current: location.pathname.includes("/requisitos") ? true : false,
     },
     {
       name: "Cargos",
