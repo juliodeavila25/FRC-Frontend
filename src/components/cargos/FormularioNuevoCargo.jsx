@@ -4,6 +4,7 @@ import { Tooltip } from "react-tooltip";
 import useCargos from "../../hooks/useCargos";
 import Alert from "../Alert";
 import useAuth from "../../hooks/useAuth";
+import useRequisito from "../../hooks/useRequisito";
 import { BeatLoader } from "react-spinners";
 import { InformationCircleIcon } from "@heroicons/react/24/outline";
 
@@ -50,6 +51,8 @@ const FormularioNuevoCargo = () => {
     },
   ]);
 
+  const[requisitos, setRequisitos] = useState([]);
+
   /* Error en el campo nombre del cargo*/
   const inputRef = useRef(null);
   const [errorNombre, setErrorNombre] = useState(false);
@@ -63,7 +66,7 @@ const FormularioNuevoCargo = () => {
 
   const { auth, cargando } = useAuth();
 
-
+  const { requisitosBo } = useRequisito();
 
   useEffect(() => {
     if (params.id) {
@@ -91,6 +94,7 @@ const FormularioNuevoCargo = () => {
       setDescripcionCargos(cargo.descripcionCargos);
       setEstado(cargo.estado);
       setInputPreguntas(cargo.inputPreguntas);
+      setRequisitos(cargo.requisitos)
     }
   }, [cargo]);
 
@@ -104,6 +108,7 @@ const FormularioNuevoCargo = () => {
     } else {
       setErrorNombre(false);
     }
+
 
     await submitCargo({
       id,
@@ -130,40 +135,41 @@ const FormularioNuevoCargo = () => {
       estado,
       inputCargos,
       inputPreguntas,
+      requisitos
     });
   };
 
-  const handleaddclick = () => {
-    setInputCargos([
-      ...inputCargos,
-      {
-        nombre_requisito: "Bachiller",
-        vigencia: false,
-        emisor: false,
-        fecha_exp: false,
-        ref: false,
-        estado_requisito: "Activo",
-        descripcionRequisitos: "",
-      },
-    ]);
-  };
+  // const handleaddclick = () => {
+  //   setInputCargos([
+  //     ...inputCargos,
+  //     {
+  //       nombre_requisito: "Bachiller",
+  //       vigencia: false,
+  //       emisor: false,
+  //       fecha_exp: false,
+  //       ref: false,
+  //       estado_requisito: "Activo",
+  //       descripcionRequisitos: "",
+  //     },
+  //   ]);
+  // };
 
-  const handleinputchange = (e, index) => {
-    const { name, value, checked } = e.target;
-    const list = [...inputCargos];
-    if (e.target.type === "checkbox") {
-      list[index][name] = checked;
-    } else {
-      list[index][name] = value;
-    }
-    setInputCargos(list);
-  };
+  // const handleinputchange = (e, index) => {
+  //   const { name, value, checked } = e.target;
+  //   const list = [...inputCargos];
+  //   if (e.target.type === "checkbox") {
+  //     list[index][name] = checked;
+  //   } else {
+  //     list[index][name] = value;
+  //   }
+  //   setInputCargos(list);
+  // };
 
-  const handleremove = (index) => {
-    const list = [...inputCargos];
-    list.splice(index, 1);
-    setInputCargos(list);
-  };
+  // const handleremove = (index) => {
+  //   const list = [...inputCargos];
+  //   list.splice(index, 1);
+  //   setInputCargos(list);
+  // };
 
   const handleaddclickPreguntas = () => {
     setInputPreguntas([
@@ -229,6 +235,27 @@ const FormularioNuevoCargo = () => {
   };
   const handleChangeTecnologico = (event) => {
     setTecnologico(event.target.checked);
+  };
+
+  // const handleCheckboxChange = (event) => {
+  //   const { name, checked } = event.target;
+  //   setRequisitos((prev) => ({
+  //     ...prev,
+  //     [name]: checked,
+  //   }));
+  // };
+
+  const handleCheckboxChange = (data) => {
+    const isChecked = requisitos.some(checkedCheckbox => checkedCheckbox._id === data._id)
+    if (isChecked) {
+      setRequisitos(
+        requisitos.filter(
+          (checkedCheckbox) => checkedCheckbox._id !== data._id
+        )
+      );
+    } else {
+      setRequisitos(requisitos.concat(data));
+    }
   };
 
   const { msg } = alerta;
@@ -714,234 +741,27 @@ const FormularioNuevoCargo = () => {
                   Requisitos
                 </h6>
               </div>
-              {inputCargos &&
-                Array.isArray(inputCargos) &&
-                inputCargos.map((item, i) => {
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-6 pt-5 ">
+              {requisitosBo &&
+                Array.isArray(requisitosBo) &&
+                requisitosBo.map((item, i) => {
                   return (
-                    <div
-                      key={i}
-                      className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-6 pt-5 "
-                    >
-                      <div className="">
-                        <div className="border-b border-gray-900 pb-2">
-                          <h6 className="text-sm font-medium text-gray-900">
-                            Requisito {i + 1}
-                          </h6>
-                        </div>
-                        <label className="block text-sm font-medium text-gray-700 pt-4">
-                          Nombre requisito
-                        </label>
-                        <select
-                          id="nombre_requisito"
-                          name="nombre_requisito"
-                          className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                          onChange={(e) => handleinputchange(e, i)}
-                          value={item.nombre_requisito}
-                          required={true}
-                          disabled={
-                            (Array.isArray(cargo.inputCargos) &&
-                              i >= cargo.inputCargos?.length) ||
-                            (params.id === undefined && inputCargos.length >= 1)
-                              ? false
-                              : true
-                          }
-                        >
-                          <option
-                            value="elegir"
-                            disabled
-                            className="text-gray-400"
-                          >
-                            --Selecciona un tipo de documento--
-                          </option>
-                          <option value="Bachiller">Bachiller</option>
-                          <option value="Titulo: Aux o Tec En Auxiliar De Enfermeria">
-                            Titulo: Aux o Tec En Auxiliar De Enfermeria
-                          </option>
-                          <option value="Titulo: Medicina Gral">
-                            Titulo: Medicina Gral
-                          </option>
-                          <option value="Titulo: Profesional De Enfermeria">
-                            Titulo: Profesional De Enfermeria
-                          </option>
-                          <option value="Titulo: Instrumentador Quirurgico">
-                            Titulo: Instrumentador Quirurgico
-                          </option>
-                          <option value="Titulo: Tecnologo En Imagenes Diagnostica">
-                            Titulo: Tecnologo En Imagenes Diagnostica
-                          </option>
-                          <option value="Titulo: Bacteriologo">
-                            Titulo: Bacteriologo
-                          </option>
-                          <option value="Titulo: Regencia De Farmacia">
-                            Titulo: Regencia De Farmacia
-                          </option>
-                          <option value="Titulo: Fisioterapeuta">
-                            Titulo: Fisioterapeuta
-                          </option>
-                          <option value="Titulo: Quimico Farmaceutico">
-                            Titulo: Quimico Farmaceutico
-                          </option>
-                          <option value="Tarjeta Profesional">
-                            Tarjeta Profesional
-                          </option>
-                          <option value="Rethus">Rethus</option>
-                          <option value="Certificado Rcp ( Bls- Acls) Basico">
-                            Certificado Rcp ( Bls- Acls) Basico
-                          </option>
-                          <option value="Certificado De Curso De Violencia Sexual">
-                            Certificado De Curso De Violencia Sexual
-                          </option>
-                          <option value="Certificado De Curso Gestion Del Duelo">
-                            Certificado De Curso Gestion Del Duelo
-                          </option>
-                          <option value="Certificado De Curso Agente Quimicos">
-                            Certificado De Curso Agente Quimicos
-                          </option>
-                          <option value="Certificado De Curso Aiepi Clinico">
-                            Certificado De Curso Aiepi Clinico
-                          </option>
-                          <option value="Certificado De Curso De Aimi">
-                            Certificado De Curso De Aimi
-                          </option>
-                          <option value="Certificado De Toma De Muestra">
-                            Certificado De Toma De Muestra
-                          </option>
-                          <option value="Certificado De Equivalencia De Medicamentos">
-                            Certificado De Equivalencia De Medicamentos
-                          </option>
-                          <option value="Certificado Rcp ( Bls- Acls) ">
-                            Certificado Rcp ( Bls- Acls)
-                          </option>
-                          <option value="Diplomado En Uci: Opcional">
-                            Diplomado En Uci: Opcional
-                          </option>
-                          <option value="Certificado Rcp ( Bls- Acls) Avanzado">
-                            Certificado Rcp ( Bls- Acls) Avanzado
-                          </option>
-                          <option value="Certificado De Equivalencia De Medicamento">
-                            Certificado De Equivalencia De Medicamento
-                          </option>
-                          <option value="Actualizacion Y Manejo Del Fisoterapeutica En Cuidados Criticos">
-                            Actualizacion Y Manejo Del Fisoterapeutica En
-                            Cuidados Criticos
-                          </option>
-                          <option value="Carnet De Radio Protección">
-                            Carnet De Radio Protección
-                          </option>
-                        </select>
-                      </div>
-                      <div className="flex space-x-4 items-center pl-4"></div>
+                    <div  key={i}>
                       <div className="flex space-x-4 items-center pl-4">
                         <input
                           type="checkbox"
-                          id="vigencia"
-                          name="vigencia"
-                          value={item.vigencia}
-                          checked={item.vigencia}
-                          onChange={(e) => handleinputchange(e, i)}
+                          value={item._id}
+                          name={item._id}
+                          checked={requisitos.some(checkedCheckbox => checkedCheckbox._id === item._id)}
+                          onChange={() => handleCheckboxChange(item)}
                         />
-                        <label htmlFor="vigencia">
-                          ¿Tiene fecha de vigencia?
-                        </label>
-                      </div>
-                      <div className="flex space-x-4 items-center pl-4">
-                        <input
-                          type="checkbox"
-                          id="emisor"
-                          name="emisor"
-                          value={item.emisor}
-                          checked={item.emisor}
-                          onChange={(e) => handleinputchange(e, i)}
-                        />
-                        <label htmlFor="emisor">¿Emisor o expedido por?</label>
-                      </div>
-                      <div className="flex space-x-4 items-center pl-4">
-                        <input
-                          type="checkbox"
-                          id="fecha_exp"
-                          name="fecha_exp"
-                          value={item.fecha_exp}
-                          checked={item.fecha_exp}
-                          onChange={(e) => handleinputchange(e, i)}
-                        />
-                        <label htmlFor="fecha_exp">Fecha de expedición</label>
-                      </div>
-                      <div className="flex space-x-4 items-center pl-4">
-                        <input
-                          type="checkbox"
-                          id="ref"
-                          name="ref"
-                          value={item.ref}
-                          checked={item.ref}
-                          onChange={(e) => handleinputchange(e, i)}
-                        />
-                        <label htmlFor="ref">
-                          Numero de documento o referencia
-                        </label>
-                      </div>
-                      <div className="">
-                        <label className="block text-sm font-medium text-gray-700">
-                          Estado requisito
-                        </label>
-                        <select
-                          id="estado_requisito"
-                          name="estado_requisito"
-                          placeholder="Digita tu correo electrónico"
-                          className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                          onChange={(e) => handleinputchange(e, i)}
-                          value={item.estado_requisito}
-                          required={true}
-                        >
-                          <option value="Activo">Activo</option>
-                          <option value="Inactivo">Inactivo</option>
-                        </select>
-                      </div>
-                      <div>
-                        <label
-                          htmlFor="descripcionRequisitos"
-                          className="block text-sm font-medium text-gray-700"
-                        >
-                          Descripción del requisito
-                        </label>
-                        <div>
-                          <textarea
-                            id="descripcionRequisitos"
-                            name="descripcionRequisitos"
-                            type="text"
-                            placeholder=""
-                            rows="3"
-                            className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                            value={item.descripcionRequisitos}
-                            onChange={(e) => handleinputchange(e, i)}
-                            // onChange={(e) => setDescripcionIngresos(e.target.value)}
-                          />
-                        </div>
-                      </div>
-                      <div className="grid grid-cols-2 gap-4 pt-6 ">
-                        {(Array.isArray(cargo.inputCargos) &&
-                          i >= cargo.inputCargos?.length) ||
-                        (params.id === undefined &&
-                          inputCargos.length !== 1) ? (
-                          <button
-                            className="h-8 flex items-center w-full justify-center rounded-md border-2 border-red-400 bg-transparent py-2 px-4 text-sm font-medium text-red-500 shadow-sm hover:bg-red-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                            onClick={() => handleremove(i)}
-                          >
-                            Remover
-                          </button>
-                        ) : null}
-
-                        {inputCargos.length - 1 === i && (
-                          <button
-                            className="h-8 flex items-center w-full justify-center rounded-md border border-transparent bg-green-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 cursor-pointer"
-                            onClick={handleaddclick}
-                          >
-                            Agregar
-                          </button>
-                        )}
+                        <label htmlFor={item._id}>{item.nombre}</label>
                       </div>
                     </div>
                   );
                 })}
+              </div>
+              
             </div>
             <div>
               <div className="border-b border-gray-200 pb-2">
