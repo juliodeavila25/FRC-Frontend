@@ -429,8 +429,8 @@ const ListarPostulantes = () => {
                         {Array.isArray(curriculums) && curriculums.length > 0
                           ? curriculums.filter(
                               (curriculum) =>
-                                curriculum.estadoAplicacionOferta ===
-                                "Entrevista realizada"
+                              curriculum.estadoAplicacionOferta ===
+                              "Primera entrevista" || curriculum.estadoAplicacionOferta === "Segunda entrevista"
                             ).length
                           : 0}
                       </span>
@@ -444,14 +444,14 @@ const ListarPostulantes = () => {
                   curriculums.filter(
                     (curriculum) =>
                       curriculum.estadoAplicacionOferta ===
-                      "Entrevista realizada"
+                      "Primera entrevista" || curriculum.estadoAplicacionOferta === "Segunda entrevista"
                   ).length > 0 ? (
                     <>
                       <Table
                         data={curriculums.filter(
                           (curriculum) =>
-                            curriculum.estadoAplicacionOferta ===
-                            "Entrevista realizada"
+                          curriculum.estadoAplicacionOferta ===
+                          "Primera entrevista" || curriculum.estadoAplicacionOferta === "Segunda entrevista"
                         )}
                         columns={headers}
                       />
