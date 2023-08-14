@@ -240,16 +240,31 @@ export default function ModalPublic({ setShowModal, data }) {
                     data.estadoAplicacionOferta === "Preseleccionado" && (
                       <>
                         <option value="Postulado">Postulado</option>
-                        <option value="Entrevista realizada">
-                          Entrevista realizada
+                        <option value="Primera entrevista">
+                          Primera entrevista
                         </option>
                         <option value="No continúa">No continúa</option>
                       </>
                     )}
                   {data &&
-                    data.estadoAplicacionOferta === "Entrevista realizada" && (
+                    data.estadoAplicacionOferta === "Primera entrevista" && (
                       <>
                         <option value="Preseleccionado">Preseleccionado</option>
+                        <option value="Segunda entrevista">
+                          Segunda entrevista
+                        </option>
+                        <option value="Exámenes Ocupacionales">
+                          Exámenes Ocupacionales
+                        </option>
+                        <option value="No continúa">No continúa</option>
+                      </>
+                    )}
+                  {data &&
+                    data.estadoAplicacionOferta === "Segunda entrevista" && (
+                      <>
+                        <option value="Primera entrevista">
+                          Primera entrevista
+                        </option>
                         <option value="Exámenes Ocupacionales">
                           Exámenes Ocupacionales
                         </option>
@@ -260,25 +275,28 @@ export default function ModalPublic({ setShowModal, data }) {
                     data.estadoAplicacionOferta ===
                       "Exámenes Ocupacionales" && (
                       <>
-                        <option value="Entrevista realizada">
-                          Entrevista realizada
+                        <option value="Primera entrevista">
+                          Primera entrevista
+                        </option>
+                        <option value="Segunda entrevista">
+                          Segunda entrevista
                         </option>
                         <option value="Afiliaciones">Afiliaciones</option>
                         <option value="No continúa">No continúa</option>
                       </>
                     )}
-                  {data && data.estadoAplicacionOferta === "Afiliaciones" && (
+                  {data && data.estadoAplicacionOferta === "Contratado" && (
                     <>
                       <option value="Exámenes Ocupacionales">
                         Exámenes Ocupacionales
                       </option>
-                      <option value="Contratado">Contratado</option>
+                      <option value="Afiliaciones">Afiliaciones</option>
                       <option value="No continúa">No continúa</option>
                     </>
                   )}
-                  {data && data.estadoAplicacionOferta === "Contratado" && (
+                  {data && data.estadoAplicacionOferta === "Afiliaciones" && (
                     <>
-                      <option value="Afiliaciones">Afiliaciones</option>
+                      <option value="Contratado">Contratado</option>
                       <option value="No continúa">No continúa</option>
                     </>
                   )}

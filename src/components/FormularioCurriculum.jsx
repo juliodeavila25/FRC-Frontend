@@ -2919,7 +2919,7 @@ const FormularioCurriculum = () => {
                   </div>
                 </div>
 
-                <div>
+                <div className="hidden">
                   <label
                     htmlFor="unidadFuncional"
                     className="block text-sm font-medium text-gray-700"
@@ -2940,7 +2940,7 @@ const FormularioCurriculum = () => {
                   </div>
                 </div>
 
-                <div>
+                <div className="hidden">
                   <label
                     htmlFor="unidadNegocio"
                     className="block text-sm font-medium text-gray-700"

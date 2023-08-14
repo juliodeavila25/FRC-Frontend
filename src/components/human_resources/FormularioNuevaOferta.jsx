@@ -409,6 +409,17 @@ const FormularioNuevaOferta = () => {
               </div>
             </div>
           </div>
+          <div className="text-left text-lg text-gray-700 mt-8 font-medium border-b-2 border-corporative-blue inline-flex">
+            Listado de requisitos
+          </div>
+          <div className="grid grid-cols-3 gap-6 mb-10">
+            <div className="font-ligh text-gray-600">1. Diploma Bachiller</div>
+            <div className="font-ligh text-gray-600">2. Tarjeta Profesional</div>
+            <div className="font-ligh text-gray-600">3. Rethus</div>
+            <div className="font-ligh text-gray-600">4. Certificado Rcp ( Bls- Acls)</div>
+            <div className="font-ligh text-gray-600">5. Certificado De Curso De Violencia Sexual</div>
+            <div className="font-ligh text-gray-600">6. Certificado De Curso Gestion Del Duelo</div>
+          </div>
           {msg && <Alert alerta={alerta} />}
           <div className="grid grid-cols-2 gap-6 w-3/5 mx-auto">
             <Link

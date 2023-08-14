@@ -429,8 +429,8 @@ const ListarPostulantes = () => {
                         {Array.isArray(curriculums) && curriculums.length > 0
                           ? curriculums.filter(
                               (curriculum) =>
-                                curriculum.estadoAplicacionOferta ===
-                                "Entrevista realizada"
+                              curriculum.estadoAplicacionOferta ===
+                              "Primera entrevista" || curriculum.estadoAplicacionOferta === "Segunda entrevista"
                             ).length
                           : 0}
                       </span>
@@ -444,14 +444,14 @@ const ListarPostulantes = () => {
                   curriculums.filter(
                     (curriculum) =>
                       curriculum.estadoAplicacionOferta ===
-                      "Entrevista realizada"
+                      "Primera entrevista" || curriculum.estadoAplicacionOferta === "Segunda entrevista"
                   ).length > 0 ? (
                     <>
                       <Table
                         data={curriculums.filter(
                           (curriculum) =>
-                            curriculum.estadoAplicacionOferta ===
-                            "Entrevista realizada"
+                          curriculum.estadoAplicacionOferta ===
+                          "Primera entrevista" || curriculum.estadoAplicacionOferta === "Segunda entrevista"
                         )}
                         columns={headers}
                       />
@@ -552,10 +552,77 @@ const ListarPostulantes = () => {
                 </AccordionBody>
               </Accordion>
 
+              
               <Accordion open={open === 5} icon={<Icon id={5} open={open} />}>
                 <AccordionHeader
                   className="text-base font-semibold text-gray-900"
                   onClick={() => handleOpen(5)}
+                >
+                  <div className="flex space-x-3 items-center">
+                    <FcOk className="text-lg" />
+                    <p>
+                      Contratado (
+                      <span>
+                        {Array.isArray(curriculums) && curriculums.length > 0
+                          ? curriculums.filter(
+                              (curriculum) =>
+                                curriculum.estadoAplicacionOferta ===
+                                "Contratado"
+                            ).length
+                          : 0}
+                      </span>
+                      )
+                    </p>
+                  </div>
+                </AccordionHeader>
+                <AccordionBody>
+                  {Array.isArray(curriculums) &&
+                  curriculums.length > 0 &&
+                  curriculums.filter(
+                    (curriculum) =>
+                      curriculum.estadoAplicacionOferta === "Contratado"
+                  ).length > 0 ? (
+                    <>
+                      <Table
+                        data={curriculums.filter(
+                          (curriculum) =>
+                            curriculum.estadoAplicacionOferta === "Contratado"
+                        )}
+                        columns={headers}
+                      />
+                    </>
+                  ) : (
+                    <div className="rounded-md bg-blue-50 p-4">
+                      <div className="flex">
+                        <div className="flex-shrink-0">
+                          <svg
+                            className="h-5 w-5 text-blue-400"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                            aria-hidden="true"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a.75.75 0 000 1.5h.253a.25.25 0 01.244.304l-.459 2.066A1.75 1.75 0 0010.747 15H11a.75.75 0 000-1.5h-.253a.25.25 0 01-.244-.304l.459-2.066A1.75 1.75 0 009.253 9H9z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                        </div>
+                        <div className="ml-3 flex-1 md:flex ">
+                          <p className="text-sm text-blue-700">
+                            No existen postulantes contratados.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </AccordionBody>
+              </Accordion>
+
+              <Accordion open={open === 6} icon={<Icon id={6} open={open} />}>
+                <AccordionHeader
+                  className="text-base font-semibold text-gray-900"
+                  onClick={() => handleOpen(6)}
                 >
                   <div className="flex space-x-3 items-center">
                     <FcFile className="text-lg" />
@@ -618,71 +685,6 @@ const ListarPostulantes = () => {
                 </AccordionBody>
               </Accordion>
 
-              <Accordion open={open === 6} icon={<Icon id={6} open={open} />}>
-                <AccordionHeader
-                  className="text-base font-semibold text-gray-900"
-                  onClick={() => handleOpen(6)}
-                >
-                  <div className="flex space-x-3 items-center">
-                    <FcOk className="text-lg" />
-                    <p>
-                      Contratado (
-                      <span>
-                        {Array.isArray(curriculums) && curriculums.length > 0
-                          ? curriculums.filter(
-                              (curriculum) =>
-                                curriculum.estadoAplicacionOferta ===
-                                "Contratado"
-                            ).length
-                          : 0}
-                      </span>
-                      )
-                    </p>
-                  </div>
-                </AccordionHeader>
-                <AccordionBody>
-                  {Array.isArray(curriculums) &&
-                  curriculums.length > 0 &&
-                  curriculums.filter(
-                    (curriculum) =>
-                      curriculum.estadoAplicacionOferta === "Contratado"
-                  ).length > 0 ? (
-                    <>
-                      <Table
-                        data={curriculums.filter(
-                          (curriculum) =>
-                            curriculum.estadoAplicacionOferta === "Contratado"
-                        )}
-                        columns={headers}
-                      />
-                    </>
-                  ) : (
-                    <div className="rounded-md bg-blue-50 p-4">
-                      <div className="flex">
-                        <div className="flex-shrink-0">
-                          <svg
-                            className="h-5 w-5 text-blue-400"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                            aria-hidden="true"
-                          >
-                            <path
-                              fillRule="evenodd"
-                              d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a.75.75 0 000 1.5h.253a.25.25 0 01.244.304l-.459 2.066A1.75 1.75 0 0010.747 15H11a.75.75 0 000-1.5h-.253a.25.25 0 01-.244-.304l.459-2.066A1.75 1.75 0 009.253 9H9z"
-                              clipRule="evenodd"
-                            />
-                          </svg>
-                        </div>
-                        <div className="ml-3 flex-1 md:flex ">
-                          <p className="text-sm text-blue-700">
-                            No existen postulantes contratados.
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                </AccordionBody>
-              </Accordion>
 
               <Accordion open={open === 7} icon={<Icon id={7} open={open} />}>
                 <AccordionHeader
