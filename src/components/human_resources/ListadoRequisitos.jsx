@@ -13,7 +13,7 @@ const ListadoRequisitos = ({ listadoCargos, selectedCargo }) => {
   return (
     <>
       {Array.isArray(requisitosCargos) &&
-      requisitosCargos[0]?.requisitos.length > 0 ? (
+        requisitosCargos[0]?.requisitos.length > 0 ? (
         requisitosCargos[0]?.requisitos.map((item) => {
           return (
             <div
@@ -25,7 +25,8 @@ const ListadoRequisitos = ({ listadoCargos, selectedCargo }) => {
                   <FcDocument className="text-lg" />
                 </div>
                 <div className="ml-3 ">
-                  <p className="text-sm text-gray-900">{item.nombre}</p>
+                  <p className="text-sm text-gray-900 font-bold">{item.nombre}</p>
+                  <p className="text-sm text-gray-900 italic">{item.descripcionRequisito}</p>
                 </div>
               </div>
             </div>
