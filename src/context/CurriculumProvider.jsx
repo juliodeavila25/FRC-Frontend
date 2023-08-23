@@ -40,9 +40,9 @@ const CurriculumProvider = ({ children }) => {
     //   console.log(value);
     // }
     // console.log(curriculum);
-    /*for (const value of curriculum.values()) {
-      console.log(value);
-    }*/
+    // for (const value of curriculum.values()) {
+    //   console.log(value);
+    // }
     try {
       const token = localStorage.getItem("token");
       if (!token) return;

@@ -3,9 +3,12 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import useOfertas from "../hooks/useOfertas";
 import usePostulaciones from "../hooks/usePostulaciones";
 import useAuth from "../hooks/useAuth";
+import useCargos from "../hooks/useCargos";
 import { BeatLoader } from "react-spinners";
 import swal from "sweetalert";
-import ModalRequistos from "../components/ModalRequisitos"
+import ModalRequistos from "../components/ModalRequisitos";
+import { FcDocument } from "react-icons/fc";
+import ListadoRequisitos from "../components/human_resources/ListadoRequisitos"
 
 const OfertaIndividual = () => {
   const current = new Date();
@@ -33,11 +36,12 @@ const OfertaIndividual = () => {
   const [estadoAplicacionOferta, setEstadoAplicacionOferta] =
     useState("Postulado");
 
-    const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(false);
+  const [requisitosCargos, setRequisitosCargos] = useState([]);
 
   const params = useParams();
 
-  console.log(params.id);
+
 
   const {
     submitOferta,
@@ -45,8 +49,10 @@ const OfertaIndividual = () => {
     alerta,
     obtenerOferta,
     oferta,
-    cargandoDataCargos,
+    cargandoDataCargos
   } = useOfertas();
+
+  const { obtenerCargosForm, cargosForm } = useCargos();
 
   const { auth, cargando } = useAuth();
 
@@ -72,8 +78,23 @@ const OfertaIndividual = () => {
       setEstadoConvocatoria(oferta.estadoConvocatoria);
       setIdUsuario(auth._id);
       setIdOferta(oferta._id);
+
+      let cargos = cargosForm.filter((item) => item.nombre === oferta.nombre);
+  
+      setRequisitosCargos(cargos);
     }
   }, [oferta]);
+
+
+  useEffect(() => {
+    obtenerCargosForm();
+  }, []);
+
+  useEffect(()=>{
+    let cargos = cargosForm.filter((item) => item.nombre === oferta.nombre);
+  
+    setRequisitosCargos(cargos);
+  },[cargosForm])
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -121,20 +142,17 @@ const OfertaIndividual = () => {
   const activateModal = (e) => {
     e.preventDefault();
     setVisible(true);
-   
   };
 
   const setShowModal = () => {
     setVisible(false);
   };
 
-  if (cargandoDataCargos) return <BeatLoader color="#36d7b7" />;
+  if (cargandoDataCargos  && cargosForm.length === 0) return <BeatLoader color="#36d7b7"  />;
 
   return (
     <>
-      {visible === true && (
-        <ModalRequistos setShowModal={setShowModal} />
-      )}
+      {Array.isArray(cargosForm) && cargosForm.length > 0 && visible === true && <ModalRequistos setShowModal={setShowModal} listadoCargos={cargosForm} selectedCargo={nombre} idOferta={id} />}
       <div className="sm:mx-auto sm:w-full">
         <div className="bg-white py-8 px-4 shadow-lg rounded-lg sm:px-10">
           <form className="space-y-6 ">
@@ -348,23 +366,9 @@ const OfertaIndividual = () => {
               Listado de documentos requeridos para aplicar a esta oferta
             </div>
             <div className="grid grid-cols-3 gap-6 mb-10">
-              <div className="font-ligh text-gray-600">
-                1. Diploma Bachiller
-              </div>
-              <div className="font-ligh text-gray-600">
-                2. Tarjeta Profesional
-              </div>
-              <div className="font-ligh text-gray-600">3. Rethus</div>
-              <div className="font-ligh text-gray-600">
-                4. Certificado Rcp ( Bls- Acls)
-              </div>
-              <div className="font-ligh text-gray-600">
-                5. Certificado De Curso De Violencia Sexual
-              </div>
-              <div className="font-ligh text-gray-600">
-                6. Certificado De Curso Gestion Del Duelo
-              </div>
-            </div>
+            {console.log(nombre)}
+            {Array.isArray(cargosForm) && cargosForm.length > 0 ?  <ListadoRequisitos listadoCargos={cargosForm} selectedCargo={nombre} /> : null}
+          </div>
 
             <div className="grid grid-cols-2 gap-6 w-3/5 mx-auto">
               <Link

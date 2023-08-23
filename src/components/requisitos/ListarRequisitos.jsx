@@ -100,7 +100,7 @@ const ListarRequisitos = () => {
             </div>
             <div className="ml-3 flex-1 md:flex ">
               <p className="text-sm text-blue-700">
-                No existen unidades de negocio registradas
+                No existen requisitos registrados
               </p>
             </div>
           </div>

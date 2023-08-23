@@ -7,6 +7,8 @@ import useAuth from "../../hooks/useAuth";
 import { BeatLoader } from "react-spinners";
 import moment from "moment";
 
+import ListadoRequisitos from "./ListadoRequisitos"
+
 const FormularioNuevaOferta = () => {
   const current = new Date();
   const date = `${current.getFullYear()}-${
@@ -30,12 +32,12 @@ const FormularioNuevaOferta = () => {
   const [perfil, setPerfil] = useState("");
   const [funciones, setFunciones] = useState("");
   const [estadoConvocatoria, setEstadoConvocatoria] = useState("Activa");
-  const [unidadFuncional , setUnidadFuncional] = useState("");
+  const [unidadFuncional, setUnidadFuncional] = useState("");
+  const [requisitosCargos, setRequisitosCargos] = useState([]);
   const params = useParams();
 
   const { obtenerCargosForm, cargosForm } = useCargos();
 
-  console.log(params.id);
 
   const {
     submitOferta,
@@ -46,9 +48,12 @@ const FormularioNuevaOferta = () => {
     cargandoData,
   } = useOfertas();
 
+  console.log(oferta)
+
   const { auth, cargando } = useAuth();
 
   useEffect(() => {
+   
     if (params.id) {
       setId(oferta._id);
       setNombre(oferta.nombre !== "" ? oferta.nombre : "elegir");
@@ -73,7 +78,13 @@ const FormularioNuevaOferta = () => {
       let concatAddZeros = addZeros.concat("-", current_year);
       setConvocatoria(concatAddZeros);
     }
-  }, []);
+  }, [oferta]);
+
+  useEffect(()=>{
+    let cargos = cargosForm.filter((item) => item.nombre === oferta.nombre);
+    console.log(cargos);
+    setRequisitosCargos(cargos);
+  },[cargosForm])
 
   useEffect(() => {
     obtenerCargosForm();
@@ -92,7 +103,7 @@ const FormularioNuevaOferta = () => {
         bonificaciones,
         perfil,
         funciones,
-        unidadFuncional
+        unidadFuncional,
       ].includes("")
     ) {
       console.log(
@@ -129,11 +140,21 @@ const FormularioNuevaOferta = () => {
       fechaInicio,
       fechaFin,
       estadoConvocatoria,
-      unidadFuncional
+      unidadFuncional,
     });
   };
 
+  const handleinputchange = (e) => {
+    e.preventDefault();
+    setNombre(e.target.value);
+    
+  };
+
   const { msg } = alerta;
+
+  console.log(cargosForm); 
+
+  if (cargandoData && cargosForm.length === 0) return <BeatLoader color="#36d7b7" />;
 
   return (
     <div className=" sm:mx-auto sm:w-full">
@@ -177,7 +198,7 @@ const FormularioNuevaOferta = () => {
                   id="nombre"
                   name="nombre"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                  onChange={(e) => setNombre(e.target.value)}
+                  onChange={(e) => handleinputchange(e)}
                   value={nombre}
                   //ref={inputRefCargo}
                   required={true}
@@ -413,15 +434,12 @@ const FormularioNuevaOferta = () => {
             Listado de requisitos
           </div>
           <div className="grid grid-cols-3 gap-6 mb-10">
-            <div className="font-ligh text-gray-600">1. Diploma Bachiller</div>
-            <div className="font-ligh text-gray-600">2. Tarjeta Profesional</div>
-            <div className="font-ligh text-gray-600">3. Rethus</div>
-            <div className="font-ligh text-gray-600">4. Certificado Rcp ( Bls- Acls)</div>
-            <div className="font-ligh text-gray-600">5. Certificado De Curso De Violencia Sexual</div>
-            <div className="font-ligh text-gray-600">6. Certificado De Curso Gestion Del Duelo</div>
+            {console.log(nombre)}
+            {Array.isArray(cargosForm) && cargosForm.length > 0 ?  <ListadoRequisitos listadoCargos={cargosForm} selectedCargo={nombre} /> : null}
           </div>
+
           {msg && <Alert alerta={alerta} />}
-          <div className="grid grid-cols-2 gap-6 w-3/5 mx-auto">
+          <div className="grid grid-cols-2 gap-6 w-3/5 mx-auto pt-10 ">
             <Link
               to="/recursos-humanos/listar-convocatorias"
               className="flex w-full justify-center rounded-md border-2 border-red-400 bg-transparent py-2 px-4 text-sm font-medium text-red-500 shadow-sm hover:bg-red-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"

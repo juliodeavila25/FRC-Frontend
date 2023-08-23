@@ -1,169 +1,143 @@
 import { useState, useEffect, useRef } from "react";
-import useEstadoPostulaciones from "../hooks/useEstadoPostulaciones";
-import usePostulaciones from "../hooks/usePostulaciones";
+import useDocumentosRequisitos from "../hooks/useDocumentosRequisitos";
 import Alert from "./Alert";
 import moment from "moment";
-import TableWithoutSearch from "./table/TableWithoutSearch";
-import { FcDataProtection } from "react-icons/fc";
 import useAuth from "../hooks/useAuth";
+import {
+  Accordion,
+  AccordionHeader,
+  AccordionBody,
+} from "@material-tailwind/react";
+import usePostulaciones from "../hooks/usePostulaciones";
 
-export default function ModalPublic({ setShowModal }) {
+
+import {
+  FcBusinessContact,
+  FcInspection,
+  FcAssistant,
+  FcCancel,
+  FcOk,
+  FcBriefcase,
+  FcManager,
+  FcFile,
+} from "react-icons/fc";
+
+function Icon({ id, open }) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className={`${
+        id === open ? "rotate-180" : ""
+      } h-5 w-5 transition-transform`}
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      strokeWidth={2}
+    >
+      <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+    </svg>
+  );
+}
+
+export default function ModalPublic({
+  setShowModal,
+  listadoCargos,
+  selectedCargo,
+  idOferta
+}) {
+  const [requisitosCargos, setRequisitosCargos] = useState([]);
+
+  const[idUsuario, setIdUsuario]= useState("")
+  const [estadoAplicacionOferta, setEstadoAplicacionOferta] =
+    useState("Postulado");
+
+  const [documentosRequeridos, setDocumentosRequeridos] = useState([]);
+
+  const [archivos, setArchivos] = useState([]);
+
+  const [open, setOpen] = useState(1);
+
   const current = new Date();
   const date = `${current.getFullYear()}-${
     current.getMonth() + 1
   }-${current.getDate()}`;
 
-  const [estadoPostulacion, setEstadoPostulacion] = useState("elegir");
+  const { obtenerUsuarios, usuarios, usuarioAutenticado, auth } = useAuth();
 
-  /* Error en el campo de estado de postulación*/
-  const inputRefEstadoPostulacion = useRef(null);
-  const [errorEstadoPostulacion, setErrorEstadoPostulacion] = useState(false);
+  const { nuevosDocumentosRequisitos, alertaDocumentosRequisitos } = useDocumentosRequisitos();
 
-  const [fechaRevisionPostulacion, setFechaRevisionPostulacion] = useState(
-    moment(date).format("YYYY-MM-DD")
-  );
-  const [fechaSistemaPostulacion, setFechaSistemaPostulacion] = useState(
-    moment(date).format("YYYY-MM-DD")
-  );
-  const [observacionesPostulacion, setObservacionesPostulacion] = useState("");
-  const [documentacionPostulacion, setDocumentacionPostulacion] = useState("");
-  const [errorDocumentacionPostulacion, setErrorDocumentacionPostulacion] =
-    useState(false);
+  const { nuevaPostulacion, postulaciones } = usePostulaciones();
 
-  const {
-    nuevoEstadoPostulacionModal,
-    alertaPostulacion,
-    obtenerEstadoPostulacionesPorUsuario,
-    estadosPostulaciones,
-  } = useEstadoPostulaciones();
-  const { obtenerPostulacionesUsuario, postulacionesUsuario } =
-    usePostulaciones();
-  const { obtenerUsuarios, usuarios } = useAuth();
+  const { msg, error} = alertaDocumentosRequisitos;
 
-  // useEffect(() => {
-  //   obtenerPostulacionesUsuario(data.creador);
-  // }, []);
+  useEffect(() =>{
+    if(error === false){
 
-  // useEffect(() => {
-  //   if (
-  //     Array.isArray(postulacionesUsuario) &&
-  //     postulacionesUsuario.length > 0
-  //   ) {
-  //     const id_oferta = localStorage.getItem("id_oferta");
-  //     const idPostulacionUsuario = postulacionesUsuario.filter(
-  //       (item) => item.idOferta === id_oferta
-  //     );
-  //     obtenerEstadoPostulacionesPorUsuario(idPostulacionUsuario[0]._id);
-  //   }
-  // }, [postulacionesUsuario]);
+     setTimeout(() => {
+      setShowModal(false)
+     }, 3000);
 
-  // useEffect(() => {
-  //   obtenerUsuarios();
-  // }, []);
+    }
 
-  
+  },[alertaDocumentosRequisitos])
 
-  console.log(usuarios);
-  const [headers, setHeaders] = useState([
-    {
-      Header: "Estado origen - Estado destino",
-      accessor: (originalRow, rowIndex) => (
-        <div className="">
-          <p className="capitalize">
-            {originalRow.estadoPostulacionAnterior} -{" "}
-            {originalRow.estadoPostulacion}
-          </p>
-        </div>
-      ),
-    },
-    {
-      Header: "Fechas",
-      accessor: (originalRow, rowIndex) => (
-        <div className="">
-          <p className="capitalize">
-            F. Post: {originalRow.fechaRevisionPostulacion}
-          </p>
-          <p className="capitalize">
-            F. Rev: {originalRow.fechaSistemaPostulacion}
-          </p>
-        </div>
-      ),
-    },
+  console.log(auth)
 
-    {
-      Header: "Observaciones",
-      accessor: "observacionesPostulacion",
-    },
-    {
-      Header: "Documentación",
+  useEffect(() => {
+    let cargo = listadoCargos.filter((item) => item.nombre === selectedCargo);
+    setRequisitosCargos(cargo);
 
-      accessor: (originalRow, rowIndex) => (
-        <div>
-          {originalRow.documentacionPostulacion !== "" ? (
-            <a
-              className="text-blue-500 hover:text-blue-900 cursor-pointer underline"
-              href={`${import.meta.env.VITE_BACKEND_URL}/${
-                originalRow.documentacionPostulacion
-              }`}
-              target="_blank"
-            >
-              Ver documento
-            </a>
-          ) : (
-            <p>No existe documento cargado</p>
-          )}
-        </div>
-      ),
-    },
-    {
-      Header: "Creador",
-      accessor: (originalRow, rowIndex) => (
-        <div className="">
-          <p className="capitalize">{originalRow.creador.nombre}</p>
-        </div>
-      ),
-    },
-  ]);
+    setIdUsuario(auth._id);
 
-  console.log("estadosPostulaciones", estadosPostulaciones);
+    if (documentosRequeridos.length === 0) {
+      console.log("Holaaa")
+      const updatedBdays = documentosRequeridos;
+      for (let i = 0; i < cargo[0]?.requisitos.length; i++) {
+        updatedBdays.push({
+          idRequisito:cargo[0]?.requisitos[i]._id,
+          nombreRequisito: cargo[0]?.requisitos[i].nombre,
+          fechaVigencia: "",
+          emisor: "",
+          fechaExpedicion: "",
+          numeroDocumento: "",
+          documento: "",
+        });
+      }
+
+      setDocumentosRequeridos(updatedBdays);
+    }
+  }, [selectedCargo]);
+
+ 
 
   const submitData = async (e) => {
     e.preventDefault();
     const id_oferta = localStorage.getItem("id_oferta");
 
-    if (estadoPostulacion === "elegir") {
-      inputRefEstadoPostulacion.current.focus();
-      setErrorEstadoPostulacion(true);
-      return;
-    } else {
-      setErrorEstadoPostulacion(false);
-    }
 
     const formData = new FormData();
 
-    const idPostulacionUsuario = postulacionesUsuario.filter(
-      (item) => item.idOferta === id_oferta
-    );
+    for (const obj of documentosRequeridos) {
+      // Append non-file properties as JSON strings
+      formData.append("documentosRequeridos", JSON.stringify(obj));
+      // Append file property
+      formData.append("documentos", obj.documento, obj.documento.name);
+    }
 
-    formData.append("idPostulacion", idPostulacionUsuario[0]._id);
-    formData.append("estadoPostulacion", estadoPostulacion);
-    formData.append("fechaRevisionPostulacion", fechaRevisionPostulacion);
-    formData.append("fechaSistemaPostulacion", fechaSistemaPostulacion);
-    formData.append("observacionesPostulacion", observacionesPostulacion);
-    formData.append("documentacionPostulacion", documentacionPostulacion);
-    formData.append("estadoPostulacionAnterior", data.estadoAplicacionOferta);
-    formData.append("nombre", data.nombre);
-    formData.append("correo", data.correo);
-    formData.append("idOferta", data.idOferta);
+    formData.append("idOferta", idOferta);
+    formData.append("creador",  usuarioAutenticado._id)
 
-    await nuevoEstadoPostulacionModal(formData);
+    await nuevosDocumentosRequisitos(formData);
 
-    setTimeout(() => {
-      setShowModal(false);
-    }, 2000);
+    await nuevaPostulacion({
+      idUsuario,
+      idOferta,
+      estadoAplicacionOferta,
+    });
+    
   };
 
-  const { msg } = alertaPostulacion;
+
 
   const handleDocumentacionPostulacion = (data) => {
     const maxfilesize = 1024 * 1024;
@@ -178,6 +152,21 @@ export default function ModalPublic({ setShowModal }) {
     }
   };
 
+  const handleOpen = (value) => {
+    setOpen(open === value ? 0 : value);
+  };
+
+  const handleinputchangeDocumentosRequeridos = (e, index) => {
+    const { name, value, files } = e.target;
+    const list = [...documentosRequeridos];
+    if (files?.length > 0) {
+      list[index][name] = files[0];
+    } else {
+      list[index][name] = value;
+    }
+    setDocumentosRequeridos(list);
+  };
+
   return (
     <>
       <div className="justify-center  flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
@@ -190,122 +179,225 @@ export default function ModalPublic({ setShowModal }) {
           >
             {/*header*/}
             <div className="px-5 py-3 border-b border-solid border-slate-200 rounded-t">
-              <div className="mt-2 font-bold"> Listo de requisitos para aplicar a la vacante</div>
-              <div className="mt-2 font-light italic text-sm">Nota: Para poder aplicar a este cargo es indispensable, cargar los siguientes documentos</div>
-              
+              <div className="mt-2 font-bold">
+                {" "}
+                Listado de requisitos para aplicar a la vacante
+              </div>
+              <div className="mt-2 font-light italic text-sm">
+                <span className="font-medium">Nota:</span> Para poder aplicar a
+                este cargo es indispensable, cargar los siguientes documentos
+              </div>
             </div>
             {/*body*/}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 p-8">
-              
-              <div className="">
-                <label className="block text-sm font-medium text-gray-700">
-                  Nombre requisito
-                </label>
-                <input
-                  type="text"
-                  id="fechaRevisionPostulacion"
-                  name="fechaRevisionPostulacion"
-                  value="Diploma Bachiller"
-                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                  disabled={true}
-                />
-              </div>
-              <div className="">
-                <label className="block text-sm font-medium text-gray-700">
-                  Fecha de vigencia
-                </label>
-                <input
-                  type="date"
-                  id="fechaSistemaPostulacion"
-                  name="fechaSistemaPostulacion"
-                  value={fechaSistemaPostulacion}
-                  onChange={(e) => setFechaSistemaPostulacion(e.target.value)}
-                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                  
-                />
-              </div>
-              <div className="">
-                <label className="block text-sm font-medium text-gray-700">
-                  Emisor o expedido por 
-                </label>
-                <input
-                  type="text"
-                  id="observacionesPostulacion"
-                  name="observacionesPostulacion"
-                  placeholder="Observaciones"
-                  value={observacionesPostulacion}
-                  onChange={(e) => setObservacionesPostulacion(e.target.value)}
-                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                />
-              </div>
-              <div className="">
-                <label className="block text-sm font-medium text-gray-700">
-                  Fecha de expedición
-                </label>
-                <input
-                  type="date"
-                  id="fechaSistemaPostulacion"
-                  name="fechaSistemaPostulacion"
-                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                  
-                />
-              </div>
-              <div className="">
-                <label className="block text-sm font-medium text-gray-700">
-                 Número de documento o referencia
-                </label>
-                <input
-                  type="text"
-                  id="observacionesPostulacion"
-                  name="observacionesPostulacion"
-                  placeholder="Observaciones"
-                  
-                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                />
-              </div>
+            {Array.isArray(requisitosCargos) &&
+            requisitosCargos[0]?.requisitos.length > 0 ? (
+              requisitosCargos[0]?.requisitos.map((item, i) => {
+                return (
+                  <div key={i} className="w-11/12 mx-auto pt-5 ">
+                    <Accordion
+                      open={open === i + 1}
+                      icon={<Icon id={item._id} open={open} />}
+                    >
+                      <AccordionHeader
+                        className="text-base font-semibold text-gray-900"
+                        onClick={() => handleOpen(i + 1)}
+                      >
+                        <div className="flex space-x-3 items-center">
+                          <FcBusinessContact className="text-lg" />
+                          <p>{item.nombre}</p>
+                        </div>
+                      </AccordionHeader>
+                      <AccordionBody>
+                        {console.log(documentosRequeridos)}
+                        {Array.isArray(documentosRequeridos) &&
+                          [documentosRequeridos[i]].map((doc, index) => {
+                            {console.log(item._id)}
+                            return (
+                              <div
+                                key={i}
+                                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 p-8"
+                              >
+                                <div className="">
+                                  <label className="block text-sm font-medium text-gray-700">
+                                    Nombre requisito
+                                  </label>
+                                  <input
+                                    type="text"
+                                    id="fechaRevisionPostulacion"
+                                    name="fechaRevisionPostulacion"
+                                    value={item.nombre}
+                                    className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                    disabled={true}
+                                    onChange={(e) =>
+                                      handleinputchangeDocumentosRequeridos(
+                                        e,
+                                        i
+                                      )
+                                    }
+                                  />
+                                </div>
+                                <div className="">
+                                  <label className="block text-sm font-medium text-gray-700">
+                                    Fecha de vigencia
+                                  </label>
+                                  <input
+                                    type="date"
+                                    id="fechaVigencia"
+                                    name="fechaVigencia"
+                                    value={doc.fechaVigencia}
+                                    onChange={(e) =>
+                                      handleinputchangeDocumentosRequeridos(
+                                        e,
+                                        i
+                                      )
+                                    }
+                                    // onChange={(e) =>
+                                    //   setFechaSistemaPostulacion(e.target.value)
+                                    // }
+                                    className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                  />
+                                </div>
+                                <div className="">
+                                  <label className="block text-sm font-medium text-gray-700">
+                                    Emisor o expedido por
+                                  </label>
+                                  <input
+                                    type="text"
+                                    id="emisor"
+                                    name="emisor"
+                                    placeholder="Digite el emisor"
+                                    value={doc.emisor}
+                                    onChange={(e) =>
+                                      handleinputchangeDocumentosRequeridos(
+                                        e,
+                                        i
+                                      )
+                                    }
+                                    // onChange={(e) =>
+                                    //   setObservacionesPostulacion(
+                                    //     e.target.value
+                                    //   )
+                                    // }
+                                    className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                  />
+                                </div>
+                                <div className="">
+                                  <label className="block text-sm font-medium text-gray-700">
+                                    Fecha de expedición
+                                  </label>
+                                  <input
+                                    type="date"
+                                    id="fechaExpedicion"
+                                    name="fechaExpedicion"
+                                    value={doc.fechaExpedicion}
+                                    onChange={(e) =>
+                                      handleinputchangeDocumentosRequeridos(
+                                        e,
+                                        i
+                                      )
+                                    }
+                                    className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                  />
+                                </div>
+                                <div className="">
+                                  <label className="block text-sm font-medium text-gray-700">
+                                    Número de documento o referencia
+                                  </label>
+                                  <input
+                                    type="text"
+                                    id="numeroDocumento"
+                                    name="numeroDocumento"
+                                    placeholder="Digite el numero del documento"
+                                    value={doc.numeroDocumento}
+                                    onChange={(e) =>
+                                      handleinputchangeDocumentosRequeridos(
+                                        e,
+                                        i
+                                      )
+                                    }
+                                    className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                  />
+                                </div>
 
-              <div>
-                <label
-                  htmlFor="documentacionPostulacion"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Documentación
-                </label>
-                <div className="">
-                  <input
-                    className="form-control
-                  block
-                  w-full
-                  px-3
-                  py-1.5
-                  text-base
-                  font-normal
-                  text-gray-700
-                  bg-white bg-clip-padding
-                  border border-solid border-gray-300
-                  rounded
-                  transition
-                  ease-in-out
-                  m-0
-                  focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                    type="file"
-                    name="documentacionPostulacion"
-                    id="documentacionPostulacion"
-                    onChange={(e) =>
-                      handleDocumentacionPostulacion(e.target.files[0])
-                    }
-                    accept=".pdf"
-                  />
+                                <div>
+                                  <label className="block text-sm font-medium text-gray-700">
+                                    Subir documento
+                                  </label>
+                                  <div className="">
+                                    <input
+                                      className="form-control
+                                            block
+                                            w-full
+                                            px-3
+                                            py-1.5
+                                            text-base
+                                            font-normal
+                                            text-gray-700
+                                            bg-white bg-clip-padding
+                                            border border-solid border-gray-300
+                                            rounded
+                                            transition
+                                            ease-in-out
+                                            m-0
+                                            focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                      type="file"
+                                      name="documento"
+                                      id="documento"
+                                      onChange={(e) =>
+                                        handleinputchangeDocumentosRequeridos(
+                                          e,
+                                          i
+                                        )
+                                      }
+                                      // onChange={(e) =>
+                                      //   handleDocumentacionPostulacion(
+                                      //     e.target.files[0]
+                                      //   )
+                                      // }
+                                      accept=".pdf"
+                                    />
+                                  </div>
+                                  {/* {errorDocumentacionPostulacion === true && (
+                                    <span className="text-red-500 text-xs">
+                                      El tamaño máximo es 1 Mb
+                                    </span>
+                                  )} */}
+                                </div>
+                              </div>
+                            );
+                          })}
+                      </AccordionBody>
+                    </Accordion>
+                  </div>
+                );
+              })
+            ) : (
+              <div className="rounded-md bg-blue-50 p-4">
+                <div className="flex">
+                  <div className="flex-shrink-0">
+                    <svg
+                      className="h-5 w-5 text-blue-400"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      aria-hidden="true"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a.75.75 0 000 1.5h.253a.25.25 0 01.244.304l-.459 2.066A1.75 1.75 0 0010.747 15H11a.75.75 0 000-1.5h-.253a.25.25 0 01-.244-.304l.459-2.066A1.75 1.75 0 009.253 9H9z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </div>
+                  <div className="ml-3 flex-1 md:flex ">
+                    <p className="text-sm text-blue-700">
+                      No existen requisitos para este cargo
+                    </p>
+                  </div>
                 </div>
-                {errorDocumentacionPostulacion === true && (
-                  <span className="text-red-500 text-xs">
-                    El tamaño máximo es 1 Mb
-                  </span>
-                )}
               </div>
-            </div>
-            
-            {msg && <Alert alerta={alertaPostulacion} />}
+            )}
+
+            {msg && <Alert alerta={alertaDocumentosRequisitos} />}
             {/*footer*/}
             <div className="flex space-x-4 items-center justify-end p-2 border-t border-solid border-slate-200 rounded-b">
               <button
