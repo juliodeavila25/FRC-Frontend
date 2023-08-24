@@ -1,22 +1,24 @@
-import FormularioNuevaUnidadFuncional from "../../components/unidad_funcional/FormularioNuevaUnidadFuncional";
-import { useState, useEffect } from "react";
+import FormularioRequisitosCargos from "../../components/requisitos_cargos/FormularioRequisitosCargos";
+import { useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 
 import { BeatLoader } from "react-spinners";
-import useFuncional from "../../hooks/useFuncional";
 
-const EditarUnidadFuncional = () => {
+import useDocumentosRequisitos from "../../hooks/useDocumentosRequisitos";
+
+const EditarRequisitosCargos = () => {
   const params = useParams();
-  const { obtenerUnidadFuncional, cargandoDataFuncionales } = useFuncional();
+
+  const { obtenerRequisitoCargo, cargandoDataDocumentos } = useDocumentosRequisitos()
 
   console.log(params.id);
   useEffect(() => {
-    obtenerUnidadFuncional(params.id);
-  }, []); 
+    obtenerRequisitoCargo(params.id);
+  }, []);
 
-  if (cargandoDataFuncionales) return <BeatLoader color="#36d7b7" />;
+  if (cargandoDataDocumentos) return <BeatLoader color="#36d7b7" />;
 
-  return <FormularioNuevaUnidadFuncional />;
+  return <FormularioRequisitosCargos />;
 };
 
-export default EditarUnidadFuncional;
+export default EditarRequisitosCargos;

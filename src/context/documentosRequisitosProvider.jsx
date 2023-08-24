@@ -7,10 +7,10 @@ const DocumentosRequisitosContext = createContext();
 
 const DocumentosRequisitosProvider = ({ children }) => {
   const [documentosRequisitos, setDocumentosRequisitos] = useState([]);
-  // const [requisitosBo, setRequisitosBo] = useState([]);
-  // const [requisitosBoForm, setRequisitosBoForm] = useState([]);
+  const [documentosRequisitosUsuario, setDocumentosRequisitosUsuario] = useState([]);
+  const [documentos, setDocumentos] = useState([]);
   const [alertaDocumentosRequisitos, setAlerta] = useState({});
-  const [cargandoDataRequisitosBo, setCargando] = useState(false);
+  const [cargandoDataDocumentos, setCargando] = useState(false);
   const navigate = useNavigate();
   const { auth } = useAuth();
 
@@ -21,28 +21,29 @@ const DocumentosRequisitosProvider = ({ children }) => {
     }, 5000);
   };
 
-  // useEffect(() => {
-  //   setCargando(true);
-  //   const obtenerRequisitosBo = async () => {
-  //     try {
-  //       const token = localStorage.getItem("token");
-  //       if (!token) return;
-  //       const config = {
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //           Authorization: `Bearer ${token}`,
-  //         },
-  //       };
-  //       const { data } = await clienteAxios("/requisito-bo", config);
+  useEffect(() => {
+    setCargando(true);
+    const obtenerRequisitosPorUsuario = async () => {
+      const id = auth._id
+      try {
+        const token = localStorage.getItem("token");
+        if (!token) return;
+        const config = {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        };
+        const { data } = await clienteAxios(`/documentos-requisitos/${id}`, config);
 
-  //       setRequisitosBo(data);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-  //   obtenerRequisitosBo();
-  //   setCargando(false);
-  // }, [auth]);
+        setDocumentosRequisitosUsuario(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    obtenerRequisitosPorUsuario();
+    setCargando(false);
+  }, [auth]);
 
   // const submitRequisitoBo = async (requisito) => {
   //   if (requisito.id) {
@@ -122,35 +123,39 @@ const DocumentosRequisitosProvider = ({ children }) => {
     setCargando(false);
   };
 
-  // const obtenerRequisitoBo = async (id) => {
-  //   setCargando(true);
-  //   console.log(id);
-  //   try {
-  //     const token = localStorage.getItem("token");
-  //     if (!token) return;
-  //     const config = {
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         Authorization: `Bearer ${token}`,
-  //       },
-  //     };
-  //     const { data } = await clienteAxios.get(`/requisito-bo/${id}`, config);
-  //     console.log(data);
-  //     setRequisitoBo(data);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
+  const obtenerRequisitoCargo = async (id) => {
+    setCargando(true);
+    console.log(id);
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) return;
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      const { data } = await clienteAxios.get(`/documentos-requisitos/documento/${id}`, config);
+      console.log(data);
+      setDocumentos(data);
+    } catch (error) {
+      console.log(error);
+    }
 
-  //   setCargando(false);
-  // };
+    setCargando(false);
+  };
 
   return (
     <DocumentosRequisitosContext.Provider
       value={{
         alertaDocumentosRequisitos,
         documentosRequisitos,
+        documentosRequisitosUsuario,
+        documentos,
+        cargandoDataDocumentos,
         nuevosDocumentosRequisitos,
         mostrarAlerta,
+        obtenerRequisitoCargo
 
       }}
     >

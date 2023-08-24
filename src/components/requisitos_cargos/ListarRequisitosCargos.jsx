@@ -1,4 +1,4 @@
-import useFuncional from "../../hooks/useFuncional";
+import useDocumentosRequisitos from "../../hooks/useDocumentosRequisitos";
 import { useState } from "react";
 import Table from "../table/Table";
 import { BeatLoader } from "react-spinners";
@@ -6,18 +6,29 @@ import { format } from "date-fns";
 import { useNavigate, Link } from "react-router-dom";
 
 const ListarRequisitosCargos = () => {
-  const { funcionales } =
-    useFuncional();
+  const { documentosRequisitosUsuario } =
+    useDocumentosRequisitos();
   const navigate = useNavigate();
 
   const [headers, setHeaders] = useState([
     {
-      Header: "Nombre Unidad",
-      accessor: "nombre",
+      Header: "Nombre requisito",
+      accessor: "nombreRequisito",
     },
     {
-      Header: "Estado",
-      accessor: "estado",
+      Header: "Documento",
+      accessor: (originalRow, rowIndex) => (
+        <div>
+          <a
+            className="text-blue-500 hover:text-blue-900 cursor-pointer underline"
+            href={`${import.meta.env.VITE_BACKEND_URL}/${originalRow.documento
+              }`}
+            target="_blank"
+          >
+            Ver documento
+          </a>
+        </div>
+      ),
     },
 
     {
@@ -34,7 +45,7 @@ const ListarRequisitosCargos = () => {
           <button
             className="text-blue-500 hover:text-blue-900"
             onClick={() =>
-              navigate(`/unidades-funcionales/editar-unidades-funcionales/${originalRow._id}`)
+              navigate(`/requisitos-cargos/editar-requisito-cargo/${originalRow._id}`)
             }
           >
             <svg
@@ -70,8 +81,8 @@ const ListarRequisitosCargos = () => {
           </div>
         </div>
       </div>
-      {Array.isArray(funcionales) && funcionales.length > 0 ? (
-        <Table data={funcionales} columns={headers} />
+      {Array.isArray(documentosRequisitosUsuario) && documentosRequisitosUsuario.length > 0 ? (
+        <Table data={documentosRequisitosUsuario} columns={headers} />
       ) : (
         <div className="rounded-md bg-blue-50 p-4">
           <div className="flex">

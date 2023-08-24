@@ -62,8 +62,6 @@ import EditarRequisito from "./pages/requisitos/EditarRequisito";
 import { DocumentosRequisitosProvider } from "./context/documentosRequisitosProvider";
 import ListarRequisitosCargos from "./pages/requisitos_cargos/ListarRequisitosCargos";
 import EditarRequisitosCargos from "./pages/requisitos_cargos/EditarRequisitosCargos"
-import SarlaftCreate from "./pages/sarlaft/SarlaftCreate";
-import SarlaftEdit from "./pages/sarlaft/SarlaftEdit";
 
 function App() {
   return (
@@ -479,11 +477,11 @@ function App() {
                                         >
                                           <Route
                                             path="crear-sarlaft"
-                                            element={<SarlaftCreate />}
+                                            element={<CurriculumVitae />}
                                           />
                                           <Route
                                             path="editar-sarlaft/:id"
-                                            element={<SarlaftEdit />}
+                                            element={<EditarCurriculumVitae />}
                                           />
                                         </Route>
 
