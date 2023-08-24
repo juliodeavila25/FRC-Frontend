@@ -60,6 +60,7 @@ import CrearRequisito from "./pages/requisitos/CrearRequisito";
 import { RequisitoProvider } from "./context/requisitoProvider";
 import EditarRequisito from "./pages/requisitos/EditarRequisito";
 import { DocumentosRequisitosProvider } from "./context/documentosRequisitosProvider";
+import ListarRequisitosCargos from "./pages/requisitos_cargos/ListarRequisitosCargos";
 
 function App() {
   return (
@@ -435,6 +436,32 @@ function App() {
                                             element={<EditarRequisito />}
                                           ></Route>
                                         </Route>
+
+
+                                        <Route
+                                          path="/requisitos-cargos"
+                                          element={
+                                            <RutaProtegida
+                                              allowedRoles={[
+                                                "aspirante",
+                                                "colaborador",
+                                              ]}
+                                            />
+                                          }
+                                        >
+                                          <Route
+                                            index
+                                            path="listar-requisitos-cargos"
+                                            element={<ListarRequisitosCargos />}
+                                          />
+
+                                          <Route
+                                            path="editar-requisito-cargo/:id"
+                                            element={<EditarRequisito />}
+                                          ></Route>
+                                        </Route>
+
+
                                       </Routes>
                                     </DocumentosRequeridosProvider>
                                   </CurriculumProvider>

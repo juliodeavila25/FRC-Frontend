@@ -81,11 +81,18 @@ const Sidebar = () => {
 
   const navigation_hv_inicial = [
     {
+      name: "Listado de Requisitos",
+      href: "/requisitos-cargos/listar-requisitos-cargos",
+      icon: BriefcaseIcon,
+      current: location.pathname.includes("/requisitos-cargos") ? true : false,
+    },
+    {
       name: "Ofertas de empleo",
       href: "/ofertas",
       icon: BriefcaseIcon,
       current: location.pathname.includes("/ofertas") ? true : false,
-    },
+    }
+
   ];
 
   const navigation_recursos_humanos = [
@@ -144,7 +151,7 @@ const Sidebar = () => {
       icon: ClipboardDocumentListIcon,
       current: location.pathname.includes("/documentos") ? true : false,
     },
-    
+
   ];
 
   const navigation_gerente = [
@@ -203,7 +210,7 @@ const Sidebar = () => {
       icon: ClipboardDocumentListIcon,
       current: location.pathname.includes("/documentos") ? true : false,
     },
-    
+
   ];
 
   const solicitudes = [
@@ -291,85 +298,85 @@ const Sidebar = () => {
                     <div className="space-y-1">
                       {auth?.userType[0] === "admin"
                         ? navigation_admin.map((item) => (
-                            <Link
-                              key={item.name}
-                              to={item.href}
+                          <Link
+                            key={item.name}
+                            to={item.href}
+                            className={classNames(
+                              item.current
+                                ? "bg-gray-100 text-gray-900"
+                                : "text-gray-600 hover:text-gray-900 hover:bg-gray-50",
+                              "group flex items-center px-2 py-2 text-base leading-5 font-medium rounded-md"
+                            )}
+                            aria-current={item.current ? "page" : undefined}
+                          >
+                            <item.icon
                               className={classNames(
                                 item.current
-                                  ? "bg-gray-100 text-gray-900"
-                                  : "text-gray-600 hover:text-gray-900 hover:bg-gray-50",
-                                "group flex items-center px-2 py-2 text-base leading-5 font-medium rounded-md"
+                                  ? "text-gray-500"
+                                  : "text-gray-400 group-hover:text-gray-500",
+                                "mr-3 flex-shrink-0 h-6 w-6"
                               )}
-                              aria-current={item.current ? "page" : undefined}
-                            >
-                              <item.icon
-                                className={classNames(
-                                  item.current
-                                    ? "text-gray-500"
-                                    : "text-gray-400 group-hover:text-gray-500",
-                                  "mr-3 flex-shrink-0 h-6 w-6"
-                                )}
-                                aria-hidden="true"
-                              />
-                              {item.name}
-                            </Link>
-                          ))
+                              aria-hidden="true"
+                            />
+                            {item.name}
+                          </Link>
+                        ))
                         : ""}
 
                       {auth?.userType[0] === "aspirante" ||
-                      auth?.userType[0] === "colaborador"
+                        auth?.userType[0] === "colaborador"
                         ? navigation_aspirante.map((item) => (
-                            <Link
-                              key={item.name}
-                              to={item.href}
+                          <Link
+                            key={item.name}
+                            to={item.href}
+                            className={classNames(
+                              item.current
+                                ? "bg-gray-100 text-gray-900"
+                                : "text-gray-600 hover:text-gray-900 hover:bg-gray-50",
+                              "group flex items-center px-2 py-2 text-base leading-5 font-medium rounded-md"
+                            )}
+                            aria-current={item.current ? "page" : undefined}
+                          >
+                            <item.icon
                               className={classNames(
                                 item.current
-                                  ? "bg-gray-100 text-gray-900"
-                                  : "text-gray-600 hover:text-gray-900 hover:bg-gray-50",
-                                "group flex items-center px-2 py-2 text-base leading-5 font-medium rounded-md"
+                                  ? "text-gray-500"
+                                  : "text-gray-400 group-hover:text-gray-500",
+                                "mr-3 flex-shrink-0 h-6 w-6"
                               )}
-                              aria-current={item.current ? "page" : undefined}
-                            >
-                              <item.icon
-                                className={classNames(
-                                  item.current
-                                    ? "text-gray-500"
-                                    : "text-gray-400 group-hover:text-gray-500",
-                                  "mr-3 flex-shrink-0 h-6 w-6"
-                                )}
-                                aria-hidden="true"
-                              />
-                              {item.name}
-                            </Link>
-                          ))
+                              aria-hidden="true"
+                            />
+                            {item.name}
+                          </Link>
+                        ))
                         : ""}
 
-                      {auth?.userType[0] !== "recursos_humanos" && auth?.userType[0] !== "gerente"  &&
-                      auth?.estado !== "inicial"
+                      {auth?.userType[0] !== "recursos_humanos" && auth?.userType[0] !== "gerente" &&
+                        auth?.estado !== "inicial"
                         ? navigation_hv_inicial.map((item) => (
-                            <Link
-                              key={item.name}
-                              to={item.href}
+                          <Link
+                            key={item.name}
+                            to={item.href}
+                            className={classNames(
+                              item.current
+                                ? "bg-gray-100 text-gray-900"
+                                : "text-gray-600 hover:text-gray-900 hover:bg-gray-50",
+                              "group flex items-center px-2 py-2 text-base leading-5 font-medium rounded-md"
+                            )}
+                            aria-current={item.current ? "page" : undefined}
+                          >
+                            <item.icon
                               className={classNames(
                                 item.current
-                                  ? "bg-gray-100 text-gray-900"
-                                  : "text-gray-600 hover:text-gray-900 hover:bg-gray-50",
-                                "group flex items-center px-2 py-2 text-base leading-5 font-medium rounded-md"
+                                  ? "text-gray-500"
+                                  : "text-gray-400 group-hover:text-gray-500",
+                                "mr-3 flex-shrink-0 h-6 w-6"
                               )}
-                              aria-current={item.current ? "page" : undefined}
-                            >
-                              <item.icon
-                                className={classNames(
-                                  item.current
-                                    ? "text-gray-500"
-                                    : "text-gray-400 group-hover:text-gray-500",
-                                  "mr-3 flex-shrink-0 h-6 w-6"
-                                )}
-                                aria-hidden="true"
-                              />
-                              {item.name}
-                            </Link>
-                          ))
+                              aria-hidden="true"
+                            />
+                            {item.name}
+                          </Link>
+                        ))
                         : ""}
 
                       {auth?.userType[0] === "gerente" &&
@@ -426,12 +433,12 @@ const Sidebar = () => {
                     </div>
 
                     {Object.keys(usuarioAutenticado).length !== 0 &&
-                    usuarioAutenticado &&
-                    usuarioAutenticado?.userType[0] === "colaborador" &&
-                    usuarioAutenticado?.estado === "completado" &&
-                    Array.isArray(curriculum) &&
-                    curriculum.length > 0 &&
-                    (curriculum[0].empresa === "Fundación Renal de Colombia" || curriculum[0].empresa === "GEIPAS") ? (
+                      usuarioAutenticado &&
+                      usuarioAutenticado?.userType[0] === "colaborador" &&
+                      usuarioAutenticado?.estado === "completado" &&
+                      Array.isArray(curriculum) &&
+                      curriculum.length > 0 &&
+                      (curriculum[0].empresa === "Fundación Renal de Colombia" || curriculum[0].empresa === "GEIPAS") ? (
                       <div className="mt-8">
                         <h3
                           className="px-3 text-lg font-medium text-gray-500"
@@ -659,85 +666,85 @@ const Sidebar = () => {
             <div className="space-y-1">
               {auth?.userType[0] === "admin"
                 ? navigation_admin.map((item) => (
-                    <Link
-                      key={item.name}
-                      to={item.href}
+                  <Link
+                    key={item.name}
+                    to={item.href}
+                    className={classNames(
+                      item.current
+                        ? "bg-gray-200 text-gray-900"
+                        : "text-gray-700 hover:text-gray-900 hover:bg-gray-50",
+                      "group flex items-center px-2 py-2 text-sm font-medium rounded-md"
+                    )}
+                    aria-current={item.current ? "page" : undefined}
+                  >
+                    <item.icon
                       className={classNames(
                         item.current
-                          ? "bg-gray-200 text-gray-900"
-                          : "text-gray-700 hover:text-gray-900 hover:bg-gray-50",
-                        "group flex items-center px-2 py-2 text-sm font-medium rounded-md"
+                          ? "text-gray-500"
+                          : "text-gray-400 group-hover:text-gray-500",
+                        "mr-3 flex-shrink-0 h-6 w-6"
                       )}
-                      aria-current={item.current ? "page" : undefined}
-                    >
-                      <item.icon
-                        className={classNames(
-                          item.current
-                            ? "text-gray-500"
-                            : "text-gray-400 group-hover:text-gray-500",
-                          "mr-3 flex-shrink-0 h-6 w-6"
-                        )}
-                        aria-hidden="true"
-                      />
-                      {item.name}
-                    </Link>
-                  ))
+                      aria-hidden="true"
+                    />
+                    {item.name}
+                  </Link>
+                ))
                 : ""}
 
               {auth?.userType[0] === "aspirante" ||
-              auth?.userType[0] === "colaborador"
+                auth?.userType[0] === "colaborador"
                 ? navigation_aspirante.map((item) => (
-                    <Link
-                      key={item.name}
-                      to={item.href}
+                  <Link
+                    key={item.name}
+                    to={item.href}
+                    className={classNames(
+                      item.current
+                        ? "bg-gray-200 text-gray-900"
+                        : "text-gray-700 hover:text-gray-900 hover:bg-gray-50",
+                      "group flex items-center px-2 py-2 text-sm font-medium rounded-md"
+                    )}
+                    aria-current={item.current ? "page" : undefined}
+                  >
+                    <item.icon
                       className={classNames(
                         item.current
-                          ? "bg-gray-200 text-gray-900"
-                          : "text-gray-700 hover:text-gray-900 hover:bg-gray-50",
-                        "group flex items-center px-2 py-2 text-sm font-medium rounded-md"
+                          ? "text-gray-500"
+                          : "text-gray-400 group-hover:text-gray-500",
+                        "mr-3 flex-shrink-0 h-6 w-6"
                       )}
-                      aria-current={item.current ? "page" : undefined}
-                    >
-                      <item.icon
-                        className={classNames(
-                          item.current
-                            ? "text-gray-500"
-                            : "text-gray-400 group-hover:text-gray-500",
-                          "mr-3 flex-shrink-0 h-6 w-6"
-                        )}
-                        aria-hidden="true"
-                      />
-                      {item.name}
-                    </Link>
-                  ))
+                      aria-hidden="true"
+                    />
+                    {item.name}
+                  </Link>
+                ))
                 : ""}
 
-              {auth?.userType[0] !== "recursos_humanos" && auth?.userType[0] !== "gerente"  &&
-              auth?.estado !== "inicial"
+              {auth?.userType[0] !== "recursos_humanos" && auth?.userType[0] !== "gerente" &&
+                auth?.estado !== "inicial"
                 ? navigation_hv_inicial.map((item) => (
-                    <Link
-                      key={item.name}
-                      to={item.href}
+                  <Link
+                    key={item.name}
+                    to={item.href}
+                    className={classNames(
+                      item.current
+                        ? "bg-gray-200 text-gray-900"
+                        : "text-gray-700 hover:text-gray-900 hover:bg-gray-50",
+                      "group flex items-center px-2 py-2 text-sm font-medium rounded-md"
+                    )}
+                    aria-current={item.current ? "page" : undefined}
+                  >
+                    <item.icon
                       className={classNames(
                         item.current
-                          ? "bg-gray-200 text-gray-900"
-                          : "text-gray-700 hover:text-gray-900 hover:bg-gray-50",
-                        "group flex items-center px-2 py-2 text-sm font-medium rounded-md"
+                          ? "text-gray-500"
+                          : "text-gray-400 group-hover:text-gray-500",
+                        "mr-3 flex-shrink-0 h-6 w-6"
                       )}
-                      aria-current={item.current ? "page" : undefined}
-                    >
-                      <item.icon
-                        className={classNames(
-                          item.current
-                            ? "text-gray-500"
-                            : "text-gray-400 group-hover:text-gray-500",
-                          "mr-3 flex-shrink-0 h-6 w-6"
-                        )}
-                        aria-hidden="true"
-                      />
-                      {item.name}
-                    </Link>
-                  ))
+                      aria-hidden="true"
+                    />
+                    {item.name}
+                  </Link>
+                ))
                 : ""}
 
               {auth?.userType[0] === "recursos_humanos" &&
@@ -765,7 +772,7 @@ const Sidebar = () => {
                     {item.name}
                   </Link>
                 ))}
-              
+
               {auth?.userType[0] === "gerente" &&
                 navigation_gerente.map((item) => (
                   <Link
@@ -793,12 +800,12 @@ const Sidebar = () => {
                 ))}
             </div>
             {Object.keys(usuarioAutenticado).length !== 0 &&
-            usuarioAutenticado &&
-            usuarioAutenticado?.userType[0] === "colaborador" &&
-            usuarioAutenticado?.estado === "completado" &&
-            Array.isArray(curriculum) &&
-            curriculum.length > 0 &&
-            (curriculum[0].empresa === "Fundación Renal de Colombia" || curriculum[0].empresa === "GEIPAS") ? (
+              usuarioAutenticado &&
+              usuarioAutenticado?.userType[0] === "colaborador" &&
+              usuarioAutenticado?.estado === "completado" &&
+              Array.isArray(curriculum) &&
+              curriculum.length > 0 &&
+              (curriculum[0].empresa === "Fundación Renal de Colombia" || curriculum[0].empresa === "GEIPAS") ? (
               <div className="mt-8">
                 {/* Secondary navigation */}
                 <h3
