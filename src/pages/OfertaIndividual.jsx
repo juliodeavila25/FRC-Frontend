@@ -12,9 +12,8 @@ import ListadoRequisitos from "../components/human_resources/ListadoRequisitos"
 
 const OfertaIndividual = () => {
   const current = new Date();
-  const date = `${current.getFullYear()}-${
-    current.getMonth() + 1
-  }-${current.getDate()}`;
+  const date = `${current.getFullYear()}-${current.getMonth() + 1
+    }-${current.getDate()}`;
 
   const navigate = useNavigate();
   const [active, setActive] = useState(false);
@@ -52,7 +51,7 @@ const OfertaIndividual = () => {
     cargandoDataCargos
   } = useOfertas();
 
-  const { obtenerCargosForm, cargosForm } = useCargos();
+  const { obtenerCargosForm, cargosForm, cargandoDataForm } = useCargos();
 
   const { auth, cargando } = useAuth();
 
@@ -79,22 +78,26 @@ const OfertaIndividual = () => {
       setIdUsuario(auth._id);
       setIdOferta(oferta._id);
 
-      let cargos = cargosForm.filter((item) => item.nombre === oferta.nombre);
-  
-      setRequisitosCargos(cargos);
+      // let cargos = cargosForm.filter((item) => item.nombre === oferta.nombre);
+
+      // setRequisitosCargos(cargos);
     }
   }, [oferta]);
 
 
+
+
+  useEffect(() => {
+    let cargos = cargosForm.filter((item) => item.nombre === oferta.nombre);
+
+    setRequisitosCargos(cargos);
+
+    console.log("Holaaaa: ", cargosForm)
+  }, [cargosForm])
+
   useEffect(() => {
     obtenerCargosForm();
-  }, []);
-
-  useEffect(()=>{
-    let cargos = cargosForm.filter((item) => item.nombre === oferta.nombre);
-  
-    setRequisitosCargos(cargos);
-  },[cargosForm])
+  }, [oferta]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -148,7 +151,10 @@ const OfertaIndividual = () => {
     setVisible(false);
   };
 
-  if (cargandoDataCargos  && cargosForm.length === 0) return <BeatLoader color="#36d7b7"  />;
+  if (cargandoDataForm) return <BeatLoader color="#36d7b7" />;
+
+
+  console.log("cargosForm: ", cargandoDataCargos, cargandoDataForm)
 
   return (
     <>
@@ -366,9 +372,9 @@ const OfertaIndividual = () => {
               Listado de documentos requeridos para aplicar a esta oferta
             </div>
             <div className="grid grid-cols-3 gap-6 mb-10">
-            {console.log(nombre)}
-            {Array.isArray(cargosForm) && cargosForm.length > 0 ?  <ListadoRequisitos listadoCargos={cargosForm} selectedCargo={nombre} /> : null}
-          </div>
+              {console.log(nombre)}
+              {Array.isArray(cargosForm) && cargosForm.length > 0 ? <ListadoRequisitos listadoCargos={cargosForm} selectedCargo={nombre} /> : null}
+            </div>
 
             <div className="grid grid-cols-2 gap-6 w-3/5 mx-auto">
               <Link
@@ -378,9 +384,9 @@ const OfertaIndividual = () => {
                 Cancelar
               </Link>
               {Array.isArray(postulaciones) &&
-              postulaciones.filter(
-                (postulacion) => postulacion._id === oferta._id
-              ).length === 0 ? (
+                postulaciones.filter(
+                  (postulacion) => postulacion._id === oferta._id
+                ).length === 0 ? (
                 <input
                   type="button"
                   className="flex w-full justify-center rounded-md border border-transparent bg-green-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 cursor-pointer"

@@ -11,6 +11,7 @@ const CargosProvider = ({ children }) => {
   const [cargosForm, setCargosForm] = useState([]);
   const [alerta, setAlerta] = useState({});
   const [cargandoDataCargos, setCargando] = useState(false);
+  const [cargandoDataForm, setCargandoForm] = useState(false);
   const navigate = useNavigate();
   const { auth } = useAuth();
 
@@ -147,6 +148,7 @@ const CargosProvider = ({ children }) => {
 
 
   const obtenerCargosForm = async () => {
+    setCargandoForm(true);
     try {
       const token = localStorage.getItem("token");
       if (!token) return;
@@ -162,6 +164,7 @@ const CargosProvider = ({ children }) => {
     } catch (error) {
       console.log(error);
     }
+    setCargandoForm(false);
   };
 
   return (
@@ -172,6 +175,7 @@ const CargosProvider = ({ children }) => {
         cargos,
         cargosForm,
         cargandoDataCargos,
+        cargandoDataForm,
         submitCargo,
         mostrarAlerta,
         obtenerCargo,

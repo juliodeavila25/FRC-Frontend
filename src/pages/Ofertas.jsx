@@ -2,18 +2,22 @@ import { useEffect, useState } from 'react'
 import usePostulaciones from '../hooks/usePostulaciones';
 import useOfertas from "../hooks/useOfertas";
 import useAuth from "../hooks/useAuth";
+import useCargos from "../hooks/useCargos";
 import ModalFillCurriculum from "../components/ModalFillCurriculum";
 import Table from "../components/table/Table";
 import { format } from "date-fns";
 import { useNavigate, Link } from "react-router-dom";
 import swal from 'sweetalert'
 import moment from 'moment'
+import ModalRequistos from "../components/ModalRequisitos";
 
 const Ofertas = () => {
-
+  const [cargoLinea, setCargoLinea] = useState("")
+  const [idOfertaLinea, setIdOfertaLinea] = useState("")
   const { ofertas, cargandoData } = useOfertas();
   const { auth, obtenerUsuarioAutenticado, usuarioAutenticado } = useAuth();
   const navigate = useNavigate();
+  const { obtenerCargosForm, cargosForm, cargandoDataForm } = useCargos();
 
   const { nuevaPostulacion, postulaciones, cargandoDataCargos, postulacionesFiltradas } = usePostulaciones();
 
@@ -22,6 +26,10 @@ const Ofertas = () => {
   useEffect(() => {
     obtenerUsuarioAutenticado()
   }, [auth])
+
+  useEffect(() => {
+    obtenerCargosForm();
+  }, []);
 
   useEffect(() => {
     setHeaders([
@@ -67,7 +75,7 @@ const Ofertas = () => {
 
                 <button
                   className={"text-blue-500 hover:text-blue-900  "}
-                  onClick={() => aplicarOferta(originalRow._id)}
+                  onClick={() => activateModal(originalRow)}
 
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor " className="w-6 h-6">
@@ -175,6 +183,19 @@ const Ofertas = () => {
 
   const [headers, setHeaders] = useState([]);
   const [headersOferta, setHeadersOferta] = useState([]);
+  const [visible, setVisible] = useState(false);
+
+  const activateModal = (data) => {
+    //e.preventDefault();
+    console.log(data)
+    setVisible(true);
+    setCargoLinea(data.nombre)
+    setIdOfertaLinea(data._id)
+  };
+
+  const setShowModal = () => {
+    setVisible(false);
+  };
 
 
   if (cargandoDataCargos && cargandoData) return <BeatLoader color="#36d7b7" />;
@@ -184,6 +205,7 @@ const Ofertas = () => {
       {Object.keys(usuarioAutenticado).length !== 0 && usuarioAutenticado && usuarioAutenticado?.userType[0] === "colaborador" && usuarioAutenticado?.estado === "por_completar" ? (
         <ModalFillCurriculum />
       ) : null}
+      {Array.isArray(cargosForm) && cargosForm.length > 0 && visible === true && <ModalRequistos setShowModal={setShowModal} listadoCargos={cargosForm} selectedCargo={cargoLinea} idOferta={idOfertaLinea} />}
       <div className="w-11/12 mx-auto mt-10 ">
         <div className="flex justify-around bg-gray-100 rounded-t-lg">
           <button
@@ -191,7 +213,7 @@ const Ofertas = () => {
             onClick={() => toggleTab(1)}
           >
             Listado de ofertas
-            
+
           </button>
           <button
             className={toggleState === 2 ? 'border-indigo-500 text-indigo-600 w-1/4 border-b-2 py-4 px-1 text-center text-sm font-medium' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 w-1/4 border-b-2 py-4 px-1 text-center text-sm font-medium'}
@@ -205,7 +227,7 @@ const Ofertas = () => {
           <div
             className={toggleState === 1 ? "content  active-content" : "content"}
           >
-             {Array.isArray(ofertas) && ofertas.length > 0 && ofertas.filter(oferta => oferta.estadoConvocatoria === "Activa").length > 0 ? (
+            {Array.isArray(ofertas) && ofertas.length > 0 && ofertas.filter(oferta => oferta.estadoConvocatoria === "Activa").length > 0 ? (
               <>
                 <Table
                   data={ofertas.filter(oferta => oferta.estadoConvocatoria === "Activa")}
@@ -234,7 +256,7 @@ const Ofertas = () => {
                   </div>
                   <div className="ml-3 flex-1 md:flex ">
                     <p className="text-sm text-blue-700">
-                    No existen ofertas activas.
+                      No existen ofertas activas.
                     </p>
                   </div>
                 </div>
@@ -245,7 +267,7 @@ const Ofertas = () => {
           <div
             className={toggleState === 2 ? "content  active-content" : "content"}
           >
-           {Array.isArray(postulaciones) && postulaciones.length > 0 ? (
+            {Array.isArray(postulaciones) && postulaciones.length > 0 ? (
               <>
                 <Table
                   data={postulaciones}
@@ -274,8 +296,8 @@ const Ofertas = () => {
                   </div>
                   <div className="ml-3 flex-1 md:flex ">
                     <p className="text-sm text-blue-700">
-                    No has aplicado a ninguna oferta.
-                    
+                      No has aplicado a ninguna oferta.
+
                     </p>
                   </div>
                 </div>

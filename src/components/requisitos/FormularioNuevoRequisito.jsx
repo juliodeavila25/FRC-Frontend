@@ -12,12 +12,12 @@ const FormularioNuevoRequisito = () => {
   const [active, setActive] = useState(false);
   const [id, setId] = useState(null);
   const [nombre, setNombre] = useState("");
-  const [vigencia, setVigencia] = useState("");
-  const [emisor, setEmisor]= useState("");
-  const [fechaExp, setFechaExp]= useState("")
-  const [reference, setReference]= useState("");
+  const [vigencia, setVigencia] = useState(false);
+  const [emisor, setEmisor] = useState(false);
+  const [fechaExp, setFechaExp] = useState(false)
+  const [reference, setReference] = useState(false);
   const [estado, setEstado] = useState("Pendiente");
-  const [descripcionRequisito, setDescripcionRequisito]=useState("")
+  const [descripcionRequisito, setDescripcionRequisito] = useState("")
 
 
   /* Error en el campo nombre del cargo*/
@@ -29,7 +29,7 @@ const FormularioNuevoRequisito = () => {
 
   const params = useParams();
   const { submitRequisitoBo, mostrarAlerta, alerta, requisitoBo, cargandoDataRequisitoBo } =
-  useRequisito();
+    useRequisito();
 
   const { auth, cargando } = useAuth();
 
@@ -124,7 +124,7 @@ const FormularioNuevoRequisito = () => {
                   value={vigencia}
                   checked={vigencia}
                   onChange={(e) => setVigencia(e.target.checked)}
-                
+
                 />
                 <label htmlFor="vigencia">¿Tiene fecha de vigencia?</label>
               </div>
@@ -147,7 +147,7 @@ const FormularioNuevoRequisito = () => {
                   value={fechaExp}
                   checked={fechaExp}
                   onChange={(e) => setFechaExp(e.target.checked)}
-                 
+
                 />
                 <label htmlFor="fecha_exp">Fecha de expedición</label>
               </div>

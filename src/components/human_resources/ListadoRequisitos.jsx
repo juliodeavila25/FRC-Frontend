@@ -1,14 +1,18 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, memo } from "react";
 import { FcDocument } from "react-icons/fc";
+import useCargos from "../../hooks/useCargos";
 
 const ListadoRequisitos = ({ listadoCargos, selectedCargo }) => {
   const [requisitosCargos, setRequisitosCargos] = useState([]);
+  const { cargo } = useCargos();
 
   useEffect(() => {
-    let cargo = listadoCargos.filter((item) => item.nombre === selectedCargo);
+    let cargoNuevo = listadoCargos.filter((item) => item.nombre === selectedCargo);
 
-    setRequisitosCargos(cargo);
-  }, [selectedCargo]);
+    setRequisitosCargos(cargoNuevo);
+  }, [selectedCargo, cargo]);
+
+  console.log(requisitosCargos)
 
   return (
     <>
@@ -61,4 +65,4 @@ const ListadoRequisitos = ({ listadoCargos, selectedCargo }) => {
   );
 };
 
-export default ListadoRequisitos;
+export default memo(ListadoRequisitos);

@@ -26,9 +26,8 @@ function Icon({ id, open }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      className={`${
-        id === open ? "rotate-180" : ""
-      } h-5 w-5 transition-transform`}
+      className={`${id === open ? "rotate-180" : ""
+        } h-5 w-5 transition-transform`}
       fill="none"
       viewBox="0 0 24 24"
       stroke="currentColor"
@@ -47,39 +46,40 @@ export default function ModalPublic({
 }) {
   const [requisitosCargos, setRequisitosCargos] = useState([]);
 
-  const[idUsuario, setIdUsuario]= useState("")
+  const [idUsuario, setIdUsuario] = useState("")
   const [estadoAplicacionOferta, setEstadoAplicacionOferta] =
     useState("Postulado");
 
   const [documentosRequeridos, setDocumentosRequeridos] = useState([]);
+
+  const [errorDocumentos, setErrorDocumentos] = useState(false)
 
   const [archivos, setArchivos] = useState([]);
 
   const [open, setOpen] = useState(1);
 
   const current = new Date();
-  const date = `${current.getFullYear()}-${
-    current.getMonth() + 1
-  }-${current.getDate()}`;
+  const date = `${current.getFullYear()}-${current.getMonth() + 1
+    }-${current.getDate()}`;
 
   const { obtenerUsuarios, usuarios, usuarioAutenticado, auth } = useAuth();
 
-  const { nuevosDocumentosRequisitos, alertaDocumentosRequisitos } = useDocumentosRequisitos();
+  const { nuevosDocumentosRequisitos, alertaDocumentosRequisitos, mostrarAlerta } = useDocumentosRequisitos();
 
   const { nuevaPostulacion, postulaciones } = usePostulaciones();
 
-  const { msg, error} = alertaDocumentosRequisitos;
+  const { msg, error } = alertaDocumentosRequisitos;
 
-  useEffect(() =>{
-    if(error === false){
+  useEffect(() => {
+    if (error === false) {
 
-     setTimeout(() => {
-      setShowModal(false)
-     }, 3000);
+      setTimeout(() => {
+        setShowModal(false)
+      }, 3000);
 
     }
 
-  },[alertaDocumentosRequisitos])
+  }, [alertaDocumentosRequisitos])
 
   console.log(auth)
 
@@ -94,7 +94,7 @@ export default function ModalPublic({
       const updatedBdays = documentosRequeridos;
       for (let i = 0; i < cargo[0]?.requisitos.length; i++) {
         updatedBdays.push({
-          idRequisito:cargo[0]?.requisitos[i]._id,
+          idRequisito: cargo[0]?.requisitos[i]._id,
           nombreRequisito: cargo[0]?.requisitos[i].nombre,
           fechaVigencia: "",
           emisor: "",
@@ -108,11 +108,12 @@ export default function ModalPublic({
     }
   }, [selectedCargo]);
 
- 
+
 
   const submitData = async (e) => {
     e.preventDefault();
     const id_oferta = localStorage.getItem("id_oferta");
+
 
 
     const formData = new FormData();
@@ -125,7 +126,7 @@ export default function ModalPublic({
     }
 
     formData.append("idOferta", idOferta);
-    formData.append("creador",  usuarioAutenticado._id)
+    formData.append("creador", usuarioAutenticado._id)
 
     await nuevosDocumentosRequisitos(formData);
 
@@ -134,7 +135,7 @@ export default function ModalPublic({
       idOferta,
       estadoAplicacionOferta,
     });
-    
+
   };
 
 
@@ -157,14 +158,25 @@ export default function ModalPublic({
   };
 
   const handleinputchangeDocumentosRequeridos = (e, index) => {
+    const maxfilesize = 1024 * 1024;
+
     const { name, value, files } = e.target;
+    console.log(files)
     const list = [...documentosRequeridos];
     if (files?.length > 0) {
-      list[index][name] = files[0];
+      if (files[0].size > maxfilesize) {
+        e.target.value = '';
+        setErrorDocumentos(true);
+      } else {
+        list[index][name] = files[0];
+        setErrorDocumentos(false);
+      }
+
     } else {
       list[index][name] = value;
     }
     setDocumentosRequeridos(list);
+    console.log(documentosRequeridos)
   };
 
   return (
@@ -190,7 +202,7 @@ export default function ModalPublic({
             </div>
             {/*body*/}
             {Array.isArray(requisitosCargos) &&
-            requisitosCargos[0]?.requisitos.length > 0 ? (
+              requisitosCargos[0]?.requisitos.length > 0 ? (
               requisitosCargos[0]?.requisitos.map((item, i) => {
                 return (
                   <div key={i} className="w-11/12 mx-auto pt-5 ">
@@ -211,11 +223,11 @@ export default function ModalPublic({
                         {console.log(documentosRequeridos)}
                         {Array.isArray(documentosRequeridos) &&
                           [documentosRequeridos[i]].map((doc, index) => {
-                            {console.log(item._id)}
+                            { console.log(item) }
                             return (
                               <div
                                 key={i}
-                                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 p-8"
+                                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-5 p-8"
                               >
                                 <div className="">
                                   <label className="block text-sm font-medium text-gray-700">
@@ -236,88 +248,97 @@ export default function ModalPublic({
                                     }
                                   />
                                 </div>
-                                <div className="">
-                                  <label className="block text-sm font-medium text-gray-700">
-                                    Fecha de vigencia
-                                  </label>
-                                  <input
-                                    type="date"
-                                    id="fechaVigencia"
-                                    name="fechaVigencia"
-                                    value={doc.fechaVigencia}
-                                    onChange={(e) =>
-                                      handleinputchangeDocumentosRequeridos(
-                                        e,
-                                        i
-                                      )
-                                    }
-                                    // onChange={(e) =>
-                                    //   setFechaSistemaPostulacion(e.target.value)
-                                    // }
-                                    className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                                  />
-                                </div>
-                                <div className="">
-                                  <label className="block text-sm font-medium text-gray-700">
-                                    Emisor o expedido por
-                                  </label>
-                                  <input
-                                    type="text"
-                                    id="emisor"
-                                    name="emisor"
-                                    placeholder="Digite el emisor"
-                                    value={doc.emisor}
-                                    onChange={(e) =>
-                                      handleinputchangeDocumentosRequeridos(
-                                        e,
-                                        i
-                                      )
-                                    }
-                                    // onChange={(e) =>
-                                    //   setObservacionesPostulacion(
-                                    //     e.target.value
-                                    //   )
-                                    // }
-                                    className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                                  />
-                                </div>
-                                <div className="">
-                                  <label className="block text-sm font-medium text-gray-700">
-                                    Fecha de expedición
-                                  </label>
-                                  <input
-                                    type="date"
-                                    id="fechaExpedicion"
-                                    name="fechaExpedicion"
-                                    value={doc.fechaExpedicion}
-                                    onChange={(e) =>
-                                      handleinputchangeDocumentosRequeridos(
-                                        e,
-                                        i
-                                      )
-                                    }
-                                    className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                                  />
-                                </div>
-                                <div className="">
-                                  <label className="block text-sm font-medium text-gray-700">
-                                    Número de documento o referencia
-                                  </label>
-                                  <input
-                                    type="text"
-                                    id="numeroDocumento"
-                                    name="numeroDocumento"
-                                    placeholder="Digite el numero del documento"
-                                    value={doc.numeroDocumento}
-                                    onChange={(e) =>
-                                      handleinputchangeDocumentosRequeridos(
-                                        e,
-                                        i
-                                      )
-                                    }
-                                    className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                                  />
-                                </div>
+                                {item.vigencia === true ? (
+                                  <div className="">
+                                    <label className="block text-sm font-medium text-gray-700">
+                                      Fecha de vigencia
+                                    </label>
+                                    <input
+                                      type="date"
+                                      id="fechaVigencia"
+                                      name="fechaVigencia"
+                                      value={doc.fechaVigencia}
+                                      onChange={(e) =>
+                                        handleinputchangeDocumentosRequeridos(
+                                          e,
+                                          i
+                                        )
+                                      }
+                                      // onChange={(e) =>
+                                      //   setFechaSistemaPostulacion(e.target.value)
+                                      // }
+                                      required={true}
+                                      className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                    />
+                                  </div>
+                                ) : null}
+                                {item.emisor === true ? (
+                                  <div className="">
+                                    <label className="block text-sm font-medium text-gray-700">
+                                      Emisor o expedido por
+                                    </label>
+                                    <input
+                                      type="text"
+                                      id="emisor"
+                                      name="emisor"
+                                      placeholder="Digite el emisor"
+                                      value={doc.emisor}
+                                      onChange={(e) =>
+                                        handleinputchangeDocumentosRequeridos(
+                                          e,
+                                          i
+                                        )
+                                      }
+                                      // onChange={(e) =>
+                                      //   setObservacionesPostulacion(
+                                      //     e.target.value
+                                      //   )
+                                      // }
+                                      required={true}
+                                      className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                    />
+                                  </div>) : null}
+                                {item.fechaExp === true ? (
+                                  <div className="">
+                                    <label className="block text-sm font-medium text-gray-700">
+                                      Fecha de expedición
+                                    </label>
+                                    <input
+                                      type="date"
+                                      id="fechaExpedicion"
+                                      name="fechaExpedicion"
+                                      value={doc.fechaExpedicion}
+                                      required={true}
+                                      onChange={(e) =>
+                                        handleinputchangeDocumentosRequeridos(
+                                          e,
+                                          i
+                                        )
+                                      }
+                                      className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                    />
+                                  </div>) : null}
+                                {item.reference === true ? (
+                                  <div className="">
+                                    <label className="block text-sm font-medium text-gray-700">
+                                      Número de documento o referencia
+                                    </label>
+                                    <input
+                                      type="text"
+                                      id="numeroDocumento"
+                                      name="numeroDocumento"
+                                      placeholder="Digite el numero del documento"
+                                      value={doc.numeroDocumento}
+                                      required={true}
+                                      onChange={(e) =>
+                                        handleinputchangeDocumentosRequeridos(
+                                          e,
+                                          i
+                                        )
+                                      }
+                                      className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                    />
+                                  </div>) : null}
 
                                 <div>
                                   <label className="block text-sm font-medium text-gray-700">
@@ -343,6 +364,7 @@ export default function ModalPublic({
                                       type="file"
                                       name="documento"
                                       id="documento"
+                                      required={true}
                                       onChange={(e) =>
                                         handleinputchangeDocumentosRequeridos(
                                           e,
@@ -356,12 +378,14 @@ export default function ModalPublic({
                                       // }
                                       accept=".pdf"
                                     />
-                                  </div>
-                                  {/* {errorDocumentacionPostulacion === true && (
-                                    <span className="text-red-500 text-xs">
-                                      El tamaño máximo es 1 Mb
+
+                                    <span className="text-blue-900 text-xs font-bold italic">
+                                      Nota: El tamaño máximo es 1mb
                                     </span>
-                                  )} */}
+
+                                  </div>
+
+
                                 </div>
                               </div>
                             );

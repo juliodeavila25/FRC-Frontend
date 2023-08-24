@@ -89,7 +89,7 @@ const DocumentosRequisitosProvider = ({ children }) => {
   //   }
   // };
 
-  const nuevosDocumentosRequisitos= async (documentosRequisitos) => {
+  const nuevosDocumentosRequisitos = async (documentosRequisitos) => {
     setCargando(true);
     // for (const value of documentosRequisitos.values()) {
     //   console.log(value);
@@ -113,10 +113,9 @@ const DocumentosRequisitosProvider = ({ children }) => {
         error: false,
       });
 
-      // setTimeout(() => {
-      //   setAlerta({});
-      //   navigate("/requisitos/listar-requisitos");
-      // }, 3000);
+      setTimeout(() => {
+        setAlerta({});
+      }, 3000);
     } catch (error) {
       console.log(error);
     }
