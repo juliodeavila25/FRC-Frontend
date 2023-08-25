@@ -21,7 +21,7 @@ const FormularioRequisitosCargos = () => {
   const params = useParams();
   const { auth, cargando } = useAuth();
 
-  const { documentos, cargandoDataDocumentos } = useDocumentosRequisitos()
+  const { documentos, cargandoDataDocumentos, alertaDocumentosRequisitos, editarDocumentosRequisitos } = useDocumentosRequisitos()
 
 
   console.log(documentos)
@@ -41,17 +41,21 @@ const FormularioRequisitosCargos = () => {
 
 
 
-  const handleSubmit = async (e) => {
+  const submitData = async (e) => {
     e.preventDefault();
 
+    const formData = new FormData();
 
-    await submitFuncional({
-      id,
-      nombre,
-      negocio,
-      inputCargos,
-      estado,
-    });
+    formData.append("id", id);
+    formData.append("nombreRequisito", nombreRequisito);
+    formData.append("fechaVigencia", fechaVigencia);
+    formData.append("emisor", emisor);
+    formData.append("fechaExpedicion", fechaExpedicion);
+    formData.append("numeroDocumento", numeroDocumento);
+    formData.append("documento", documento);
+
+
+    await editarDocumentosRequisitos(formData);
   };
 
 
@@ -69,14 +73,16 @@ const FormularioRequisitosCargos = () => {
 
 
 
-  // const { msg } = alerta;
+  const { msg } = alertaDocumentosRequisitos;
 
   if (cargandoDataDocumentos) return <BeatLoader color="#36d7b7" />;
 
   return (
     <div className=" sm:mx-auto sm:w-full">
       <div className="bg-white py-8 px-4 shadow-lg rounded-lg sm:px-10">
-        <form className="space-y-6 " onSubmit={handleSubmit}>
+        <form className="space-y-6 "
+          onSubmit={submitData}
+          encType="multipart/form-data">
           <div className="text-left text-xl text-gray-700 mt-8 font-bold border-b-4 border-corporative-blue inline-flex">
             Listado de Requisitos para Cargos
           </div>
@@ -239,7 +245,7 @@ const FormularioRequisitosCargos = () => {
 
             </div>
 
-            {/* {msg && <Alert alerta={alerta} />} */}
+            {msg && <Alert alerta={alertaDocumentosRequisitos} />}
 
             <div className="grid grid-cols-2 gap-6 w-3/5 mx-auto pt-10">
               <Link

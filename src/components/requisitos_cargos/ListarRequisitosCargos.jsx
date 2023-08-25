@@ -1,14 +1,22 @@
 import useDocumentosRequisitos from "../../hooks/useDocumentosRequisitos";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Table from "../table/Table";
 import { BeatLoader } from "react-spinners";
 import { format } from "date-fns";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 
 const ListarRequisitosCargos = () => {
-  const { documentosRequisitosUsuario } =
+  const { documentosRequisitosUsuario, obtenerRequisitosPorUsuario, cargandoDataDocumentos } =
     useDocumentosRequisitos();
   const navigate = useNavigate();
+  const { auth } = useAuth();
+
+
+  useEffect(() => {
+    obtenerRequisitosPorUsuario(auth?._id)
+  }, [])
+
 
   const [headers, setHeaders] = useState([
     {
@@ -67,6 +75,10 @@ const ListarRequisitosCargos = () => {
       ),
     },
   ]);
+
+
+  if (cargandoDataDocumentos) return <BeatLoader color="#36d7b7" />;
+
 
   return (
     <>

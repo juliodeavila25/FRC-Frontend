@@ -21,29 +21,31 @@ const DocumentosRequisitosProvider = ({ children }) => {
     }, 5000);
   };
 
-  useEffect(() => {
-    setCargando(true);
-    const obtenerRequisitosPorUsuario = async () => {
-      const id = auth._id
-      try {
-        const token = localStorage.getItem("token");
-        if (!token) return;
-        const config = {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        };
-        const { data } = await clienteAxios(`/documentos-requisitos/${id}`, config);
+  console.log(auth)
 
-        setDocumentosRequisitosUsuario(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    obtenerRequisitosPorUsuario();
+
+  const obtenerRequisitosPorUsuario = async (id) => {
     setCargando(false);
-  }, [auth]);
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) return;
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      const { data } = await clienteAxios(`/documentos-requisitos/${id}`, config);
+
+      setDocumentosRequisitosUsuario(data);
+    } catch (error) {
+      console.log(error);
+    }
+    setCargando(false);
+  };
+
+
+
 
   // const submitRequisitoBo = async (requisito) => {
   //   if (requisito.id) {
@@ -53,42 +55,42 @@ const DocumentosRequisitosProvider = ({ children }) => {
   //   }
   // };
 
-  // const editarRequisitoBo = async (requisito) => {
-  //   console.log(requisito);
-  //   try {
-  //     const token = localStorage.getItem("token");
-  //     if (!token) return;
-  //     const config = {
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         Authorization: `Bearer ${token}`,
-  //       },
-  //     };
-  //     const { data } = await clienteAxios.put(
-  //       `/requisito-bo/${requisito.id}`,
-  //       requisito,
-  //       config
-  //     );
+  const editarDocumentosRequisitos = async (requisito) => {
+    const id = requisito.get("id");
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) return;
+      const config = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      const { data } = await clienteAxios.put(
+        `/documentos-requisitos/${id}`,
+        requisito,
+        config
+      );
 
-  //     const requisitosActualizados = requisitosBo.map((requisitoState) =>
-  //       requisitoState._id === data._id ? data : requisitoState
-  //     );
-  //     setRequisitosBo(requisitosActualizados);
+      const requisitosActualizados = documentosRequisitos.map((requisitoState) =>
+        requisitoState._id === data._id ? data : requisitoState
+      );
+      setDocumentosRequisitos(requisitosActualizados);
 
-  //     //Mostrar alerta
-  //     setAlerta({
-  //       msg: "Requisito actualizado correctamente",
-  //       error: false,
-  //     });
+      //Mostrar alerta
+      setAlerta({
+        msg: "Requisito actualizado correctamente",
+        error: false,
+      });
 
-  //     setTimeout(() => {
-  //       setAlerta({});
-  //       navigate("/requisitos/listar-requisitos");
-  //     }, 3000);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+      setTimeout(() => {
+        setAlerta({});
+        navigate("/requisitos-cargos/listar-requisitos-cargos");
+      }, 3000);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const nuevosDocumentosRequisitos = async (documentosRequisitos) => {
     setCargando(true);
@@ -155,7 +157,9 @@ const DocumentosRequisitosProvider = ({ children }) => {
         cargandoDataDocumentos,
         nuevosDocumentosRequisitos,
         mostrarAlerta,
-        obtenerRequisitoCargo
+        obtenerRequisitoCargo,
+        editarDocumentosRequisitos,
+        obtenerRequisitosPorUsuario
 
       }}
     >
