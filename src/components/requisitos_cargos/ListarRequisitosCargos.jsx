@@ -17,6 +17,7 @@ const ListarRequisitosCargos = () => {
     obtenerRequisitosPorUsuario(auth?._id)
   }, [])
 
+  console.log(documentosRequisitosUsuario)
 
   const [headers, setHeaders] = useState([
     {
@@ -44,6 +45,28 @@ const ListarRequisitosCargos = () => {
       accessor: "createdAt",
       Cell: ({ value }) => {
         return format(new Date(value), "dd/MM/yyyy");
+      },
+    },
+    {
+      Header: "Vencimiento(dias)",
+      accessor: "fechaVigencia",
+      Cell: ({ value }) => {
+        console.log(value)
+        var fechaActual = new Date();
+        var otraFecha = new Date(value);
+        var diferenciaEnMilisegundos = otraFecha - fechaActual;
+        var diferenciaEnDias = diferenciaEnMilisegundos / (1000 * 60 * 60 * 24);
+        if (isNaN(diferenciaEnDias)) {
+          return (<span>N/A</span>)
+        } else {
+          if (Math.round(diferenciaEnDias) <= 5) {
+            return (<div className="text-red-500 lowercase">{Math.round(diferenciaEnDias)} días</div>)
+          } else {
+            return (<div className="lowercase">{Math.round(diferenciaEnDias)}  días</div>)
+          }
+
+        }
+
       },
     },
     {

@@ -24,9 +24,8 @@ function Icon({ id, open }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      className={`${
-        id === open ? "rotate-180" : ""
-      } h-5 w-5 transition-transform`}
+      className={`${id === open ? "rotate-180" : ""
+        } h-5 w-5 transition-transform`}
       fill="none"
       viewBox="0 0 24 24"
       stroke="currentColor"
@@ -103,16 +102,16 @@ export default function Dashboard() {
     <>
       {auth?.userType[0] === "admin" ? <Admin /> : null}
       {Object.keys(usuarioAutenticado).length !== 0 &&
-      usuarioAutenticado &&
-      usuarioAutenticado?.userType[0] === "colaborador" &&
-      usuarioAutenticado?.estado === "por_completar" ? (
+        usuarioAutenticado &&
+        usuarioAutenticado?.userType[0] === "colaborador" &&
+        usuarioAutenticado?.estado === "por_completar" ? (
         <ModalFillCurriculum />
       ) : null}
 
-      {Object.keys(usuarioAutenticado).length !== 0 &&
-      usuarioAutenticado &&
-      usuarioAutenticado?.userType[0] === "aspirante" &&
-      usuarioAutenticado?.estado === "inicial_completado" ? (
+      {/* {Object.keys(usuarioAutenticado).length !== 0 &&
+        usuarioAutenticado &&
+        usuarioAutenticado?.userType[0] === "aspirante" &&
+        usuarioAutenticado?.estado === "inicial_completado" ? (
         <div className="rounded-md bg-red-50 p-4">
           <div className="flex">
             <div className="flex-shrink-0">
@@ -142,7 +141,7 @@ export default function Dashboard() {
             </div>
           </div>
         </div>
-      ) : null}
+      ) : null} */}
       <div className="rounded-md bg-blue-50 p-4">
         <div className="flex">
           <div className="flex-shrink-0">
@@ -167,7 +166,7 @@ export default function Dashboard() {
         </div>
       </div>
       <div>
-        <div className="w-11/12 mx-auto pt-2">
+        <div className="w-11/12 mx-auto pt-2 hidden">
           <Accordion open={open === 1} icon={<Icon id={1} open={open} />}>
             <AccordionHeader
               className="text-base font-semibold text-gray-900"

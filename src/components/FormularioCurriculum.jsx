@@ -889,44 +889,6 @@ const FormularioCurriculum = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             <div>
               <label
-                htmlFor="tipoDocumento"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Tipo de Persona <span className="text-red-700">*</span>
-              </label>
-              <div className="mt-1">
-                <select
-                  id="tipoDocumento"
-                  name="tipoDocumento"
-                  placeholder="Digita tu correo electrónico"
-                  className={
-                    errorTipoDocumento === false
-                      ? "block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                      : "block w-full appearance-none rounded-md border border-red-500 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-red-500 focus:outline-none focus:ring-red-500 sm:text-sm"
-                  }
-                  onChange={(e) => {
-                    const selectedDocumentType = e.target.value;
-
-                    setTipoDocumento(selectedDocumentType);
-                  }}
-                  value={tipoDocumento}
-                  ref={inputRefTipoDocumento}
-                >
-                  <option value="elegir" disabled className="text-gray-400">
-                    --Selecciona un tipo de persona--
-                  </option>
-                  <option value="Natural">Natural</option>
-                  <option value="Juridica">Juridica</option>
-                </select>
-                {errorTipoDocumento === true && (
-                  <span className="text-red-500 text-xs">
-                    Seleccione la información requerida
-                  </span>
-                )}
-              </div>
-            </div>
-            <div>
-              <label
                 htmlFor="nombre"
                 className="block text-sm font-medium text-gray-700"
               >
@@ -1647,9 +1609,8 @@ const FormularioCurriculum = () => {
               <div className="mt-3">
                 {curriculum[0]?.soporteExp && (
                   <a
-                    href={`${import.meta.env.VITE_BACKEND_URL}/${
-                      curriculum[0].soporteExp
-                    }`}
+                    href={`${import.meta.env.VITE_BACKEND_URL}/${curriculum[0].soporteExp
+                      }`}
                     download={curriculum[0].soporteExp}
                     target="_blank"
                     className="underline text-blue-500 pt-5"
@@ -1741,7 +1702,7 @@ const FormularioCurriculum = () => {
                   placeholder="Digita correo de la referencia 1"
                   className={
                     errorReferenciaACorreo === false &&
-                    errorCorreoRefInput === false
+                      errorCorreoRefInput === false
                       ? "block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                       : "block w-full appearance-none rounded-md border border-red-500 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-red-500 focus:outline-none focus:ring-red-500 sm:text-sm"
                   }
@@ -1835,8 +1796,8 @@ const FormularioCurriculum = () => {
             </div>
           </div>
           {Object.keys(usuarioAutenticado).length !== 0 &&
-          usuarioAutenticado &&
-          usuarioAutenticado?.userType[0] === "colaborador" ? (
+            usuarioAutenticado &&
+            usuarioAutenticado?.userType[0] === "colaborador" ? (
             <>
               <div className="text-left text-xl text-gray-700 mt-8 font-bold border-b-4 border-corporative-blue inline-flex pt-3">
                 Seguridad Social
@@ -1918,9 +1879,8 @@ const FormularioCurriculum = () => {
                   <div className="mt-3">
                     {curriculum[0]?.soporteEps && (
                       <a
-                        href={`${import.meta.env.VITE_BACKEND_URL}/${
-                          curriculum[0].soporteEps
-                        }`}
+                        href={`${import.meta.env.VITE_BACKEND_URL}/${curriculum[0].soporteEps
+                          }`}
                         download={curriculum[0].soporteEps}
                         target="_blank"
                         className="underline text-blue-500 pt-5"
@@ -1995,9 +1955,8 @@ const FormularioCurriculum = () => {
                   <div className="mt-3">
                     {curriculum[0]?.soportePension && (
                       <a
-                        href={`${import.meta.env.VITE_BACKEND_URL}/${
-                          curriculum[0].soportePension
-                        }`}
+                        href={`${import.meta.env.VITE_BACKEND_URL}/${curriculum[0].soportePension
+                          }`}
                         download={curriculum[0].soportePension}
                         target="_blank"
                         className="underline text-blue-500 pt-5"
@@ -2094,9 +2053,8 @@ const FormularioCurriculum = () => {
                   <div className="mt-3">
                     {curriculum[0]?.rut && (
                       <a
-                        href={`${import.meta.env.VITE_BACKEND_URL}/${
-                          curriculum[0].rut
-                        }`}
+                        href={`${import.meta.env.VITE_BACKEND_URL}/${curriculum[0].rut
+                          }`}
                         download={curriculum[0].rut}
                         target="_blank"
                         className="underline text-blue-500 pt-5"
@@ -3011,9 +2969,8 @@ const FormularioCurriculum = () => {
                   <div className="mt-3">
                     {curriculum[0]?.soporteContrato && (
                       <a
-                        href={`${import.meta.env.VITE_BACKEND_URL}/${
-                          curriculum[0].soporteContrato
-                        }`}
+                        href={`${import.meta.env.VITE_BACKEND_URL}/${curriculum[0].soporteContrato
+                          }`}
                         download={curriculum[0].soporteContrato}
                         target="_blank"
                         className="underline text-blue-500 pt-5"
@@ -3040,7 +2997,7 @@ const FormularioCurriculum = () => {
               </div>
               <div>
                 {Array.isArray(documentosRequeridos) &&
-                documentosRequeridos.length > 0 ? (
+                  documentosRequeridos.length > 0 ? (
                   <ListarRequisitos
                     data={documentosRequeridos}
                     editModal={editModal}

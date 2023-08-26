@@ -37,6 +37,7 @@ import ListarCargos from "./pages/cargos/ListarCargos";
 import CrearCargo from "./pages/cargos/CrearCargo";
 import EditarCargo from "./pages/cargos/EditarCargo";
 import BusquedaAvanzada from "./pages/public/BusquedaAvanzada";
+import ListadoOfertasPublicas from "./pages/public/ListadoOfertasPublicas";
 import OtrosDocumentos from "./pages/recursos_humanos/OtrosDocumentos";
 import CrearOtroDocumento from "./pages/recursos_humanos/otros_documentos/CrearOtroDocumento";
 import OfertaIndividual from "./pages/OfertaIndividual";
@@ -116,6 +117,12 @@ function App() {
                                           <Route
                                             index
                                             element={<BusquedaAvanzada />}
+                                          />
+                                        </Route>
+                                        <Route path="/ofertas-publicas">
+                                          <Route
+                                            index
+                                            element={<ListadoOfertasPublicas />}
                                           />
                                         </Route>
 
