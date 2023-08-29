@@ -9,9 +9,8 @@ import useAuth from "../hooks/useAuth";
 
 export default function ModalPublic({ setShowModal, data }) {
   const current = new Date();
-  const date = `${current.getFullYear()}-${
-    current.getMonth() + 1
-  }-${current.getDate()}`;
+  const date = `${current.getFullYear()}-${current.getMonth() + 1
+    }-${current.getDate()}`;
 
   const [estadoPostulacion, setEstadoPostulacion] = useState("elegir");
 
@@ -108,9 +107,8 @@ export default function ModalPublic({ setShowModal, data }) {
           {originalRow.documentacionPostulacion !== "" ? (
             <a
               className="text-blue-500 hover:text-blue-900 cursor-pointer underline"
-              href={`${import.meta.env.VITE_BACKEND_URL}/${
-                originalRow.documentacionPostulacion
-              }`}
+              href={`${import.meta.env.VITE_BACKEND_URL}/${originalRow.documentacionPostulacion
+                }`}
               target="_blank"
             >
               Ver documento
@@ -161,7 +159,7 @@ export default function ModalPublic({ setShowModal, data }) {
     formData.append("nombre", data.nombre);
     formData.append("correo", data.correo);
     formData.append("idOferta", data.idOferta);
-    
+
     formData.append("fechaEntrevista", fechaEntrevista);
     formData.append("horaEntrevista", horaEntrevista);
     await nuevoEstadoPostulacionModal(formData);
@@ -273,7 +271,7 @@ export default function ModalPublic({ setShowModal, data }) {
                     )}
                   {data &&
                     data.estadoAplicacionOferta ===
-                      "Exámenes Ocupacionales" && (
+                    "Exámenes Ocupacionales" && (
                       <>
                         <option value="Primera entrevista">
                           Primera entrevista
@@ -334,7 +332,7 @@ export default function ModalPublic({ setShowModal, data }) {
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                 />
               </div>
-              <div className="">
+              <div className="hidden">
                 <label className="block text-sm font-medium text-gray-700">
                   Fecha sistema
                 </label>
@@ -402,7 +400,7 @@ export default function ModalPublic({ setShowModal, data }) {
                 )}
               </div>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-2 gap-3 p-8">
+            {/* <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-2 gap-3 p-8">
               <div className="border-b border-gray-200 pb-2 -mt-8">
                 <h6 className="text-sm font-medium leading-6 text-gray-900 italic">
                   Entrevista 
@@ -447,11 +445,11 @@ export default function ModalPublic({ setShowModal, data }) {
                     id="tipoEntrevista"
                     name="tipoEntrevista"
                     className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                    /*onChange={(e) => {
+                    onChange={(e) => {
                     const selectedDocumentType = e.target.value;
 
                     setTipoDocumento(selectedDocumentType);
-                  }}*/
+                  }}
                     //value={concepto}
                     //ref={inputRefTipoDocumento}
                   >
@@ -517,11 +515,11 @@ export default function ModalPublic({ setShowModal, data }) {
                     id="concepto"
                     name="concepto"
                     className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                    /*onChange={(e) => {
+                    onChange={(e) => {
                     const selectedDocumentType = e.target.value;
 
                     setTipoDocumento(selectedDocumentType);
-                  }}*/
+                  }}
                     //value={concepto}
                     //ref={inputRefTipoDocumento}
                   >
@@ -549,10 +547,10 @@ export default function ModalPublic({ setShowModal, data }) {
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                 />
               </div>
-            </div>
-            
+            </div> */}
+
             {Array.isArray(estadosPostulaciones) &&
-            estadosPostulaciones.length > 0 ? (
+              estadosPostulaciones.length > 0 ? (
               <>
                 <div className="block text-lg  italic font-medium text-blue-700 ml-8 flex space-x-2 items-center">
                   <FcDataProtection className="text-lg" />

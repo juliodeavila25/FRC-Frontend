@@ -9,6 +9,7 @@ import {
   AccordionBody,
 } from "@material-tailwind/react";
 import usePostulaciones from "../hooks/usePostulaciones";
+import useRequisito from "../hooks/useRequisito";
 
 
 import {
@@ -69,6 +70,8 @@ export default function ModalPublic({
   const { nuevaPostulacion, postulaciones } = usePostulaciones();
 
   const { msg, error } = alertaDocumentosRequisitos;
+  const { requisitosBo } =
+    useRequisito();
 
   useEffect(() => {
     if (error === false) {
@@ -85,7 +88,15 @@ export default function ModalPublic({
 
   useEffect(() => {
     let cargo = listadoCargos.filter((item) => item.nombre === selectedCargo);
-    setRequisitosCargos(cargo);
+
+    let requisitosCargosUpdated = [];
+    for (let i = 0; i < cargo[0]?.requisitos.length; i++) {
+      let data = requisitosBo.filter((item) => item._id === cargo[0]?.requisitos[i]._id)
+      console.log(data)
+      requisitosCargosUpdated.push(data[0])
+    }
+    console.log(requisitosCargosUpdated)
+    setRequisitosCargos(requisitosCargosUpdated);
 
     setIdUsuario(auth._id);
 
@@ -179,6 +190,8 @@ export default function ModalPublic({
     console.log(documentosRequeridos)
   };
 
+
+  console.log(requisitosCargos)
   return (
     <>
       <div className="justify-center  flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
@@ -202,8 +215,8 @@ export default function ModalPublic({
             </div>
             {/*body*/}
             {Array.isArray(requisitosCargos) &&
-              requisitosCargos[0]?.requisitos.length > 0 ? (
-              requisitosCargos[0]?.requisitos.map((item, i) => {
+              requisitosCargos.length > 0 ? (
+              requisitosCargos.map((item, i) => {
                 return (
                   <div key={i} className="w-11/12 mx-auto pt-5 ">
                     <Accordion
@@ -248,6 +261,7 @@ export default function ModalPublic({
                                     }
                                   />
                                 </div>
+                                {console.log(item.vigencia)}
                                 {item.vigencia === true ? (
                                   <div className="">
                                     <label className="block text-sm font-medium text-gray-700">

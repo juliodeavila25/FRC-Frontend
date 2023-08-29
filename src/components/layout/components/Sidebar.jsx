@@ -80,12 +80,12 @@ const Sidebar = () => {
   ];
 
   const navigation_hv_inicial = [
-    {
-      name: "Sarlaft",
-      href: "/sarlaft/crear-sarlaft",
-      icon: BriefcaseIcon,
-      current: location.pathname.includes("/sarlaft") ? true : false,
-    },
+    // {
+    //   name: "Sarlaft",
+    //   href: "/sarlaft/crear-sarlaft",
+    //   icon: BriefcaseIcon,
+    //   current: location.pathname.includes("/sarlaft") ? true : false,
+    // },
     {
       name: "Listado de Requisitos",
       href: "/requisitos-cargos/listar-requisitos-cargos",

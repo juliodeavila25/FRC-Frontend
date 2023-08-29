@@ -75,6 +75,8 @@ const FormularioNuevoRequisito = () => {
 
   if (cargandoDataRequisitoBo) return <BeatLoader color="#36d7b7" />;
 
+  console.log(vigencia)
+
   return (
     <div className=" sm:mx-auto sm:w-full">
       <div className="bg-white py-8 px-4 shadow-lg rounded-lg sm:px-10">
@@ -173,6 +175,7 @@ const FormularioNuevoRequisito = () => {
                   value={estado}
                   onChange={(e) => setEstado(e.target.value)}
                   required={true}
+                  disabled={auth?.userType[0] === "gerente" ? false : true}
                 >
                   <option value="Pendiente">Pendiente</option>
                   <option value="Activo">Activo</option>

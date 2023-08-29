@@ -43,12 +43,12 @@ export default function ListadoOfertasPublicas() {
   const [documentosPublicos, setDocumentosPublicos] = useState([]);
 
 
-  const[ cargando, setCargando] = useState(false)
+  const [cargando, setCargando] = useState(false)
 
   useEffect(() => {
-    
+
     const obtenerDocumentosPublicos = async () => {
-        setCargando(true)
+      setCargando(true)
       try {
         const { data } = await clienteAxios("/ofertas/ofertas-publicas");
         console.log(data);
@@ -62,7 +62,7 @@ export default function ListadoOfertasPublicas() {
     obtenerDocumentosPublicos();
   }, []);
 
-  
+
 
   console.log(documentosPublicos);
 
@@ -166,12 +166,12 @@ export default function ListadoOfertasPublicas() {
             <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-10 gap-6">
                 {Array.isArray(documentosPublicos) &&
-                documentosPublicos.length > 0
-                  ? documentosPublicos.map((item, i) => {
-                      return (
-                        <CardsOfertas key={i} item={item}/>
-                      );
-                    })
+                  documentosPublicos.length > 0
+                  ? documentosPublicos.filter(oferta => oferta.estadoConvocatoria === "Activa").map((item, i) => {
+                    return (
+                      <CardsOfertas key={i} item={item} />
+                    );
+                  })
                   : null}
               </div>
             </div>

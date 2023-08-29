@@ -2981,8 +2981,10 @@ const FormularioCurriculum = () => {
                   </div>
                 </div>
               </div>
+            </>
+          ) : null}
 
-              <div className="text-left text-xl text-gray-700 mt-8 font-bold border-b-4 border-corporative-blue inline-flex pt-3">
+          {/* <div className="text-left text-xl text-gray-700 mt-8 font-bold border-b-4 border-corporative-blue inline-flex pt-3">
                 Documentos Requeridos
               </div>
               <div className="flex justify-end">
@@ -3028,8 +3030,7 @@ const FormularioCurriculum = () => {
                   </div>
                 )}
               </div>
-            </>
-          ) : null}
+           */}
 
           {msg && <Alert alerta={alerta} />}
           {message && <ModalValidation modal={modal} />}

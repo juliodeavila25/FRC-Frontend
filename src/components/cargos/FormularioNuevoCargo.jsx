@@ -51,7 +51,7 @@ const FormularioNuevoCargo = () => {
     },
   ]);
 
-  const[requisitos, setRequisitos] = useState([]);
+  const [requisitos, setRequisitos] = useState([]);
 
   /* Error en el campo nombre del cargo*/
   const inputRef = useRef(null);
@@ -255,6 +255,7 @@ const FormularioNuevoCargo = () => {
       );
     } else {
       setRequisitos(requisitos.concat(data));
+
     }
   };
 
@@ -503,7 +504,7 @@ const FormularioNuevoCargo = () => {
                   value="mecanico"
                   checked={mecanico}
                   onChange={handleChangeMecanico}
-                  //disabled={true}
+                //disabled={true}
                 />
                 <div
                   className="flex space-x-1"
@@ -529,7 +530,7 @@ const FormularioNuevoCargo = () => {
                   value="biologico"
                   checked={biologico}
                   onChange={handleChangeBiologico}
-                  //disabled={true}
+                //disabled={true}
                 />
                 <div
                   className="flex space-x-1"
@@ -552,7 +553,7 @@ const FormularioNuevoCargo = () => {
                   value="psicosocial"
                   checked={psicosocial}
                   onChange={handleChangePsicosocial}
-                  //disabled={true}
+                //disabled={true}
                 />
                 <div
                   className="flex space-x-1"
@@ -576,7 +577,7 @@ const FormularioNuevoCargo = () => {
                   value="carga_fisica"
                   checked={carga_fisica}
                   onChange={handleChangeCargaFisica}
-                  //disabled={true}
+                //disabled={true}
                 />
                 <div
                   className="flex space-x-1"
@@ -602,7 +603,7 @@ const FormularioNuevoCargo = () => {
                   value="quimicos"
                   checked={quimicos}
                   onChange={handleChangeQuimicos}
-                  //disabled={true}
+                //disabled={true}
                 />
                 <div
                   className="flex space-x-1"
@@ -625,7 +626,7 @@ const FormularioNuevoCargo = () => {
                   value="fisico"
                   checked={fisico}
                   onChange={handleChangeFisico}
-                  //disabled={true}
+                //disabled={true}
                 />
                 <div
                   className="flex space-x-1"
@@ -652,7 +653,7 @@ const FormularioNuevoCargo = () => {
                   value="movilidad"
                   checked={movilidad}
                   onChange={handleChangeMovilidad}
-                  //disabled={true}
+                //disabled={true}
                 />
                 <div
                   className="flex space-x-1"
@@ -675,7 +676,7 @@ const FormularioNuevoCargo = () => {
                   value="publico"
                   checked={publico}
                   onChange={handleChangePublico}
-                  //disabled={true}
+                //disabled={true}
                 />
                 <div
                   className="flex space-x-1"
@@ -696,7 +697,7 @@ const FormularioNuevoCargo = () => {
                   value="tareas_alto_riesgo"
                   checked={tareas_alto_riesgo}
                   onChange={handleChangeTareasAltoRiesgo}
-                  //disabled={true}
+                //disabled={true}
                 />
                 <div
                   className="flex space-x-1"
@@ -720,7 +721,7 @@ const FormularioNuevoCargo = () => {
                   value="tecnologico"
                   checked={tecnologico}
                   onChange={handleChangeTecnologico}
-                  //disabled={true}
+                //disabled={true}
                 />
                 <div
                   className="flex space-x-1"
@@ -742,26 +743,26 @@ const FormularioNuevoCargo = () => {
                 </h6>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-6 pt-5 ">
-              {requisitosBo &&
-                Array.isArray(requisitosBo) &&
-                requisitosBo.map((item, i) => {
-                  return (
-                    <div  key={i}>
-                      <div className="flex space-x-4 items-center pl-4">
-                        <input
-                          type="checkbox"
-                          value={item._id}
-                          name={item._id}
-                          checked={requisitos.some(checkedCheckbox => checkedCheckbox._id === item._id)}
-                          onChange={() => handleCheckboxChange(item)}
-                        />
-                        <label htmlFor={item._id}>{item.nombre}</label>
+                {requisitosBo &&
+                  Array.isArray(requisitosBo) &&
+                  requisitosBo.filter(item => item.estado === "Activo").map((item, i) => {
+                    return (
+                      <div key={i}>
+                        <div className="flex space-x-4 items-center pl-4">
+                          <input
+                            type="checkbox"
+                            value={item._id}
+                            name={item._id}
+                            checked={requisitos.some(checkedCheckbox => checkedCheckbox._id === item._id)}
+                            onChange={() => handleCheckboxChange(item)}
+                          />
+                          <label htmlFor={item._id}>{item.nombre}</label>
+                        </div>
                       </div>
-                    </div>
-                  );
-                })}
+                    );
+                  })}
               </div>
-              
+
             </div>
             <div>
               <div className="border-b border-gray-200 pb-2">
@@ -795,8 +796,8 @@ const FormularioNuevoCargo = () => {
                             disabled={
                               (Array.isArray(cargo.inputPreguntas) &&
                                 i >= cargo.inputPreguntas?.length) ||
-                              (params.id === undefined &&
-                                inputPreguntas.length >= 1)
+                                (params.id === undefined &&
+                                  inputPreguntas.length >= 1)
                                 ? false
                                 : true
                             }
@@ -806,8 +807,8 @@ const FormularioNuevoCargo = () => {
                       <div className="grid grid-cols-2 gap-4 pt-6 ">
                         {(Array.isArray(cargo.inputPreguntas) &&
                           i >= cargo.inputPreguntas?.length) ||
-                        (params.id === undefined &&
-                          inputPreguntas.length !== 1) ? (
+                          (params.id === undefined &&
+                            inputPreguntas.length !== 1) ? (
                           <button
                             className="h-8 flex items-center w-full justify-center rounded-md border-2 border-red-400 bg-transparent py-2 px-4 text-sm font-medium text-red-500 shadow-sm hover:bg-red-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                             onClick={() => handleremovePreguntas(i)}
