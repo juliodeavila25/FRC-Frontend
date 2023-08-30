@@ -1,12 +1,12 @@
-import useDocumentosRequisitos from "../../hooks/useDocumentosRequisitos";
+import useDocumentosRequisitos from "../hooks/useDocumentosRequisitos";
 import { useState, useEffect } from "react";
-import Table from "../table/Table";
+import Table from "../components/table/Table";
 import { BeatLoader } from "react-spinners";
 import { format } from "date-fns";
 import { useNavigate, Link, } from "react-router-dom";
-import useAuth from "../../hooks/useAuth";
+import useAuth from "../hooks/useAuth";
 
-const ListarRequisitosCargos = () => {
+const ListarRequisitosCargosRH = ({ id }) => {
   const { documentosRequisitosUsuario, obtenerRequisitosPorUsuario, cargandoDataDocumentos } =
     useDocumentosRequisitos();
   const navigate = useNavigate();
@@ -14,7 +14,7 @@ const ListarRequisitosCargos = () => {
 
 
   useEffect(() => {
-    obtenerRequisitosPorUsuario(auth?._id)
+    obtenerRequisitosPorUsuario(id)
   }, [])
 
   console.log(documentosRequisitosUsuario)
@@ -105,11 +105,11 @@ const ListarRequisitosCargos = () => {
 
   return (
     <>
-      <div className="px-4 sm:px-6 lg:px-8 mt-5 mb-5">
+      <div className="mt-5 mb-5">
         <div className="mt-8 flex flex-col">
           <div className="sm:flex sm:items-center">
             <div className="sm:flex-auto">
-              <h1 className="text-xl font-semibold text-gray-900">
+              <h1 className="text-xl font-semibold text-gray-900 border-b-4 border-corporative-blue inline-flex">
                 Listado de requisitos para cargos
               </h1>
             </div>
@@ -147,4 +147,4 @@ const ListarRequisitosCargos = () => {
   );
 };
 
-export default ListarRequisitosCargos;
+export default ListarRequisitosCargosRH;

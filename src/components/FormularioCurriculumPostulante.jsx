@@ -13,12 +13,12 @@ import ciuu from "../json/ciuu.json";
 import Select from "react-select";
 import departamentos from "../json/departamentos_municipios.json";
 import moment from "moment";
+import ListarRequisitosCargosRH from "./ListarRequisitosCargosRH";
 
 const FormularioCurriculumPostulante = () => {
   const current = new Date();
-  const date = `${current.getFullYear()}-${
-    current.getMonth() + 1
-  }-${current.getDate()}`;
+  const date = `${current.getFullYear()}-${current.getMonth() + 1
+    }-${current.getDate()}`;
   const navigate = useNavigate();
   const [curriculums, setCurriculums] = useState([]);
   const [id, setId] = useState(null);
@@ -561,10 +561,10 @@ const FormularioCurriculumPostulante = () => {
                   onChange={(e) => setNombre(e.target.value)}
                   required
                   disabled={true}
-                  // {...register("nombre", {
-                  //   required: "Este campo es requerido",
-                  //   onChange: (e) => setNombre(e.target.value),
-                  // })}
+                // {...register("nombre", {
+                //   required: "Este campo es requerido",
+                //   onChange: (e) => setNombre(e.target.value),
+                // })}
                 />
               </div>
               {/* <span className="text-xs text-red-500">
@@ -620,10 +620,10 @@ const FormularioCurriculumPostulante = () => {
                   onChange={(e) => setNumeroDocumento(e.target.value)}
                   required
                   disabled={true}
-                  // {...register("numeroDocumento", {
-                  //   required: "Este campo es requerido",
-                  //   onChange: (e) => setNumeroDocumento(e.target.value),
-                  // })}
+                // {...register("numeroDocumento", {
+                //   required: "Este campo es requerido",
+                //   onChange: (e) => setNumeroDocumento(e.target.value),
+                // })}
                 />
               </div>
               {/* <span className="text-xs text-red-500">
@@ -649,10 +649,10 @@ const FormularioCurriculumPostulante = () => {
                   onChange={(e) => setFechaNacimiento(e.target.value)}
                   required
                   disabled={true}
-                  // {...register("fechaNacimiento", {
-                  //   required: "Este campo es requerido",
-                  //   onChange: (e) => setFechaNacimiento(e.target.value),
-                  // })}
+                // {...register("fechaNacimiento", {
+                //   required: "Este campo es requerido",
+                //   onChange: (e) => setFechaNacimiento(e.target.value),
+                // })}
                 />
               </div>
               {/* <span className="text-xs text-red-500">
@@ -678,10 +678,10 @@ const FormularioCurriculumPostulante = () => {
                   onChange={(e) => setLugarNacimiento(e.target.value)}
                   required
                   disabled={true}
-                  // {...register("lugarNacimiento", {
-                  //   required: "Este campo es requerido",
-                  //   onChange: (e) => setLugarNacimiento(e.target.value),
-                  // })}
+                // {...register("lugarNacimiento", {
+                //   required: "Este campo es requerido",
+                //   onChange: (e) => setLugarNacimiento(e.target.value),
+                // })}
                 />
               </div>
               {/* <span className="text-xs text-red-500">
@@ -707,10 +707,10 @@ const FormularioCurriculumPostulante = () => {
                   onChange={(e) => setTelefono(e.target.value)}
                   required
                   disabled={true}
-                  // {...register("telefono", {
-                  //   required: "Este campo es requerido",
-                  //   onChange: (e) => setTelefono(e.target.value),
-                  // })}
+                // {...register("telefono", {
+                //   required: "Este campo es requerido",
+                //   onChange: (e) => setTelefono(e.target.value),
+                // })}
                 />
               </div>
               {/* <span className="text-xs text-red-500">
@@ -736,10 +736,10 @@ const FormularioCurriculumPostulante = () => {
                   onChange={(e) => setCorreo(e.target.value)}
                   required
                   disabled={true}
-                  // {...register("correo", {
-                  //   required: "Este campo es requerido",
-                  //   onChange: (e) => setCorreo(e.target.value),
-                  // })}
+                // {...register("correo", {
+                //   required: "Este campo es requerido",
+                //   onChange: (e) => setCorreo(e.target.value),
+                // })}
                 />
               </div>
               {/* <span className="text-xs text-red-500">
@@ -765,10 +765,10 @@ const FormularioCurriculumPostulante = () => {
                   onChange={(e) => setDireccion(e.target.value)}
                   required
                   disabled={true}
-                  // {...register("direccion", {
-                  //   required: "Este campo es requerido",
-                  //   onChange: (e) => setDireccion(e.target.value),
-                  // })}
+                // {...register("direccion", {
+                //   required: "Este campo es requerido",
+                //   onChange: (e) => setDireccion(e.target.value),
+                // })}
                 />
               </div>
               {/* <span className="text-xs text-red-500">
@@ -822,10 +822,10 @@ const FormularioCurriculumPostulante = () => {
                   onChange={(e) => setPais(e.target.value)}
                   required
                   disabled={true}
-                  // {...register("pais", {
-                  //   required: "Este campo es requerido",
-                  //   onChange: (e) => setPais(e.target.value),
-                  // })}
+                // {...register("pais", {
+                //   required: "Este campo es requerido",
+                //   onChange: (e) => setPais(e.target.value),
+                // })}
                 />
               </div>
               {/* <span className="text-xs text-red-500">
@@ -851,10 +851,10 @@ const FormularioCurriculumPostulante = () => {
                   onChange={(e) => setDepartamento(e.target.value)}
                   required
                   disabled={true}
-                  // {...register("departamento", {
-                  //   required: "Este campo es requerido",
-                  //   onChange: (e) => setDepartamento(e.target.value),
-                  // })}
+                // {...register("departamento", {
+                //   required: "Este campo es requerido",
+                //   onChange: (e) => setDepartamento(e.target.value),
+                // })}
                 />
               </div>
               {/* <span className="text-xs text-red-500">
@@ -880,10 +880,10 @@ const FormularioCurriculumPostulante = () => {
                   onChange={(e) => setCiudad(e.target.value)}
                   required
                   disabled={true}
-                  // {...register("ciudad", {
-                  //   required: "Este campo es requerido",
-                  //   onChange: (e) => setCiudad(e.target.value),
-                  // })}
+                // {...register("ciudad", {
+                //   required: "Este campo es requerido",
+                //   onChange: (e) => setCiudad(e.target.value),
+                // })}
                 />
               </div>
               {/* <span className="text-xs text-red-500">
@@ -909,10 +909,10 @@ const FormularioCurriculumPostulante = () => {
                   onChange={(e) => setNumeroHijos(e.target.value)}
                   required
                   disabled={true}
-                  // {...register("numeroHijos", {
-                  //   required: "Este campo es requerido",
-                  //   onChange: (e) => setNumeroHijos(e.target.value),
-                  // })}
+                // {...register("numeroHijos", {
+                //   required: "Este campo es requerido",
+                //   onChange: (e) => setNumeroHijos(e.target.value),
+                // })}
                 />
               </div>
               {/* <span className="text-xs text-red-500">
@@ -938,10 +938,10 @@ const FormularioCurriculumPostulante = () => {
                   onChange={(e) => setTipoSangre(e.target.value)}
                   required
                   disabled={true}
-                  // {...register("tipoSangre", {
-                  //   required: "Este campo es requerido",
-                  //   onChange: (e) => setTipoSangre(e.target.value),
-                  // })}
+                // {...register("tipoSangre", {
+                //   required: "Este campo es requerido",
+                //   onChange: (e) => setTipoSangre(e.target.value),
+                // })}
                 />
               </div>
               {/* <span className="text-xs text-red-500">
@@ -1006,10 +1006,10 @@ const FormularioCurriculumPostulante = () => {
                   onChange={(e) => setTitulo(e.target.value)}
                   required
                   disabled={true}
-                  // {...register("titulo", {
-                  //   required: "Este campo es requerido",
-                  //   onChange: (e) => setTitulo(e.target.value),
-                  // })}
+                // {...register("titulo", {
+                //   required: "Este campo es requerido",
+                //   onChange: (e) => setTitulo(e.target.value),
+                // })}
                 />
               </div>
               {/* <span className="text-xs text-red-500">
@@ -1034,10 +1034,10 @@ const FormularioCurriculumPostulante = () => {
                   onChange={(e) => setAnioTitulo(e.target.value)}
                   required
                   disabled={true}
-                  // {...register("anioTitulo", {
-                  //   required: "Este campo es requerido",
-                  //   onChange: (e) => setAnioTitulo(e.target.value),
-                  // })}
+                // {...register("anioTitulo", {
+                //   required: "Este campo es requerido",
+                //   onChange: (e) => setAnioTitulo(e.target.value),
+                // })}
                 />
               </div>
               {/* <span className="text-xs text-red-500">
@@ -1063,10 +1063,10 @@ const FormularioCurriculumPostulante = () => {
                   onChange={(e) => setInstitucionTitulo(e.target.value)}
                   required
                   disabled={true}
-                  // {...register("institucionTitulo", {
-                  //   required: "Este campo es requerido",
-                  //   onChange: (e) => setInstitucionTitulo(e.target.value),
-                  // })}
+                // {...register("institucionTitulo", {
+                //   required: "Este campo es requerido",
+                //   onChange: (e) => setInstitucionTitulo(e.target.value),
+                // })}
                 />
               </div>
               {/* <span className="text-xs text-red-500">
@@ -1098,10 +1098,10 @@ const FormularioCurriculumPostulante = () => {
                   onChange={(e) => setEmpresaExp(e.target.value)}
                   required
                   disabled={true}
-                  // {...register("empresaExp", {
-                  //   required: "Este campo es requerido",
-                  //   onChange: (e) => setEmpresaExp(e.target.value),
-                  // })}
+                // {...register("empresaExp", {
+                //   required: "Este campo es requerido",
+                //   onChange: (e) => setEmpresaExp(e.target.value),
+                // })}
                 />
               </div>
               {/* <span className="text-xs text-red-500">
@@ -1126,10 +1126,10 @@ const FormularioCurriculumPostulante = () => {
                   onChange={(e) => setFechaInicioExp(e.target.value)}
                   required
                   disabled={true}
-                  // {...register("fechaInicioExp", {
-                  //   required: "Este campo es requerido",
-                  //   onChange: (e) => setFechaInicioExp(e.target.value),
-                  // })}
+                // {...register("fechaInicioExp", {
+                //   required: "Este campo es requerido",
+                //   onChange: (e) => setFechaInicioExp(e.target.value),
+                // })}
                 />
               </div>
               {/* <span className="text-xs text-red-500">
@@ -1196,9 +1196,8 @@ const FormularioCurriculumPostulante = () => {
               <div className="mt-3">
                 {collaborator[0]?.soporteExp && (
                   <a
-                    href={`${import.meta.env.VITE_BACKEND_URL}/${
-                      collaborator[0].soporteExp
-                    }`}
+                    href={`${import.meta.env.VITE_BACKEND_URL}/${collaborator[0].soporteExp
+                      }`}
                     download={collaborator[0].soporteExp}
                     target="_blank"
                     className="underline text-blue-500 pt-5"
@@ -1234,10 +1233,10 @@ const FormularioCurriculumPostulante = () => {
                   onChange={(e) => setNombreRefA(e.target.value)}
                   required
                   disabled={true}
-                  // {...register("nombreRefA", {
-                  //   required: "Este campo es requerido",
-                  //   onChange: (e) => setNombreRefA(e.target.value),
-                  // })}
+                // {...register("nombreRefA", {
+                //   required: "Este campo es requerido",
+                //   onChange: (e) => setNombreRefA(e.target.value),
+                // })}
                 />
               </div>
               {/* <span className="text-xs text-red-500">
@@ -1263,10 +1262,10 @@ const FormularioCurriculumPostulante = () => {
                   onChange={(e) => setTelefonoRefA(e.target.value)}
                   required
                   disabled={true}
-                  // {...register("telefonoRefA", {
-                  //   required: "Este campo es requerido",
-                  //   onChange: (e) => setTelefonoRefA(e.target.value),
-                  // })}
+                // {...register("telefonoRefA", {
+                //   required: "Este campo es requerido",
+                //   onChange: (e) => setTelefonoRefA(e.target.value),
+                // })}
                 />
               </div>
               {/* <span className="text-xs text-red-500">
@@ -1292,10 +1291,10 @@ const FormularioCurriculumPostulante = () => {
                   onChange={(e) => setCorreoRefA(e.target.value)}
                   required
                   disabled={true}
-                  // {...register("correoRefA", {
-                  //   required: "Este campo es requerido",
-                  //   onChange: (e) => setCorreoRefA(e.target.value),
-                  // })}
+                // {...register("correoRefA", {
+                //   required: "Este campo es requerido",
+                //   onChange: (e) => setCorreoRefA(e.target.value),
+                // })}
                 />
               </div>
               {/* <span className="text-xs text-red-500">
@@ -1460,9 +1459,8 @@ const FormularioCurriculumPostulante = () => {
               <div className="mt-3">
                 {collaborator[0]?.soporteEps && (
                   <a
-                    href={`${import.meta.env.VITE_BACKEND_URL}/${
-                      collaborator[0].soporteEps
-                    }`}
+                    href={`${import.meta.env.VITE_BACKEND_URL}/${collaborator[0].soporteEps
+                      }`}
                     download={collaborator[0].soporteEps}
                     target="_blank"
                     className="underline text-blue-500 pt-5"
@@ -1539,9 +1537,8 @@ const FormularioCurriculumPostulante = () => {
               <div className="mt-3">
                 {collaborator[0]?.soportePension && (
                   <a
-                    href={`${import.meta.env.VITE_BACKEND_URL}/${
-                      collaborator[0].soportePension
-                    }`}
+                    href={`${import.meta.env.VITE_BACKEND_URL}/${collaborator[0].soportePension
+                      }`}
                     download={collaborator[0].soportePension}
                     target="_blank"
                     className="underline text-blue-500 pt-5"
@@ -1622,9 +1619,8 @@ const FormularioCurriculumPostulante = () => {
               <div className="mt-3">
                 {collaborator[0]?.rut && (
                   <a
-                    href={`${import.meta.env.VITE_BACKEND_URL}/${
-                      collaborator[0].rut
-                    }`}
+                    href={`${import.meta.env.VITE_BACKEND_URL}/${collaborator[0].rut
+                      }`}
                     download={collaborator[0].rut}
                     target="_blank"
                     className="underline text-blue-500 pt-5"
@@ -2638,9 +2634,8 @@ const FormularioCurriculumPostulante = () => {
               <div className="mt-3">
                 {collaborator[0]?.soporteContrato && (
                   <a
-                    href={`${import.meta.env.VITE_BACKEND_URL}/${
-                      collaborator[0].soporteContrato
-                    }`}
+                    href={`${import.meta.env.VITE_BACKEND_URL}/${collaborator[0].soporteContrato
+                      }`}
                     download={collaborator[0].soporteContrato}
                     target="_blank"
                     className="underline text-blue-500 pt-5"
@@ -2652,8 +2647,11 @@ const FormularioCurriculumPostulante = () => {
             </div>
           </div>
           {Array.isArray(curriculums) &&
-          curriculums.length > 0 &&
-          curriculums[0].estadoAplicacionOferta !== "Postulado" ? null : (
+            curriculums.length > 0 && <ListarRequisitosCargosRH id={curriculums[0].idUsuario} />}
+
+          {Array.isArray(curriculums) &&
+            curriculums.length > 0 &&
+            curriculums[0].estadoAplicacionOferta !== "Postulado" ? null : (
             <>
               <div className="text-left text-xl text-gray-700 mt-8 font-bold border-b-4 border-corporative-blue inline-flex pt-3">
                 Proceso de selección
@@ -2782,8 +2780,8 @@ const FormularioCurriculumPostulante = () => {
 
           {msg && <Alert alerta={alertaPostulacion} />}
           {Array.isArray(curriculums) &&
-          curriculums.length > 0 &&
-          curriculums[0].estadoAplicacionOferta !== "Postulado" ? (
+            curriculums.length > 0 &&
+            curriculums[0].estadoAplicacionOferta !== "Postulado" ? (
             <a
               onClick={() => navigate(-1)}
               className="cursor-pointer flex w-60 mx-auto justify-center rounded-md border-2 border-red-400 bg-transparent py-2 px-4 text-sm font-medium text-red-500 shadow-sm hover:bg-red-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"

@@ -455,6 +455,8 @@ function App() {
                                               allowedRoles={[
                                                 "aspirante",
                                                 "colaborador",
+                                                "recursos_humanos",
+                                                "gerente"
                                               ]}
                                             />
                                           }
