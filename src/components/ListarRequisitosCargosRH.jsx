@@ -5,17 +5,19 @@ import { BeatLoader } from "react-spinners";
 import { format } from "date-fns";
 import { useNavigate, Link, } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
+import ModalRequisitosCargos from './ModalRequisitosCargos'
 
 const ListarRequisitosCargosRH = ({ id }) => {
   const { documentosRequisitosUsuario, obtenerRequisitosPorUsuario, cargandoDataDocumentos } =
     useDocumentosRequisitos();
   const navigate = useNavigate();
   const { auth } = useAuth();
-
+  const [visible, setVisible] = useState(false); 
+  const[infoRequisitos, setInfoRequisitos]= useState("")
 
   useEffect(() => {
     obtenerRequisitosPorUsuario(id)
-  }, [])
+  }, [id])
 
   console.log(documentosRequisitosUsuario)
 
@@ -75,9 +77,7 @@ const ListarRequisitosCargosRH = ({ id }) => {
         <div>
           <button
             className="text-blue-500 hover:text-blue-900"
-            onClick={() =>
-              navigate(`/requisitos-cargos/editar-requisito-cargo/${originalRow._id}`)
-            }
+            onClick={(e) =>infoModal(e, originalRow)}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -99,12 +99,33 @@ const ListarRequisitosCargosRH = ({ id }) => {
     },
   ]);
 
+  const setShowModal = (e) => {
+    setVisible(false);
+
+   
+  };
+
+
+  const infoModal = (e, data) => {
+    e.preventDefault();
+    setInfoRequisitos(data)
+    setVisible(true);
+  };
+
+
 
   if (cargandoDataDocumentos) return <BeatLoader color="#36d7b7" />;
 
 
   return (
     <>
+     {visible === true && (
+          <ModalRequisitosCargos
+            setShowModal={setShowModal}
+            infoRequisitos={infoRequisitos}
+            
+          />
+        )}
       <div className="mt-5 mb-5">
         <div className="mt-8 flex flex-col">
           <div className="sm:flex sm:items-center">
