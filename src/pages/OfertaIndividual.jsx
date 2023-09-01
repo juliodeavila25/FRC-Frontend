@@ -9,6 +9,7 @@ import swal from "sweetalert";
 import ModalRequistos from "../components/ModalRequisitos";
 import { FcDocument } from "react-icons/fc";
 import ListadoRequisitos from "../components/human_resources/ListadoRequisitos"
+import useDocumentosRequisitos from "../hooks/useDocumentosRequisitos";
 
 const OfertaIndividual = () => {
   const current = new Date();
@@ -57,9 +58,16 @@ const OfertaIndividual = () => {
 
   const { nuevaPostulacion, postulaciones } = usePostulaciones();
 
+  const { documentosRequisitosUsuario, obtenerRequisitosPorUsuario, cargandoDataDocumentos } =
+  useDocumentosRequisitos();
+
   useEffect(() => {
     obtenerOferta(params.id);
   }, []);
+
+  useEffect(() => {
+      obtenerRequisitosPorUsuario(auth?._id)
+    }, [])
 
   useEffect(() => {
     if (params.id) {
@@ -158,7 +166,7 @@ const OfertaIndividual = () => {
 
   return (
     <>
-      {Array.isArray(cargosForm) && cargosForm.length > 0 && visible === true && <ModalRequistos setShowModal={setShowModal} listadoCargos={cargosForm} selectedCargo={nombre} idOferta={id} />}
+      {Array.isArray(cargosForm) && cargosForm.length > 0 && visible === true && <ModalRequistos setShowModal={setShowModal} listadoCargos={cargosForm} selectedCargo={nombre} idOferta={id} documentosRequisitosPorUsuario={documentosRequisitosUsuario}/>}
       <div className="sm:mx-auto sm:w-full">
         <div className="bg-white py-8 px-4 shadow-lg rounded-lg sm:px-10">
           <form className="space-y-6 ">
