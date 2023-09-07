@@ -753,7 +753,7 @@ const FormularioNuevoCargo = () => {
                             type="checkbox"
                             value={item._id}
                             name={item._id}
-                            checked={requisitos.some(checkedCheckbox => checkedCheckbox._id === item._id)}
+                            checked={requisitos && requisitos.some(checkedCheckbox => checkedCheckbox._id === item._id)}
                             onChange={() => handleCheckboxChange(item)}
                           />
                           <label htmlFor={item._id}>{item.nombre}</label>
