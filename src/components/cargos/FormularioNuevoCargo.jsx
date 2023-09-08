@@ -13,9 +13,8 @@ import {
   FcBriefcase,
   FcBiohazard,
   FcSupport,
-  FcSurvey
+  FcSurvey,
 } from "react-icons/fc";
-
 
 const FormularioNuevoCargo = () => {
   const navigate = useNavigate();
@@ -57,6 +56,8 @@ const FormularioNuevoCargo = () => {
   const [inputPreguntas, setInputPreguntas] = useState([
     {
       textoPreguntas: "",
+      respuestaPreguntas: "",
+      fuente: "Durante entrevista",
     },
   ]);
 
@@ -106,8 +107,8 @@ const FormularioNuevoCargo = () => {
       setDescripcionCargos(cargo.descripcionCargos);
       setEstado(cargo.estado);
       setInputPreguntas(cargo.inputPreguntas);
-      setRequisitos(cargo.requisitos)
-      setHerramientas(cargo.herramientasSelect)
+      setRequisitos(cargo.requisitos);
+      setHerramientas(cargo.herramientasSelect);
     }
   }, [cargo]);
 
@@ -121,7 +122,6 @@ const FormularioNuevoCargo = () => {
     } else {
       setErrorNombre(false);
     }
-
 
     await submitCargo({
       id,
@@ -149,7 +149,7 @@ const FormularioNuevoCargo = () => {
       inputCargos,
       inputPreguntas,
       requisitos,
-      herramientasSelect
+      herramientasSelect,
     });
   };
 
@@ -260,22 +260,22 @@ const FormularioNuevoCargo = () => {
   // };
 
   const handleCheckboxChange = (data) => {
-    const isChecked = requisitos.some(checkedCheckbox => checkedCheckbox._id === data._id)
+    const isChecked = requisitos.some(
+      (checkedCheckbox) => checkedCheckbox._id === data._id
+    );
     if (isChecked) {
       setRequisitos(
-        requisitos.filter(
-          (checkedCheckbox) => checkedCheckbox._id !== data._id
-        )
+        requisitos.filter((checkedCheckbox) => checkedCheckbox._id !== data._id)
       );
     } else {
       setRequisitos(requisitos.concat(data));
-
     }
   };
 
-
   const handleCheckboxChangeTools = (data) => {
-    const isChecked = herramientasSelect.some(checkedCheckbox => checkedCheckbox._id === data._id)
+    const isChecked = herramientasSelect.some(
+      (checkedCheckbox) => checkedCheckbox._id === data._id
+    );
     if (isChecked) {
       setHerramientas(
         herramientasSelect.filter(
@@ -284,10 +284,8 @@ const FormularioNuevoCargo = () => {
       );
     } else {
       setHerramientas(herramientasSelect.concat(data));
-
     }
   };
-
 
   const { msg } = alerta;
 
@@ -301,11 +299,11 @@ const FormularioNuevoCargo = () => {
             Listado Maestro de Cargos
           </div>
           <div className="grid grid-cols-1 gap-6 ">
-
             <div className="border-b border-gray-200 py-2 px-2 italic flex items-center space-x-2 bg-gray-100">
-
               <FcBriefcase />
-              <h6 className="text-base font-medium text-gray-900">Datos Cargo</h6>
+              <h6 className="text-base font-medium text-gray-900">
+                Datos Cargo
+              </h6>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-2 gap-6">
               <div>
@@ -486,10 +484,7 @@ const FormularioNuevoCargo = () => {
             <div className="pt-5">
               <div className="border-b border-gray-200 py-2 px-2 italic flex items-center space-x-2 bg-gray-100">
                 <FcBiohazard />
-                <h6 className="font-medium text-gray-900">
-
-                  Perfil de Riesgo
-                </h6>
+                <h6 className="font-medium text-gray-900">Perfil de Riesgo</h6>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-2 gap-6 pt-5">
                 <div className="flex space-x-4 items-center  pl-4">
@@ -540,7 +535,7 @@ const FormularioNuevoCargo = () => {
                     value="mecanico"
                     checked={mecanico}
                     onChange={handleChangeMecanico}
-                  //disabled={true}
+                    //disabled={true}
                   />
                   <div
                     className="flex space-x-1"
@@ -566,7 +561,7 @@ const FormularioNuevoCargo = () => {
                     value="biologico"
                     checked={biologico}
                     onChange={handleChangeBiologico}
-                  //disabled={true}
+                    //disabled={true}
                   />
                   <div
                     className="flex space-x-1"
@@ -589,7 +584,7 @@ const FormularioNuevoCargo = () => {
                     value="psicosocial"
                     checked={psicosocial}
                     onChange={handleChangePsicosocial}
-                  //disabled={true}
+                    //disabled={true}
                   />
                   <div
                     className="flex space-x-1"
@@ -613,7 +608,7 @@ const FormularioNuevoCargo = () => {
                     value="carga_fisica"
                     checked={carga_fisica}
                     onChange={handleChangeCargaFisica}
-                  //disabled={true}
+                    //disabled={true}
                   />
                   <div
                     className="flex space-x-1"
@@ -639,7 +634,7 @@ const FormularioNuevoCargo = () => {
                     value="quimicos"
                     checked={quimicos}
                     onChange={handleChangeQuimicos}
-                  //disabled={true}
+                    //disabled={true}
                   />
                   <div
                     className="flex space-x-1"
@@ -662,7 +657,7 @@ const FormularioNuevoCargo = () => {
                     value="fisico"
                     checked={fisico}
                     onChange={handleChangeFisico}
-                  //disabled={true}
+                    //disabled={true}
                   />
                   <div
                     className="flex space-x-1"
@@ -689,7 +684,7 @@ const FormularioNuevoCargo = () => {
                     value="movilidad"
                     checked={movilidad}
                     onChange={handleChangeMovilidad}
-                  //disabled={true}
+                    //disabled={true}
                   />
                   <div
                     className="flex space-x-1"
@@ -712,7 +707,7 @@ const FormularioNuevoCargo = () => {
                     value="publico"
                     checked={publico}
                     onChange={handleChangePublico}
-                  //disabled={true}
+                    //disabled={true}
                   />
                   <div
                     className="flex space-x-1"
@@ -733,7 +728,7 @@ const FormularioNuevoCargo = () => {
                     value="tareas_alto_riesgo"
                     checked={tareas_alto_riesgo}
                     onChange={handleChangeTareasAltoRiesgo}
-                  //disabled={true}
+                    //disabled={true}
                   />
                   <div
                     className="flex space-x-1"
@@ -757,7 +752,7 @@ const FormularioNuevoCargo = () => {
                     value="tecnologico"
                     checked={tecnologico}
                     onChange={handleChangeTecnologico}
-                  //disabled={true}
+                    //disabled={true}
                   />
                   <div
                     className="flex space-x-1"
@@ -776,31 +771,36 @@ const FormularioNuevoCargo = () => {
             <div className="pt-5">
               <div className="border-b border-gray-200 py-2 px-2 italic flex items-center space-x-2 bg-gray-100">
                 <FcDocument />
-                <h6 className=" font-medium text-gray-900">
-                  Requisitos
-                </h6>
+                <h6 className=" font-medium text-gray-900">Requisitos</h6>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-6 pt-5 ">
                 {requisitosBo &&
                   Array.isArray(requisitosBo) &&
-                  requisitosBo.filter(item => item.estado === "Activo").map((item, i) => {
-                    return (
-                      <div key={i}>
-                        <div className="flex space-x-4 items-center pl-4">
-                          <input
-                            type="checkbox"
-                            value={item._id}
-                            name={item._id}
-                            checked={requisitos && requisitos.some(checkedCheckbox => checkedCheckbox._id === item._id)}
-                            onChange={() => handleCheckboxChange(item)}
-                          />
-                          <label htmlFor={item._id}>{item.nombre}</label>
+                  requisitosBo
+                    .filter((item) => item.estado === "Activo")
+                    .map((item, i) => {
+                      return (
+                        <div key={i}>
+                          <div className="flex space-x-4 items-center pl-4">
+                            <input
+                              type="checkbox"
+                              value={item._id}
+                              name={item._id}
+                              checked={
+                                requisitos &&
+                                requisitos.some(
+                                  (checkedCheckbox) =>
+                                    checkedCheckbox._id === item._id
+                                )
+                              }
+                              onChange={() => handleCheckboxChange(item)}
+                            />
+                            <label htmlFor={item._id}>{item.nombre}</label>
+                          </div>
                         </div>
-                      </div>
-                    );
-                  })}
+                      );
+                    })}
               </div>
-
             </div>
 
             <div className="pt-5">
@@ -813,25 +813,32 @@ const FormularioNuevoCargo = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-6 pt-5 ">
                 {herramientas &&
                   Array.isArray(herramientas) &&
-                  herramientas.filter(item => item.estado === "Activo").map((item, i) => {
-                    console.log(herramientas)
-                    return (
-                      <div key={i}>
-                        <div className="flex space-x-4 items-center pl-4">
-                          <input
-                            type="checkbox"
-                            value={item._id}
-                            name={item._id}
-                            checked={herramientasSelect && herramientasSelect.some(checkedCheckbox => checkedCheckbox._id === item._id)}
-                            onChange={() => handleCheckboxChangeTools(item)}
-                          />
-                          <label htmlFor={item._id}>{item.nombre}</label>
+                  herramientas
+                    .filter((item) => item.estado === "Activo")
+                    .map((item, i) => {
+                      console.log(herramientas);
+                      return (
+                        <div key={i}>
+                          <div className="flex space-x-4 items-center pl-4">
+                            <input
+                              type="checkbox"
+                              value={item._id}
+                              name={item._id}
+                              checked={
+                                herramientasSelect &&
+                                herramientasSelect.some(
+                                  (checkedCheckbox) =>
+                                    checkedCheckbox._id === item._id
+                                )
+                              }
+                              onChange={() => handleCheckboxChangeTools(item)}
+                            />
+                            <label htmlFor={item._id}>{item.nombre}</label>
+                          </div>
                         </div>
-                      </div>
-                    );
-                  })}
+                      );
+                    })}
               </div>
-
             </div>
             <div className="pt-5">
               <div className="border-b border-gray-200 py-2 px-2 italic flex items-center space-x-2 bg-gray-100">
@@ -851,7 +858,7 @@ const FormularioNuevoCargo = () => {
                           htmlFor="textoPreguntas"
                           className="block text-sm font-medium text-gray-700"
                         >
-                          Texto de la pregunta
+                          Texto de la pregunta <span className="text-red-700">*</span>
                         </label>
                         <div>
                           <textarea
@@ -863,22 +870,66 @@ const FormularioNuevoCargo = () => {
                             className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                             value={item.textoPreguntas}
                             onChange={(e) => handleinputchangePreguntas(e, i)}
-                            disabled={
-                              (Array.isArray(cargo.inputPreguntas) &&
-                                i >= cargo.inputPreguntas?.length) ||
-                                (params.id === undefined &&
-                                  inputPreguntas.length >= 1)
-                                ? false
-                                : true
-                            }
+                            required={true}
                           />
                         </div>
                       </div>
+                      <div>
+                        <label
+                          htmlFor="respuestaPreguntas"
+                          className="block text-sm font-medium text-gray-700"
+                        >
+                          Respuesta sugerida <span className="text-red-700">*</span>
+                        </label>
+                        <div>
+                          <textarea
+                            id="respuestaPreguntas"
+                            name="respuestaPreguntas"
+                            type="text"
+                            placeholder=""
+                            rows="3"
+                            className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                            value={item.respuestaPreguntas}
+                            onChange={(e) => handleinputchangePreguntas(e, i)}
+                            required={true}
+                          />
+                        </div>
+                      </div>
+
+                      <div>
+                        <label
+                          htmlFor="fuente"
+                          className="block text-sm font-medium text-gray-700"
+                        >
+                          Fuente <span className="text-red-700">*</span>
+                        </label>
+                        <div className="mt-1">
+                          <select
+                            id="fuente"
+                            name="fuente"
+                            className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                            onChange={(e) => handleinputchangePreguntas(e, i)}
+                            value={estado}
+                            disabled={true}
+                          >
+                            <option
+                              value="elegir"
+                              disabled
+                              className="text-gray-400"
+                            >
+                              --Selecciona un tipo de documento--
+                            </option>
+                            <option value="Durante entrevista">Durante entrevista</option>
+                            <option value="Antes de entrevista">Antes de entrevista</option>
+                          </select>
+                        </div>
+                      </div>
+
                       <div className="grid grid-cols-2 gap-4 pt-6 ">
                         {(Array.isArray(cargo.inputPreguntas) &&
                           i >= cargo.inputPreguntas?.length) ||
-                          (params.id === undefined &&
-                            inputPreguntas.length !== 1) ? (
+                        (params.id === undefined &&
+                          inputPreguntas.length !== 1) ? (
                           <button
                             className="h-8 flex items-center w-full justify-center rounded-md border-2 border-red-400 bg-transparent py-2 px-4 text-sm font-medium text-red-500 shadow-sm hover:bg-red-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                             onClick={() => handleremovePreguntas(i)}
@@ -958,8 +1009,8 @@ const FormularioNuevoCargo = () => {
             />
           </div>
         </form>
-      </div >
-    </div >
+      </div>
+    </div>
   );
 };
 
