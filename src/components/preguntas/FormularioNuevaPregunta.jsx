@@ -16,6 +16,7 @@ const FormularioNuevaPregunta = () => {
   const [textoPreguntas, setTextoPreguntas] = useState("");
   const [respuestaPreguntas, setRespuestaPreguntas] = useState("");
   const [fuente, setFuente] = useState("Durante entrevista");
+  const [categoria, setCategoria] = useState("elegir")
   const [estado, setEstado] = useState("Activo");
 
   const { obtenerCargosForm, cargosForm } = useCargos();
@@ -38,6 +39,7 @@ const FormularioNuevaPregunta = () => {
       setTextoPreguntas(pregunta.textoPreguntas);
       setRespuestaPreguntas(pregunta.respuestaPreguntas)
       setFuente(pregunta.fuente)
+      setCategoria(pregunta.categoria)
 
     }
   }, [pregunta]);
@@ -46,13 +48,16 @@ const FormularioNuevaPregunta = () => {
     e.preventDefault();
 
 
+    console.log(categoria)
+
     await submitPregunta({
       id,
       cargo,
       estado,
       textoPreguntas,
       respuestaPreguntas,
-      fuente
+      fuente,
+      categoria
     });
   };
 
@@ -72,6 +77,41 @@ const FormularioNuevaPregunta = () => {
           </div>
           <div className="grid grid-cols-1 gap-6 ">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-2 gap-6">
+              <div>
+                <label
+                  htmlFor="categoria"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Categoría <span className="text-red-700">*</span>
+                </label>
+                <div className="mt-1">
+                  <select
+                    id="categoria"
+                    name="categoria"
+                    className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                    onChange={(e) => setCategoria(e.target.value)}
+                    value={categoria}
+                  >
+                    <option
+                      value="elegir"
+                      disabled
+                      className="text-gray-400"
+                    >
+                      --Selecciona una categoría--
+                    </option>
+                    <option value="Experiencia Laboral">Experiencia Laboral</option>
+                    <option value="Habilidades Técnicas">Habilidades Técnicas</option>
+                    <option value="Competencias Blandas">Competencias Blandas</option>
+                    <option value="Encaje Cultural">Encaje Cultural</option>
+                    <option value="Logros y resultados previos">Logros y resultados previos</option>
+                    <option value="Capacidad de aprendizaje y adaptación">Capacidad de aprendizaje y adaptación</option>
+                    <option value="Motivación y pasión">Motivación y pasión</option>
+
+
+                  </select>
+                </div>
+              </div>
+
               <div>
                 <label
                   htmlFor="cargo"

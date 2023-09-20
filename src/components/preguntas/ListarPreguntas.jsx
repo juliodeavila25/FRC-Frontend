@@ -20,6 +20,10 @@ const ListarPreguntas = () => {
 
   const [headers, setHeaders] = useState([
     {
+      Header: "Categoría",
+      accessor: "categoria",
+    },
+    {
       Header: "Prgunta",
       accessor: "textoPreguntas",
     },

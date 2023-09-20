@@ -14,10 +14,44 @@ import {
   FcBiohazard,
   FcSupport,
   FcSurvey,
+
+  FcBusinessContact,
+  FcInspection,
+  FcAssistant,
+  FcCancel,
+  FcOk,
+
+  FcManager,
+  FcFile,
 } from "react-icons/fc";
+import usePregunta from "../../hooks/usePregunta";
+
+import {
+  Accordion,
+  AccordionHeader,
+  AccordionBody,
+} from "@material-tailwind/react";
+
+
+function Icon({ id, open }) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className={`${id === open ? "rotate-180" : ""
+        } h-5 w-5 transition-transform`}
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      strokeWidth={2}
+    >
+      <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+    </svg>
+  );
+}
 
 const FormularioNuevoCargo = () => {
   const navigate = useNavigate();
+  const [open, setOpen] = useState(0);
   const [active, setActive] = useState(false);
   const [id, setId] = useState(null);
   const [nombre, setNombre] = useState("");
@@ -53,13 +87,9 @@ const FormularioNuevoCargo = () => {
     },
   ]);
 
-  const [inputPreguntas, setInputPreguntas] = useState([
-    {
-      textoPreguntas: "",
-      respuestaPreguntas: "",
-      fuente: "Durante entrevista",
-    },
-  ]);
+  const [preguntasFiltradas, setPregutasFiltradas] = useState([])
+
+
 
   const [requisitos, setRequisitos] = useState([]);
 
@@ -73,13 +103,16 @@ const FormularioNuevoCargo = () => {
   const [errorEstado, setErrorEstado] = useState(false);
 
   const params = useParams();
-  const { submitCargo, mostrarAlerta, alerta, cargo, cargandoDataCargos } =
+  const { submitCargo, mostrarAlerta, alerta, cargo, cargandoDataCargos, obtenerCargosForm, cargosForm } =
     useCargos();
 
   const { auth, cargando } = useAuth();
 
   const { requisitosBo } = useRequisito();
   const { herramientas } = useHerramienta();
+
+  const { preguntas } =
+    usePregunta();
 
   useEffect(() => {
     if (params.id) {
@@ -106,11 +139,18 @@ const FormularioNuevoCargo = () => {
       setTecnologico(cargo.tecnologico);
       setDescripcionCargos(cargo.descripcionCargos);
       setEstado(cargo.estado);
-      setInputPreguntas(cargo.inputPreguntas);
+
       setRequisitos(cargo.requisitos);
       setHerramientas(cargo.herramientasSelect);
+
+      let dataFilter = preguntas.filter(item => item.cargo === cargo._id || item.cargo === "todos")
+      setPregutasFiltradas(dataFilter)
     }
   }, [cargo]);
+
+  useEffect(() => {
+    obtenerCargosForm()
+  }, [])
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -147,7 +187,7 @@ const FormularioNuevoCargo = () => {
       descripcionCargos,
       estado,
       inputCargos,
-      inputPreguntas,
+
       requisitos,
       herramientasSelect,
     });
@@ -185,31 +225,7 @@ const FormularioNuevoCargo = () => {
   //   setInputCargos(list);
   // };
 
-  const handleaddclickPreguntas = () => {
-    setInputPreguntas([
-      ...inputPreguntas,
-      {
-        textoPreguntas: "",
-      },
-    ]);
-  };
 
-  const handleinputchangePreguntas = (e, index) => {
-    const { name, value, checked } = e.target;
-    const list = [...inputPreguntas];
-    if (e.target.type === "checkbox") {
-      list[index][name] = checked;
-    } else {
-      list[index][name] = value;
-    }
-    setInputPreguntas(list);
-  };
-
-  const handleremovePreguntas = (index) => {
-    const list = [...inputPreguntas];
-    list.splice(index, 1);
-    setInputPreguntas(list);
-  };
 
   const handleChangeElectrico = (event) => {
     setElectrico(event.target.checked);
@@ -287,7 +303,20 @@ const FormularioNuevoCargo = () => {
     }
   };
 
+
+  const filterData = (e) => {
+    setNombre(e.target.value)
+    let dataFilter = preguntas.filter(item => item.cargo === e.target.value || item.cargo === "todos")
+    console.log(dataFilter)
+  }
+
+  const handleOpen = (value) => {
+    setOpen(open === value ? 0 : value);
+  };
+
   const { msg } = alerta;
+
+
 
   if (cargandoDataCargos) return <BeatLoader color="#36d7b7" />;
 
@@ -325,7 +354,7 @@ const FormularioNuevoCargo = () => {
                         : "block w-full appearance-none rounded-md border border-red-500 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-red-500 focus:outline-none  sm:text-sm"
                     }
                     value={nombre}
-                    onChange={(e) => setNombre(e.target.value)}
+                    onChange={(e) => filterData(e)}
                     ref={inputRef}
                   />
                   {errorNombre === true && (
@@ -847,112 +876,1017 @@ const FormularioNuevoCargo = () => {
                 <FcSurvey />
                 <h6 className="font-medium text-gray-900">Preguntas</h6>
               </div>
-              {inputPreguntas &&
-                Array.isArray(inputPreguntas) &&
-                inputPreguntas.map((item, i) => {
-                  return (
-                    <div
-                      key={i}
-                      className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 pt-5 "
-                    >
-                      <div>
-                        <label
-                          htmlFor="textoPreguntas"
-                          className="block text-sm font-medium text-gray-700"
-                        >
-                          Texto de la pregunta <span className="text-red-700">*</span>
-                        </label>
-                        <div>
-                          <textarea
-                            id="textoPreguntas"
-                            name="textoPreguntas"
-                            type="text"
-                            placeholder=""
-                            rows="3"
-                            className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                            value={item.textoPreguntas}
-                            onChange={(e) => handleinputchangePreguntas(e, i)}
-                            required={true}
-                          />
-                        </div>
-                      </div>
-                      <div>
-                        <label
-                          htmlFor="respuestaPreguntas"
-                          className="block text-sm font-medium text-gray-700"
-                        >
-                          Respuesta sugerida <span className="text-red-700">*</span>
-                        </label>
-                        <div>
-                          <textarea
-                            id="respuestaPreguntas"
-                            name="respuestaPreguntas"
-                            type="text"
-                            placeholder=""
-                            rows="3"
-                            className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                            value={item.respuestaPreguntas}
-                            onChange={(e) => handleinputchangePreguntas(e, i)}
-                            required={true}
-                          />
-                        </div>
-                      </div>
 
-                      <div>
-                        <label
-                          htmlFor="fuente"
-                          className="block text-sm font-medium text-gray-700"
-                        >
-                          Fuente <span className="text-red-700">*</span>
-                        </label>
-                        <div className="mt-1">
-                          <select
-                            id="fuente"
-                            name="fuente"
-                            className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                            onChange={(e) => handleinputchangePreguntas(e, i)}
-                            value={item.fuente}
-
-
-                          >
-                            <option
-                              value="elegir"
-                              disabled
-                              className="text-gray-400"
-                            >
-                              --Selecciona un tipo de documento--
-                            </option>
-                            <option value="Durante entrevista">Durante entrevista</option>
-                            <option value="Antes de entrevista">Antes de entrevista</option>
-                          </select>
-                        </div>
-                      </div>
-
-                      <div className="grid grid-cols-2 gap-4 pt-6 ">
-                        {(Array.isArray(cargo.inputPreguntas) &&
-                          i >= cargo.inputPreguntas?.length) ||
-                          (params.id === undefined &&
-                            inputPreguntas.length !== 1) ? (
-                          <button
-                            className="h-8 flex items-center w-full justify-center rounded-md border-2 border-red-400 bg-transparent py-2 px-4 text-sm font-medium text-red-500 shadow-sm hover:bg-red-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                            onClick={() => handleremovePreguntas(i)}
-                          >
-                            Remover
-                          </button>
-                        ) : null}
-
-                        {inputPreguntas.length - 1 === i && (
-                          <button
-                            className="h-8 flex items-center w-full justify-center rounded-md border border-transparent bg-green-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 cursor-pointer"
-                            onClick={handleaddclickPreguntas}
-                          >
-                            Agregar
-                          </button>
-                        )}
-                      </div>
+              <div className="w-11/12 mx-auto ">
+                <Accordion open={open === 1} icon={<Icon id={1} open={open} />}>
+                  <AccordionHeader
+                    className="text-base font-semibold text-gray-900"
+                    onClick={() => handleOpen(1)}
+                  >
+                    <div className="flex space-x-3 items-center">
+                      <FcBusinessContact className="text-lg" />
+                      <p>
+                        Experiencia Laboral (
+                        <span>
+                          {Array.isArray(preguntasFiltradas) && preguntasFiltradas.length > 0
+                            ? preguntasFiltradas.filter(
+                              (pregunta) =>
+                                pregunta.categoria ===
+                                "Experiencia Laboral"
+                            ).length
+                            : 0}
+                        </span>
+                        )
+                      </p>
                     </div>
-                  );
-                })}
+                  </AccordionHeader>
+                  <AccordionBody>
+                    {Array.isArray(preguntasFiltradas) &&
+                      preguntasFiltradas.length > 0 &&
+                      preguntasFiltradas.filter(
+                        (pregunta) =>
+                          pregunta.categoria ===
+                          "Experiencia Laboral"
+                      ).length > 0 ? (
+                      <>
+                        {preguntasFiltradas &&
+                          Array.isArray(preguntasFiltradas) &&
+                          preguntasFiltradas.filter(
+                            (pregunta) =>
+                              pregunta.categoria ===
+                              "Experiencia Laboral"
+                          ).map((item, i) => {
+                            console.log(item);
+                            return (
+                              <div key={i} className="grid grid-cols-3 gap-6 pt-5">
+                                <div>
+                                  <label
+                                    htmlFor="textoPreguntas"
+                                    className="block text-sm font-medium text-gray-700"
+                                  >
+                                    Texto de la pregunta <span className="text-red-700">*</span>
+                                  </label>
+                                  <div>
+                                    <textarea
+                                      id="textoPreguntas"
+                                      name="textoPreguntas"
+                                      type="text"
+                                      placeholder=""
+                                      rows="3"
+                                      className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                      value={item.textoPreguntas}
+                                      disabled={true}
+                                      required={true}
+                                    />
+                                  </div>
+                                </div>
+                                <div>
+                                  <label
+                                    htmlFor="respuestaPreguntas"
+                                    className="block text-sm font-medium text-gray-700"
+                                  >
+                                    Respuesta sugerida <span className="text-red-700">*</span>
+                                  </label>
+                                  <div>
+                                    <textarea
+                                      id="respuestaPreguntas"
+                                      name="respuestaPreguntas"
+                                      type="text"
+                                      placeholder=""
+                                      rows="3"
+                                      className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                      value={item.respuestaPreguntas}
+                                      disabled={true}
+                                      required={true}
+                                    />
+                                  </div>
+                                </div>
+
+                                <div>
+                                  <label
+                                    htmlFor="fuente"
+                                    className="block text-sm font-medium text-gray-700"
+                                  >
+                                    Fuente <span className="text-red-700">*</span>
+                                  </label>
+                                  <div className="mt-1">
+                                    <select
+                                      id="fuente"
+                                      name="fuente"
+                                      className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                      disabled={true}
+                                      value={item.fuente}
+                                    >
+                                      <option
+                                        value="elegir"
+                                        disabled
+                                        className="text-gray-400"
+                                      >
+                                        --Selecciona un tipo de documento--
+                                      </option>
+                                      <option value="Durante entrevista">Durante entrevista</option>
+                                      <option value="Antes de entrevista">Antes de entrevista</option>
+                                    </select>
+                                  </div>
+                                </div>
+                              </div>
+                            );
+                          })}
+                      </>
+                    ) : (
+                      <div className="rounded-md bg-blue-50 p-4">
+                        <div className="flex">
+                          <div className="flex-shrink-0">
+                            <svg
+                              className="h-5 w-5 text-blue-400"
+                              viewBox="0 0 20 20"
+                              fill="currentColor"
+                              aria-hidden="true"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a.75.75 0 000 1.5h.253a.25.25 0 01.244.304l-.459 2.066A1.75 1.75 0 0010.747 15H11a.75.75 0 000-1.5h-.253a.25.25 0 01-.244-.304l.459-2.066A1.75 1.75 0 009.253 9H9z"
+                                clipRule="evenodd"
+                              />
+                            </svg>
+                          </div>
+                          <div className="ml-3 flex-1 md:flex ">
+                            <p className="text-sm text-blue-700">
+                              No existen preguntas de experiencia laboral  para este cargo.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </AccordionBody>
+                </Accordion>
+
+                <Accordion open={open === 2} icon={<Icon id={2} open={open} />}>
+                  <AccordionHeader
+                    className="text-base font-semibold text-gray-900"
+                    onClick={() => handleOpen(2)}
+                  >
+                    <div className="flex space-x-3 items-center">
+                      <FcBusinessContact className="text-lg" />
+                      <p>
+                        Habilidades Técnicas (
+                        <span>
+                          {Array.isArray(preguntasFiltradas) && preguntasFiltradas.length > 0
+                            ? preguntasFiltradas.filter(
+                              (pregunta) =>
+                                pregunta.categoria ===
+                                "Habilidades Técnicas"
+                            ).length
+                            : 0}
+                        </span>
+                        )
+                      </p>
+                    </div>
+                  </AccordionHeader>
+                  <AccordionBody>
+                    {Array.isArray(preguntasFiltradas) &&
+                      preguntasFiltradas.length > 0 &&
+                      preguntasFiltradas.filter(
+                        (pregunta) =>
+                          pregunta.categoria ===
+                          "Habilidades Técnicas"
+                      ).length > 0 ? (
+                      <>
+                        {preguntasFiltradas &&
+                          Array.isArray(preguntasFiltradas) &&
+                          preguntasFiltradas.filter(
+                            (pregunta) =>
+                              pregunta.categoria ===
+                              "Habilidades Técnicas"
+                          ).map((item, i) => {
+                            console.log(item);
+                            return (
+                              <div key={i} className="grid grid-cols-3 gap-6 pt-5">
+                                <div>
+                                  <label
+                                    htmlFor="textoPreguntas"
+                                    className="block text-sm font-medium text-gray-700"
+                                  >
+                                    Texto de la pregunta <span className="text-red-700">*</span>
+                                  </label>
+                                  <div>
+                                    <textarea
+                                      id="textoPreguntas"
+                                      name="textoPreguntas"
+                                      type="text"
+                                      placeholder=""
+                                      rows="3"
+                                      className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                      value={item.textoPreguntas}
+                                      disabled={true}
+                                      required={true}
+                                    />
+                                  </div>
+                                </div>
+                                <div>
+                                  <label
+                                    htmlFor="respuestaPreguntas"
+                                    className="block text-sm font-medium text-gray-700"
+                                  >
+                                    Respuesta sugerida <span className="text-red-700">*</span>
+                                  </label>
+                                  <div>
+                                    <textarea
+                                      id="respuestaPreguntas"
+                                      name="respuestaPreguntas"
+                                      type="text"
+                                      placeholder=""
+                                      rows="3"
+                                      className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                      value={item.respuestaPreguntas}
+                                      disabled={true}
+                                      required={true}
+                                    />
+                                  </div>
+                                </div>
+
+                                <div>
+                                  <label
+                                    htmlFor="fuente"
+                                    className="block text-sm font-medium text-gray-700"
+                                  >
+                                    Fuente <span className="text-red-700">*</span>
+                                  </label>
+                                  <div className="mt-1">
+                                    <select
+                                      id="fuente"
+                                      name="fuente"
+                                      className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                      disabled={true}
+                                      value={item.fuente}
+                                    >
+                                      <option
+                                        value="elegir"
+                                        disabled
+                                        className="text-gray-400"
+                                      >
+                                        --Selecciona un tipo de documento--
+                                      </option>
+                                      <option value="Durante entrevista">Durante entrevista</option>
+                                      <option value="Antes de entrevista">Antes de entrevista</option>
+                                    </select>
+                                  </div>
+                                </div>
+                              </div>
+                            );
+                          })}
+                      </>
+                    ) : (
+                      <div className="rounded-md bg-blue-50 p-4">
+                        <div className="flex">
+                          <div className="flex-shrink-0">
+                            <svg
+                              className="h-5 w-5 text-blue-400"
+                              viewBox="0 0 20 20"
+                              fill="currentColor"
+                              aria-hidden="true"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a.75.75 0 000 1.5h.253a.25.25 0 01.244.304l-.459 2.066A1.75 1.75 0 0010.747 15H11a.75.75 0 000-1.5h-.253a.25.25 0 01-.244-.304l.459-2.066A1.75 1.75 0 009.253 9H9z"
+                                clipRule="evenodd"
+                              />
+                            </svg>
+                          </div>
+                          <div className="ml-3 flex-1 md:flex ">
+                            <p className="text-sm text-blue-700">
+                              No existen preguntas de habilidades técnicas para este cargo.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </AccordionBody>
+                </Accordion>
+
+                <Accordion open={open === 3} icon={<Icon id={3} open={open} />}>
+                  <AccordionHeader
+                    className="text-base font-semibold text-gray-900"
+                    onClick={() => handleOpen(3)}
+                  >
+                    <div className="flex space-x-3 items-center">
+                      <FcBusinessContact className="text-lg" />
+                      <p>
+                        Competencias Blandas (
+                        <span>
+                          {Array.isArray(preguntasFiltradas) && preguntasFiltradas.length > 0
+                            ? preguntasFiltradas.filter(
+                              (pregunta) =>
+                                pregunta.categoria ===
+                                "Competencias Blandas"
+                            ).length
+                            : 0}
+                        </span>
+                        )
+                      </p>
+                    </div>
+                  </AccordionHeader>
+                  <AccordionBody>
+                    {Array.isArray(preguntasFiltradas) &&
+                      preguntasFiltradas.length > 0 &&
+                      preguntasFiltradas.filter(
+                        (pregunta) =>
+                          pregunta.categoria ===
+                          "Competencias Blandas"
+                      ).length > 0 ? (
+                      <>
+                        {preguntasFiltradas &&
+                          Array.isArray(preguntasFiltradas) &&
+                          preguntasFiltradas.filter(
+                            (pregunta) =>
+                              pregunta.categoria ===
+                              "Competencias Blandas"
+                          ).map((item, i) => {
+                            console.log(item);
+                            return (
+                              <div key={i} className="grid grid-cols-3 gap-6 pt-5">
+                                <div>
+                                  <label
+                                    htmlFor="textoPreguntas"
+                                    className="block text-sm font-medium text-gray-700"
+                                  >
+                                    Texto de la pregunta <span className="text-red-700">*</span>
+                                  </label>
+                                  <div>
+                                    <textarea
+                                      id="textoPreguntas"
+                                      name="textoPreguntas"
+                                      type="text"
+                                      placeholder=""
+                                      rows="3"
+                                      className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                      value={item.textoPreguntas}
+                                      disabled={true}
+                                      required={true}
+                                    />
+                                  </div>
+                                </div>
+                                <div>
+                                  <label
+                                    htmlFor="respuestaPreguntas"
+                                    className="block text-sm font-medium text-gray-700"
+                                  >
+                                    Respuesta sugerida <span className="text-red-700">*</span>
+                                  </label>
+                                  <div>
+                                    <textarea
+                                      id="respuestaPreguntas"
+                                      name="respuestaPreguntas"
+                                      type="text"
+                                      placeholder=""
+                                      rows="3"
+                                      className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                      value={item.respuestaPreguntas}
+                                      disabled={true}
+                                      required={true}
+                                    />
+                                  </div>
+                                </div>
+
+                                <div>
+                                  <label
+                                    htmlFor="fuente"
+                                    className="block text-sm font-medium text-gray-700"
+                                  >
+                                    Fuente <span className="text-red-700">*</span>
+                                  </label>
+                                  <div className="mt-1">
+                                    <select
+                                      id="fuente"
+                                      name="fuente"
+                                      className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                      disabled={true}
+                                      value={item.fuente}
+                                    >
+                                      <option
+                                        value="elegir"
+                                        disabled
+                                        className="text-gray-400"
+                                      >
+                                        --Selecciona un tipo de documento--
+                                      </option>
+                                      <option value="Durante entrevista">Durante entrevista</option>
+                                      <option value="Antes de entrevista">Antes de entrevista</option>
+                                    </select>
+                                  </div>
+                                </div>
+                              </div>
+                            );
+                          })}
+                      </>
+                    ) : (
+                      <div className="rounded-md bg-blue-50 p-4">
+                        <div className="flex">
+                          <div className="flex-shrink-0">
+                            <svg
+                              className="h-5 w-5 text-blue-400"
+                              viewBox="0 0 20 20"
+                              fill="currentColor"
+                              aria-hidden="true"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a.75.75 0 000 1.5h.253a.25.25 0 01.244.304l-.459 2.066A1.75 1.75 0 0010.747 15H11a.75.75 0 000-1.5h-.253a.25.25 0 01-.244-.304l.459-2.066A1.75 1.75 0 009.253 9H9z"
+                                clipRule="evenodd"
+                              />
+                            </svg>
+                          </div>
+                          <div className="ml-3 flex-1 md:flex ">
+                            <p className="text-sm text-blue-700">
+                              No existen preguntas de competencias blandas para este cargo.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </AccordionBody>
+                </Accordion>
+
+                <Accordion open={open === 4} icon={<Icon id={4} open={open} />}>
+                  <AccordionHeader
+                    className="text-base font-semibold text-gray-900"
+                    onClick={() => handleOpen(4)}
+                  >
+                    <div className="flex space-x-3 items-center">
+                      <FcBusinessContact className="text-lg" />
+                      <p>
+                        Encaje Cultural (
+                        <span>
+                          {Array.isArray(preguntasFiltradas) && preguntasFiltradas.length > 0
+                            ? preguntasFiltradas.filter(
+                              (pregunta) =>
+                                pregunta.categoria ===
+                                "Encaje Cultural"
+                            ).length
+                            : 0}
+                        </span>
+                        )
+                      </p>
+                    </div>
+                  </AccordionHeader>
+                  <AccordionBody>
+                    {Array.isArray(preguntasFiltradas) &&
+                      preguntasFiltradas.length > 0 &&
+                      preguntasFiltradas.filter(
+                        (pregunta) =>
+                          pregunta.categoria ===
+                          "Encaje Cultural"
+                      ).length > 0 ? (
+                      <>
+                        {preguntasFiltradas &&
+                          Array.isArray(preguntasFiltradas) &&
+                          preguntasFiltradas.filter(
+                            (pregunta) =>
+                              pregunta.categoria ===
+                              "Encaje Cultural"
+                          ).map((item, i) => {
+                            console.log(item);
+                            return (
+                              <div key={i} className="grid grid-cols-3 gap-6 pt-5">
+                                <div>
+                                  <label
+                                    htmlFor="textoPreguntas"
+                                    className="block text-sm font-medium text-gray-700"
+                                  >
+                                    Texto de la pregunta <span className="text-red-700">*</span>
+                                  </label>
+                                  <div>
+                                    <textarea
+                                      id="textoPreguntas"
+                                      name="textoPreguntas"
+                                      type="text"
+                                      placeholder=""
+                                      rows="3"
+                                      className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                      value={item.textoPreguntas}
+                                      disabled={true}
+                                      required={true}
+                                    />
+                                  </div>
+                                </div>
+                                <div>
+                                  <label
+                                    htmlFor="respuestaPreguntas"
+                                    className="block text-sm font-medium text-gray-700"
+                                  >
+                                    Respuesta sugerida <span className="text-red-700">*</span>
+                                  </label>
+                                  <div>
+                                    <textarea
+                                      id="respuestaPreguntas"
+                                      name="respuestaPreguntas"
+                                      type="text"
+                                      placeholder=""
+                                      rows="3"
+                                      className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                      value={item.respuestaPreguntas}
+                                      disabled={true}
+                                      required={true}
+                                    />
+                                  </div>
+                                </div>
+
+                                <div>
+                                  <label
+                                    htmlFor="fuente"
+                                    className="block text-sm font-medium text-gray-700"
+                                  >
+                                    Fuente <span className="text-red-700">*</span>
+                                  </label>
+                                  <div className="mt-1">
+                                    <select
+                                      id="fuente"
+                                      name="fuente"
+                                      className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                      disabled={true}
+                                      value={item.fuente}
+                                    >
+                                      <option
+                                        value="elegir"
+                                        disabled
+                                        className="text-gray-400"
+                                      >
+                                        --Selecciona un tipo de documento--
+                                      </option>
+                                      <option value="Durante entrevista">Durante entrevista</option>
+                                      <option value="Antes de entrevista">Antes de entrevista</option>
+                                    </select>
+                                  </div>
+                                </div>
+                              </div>
+                            );
+                          })}
+                      </>
+                    ) : (
+                      <div className="rounded-md bg-blue-50 p-4">
+                        <div className="flex">
+                          <div className="flex-shrink-0">
+                            <svg
+                              className="h-5 w-5 text-blue-400"
+                              viewBox="0 0 20 20"
+                              fill="currentColor"
+                              aria-hidden="true"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a.75.75 0 000 1.5h.253a.25.25 0 01.244.304l-.459 2.066A1.75 1.75 0 0010.747 15H11a.75.75 0 000-1.5h-.253a.25.25 0 01-.244-.304l.459-2.066A1.75 1.75 0 009.253 9H9z"
+                                clipRule="evenodd"
+                              />
+                            </svg>
+                          </div>
+                          <div className="ml-3 flex-1 md:flex ">
+                            <p className="text-sm text-blue-700">
+                              No existen preguntas de encaje cultural para este cargo.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </AccordionBody>
+                </Accordion>
+
+                <Accordion open={open === 5} icon={<Icon id={5} open={open} />}>
+                  <AccordionHeader
+                    className="text-base font-semibold text-gray-900"
+                    onClick={() => handleOpen(5)}
+                  >
+                    <div className="flex space-x-3 items-center">
+                      <FcBusinessContact className="text-lg" />
+                      <p>
+                        Logros y resultados previos (
+                        <span>
+                          {Array.isArray(preguntasFiltradas) && preguntasFiltradas.length > 0
+                            ? preguntasFiltradas.filter(
+                              (pregunta) =>
+                                pregunta.categoria ===
+                                "Logros y resultados previos"
+                            ).length
+                            : 0}
+                        </span>
+                        )
+                      </p>
+                    </div>
+                  </AccordionHeader>
+                  <AccordionBody>
+                    {Array.isArray(preguntasFiltradas) &&
+                      preguntasFiltradas.length > 0 &&
+                      preguntasFiltradas.filter(
+                        (pregunta) =>
+                          pregunta.categoria ===
+                          "Logros y resultados previos"
+                      ).length > 0 ? (
+                      <>
+                        {preguntasFiltradas &&
+                          Array.isArray(preguntasFiltradas) &&
+                          preguntasFiltradas.filter(
+                            (pregunta) =>
+                              pregunta.categoria ===
+                              "Logros y resultados previos"
+                          ).map((item, i) => {
+                            console.log(item);
+                            return (
+                              <div key={i} className="grid grid-cols-3 gap-6 pt-5">
+                                <div>
+                                  <label
+                                    htmlFor="textoPreguntas"
+                                    className="block text-sm font-medium text-gray-700"
+                                  >
+                                    Texto de la pregunta <span className="text-red-700">*</span>
+                                  </label>
+                                  <div>
+                                    <textarea
+                                      id="textoPreguntas"
+                                      name="textoPreguntas"
+                                      type="text"
+                                      placeholder=""
+                                      rows="3"
+                                      className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                      value={item.textoPreguntas}
+                                      disabled={true}
+                                      required={true}
+                                    />
+                                  </div>
+                                </div>
+                                <div>
+                                  <label
+                                    htmlFor="respuestaPreguntas"
+                                    className="block text-sm font-medium text-gray-700"
+                                  >
+                                    Respuesta sugerida <span className="text-red-700">*</span>
+                                  </label>
+                                  <div>
+                                    <textarea
+                                      id="respuestaPreguntas"
+                                      name="respuestaPreguntas"
+                                      type="text"
+                                      placeholder=""
+                                      rows="3"
+                                      className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                      value={item.respuestaPreguntas}
+                                      disabled={true}
+                                      required={true}
+                                    />
+                                  </div>
+                                </div>
+
+                                <div>
+                                  <label
+                                    htmlFor="fuente"
+                                    className="block text-sm font-medium text-gray-700"
+                                  >
+                                    Fuente <span className="text-red-700">*</span>
+                                  </label>
+                                  <div className="mt-1">
+                                    <select
+                                      id="fuente"
+                                      name="fuente"
+                                      className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                      disabled={true}
+                                      value={item.fuente}
+                                    >
+                                      <option
+                                        value="elegir"
+                                        disabled
+                                        className="text-gray-400"
+                                      >
+                                        --Selecciona un tipo de documento--
+                                      </option>
+                                      <option value="Durante entrevista">Durante entrevista</option>
+                                      <option value="Antes de entrevista">Antes de entrevista</option>
+                                    </select>
+                                  </div>
+                                </div>
+                              </div>
+                            );
+                          })}
+                      </>
+                    ) : (
+                      <div className="rounded-md bg-blue-50 p-4">
+                        <div className="flex">
+                          <div className="flex-shrink-0">
+                            <svg
+                              className="h-5 w-5 text-blue-400"
+                              viewBox="0 0 20 20"
+                              fill="currentColor"
+                              aria-hidden="true"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a.75.75 0 000 1.5h.253a.25.25 0 01.244.304l-.459 2.066A1.75 1.75 0 0010.747 15H11a.75.75 0 000-1.5h-.253a.25.25 0 01-.244-.304l.459-2.066A1.75 1.75 0 009.253 9H9z"
+                                clipRule="evenodd"
+                              />
+                            </svg>
+                          </div>
+                          <div className="ml-3 flex-1 md:flex ">
+                            <p className="text-sm text-blue-700">
+                              No existen preguntas de logros y resultados previos para este cargo.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </AccordionBody>
+                </Accordion>
+
+                <Accordion open={open === 6} icon={<Icon id={6} open={open} />}>
+                  <AccordionHeader
+                    className="text-base font-semibold text-gray-900"
+                    onClick={() => handleOpen(3)}
+                  >
+                    <div className="flex space-x-3 items-center">
+                      <FcBusinessContact className="text-lg" />
+                      <p>
+                        Capacidad de aprendizaje y adaptación (
+                        <span>
+                          {Array.isArray(preguntasFiltradas) && preguntasFiltradas.length > 0
+                            ? preguntasFiltradas.filter(
+                              (pregunta) =>
+                                pregunta.categoria ===
+                                "Capacidad de aprendizaje y adaptación"
+                            ).length
+                            : 0}
+                        </span>
+                        )
+                      </p>
+                    </div>
+                  </AccordionHeader>
+                  <AccordionBody>
+                    {Array.isArray(preguntasFiltradas) &&
+                      preguntasFiltradas.length > 0 &&
+                      preguntasFiltradas.filter(
+                        (pregunta) =>
+                          pregunta.categoria ===
+                          "Capacidad de aprendizaje y adaptación"
+                      ).length > 0 ? (
+                      <>
+                        {preguntasFiltradas &&
+                          Array.isArray(preguntasFiltradas) &&
+                          preguntasFiltradas.filter(
+                            (pregunta) =>
+                              pregunta.categoria ===
+                              "Capacidad de aprendizaje y adaptación"
+                          ).map((item, i) => {
+                            console.log(item);
+                            return (
+                              <div key={i} className="grid grid-cols-3 gap-6 pt-5">
+                                <div>
+                                  <label
+                                    htmlFor="textoPreguntas"
+                                    className="block text-sm font-medium text-gray-700"
+                                  >
+                                    Texto de la pregunta <span className="text-red-700">*</span>
+                                  </label>
+                                  <div>
+                                    <textarea
+                                      id="textoPreguntas"
+                                      name="textoPreguntas"
+                                      type="text"
+                                      placeholder=""
+                                      rows="3"
+                                      className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                      value={item.textoPreguntas}
+                                      disabled={true}
+                                      required={true}
+                                    />
+                                  </div>
+                                </div>
+                                <div>
+                                  <label
+                                    htmlFor="respuestaPreguntas"
+                                    className="block text-sm font-medium text-gray-700"
+                                  >
+                                    Respuesta sugerida <span className="text-red-700">*</span>
+                                  </label>
+                                  <div>
+                                    <textarea
+                                      id="respuestaPreguntas"
+                                      name="respuestaPreguntas"
+                                      type="text"
+                                      placeholder=""
+                                      rows="3"
+                                      className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                      value={item.respuestaPreguntas}
+                                      disabled={true}
+                                      required={true}
+                                    />
+                                  </div>
+                                </div>
+
+                                <div>
+                                  <label
+                                    htmlFor="fuente"
+                                    className="block text-sm font-medium text-gray-700"
+                                  >
+                                    Fuente <span className="text-red-700">*</span>
+                                  </label>
+                                  <div className="mt-1">
+                                    <select
+                                      id="fuente"
+                                      name="fuente"
+                                      className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                      disabled={true}
+                                      value={item.fuente}
+                                    >
+                                      <option
+                                        value="elegir"
+                                        disabled
+                                        className="text-gray-400"
+                                      >
+                                        --Selecciona un tipo de documento--
+                                      </option>
+                                      <option value="Durante entrevista">Durante entrevista</option>
+                                      <option value="Antes de entrevista">Antes de entrevista</option>
+                                    </select>
+                                  </div>
+                                </div>
+                              </div>
+                            );
+                          })}
+                      </>
+                    ) : (
+                      <div className="rounded-md bg-blue-50 p-4">
+                        <div className="flex">
+                          <div className="flex-shrink-0">
+                            <svg
+                              className="h-5 w-5 text-blue-400"
+                              viewBox="0 0 20 20"
+                              fill="currentColor"
+                              aria-hidden="true"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a.75.75 0 000 1.5h.253a.25.25 0 01.244.304l-.459 2.066A1.75 1.75 0 0010.747 15H11a.75.75 0 000-1.5h-.253a.25.25 0 01-.244-.304l.459-2.066A1.75 1.75 0 009.253 9H9z"
+                                clipRule="evenodd"
+                              />
+                            </svg>
+                          </div>
+                          <div className="ml-3 flex-1 md:flex ">
+                            <p className="text-sm text-blue-700">
+                              No existen preguntas de capacidad de aprendizaje y adaptación para este cargo.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </AccordionBody>
+                </Accordion>
+
+                <Accordion open={open === 7} icon={<Icon id={7} open={open} />}>
+                  <AccordionHeader
+                    className="text-base font-semibold text-gray-900"
+                    onClick={() => handleOpen(7)}
+                  >
+                    <div className="flex space-x-3 items-center">
+                      <FcBusinessContact className="text-lg" />
+                      <p>
+                        Motivación y pasión (
+                        <span>
+                          {Array.isArray(preguntasFiltradas) && preguntasFiltradas.length > 0
+                            ? preguntasFiltradas.filter(
+                              (pregunta) =>
+                                pregunta.categoria ===
+                                "Motivación y pasión"
+                            ).length
+                            : 0}
+                        </span>
+                        )
+                      </p>
+                    </div>
+                  </AccordionHeader>
+                  <AccordionBody>
+                    {Array.isArray(preguntasFiltradas) &&
+                      preguntasFiltradas.length > 0 &&
+                      preguntasFiltradas.filter(
+                        (pregunta) =>
+                          pregunta.categoria ===
+                          "Motivación y pasión"
+                      ).length > 0 ? (
+                      <>
+                        {preguntasFiltradas &&
+                          Array.isArray(preguntasFiltradas) &&
+                          preguntasFiltradas.filter(
+                            (pregunta) =>
+                              pregunta.categoria ===
+                              "Motivación y pasión"
+                          ).map((item, i) => {
+                            console.log(item);
+                            return (
+                              <div key={i} className="grid grid-cols-3 gap-6 pt-5">
+                                <div>
+                                  <label
+                                    htmlFor="textoPreguntas"
+                                    className="block text-sm font-medium text-gray-700"
+                                  >
+                                    Texto de la pregunta <span className="text-red-700">*</span>
+                                  </label>
+                                  <div>
+                                    <textarea
+                                      id="textoPreguntas"
+                                      name="textoPreguntas"
+                                      type="text"
+                                      placeholder=""
+                                      rows="3"
+                                      className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                      value={item.textoPreguntas}
+                                      disabled={true}
+                                      required={true}
+                                    />
+                                  </div>
+                                </div>
+                                <div>
+                                  <label
+                                    htmlFor="respuestaPreguntas"
+                                    className="block text-sm font-medium text-gray-700"
+                                  >
+                                    Respuesta sugerida <span className="text-red-700">*</span>
+                                  </label>
+                                  <div>
+                                    <textarea
+                                      id="respuestaPreguntas"
+                                      name="respuestaPreguntas"
+                                      type="text"
+                                      placeholder=""
+                                      rows="3"
+                                      className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                      value={item.respuestaPreguntas}
+                                      disabled={true}
+                                      required={true}
+                                    />
+                                  </div>
+                                </div>
+
+                                <div>
+                                  <label
+                                    htmlFor="fuente"
+                                    className="block text-sm font-medium text-gray-700"
+                                  >
+                                    Fuente <span className="text-red-700">*</span>
+                                  </label>
+                                  <div className="mt-1">
+                                    <select
+                                      id="fuente"
+                                      name="fuente"
+                                      className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                      disabled={true}
+                                      value={item.fuente}
+                                    >
+                                      <option
+                                        value="elegir"
+                                        disabled
+                                        className="text-gray-400"
+                                      >
+                                        --Selecciona un tipo de documento--
+                                      </option>
+                                      <option value="Durante entrevista">Durante entrevista</option>
+                                      <option value="Antes de entrevista">Antes de entrevista</option>
+                                    </select>
+                                  </div>
+                                </div>
+                              </div>
+                            );
+                          })}
+                      </>
+                    ) : (
+                      <div className="rounded-md bg-blue-50 p-4">
+                        <div className="flex">
+                          <div className="flex-shrink-0">
+                            <svg
+                              className="h-5 w-5 text-blue-400"
+                              viewBox="0 0 20 20"
+                              fill="currentColor"
+                              aria-hidden="true"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a.75.75 0 000 1.5h.253a.25.25 0 01.244.304l-.459 2.066A1.75 1.75 0 0010.747 15H11a.75.75 0 000-1.5h-.253a.25.25 0 01-.244-.304l.459-2.066A1.75 1.75 0 009.253 9H9z"
+                                clipRule="evenodd"
+                              />
+                            </svg>
+                          </div>
+                          <div className="ml-3 flex-1 md:flex ">
+                            <p className="text-sm text-blue-700">
+                              No existen preguntas de motivación y pasión para este cargo.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </AccordionBody>
+                </Accordion>
+
+
+              </div>
+
+
+
+
+
+
             </div>
             <div>
               <label
