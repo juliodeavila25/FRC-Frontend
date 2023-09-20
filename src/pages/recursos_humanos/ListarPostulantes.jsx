@@ -23,9 +23,8 @@ function Icon({ id, open }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      className={`${
-        id === open ? "rotate-180" : ""
-      } h-5 w-5 transition-transform`}
+      className={`${id === open ? "rotate-180" : ""
+        } h-5 w-5 transition-transform`}
       fill="none"
       viewBox="0 0 24 24"
       stroke="currentColor"
@@ -55,6 +54,8 @@ const ListarPostulantes = () => {
 
   const params = useParams();
   const { obtenerPostulantesPorOferta, postulantes } = useOfertas();
+
+
 
   useEffect(() => {
     obtenerPostulantesPorOferta(params.id);
@@ -295,10 +296,10 @@ const ListarPostulantes = () => {
                       <span>
                         {Array.isArray(curriculums) && curriculums.length > 0
                           ? curriculums.filter(
-                              (curriculum) =>
-                                curriculum.estadoAplicacionOferta ===
-                                "Postulado"
-                            ).length
+                            (curriculum) =>
+                              curriculum.estadoAplicacionOferta ===
+                              "Postulado"
+                          ).length
                           : 0}
                       </span>
                       )
@@ -307,11 +308,11 @@ const ListarPostulantes = () => {
                 </AccordionHeader>
                 <AccordionBody>
                   {Array.isArray(curriculums) &&
-                  curriculums.length > 0 &&
-                  curriculums.filter(
-                    (curriculum) =>
-                      curriculum.estadoAplicacionOferta === "Postulado"
-                  ).length > 0 ? (
+                    curriculums.length > 0 &&
+                    curriculums.filter(
+                      (curriculum) =>
+                        curriculum.estadoAplicacionOferta === "Postulado"
+                    ).length > 0 ? (
                     <>
                       <Table
                         data={curriculums.filter(
@@ -361,10 +362,10 @@ const ListarPostulantes = () => {
                       <span>
                         {Array.isArray(curriculums) && curriculums.length > 0
                           ? curriculums.filter(
-                              (curriculum) =>
-                                curriculum.estadoAplicacionOferta ===
-                                "Preseleccionado"
-                            ).length
+                            (curriculum) =>
+                              curriculum.estadoAplicacionOferta ===
+                              "Preseleccionado"
+                          ).length
                           : 0}
                       </span>
                       )
@@ -373,11 +374,11 @@ const ListarPostulantes = () => {
                 </AccordionHeader>
                 <AccordionBody>
                   {Array.isArray(curriculums) &&
-                  curriculums.length > 0 &&
-                  curriculums.filter(
-                    (curriculum) =>
-                      curriculum.estadoAplicacionOferta === "Preseleccionado"
-                  ).length > 0 ? (
+                    curriculums.length > 0 &&
+                    curriculums.filter(
+                      (curriculum) =>
+                        curriculum.estadoAplicacionOferta === "Preseleccionado"
+                    ).length > 0 ? (
                     <>
                       <Table
                         data={curriculums.filter(
@@ -428,10 +429,10 @@ const ListarPostulantes = () => {
                       <span>
                         {Array.isArray(curriculums) && curriculums.length > 0
                           ? curriculums.filter(
-                              (curriculum) =>
+                            (curriculum) =>
                               curriculum.estadoAplicacionOferta ===
                               "Primera entrevista" || curriculum.estadoAplicacionOferta === "Segunda entrevista"
-                            ).length
+                          ).length
                           : 0}
                       </span>
                       )
@@ -440,18 +441,18 @@ const ListarPostulantes = () => {
                 </AccordionHeader>
                 <AccordionBody>
                   {Array.isArray(curriculums) &&
-                  curriculums.length > 0 &&
-                  curriculums.filter(
-                    (curriculum) =>
-                      curriculum.estadoAplicacionOferta ===
-                      "Primera entrevista" || curriculum.estadoAplicacionOferta === "Segunda entrevista"
-                  ).length > 0 ? (
+                    curriculums.length > 0 &&
+                    curriculums.filter(
+                      (curriculum) =>
+                        curriculum.estadoAplicacionOferta ===
+                        "Primera entrevista" || curriculum.estadoAplicacionOferta === "Segunda entrevista"
+                    ).length > 0 ? (
                     <>
                       <Table
                         data={curriculums.filter(
                           (curriculum) =>
-                          curriculum.estadoAplicacionOferta ===
-                          "Primera entrevista" || curriculum.estadoAplicacionOferta === "Segunda entrevista"
+                            curriculum.estadoAplicacionOferta ===
+                            "Primera entrevista" || curriculum.estadoAplicacionOferta === "Segunda entrevista"
                         )}
                         columns={headers}
                       />
@@ -496,10 +497,10 @@ const ListarPostulantes = () => {
                       <span>
                         {Array.isArray(curriculums) && curriculums.length > 0
                           ? curriculums.filter(
-                              (curriculum) =>
-                                curriculum.estadoAplicacionOferta ===
-                                "Exámenes Ocupacionales"
-                            ).length
+                            (curriculum) =>
+                              curriculum.estadoAplicacionOferta ===
+                              "Exámenes Ocupacionales"
+                          ).length
                           : 0}
                       </span>
                       )
@@ -508,12 +509,12 @@ const ListarPostulantes = () => {
                 </AccordionHeader>
                 <AccordionBody>
                   {Array.isArray(curriculums) &&
-                  curriculums.length > 0 &&
-                  curriculums.filter(
-                    (curriculum) =>
-                      curriculum.estadoAplicacionOferta ===
-                      "Exámenes Ocupacionales"
-                  ).length > 0 ? (
+                    curriculums.length > 0 &&
+                    curriculums.filter(
+                      (curriculum) =>
+                        curriculum.estadoAplicacionOferta ===
+                        "Exámenes Ocupacionales"
+                    ).length > 0 ? (
                     <>
                       <Table
                         data={curriculums.filter(
@@ -552,7 +553,7 @@ const ListarPostulantes = () => {
                 </AccordionBody>
               </Accordion>
 
-              
+
               <Accordion open={open === 5} icon={<Icon id={5} open={open} />}>
                 <AccordionHeader
                   className="text-base font-semibold text-gray-900"
@@ -565,10 +566,10 @@ const ListarPostulantes = () => {
                       <span>
                         {Array.isArray(curriculums) && curriculums.length > 0
                           ? curriculums.filter(
-                              (curriculum) =>
-                                curriculum.estadoAplicacionOferta ===
-                                "Contratado"
-                            ).length
+                            (curriculum) =>
+                              curriculum.estadoAplicacionOferta ===
+                              "Contratado"
+                          ).length
                           : 0}
                       </span>
                       )
@@ -577,11 +578,11 @@ const ListarPostulantes = () => {
                 </AccordionHeader>
                 <AccordionBody>
                   {Array.isArray(curriculums) &&
-                  curriculums.length > 0 &&
-                  curriculums.filter(
-                    (curriculum) =>
-                      curriculum.estadoAplicacionOferta === "Contratado"
-                  ).length > 0 ? (
+                    curriculums.length > 0 &&
+                    curriculums.filter(
+                      (curriculum) =>
+                        curriculum.estadoAplicacionOferta === "Contratado"
+                    ).length > 0 ? (
                     <>
                       <Table
                         data={curriculums.filter(
@@ -631,10 +632,10 @@ const ListarPostulantes = () => {
                       <span>
                         {Array.isArray(curriculums) && curriculums.length > 0
                           ? curriculums.filter(
-                              (curriculum) =>
-                                curriculum.estadoAplicacionOferta ===
-                                "Afiliaciones"
-                            ).length
+                            (curriculum) =>
+                              curriculum.estadoAplicacionOferta ===
+                              "Afiliaciones"
+                          ).length
                           : 0}
                       </span>
                       )
@@ -643,11 +644,11 @@ const ListarPostulantes = () => {
                 </AccordionHeader>
                 <AccordionBody>
                   {Array.isArray(curriculums) &&
-                  curriculums.length > 0 &&
-                  curriculums.filter(
-                    (curriculum) =>
-                      curriculum.estadoAplicacionOferta === "Afiliaciones"
-                  ).length > 0 ? (
+                    curriculums.length > 0 &&
+                    curriculums.filter(
+                      (curriculum) =>
+                        curriculum.estadoAplicacionOferta === "Afiliaciones"
+                    ).length > 0 ? (
                     <>
                       <Table
                         data={curriculums.filter(
@@ -698,10 +699,10 @@ const ListarPostulantes = () => {
                       <span>
                         {Array.isArray(curriculums) && curriculums.length > 0
                           ? curriculums.filter(
-                              (curriculum) =>
-                                curriculum.estadoAplicacionOferta ===
-                                "No continúa"
-                            ).length
+                            (curriculum) =>
+                              curriculum.estadoAplicacionOferta ===
+                              "No continúa"
+                          ).length
                           : 0}
                       </span>
                       )
@@ -710,11 +711,11 @@ const ListarPostulantes = () => {
                 </AccordionHeader>
                 <AccordionBody>
                   {Array.isArray(curriculums) &&
-                  curriculums.length > 0 &&
-                  curriculums.filter(
-                    (curriculum) =>
-                      curriculum.estadoAplicacionOferta === "No continúa"
-                  ).length > 0 ? (
+                    curriculums.length > 0 &&
+                    curriculums.filter(
+                      (curriculum) =>
+                        curriculum.estadoAplicacionOferta === "No continúa"
+                    ).length > 0 ? (
                     <>
                       <Table
                         data={curriculums.filter(

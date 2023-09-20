@@ -16,7 +16,8 @@ import {
   BuildingOfficeIcon,
   BuildingOffice2Icon,
   QueueListIcon,
-  WrenchIcon
+  WrenchIcon,
+  QuestionMarkCircleIcon
 } from "@heroicons/react/24/outline";
 
 <svg
@@ -132,6 +133,12 @@ const Sidebar = () => {
       href: "/herramientas/listar-herramientas",
       icon: WrenchIcon,
       current: location.pathname.includes("/herramientas") ? true : false,
+    },
+    {
+      name: "Preguntas",
+      href: "/preguntas/listar-preguntas",
+      icon: QuestionMarkCircleIcon,
+      current: location.pathname.includes("/preguntas") ? true : false,
     },
     {
       name: "Cargos",

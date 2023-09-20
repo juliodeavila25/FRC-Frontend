@@ -6,8 +6,12 @@ import moment from "moment";
 import TableWithoutSearch from "./table/TableWithoutSearch";
 import { FcDataProtection } from "react-icons/fc";
 import useAuth from "../hooks/useAuth";
+import useCargos from "../hooks/useCargos";
+import { useParams, Link } from "react-router-dom";
+import FormularioEntrevista from "./FormularioEntrevista";
 
 export default function ModalPublic({ setShowModal, data }) {
+  const params = useParams();
   const current = new Date();
   const date = `${current.getFullYear()}-${current.getMonth() + 1
     }-${current.getDate()}`;
@@ -35,6 +39,8 @@ export default function ModalPublic({ setShowModal, data }) {
   const [errorDocumentacionPostulacion, setErrorDocumentacionPostulacion] =
     useState(false);
 
+  const [cargoFiltrado, setCargoFiltrado] = useState("")
+
   const {
     nuevoEstadoPostulacionModal,
     alertaPostulacion,
@@ -44,6 +50,23 @@ export default function ModalPublic({ setShowModal, data }) {
   const { obtenerPostulacionesUsuario, postulacionesUsuario } =
     usePostulaciones();
   const { obtenerUsuarios, usuarios } = useAuth();
+
+
+  const { obtenerCargosForm, cargosForm } = useCargos();
+
+
+  useEffect(() => {
+    let cargos = cargosForm.filter((item) => item.nombre === params.cargo);
+    console.log(cargos);
+    setCargoFiltrado(cargos);
+  }, [cargosForm])
+
+  useEffect(() => {
+    obtenerCargosForm();
+  }, []);
+
+  console.log(cargoFiltrado)
+
 
   useEffect(() => {
     obtenerPostulacionesUsuario(data.creador);
@@ -400,6 +423,11 @@ export default function ModalPublic({ setShowModal, data }) {
                 )}
               </div>
             </div>
+            {console.log(data &&
+              data.estadoAplicacionOferta === "Primera entrevista" && Array.isArray(cargoFiltrado) && cargoFiltrado.length > 0)}
+            {data &&
+              data.estadoAplicacionOferta === "Primera entrevista" && Array.isArray(cargoFiltrado) && cargoFiltrado.length > 0 &&
+              <FormularioEntrevista preguntas={cargoFiltrado} />}
             {/* <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-2 gap-3 p-8">
               <div className="border-b border-gray-200 pb-2 -mt-8">
                 <h6 className="text-sm font-medium leading-6 text-gray-900 italic">
