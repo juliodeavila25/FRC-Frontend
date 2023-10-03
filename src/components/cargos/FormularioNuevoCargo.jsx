@@ -16,13 +16,7 @@ import {
   FcSurvey,
 
   FcBusinessContact,
-  FcInspection,
-  FcAssistant,
-  FcCancel,
-  FcOk,
-
-  FcManager,
-  FcFile,
+  FcInspection
 } from "react-icons/fc";
 import usePregunta from "../../hooks/usePregunta";
 
@@ -144,6 +138,10 @@ const FormularioNuevoCargo = () => {
       setHerramientas(cargo.herramientasSelect);
 
       let dataFilter = preguntas.filter(item => item.cargo === cargo._id || item.cargo === "todos")
+      setPregutasFiltradas(dataFilter)
+    } else {
+
+      let dataFilter = preguntas.filter(item => item.cargo === "todos")
       setPregutasFiltradas(dataFilter)
     }
   }, [cargo]);
@@ -304,11 +302,11 @@ const FormularioNuevoCargo = () => {
   };
 
 
-  const filterData = (e) => {
-    setNombre(e.target.value)
-    let dataFilter = preguntas.filter(item => item.cargo === e.target.value || item.cargo === "todos")
-    console.log(dataFilter)
-  }
+  // const filterData = (e) => {
+  //   setNombre(e.target.value)
+  //   let dataFilter = preguntas.filter(item => item.cargo === e.target.value || item.cargo === "todos")
+  //   console.log(dataFilter)
+  // }
 
   const handleOpen = (value) => {
     setOpen(open === value ? 0 : value);
@@ -354,7 +352,7 @@ const FormularioNuevoCargo = () => {
                         : "block w-full appearance-none rounded-md border border-red-500 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-red-500 focus:outline-none  sm:text-sm"
                     }
                     value={nombre}
-                    onChange={(e) => filterData(e)}
+                    onChange={(e) => setNombre(e.target.value)}
                     ref={inputRef}
                   />
                   {errorNombre === true && (
@@ -884,7 +882,7 @@ const FormularioNuevoCargo = () => {
                     onClick={() => handleOpen(1)}
                   >
                     <div className="flex space-x-3 items-center">
-                      <FcBusinessContact className="text-lg" />
+                      <FcInspection className="text-lg" />
                       <p>
                         Experiencia Laboral (
                         <span>
@@ -918,7 +916,7 @@ const FormularioNuevoCargo = () => {
                           ).map((item, i) => {
                             console.log(item);
                             return (
-                              <div key={i} className="grid grid-cols-3 gap-6 pt-5">
+                              <div key={i} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-5 pb-3 border-b border-gray-200">
                                 <div>
                                   <label
                                     htmlFor="textoPreguntas"
@@ -1027,7 +1025,7 @@ const FormularioNuevoCargo = () => {
                     onClick={() => handleOpen(2)}
                   >
                     <div className="flex space-x-3 items-center">
-                      <FcBusinessContact className="text-lg" />
+                      <FcInspection className="text-lg" />
                       <p>
                         Habilidades Técnicas (
                         <span>
@@ -1061,7 +1059,7 @@ const FormularioNuevoCargo = () => {
                           ).map((item, i) => {
                             console.log(item);
                             return (
-                              <div key={i} className="grid grid-cols-3 gap-6 pt-5">
+                              <div key={i} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-5 pb-3 border-b border-gray-200">
                                 <div>
                                   <label
                                     htmlFor="textoPreguntas"
@@ -1170,7 +1168,7 @@ const FormularioNuevoCargo = () => {
                     onClick={() => handleOpen(3)}
                   >
                     <div className="flex space-x-3 items-center">
-                      <FcBusinessContact className="text-lg" />
+                      <FcInspection className="text-lg" />
                       <p>
                         Competencias Blandas (
                         <span>
@@ -1204,7 +1202,7 @@ const FormularioNuevoCargo = () => {
                           ).map((item, i) => {
                             console.log(item);
                             return (
-                              <div key={i} className="grid grid-cols-3 gap-6 pt-5">
+                              <div key={i} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-5 pb-3 border-b border-gray-200">
                                 <div>
                                   <label
                                     htmlFor="textoPreguntas"
@@ -1313,7 +1311,7 @@ const FormularioNuevoCargo = () => {
                     onClick={() => handleOpen(4)}
                   >
                     <div className="flex space-x-3 items-center">
-                      <FcBusinessContact className="text-lg" />
+                      <FcInspection className="text-lg" />
                       <p>
                         Encaje Cultural (
                         <span>
@@ -1347,7 +1345,7 @@ const FormularioNuevoCargo = () => {
                           ).map((item, i) => {
                             console.log(item);
                             return (
-                              <div key={i} className="grid grid-cols-3 gap-6 pt-5">
+                              <div key={i} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-5 pb-3 border-b border-gray-200">
                                 <div>
                                   <label
                                     htmlFor="textoPreguntas"
@@ -1456,7 +1454,7 @@ const FormularioNuevoCargo = () => {
                     onClick={() => handleOpen(5)}
                   >
                     <div className="flex space-x-3 items-center">
-                      <FcBusinessContact className="text-lg" />
+                      <FcInspection className="text-lg" />
                       <p>
                         Logros y resultados previos (
                         <span>
@@ -1490,7 +1488,7 @@ const FormularioNuevoCargo = () => {
                           ).map((item, i) => {
                             console.log(item);
                             return (
-                              <div key={i} className="grid grid-cols-3 gap-6 pt-5">
+                              <div key={i} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-5 pb-3 border-b border-gray-200">
                                 <div>
                                   <label
                                     htmlFor="textoPreguntas"
@@ -1599,7 +1597,7 @@ const FormularioNuevoCargo = () => {
                     onClick={() => handleOpen(3)}
                   >
                     <div className="flex space-x-3 items-center">
-                      <FcBusinessContact className="text-lg" />
+                      <FcInspection className="text-lg" />
                       <p>
                         Capacidad de aprendizaje y adaptación (
                         <span>
@@ -1633,7 +1631,7 @@ const FormularioNuevoCargo = () => {
                           ).map((item, i) => {
                             console.log(item);
                             return (
-                              <div key={i} className="grid grid-cols-3 gap-6 pt-5">
+                              <div key={i} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-5 pb-3 border-b border-gray-200">
                                 <div>
                                   <label
                                     htmlFor="textoPreguntas"
@@ -1742,7 +1740,7 @@ const FormularioNuevoCargo = () => {
                     onClick={() => handleOpen(7)}
                   >
                     <div className="flex space-x-3 items-center">
-                      <FcBusinessContact className="text-lg" />
+                      <FcInspection className="text-lg" />
                       <p>
                         Motivación y pasión (
                         <span>
@@ -1776,7 +1774,7 @@ const FormularioNuevoCargo = () => {
                           ).map((item, i) => {
                             console.log(item);
                             return (
-                              <div key={i} className="grid grid-cols-3 gap-6 pt-5">
+                              <div key={i} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-5 pb-3 border-b border-gray-200">
                                 <div>
                                   <label
                                     htmlFor="textoPreguntas"

@@ -7,7 +7,7 @@ const ListadoRequisitos = ({ listadoCargos, selectedCargo }) => {
   const { cargo } = useCargos();
 
   useEffect(() => {
-    let cargoNuevo = listadoCargos.filter((item) => item.nombre === selectedCargo);
+    let cargoNuevo = listadoCargos.filter((item) => item._id === selectedCargo);
 
     setRequisitosCargos(cargoNuevo);
   }, [selectedCargo, cargo]);
@@ -55,7 +55,7 @@ const ListadoRequisitos = ({ listadoCargos, selectedCargo }) => {
             </div>
             <div className="ml-3 flex-1 md:flex ">
               <p className="text-sm text-blue-700">
-                No existen requisitos para este cargo
+                No existen requisitos para este cargo.
               </p>
             </div>
           </div>

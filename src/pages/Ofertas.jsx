@@ -37,7 +37,16 @@ const Ofertas = () => {
         Header: "Nro. Convocatoria",
         accessor: "convocatoria",
       },
-      { Header: "Cargo", accessor: "nombre" },
+      {
+        Header: "Cargo",
+        accessor: "nombre",
+        Cell: (row) => (
+          <div className="">
+            {console.log(Array.isArray(cargosForm) && cargosForm.length > 0 && cargosForm?.filter(item => item._id === row.value)[0]?.nombre)}
+            <p>{Array.isArray(cargosForm) && cargosForm.length > 0 && cargosForm?.filter(item => item._id === row.value)[0]?.nombre}</p>
+          </div>
+        )
+      },
       { Header: "Ciudad", accessor: "ciudad" },
       {
         Header: "Fecha de inicio",
@@ -97,7 +106,16 @@ const Ofertas = () => {
         Header: "Nro. Convocatoria",
         accessor: "convocatoria",
       },
-      { Header: "Cargo", accessor: "nombre" },
+      {
+        Header: "Cargo",
+        accessor: "nombre",
+        Cell: (row) => (
+          <div className="">
+            {console.log(Array.isArray(cargosForm) && cargosForm.length > 0 && cargosForm?.filter(item => item._id === row.value)[0]?.nombre)}
+            <p>{Array.isArray(cargosForm) && cargosForm.length > 0 && cargosForm?.filter(item => item._id === row.value)[0]?.nombre}</p>
+          </div>
+        )
+      },
       { Header: "Ciudad", accessor: "ciudad" },
       {
         Header: "Fecha de postulación",

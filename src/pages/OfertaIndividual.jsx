@@ -64,7 +64,7 @@ const OfertaIndividual = () => {
   useEffect(() => {
     if (params.id) {
       setId(oferta._id);
-      setNombre(oferta.nombre);
+      setNombre(Array.isArray(cargosForm) && cargosForm.length > 0 && cargosForm?.filter(item => item._id === oferta.nombre)[0]?.nombre);
       setConvocatoria(oferta.convocatoria);
       setCiudad(oferta.ciudad);
       setSalario(oferta.salario);
@@ -82,7 +82,7 @@ const OfertaIndividual = () => {
 
       // setRequisitosCargos(cargos);
     }
-  }, [oferta]);
+  }, [oferta, cargosForm]);
 
 
 
@@ -158,7 +158,7 @@ const OfertaIndividual = () => {
 
   return (
     <>
-      {Array.isArray(cargosForm) && cargosForm.length > 0 && visible === true && <ModalRequistos setShowModal={setShowModal} listadoCargos={cargosForm} selectedCargo={nombre} idOferta={id} />}
+      {Array.isArray(cargosForm) && cargosForm.length > 0 && visible === true && <ModalRequistos setShowModal={setShowModal} listadoCargos={cargosForm} selectedCargo={nombre} idOferta={id} oferta={oferta} />}
       <div className="sm:mx-auto sm:w-full">
         <div className="bg-white py-8 px-4 shadow-lg rounded-lg sm:px-10">
           <form className="space-y-6 ">
@@ -373,7 +373,7 @@ const OfertaIndividual = () => {
             </div>
             <div className="grid grid-cols-3 gap-6 mb-10">
               {console.log(nombre)}
-              {Array.isArray(cargosForm) && cargosForm.length > 0 ? <ListadoRequisitos listadoCargos={cargosForm} selectedCargo={nombre} /> : null}
+              {Array.isArray(cargosForm) && cargosForm.length > 0 ? <ListadoRequisitos listadoCargos={cargosForm} selectedCargo={oferta.nombre} /> : null}
             </div>
 
             <div className="grid grid-cols-2 gap-6 w-3/5 mx-auto">
