@@ -10,6 +10,7 @@ import { useNavigate, Link } from "react-router-dom";
 import swal from 'sweetalert'
 import moment from 'moment'
 import ModalRequistos from "../components/ModalRequisitos";
+import useDocumentosRequisitos from "../hooks/useDocumentosRequisitos";
 
 const Ofertas = () => {
   const [cargoLinea, setCargoLinea] = useState("")
@@ -21,11 +22,18 @@ const Ofertas = () => {
 
   const { nuevaPostulacion, postulaciones, cargandoDataCargos, postulacionesFiltradas } = usePostulaciones();
 
+  const { documentosRequisitosUsuario, obtenerRequisitosPorUsuario, cargandoDataDocumentos } =
+  useDocumentosRequisitos();
+
   console.log(postulacionesFiltradas)
 
   useEffect(() => {
     obtenerUsuarioAutenticado()
   }, [auth])
+
+  useEffect(() => {
+    obtenerRequisitosPorUsuario(auth?._id)
+  }, [])
 
   useEffect(() => {
     obtenerCargosForm();
@@ -223,7 +231,7 @@ const Ofertas = () => {
       {Object.keys(usuarioAutenticado).length !== 0 && usuarioAutenticado && usuarioAutenticado?.userType[0] === "colaborador" && usuarioAutenticado?.estado === "por_completar" ? (
         <ModalFillCurriculum />
       ) : null}
-      {Array.isArray(cargosForm) && cargosForm.length > 0 && visible === true && <ModalRequistos setShowModal={setShowModal} listadoCargos={cargosForm} selectedCargo={cargoLinea} idOferta={idOfertaLinea} />}
+      {Array.isArray(cargosForm) && cargosForm.length > 0 && visible === true && <ModalRequistos setShowModal={setShowModal} listadoCargos={cargosForm} selectedCargo={cargoLinea} idOferta={idOfertaLinea}  documentosRequisitosPorUsuario={documentosRequisitosUsuario}  />}
       <div className="w-11/12 mx-auto mt-10 ">
         <div className="flex justify-around bg-gray-100 rounded-t-lg">
           <button

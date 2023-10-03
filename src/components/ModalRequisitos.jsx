@@ -11,7 +11,6 @@ import {
 import usePostulaciones from "../hooks/usePostulaciones";
 import useRequisito from "../hooks/useRequisito";
 
-
 import {
   FcBusinessContact,
   FcInspection,
@@ -44,17 +43,18 @@ export default function ModalPublic({
   listadoCargos,
   selectedCargo,
   idOferta,
-  oferta
+  oferta,
+  documentosRequisitosPorUsuario,
 }) {
   const [requisitosCargos, setRequisitosCargos] = useState([]);
 
-  const [idUsuario, setIdUsuario] = useState("")
+  const [idUsuario, setIdUsuario] = useState("");
   const [estadoAplicacionOferta, setEstadoAplicacionOferta] =
     useState("Postulado");
 
   const [documentosRequeridos, setDocumentosRequeridos] = useState([]);
 
-  const [errorDocumentos, setErrorDocumentos] = useState(false)
+  const [errorDocumentos, setErrorDocumentos] = useState(false);
 
   const [archivos, setArchivos] = useState([]);
 
@@ -66,28 +66,34 @@ export default function ModalPublic({
 
   const { obtenerUsuarios, usuarios, usuarioAutenticado, auth } = useAuth();
 
-  const { nuevosDocumentosRequisitos, alertaDocumentosRequisitos, mostrarAlerta } = useDocumentosRequisitos();
+  const {
+    nuevosDocumentosRequisitos,
+    alertaDocumentosRequisitos,
+    mostrarAlerta,
+  } = useDocumentosRequisitos();
 
   const { nuevaPostulacion, postulaciones } = usePostulaciones();
 
   const { msg, error } = alertaDocumentosRequisitos;
-  const { requisitosBo } =
-    useRequisito();
+  const { requisitosBo } = useRequisito();
+
+  const {
+    documentosRequisitosUsuario,
+    obtenerRequisitosPorUsuario,
+    cargandoDataDocumentos,
+  } = useDocumentosRequisitos();
 
   const [respuesta, setRespuesta] = useState([])
 
   useEffect(() => {
     if (error === false) {
-
       setTimeout(() => {
-        setShowModal(false)
+        setShowModal(false);
       }, 3000);
-
     }
+  }, [alertaDocumentosRequisitos]);
 
-  }, [alertaDocumentosRequisitos])
-
-  console.log(auth)
+  console.log(auth);
 
   useEffect(() => {
     let cargo = listadoCargos.filter((item) => item.nombre === selectedCargo);
@@ -96,54 +102,77 @@ export default function ModalPublic({
 
     let requisitosCargosUpdated = [];
     for (let i = 0; i < cargo[0]?.requisitos.length; i++) {
-      let data = requisitosBo.filter((item) => item._id === cargo[0]?.requisitos[i]._id)
-      console.log(data)
-      requisitosCargosUpdated.push(data[0])
+      let data = requisitosBo.filter(
+        (item) => item._id === cargo[0]?.requisitos[i]._id
+      );
+      console.log(data);
+      requisitosCargosUpdated.push(data[0]);
     }
-    console.log(requisitosCargosUpdated)
+    console.log(requisitosCargosUpdated);
     setRequisitosCargos(requisitosCargosUpdated);
 
     setIdUsuario(auth._id);
 
     if (documentosRequeridos.length === 0) {
-      console.log("Holaaa")
       const updatedBdays = documentosRequeridos;
       for (let i = 0; i < cargo[0]?.requisitos.length; i++) {
-        updatedBdays.push({
-          idRequisito: cargo[0]?.requisitos[i]._id,
-          nombreRequisito: cargo[0]?.requisitos[i].nombre,
-          fechaVigencia: "",
-          emisor: "",
-          fechaExpedicion: "",
-          numeroDocumento: "",
-          documento: "",
-        });
-      }
+        let findData = documentosRequisitosPorUsuario.filter(
+          (item) => item.idRequisito === cargo[0]?.requisitos[i]._id
+        );
 
+        if (findData.length > 0) {
+          updatedBdays.push({
+            idRequisito: cargo[0]?.requisitos[i]._id,
+            nombreRequisito: cargo[0]?.requisitos[i].nombre,
+            fechaVigencia: findData[0]?.fechaVigencia,
+            emisor: findData[0]?.emisor,
+            fechaExpedicion: findData[0]?.fechaExpedicion,
+            numeroDocumento: findData[0]?.numeroDocumento,
+            documento: findData[0]?.documento,
+            estado: true,
+          });
+        } else {
+          updatedBdays.push({
+            idRequisito: cargo[0]?.requisitos[i]._id,
+            nombreRequisito: cargo[0]?.requisitos[i].nombre,
+            fechaVigencia: "",
+            emisor: "",
+            fechaExpedicion: "",
+            numeroDocumento: "",
+            documento: "",
+            estado: false,
+          });
+        }
+      }
+      console.log(updatedBdays);
+      // let filterupdatedBdays = updatedBdays.filter((item)=> item.estado === false)
+      // console.log(filterupdatedBdays)
       setDocumentosRequeridos(updatedBdays);
     }
-  }, [selectedCargo]);
-
+  }, [selectedCargo, documentosRequisitosPorUsuario]);
 
   console.log(oferta)
+  console.log(documentosRequisitosUsuario);
 
   const submitData = async (e) => {
     e.preventDefault();
     const id_oferta = localStorage.getItem("id_oferta");
 
-
-
     const formData = new FormData();
 
     for (const obj of documentosRequeridos) {
       // Append non-file properties as JSON strings
+      console.log(obj)
       formData.append("documentosRequeridos", JSON.stringify(obj));
       // Append file property
-      formData.append("documentos", obj.documento, obj.documento.name);
+
+      if (typeof obj.documento !== "string") {
+        formData.append("documentos", obj.documento, obj.documento.name);
+      }
     }
 
     formData.append("idOferta", idOferta);
-    formData.append("creador", usuarioAutenticado._id)
+    formData.append("creador", usuarioAutenticado._id);
 
 
     await nuevosDocumentosRequisitos(formData);
@@ -153,10 +182,7 @@ export default function ModalPublic({
       idOferta,
       estadoAplicacionOferta,
     });
-
   };
-
-
 
   const handleDocumentacionPostulacion = (data) => {
     const maxfilesize = 1024 * 1024;
@@ -179,22 +205,21 @@ export default function ModalPublic({
     const maxfilesize = 1024 * 1024;
 
     const { name, value, files } = e.target;
-    console.log(files)
+    console.log(files);
     const list = [...documentosRequeridos];
     if (files?.length > 0) {
       if (files[0].size > maxfilesize) {
-        e.target.value = '';
+        e.target.value = "";
         setErrorDocumentos(true);
       } else {
         list[index][name] = files[0];
         setErrorDocumentos(false);
       }
-
     } else {
       list[index][name] = value;
     }
     setDocumentosRequeridos(list);
-    console.log(documentosRequeridos)
+    console.log(documentosRequeridos);
   };
 
 
@@ -423,6 +448,9 @@ export default function ModalPublic({
             {Array.isArray(requisitosCargos) &&
               requisitosCargos.length > 0 ? (
               requisitosCargos.map((item, i) => {
+                {
+                  console.log(item);
+                }
                 return (
                   <div key={i} className="w-11/12 mx-auto pt-5 ">
                     <Accordion
@@ -436,13 +464,30 @@ export default function ModalPublic({
                         <div className="flex space-x-3 items-center">
                           <FcBusinessContact className="text-lg" />
                           <p>{item.nombre}</p>
+                          {Array.isArray(documentosRequeridos) &&
+                            [documentosRequeridos[i]].map((doc, index) => {
+                              {
+                                console.log(doc);
+                              }
+                              return (
+                                <div>
+                                  {doc.estado === true ? (
+                                    <FcOk className="text-lg" />
+                                  ) : (
+                                    <p className="text-xs italic text-red-500">Pendiente por cargar información</p>
+                                  )}
+                                </div>
+                              );
+                            })}
                         </div>
                       </AccordionHeader>
                       <AccordionBody>
                         {console.log(documentosRequeridos)}
                         {Array.isArray(documentosRequeridos) &&
                           [documentosRequeridos[i]].map((doc, index) => {
-                            { console.log(item) }
+                            {
+                              console.log(doc);
+                            }
                             return (
                               <div
                                 key={i}
@@ -487,6 +532,7 @@ export default function ModalPublic({
                                       // onChange={(e) =>
                                       //   setFechaSistemaPostulacion(e.target.value)
                                       // }
+                                      disabled={doc.estado}
                                       required={true}
                                       className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                                     />
@@ -509,6 +555,7 @@ export default function ModalPublic({
                                           i
                                         )
                                       }
+                                      disabled={doc.estado}
                                       // onChange={(e) =>
                                       //   setObservacionesPostulacion(
                                       //     e.target.value
@@ -517,7 +564,8 @@ export default function ModalPublic({
                                       required={true}
                                       className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                                     />
-                                  </div>) : null}
+                                  </div>
+                                ) : null}
                                 {item.fechaExp === true ? (
                                   <div className="">
                                     <label className="block text-sm font-medium text-gray-700">
@@ -529,6 +577,7 @@ export default function ModalPublic({
                                       name="fechaExpedicion"
                                       value={doc.fechaExpedicion}
                                       required={true}
+                                      disabled={doc.estado}
                                       onChange={(e) =>
                                         handleinputchangeDocumentosRequeridos(
                                           e,
@@ -537,7 +586,8 @@ export default function ModalPublic({
                                       }
                                       className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                                     />
-                                  </div>) : null}
+                                  </div>
+                                ) : null}
                                 {item.reference === true ? (
                                   <div className="">
                                     <label className="block text-sm font-medium text-gray-700">
@@ -550,6 +600,7 @@ export default function ModalPublic({
                                       placeholder="Digite el numero del documento"
                                       value={doc.numeroDocumento}
                                       required={true}
+                                      disabled={doc.estado}
                                       onChange={(e) =>
                                         handleinputchangeDocumentosRequeridos(
                                           e,
@@ -558,7 +609,8 @@ export default function ModalPublic({
                                       }
                                       className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                                     />
-                                  </div>) : null}
+                                  </div>
+                                ) : null}
 
                                 <div>
                                   <label className="block text-sm font-medium text-gray-700">
@@ -584,7 +636,11 @@ export default function ModalPublic({
                                       type="file"
                                       name="documento"
                                       id="documento"
-                                      required={true}
+                                      required={
+                                        item.documento !== "" ? false : true
+
+                                      }
+                                      disabled={doc.estado}
                                       onChange={(e) =>
                                         handleinputchangeDocumentosRequeridos(
                                           e,
@@ -602,10 +658,7 @@ export default function ModalPublic({
                                     <span className="text-blue-900 text-xs font-bold italic">
                                       Nota: El tamaño máximo es 1mb
                                     </span>
-
                                   </div>
-
-
                                 </div>
                               </div>
                             );

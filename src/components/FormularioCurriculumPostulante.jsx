@@ -152,6 +152,8 @@ const FormularioCurriculumPostulante = () => {
   const [errorDocumentacionPostulacion, setErrorDocumentacionPostulacion] =
     useState(false);
 
+  const [visible, setVisible] = useState(false); 
+
   const params = useParams();
 
   const {
@@ -523,6 +525,12 @@ const FormularioCurriculumPostulante = () => {
     }
   };
 
+  const setShowModal = () => {
+    setVisible(false);
+   
+  };
+
+
   const { msg } = alertaPostulacion;
 
   if (cargandoData) return <BeatLoader color="#36d7b7" />;
@@ -530,6 +538,11 @@ const FormularioCurriculumPostulante = () => {
   return (
     <div className=" sm:mx-auto sm:w-full">
       <div className="bg-white py-8 px-4 shadow-lg rounded-lg sm:px-10">
+      {visible === true && (
+          <ModalRequisitosCargos
+            setShowModal={setShowModal}
+          />
+        )}
         <form
           className="space-y-6 "
           // onSubmit={handleSubmit((data, e) => {
@@ -2646,6 +2659,7 @@ const FormularioCurriculumPostulante = () => {
               </div>
             </div>
           </div>
+
           {Array.isArray(curriculums) &&
             curriculums.length > 0 && <ListarRequisitosCargosRH id={curriculums[0].idUsuario} />}
 
