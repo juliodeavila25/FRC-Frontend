@@ -87,6 +87,7 @@ const FormularioNuevaOferta = () => {
   useEffect(() => {
 
     if (params.id) {
+      console.log("Oferta:", oferta)
       setId(oferta._id);
       setNombre(oferta.nombre !== "" ? oferta.nombre : "elegir");
       setConvocatoria(oferta.convocatoria);
@@ -101,7 +102,7 @@ const FormularioNuevaOferta = () => {
       setFechaFin(oferta.fechaFin?.split("T")[0]);
       setEstadoConvocatoria(oferta.estadoConvocatoria);
       setUnidadFuncional(oferta.unidadFuncional);
-      let dataFilter = preguntas.filter(item => item.cargo === oferta.nombre || item.cargo === "todos")
+      let dataFilter = oferta?.preguntasFiltradas?.filter(item => item.cargo === oferta.nombre || item.cargo === "todos")
 
       setPregutasFiltradas(dataFilter)
     } else {
@@ -112,6 +113,10 @@ const FormularioNuevaOferta = () => {
       let current_year = new Date().getFullYear();
       let concatAddZeros = addZeros.concat("-", current_year);
       setConvocatoria(concatAddZeros);
+
+      let dataFilter = preguntas.filter(item => item.cargo === oferta.nombre || item.cargo === "todos")
+
+      setPregutasFiltradas(dataFilter)
     }
   }, [oferta]);
 
@@ -636,11 +641,13 @@ const FormularioNuevaOferta = () => {
                           </div>
                           <div className="flex space-x-4 items-center mt-0 md:mt-3">
                             <label htmlFor="selectQuestion" className="font-medium">Agregar pregunta a la oferta</label>
+
                             <input
                               type="checkbox"
                               id="selectQuestion"
                               name="selectQuestion"
-                              value={item.selectedQuestion}
+                              value={item.selectQuestion}
+                              checked={item.selectQuestion}
                               className="h-4 w-4 mt-1"
                               onChange={(e) =>
                                 handleinputchangeDocumentosRequeridos(
@@ -819,7 +826,8 @@ const FormularioNuevaOferta = () => {
                               type="checkbox"
                               id="selectQuestion"
                               name="selectQuestion"
-                              value={item.selectedQuestion}
+                              value={item.selectQuestion}
+                              checked={item.selectQuestion}
                               className="h-4 w-4 mt-1"
                               onChange={(e) =>
                                 handleinputchangeDocumentosRequeridos(
@@ -901,7 +909,7 @@ const FormularioNuevaOferta = () => {
                         pregunta.categoria ===
                         "Competencias Blandas"
                     ).map((item, i) => {
-                      console.log(item);
+
                       return (
                         <div key={i} className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-5 pb-3 border-b border-gray-200">
                           <div>
@@ -998,7 +1006,8 @@ const FormularioNuevaOferta = () => {
                               type="checkbox"
                               id="selectQuestion"
                               name="selectQuestion"
-                              value={item.selectedQuestion}
+                              value={item.selectQuestion}
+                              checked={item.selectQuestion}
                               className="h-4 w-4 mt-1"
                               onChange={(e) =>
                                 handleinputchangeDocumentosRequeridos(
@@ -1080,7 +1089,7 @@ const FormularioNuevaOferta = () => {
                         pregunta.categoria ===
                         "Encaje Cultural"
                     ).map((item, i) => {
-                      console.log(item);
+
                       return (
                         <div key={i} className="grid grid-cols-1 md:grid-cols-2  gap-6 pt-5 pb-3 border-b border-gray-200">
                           <div>
@@ -1159,7 +1168,8 @@ const FormularioNuevaOferta = () => {
                               type="checkbox"
                               id="selectQuestion"
                               name="selectQuestion"
-                              value={item.selectedQuestion}
+                              value={item.selectQuestion}
+                              checked={item.selectQuestion}
                               className="h-4 w-4 mt-1"
                               onChange={(e) =>
                                 handleinputchangeDocumentosRequeridos(
@@ -1241,7 +1251,7 @@ const FormularioNuevaOferta = () => {
                         pregunta.categoria ===
                         "Logros y resultados previos"
                     ).map((item, i) => {
-                      console.log(item);
+
                       return (
                         <div key={i} className="grid grid-cols-1 md:grid-cols-2  gap-6 pt-5 pb-3 border-b border-gray-200">
                           <div>
@@ -1320,7 +1330,8 @@ const FormularioNuevaOferta = () => {
                               type="checkbox"
                               id="selectQuestion"
                               name="selectQuestion"
-                              value={item.selectedQuestion}
+                              value={item.selectQuestion}
+                              checked={item.selectQuestion}
                               className="h-4 w-4 mt-1"
                               onChange={(e) =>
                                 handleinputchangeDocumentosRequeridos(
@@ -1330,7 +1341,6 @@ const FormularioNuevaOferta = () => {
                               }
 
                             />
-
                           </div>
                         </div>
                       );
@@ -1402,7 +1412,7 @@ const FormularioNuevaOferta = () => {
                         pregunta.categoria ===
                         "Capacidad de aprendizaje y adaptación"
                     ).map((item, i) => {
-                      console.log(item);
+
                       return (
                         <div key={i} className="grid grid-cols-1 md:grid-cols-2  gap-6 pt-5 pb-3 border-b border-gray-200">
                           <div>
@@ -1481,7 +1491,8 @@ const FormularioNuevaOferta = () => {
                               type="checkbox"
                               id="selectQuestion"
                               name="selectQuestion"
-                              value={item.selectedQuestion}
+                              value={item.selectQuestion}
+                              checked={item.selectQuestion}
                               className="h-4 w-4 mt-1"
                               onChange={(e) =>
                                 handleinputchangeDocumentosRequeridos(
@@ -1491,7 +1502,6 @@ const FormularioNuevaOferta = () => {
                               }
 
                             />
-
                           </div>
                         </div>
                       );
@@ -1563,7 +1573,7 @@ const FormularioNuevaOferta = () => {
                         pregunta.categoria ===
                         "Motivación y pasión"
                     ).map((item, i) => {
-                      console.log(item);
+
                       return (
                         <div key={i} className="grid grid-cols-1 md:grid-cols-2  gap-6 pt-5 pb-3 border-b border-gray-200">
                           <div>
@@ -1642,7 +1652,8 @@ const FormularioNuevaOferta = () => {
                               type="checkbox"
                               id="selectQuestion"
                               name="selectQuestion"
-                              value={item.selectedQuestion}
+                              value={item.selectQuestion}
+                              checked={item.selectQuestion}
                               className="h-4 w-4 mt-1"
                               onChange={(e) =>
                                 handleinputchangeDocumentosRequeridos(

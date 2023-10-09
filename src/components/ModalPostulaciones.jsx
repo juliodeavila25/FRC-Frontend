@@ -4,19 +4,56 @@ import usePostulaciones from "../hooks/usePostulaciones";
 import Alert from "./Alert";
 import moment from "moment";
 import TableWithoutSearch from "./table/TableWithoutSearch";
-import { FcDataProtection } from "react-icons/fc";
+import { FcDataProtection, FcInspection } from "react-icons/fc";
 import useAuth from "../hooks/useAuth";
 import useCargos from "../hooks/useCargos";
 import { useParams, Link } from "react-router-dom";
 import FormularioEntrevista from "./FormularioEntrevista";
+import {
+  Accordion,
+  AccordionHeader,
+  AccordionBody,
+} from "@material-tailwind/react";
+
+
+function Icon({ id, open }) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className={`${id === open ? "rotate-180" : ""
+        } h-5 w-5 transition-transform`}
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      strokeWidth={2}
+    >
+      <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+    </svg>
+  );
+}
+
 
 export default function ModalPublic({ setShowModal, data }) {
+  const [idOfertaNew, setIdOfertaNew] = useState(localStorage.getItem("id_oferta"))
+
+  const [postulacionActual, setPostulacionActual] = useState([]);
+  const [totalCalificacion, setTotalCalificacion] = useState(0)
+  const [totalCalificacionDurante, setTotalCalificacionDurante] = useState(0)
+  const [totalPuntos, setTotalPuntos] = useState(0)
+  const [totalPuntosDurante, setTotalPuntosDurante] = useState(0)
+  const [respuesta, setRespuesta] = useState([])
   const params = useParams();
   const current = new Date();
   const date = `${current.getFullYear()}-${current.getMonth() + 1
     }-${current.getDate()}`;
 
   const [estadoPostulacion, setEstadoPostulacion] = useState("elegir");
+
+  const handleOpen = (value) => {
+    setOpen(open === value ? 0 : value);
+  };
+
+  const [open, setOpen] = useState(1);
 
   /* Error en el campo de estado de postulación*/
   const inputRefEstadoPostulacion = useRef(null);
@@ -41,11 +78,20 @@ export default function ModalPublic({ setShowModal, data }) {
 
   const [cargoFiltrado, setCargoFiltrado] = useState("")
 
+
+  const [idPostulacion, setIdPostulacion] = useState("")
+
+  const inputRefCalificacion = useRef([]);
+
+  const [errorCalificacion, setErrorCalificacion] = useState(false);
+  const [focusedInput, setFocusedInput] = useState(null);
+
   const {
     nuevoEstadoPostulacionModal,
     alertaPostulacion,
     obtenerEstadoPostulacionesPorUsuario,
     estadosPostulaciones,
+    nuevaCalificacion
   } = useEstadoPostulaciones();
   const { obtenerPostulacionesUsuario, postulacionesUsuario } =
     usePostulaciones();
@@ -65,7 +111,76 @@ export default function ModalPublic({ setShowModal, data }) {
     obtenerCargosForm();
   }, []);
 
-  console.log(cargoFiltrado)
+
+  useEffect(() => {
+    const filtrado = postulacionesUsuario.filter(
+      (item) => item.idOferta === idOfertaNew
+    )
+
+    setIdPostulacion(filtrado[0]?._id)
+
+    setRespuesta(filtrado[0]?.respuesta)
+
+    console.log(filtrado)
+
+
+    const filtradoAntes = filtrado[0]?.respuesta?.filter((item) => item.fuente === "Antes de entrevista")
+
+    console.log(filtradoAntes)
+
+    for (let i = 0; i < filtradoAntes?.length; i++) {
+      if (filtradoAntes[i].calificacion === "3" || filtradoAntes[i].calificacion === "2" || filtradoAntes[i].calificacion === "1") {
+        setTotalCalificacion(filtradoAntes?.reduce((accumulator, currentValue) => accumulator + Number(currentValue.calificacion), 0))
+      }
+      else {
+        filtradoAntes[i].calificacion = 0;
+      }
+    }
+
+
+    const filtradoDurante = filtrado[0]?.respuesta?.filter((item) => item.fuente === "Durante entrevista")
+
+
+
+    for (let i = 0; i < filtradoDurante?.length; i++) {
+      if (filtradoDurante[i].calificacion === "3" || filtradoDurante[i].calificacion === "2" || filtradoDurante[i].calificacion === "1") {
+        setTotalCalificacionDurante(filtradoDurante?.reduce((accumulator, currentValue) => accumulator + Number(currentValue.calificacion), 0))
+      }
+      else {
+        filtradoDurante[i].calificacion = 0;
+      }
+    }
+
+
+    console.log("totalCalificacion", totalCalificacion)
+    console.log("totalCalificacionDurante", totalCalificacionDurante)
+
+
+
+    setPostulacionActual(filtrado)
+
+
+  }, [postulacionesUsuario])
+
+
+  useEffect(() => {
+    let cantidadPreguntas = postulacionActual[0]?.respuesta?.filter(
+      (pregunta) =>
+        pregunta.selectQuestion === true && pregunta.fuente === "Antes de entrevista").length
+
+    setTotalPuntos(cantidadPreguntas * 3)
+  }, [postulacionActual])
+
+
+  useEffect(() => {
+    let cantidadPreguntas = postulacionActual[0]?.respuesta?.filter(
+      (pregunta) =>
+        pregunta.selectQuestion === true && pregunta.fuente === "Durante entrevista").length
+
+
+    setTotalPuntosDurante(cantidadPreguntas * 3)
+  }, [postulacionActual])
+
 
 
   useEffect(() => {
@@ -166,13 +281,34 @@ export default function ModalPublic({ setShowModal, data }) {
       setErrorEstadoPostulacion(false);
     }
 
+    const filtrado = postulacionActual[0].respuesta.filter(
+      (item) => item.selectQuestion === true && item.fuente === "Antes de entrevista"
+    )
+
+
+    for (let i = 0; i < filtrado.length; i++) {
+
+      if (Number(inputRefCalificacion.current[filtrado[i]._id].value) === 0) {
+
+
+        inputRefCalificacion.current[filtrado[i]._id].focus();
+        setFocusedInput(filtrado[i]._id);
+        setErrorCalificacion(true);
+        return;
+      } else {
+        setFocusedInput(null);
+        setErrorCalificacion(false);
+      }
+
+    }
+
     const formData = new FormData();
 
     const idPostulacionUsuario = postulacionesUsuario.filter(
       (item) => item.idOferta === id_oferta
     );
 
-    formData.append("idPostulacion", idPostulacionUsuario[0]._id);
+    formData.append("idPostulacion", idPostulacion);
     formData.append("estadoPostulacion", estadoPostulacion);
     formData.append("fechaRevisionPostulacion", fechaRevisionPostulacion);
     formData.append("fechaSistemaPostulacion", fechaSistemaPostulacion);
@@ -185,6 +321,12 @@ export default function ModalPublic({ setShowModal, data }) {
 
     formData.append("fechaEntrevista", fechaEntrevista);
     formData.append("horaEntrevista", horaEntrevista);
+
+    await nuevaCalificacion({
+      idPostulacion,
+      respuesta
+    })
+
     await nuevoEstadoPostulacionModal(formData);
 
     setTimeout(() => {
@@ -205,6 +347,45 @@ export default function ModalPublic({ setShowModal, data }) {
       setErrorDocumentacionPostulacion(false);
       setDocumentacionPostulacion(data);
     }
+  };
+
+
+  const handleinputchangeCalificacion = (e, index) => {
+    const { name, value, checked } = e.target;
+    const list = [...postulacionActual[0]?.respuesta];
+    for (let i = 0; i < postulacionActual[0]?.respuesta.length; i++) {
+      if (postulacionActual[0]?.respuesta[i]._id === index) {
+        list[i][name] = value;
+      }
+    }
+
+    setRespuesta(list)
+    const filtrado = postulacionActual[0].respuesta.filter(
+      (item) => item.selectQuestion === true && item.fuente === "Antes de entrevista"
+    )
+
+    setTotalCalificacion(filtrado.reduce((accumulator, currentValue) => accumulator + Number(currentValue.calificacion), 0))
+
+  };
+
+  const handleinputchangeCalificacionDurante = (e, index) => {
+    const { name, value, checked } = e.target;
+    const list = [...postulacionActual[0]?.respuesta];
+    for (let i = 0; i < postulacionActual[0]?.respuesta.length; i++) {
+      if (postulacionActual[0]?.respuesta[i]._id === index) {
+        list[i][name] = value;
+      }
+    }
+
+    setRespuesta(list)
+    const filtrado = postulacionActual[0].respuesta.filter(
+      (item) => item.selectQuestion === true && item.fuente === "Durante entrevista"
+    )
+
+
+
+    setTotalCalificacionDurante(filtrado.reduce((accumulator, currentValue) => accumulator + Number(currentValue.calificacion), 0))
+
   };
 
   return (
@@ -261,30 +442,18 @@ export default function ModalPublic({ setShowModal, data }) {
                     data.estadoAplicacionOferta === "Preseleccionado" && (
                       <>
                         <option value="Postulado">Postulado</option>
-                        <option value="Primera entrevista">
-                          Primera entrevista
+                        <option value="En entrevista">
+                          En entrevista
                         </option>
                         <option value="No continúa">No continúa</option>
                       </>
                     )}
                   {data &&
-                    data.estadoAplicacionOferta === "Primera entrevista" && (
+                    data.estadoAplicacionOferta === "En entrevista" && (
                       <>
                         <option value="Preseleccionado">Preseleccionado</option>
-                        <option value="Segunda entrevista">
-                          Segunda entrevista
-                        </option>
-                        <option value="Exámenes Ocupacionales">
-                          Exámenes Ocupacionales
-                        </option>
-                        <option value="No continúa">No continúa</option>
-                      </>
-                    )}
-                  {data &&
-                    data.estadoAplicacionOferta === "Segunda entrevista" && (
-                      <>
-                        <option value="Primera entrevista">
-                          Primera entrevista
+                        <option value="En entrevista">
+                          En entrevista
                         </option>
                         <option value="Exámenes Ocupacionales">
                           Exámenes Ocupacionales
@@ -296,11 +465,8 @@ export default function ModalPublic({ setShowModal, data }) {
                     data.estadoAplicacionOferta ===
                     "Exámenes Ocupacionales" && (
                       <>
-                        <option value="Primera entrevista">
-                          Primera entrevista
-                        </option>
-                        <option value="Segunda entrevista">
-                          Segunda entrevista
+                        <option value="En entrevista">
+                          En entrevista
                         </option>
                         <option value="Afiliaciones">Afiliaciones</option>
                         <option value="No continúa">No continúa</option>
@@ -325,8 +491,8 @@ export default function ModalPublic({ setShowModal, data }) {
                     <>
                       <option value="Postulado">Postulado</option>
                       <option value="Preseleccionado">Preseleccionado</option>
-                      <option value="Entrevista realizada">
-                        Entrevista realizada
+                      <option value="En entrevista">
+                        En entrevista
                       </option>
                       <option value="Exámenes Ocupacionales">
                         Exámenes Ocupacionales
@@ -423,6 +589,484 @@ export default function ModalPublic({ setShowModal, data }) {
                 )}
               </div>
             </div>
+
+            <div className="w-11/12 mx-auto pt-5 pb-10 ">
+
+
+              <Accordion open={open === 1} icon={<Icon id={1} open={open} />}>
+                <AccordionHeader
+                  className="text-base font-semibold text-gray-900"
+                  onClick={() => handleOpen(1)}
+                >
+                  <div className="flex space-x-3 items-center">
+                    <FcInspection className="text-lg" />
+                    <p>
+                      Listado de preguntas (Antes de entrevista)
+                    </p>
+                  </div>
+                </AccordionHeader>
+                <AccordionBody>
+
+                  {Array.isArray(postulacionActual[0]?.respuesta) &&
+                    postulacionActual[0]?.respuesta?.length > 0 && postulacionActual[0]?.respuesta?.filter(
+                      (pregunta) =>
+                        pregunta.selectQuestion === true && pregunta.fuente === "Antes de entrevista").length > 0
+                    ? (
+                      <>
+                        {Array.isArray(postulacionActual[0]?.respuesta) &&
+                          postulacionActual[0]?.respuesta?.length > 0 && postulacionActual[0]?.respuesta?.filter(
+                            (pregunta) =>
+                              pregunta.selectQuestion === true && pregunta.fuente === "Antes de entrevista").map((item, i) => {
+                                { console.log(item) }
+                                return (
+                                  <div key={i} className="grid grid-cols-1 md:grid-cols-2  gap-6 pt-5 pb-3 border-b border-gray-200 ">
+                                    <div className="col-span-2">
+                                      <p className="font-medium italic underline">Pregunta Nro. {i + 1}</p>
+                                    </div>
+                                    <div>
+                                      <label
+                                        htmlFor="textoPreguntas"
+                                        className="block text-sm font-medium text-gray-700"
+                                      >
+                                        Pregunta <span className="text-red-700">*</span>
+                                      </label>
+                                      <div>
+                                        <textarea
+                                          id="textoPreguntas"
+                                          name="textoPreguntas"
+                                          type="text"
+                                          placeholder=""
+                                          rows="3"
+                                          className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                          value={item.textoPreguntas}
+                                          disabled={true}
+                                          required={true}
+                                          onChange={(e) =>
+                                            handleinputchangeCalificacion(
+                                              e,
+                                              i
+                                            )
+                                          }
+                                        />
+                                      </div>
+                                    </div>
+                                    <div >
+                                      <label
+                                        htmlFor="respuestaPreguntas"
+                                        className="block text-sm font-medium text-gray-700"
+                                      >
+                                        Respuesta sugerida <span className="text-red-700">*</span>
+                                      </label>
+                                      <div>
+                                        <textarea
+                                          id="respuestaPreguntas"
+                                          name="respuestaPreguntas"
+                                          type="text"
+                                          placeholder=""
+                                          rows="3"
+                                          className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                          value={item.respuestaPreguntas}
+                                          disabled={true}
+                                          required={true}
+                                          onChange={(e) =>
+                                            handleinputchangeCalificacion(
+                                              e,
+                                              i
+                                            )
+                                          }
+                                        />
+                                      </div>
+                                    </div>
+
+                                    <div className="hidden">
+                                      <label
+                                        htmlFor="fuente"
+                                        className="block text-sm font-medium text-gray-700"
+                                      >
+                                        Fuente <span className="text-red-700">*</span>
+                                      </label>
+                                      <div className="mt-1">
+                                        <select
+                                          id="fuente"
+                                          name="fuente"
+                                          className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                          disabled={true}
+                                          value={item.fuente}
+                                          onChange={(e) =>
+                                            handleinputchangeCalificacion(
+                                              e,
+                                              i
+                                            )
+                                          }
+                                        >
+                                          <option
+                                            value="elegir"
+                                            disabled
+                                            className="text-gray-400"
+                                          >
+                                            --Selecciona un tipo de documento--
+                                          </option>
+                                          <option value="Durante entrevista">Durante entrevista</option>
+                                          <option value="Antes de entrevista">Antes de entrevista</option>
+                                        </select>
+                                      </div>
+                                    </div>
+
+                                    <div>
+                                      <label
+                                        htmlFor="respuestaPreguntaPostulante"
+                                        className="block text-sm font-medium text-gray-700"
+                                      >
+                                        Respuesta del postulante <span className="text-red-700">*</span>
+                                      </label>
+                                      <div>
+                                        <textarea
+                                          id="respuestaPreguntaPostulante"
+                                          name="respuestaPreguntaPostulante"
+                                          type="text"
+                                          placeholder=""
+                                          rows="3"
+                                          className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                          value={item.respuestaPreguntaPostulante}
+                                          disabled={true}
+                                          required={true}
+                                          onChange={(e) =>
+                                            handleinputchangeCalificacion(
+                                              e,
+                                              item._id
+                                            )
+                                          }
+                                        />
+                                      </div>
+                                    </div>
+
+                                    <div className="">
+                                      <label
+                                        htmlFor="calificacion"
+                                        className="block text-sm font-medium text-blue-700 "
+                                      >
+                                        Calificación <span className="text-red-700">*</span>
+                                      </label>
+                                      <div className="mt-1">
+
+                                        <select
+                                          id={item._id}
+                                          name="calificacion"
+                                          ref={(el) => (inputRefCalificacion.current[item._id] = el)}
+                                          className={focusedInput !== item._id
+                                            ? "block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                            : "block w-full appearance-none rounded-md border border-red-500 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-red-500 focus:outline-none focus:ring-red-500 sm:text-sm"}
+                                          required={true}
+                                          value={item.calificacion}
+                                          disabled={data && data.estadoAplicacionOferta !== "Postulado"}
+
+
+                                          //ref={inputRefCalificacion}
+                                          onChange={(e) =>
+                                            handleinputchangeCalificacion(
+                                              e,
+                                              item._id
+                                            )
+                                          }
+                                        >
+                                          <option
+                                            value={0}
+                                            disabled
+                                            className="text-gray-400"
+                                          >
+                                            --Selecciona una calificación--
+                                          </option>
+                                          <option value={3}>Buena</option>
+                                          <option value={2}>Regular</option>
+                                          <option value={1}>Mala</option>
+                                        </select>
+                                        {focusedInput === item._id && (
+                                          <span className="text-red-500 text-xs">
+                                            Seleccione la información requerida
+                                          </span>
+                                        )}
+                                      </div>
+                                    </div>
+
+                                  </div>
+                                )
+                              })}
+
+                        <div className="">
+                          <p className="text-blue-700 text-lg font-bold flex ">Calificación Total:<span className="pl-2 ">{Math.round((totalCalificacion / totalPuntos) * 100)}%</span></p>
+
+                        </div>
+
+                      </>
+                    ) : (
+                      <div className="rounded-md bg-blue-50 p-4">
+                        <div className="flex">
+                          <div className="flex-shrink-0">
+                            <svg
+                              className="h-5 w-5 text-blue-400"
+                              viewBox="0 0 20 20"
+                              fill="currentColor"
+                              aria-hidden="true"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a.75.75 0 000 1.5h.253a.25.25 0 01.244.304l-.459 2.066A1.75 1.75 0 0010.747 15H11a.75.75 0 000-1.5h-.253a.25.25 0 01-.244-.304l.459-2.066A1.75 1.75 0 009.253 9H9z"
+                                clipRule="evenodd"
+                              />
+                            </svg>
+                          </div>
+                          <div className="ml-3 flex-1 md:flex ">
+                            <p className="text-sm text-blue-700">
+                              No existen preguntas antes de la entrevista.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                </AccordionBody>
+              </Accordion>
+            </div>
+
+            {data && data.estadoAplicacionOferta === "En entrevista" ?
+              (
+                <div className="w-11/12 mx-auto pt-5 pb-10 ">
+                  <Accordion open={open === 1} icon={<Icon id={1} open={open} />}>
+                    <AccordionHeader
+                      className="text-base font-semibold text-gray-900"
+                      onClick={() => handleOpen(1)}
+                    >
+                      <div className="flex space-x-3 items-center">
+                        <FcInspection className="text-lg" />
+                        <p>
+                          Listado de preguntas (Durante la  entrevista)
+                        </p>
+                      </div>
+                    </AccordionHeader>
+                    <AccordionBody>
+
+                      {Array.isArray(postulacionActual[0]?.respuesta) &&
+                        postulacionActual[0]?.respuesta?.length > 0 && postulacionActual[0]?.respuesta?.filter(
+                          (pregunta) =>
+                            pregunta.selectQuestion === true && pregunta.fuente === "Durante entrevista").length > 0
+                        ? (
+                          <>
+                            {Array.isArray(postulacionActual[0]?.respuesta) &&
+                              postulacionActual[0]?.respuesta?.length > 0 && postulacionActual[0]?.respuesta?.filter(
+                                (pregunta) =>
+                                  pregunta.selectQuestion === true && pregunta.fuente === "Durante entrevista").map((item, i) => {
+                                    { console.log(item) }
+                                    return (
+                                      <div key={i} className="grid grid-cols-1 md:grid-cols-2  gap-6 pt-5 pb-3 border-b border-gray-200 ">
+                                        <div className="col-span-2">
+                                          <p className="font-medium italic underline">Pregunta Nro. {i + 1}</p>
+                                        </div>
+                                        <div>
+                                          <label
+                                            htmlFor="textoPreguntas"
+                                            className="block text-sm font-medium text-gray-700"
+                                          >
+                                            Pregunta <span className="text-red-700">*</span>
+                                          </label>
+                                          <div>
+                                            <textarea
+                                              id="textoPreguntas"
+                                              name="textoPreguntas"
+                                              type="text"
+                                              placeholder=""
+                                              rows="3"
+                                              className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                              value={item.textoPreguntas}
+                                              disabled={true}
+                                              required={true}
+                                              onChange={(e) =>
+                                                handleinputchangeCalificacionDurante(
+                                                  e,
+                                                  i
+                                                )
+                                              }
+                                            />
+                                          </div>
+                                        </div>
+                                        <div >
+                                          <label
+                                            htmlFor="respuestaPreguntas"
+                                            className="block text-sm font-medium text-gray-700"
+                                          >
+                                            Respuesta sugerida <span className="text-red-700">*</span>
+                                          </label>
+                                          <div>
+                                            <textarea
+                                              id="respuestaPreguntas"
+                                              name="respuestaPreguntas"
+                                              type="text"
+                                              placeholder=""
+                                              rows="3"
+                                              className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                              value={item.respuestaPreguntas}
+                                              disabled={true}
+                                              required={true}
+                                              onChange={(e) =>
+                                                handleinputchangeCalificacionDurante(
+                                                  e,
+                                                  i
+                                                )
+                                              }
+                                            />
+                                          </div>
+                                        </div>
+
+                                        <div className="hidden">
+                                          <label
+                                            htmlFor="fuente"
+                                            className="block text-sm font-medium text-gray-700"
+                                          >
+                                            Fuente <span className="text-red-700">*</span>
+                                          </label>
+                                          <div className="mt-1">
+                                            <select
+                                              id="fuente"
+                                              name="fuente"
+                                              className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                              disabled={true}
+                                              value={item.fuente}
+                                              onChange={(e) =>
+                                                handleinputchangeCalificacionDurante(
+                                                  e,
+                                                  i
+                                                )
+                                              }
+                                            >
+                                              <option
+                                                value="elegir"
+                                                disabled
+                                                className="text-gray-400"
+                                              >
+                                                --Selecciona un tipo de documento--
+                                              </option>
+                                              <option value="Durante entrevista">Durante entrevista</option>
+                                              <option value="Antes de entrevista">Antes de entrevista</option>
+                                            </select>
+                                          </div>
+                                        </div>
+
+                                        <div>
+                                          <label
+                                            htmlFor="respuestaPreguntaPostulante"
+                                            className="block text-sm font-medium text-gray-700"
+                                          >
+                                            Respuesta del postulante <span className="text-red-700">*</span>
+                                          </label>
+                                          <div>
+                                            <textarea
+                                              id="respuestaPreguntaPostulante"
+                                              name="respuestaPreguntaPostulante"
+                                              type="text"
+                                              placeholder=""
+                                              rows="3"
+                                              className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                              value={item.respuestaPreguntaPostulante}
+                                              //disabled={true}
+                                              required={true}
+                                              onChange={(e) =>
+                                                handleinputchangeCalificacionDurante(
+                                                  e,
+                                                  item._id
+                                                )
+                                              }
+                                            />
+                                          </div>
+                                        </div>
+
+                                        <div className="">
+                                          <label
+                                            htmlFor="calificacion"
+                                            className="block text-sm font-medium text-blue-700 "
+                                          >
+                                            Calificación <span className="text-red-700">*</span>
+                                          </label>
+                                          <div className="mt-1">
+
+                                            <select
+                                              id={item._id}
+                                              name="calificacion"
+                                              ref={(el) => (inputRefCalificacion.current[item._id] = el)}
+                                              className={focusedInput !== item._id
+                                                ? "block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                                : "block w-full appearance-none rounded-md border border-red-500 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-red-500 focus:outline-none focus:ring-red-500 sm:text-sm"}
+                                              required={true}
+                                              value={item.calificacion}
+                                              //disabled={data && data.estadoAplicacionOferta !== "Postulado"}
+
+
+                                              //ref={inputRefCalificacion}
+                                              onChange={(e) =>
+                                                handleinputchangeCalificacionDurante(
+                                                  e,
+                                                  item._id
+                                                )
+                                              }
+                                            >
+                                              <option
+                                                value={0}
+                                                disabled
+                                                className="text-gray-400"
+                                              >
+                                                --Selecciona una calificación--
+                                              </option>
+                                              <option value={3}>Buena</option>
+                                              <option value={2}>Regular</option>
+                                              <option value={1}>Mala</option>
+                                            </select>
+                                            {focusedInput === item._id && (
+                                              <span className="text-red-500 text-xs">
+                                                Seleccione la información requerida
+                                              </span>
+                                            )}
+                                          </div>
+                                        </div>
+
+                                      </div>
+                                    )
+                                  })}
+
+                            <div className="">
+                              <p className="text-blue-700 text-lg font-bold flex ">Calificación Total:<span className="pl-2 ">{Math.round((totalCalificacionDurante / totalPuntosDurante) * 100)}%</span></p>
+
+                            </div>
+
+                          </>
+                        ) : (
+                          <div className="rounded-md bg-blue-50 p-4">
+                            <div className="flex">
+                              <div className="flex-shrink-0">
+                                <svg
+                                  className="h-5 w-5 text-blue-400"
+                                  viewBox="0 0 20 20"
+                                  fill="currentColor"
+                                  aria-hidden="true"
+                                >
+                                  <path
+                                    fillRule="evenodd"
+                                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a.75.75 0 000 1.5h.253a.25.25 0 01.244.304l-.459 2.066A1.75 1.75 0 0010.747 15H11a.75.75 0 000-1.5h-.253a.25.25 0 01-.244-.304l.459-2.066A1.75 1.75 0 009.253 9H9z"
+                                    clipRule="evenodd"
+                                  />
+                                </svg>
+                              </div>
+                              <div className="ml-3 flex-1 md:flex ">
+                                <p className="text-sm text-blue-700">
+                                  No existen preguntas antes de la entrevista.
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        )}
+                    </AccordionBody>
+                  </Accordion>
+                </div>
+              ) : null}
+
+
+
             {console.log(data &&
               data.estadoAplicacionOferta === "Primera entrevista" && Array.isArray(cargoFiltrado) && cargoFiltrado.length > 0)}
             {data &&

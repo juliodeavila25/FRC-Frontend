@@ -425,13 +425,13 @@ const ListarPostulantes = () => {
                     <FcAssistant className="text-lg" />
                     <p>
                       {" "}
-                      Entrevista realizada (
+                      En entrevista (
                       <span>
                         {Array.isArray(curriculums) && curriculums.length > 0
                           ? curriculums.filter(
                             (curriculum) =>
                               curriculum.estadoAplicacionOferta ===
-                              "Primera entrevista" || curriculum.estadoAplicacionOferta === "Segunda entrevista"
+                              "En entrevista"
                           ).length
                           : 0}
                       </span>
@@ -445,14 +445,14 @@ const ListarPostulantes = () => {
                     curriculums.filter(
                       (curriculum) =>
                         curriculum.estadoAplicacionOferta ===
-                        "Primera entrevista" || curriculum.estadoAplicacionOferta === "Segunda entrevista"
+                        "En entrevista"
                     ).length > 0 ? (
                     <>
                       <Table
                         data={curriculums.filter(
                           (curriculum) =>
                             curriculum.estadoAplicacionOferta ===
-                            "Primera entrevista" || curriculum.estadoAplicacionOferta === "Segunda entrevista"
+                            "En entrevista"
                         )}
                         columns={headers}
                       />

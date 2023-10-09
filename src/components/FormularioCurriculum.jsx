@@ -374,7 +374,7 @@ const FormularioCurriculum = () => {
       ) {
         inputRefActividadEconomica.current.focus();
         setErrorActividadEconomica(true);
-        console.log();
+        //console.log();
         return;
       } else {
         setErrorActividadEconomica(false);
@@ -772,7 +772,7 @@ const FormularioCurriculum = () => {
   };
 
   const handleSoporteEps = (data) => {
-    console.log(data);
+    //console.log(data);
     const maxfilesize = 1024 * 1024;
 
     if (data && data.size > maxfilesize) {
@@ -848,7 +848,7 @@ const FormularioCurriculum = () => {
 
   const editModal = (e, data) => {
     e.preventDefault();
-    console.log(data);
+    //console.log(data);
     setEditarDocumento(data);
     setVisible(true);
   };

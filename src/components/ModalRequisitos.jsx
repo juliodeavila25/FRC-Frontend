@@ -96,6 +96,7 @@ export default function ModalPublic({
   console.log(auth);
 
   useEffect(() => {
+    console.log("selectedCargo", selectedCargo)
     let cargo = listadoCargos.filter((item) => item.nombre === selectedCargo);
 
     console.log(cargo)
@@ -171,9 +172,13 @@ export default function ModalPublic({
       }
     }
 
+
     formData.append("idOferta", idOferta);
     formData.append("creador", usuarioAutenticado._id);
 
+
+
+    console.log(formData);
 
     await nuevosDocumentosRequisitos(formData);
 
@@ -181,7 +186,13 @@ export default function ModalPublic({
       idUsuario,
       idOferta,
       estadoAplicacionOferta,
+      respuesta
     });
+
+
+    setRespuesta([])
+
+
   };
 
   const handleDocumentacionPostulacion = (data) => {
@@ -229,6 +240,7 @@ export default function ModalPublic({
     const list = [...oferta.preguntasFiltradas];
     console.log(oferta.preguntasFiltradas)
     for (let i = 0; i < oferta.preguntasFiltradas.length; i++) {
+      console.log(oferta.preguntasFiltradas[i]._id)
       if (oferta.preguntasFiltradas[i]._id === index) {
 
         list[i][name] = value;
@@ -280,11 +292,11 @@ export default function ModalPublic({
                   </div>
                 </AccordionHeader>
                 <AccordionBody>
+                  {console.log("oferta.preguntasFiltradas!!!!!:", oferta.preguntasFiltradas)}
                   {Array.isArray(oferta.preguntasFiltradas) &&
                     oferta.preguntasFiltradas.length > 0
                     ? (
                       <>
-
                         {oferta.preguntasFiltradas &&
                           Array.isArray(oferta.preguntasFiltradas) &&
                           oferta.preguntasFiltradas.filter(
@@ -445,6 +457,7 @@ export default function ModalPublic({
                 </AccordionBody>
               </Accordion>
             </div>
+            {console.log("REquisitosCargos", requisitosCargos)}
             {Array.isArray(requisitosCargos) &&
               requisitosCargos.length > 0 ? (
               requisitosCargos.map((item, i) => {

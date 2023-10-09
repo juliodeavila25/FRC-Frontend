@@ -66,7 +66,9 @@ const PostulacionesProvider = ({ children }) => {
 
 
   const nuevaPostulacion = async (info) => {
-    console.log(postulacion)
+
+
+
     try {
       const token = localStorage.getItem("token");
       if (!token) return;
@@ -104,7 +106,7 @@ const PostulacionesProvider = ({ children }) => {
         },
       };
       const { data } = await clienteAxios(`/postulaciones/filtradas/${id}`, config);
-
+      console.log(data)
       setPostulacionesUSuario(data);
     } catch (error) {
       console.log(error);

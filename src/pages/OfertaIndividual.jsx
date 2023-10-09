@@ -100,7 +100,7 @@ const OfertaIndividual = () => {
 
     setRequisitosCargos(cargos);
 
-    console.log("Holaaaa: ", cargosForm)
+
   }, [cargosForm])
 
   useEffect(() => {

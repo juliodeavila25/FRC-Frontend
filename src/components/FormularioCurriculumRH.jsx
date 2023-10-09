@@ -139,7 +139,7 @@ const FormularioCurriculum = () => {
   const [errorCargo, setErrorCargo] = useState(false);
 
 
-  const [visible, setVisible] = useState(false); 
+  const [visible, setVisible] = useState(false);
 
   const params = useParams();
 
@@ -167,7 +167,7 @@ const FormularioCurriculum = () => {
     obtenerCargosForm();
   }, []);
 
-  console.log(cargosForm)
+  //console.log(cargosForm)
 
   useEffect(() => {
     if (Object.keys(collaborator).length !== 0) {
@@ -584,7 +584,7 @@ const FormularioCurriculum = () => {
 
   const setShowModal = () => {
     setVisible(false);
-   
+
   };
 
   const { message } = modal;
@@ -592,7 +592,7 @@ const FormularioCurriculum = () => {
 
   if (cargandoData) return <BeatLoader color="#36d7b7" />;
 
-  
+
 
   return (
     <div className=" sm:mx-auto sm:w-full">
@@ -668,7 +668,7 @@ const FormularioCurriculum = () => {
         </div>
       </section> */}
       <div className="bg-white py-8 px-4 shadow-lg rounded-lg sm:px-10">
-      {visible === true && (
+        {visible === true && (
           <ModalRequisitosCargos
             setShowModal={setShowModal}
           />
@@ -678,7 +678,7 @@ const FormularioCurriculum = () => {
           // onSubmit={handleSubmit((data, e) => {
           //   submitData(data, e);
           // })}
-          onSubmit={submitData} 
+          onSubmit={submitData}
           encType="multipart/form-data"
         >
           {/* */}
@@ -2529,9 +2529,9 @@ const FormularioCurriculum = () => {
               </div>
             </div>
           </div>
-     
-             
-          {Object.keys(collaborator).length !== 0&& <ListarRequisitosCargosRH id={collaborator.creador} />}
+
+
+          {Object.keys(collaborator).length !== 0 && <ListarRequisitosCargosRH id={collaborator.creador} />}
 
           <div className="text-left text-xl text-gray-700 mt-8 font-bold border-b-4 border-corporative-blue inline-flex pt-3">
             Datos Contratos
