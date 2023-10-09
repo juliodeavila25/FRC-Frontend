@@ -23,7 +23,7 @@ const Ofertas = () => {
   const { nuevaPostulacion, postulaciones, cargandoDataCargos, postulacionesFiltradas } = usePostulaciones();
 
   const { documentosRequisitosUsuario, obtenerRequisitosPorUsuario, cargandoDataDocumentos } =
-  useDocumentosRequisitos();
+    useDocumentosRequisitos();
 
   console.log(postulacionesFiltradas)
 
@@ -45,7 +45,16 @@ const Ofertas = () => {
         Header: "Nro. Convocatoria",
         accessor: "convocatoria",
       },
-      { Header: "Cargo", accessor: "nombre" },
+      {
+        Header: "Cargo",
+        accessor: "nombre",
+        Cell: (row) => (
+          <div className="">
+            {console.log(Array.isArray(cargosForm) && cargosForm.length > 0 && cargosForm?.filter(item => item._id === row.value)[0]?.nombre)}
+            <p>{Array.isArray(cargosForm) && cargosForm.length > 0 && cargosForm?.filter(item => item._id === row.value)[0]?.nombre}</p>
+          </div>
+        )
+      },
       { Header: "Ciudad", accessor: "ciudad" },
       {
         Header: "Fecha de inicio",
@@ -105,7 +114,16 @@ const Ofertas = () => {
         Header: "Nro. Convocatoria",
         accessor: "convocatoria",
       },
-      { Header: "Cargo", accessor: "nombre" },
+      {
+        Header: "Cargo",
+        accessor: "nombre",
+        Cell: (row) => (
+          <div className="">
+            {console.log(Array.isArray(cargosForm) && cargosForm.length > 0 && cargosForm?.filter(item => item._id === row.value)[0]?.nombre)}
+            <p>{Array.isArray(cargosForm) && cargosForm.length > 0 && cargosForm?.filter(item => item._id === row.value)[0]?.nombre}</p>
+          </div>
+        )
+      },
       { Header: "Ciudad", accessor: "ciudad" },
       {
         Header: "Fecha de postulación",
@@ -192,19 +210,22 @@ const Ofertas = () => {
   const [headers, setHeaders] = useState([]);
   const [headersOferta, setHeadersOferta] = useState([]);
   const [visible, setVisible] = useState(false);
+  const [ofertaElegida, setOfertaElegida] = useState("")
 
   const activateModal = (data) => {
     //e.preventDefault();
     console.log(data)
     setVisible(true);
-    setCargoLinea(data.nombre)
+    setCargoLinea(Array.isArray(cargosForm) && cargosForm.length > 0 && cargosForm?.filter(item => item._id === data.nombre)[0]?.nombre)
     setIdOfertaLinea(data._id)
+    setOfertaElegida(data)
   };
 
   const setShowModal = () => {
     setVisible(false);
   };
 
+  console.log("cargoLinea", cargoLinea)
 
   if (cargandoDataCargos && cargandoData) return <BeatLoader color="#36d7b7" />;
 
@@ -213,7 +234,7 @@ const Ofertas = () => {
       {Object.keys(usuarioAutenticado).length !== 0 && usuarioAutenticado && usuarioAutenticado?.userType[0] === "colaborador" && usuarioAutenticado?.estado === "por_completar" ? (
         <ModalFillCurriculum />
       ) : null}
-      {Array.isArray(cargosForm) && cargosForm.length > 0 && visible === true && <ModalRequistos setShowModal={setShowModal} listadoCargos={cargosForm} selectedCargo={cargoLinea} idOferta={idOfertaLinea}  documentosRequisitosPorUsuario={documentosRequisitosUsuario}  />}
+      {Array.isArray(cargosForm) && cargosForm.length > 0 && visible === true && <ModalRequistos setShowModal={setShowModal} listadoCargos={cargosForm} selectedCargo={cargoLinea} idOferta={idOfertaLinea} documentosRequisitosPorUsuario={documentosRequisitosUsuario} oferta={ofertaElegida} />}
       <div className="w-11/12 mx-auto mt-10 ">
         <div className="flex justify-around bg-gray-100 rounded-t-lg">
           <button

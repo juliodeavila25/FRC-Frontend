@@ -1,27 +1,29 @@
-import useCargos from "../../hooks/useCargos";
+import useHerramienta from "../../hooks/useHerramienta";
 import { useState } from "react";
 import Table from "../table/Table";
 import { BeatLoader } from "react-spinners";
 import { format } from "date-fns";
 import { useNavigate, Link } from "react-router-dom";
 
-const ListarCargosTotal = () => {
-  const { cargos, obtenerCargos, cargo, cargandoDataCargos } =
-    useCargos();
+const ListarHerramientas = () => {
+  const { herramientas } =
+    useHerramienta();
   const navigate = useNavigate();
+
+
+  console.log(herramientas)
+
 
   const [headers, setHeaders] = useState([
     {
-      Header: "Nombre Cargo",
+      Header: "Nombre",
       accessor: "nombre",
     },
     {
-      Header: "Requisitos",
-      accessor: "requisitos",
-      Cell: ({ value }) => {
-        return value.map(home => <div className="mb-2" key={home._id}>{home.nombre} <span className={`${home.estado === "Activo" ? "bg-green-400 px-3 py-0 text-white rounded-full" : "bg-red-400 px-3 py-0 text-white rounded-full"}  `}>{home.estado}</span></div>);
-      },
+      Header: "Estado",
+      accessor: "estado",
     },
+
     {
       Header: "Fecha de creación",
       accessor: "createdAt",
@@ -36,7 +38,7 @@ const ListarCargosTotal = () => {
           <button
             className="text-blue-500 hover:text-blue-900"
             onClick={() =>
-              navigate(`/cargos/editar-cargo/${originalRow._id}`)
+              navigate(`/herramientas/editar-herramienta/${originalRow._id}`)
             }
           >
             <svg
@@ -66,22 +68,22 @@ const ListarCargosTotal = () => {
           <div className="sm:flex sm:items-center">
             <div className="sm:flex-auto">
               <h1 className="text-xl font-semibold text-gray-900">
-                Listado maestro de cargos
+                Listado maestro de herramientas para cargos
               </h1>
             </div>
             <div className="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
               <Link
-                to="/cargos/crear-cargo"
+                to="/herramientas/crear-herramienta"
                 className="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto"
               >
-                Nuevo Cargo
+                Nueva herramienta
               </Link>
             </div>
           </div>
         </div>
       </div>
-      {Array.isArray(cargos) && cargos.length > 0 ? (
-        <Table data={cargos} columns={headers} />
+      {Array.isArray(herramientas) && herramientas.length > 0 ? (
+        <Table data={herramientas} columns={headers} />
       ) : (
         <div className="rounded-md bg-blue-50 p-4">
           <div className="flex">
@@ -101,7 +103,7 @@ const ListarCargosTotal = () => {
             </div>
             <div className="ml-3 flex-1 md:flex ">
               <p className="text-sm text-blue-700">
-                No existen documentos cargados
+                No existen herramientas registradas
               </p>
             </div>
           </div>
@@ -111,4 +113,4 @@ const ListarCargosTotal = () => {
   );
 };
 
-export default ListarCargosTotal;
+export default ListarHerramientas;

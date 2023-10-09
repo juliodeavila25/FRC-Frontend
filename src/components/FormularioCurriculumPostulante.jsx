@@ -16,6 +16,8 @@ import moment from "moment";
 import ListarRequisitosCargosRH from "./ListarRequisitosCargosRH";
 
 const FormularioCurriculumPostulante = () => {
+  const [idOfertaNew, setIdOfertaNew] = useState(localStorage.getItem("id_oferta"))
+  const [idPostulacion, setIdPostulacion] = useState("")
   const current = new Date();
   const date = `${current.getFullYear()}-${current.getMonth() + 1
     }-${current.getDate()}`;
@@ -120,6 +122,8 @@ const FormularioCurriculumPostulante = () => {
   const [errorSoporteContrato, setErrorSoporteContrato] = useState(false);
   const [cargo, setCargo] = useState("elegir");
 
+  const [respuesta, setRespuesta] = useState([])
+
   const [cargosFiltrado, setCargosFiltrado] = useState([]);
   const [inputReq, setInputReq] = useState([
     {
@@ -152,7 +156,21 @@ const FormularioCurriculumPostulante = () => {
   const [errorDocumentacionPostulacion, setErrorDocumentacionPostulacion] =
     useState(false);
 
-  const [visible, setVisible] = useState(false); 
+  const [visible, setVisible] = useState(false);
+
+  const [postulacionActual, setPostulacionActual] = useState([]);
+
+  const [calificacionTotal, setCalificacionTotal] = useState([])
+
+
+  const inputRefCalificacion = useRef([]);
+
+  const [errorCalificacion, setErrorCalificacion] = useState(false);
+  const [focusedInput, setFocusedInput] = useState(null);
+
+  const [totalCalificacion, setTotalCalificacion] = useState(0)
+
+  const [totalPuntos, setTotalPuntos] = useState(0)
 
   const params = useParams();
 
@@ -170,8 +188,10 @@ const FormularioCurriculumPostulante = () => {
   const { obtenerPostulacionesUsuario, postulacionesUsuario } =
     usePostulaciones();
 
-  const { nuevoEstadoPostulacion, alertaPostulacion } =
+  const { nuevoEstadoPostulacion, alertaPostulacion, nuevaCalificacion } =
     useEstadoPostulaciones();
+
+
 
   const { auth, cargando } = useAuth();
   //console.log(auth.documento);
@@ -206,18 +226,16 @@ const FormularioCurriculumPostulante = () => {
         ...new Map(newArrays.map((item) => [item._id, item])).values(),
       ];
       let hv = newArraysUnique.filter((item) => item._id === params.id);
-      console.log(hv);
+      //console.log(hv);
       setCurriculums(hv);
     } else {
       setCurriculums([]);
     }
   }, [postulantes]);
 
-  useEffect(() => {
-    if (Array.isArray(curriculums) && curriculums.length > 0) {
-      obtenerPostulacionesUsuario(curriculums[0].creador);
-    }
-  }, [curriculums]);
+
+
+
 
   useEffect(() => {
     if (
@@ -225,7 +243,7 @@ const FormularioCurriculumPostulante = () => {
       Array.isArray(curriculums) &&
       curriculums.length > 0
     ) {
-      console.log(curriculums[0]);
+      //console.log(curriculums[0]);
       setId(params.id);
       setEstado(curriculums[0].estado);
       setNombre(curriculums[0].nombre);
@@ -302,13 +320,58 @@ const FormularioCurriculumPostulante = () => {
       setUnidadFuncional(curriculums[0].unidadFuncional);
       setUnidadNegocio(curriculums[0].unidadNegocio);
       //setEstadoAplicacionOferta(curriculums[0].estadoAplicacionOferta)
+
+      obtenerPostulacionesUsuario(curriculums[0].creador);
     }
   }, [curriculums]);
+
+
+
+  useEffect(() => {
+    const filtrado = postulacionesUsuario.filter(
+      (item) => item.idOferta === idOfertaNew
+    )
+
+    setIdPostulacion(filtrado[0]?._id)
+
+    setRespuesta(filtrado[0]?.respuesta)
+
+    console.log(filtrado)
+
+    for (let i = 0; i < filtrado[0]?.respuesta?.length; i++) {
+      if (filtrado[0].respuesta[i].calificacion === "3" || filtrado[0].respuesta[i].calificacion === "2" || filtrado[0].respuesta[i].calificacion === "1") {
+        setTotalCalificacion(filtrado[0]?.respuesta.reduce((accumulator, currentValue) => accumulator + Number(currentValue.calificacion), 0))
+      } else {
+        filtrado[0].respuesta[i].calificacion = 0;
+      }
+
+    }
+
+    setPostulacionActual(filtrado)
+
+
+  }, [postulacionesUsuario])
+
+
+
+  useEffect(() => {
+    let cantidadPreguntas = postulacionActual[0]?.respuesta?.filter(
+      (pregunta) =>
+        pregunta.selectQuestion === true && pregunta.fuente === "Antes de entrevista").length
+
+
+    setTotalPuntos(cantidadPreguntas * 3)
+  }, [postulacionActual])
+
+
+
+
+
 
   const submitData = async (e) => {
     e.preventDefault();
     localStorage.setItem("tipo", "formRH");
-    const id_oferta = localStorage.getItem("id_oferta");
+
 
     if (errorSoporteExp === true) {
       mostrarAlerta({
@@ -316,6 +379,30 @@ const FormularioCurriculumPostulante = () => {
         error: true,
       });
       return;
+    }
+
+
+
+
+    const filtrado = postulacionActual[0].respuesta.filter(
+      (item) => item.selectQuestion === true && item.fuente === "Antes de entrevista"
+    )
+
+
+    for (let i = 0; i < filtrado.length; i++) {
+
+      if (Number(inputRefCalificacion.current[filtrado[i]._id].value) === 0) {
+
+
+        inputRefCalificacion.current[filtrado[i]._id].focus();
+        setFocusedInput(filtrado[i]._id);
+        setErrorCalificacion(true);
+        return;
+      } else {
+        setFocusedInput(null);
+        setErrorCalificacion(false);
+      }
+
     }
 
     if (estadoPostulacion === "elegir") {
@@ -329,10 +416,12 @@ const FormularioCurriculumPostulante = () => {
     const formData = new FormData();
 
     const idPostulacionUsuario = postulacionesUsuario.filter(
-      (item) => item.idOferta === id_oferta
+      (item) => item.idOferta === idOfertaNew
     );
 
-    formData.append("idPostulacion", idPostulacionUsuario[0]._id);
+
+
+    formData.append("idPostulacion", idPostulacion);
     formData.append("estadoPostulacion", estadoPostulacion);
     formData.append("fechaRevisionPostulacion", fechaRevisionPostulacion);
     formData.append("fechaSistemaPostulacion", fechaSistemaPostulacion);
@@ -346,6 +435,14 @@ const FormularioCurriculumPostulante = () => {
     formData.append("correo", curriculums[0].correo);
     formData.append("idOferta", curriculums[0].idOferta);
 
+
+    console.log("Respuesta", respuesta)
+
+
+    await nuevaCalificacion({
+      idPostulacion,
+      respuesta
+    })
     await nuevoEstadoPostulacion(formData);
   };
   //Informacion Financiera
@@ -527,8 +624,27 @@ const FormularioCurriculumPostulante = () => {
 
   const setShowModal = () => {
     setVisible(false);
-   
   };
+
+  const handleinputchangeCalificacion = (e, index) => {
+    const { name, value, checked } = e.target;
+    const list = [...postulacionActual[0]?.respuesta];
+    for (let i = 0; i < postulacionActual[0]?.respuesta.length; i++) {
+      if (postulacionActual[0]?.respuesta[i]._id === index) {
+        list[i][name] = value;
+      }
+    }
+
+    setRespuesta(list)
+    const filtrado = postulacionActual[0].respuesta.filter(
+      (item) => item.selectQuestion === true && item.fuente === "Antes de entrevista"
+    )
+
+    setTotalCalificacion(filtrado.reduce((accumulator, currentValue) => accumulator + Number(currentValue.calificacion), 0))
+
+
+  };
+
 
 
   const { msg } = alertaPostulacion;
@@ -538,7 +654,7 @@ const FormularioCurriculumPostulante = () => {
   return (
     <div className=" sm:mx-auto sm:w-full">
       <div className="bg-white py-8 px-4 shadow-lg rounded-lg sm:px-10">
-      {visible === true && (
+        {visible === true && (
           <ModalRequisitosCargos
             setShowModal={setShowModal}
           />
@@ -2670,6 +2786,190 @@ const FormularioCurriculumPostulante = () => {
               <div className="text-left text-xl text-gray-700 mt-8 font-bold border-b-4 border-corporative-blue inline-flex pt-3">
                 Proceso de selección
               </div>
+
+              {Array.isArray(postulacionActual[0]?.respuesta) &&
+                postulacionActual[0]?.respuesta?.length > 0 && postulacionActual[0]?.respuesta?.filter(
+                  (pregunta) =>
+                    pregunta.selectQuestion === true && pregunta.fuente === "Antes de entrevista").map((item, i) => {
+                      { console.log(item) }
+                      return (
+                        <div key={i} className="grid grid-cols-1 md:grid-cols-2  gap-6 pt-5 pb-3 border-b border-gray-200 ">
+                          <div className="col-span-2">
+                            <p className="font-medium italic underline">Pregunta Nro. {i + 1}</p>
+                          </div>
+                          <div>
+                            <label
+                              htmlFor="textoPreguntas"
+                              className="block text-sm font-medium text-gray-700"
+                            >
+                              Pregunta <span className="text-red-700">*</span>
+                            </label>
+                            <div>
+                              <textarea
+                                id="textoPreguntas"
+                                name="textoPreguntas"
+                                type="text"
+                                placeholder=""
+                                rows="3"
+                                className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                value={item.textoPreguntas}
+                                disabled={true}
+                                required={true}
+                                onChange={(e) =>
+                                  handleinputchangeCalificacion(
+                                    e,
+                                    i
+                                  )
+                                }
+                              />
+                            </div>
+                          </div>
+                          <div >
+                            <label
+                              htmlFor="respuestaPreguntas"
+                              className="block text-sm font-medium text-gray-700"
+                            >
+                              Respuesta sugerida <span className="text-red-700">*</span>
+                            </label>
+                            <div>
+                              <textarea
+                                id="respuestaPreguntas"
+                                name="respuestaPreguntas"
+                                type="text"
+                                placeholder=""
+                                rows="3"
+                                className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                value={item.respuestaPreguntas}
+                                disabled={true}
+                                required={true}
+                                onChange={(e) =>
+                                  handleinputchangeCalificacion(
+                                    e,
+                                    i
+                                  )
+                                }
+                              />
+                            </div>
+                          </div>
+
+                          <div className="hidden">
+                            <label
+                              htmlFor="fuente"
+                              className="block text-sm font-medium text-gray-700"
+                            >
+                              Fuente <span className="text-red-700">*</span>
+                            </label>
+                            <div className="mt-1">
+                              <select
+                                id="fuente"
+                                name="fuente"
+                                className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                disabled={true}
+                                value={item.fuente}
+                                onChange={(e) =>
+                                  handleinputchangeCalificacion(
+                                    e,
+                                    i
+                                  )
+                                }
+                              >
+                                <option
+                                  value="elegir"
+                                  disabled
+                                  className="text-gray-400"
+                                >
+                                  --Selecciona un tipo de documento--
+                                </option>
+                                <option value="Durante entrevista">Durante entrevista</option>
+                                <option value="Antes de entrevista">Antes de entrevista</option>
+                              </select>
+                            </div>
+                          </div>
+
+                          <div>
+                            <label
+                              htmlFor="respuestaPreguntaPostulante"
+                              className="block text-sm font-medium text-gray-700"
+                            >
+                              Respuesta del postulante <span className="text-red-700">*</span>
+                            </label>
+                            <div>
+                              <textarea
+                                id="respuestaPreguntaPostulante"
+                                name="respuestaPreguntaPostulante"
+                                type="text"
+                                placeholder=""
+                                rows="3"
+                                className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                value={item.respuestaPreguntaPostulante}
+                                disabled={true}
+                                required={true}
+                                onChange={(e) =>
+                                  handleinputchangeCalificacion(
+                                    e,
+                                    item._id
+                                  )
+                                }
+                              />
+                            </div>
+                          </div>
+
+                          <div className="">
+                            <label
+                              htmlFor="calificacion"
+                              className="block text-sm font-medium text-blue-700 "
+                            >
+                              Calificación <span className="text-red-700">*</span>
+                            </label>
+                            <div className="mt-1">
+
+                              <select
+                                id={item._id}
+                                name="calificacion"
+                                ref={(el) => (inputRefCalificacion.current[item._id] = el)}
+                                className={focusedInput !== item._id
+                                  ? "block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                  : "block w-full appearance-none rounded-md border border-red-500 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-red-500 focus:outline-none focus:ring-red-500 sm:text-sm"}
+                                required={true}
+                                value={item.calificacion}
+
+
+                                //ref={inputRefCalificacion}
+                                onChange={(e) =>
+                                  handleinputchangeCalificacion(
+                                    e,
+                                    item._id
+                                  )
+                                }
+                              >
+                                <option
+                                  value={0}
+                                  disabled
+                                  className="text-gray-400"
+                                >
+                                  --Selecciona una calificación--
+                                </option>
+                                <option value={3}>Buena</option>
+                                <option value={2}>Regular</option>
+                                <option value={1}>Mala</option>
+                              </select>
+                              {focusedInput === item._id && (
+                                <span className="text-red-500 text-xs">
+                                  Seleccione la información requerida
+                                </span>
+                              )}
+                            </div>
+                          </div>
+
+                        </div>
+                      )
+                    })}
+
+              <div className="">
+                <p className="text-blue-700 text-lg font-bold flex ">Calificación Total:<span className="pl-2 ">{Math.round((totalCalificacion / totalPuntos) * 100)}%</span></p>
+
+              </div>
+
               <div>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 pt-5 ">
                   <div className="">

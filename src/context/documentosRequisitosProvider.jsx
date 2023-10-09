@@ -94,9 +94,9 @@ const DocumentosRequisitosProvider = ({ children }) => {
 
   const nuevosDocumentosRequisitos = async (documentosRequisitos) => {
     setCargando(true);
-    // for (const value of documentosRequisitos.values()) {
-    //   console.log(value);
-    // }
+    for (const value of documentosRequisitos.values()) {
+      console.log(value);
+    }
     try {
       const token = localStorage.getItem("token");
       if (!token) return;

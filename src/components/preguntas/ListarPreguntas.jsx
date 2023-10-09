@@ -1,27 +1,56 @@
-import useCargos from "../../hooks/useCargos";
-import { useState } from "react";
+import usePregunta from "../../hooks/usePregunta";
+import { useState, useEffect } from "react";
 import Table from "../table/Table";
 import { BeatLoader } from "react-spinners";
 import { format } from "date-fns";
 import { useNavigate, Link } from "react-router-dom";
+import useCargos from "../../hooks/useCargos";
 
-const ListarCargosTotal = () => {
-  const { cargos, obtenerCargos, cargo, cargandoDataCargos } =
-    useCargos();
+const ListarPreguntas = () => {
+  const { preguntas } =
+    usePregunta();
   const navigate = useNavigate();
+
+  const { obtenerCargosForm, cargosForm, cargandoDataForm } = useCargos();
+
+  console.log(preguntas)
+
+
+
 
   const [headers, setHeaders] = useState([
     {
-      Header: "Nombre Cargo",
-      accessor: "nombre",
+      Header: "Categoría",
+      accessor: "categoria",
     },
     {
-      Header: "Requisitos",
-      accessor: "requisitos",
-      Cell: ({ value }) => {
-        return value.map(home => <div className="mb-2" key={home._id}>{home.nombre} <span className={`${home.estado === "Activo" ? "bg-green-400 px-3 py-0 text-white rounded-full" : "bg-red-400 px-3 py-0 text-white rounded-full"}  `}>{home.estado}</span></div>);
-      },
+      Header: "Prgunta",
+      accessor: "textoPreguntas",
     },
+    {
+      Header: "Respuesta",
+      accessor: "respuestaPreguntas",
+    },
+    {
+      Header: "Cargo",
+      accessor: "cargo",
+      Cell: (row) => (
+        <div className="">
+          {row.value === "todos" ?
+            <p>Todos los cargos</p> :
+            <p>{Array.isArray(cargosForm) && cargosForm.length > 0 && cargosForm?.filter(item => item._id === row.value)[0]?.nombre}</p>
+          }
+
+
+        </div>
+      )
+    },
+
+    {
+      Header: "Fuente",
+      accessor: "fuente",
+    },
+
     {
       Header: "Fecha de creación",
       accessor: "createdAt",
@@ -36,7 +65,7 @@ const ListarCargosTotal = () => {
           <button
             className="text-blue-500 hover:text-blue-900"
             onClick={() =>
-              navigate(`/cargos/editar-cargo/${originalRow._id}`)
+              navigate(`/preguntas/editar-pregunta/${originalRow._id}`)
             }
           >
             <svg
@@ -59,6 +88,12 @@ const ListarCargosTotal = () => {
     },
   ]);
 
+
+
+
+  if (cargandoDataForm) return <BeatLoader color="#36d7b7" />;
+
+
   return (
     <>
       <div className="px-4 sm:px-6 lg:px-8 mt-5 mb-5">
@@ -66,22 +101,22 @@ const ListarCargosTotal = () => {
           <div className="sm:flex sm:items-center">
             <div className="sm:flex-auto">
               <h1 className="text-xl font-semibold text-gray-900">
-                Listado maestro de cargos
+                Listado maestro de preguntas para cargos
               </h1>
             </div>
             <div className="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
               <Link
-                to="/cargos/crear-cargo"
+                to="/preguntas/crear-pregunta"
                 className="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto"
               >
-                Nuevo Cargo
+                Nueva Pregunta
               </Link>
             </div>
           </div>
         </div>
       </div>
-      {Array.isArray(cargos) && cargos.length > 0 ? (
-        <Table data={cargos} columns={headers} />
+      {Array.isArray(preguntas) && preguntas.length > 0 ? (
+        <Table data={preguntas} columns={headers} />
       ) : (
         <div className="rounded-md bg-blue-50 p-4">
           <div className="flex">
@@ -101,7 +136,7 @@ const ListarCargosTotal = () => {
             </div>
             <div className="ml-3 flex-1 md:flex ">
               <p className="text-sm text-blue-700">
-                No existen documentos cargados
+                No existen preguntas registradas
               </p>
             </div>
           </div>
@@ -111,4 +146,4 @@ const ListarCargosTotal = () => {
   );
 };
 
-export default ListarCargosTotal;
+export default ListarPreguntas;

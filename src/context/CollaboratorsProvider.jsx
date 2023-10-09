@@ -12,7 +12,7 @@ const CollaboratorsProvider = ({ children }) => {
   const [alerta, setAlerta] = useState({});
   const [cargandoDatos, setCargando] = useState(false);
   const [loading, setLoading] = useState(false)
-  const[modal, setModal]=useState({})
+  const [modal, setModal] = useState({})
   const navigate = useNavigate();
   const { auth } = useAuth();
 
@@ -24,8 +24,8 @@ const CollaboratorsProvider = ({ children }) => {
   };
 
   useEffect(() => {
-  
-  
+
+
   }, []);
 
   const obtenerCurriculums = async () => {
@@ -42,7 +42,7 @@ const CollaboratorsProvider = ({ children }) => {
       const { data } = await clienteAxios.get("/colaboradores", config);
       console.log(data)
       setCollaborators(data);
-      
+
     } catch (error) {
       console.log(error);
     }
@@ -70,17 +70,16 @@ const CollaboratorsProvider = ({ children }) => {
     setCargando(false);
   };
 
-   const editarCurriculumRH = async (curriculum) => {
+  const editarCurriculumRH = async (curriculum) => {
     setLoading(true)
     const id = curriculum.get("id");
-    console.log("ID:", id)
     // for (const value of curriculum.values()) {
     //   console.log(value);
     // }
     // console.log(curriculum);
     /*for (const value of curriculum.values()) {
       console.log(value);
-    }*/
+    }*/
     try {
       const token = localStorage.getItem("token");
       if (!token) return;
@@ -97,13 +96,13 @@ const CollaboratorsProvider = ({ children }) => {
       );
 
       //Mostrar modal
-     
+
       setModal({
         message: "Hoja de vida actualizada exitosamente",
         error: false,
       });
 
-     
+
     } catch (error) {
       console.log(error);
     }

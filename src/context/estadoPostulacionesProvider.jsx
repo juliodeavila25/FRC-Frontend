@@ -74,6 +74,48 @@ const EstadoPostulacionesProvider = ({ children }) => {
   };
 
 
+
+  const nuevaCalificacion = async (info) => {
+
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) return;
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      };
+
+      const { data } = await clienteAxios.patch(
+        "/estadoPostulaciones/calificacion",
+        info,
+        config
+      );
+      //setEstadoPostulaciones([...estadoPostulaciones, data]);
+
+      setAlertaPostulacion({
+        msg: "Postulación actualizada correctamente",
+        error: false,
+      });
+
+
+
+      setTimeout(() => {
+        setAlertaPostulacion({});
+
+
+      }, 3000);
+
+
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+
+
+
   const nuevoEstadoPostulacionModal = async (info) => {
 
     try {
@@ -121,6 +163,7 @@ const EstadoPostulacionesProvider = ({ children }) => {
         nuevoEstadoPostulacion,
         setAlertaPostulacion,
         obtenerEstadoPostulacionesPorUsuario,
+        nuevaCalificacion,
         alertaPostulacion,
         estadosPostulaciones
       }}

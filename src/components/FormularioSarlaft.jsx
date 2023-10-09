@@ -374,7 +374,7 @@ const FormularioSarlaft = () => {
       ) {
         inputRefActividadEconomica.current.focus();
         setErrorActividadEconomica(true);
-        console.log();
+        //console.log();
         return;
       } else {
         setErrorActividadEconomica(false);

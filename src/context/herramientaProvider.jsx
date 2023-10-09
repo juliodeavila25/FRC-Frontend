@@ -3,15 +3,13 @@ import clienteAxios from "../config/clienteAxios";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 
-const CargosContext = createContext();
+const HerramientaContext = createContext();
 
-const CargosProvider = ({ children }) => {
-  const [cargo, setCargo] = useState([]);
-  const [cargos, setCargos] = useState([]);
-  const [cargosForm, setCargosForm] = useState([]);
+const HerramientaProvider = ({ children }) => {
+  const [herramienta, setHerramienta] = useState([]);
+  const [herramientas, setHerramientas] = useState([]);
   const [alerta, setAlerta] = useState({});
-  const [cargandoDataCargos, setCargando] = useState(false);
-  const [cargandoDataForm, setCargandoForm] = useState(false);
+  const [cargandoDataHerramienta, setCargando] = useState(false);
   const navigate = useNavigate();
   const { auth } = useAuth();
 
@@ -24,7 +22,7 @@ const CargosProvider = ({ children }) => {
 
   useEffect(() => {
     setCargando(true);
-    const obtenerCargos = async () => {
+    const obtenerHerramientas = async () => {
       try {
         const token = localStorage.getItem("token");
         if (!token) return;
@@ -34,28 +32,28 @@ const CargosProvider = ({ children }) => {
             Authorization: `Bearer ${token}`,
           },
         };
-        const { data } = await clienteAxios("/cargos", config);
+        const { data } = await clienteAxios("/herramienta", config);
+        console.log(data)
 
-        setCargos(data);
+        setHerramientas(data);
       } catch (error) {
         console.log(error);
       }
     };
-    obtenerCargos();
+    obtenerHerramientas();
     setCargando(false);
   }, [auth]);
 
-
-  const submitCargo = async (cargo) => {
-    if (cargo.id) {
-      await editarCargo(cargo);
+  const submitHerramienta = async (herramienta) => {
+    if (herramienta.id) {
+      await editarHerramienta(herramienta);
     } else {
-      await nuevoCargo(cargo);
+      await nuevaHerramienta(herramienta);
     }
   };
 
-  const editarCargo = async (cargo) => {
-    console.log(cargo)
+  const editarHerramienta = async (herramienta) => {
+    console.log(herramienta);
     try {
       const token = localStorage.getItem("token");
       if (!token) return;
@@ -66,32 +64,33 @@ const CargosProvider = ({ children }) => {
         },
       };
       const { data } = await clienteAxios.put(
-        `/cargos/${cargo.id}`,
-        cargo,
+        `/herramienta/${herramienta.id}`,
+        herramienta,
         config
       );
 
-      const cargosActualizados = cargos.map((cargoState) =>
-        cargoState._id === data._id ? data : cargoState
+      const herramientasActualizados = herramientas.map((herramientaState) =>
+        herramientaState._id === data._id ? data : herramientaState
       );
-      setCargos(cargosActualizados);
+      setHerramientas(herramientasActualizados);
 
       //Mostrar alerta
       setAlerta({
-        msg: "Cargo actualizado correctamente",
+        msg: "Herramienta actualizada correctamente",
         error: false,
       });
 
       setTimeout(() => {
         setAlerta({});
-        navigate("/cargos/listar-cargos");
+        navigate("/herramientas/listar-herramientas");
       }, 3000);
     } catch (error) {
       console.log(error);
     }
   };
 
-  const nuevoCargo = async (cargo) => {
+  const nuevaHerramienta = async (herramienta) => {
+    console.log(herramienta)
     try {
       const token = localStorage.getItem("token");
       if (!token) return;
@@ -102,29 +101,25 @@ const CargosProvider = ({ children }) => {
         },
       };
 
-      const { data } = await clienteAxios.post(
-        "/cargos",
-        cargo,
-        config
-      );
+      const { data } = await clienteAxios.post("/herramienta", herramienta, config);
 
-      setCargos([...cargos, data]);
+      setHerramientas([...herramientas, data]);
 
       setAlerta({
-        msg: "Cargo creado correctamente",
+        msg: "Herramienta creada correctamente",
         error: false,
       });
 
       setTimeout(() => {
         setAlerta({});
-        navigate("/cargos/listar-cargos");
+        navigate("/herramientas/listar-herramientas");
       }, 3000);
     } catch (error) {
       console.log(error);
     }
   };
 
-  const obtenerCargo = async (id) => {
+  const obtenerHerramienta = async (id) => {
     setCargando(true);
     console.log(id);
     try {
@@ -136,9 +131,9 @@ const CargosProvider = ({ children }) => {
           Authorization: `Bearer ${token}`,
         },
       };
-      const { data } = await clienteAxios.get(`/cargos/${id}`, config);
+      const { data } = await clienteAxios.get(`/herramienta/${id}`, config);
       console.log(data);
-      setCargo(data);
+      setHerramienta(data);
     } catch (error) {
       console.log(error);
     }
@@ -146,49 +141,23 @@ const CargosProvider = ({ children }) => {
     setCargando(false);
   };
 
-
-  const obtenerCargosForm = async () => {
-
-    setCargandoForm(true);
-    try {
-      const token = localStorage.getItem("token");
-      if (!token) return;
-      const config = {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      };
-      const { data } = await clienteAxios("/cargos", config);
-
-      setCargosForm(data);
-    } catch (error) {
-      console.log(error);
-    }
-    setCargandoForm(false);
-  };
-
   return (
-    <CargosContext.Provider
+    <HerramientaContext.Provider
       value={{
         alerta,
-        cargo,
-        cargos,
-        cargosForm,
-        cargandoDataCargos,
-        cargandoDataForm,
-        submitCargo,
+        herramienta,
+        herramientas,
+        cargandoDataHerramienta,
+        submitHerramienta,
         mostrarAlerta,
-        obtenerCargo,
-        obtenerCargosForm
-
+        obtenerHerramienta,
       }}
     >
       {children}
-    </CargosContext.Provider>
+    </HerramientaContext.Provider>
   );
 };
 
-export { CargosProvider };
+export { HerramientaProvider };
 
-export default CargosContext;
+export default HerramientaContext;

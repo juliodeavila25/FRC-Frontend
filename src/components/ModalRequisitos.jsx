@@ -26,9 +26,8 @@ function Icon({ id, open }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      className={`${
-        id === open ? "rotate-180" : ""
-      } h-5 w-5 transition-transform`}
+      className={`${id === open ? "rotate-180" : ""
+        } h-5 w-5 transition-transform`}
       fill="none"
       viewBox="0 0 24 24"
       stroke="currentColor"
@@ -44,6 +43,7 @@ export default function ModalPublic({
   listadoCargos,
   selectedCargo,
   idOferta,
+  oferta,
   documentosRequisitosPorUsuario,
 }) {
   const [requisitosCargos, setRequisitosCargos] = useState([]);
@@ -61,9 +61,8 @@ export default function ModalPublic({
   const [open, setOpen] = useState(1);
 
   const current = new Date();
-  const date = `${current.getFullYear()}-${
-    current.getMonth() + 1
-  }-${current.getDate()}`;
+  const date = `${current.getFullYear()}-${current.getMonth() + 1
+    }-${current.getDate()}`;
 
   const { obtenerUsuarios, usuarios, usuarioAutenticado, auth } = useAuth();
 
@@ -84,6 +83,8 @@ export default function ModalPublic({
     cargandoDataDocumentos,
   } = useDocumentosRequisitos();
 
+  const [respuesta, setRespuesta] = useState([])
+
   useEffect(() => {
     if (error === false) {
       setTimeout(() => {
@@ -95,7 +96,10 @@ export default function ModalPublic({
   console.log(auth);
 
   useEffect(() => {
+    console.log("selectedCargo", selectedCargo)
     let cargo = listadoCargos.filter((item) => item.nombre === selectedCargo);
+
+    console.log(cargo)
 
     let requisitosCargosUpdated = [];
     for (let i = 0; i < cargo[0]?.requisitos.length; i++) {
@@ -148,6 +152,7 @@ export default function ModalPublic({
     }
   }, [selectedCargo, documentosRequisitosPorUsuario]);
 
+  console.log(oferta)
   console.log(documentosRequisitosUsuario);
 
   const submitData = async (e) => {
@@ -167,8 +172,13 @@ export default function ModalPublic({
       }
     }
 
+
     formData.append("idOferta", idOferta);
     formData.append("creador", usuarioAutenticado._id);
+
+
+
+    console.log(formData);
 
     await nuevosDocumentosRequisitos(formData);
 
@@ -176,7 +186,13 @@ export default function ModalPublic({
       idUsuario,
       idOferta,
       estadoAplicacionOferta,
+      respuesta
     });
+
+
+    setRespuesta([])
+
+
   };
 
   const handleDocumentacionPostulacion = (data) => {
@@ -217,7 +233,27 @@ export default function ModalPublic({
     console.log(documentosRequeridos);
   };
 
-  console.log(requisitosCargos);
+
+  const handleinputchangeRespuesta = (e, index) => {
+    console.log(index)
+    const { name, value, checked } = e.target;
+    const list = [...oferta.preguntasFiltradas];
+    console.log(oferta.preguntasFiltradas)
+    for (let i = 0; i < oferta.preguntasFiltradas.length; i++) {
+      console.log(oferta.preguntasFiltradas[i]._id)
+      if (oferta.preguntasFiltradas[i]._id === index) {
+
+        list[i][name] = value;
+      }
+    }
+
+    console.log(list)
+    setRespuesta(list);
+
+  };
+
+
+  console.log(requisitosCargos)
   return (
     <>
       <div className="justify-center  flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
@@ -236,11 +272,194 @@ export default function ModalPublic({
               </div>
               <div className="mt-2 font-light italic text-sm">
                 <span className="font-medium">Nota:</span> Para poder aplicar a
-                este cargo es indispensable, cargar los siguientes documentos
+                este cargo es indispensable, contestar las siguientes preguntas y cargar los documentos solicitados.
               </div>
             </div>
             {/*body*/}
-            {Array.isArray(requisitosCargos) && requisitosCargos.length > 0 ? (
+            <div className="w-11/12 mx-auto pt-5 ">
+
+
+              <Accordion open={open === 1} icon={<Icon id={1} open={open} />}>
+                <AccordionHeader
+                  className="text-base font-semibold text-gray-900"
+                  onClick={() => handleOpen(1)}
+                >
+                  <div className="flex space-x-3 items-center">
+                    <FcInspection className="text-lg" />
+                    <p>
+                      Listado de preguntas
+                    </p>
+                  </div>
+                </AccordionHeader>
+                <AccordionBody>
+                  {console.log("oferta.preguntasFiltradas!!!!!:", oferta.preguntasFiltradas)}
+                  {Array.isArray(oferta.preguntasFiltradas) &&
+                    oferta.preguntasFiltradas.length > 0
+                    ? (
+                      <>
+                        {oferta.preguntasFiltradas &&
+                          Array.isArray(oferta.preguntasFiltradas) &&
+                          oferta.preguntasFiltradas.filter(
+                            (pregunta) =>
+                              pregunta.selectQuestion === true && pregunta.fuente === "Antes de entrevista").map((item, i) => {
+                                return (
+
+                                  <div key={i} className="grid grid-cols-1 md:grid-cols-2  gap-6 pt-5 pb-3 border-b border-gray-200 ">
+                                    <div className="col-span-2">
+                                      <p className="font-medium italic underline">Pregunta Nro. {i + 1}</p>
+                                    </div>
+                                    <div>
+                                      <label
+                                        htmlFor="textoPreguntas"
+                                        className="block text-sm font-medium text-gray-700"
+                                      >
+                                        Pregunta <span className="text-red-700">*</span>
+                                      </label>
+                                      <div>
+                                        <textarea
+                                          id="textoPreguntas"
+                                          name="textoPreguntas"
+                                          type="text"
+                                          placeholder=""
+                                          rows="3"
+                                          className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                          value={item.textoPreguntas}
+                                          disabled={true}
+                                          required={true}
+                                          onChange={(e) =>
+                                            handleinputchangeRespuesta(
+                                              e,
+                                              i
+                                            )
+                                          }
+                                        />
+                                      </div>
+                                    </div>
+                                    <div className="hidden">
+                                      <label
+                                        htmlFor="respuestaPreguntas"
+                                        className="block text-sm font-medium text-gray-700"
+                                      >
+                                        Respuesta sugerida <span className="text-red-700">*</span>
+                                      </label>
+                                      <div>
+                                        <textarea
+                                          id="respuestaPreguntas"
+                                          name="respuestaPreguntas"
+                                          type="text"
+                                          placeholder=""
+                                          rows="3"
+                                          className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                          value={item.respuestaPreguntas}
+                                          disabled={true}
+                                          required={true}
+                                          onChange={(e) =>
+                                            handleinputchangeRespuesta(
+                                              e,
+                                              i
+                                            )
+                                          }
+                                        />
+                                      </div>
+                                    </div>
+
+                                    <div className="hidden">
+                                      <label
+                                        htmlFor="fuente"
+                                        className="block text-sm font-medium text-gray-700"
+                                      >
+                                        Fuente <span className="text-red-700">*</span>
+                                      </label>
+                                      <div className="mt-1">
+                                        <select
+                                          id="fuente"
+                                          name="fuente"
+                                          className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                          disabled={true}
+                                          value={item.fuente}
+                                          onChange={(e) =>
+                                            handleinputchangeRespuesta(
+                                              e,
+                                              i
+                                            )
+                                          }
+                                        >
+                                          <option
+                                            value="elegir"
+                                            disabled
+                                            className="text-gray-400"
+                                          >
+                                            --Selecciona un tipo de documento--
+                                          </option>
+                                          <option value="Durante entrevista">Durante entrevista</option>
+                                          <option value="Antes de entrevista">Antes de entrevista</option>
+                                        </select>
+                                      </div>
+                                    </div>
+
+                                    <div>
+                                      <label
+                                        htmlFor="respuestaPreguntaPostulante"
+                                        className="block text-sm font-medium text-gray-700"
+                                      >
+                                        Respuesta <span className="text-red-700">*</span>
+                                      </label>
+                                      <div>
+                                        <textarea
+                                          id="respuestaPreguntaPostulante"
+                                          name="respuestaPreguntaPostulante"
+                                          type="text"
+                                          placeholder=""
+                                          rows="3"
+                                          className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                          value={item.respuestaPreguntaPostulante}
+
+                                          required={true}
+                                          onChange={(e) =>
+                                            handleinputchangeRespuesta(
+                                              e,
+                                              item._id
+                                            )
+                                          }
+                                        />
+                                      </div>
+                                    </div>
+
+                                  </div>
+                                );
+                              })}
+                      </>
+                    ) : (
+                      <div className="rounded-md bg-blue-50 p-4">
+                        <div className="flex">
+                          <div className="flex-shrink-0">
+                            <svg
+                              className="h-5 w-5 text-blue-400"
+                              viewBox="0 0 20 20"
+                              fill="currentColor"
+                              aria-hidden="true"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a.75.75 0 000 1.5h.253a.25.25 0 01.244.304l-.459 2.066A1.75 1.75 0 0010.747 15H11a.75.75 0 000-1.5h-.253a.25.25 0 01-.244-.304l.459-2.066A1.75 1.75 0 009.253 9H9z"
+                                clipRule="evenodd"
+                              />
+                            </svg>
+                          </div>
+                          <div className="ml-3 flex-1 md:flex ">
+                            <p className="text-sm text-blue-700">
+                              No existen preguntas de experiencia laboral  para este cargo.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                </AccordionBody>
+              </Accordion>
+            </div>
+            {console.log("REquisitosCargos", requisitosCargos)}
+            {Array.isArray(requisitosCargos) &&
+              requisitosCargos.length > 0 ? (
               requisitosCargos.map((item, i) => {
                 {
                   console.log(item);
@@ -326,7 +545,7 @@ export default function ModalPublic({
                                       // onChange={(e) =>
                                       //   setFechaSistemaPostulacion(e.target.value)
                                       // }
-                                      disabled= {doc.estado}
+                                      disabled={doc.estado}
                                       required={true}
                                       className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                                     />
@@ -349,7 +568,7 @@ export default function ModalPublic({
                                           i
                                         )
                                       }
-                                      disabled= {doc.estado}
+                                      disabled={doc.estado}
                                       // onChange={(e) =>
                                       //   setObservacionesPostulacion(
                                       //     e.target.value
@@ -371,7 +590,7 @@ export default function ModalPublic({
                                       name="fechaExpedicion"
                                       value={doc.fechaExpedicion}
                                       required={true}
-                                      disabled= {doc.estado}
+                                      disabled={doc.estado}
                                       onChange={(e) =>
                                         handleinputchangeDocumentosRequeridos(
                                           e,
@@ -394,7 +613,7 @@ export default function ModalPublic({
                                       placeholder="Digite el numero del documento"
                                       value={doc.numeroDocumento}
                                       required={true}
-                                      disabled= {doc.estado}
+                                      disabled={doc.estado}
                                       onChange={(e) =>
                                         handleinputchangeDocumentosRequeridos(
                                           e,
@@ -434,7 +653,7 @@ export default function ModalPublic({
                                         item.documento !== "" ? false : true
 
                                       }
-                                      disabled= {doc.estado}
+                                      disabled={doc.estado}
                                       onChange={(e) =>
                                         handleinputchangeDocumentosRequeridos(
                                           e,

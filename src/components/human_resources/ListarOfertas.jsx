@@ -4,12 +4,16 @@ import Table from "../table/Table";
 import { BeatLoader } from "react-spinners";
 import { format } from "date-fns";
 import { useNavigate, Link } from "react-router-dom";
+import useCargos from "../../hooks/useCargos";
+import { useEffect } from "react";
 
 const ListarOfertas = () => {
   const { ofertas, obtenerOferta, oferta } = useOfertas();
   const [activas, setActivas] = useState([])
   const [pausadas, setPausadas] = useState([])
   const [inactivas, setInactivas] = useState([])
+
+  const { obtenerCargosForm, cargosForm, cargandoDataForm } = useCargos();
 
   console.log(ofertas)
 
@@ -31,12 +35,25 @@ const ListarOfertas = () => {
   }
 
 
+
+
   const [headers, setHeaders] = useState([
     {
       Header: "Nro. Convocatoria",
       accessor: "convocatoria",
     },
-    { Header: "Cargo", accessor: "nombre" },
+    {
+      Header: "Cargo",
+      accessor: "nombre",
+      Cell: (row) => (
+        <div className="">
+          {console.log(Array.isArray(cargosForm) && cargosForm.length > 0 && cargosForm?.filter(item => item._id === row.value)[0]?.nombre)}
+          <p>{Array.isArray(cargosForm) && cargosForm.length > 0 && cargosForm?.filter(item => item._id === row.value)[0]?.nombre}</p>
+        </div>
+      )
+    },
+
+
     { Header: "Ciudad", accessor: "ciudad" },
     {
       Header: "Fecha de inicio",
@@ -96,6 +113,9 @@ const ListarOfertas = () => {
     },
   ]);
 
+
+
+  if (cargandoDataForm) return <BeatLoader color="#36d7b7" />;
 
 
   return (

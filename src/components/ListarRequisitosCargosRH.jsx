@@ -12,14 +12,14 @@ const ListarRequisitosCargosRH = ({ id }) => {
     useDocumentosRequisitos();
   const navigate = useNavigate();
   const { auth } = useAuth();
-  const [visible, setVisible] = useState(false); 
-  const[infoRequisitos, setInfoRequisitos]= useState("")
+  const [visible, setVisible] = useState(false);
+  const [infoRequisitos, setInfoRequisitos] = useState("")
 
   useEffect(() => {
     obtenerRequisitosPorUsuario(id)
   }, [id])
 
-  console.log(documentosRequisitosUsuario)
+  //console.log(documentosRequisitosUsuario)
 
   const [headers, setHeaders] = useState([
     {
@@ -53,7 +53,7 @@ const ListarRequisitosCargosRH = ({ id }) => {
       Header: "Vencimiento(dias)",
       accessor: "fechaVigencia",
       Cell: ({ value }) => {
-        console.log(value)
+        //console.log(value)
         var fechaActual = new Date();
         var otraFecha = new Date(value);
         var diferenciaEnMilisegundos = otraFecha - fechaActual;
@@ -77,7 +77,7 @@ const ListarRequisitosCargosRH = ({ id }) => {
         <div>
           <button
             className="text-blue-500 hover:text-blue-900"
-            onClick={(e) =>infoModal(e, originalRow)}
+            onClick={(e) => infoModal(e, originalRow)}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -102,7 +102,7 @@ const ListarRequisitosCargosRH = ({ id }) => {
   const setShowModal = (e) => {
     setVisible(false);
 
-   
+
   };
 
 
@@ -119,13 +119,13 @@ const ListarRequisitosCargosRH = ({ id }) => {
 
   return (
     <>
-     {visible === true && (
-          <ModalRequisitosCargos
-            setShowModal={setShowModal}
-            infoRequisitos={infoRequisitos}
-            
-          />
-        )}
+      {visible === true && (
+        <ModalRequisitosCargos
+          setShowModal={setShowModal}
+          infoRequisitos={infoRequisitos}
+
+        />
+      )}
       <div className="mt-5 mb-5">
         <div className="mt-8 flex flex-col">
           <div className="sm:flex sm:items-center">
